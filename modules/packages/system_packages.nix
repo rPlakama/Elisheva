@@ -12,15 +12,12 @@
     ripdrag
     # -- Desktop & Wayland Integration -- #
     mate.mate-polkit
-
     # -- Clipboard -- #
     cliphist
     wl-clip-persist
     wl-clipboard
 
-    # -- Hardware -- #
     git
-    yadm
   ];
 
   # -- Font's -- #
