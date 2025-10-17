@@ -6,8 +6,6 @@
     lua-language-server
     # NIX
     nixd
-    nixfmt
-
     # TYPST
     typst
     tinymist
