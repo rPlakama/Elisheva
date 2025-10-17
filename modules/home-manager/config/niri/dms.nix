@@ -11,7 +11,7 @@
     enable = true;
     niri.enableKeybinds = true;
     niri.enableSpawn = false;
-    enableDynamicTheming = true;
+    enableDynamicTheming = false;
     enableVPN = false;
     enableNightMode = false;
     enableCalendarEvents = false;
