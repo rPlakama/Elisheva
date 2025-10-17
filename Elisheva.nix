@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   # -- Locale -- #
   console.keyMap = "br-abnt";
   time.timeZone = "America/Recife";

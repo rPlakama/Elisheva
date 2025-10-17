@@ -1,6 +1,9 @@
 # home.nix
-{ inputs, pkgs, ... }:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   programs.ignis = {
     enable = true;
 

@@ -1,5 +1,8 @@
-{ inputs, pkgs, ... }:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   # -- Utils for Systm -- #
   environment.systemPackages = with pkgs; [
     # -- Core CLI Utilities -- #

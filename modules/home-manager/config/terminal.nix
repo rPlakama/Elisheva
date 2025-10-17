@@ -1,6 +1,5 @@
 # -- Foot Terminal -- #
-{ ... }:
-{
+{...}: {
   # -- Terminal -- #
   programs.foot.enable = true;
   # -- Shell -- #
@@ -10,6 +9,5 @@
     set -o vi
     eval '$(zoxide init posix --hook prompt)'
     ";
-    
   };
 }

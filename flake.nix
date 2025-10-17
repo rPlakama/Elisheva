@@ -2,7 +2,6 @@
   description = "SharkGirls are Cool";
 
   inputs = {
-
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     stylix = {
       url = "github:nix-community/stylix";
@@ -32,42 +31,39 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
-  outputs =
-    {
-      nixpkgs,
-      niri,
-      home-manager,
-      self,
-      stylix,
-      ...
-    }@inputs:
-    {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-      nixosConfigurations."Elisheva" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          stylix.nixosModules.stylix
-          home-manager.nixosModules.home-manager
-          niri.nixosModules.niri
-          ./Elisheva.nix
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; };
-            };
+  outputs = {
+    nixpkgs,
+    niri,
+    home-manager,
+    self,
+    stylix,
+    ...
+  } @ inputs: {
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    nixosConfigurations."Elisheva" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {inherit inputs;};
+      modules = [
+        stylix.nixosModules.stylix
+        home-manager.nixosModules.home-manager
+        niri.nixosModules.niri
+        ./Elisheva.nix
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = {inherit inputs;};
+          };
 
-            home-manager.users.rplakama = {
-              imports = [
-                ./modules/home.nix
-              ];
-            };
-          }
-        ];
-      };
+          home-manager.users.rplakama = {
+            imports = [
+              ./modules/home.nix
+            ];
+          };
+        }
+      ];
     };
+  };
 }

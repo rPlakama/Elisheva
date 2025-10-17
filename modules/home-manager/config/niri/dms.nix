@@ -1,7 +1,4 @@
-{ inputs, ... }:
-
-{
-
+{inputs, ...}: {
   imports = [
     inputs.dankMaterialShell.homeModules.dankMaterialShell.default
     inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
@@ -18,5 +15,4 @@
     enableSystemd = true;
     quickshell.package = inputs.quickshell.packages.x86_64-linux.default;
   };
-
 }

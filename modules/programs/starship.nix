@@ -1,9 +1,5 @@
-{ ... }:
-
-{
-
+{...}: {
   programs = {
     starship.enable = true;
   };
-
 }

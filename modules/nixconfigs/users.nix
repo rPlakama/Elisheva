@@ -1,9 +1,5 @@
-{ pkgs, ... }:
-
-{
-
+{pkgs, ...}: {
   users.users.rplakama = {
-
     isNormalUser = true;
     description = "rPlakama.";
     extraGroups = [
@@ -11,6 +7,5 @@
       "networkmanager"
     ];
     shell = pkgs.fish;
-
   };
 }

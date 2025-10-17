@@ -1,7 +1,4 @@
-{ ... }:
-
-{
-
+{...}: {
   programs = {
     localsend.enable = true;
   };

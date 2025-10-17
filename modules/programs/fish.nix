@@ -1,7 +1,4 @@
-{ ... }:
-
-{
-
+{...}: {
   programs = {
     starship.transientPrompt.enable = true;
     zoxide = {
@@ -16,5 +13,4 @@
       '';
     };
   };
-
 }

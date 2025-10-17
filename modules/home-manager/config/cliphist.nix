@@ -1,7 +1,4 @@
-{ ... }:
-
-{
-
+{...}: {
   services.cliphist = {
     enable = true;
     extraOptions = [

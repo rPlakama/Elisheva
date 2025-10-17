@@ -1,10 +1,8 @@
-{ ... }:
-
-{
+{...}: {
   programs.niri.settings = {
     window-rules = [
       {
-        matches = [ { is-focused = false; } ];
+        matches = [{is-focused = false;}];
         opacity = 0.90;
       }
       {
@@ -26,6 +24,5 @@
         open-floating = true;
       }
     ];
-
   };
 }

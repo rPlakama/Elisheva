@@ -3,10 +3,7 @@
   pkgs,
   config,
   ...
-}:
-
-{
-
+}: {
   imports = [
     ./niri-outputs.nix
     ./niri-inputs.nix
@@ -29,11 +26,10 @@
       };
       layer-rules = [
         {
-          matches = [ { namespace = "^quickshell$"; } ];
+          matches = [{namespace = "^quickshell$";}];
           place-within-backdrop = true;
         }
       ];
-
     };
   };
 }

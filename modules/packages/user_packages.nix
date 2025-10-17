@@ -1,8 +1,10 @@
-{ inputs, pkgs, ... }:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   # -- User Programs -- #
   environment.systemPackages = with pkgs; [
-
     qimgv
     du-dust
     dropbox
@@ -11,6 +13,5 @@
     qbittorrent
     materialgram
     inputs.zen-browser.packages."${system}".default
-
   ];
 }

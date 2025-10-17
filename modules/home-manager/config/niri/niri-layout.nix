@@ -1,16 +1,13 @@
-{ ... }:
-
-{
-
+{...}: {
   programs.niri.settings = {
     layout = {
       gaps = 3;
       background-color = "00000000";
       center-focused-column = "never";
       preset-column-widths = [
-        { proportion = 0.33333; }
-        { proportion = 0.5; }
-        { proportion = 0.66667; }
+        {proportion = 0.33333;}
+        {proportion = 0.5;}
+        {proportion = 0.66667;}
       ];
       struts = {
         bottom = 6;
@@ -37,6 +34,5 @@
         draw-behind-window = true;
       };
     };
-
   };
 }

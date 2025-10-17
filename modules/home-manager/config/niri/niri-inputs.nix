@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   programs.niri.settings = {
     input = {
       workspace-auto-back-and-forth = true;

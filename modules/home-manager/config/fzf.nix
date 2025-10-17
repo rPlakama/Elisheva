@@ -1,4 +1,3 @@
-{ ... }:
-{
+{...}: {
   programs.fzf.enable = true;
 }

@@ -1,7 +1,4 @@
-{ pkgs, ... }:
-
-{
-
+{pkgs, ...}: {
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
@@ -9,5 +6,4 @@
       "video=eDP-1:1920x1080@75"
     ];
   };
-
 }

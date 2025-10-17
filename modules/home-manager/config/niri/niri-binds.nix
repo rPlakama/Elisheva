@@ -1,14 +1,11 @@
-{ config, ... }:
-{
-
+{config, ...}: {
   programs.niri.settings.binds = with config.lib.niri.actions; {
-
-    "Ctrl+Alt+D".action = spawn [ "dms" "ipc" "call" "dash" "toggle" "media" ];
-    "Ctrl+Alt+A".action = spawn [ "dms" "ipc" "call" "dash" "toggle" "overview" ];
-    "Ctrl+Alt+W".action = spawn [ "dms" "ipc" "call" "dash" "toggle" "weather" ];
-    "Ctrl+Alt+L".action = spawn [ "dms" "ipc" "call" "wallpaper" "next" ];
-    "Ctrl+Alt+C".action = spawn [ "dms" "ipc" "call" "control-center" "toggle" ];
-    "XF86AudioPlay".action = spawn [ "dms" "ipc" "call" "mpris" "playPause" ];
+    "Ctrl+Alt+D".action = spawn ["dms" "ipc" "call" "dash" "toggle" "media"];
+    "Ctrl+Alt+A".action = spawn ["dms" "ipc" "call" "dash" "toggle" "overview"];
+    "Ctrl+Alt+W".action = spawn ["dms" "ipc" "call" "dash" "toggle" "weather"];
+    "Ctrl+Alt+L".action = spawn ["dms" "ipc" "call" "wallpaper" "next"];
+    "Ctrl+Alt+C".action = spawn ["dms" "ipc" "call" "control-center" "toggle"];
+    "XF86AudioPlay".action = spawn ["dms" "ipc" "call" "mpris" "playPause"];
 
     "Mod+1".action = focus-workspace 1;
     "Mod+2".action = focus-workspace 2;
@@ -47,6 +44,5 @@
     "Mod+T".action = spawn "foot";
     "Mod+Y".action = spawn-sh "foot -e yazi";
     "Alt+Tab".action = spawn-sh "foot -e nvim";
-
   };
 }

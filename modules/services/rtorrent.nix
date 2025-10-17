@@ -1,7 +1,4 @@
-{ pkgs, ... }:
-
-{
-
+{pkgs, ...}: {
   services.rtorrent = {
     enable = true;
     openFirewall = true;

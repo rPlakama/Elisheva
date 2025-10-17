@@ -1,5 +1,8 @@
-{ inputs, pkgs, ... }:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   # -- Core Home Manager Settings -- #
   imports = [
     ./home-manager/config
@@ -32,5 +35,4 @@
       "my-profile"
     ];
   };
-
 }

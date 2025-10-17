@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   programs.niri.settings = {
     outputs = {
       "eDP-1" = {
@@ -14,5 +12,4 @@
       };
     };
   };
-
 }
