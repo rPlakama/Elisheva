@@ -1,0 +1,11 @@
+{ ... }:
+
+{
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
+
+}
