@@ -49,8 +49,7 @@
           stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           niri.nixosModules.niri
-          ./configuration.nix
-
+          ./Elisheva.nix
           {
             home-manager = {
               useGlobalPkgs = true;
