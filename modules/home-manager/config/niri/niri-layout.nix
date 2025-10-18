@@ -12,8 +12,8 @@
       struts = {
         bottom = 6;
         top = 6;
-        left = 12;
-        right = 12;
+        left = 8;
+        right = 8;
       };
 
       default-column-width.proportion = 0.4;
