@@ -35,6 +35,7 @@
 
   outputs = {
     nixpkgs,
+    alejandra,
     niri,
     home-manager,
     self,
@@ -49,6 +50,9 @@
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
+        {
+          environment.systemPackages = [alejandra.defaultPackage.x86_64-linux];
+        }
         ./Elisheva.nix
         {
           home-manager = {
