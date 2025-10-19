@@ -1,5 +1,0 @@
-{ ... }:
-
-{
-  programs.mango.enable = true;
-}

@@ -41,7 +41,7 @@
     "Mod+Shift+K".action = move-column-to-workspace-up;
     "Mod+Shift+J".action = move-column-to-workspace-down;
 
-    "Mod+T".action = spawn "foot";
+    "Mod+Return".action = spawn "foot";
     "Mod+Y".action = spawn-sh "foot -e yazi";
     "Alt+Tab".action = spawn-sh "foot -e nvim";
   };
