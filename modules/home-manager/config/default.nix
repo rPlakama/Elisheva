@@ -2,7 +2,6 @@
   imports = [
     ./fastfetch.nix
     ./starship.nix
-    ./anyrun.nix
     ./foot.nix
     ./yazi.nix
     ./zathura.nix
@@ -10,6 +9,7 @@
     ./cliphist.nix
     ./mpv.nix
     ./zen-browser.nix
+    ./fuzzel.nix
     ./niri/default.nix
   ];
 }

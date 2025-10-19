@@ -16,9 +16,9 @@
       main = {
         terminal = "${pkgs.foot}/bin/foot -e";
         icons-enabled = false;
-        anchor = "center";
-        lines = 1;
-        width = 30;
+        anchor = "top";
+        lines = 5;
+        width = 60;
       };
       border = {
         selection-radius = 0;
