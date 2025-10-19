@@ -1,0 +1,5 @@
+{ ... }:
+
+{
+  programs.swaync.enable = true;
+}
