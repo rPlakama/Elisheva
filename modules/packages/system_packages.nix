@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   ...
 }: {
@@ -10,12 +9,10 @@
     p7zip
     yazi
     ripdrag
-    mate.mate-polkit
     cliphist
     wl-clip-persist
     wl-clipboard
     git
-    pavucontrol
   ];
 
   # -- Font's -- #

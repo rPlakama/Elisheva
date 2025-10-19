@@ -5,5 +5,6 @@
     ./niri.nix
     ./starship.nix
     ./fish.nix
+    ./mango.nix
   ];
 }
