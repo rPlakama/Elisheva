@@ -42,6 +42,7 @@
     "Mod+Shift+J".action = move-column-to-workspace-down;
 
     "Mod+Return".action = spawn "foot";
+    "Mod+Space".action = spawn "anyrun";
     "Mod+Y".action = spawn-sh "foot -e yazi";
     "Alt+Tab".action = spawn-sh "foot -e nvim";
   };

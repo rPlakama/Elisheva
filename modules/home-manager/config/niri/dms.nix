@@ -6,7 +6,7 @@
 
   programs.dankMaterialShell = {
     enable = true;
-    niri.enableKeybinds = true;
+    niri.enableKeybinds = false;
     niri.enableSpawn = false;
     enableDynamicTheming = false;
     enableVPN = false;

@@ -1,0 +1,5 @@
+{ ... }:
+
+{
+  programs.walker.enable = true;
+}

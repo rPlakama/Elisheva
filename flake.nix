@@ -31,6 +31,12 @@
       url = "github:DreamMaoMao/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    elephant.url = "github:abenz1267/elephant";
+
+    walker = {
+      url = "github:abenz1267/walker";
+      inputs.elephant.follows = "elephant";
+    };
 
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
@@ -71,6 +77,7 @@
           home-manager.users.rplakama = {
             imports = [
               ./modules/home.nix
+              inputs.walker.homeManagerModules.default
             ];
           };
         }
