@@ -2,6 +2,7 @@
   imports = [
     ./fastfetch.nix
     ./starship.nix
+    ./anyrun.nix
     ./foot.nix
     ./yazi.nix
     ./zathura.nix

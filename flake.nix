@@ -27,6 +27,10 @@
       url = "github:kamadorueda/alejandra/4.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mango = {
+      url = "github:DreamMaoMao/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
@@ -38,6 +42,7 @@
     nixpkgs,
     alejandra,
     niri,
+    mango,
     home-manager,
     self,
     stylix,
@@ -50,6 +55,7 @@
       modules = [
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
+        inputs.mango.nixosModules.mango
         niri.nixosModules.niri
         {
           environment.systemPackages = [alejandra.defaultPackage.x86_64-linux];
