@@ -10,6 +10,7 @@
     ./mpv.nix
     ./zen-browser.nix
     ./fuzzel.nix
+    ./btop.nix
     ./niri/default.nix
   ];
 }
