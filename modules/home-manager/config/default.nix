@@ -4,6 +4,7 @@
     ./swaync.nix
     ./starship.nix
     ./terminal.nix
+    ./mako.nix
     ./yazi.nix
     ./zathura.nix
     ./fzf.nix
