@@ -11,7 +11,6 @@
 
     # Others
     nodejs
-    kdlfmt
     fish-lsp
   ];
 }
