@@ -1,4 +1,4 @@
-{config, ...}: {
+{ config, ... }: {
   programs.niri.settings.binds = with config.lib.niri.actions; {
     "Ctrl+Alt+D".action = spawn ["dms" "ipc" "call" "dash" "toggle" "media"];
     "Ctrl+Alt+A".action = spawn ["dms" "ipc" "call" "dash" "toggle" "overview"];
@@ -29,8 +29,7 @@
     "Mod+F".action = maximize-column;
     "Mod+Shift+F".action = fullscreen-window;
 
-    "Print".action = screenshot;
-    "Alt+Print".action = screenshot-window;
+    #"Print".action = screenshot;
 
     "Mod+L".action = focus-column-right;
     "Mod+H".action = focus-column-left;

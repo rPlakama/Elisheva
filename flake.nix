@@ -23,6 +23,10 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flatpaks = {
+      url = "github:gmodena/nix-flatpak/?ref=latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     alejandra = {
       url = "github:kamadorueda/alejandra/4.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,6 +41,7 @@
     nixpkgs,
     alejandra,
     niri,
+    flatpaks,
     self,
     home-manager,
     stylix,
@@ -49,6 +54,7 @@
       modules = [
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
+	flatpaks.nixosModules.nix-flatpak
         niri.nixosModules.niri
         {
           environment.systemPackages = [alejandra.defaultPackage.x86_64-linux];
