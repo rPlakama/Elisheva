@@ -9,7 +9,6 @@
     ./cliphist.nix
     ./mpv.nix
     ./zen-browser.nix
-    ./fuzzel.nix
     ./niri/default.nix
   ];
 }

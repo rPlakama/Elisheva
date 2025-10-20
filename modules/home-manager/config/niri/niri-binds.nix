@@ -5,6 +5,7 @@
     "Ctrl+Alt+W".action = spawn ["dms" "ipc" "call" "dash" "toggle" "weather"];
     "Ctrl+Alt+L".action = spawn ["dms" "ipc" "call" "wallpaper" "next"];
     "Ctrl+Alt+C".action = spawn ["dms" "ipc" "call" "control-center" "toggle"];
+    "Ctrl+Alt+S".action = spawn ["dms" "ipc" "call" "powermenu" "toggle"];
     "XF86AudioPlay".action = spawn ["dms" "ipc" "call" "mpris" "playPause"];
 
     "Mod+1".action = focus-workspace 1;
@@ -42,7 +43,7 @@
     "Mod+Shift+J".action = move-column-to-workspace-down;
 
     "Mod+Return".action = spawn "foot";
-    "Mod+Space".action = spawn "fuzzel";
+    #"Mod+Space".action = spawn "dms ipc call spotlight toggle";
     "Mod+Y".action = spawn-sh "foot -e yazi";
     "Alt+Tab".action = spawn-sh "foot -e nvim";
   };

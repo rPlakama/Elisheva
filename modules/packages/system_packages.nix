@@ -10,8 +10,6 @@
     wl-clip-persist
     wl-clipboard
     git
-    waybar
-    btop
   ];
 
   # -- Font's -- #
