@@ -2,7 +2,7 @@
   programs.niri.settings = {
     input = {
       workspace-auto-back-and-forth = true;
-      warp-mouse-to-focus = true;
+      warp-mouse-to-focus.enable = true;
       keyboard = {
         numlock = true;
         xkb = {
