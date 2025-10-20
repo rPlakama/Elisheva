@@ -37,8 +37,8 @@
     nixpkgs,
     alejandra,
     niri,
-    home-manager,
     self,
+    home-manager,
     stylix,
     ...
   } @ inputs: {
