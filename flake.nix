@@ -50,8 +50,8 @@
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
-	{
-          nixpkgs.overlays = [ niri.overlays.niri ];
+        {
+          nixpkgs.overlays = [niri.overlays.niri];
         }
         {
           environment.systemPackages = [alejandra.defaultPackage.x86_64-linux];

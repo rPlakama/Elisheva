@@ -1,4 +1,4 @@
-{ config, ... }: {
+{config, ...}: {
   programs.niri.settings.binds = with config.lib.niri.actions; {
     "Ctrl+Alt+D".action = spawn ["dms" "ipc" "call" "dash" "toggle" "media"];
     "Ctrl+Alt+A".action = spawn ["dms" "ipc" "call" "dash" "toggle" "overview"];

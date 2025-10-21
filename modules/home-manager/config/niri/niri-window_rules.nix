@@ -11,7 +11,7 @@
           top-left = 3.0;
           top-right = 3.0;
           bottom-left = 3.0;
-	  bottom-right = 3.0;
+          bottom-right = 3.0;
         };
       }
       {
