@@ -29,7 +29,7 @@
     "Mod+F".action = maximize-column;
     "Mod+Shift+F".action = fullscreen-window;
 
-    #"Print".action = screenshot;
+    "Print".action.screenshot = [];
 
     "Mod+L".action = focus-column-right;
     "Mod+H".action = focus-column-left;
