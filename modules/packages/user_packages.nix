@@ -9,6 +9,7 @@
     du-dust
     dropbox
     spotify
+    obsidian
     obs-studio
     qbittorrent
     materialgram

@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-
     bat
     fd
     ripgrep
@@ -13,7 +12,6 @@
     wl-clip-persist
     wl-clipboard
     git
-
   ];
 
   # -- Font's -- #

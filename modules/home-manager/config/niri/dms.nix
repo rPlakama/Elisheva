@@ -10,7 +10,7 @@
     niri.enableSpawn = false;
     enableDynamicTheming = false;
     enableVPN = false;
-    enableNightMode = false;
+    #enableNightMode = false;
     enableCalendarEvents = false;
     enableSystemd = true;
     quickshell.package = inputs.quickshell.packages.x86_64-linux.default;
