@@ -3,6 +3,7 @@
     bat
     fd
     ripgrep
+    pavucontrol
     p7zip
     jq
     yazi

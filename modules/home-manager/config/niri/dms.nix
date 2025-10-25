@@ -6,11 +6,10 @@
 
   programs.dankMaterialShell = {
     enable = true;
-    niri.enableKeybinds = true;
+    niri.enableKeybinds = false;
     niri.enableSpawn = false;
     enableDynamicTheming = false;
     enableVPN = false;
-    #enableNightMode = false;
     enableCalendarEvents = false;
     enableSystemd = true;
     quickshell.package = inputs.quickshell.packages.x86_64-linux.default;

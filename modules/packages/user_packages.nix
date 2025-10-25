@@ -10,6 +10,7 @@
     dropbox
     spotify
     obsidian
+    vesktop
     obs-studio
     qbittorrent
     materialgram
