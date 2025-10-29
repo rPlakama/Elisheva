@@ -7,6 +7,7 @@
   environment.systemPackages = with pkgs; [
     qimgv
     du-dust
+    asciiquarium
     dropbox
     spotify
     obsidian

@@ -8,7 +8,7 @@
 
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-medium.yaml";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/chalk.yaml";
-    
+
     polarity = "dark";
     targets.qt.enable = true;
     targets.plymouth.enable = false;
