@@ -5,7 +5,7 @@
     ./power-profiles-daemon.nix
     ./mysql.nix
     ./stylix.nix
-    ./gdm.nix
+    ./dmsgreeter.nix
     ./upower.nix
   ];
 }
