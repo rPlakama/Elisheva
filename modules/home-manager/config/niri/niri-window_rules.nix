@@ -8,10 +8,10 @@
       {
         clip-to-geometry = true;
         geometry-corner-radius = {
-          top-left = 3.0;
-          top-right = 3.0;
-          bottom-left = 3.0;
-          bottom-right = 3.0;
+          top-left = 6.0;
+          top-right = 6.0;
+          bottom-left = 6.0;
+          bottom-right = 6.0;
         };
       }
       {

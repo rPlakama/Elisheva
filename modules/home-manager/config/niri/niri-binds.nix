@@ -14,7 +14,6 @@
     "XF86MonBrightnessDown".action = spawn ["dms" "ipc" "call" "brightness" "decrement" "5" ""];
     "XF86AudioRaiseVolume".action = spawn-sh ["wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+; dms ipc call audio increment 0"];
     "XF86AudioLowerVolume".action = spawn-sh ["wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-; dms ipc call audio increment 0"];
-    #"XF86Search".action = spawn
 
     "Mod+1".action = focus-workspace 1;
     "Mod+2".action = focus-workspace 2;
@@ -51,6 +50,5 @@
 
     "Mod+Return".action = spawn "foot";
     "Mod+Y".action = spawn-sh "foot -e yazi";
-    "Alt+Tab".action = spawn-sh "foot -e nvim";
   };
 }
