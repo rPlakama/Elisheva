@@ -5,13 +5,15 @@
 }: {
   # -- User Programs -- #
   environment.systemPackages = with pkgs; [
+    dust
+    glow
+    krita
     qimgv
-    du-dust
-    asciiquarium
     dropbox
     spotify
     obsidian
     vesktop
+    microfetch
     obs-studio
     qbittorrent
     materialgram

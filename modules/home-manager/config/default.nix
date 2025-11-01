@@ -1,6 +1,5 @@
 {
   imports = [
-    ./fastfetch.nix
     ./starship.nix
     ./foot.nix
     ./yazi.nix

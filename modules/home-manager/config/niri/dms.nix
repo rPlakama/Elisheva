@@ -1,4 +1,5 @@
-{inputs, ...}: {
+{ inputs, ... }: {
+
   imports = [
     inputs.dankMaterialShell.homeModules.dankMaterialShell.default
     inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
@@ -9,8 +10,6 @@
     niri.enableKeybinds = false;
     niri.enableSpawn = false;
     enableDynamicTheming = false;
-    enableVPN = false;
-    enableCalendarEvents = false;
     enableSystemd = true;
     quickshell.package = inputs.quickshell.packages.x86_64-linux.default;
   };
