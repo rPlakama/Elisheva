@@ -1,10 +1,11 @@
-{ config, lib, ... }:
 
-{
+{...}: {
   programs.niri.settings = {
     input = {
       workspace-auto-back-and-forth = true;
       warp-mouse-to-focus.enable = true;
+      mod-key-nested = "Super";
+      mod-key = "Alt";
       keyboard = {
         numlock = true;
         xkb = {
@@ -20,13 +21,6 @@
         accel-profile = "adaptive";
       };
       mouse.accel-speed = -0.5;
-      mod-key = "Super";
-      mod-key-nested = "Alt";
     };
-  };
-
-  programs.niri.settings.input = lib.mkIf (config.networking.hostName == "Centuria") {
-    mod-key = "Alt";
-    mod-key-nested = "Super";
   };
 }

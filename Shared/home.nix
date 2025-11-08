@@ -5,7 +5,7 @@
 }: {
   # -- Core Home Manager Settings -- #
   imports = [
-    ./home-manager/config
+    ./config
   ];
 
   home.stateVersion = "25.05";
