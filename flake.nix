@@ -71,7 +71,7 @@
 
           home-manager.users.rplakama = {
             imports = [
-              ./Elisheva/home.nix
+              ./Shared/home.nix
             ];
           };
         }
@@ -98,7 +98,7 @@
 
           home-manager.users.rplakama = {
             imports = [
-              ./Centuria/home.nix
+	    ./Shared/home.nix
             ];
           };
         }
