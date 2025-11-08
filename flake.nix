@@ -61,7 +61,7 @@
           nixpkgs.overlays = [niri.overlays.niri];
         }
         ./Elisheva.nix
-	./Shared
+        ./Shared
         {
           home-manager = {
             useGlobalPkgs = true;
@@ -88,7 +88,7 @@
           nixpkgs.overlays = [niri.overlays.niri];
         }
         ./Centuria.nix
-	./Shared
+        ./Shared
         {
           home-manager = {
             useGlobalPkgs = true;
