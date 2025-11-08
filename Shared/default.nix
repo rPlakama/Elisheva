@@ -1,6 +1,5 @@
 {
   imports = [
-    ./config
     ./boot
     ./nixconfigs
     ./packages

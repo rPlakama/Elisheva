@@ -7,7 +7,6 @@
     ./fzf.nix
     ./cliphist.nix
     ./mpv.nix
-    ./zen-browser.nix
     ./niri/default.nix
   ];
 }
