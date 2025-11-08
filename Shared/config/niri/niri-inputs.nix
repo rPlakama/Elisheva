@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ osConfig, lib, ... }:
 
 {
   programs.niri.settings = {
@@ -26,9 +26,9 @@
         mod-key-nested = "Alt";
       }
 
-      (lib.mkIf (config.networking.hostName == "Centuria") {
-        mod-key = "Alt";
-        mod-key-nested = "Super";
+      (lib.mkIf (osConfig.networking.hostName == "Centuria") {
+        mod-key = lib.mkForce "Alt";
+        mod-key-nested = lib.mkForce "Super";
       })
     ];
   };

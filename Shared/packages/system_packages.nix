@@ -17,5 +17,6 @@
   # -- Font's -- #
   fonts.packages = with pkgs; [
     nerd-fonts.caskaydia-cove
+    montserrat
   ];
 }
