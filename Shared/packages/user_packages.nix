@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   ...
 }: {
@@ -10,6 +9,7 @@
     krita
     qimgv
     dropbox
+    firefox
     spotify
     obsidian
     vesktop
@@ -17,10 +17,5 @@
     obs-studio
     qbittorrent
     materialgram
-    bottles
-    icu
-    libxcrypt-legacy
-    glib
-    inputs.zen-browser.packages."${system}".default
   ];
 }
