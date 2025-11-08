@@ -1,0 +1,1 @@
+This configuration is bad, shall not be used as a reference, it have undocumented stuff. But, hardware-configuration shall always be deleted upon clone (machine-unique-stuff) ― therefore, thee may use ```` nixos-generate-config --show-hardware-config > hardware-configuration.nix ````
