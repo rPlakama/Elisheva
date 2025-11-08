@@ -1,5 +1,6 @@
 {config, ...}: {
   programs.niri.settings.binds = with config.lib.niri.actions; {
+
     "Mod+Space".action = spawn ["dms" "ipc" "call" "spotlight" "toggle"];
     "Mod+V".action = spawn ["dms" "ipc" "call" "clipboard" "toggle"];
     "Mod+M".action = spawn ["dms" "ipc" "call" "processlist" "toggle"];
