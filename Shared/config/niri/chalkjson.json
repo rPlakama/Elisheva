@@ -15,11 +15,7 @@
     "outline": "#505050",
     "surfaceContainer": "#101010",
     "surfaceContainerHigh": "#202020",
-<<<<<<< HEAD
     "surfaceContainerHighest": "#303030",
-=======
-    "surfaceContainerHighest": "#505050",
->>>>>>> 9ec87f2 (Lunarclient for Centuria-host)
     "error": "#fb9fb1",
     "warning": "#ddb26f",
     "info": "#6fc2ef",
