@@ -1,6 +1,8 @@
-{ osConfig, lib, ... }:
-
 {
+  osConfig,
+  lib,
+  ...
+}: {
   programs.niri.settings = {
     input = lib.mkMerge [
       {

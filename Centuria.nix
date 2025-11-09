@@ -8,4 +8,14 @@
     hostName = "Centuria";
     networkmanager.enable = true;
   };
+
+  flatpak = {
+    enable = true;
+    packages = [
+      {
+        appId = "com.lunarclient.LunarClient";
+        origin = "flathub";
+      }
+    ];
+  };
 }

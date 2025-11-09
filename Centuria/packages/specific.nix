@@ -3,5 +3,5 @@
   environment.systemPackages = with pkgs; [
     bottles
     prismlauncher
-    ];
+  ];
 }

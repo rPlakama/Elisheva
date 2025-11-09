@@ -39,6 +39,7 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
   outputs = {
@@ -47,6 +48,7 @@
     self,
     home-manager,
     stylix,
+    nix-flatpak,
     ...
   } @ inputs: {
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
@@ -82,6 +84,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         stylix.nixosModules.stylix
+        nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
         {
@@ -98,7 +101,7 @@
 
           home-manager.users.rplakama = {
             imports = [
-	    ./Shared/home.nix
+              ./Shared/home.nix
             ];
           };
         }
