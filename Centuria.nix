@@ -9,7 +9,7 @@
     networkmanager.enable = true;
   };
 
-  flatpak = {
+  services.flatpak = {
     enable = true;
     packages = [
       {
