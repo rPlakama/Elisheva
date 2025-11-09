@@ -2,6 +2,6 @@
   # -- User Programs -- #
   environment.systemPackages = with pkgs; [
     bottles
-    badlion-client 
+    prismlauncher
     ];
 }
