@@ -1,5 +1,0 @@
-{ ... }: 
-
-{
-  programs.coolercontrol.enable = true;
-}
