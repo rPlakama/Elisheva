@@ -4,6 +4,7 @@
     "Mod+V".action = spawn ["dms" "ipc" "call" "clipboard" "toggle"];
     "Mod+M".action = spawn ["dms" "ipc" "call" "processlist" "toggle"];
     "Mod+N".action = spawn ["dms" "ipc" "call" "notifications" "toggle"];
+
     "Ctrl+Alt+D".action = spawn ["dms" "ipc" "call" "dash" "toggle" "media"];
     "Ctrl+Alt+A".action = spawn ["dms" "ipc" "call" "dash" "toggle" "overview"];
     "Ctrl+Alt+W".action = spawn ["dms" "ipc" "call" "dankdash" "wallpaper"];
