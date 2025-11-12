@@ -5,5 +5,6 @@
     ./starship.nix
     ./fish.nix
     ./niri.nix
+    ./steam.nix
   ];
 }
