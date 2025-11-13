@@ -2,7 +2,6 @@
   # -- User Programs -- #
   environment.systemPackages = with pkgs; [
     dust
-    glow
     krita
     qimgv
     dropbox

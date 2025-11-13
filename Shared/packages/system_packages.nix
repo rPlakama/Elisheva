@@ -6,7 +6,6 @@
     p7zip
     jq
     yazi
-    imagemagick
     ripdrag
     cliphist
     wl-clip-persist
