@@ -96,19 +96,16 @@
         "dgop": [
           "dgop"
         ],
-        "dms-cli": [
-          "dms-cli"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1762984947,
-        "narHash": "sha256-Q1sscRok5XFc1zgET2QonPNAq8ac5hurDq5zKZPJ2Y8=",
+        "lastModified": 1763077549,
+        "narHash": "sha256-POgdRjITXP3mI1ubBNUftyz3ELbc7mOS2mnKFdkF1qA=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "6013c994a66ff6e8b8f05c9465c60afda906e8cb",
+        "rev": "abf1f53432cd7afdd4ec331f53c4d77b928f0b71",
         "type": "github"
       },
       "original": {
@@ -144,11 +141,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1762984855,
-        "narHash": "sha256-9MFIwdjz+qbebFc4IfjDhCc4NNfWgYmbzOnJC3atQGw=",
+        "lastModified": 1763005356,
+        "narHash": "sha256-8/BtGVZfdaOH42i6HInYcUBEWmD2yHj+rzLO52MqQYE=",
         "owner": "AvengeMedia",
         "repo": "danklinux",
-        "rev": "53e1ad7f8092d3e6ac72dff76cbe6ef005866fed",
+        "rev": "d0ec9f111d240a0f634287df6af74144a107c373",
         "type": "github"
       },
       "original": {
@@ -297,11 +294,11 @@
         "xwayland-satellite-unstable": "xwayland-satellite-unstable"
       },
       "locked": {
-        "lastModified": 1762938849,
-        "narHash": "sha256-ltM04Wy+vMm/EAwhGTl2BYjCgF+Kq4lltpDH9NEh264=",
+        "lastModified": 1763030490,
+        "narHash": "sha256-U1xBvM3vbh7GZyc2ahziMVhi4qQyQ8pRwb9l8jD4ShI=",
         "owner": "sodiboo",
         "repo": "niri-flake",
-        "rev": "ea9b76cfa921d42a7502260b2d1296798089dfe6",
+        "rev": "7920a7b0553e0bebce825b0d9deb575e26f6f6ac",
         "type": "github"
       },
       "original": {
@@ -330,11 +327,11 @@
     "niri-unstable": {
       "flake": false,
       "locked": {
-        "lastModified": 1762881062,
-        "narHash": "sha256-j0Gxopn4jGYQae/90V2v4u4+Ec+gFLq3UbSaGfczpOM=",
+        "lastModified": 1763014447,
+        "narHash": "sha256-nmu7S8J9IJKLQyIkSU8QWYHygrfw76NHGTkcr+bXMX0=",
         "owner": "YaLTeR",
         "repo": "niri",
-        "rev": "5b77107161c504376b962107913bf74b575703e7",
+        "rev": "a52df533c4694b5ed0a04140af60fd26146df911",
         "type": "github"
       },
       "original": {
