@@ -9,7 +9,6 @@
     yazi
     ripdrag
     cliphist
-    wl-clip-persist
     wl-clipboard
   ];
 
