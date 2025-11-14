@@ -10,7 +10,6 @@
     obsidian
     vesktop
     microfetch
-    obs-studio
     qbittorrent
     materialgram
   ];

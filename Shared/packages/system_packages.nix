@@ -2,6 +2,7 @@
   environment.systemPackages = with pkgs; [
     bat
     fd
+    git
     ripgrep
     p7zip
     jq
@@ -10,7 +11,6 @@
     cliphist
     wl-clip-persist
     wl-clipboard
-    git
   ];
 
   # -- Font's -- #
