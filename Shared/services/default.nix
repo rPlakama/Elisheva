@@ -2,7 +2,7 @@
   imports = [
     ./storage.nix
     ./stylix.nix
-    ./ly.nix
+    ./dmsgreeter.nix
     ./upower.nix
   ];
 }
