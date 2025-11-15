@@ -8,8 +8,8 @@
     enable = true;
     systemd.enable = true;
     niri.enableKeybinds = false;
-    niri.enableSpawn = false;
+    #niri.enableSpawn = true;
     enableDynamicTheming = false;
-    #quickshell.package = inputs.quickshell.packages.x86_64-linux.default;
+    quickshell.package = inputs.quickshell.packages.x86_64-linux.default;
   };
 }
