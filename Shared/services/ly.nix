@@ -1,6 +1,6 @@
 { ... }: {
   services.displayManager.ly = {
-    enabled = true;
+    enable = true;
     settings = { 
       load = true; 
       save = true; };
