@@ -1,24 +1,20 @@
-{
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
-  inputs.dankMaterialShell.nixosModules.greeter
-];
+    inputs.dankMaterialShell.nixosModules.greeter
+  ];
   programs.dankMaterialShell.greeter = {
-  enable = true;
-  compositor = {
-    name = "niri"; 
+    enable = true;
+    compositor = {
+      name = "niri";
+    };
+
+    configHome = "/home/rplakama/";
+
+    logs = {
+      save = true;
+      path = "/tmp/dms-greeter.log";
+    };
+
+    quickshell.package = inputs.quickshell.packages.x86_64-linux.default;
   };
-
-  configHome = "/home/rplakama/";
-
-  logs = {
-    save = true; 
-    path = "/tmp/dms-greeter.log";
-  };
-
-  quickshell.package = inputs.quickshell.packages.x86_64-linux.default;
-
-};
 }

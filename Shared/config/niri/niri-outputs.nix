@@ -10,11 +10,11 @@
         };
       };
       "HDMI-A-1" = {
-	scale = 1.0;
-	position = {
-	  x = 0;
-	  y = 0;
-	};
+        scale = 1.0;
+        position = {
+          x = 0;
+          y = 0;
+        };
       };
     };
   };
