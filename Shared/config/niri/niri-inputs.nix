@@ -30,6 +30,7 @@
 
       (lib.mkIf (osConfig.networking.hostName == "Centuria") {
         mod-key = lib.mkForce "Alt";
+	xkb.layout = lib.mkForce "us";
         mod-key-nested = lib.mkForce "Super";
       })
     ];
