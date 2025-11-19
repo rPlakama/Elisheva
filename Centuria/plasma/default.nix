@@ -1,5 +1,5 @@
 {
-  import = [
+  imports = [
     ./plasma.nix
   ];
 }
