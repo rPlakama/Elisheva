@@ -68,6 +68,8 @@
           home-manager.users.rplakama = {
             imports = [
               ./Shared/home.nix
+	      ./Elisheva/config/niri/default.nix
+
             ];
           };
         }
@@ -96,7 +98,6 @@
           home-manager.users.rplakama = {
             imports = [
               ./Shared/home.nix
-	      ./Elisheva/config/niri/default.nix
             ];
           };
         }
