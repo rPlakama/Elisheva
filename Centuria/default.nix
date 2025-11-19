@@ -3,5 +3,6 @@
     ./packages/default.nix
     ./hardware-configuration.nix
     ./hardware/default.nix
+    ./plasma/default.nix
   ];
 }
