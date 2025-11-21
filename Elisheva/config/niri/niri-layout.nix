@@ -12,8 +12,8 @@
         {proportion = 0.8;}
       ];
       struts = {
-        bottom = 6;
-        top = 6;
+        bottom = 3;
+        top = 3;
         left = 6;
         right = 6;
       };
