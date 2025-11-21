@@ -16,5 +16,6 @@
   fonts.packages = with pkgs; [
     nerd-fonts.caskaydia-cove
     montserrat
+    arkpandora_ttf
   ];
 }
