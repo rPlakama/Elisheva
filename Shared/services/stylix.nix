@@ -5,8 +5,6 @@
 }: {
   stylix = {
     enable = true;
-
-    #base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest-dark-medium.yaml";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/chalk.yaml";
 
     polarity = "dark";
@@ -14,7 +12,7 @@
     targets.plymouth.enable = false;
 
     fonts = {
-      sizes.terminal = 10;
+      sizes.terminal = 9;
       sansSerif = {
         package = pkgs.montserrat;
         name = "Montserrat";
