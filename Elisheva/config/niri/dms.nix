@@ -7,7 +7,7 @@
 
   programs.dankMaterialShell = {
     enable = true;
-    default.settings = ./settings.json;
+    settings = ./settings.json;
     systemd.enable = true;
     niri.enableKeybinds = false;
     niri.enableSpawn = false;
