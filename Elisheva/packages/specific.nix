@@ -1,6 +1,5 @@
-{ pkgs, ... }: {
-
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-  qimgv
-];
+    qimgv
+  ];
 }

@@ -68,8 +68,7 @@
           home-manager.users.rplakama = {
             imports = [
               ./Shared/home.nix
-	      ./Elisheva/config/niri/default.nix
-
+              ./Elisheva/config/niri/default.nix
             ];
           };
         }
