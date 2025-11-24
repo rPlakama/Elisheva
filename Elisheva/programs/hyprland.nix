@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  programs.hyprland.eanble = true;
+  programs.hyprland.enable = true;
 }
