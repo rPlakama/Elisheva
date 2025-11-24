@@ -18,7 +18,7 @@
         right = 6;
       };
 
-      default-column-width.proportion = 0.4;
+      default-column-width.proportion = 0.3333;
       focus-ring = {
         enable = false;
         width = 2;
