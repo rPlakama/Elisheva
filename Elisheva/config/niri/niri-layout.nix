@@ -7,8 +7,8 @@
       preset-column-widths = [
         {proportion = 0.22222;}
         {proportion = 0.33333;}
+	{proportion = 0.5;}
         {proportion = 0.6666;}
-        {proportion = 0.9999;}
       ];
       struts = {
         bottom = 3;
