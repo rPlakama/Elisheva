@@ -31,8 +31,8 @@
 
     "Mod+Tab".action = toggle-overview;
     "Mod+W".action = close-window;
-    "Mod+Shift+R".action = switch-preset-column-width-back;
-    "Mod+R".action = switch-preset-column-width;
+    "Mod+R".action = switch-preset-column-width-back;
+    "Mod+Shift+R".action = switch-preset-column-width;
     "Mod+C".action = center-column;
     "Mod+Shift+C".action = center-visible-columns;
     "Mod+BracketLeft".action = consume-or-expel-window-left;
