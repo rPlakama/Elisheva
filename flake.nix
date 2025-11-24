@@ -69,7 +69,6 @@
             imports = [
               ./Shared/home.nix
               ./Elisheva/config/niri/default.nix
-	      ./Elisheva/config/hyprland/default.nix
             ];
           };
         }
