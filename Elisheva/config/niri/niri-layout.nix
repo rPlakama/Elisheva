@@ -5,7 +5,6 @@
       background-color = "00000000";
       center-focused-column = "never";
       preset-column-widths = [
-        {proportion = 0.22222;}
         {proportion = 0.33333;}
 	{proportion = 0.5;}
         {proportion = 0.6666;}
@@ -17,7 +16,7 @@
         right = 6;
       };
 
-      default-column-width.proportion = 0.3333;
+      default-column-width.proportion = 0.5;
       focus-ring = {
         enable = false;
         width = 2;
