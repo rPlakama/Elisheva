@@ -9,5 +9,7 @@
     # Others
     nodejs
     fish-lsp
+    jq
+
   ];
 }

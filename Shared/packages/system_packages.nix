@@ -5,7 +5,6 @@
     git
     ripgrep
     p7zip
-    jq
     yazi
     ripdrag
     cliphist
