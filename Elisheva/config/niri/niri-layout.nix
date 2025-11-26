@@ -5,9 +5,8 @@
       background-color = "00000000";
       center-focused-column = "never";
       preset-column-widths = [
-
         {proportion = 0.25;}
-	{proportion = 0.5;}
+        {proportion = 0.5;}
         {proportion = 0.75;}
       ];
       struts = {
