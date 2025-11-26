@@ -6,5 +6,6 @@
     ./packages/specific.nix
     ./programs/default.nix
     ./portals.nix
+    ./boot/default.nix
   ];
 }
