@@ -1,0 +1,4 @@
+{ ... }:
+{
+  services.scx.enable = true;
+}

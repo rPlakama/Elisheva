@@ -4,5 +4,6 @@
     ./stylix.nix
     ./upower.nix
     ./network.nix
+    ./scx.nix
   ];
 }

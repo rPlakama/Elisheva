@@ -10,6 +10,7 @@
         dgop.follows = "dgop";
       };
     };
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,6 +43,7 @@
     niri,
     home-manager,
     stylix,
+    chaotic,
     nix-flatpak,
     ...
   } @ inputs: {
@@ -53,6 +55,7 @@
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
+	chaotic.nixosModules.default
         {
           nixpkgs.overlays = [niri.overlays.niri];
         }
@@ -79,6 +82,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         stylix.nixosModules.stylix
+	chaotic.nixosModules.default
         nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
