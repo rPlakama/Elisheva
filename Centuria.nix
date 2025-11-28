@@ -9,13 +9,4 @@
     networkmanager.enable = true;
   };
 
-  services.flatpak = {
-    enable = true;
-    packages = [
-      {
-        appId = "com.lunarclient.LunarClient";
-        origin = "flathub";
-      }
-    ];
-  };
 }
