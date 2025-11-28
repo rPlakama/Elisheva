@@ -33,7 +33,6 @@
       "Mod+9".action = focus-workspace 9;
       "Mod+0".action = focus-workspace 10;
 
-      "Mod+Tab".action = toggle-overview;
       "Mod+W".action = close-window;
       "Mod+R".action = switch-preset-column-width-back;
       "Mod+Shift+R".action = switch-preset-column-width;
@@ -59,6 +58,10 @@
       "Mod+Return".action = spawn "foot";
       "Mod+Y".action = spawn-sh "foot -e yazi";
     }
+
+    (lib.mkIf (osConfig.networking.hostName == "Elisheva") {
+      "Mod+Tab".action = toggle-overview;
+    })
 
     (lib.mkIf (osConfig.networking.hostName == "Centuria") {
       "Ctrl+Tab".action = toggle-overview;
