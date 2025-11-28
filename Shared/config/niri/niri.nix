@@ -5,7 +5,6 @@
 }: {
   imports = [
     ./niri-outputs.nix
-    #./niri-screenshot.nix
     ./niri-window_rules.nix
     ./niri-animations.nix
     ./niri-binds.nix
