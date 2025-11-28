@@ -4,5 +4,6 @@
     ./audio.nix
     ./nvidia.nix
     ./suspend_fix.nix
+    ./openrg.nix
   ];
 }
