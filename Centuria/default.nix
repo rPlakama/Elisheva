@@ -3,7 +3,6 @@
     ./packages/default.nix
     ./hardware-configuration.nix
     ./hardware/default.nix
-    ./plasma/default.nix
     ./programs/steam.nix
     ./boot/kernel.nix
   ];
