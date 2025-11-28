@@ -1,8 +1,9 @@
 {
-  description = "SharkGirls are Cool";
+  description = "My multi-host flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     dankMaterialShell = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs = {
