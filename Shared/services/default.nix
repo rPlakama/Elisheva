@@ -5,5 +5,6 @@
     ./upower.nix
     ./network.nix
     ./scx.nix
+    ./gdms.nix
   ];
 }
