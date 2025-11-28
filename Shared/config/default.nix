@@ -7,5 +7,6 @@
     ./fzf.nix
     ./cliphist.nix
     ./mpv.nix
+    ./niri/niri.nix
   ];
 }
