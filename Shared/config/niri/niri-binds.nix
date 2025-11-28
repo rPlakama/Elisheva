@@ -1,4 +1,6 @@
 {
+  osConfig,
+  lib,
   config, ...}: {
   programs.niri.settings.binds = with config.lib.niri.actions; lib.mkMerge [
     {
