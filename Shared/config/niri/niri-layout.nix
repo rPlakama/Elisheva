@@ -24,7 +24,7 @@
       border = {
         enable = true;
         inactive.color = "#f5f5f519";
-        active.color = "#101010ff";
+        active.color = "#303030ff";
         width = 2;
       };
       shadow = {
