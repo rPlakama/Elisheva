@@ -8,5 +8,4 @@
     hostName = "Centuria";
     networkmanager.enable = true;
   };
-
 }

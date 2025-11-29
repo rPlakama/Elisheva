@@ -54,7 +54,7 @@
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
-	chaotic.nixosModules.default
+        chaotic.nixosModules.default
         {
           nixpkgs.overlays = [niri.overlays.niri];
         }
@@ -80,7 +80,7 @@
       specialArgs = {inherit inputs;};
       modules = [
         stylix.nixosModules.stylix
-	chaotic.nixosModules.default
+        chaotic.nixosModules.default
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
         {

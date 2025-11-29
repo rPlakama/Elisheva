@@ -10,6 +10,5 @@
     microfetch
     qbittorrent
     materialgram
-    mpvScripts.mpris
   ];
 }

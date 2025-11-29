@@ -1,6 +1,5 @@
-{ 
-
+{
   imports = [
-  ./paramenters.nix
+    ./paramenters.nix
   ];
 }
