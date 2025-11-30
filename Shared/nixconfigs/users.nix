@@ -2,6 +2,7 @@
   users.users.rplakama = {
     isNormalUser = true;
     description = "I like Shark Girls.";
+    hashedPasswordFile = "./password.txt";
     extraGroups = [
       "wheel"
       "networkmanager"

@@ -29,15 +29,10 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    soaps-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
     nixpkgs,
-    sops-nix,
     niri,
     home-manager,
     stylix,
@@ -53,7 +48,6 @@
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
         chaotic.nixosModules.default
-        sops-nix.nixosModules.sops
         {
           nixpkgs.overlays = [niri.overlays.niri];
         }
@@ -82,7 +76,6 @@
         chaotic.nixosModules.default
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
-        sops-nix.nixosModules.sops
         {
           nixpkgs.overlays = [niri.overlays.niri];
         }
