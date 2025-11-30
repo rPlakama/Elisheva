@@ -6,10 +6,7 @@
 
     dankMaterialShell = {
       url = "github:AvengeMedia/DankMaterialShell";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        dgop.follows = "dgop";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     stylix = {
@@ -18,10 +15,6 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    dgop = {
-      url = "github:AvengeMedia/dgop";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri = {
@@ -36,10 +29,15 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    soaps-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     nixpkgs,
+    sops-nix,
     niri,
     home-manager,
     stylix,
@@ -55,6 +53,7 @@
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
         chaotic.nixosModules.default
+        sops-nix.nixosModules.sops
         {
           nixpkgs.overlays = [niri.overlays.niri];
         }
@@ -83,6 +82,7 @@
         chaotic.nixosModules.default
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
+        sops-nix.nixosModules.sops
         {
           nixpkgs.overlays = [niri.overlays.niri];
         }
