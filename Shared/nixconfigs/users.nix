@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   users.users.rplakama = {
     isNormalUser = true;
-    description = "Hi.";
+    description = "rPlakama.";
     extraGroups = [
       "wheel"
       "networkmanager"
