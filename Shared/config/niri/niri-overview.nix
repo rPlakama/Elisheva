@@ -3,7 +3,7 @@
     overview = {
       workspace-shadow = {
         enable = true;
-        spread = 5;
+        spread = 10;
         softness = 100;
       };
     };
