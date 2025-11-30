@@ -1,8 +1,9 @@
 {pkgs, ...}: {
+  users.mutableUsers = false;
   users.users.rplakama = {
     isNormalUser = true;
     description = "I like Shark Girls.";
-    hashedPasswordFile = "./password.txt";
+    hashedPasswordFile = "./rplakama.txt";
     extraGroups = [
       "wheel"
       "networkmanager"
