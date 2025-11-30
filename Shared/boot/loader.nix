@@ -1,9 +1,6 @@
 {...}: {
-  boot = {
-    loader.systemd-boot.enable = true;
-    loader = {
+    boot.loader = {
       efi.canTouchEfiVariables = true;
       timeout = 0;
     };
-  };
 }
