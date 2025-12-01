@@ -6,5 +6,6 @@
     ./network.nix
     ./scx.nix
     ./gdms.nix
+    ./syncthing.nix
   ];
 }
