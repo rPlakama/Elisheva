@@ -4,6 +4,7 @@
     zoxide = {
       enable = true;
       enableFishIntegration = true;
+      enableBashIntegration = true;
     };
     fish = {
       enable = true;
