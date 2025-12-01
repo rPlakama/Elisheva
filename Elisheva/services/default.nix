@@ -1,6 +1,7 @@
 {
   imports = [
-    ./power-profiles-daemon.nix
+    #./power-profiles-daemon.nix
     ./mysql.nix
+    ./tuned.nix
   ];
 }
