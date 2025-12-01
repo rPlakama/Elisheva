@@ -47,7 +47,6 @@
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
-        chaotic.nixosModules.default
         {
           nixpkgs.overlays = [niri.overlays.niri];
         }
