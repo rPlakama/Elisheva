@@ -60,7 +60,7 @@
 
         "Mod+Return".action = spawn "foot";
         "Mod+Y".action = spawn-sh "foot -e yazi";
-	"Mod+P".action = spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)";
+        "Mod+P".action = spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)";
       }
 
       (lib.mkIf (osConfig.networking.hostName == "Elisheva") {

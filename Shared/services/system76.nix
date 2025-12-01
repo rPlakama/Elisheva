@@ -1,3 +1,3 @@
-{ ... }: {
-services.system76-scheduler.enable = true;
+{...}: {
+  services.system76-scheduler.enable = true;
 }
