@@ -6,5 +6,6 @@
     ./fish.nix
     ./niri.nix
     ./bash.nix
+    ./nh.nix
   ];
 }
