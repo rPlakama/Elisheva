@@ -9,6 +9,7 @@
     ripdrag
     cliphist
     wl-clipboard
+    wl-mirror
   ];
 
   # -- Font's -- #
