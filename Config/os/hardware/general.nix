@@ -8,8 +8,8 @@ lib.mkMerge [
     services = {
       xserver.videoDrivers = ["nvidia"];
       udev.extraRules = ''
-        ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1022", ...
-      '';
+    ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1022", ATTR{device}=="0x1483", ATTR{power/wakeup}="disabled"
+  '';
     };
     hardware.nvidia = {
       powerManagement.enable = false;
