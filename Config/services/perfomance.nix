@@ -11,9 +11,9 @@
     (lib.mkIf (config.networking.hostName == "Elisheva") {
       tuned.enable = true;
       scx = {
-        scheduler = "scx_rustland";
+        scheduler = "scx_lavd";
         extraArgs = [
-          "--powersave"
+          "--autopower"
         ];
       };
     })
@@ -22,7 +22,7 @@
       scx = {
         scheduler = "scx_lavd";
         extraArgs = [
-          "--perfomance"
+          "--performance"
         ];
       };
     })
