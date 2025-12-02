@@ -1,8 +1,10 @@
-{ osConfig, lib, ... }:
-
 {
+  osConfig,
+  lib,
+  ...
+}: {
   services.scx = lib.mkMerge [
-    { enable = true; }
+    {enable = true;}
     (lib.mkIf (osConfig.networking.hostName == "Elisheva") {
       scheduler = "scx_lavd";
     })
