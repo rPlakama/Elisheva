@@ -8,5 +8,6 @@
     ./gdms.nix
     ./syncthing.nix
     ./torrent.nix
+    ./scx.nix
   ];
 }
