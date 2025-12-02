@@ -7,5 +7,6 @@
     ./system76.nix
     ./gdms.nix
     ./syncthing.nix
+    ./torrent.nix
   ];
 }

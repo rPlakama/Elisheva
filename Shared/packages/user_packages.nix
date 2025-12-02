@@ -5,10 +5,8 @@
     dropbox
     firefox
     spotify
-    obsidian
     vesktop
     microfetch
-    qbittorrent
     materialgram
   ];
 }
