@@ -1,6 +1,5 @@
 {...}: {
   imports = [
-    ./Base.nix
     ./Elisheva
   ];
   system.stateVersion = "25.05";
