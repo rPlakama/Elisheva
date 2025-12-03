@@ -1,6 +1,6 @@
 {...}: {
   imports = [
-  ./Centuria
+    ./Centuria
   ];
   system.stateVersion = "25.05";
   networking = {

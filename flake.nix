@@ -37,7 +37,8 @@
     home-manager,
     stylix,
     chaotic,
-    ... } @ inputs: {
+    ...
+  } @ inputs: {
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     nixosConfigurations."Elisheva" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -50,7 +51,7 @@
           nixpkgs.overlays = [niri.overlays.niri];
         }
         ./Elisheva.nix
-	./Config
+        ./Config
         {
           home-manager = {
             useGlobalPkgs = true;
@@ -60,7 +61,7 @@
 
           home-manager.users.rplakama = {
             imports = [
-	      ./Config/home-manager/home.nix
+              ./Config/home-manager/home.nix
             ];
           };
         }
@@ -77,8 +78,8 @@
         {
           nixpkgs.overlays = [niri.overlays.niri];
         }
-	./Config
-	./Centuria.nix
+        ./Config
+        ./Centuria.nix
         {
           home-manager = {
             useGlobalPkgs = true;
@@ -88,7 +89,7 @@
 
           home-manager.users.rplakama = {
             imports = [
-	    ./Config/home-manager/home.nix
+              ./Config/home-manager/home.nix
             ];
           };
         }

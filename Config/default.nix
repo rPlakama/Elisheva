@@ -1,9 +1,9 @@
-{ 
+{
   imports = [
-  ./os
-  ./nix
-  ./packages
-  ./programs
-  ./services
+    ./os
+    ./nix
+    ./packages
+    ./programs
+    ./services
   ];
 }

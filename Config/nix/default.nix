@@ -1,7 +1,7 @@
-{ 
+{
   imports = [
-  ./nh.nix
-  ./nix.nix
-  ./users.nix
+    ./nh.nix
+    ./nix.nix
+    ./users.nix
   ];
 }

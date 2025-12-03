@@ -13,7 +13,8 @@
       scx = {
         scheduler = "scx_bpfland";
         extraArgs = [
-          "-m" "powersave"
+          "-m"
+          "powersave"
         ];
       };
     })
