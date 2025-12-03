@@ -12,10 +12,6 @@
       tuned.enable = true;
       scx = {
         scheduler = "scx_bpfland";
-        extraArgs = [
-          "-m"
-          "powersave"
-        ];
       };
     })
 
