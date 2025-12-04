@@ -9,9 +9,15 @@
       upower.enable = true;
     }
     (lib.mkIf (config.networking.hostName == "Elisheva") {
-      tuned.enable = true;
+      tuned = {
+	enable = true;
+	settings.dynamic_tuning = true;
+      };
       scx = {
-        scheduler = "scx_bpfland";
+        scheduler = "scx_lavd";
+	extraArgs = [
+	"--autopilot"
+	];
       };
     })
 
