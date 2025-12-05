@@ -14,11 +14,11 @@
       microfetch
       materialgram
       qimgv
+      kdePackages.okular
     ]
     ++ lib.optionals (config.networking.hostName == "Centuria") [
       bottles
     ]
     ++ lib.optionals (config.networking.hostName == "Elisheva") [
-      kdePackages.okular
     ];
 }

@@ -7,11 +7,5 @@
         save-position-on-quit = true;
       };
     };
-    zathura = {
-      enable = true;
-      extraConfig = ''
-        set selection-clipboard clipboard
-      '';
-    };
   };
 }
