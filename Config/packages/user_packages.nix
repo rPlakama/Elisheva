@@ -19,6 +19,6 @@
       bottles
     ]
     ++ lib.optionals (config.networking.hostName == "Elisheva") [
-      onlyoffice-desktopeditors
+      kdePackages.okular
     ];
 }

@@ -21,7 +21,7 @@
   stylix.enable = true;
   stylix.targets = {
     gtk.enable = true;
-    qt.enable = true;
+    qt.enable = false;
     niri.enable = false;
   };
 }
