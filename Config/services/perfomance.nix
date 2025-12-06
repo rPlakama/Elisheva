@@ -10,14 +10,14 @@
     }
     (lib.mkIf (config.networking.hostName == "Elisheva") {
       tuned = {
-	enable = true;
-	settings.dynamic_tuning = true;
+        enable = true;
+        settings.dynamic_tuning = true;
       };
       scx = {
         scheduler = "scx_lavd";
-	extraArgs = [
-	"--autopilot"
-	];
+        extraArgs = [
+          "--autopilot"
+        ];
       };
     })
 
