@@ -9,7 +9,6 @@
       dust
       dropbox
       firefox
-      spotify
       vesktop
       microfetch
       materialgram
