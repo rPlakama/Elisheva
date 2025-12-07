@@ -1,5 +1,6 @@
 {
   imports = [
+    ./git.nix
     ./foot.nix
     ./yazi.nix
     ./cli.nix

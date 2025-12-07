@@ -2,7 +2,6 @@
   environment.systemPackages = with pkgs; [
     bat
     fd
-    git
     ripgrep
     p7zip
     yazi
