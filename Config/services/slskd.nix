@@ -4,8 +4,11 @@
     openFirewall = true;
     domain = "slskd.nix.com";
     environmentFile = "/home/rplakama/Dropbox/env.yaml";
-    settings.shares.directories = ["/home/rplakama/Music"];
-    settings.flags.force_share_scan = true;
+    settings = {
+      shares.directories = ["/home/rplakama/Music"];
+      slskd.settings.directories.downloads = "/home/rplakama/Music/";
+      flags.force_share_scan = true;
+    };
   };
 
   systemd.services.slskd = {
