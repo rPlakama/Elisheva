@@ -1,5 +1,4 @@
-{ ... }: {
-
+{...}: {
   services.slskd = {
     enable = true;
     domain = "slskd.nix.com";
@@ -9,8 +8,8 @@
     environmentFile = "/home/rplakama/Dropbox/env.yaml";
     settings = {
       shares = {
-	directories = ["/home/rplakama/Music/"];
-	filters = [ "\.sh$" ];
+        directories = ["/home/rplakama/Music/"];
+        filters = ["music\.sh$"];
       };
     };
   };
