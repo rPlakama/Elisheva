@@ -1,16 +1,20 @@
-{...}: {
-  networking.hosts = {
-    "127.0.0.1" = ["slskd.nix.com"];
-    "::1" = ["slskd.nix.com"];
-  };
-
+{lib, ...}: {
   services.slskd = {
     enable = true;
     openFirewall = true;
     domain = "slskd.nix.com";
-    user = "rplakama";
-    group = "users";
     environmentFile = "/home/rplakama/Dropbox/env.yaml";
     settings.shares.directories = ["/home/rplakama/Music"];
+    settings.flags.force_share_scan = true;
+  };
+
+  systemd.services.slskd = {
+    serviceConfig = {
+      ProtectHome = lib.mkForce "false";
+      BindReadOnlyPaths = lib.mkForce null;
+      ReadOnlyPaths = lib.mkForce null;
+      User = lib.mkForce "rplakama";
+      Group = lib.mkForce "users";
+    };
   };
 }
