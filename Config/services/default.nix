@@ -5,5 +5,6 @@
     ./stylix.nix
     ./network.nix
     ./torrent.nix
+    ./slskd.nix
   ];
 }
