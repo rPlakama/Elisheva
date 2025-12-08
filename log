@@ -1,0 +1,213 @@
+dez 08 08:14:46 Elisheva systemd[1]: Started A modern client-server application for the Soulseek file sharing network.
+dez 08 08:14:48 Elisheva slskd[1063]:                    ▄▄▄▄         ▄▄▄▄       ▄▄▄▄
+dez 08 08:14:48 Elisheva slskd[1063]:            ▄▄▄▄▄▄▄ █  █ ▄▄▄▄▄▄▄ █  █▄▄▄ ▄▄▄█  █
+dez 08 08:14:48 Elisheva slskd[1063]:            █__ --█ █  █ █__ --█ █    ◄█ █  -  █
+dez 08 08:14:48 Elisheva slskd[1063]:            █▄▄▄▄▄█ █▄▄█ █▄▄▄▄▄█ █▄▄█▄▄█ █▄▄▄▄▄█
+dez 08 08:14:48 Elisheva slskd[1063]: ╒════════════════════════════════════════════════════════╕
+dez 08 08:14:48 Elisheva slskd[1063]: │           GNU AFFERO GENERAL PUBLIC LICENSE            │
+dez 08 08:14:48 Elisheva slskd[1063]: │                   https://slskd.org                    │
+dez 08 08:14:48 Elisheva slskd[1063]: │                                                        │
+dez 08 08:14:48 Elisheva slskd[1063]: │                    0.24.1 (0.24.1)                     │
+dez 08 08:14:48 Elisheva slskd[1063]: └────────────────────────────────────────────────────────┘
+dez 08 08:14:48 Elisheva slskd[1063]: [08:14:48 INF] Version: 0.24.1 (0.24.1)
+dez 08 08:14:48 Elisheva slskd[1063]: [08:14:48 INF] System: .NET 8.0.22, Unix 6.18.0.0, 64 bit, 16 processors
+dez 08 08:14:48 Elisheva slskd[1063]: [08:14:48 INF] Process ID: 1063 (64 bit)
+dez 08 08:14:48 Elisheva slskd[1063]: [08:14:48 INF] Invocation ID: d958d2c5-3df4-4efd-aed4-878a62c1fca5
+dez 08 08:14:48 Elisheva slskd[1063]: [08:14:48 INF] Instance Name: default
+dez 08 08:14:48 Elisheva slskd[1063]: [08:14:48 INF] Configuring application...
+dez 08 08:14:48 Elisheva slskd[1063]: [08:14:48 INF] Using application directory /var/lib/slskd
+dez 08 08:14:48 Elisheva slskd[1063]: [08:14:48 INF] Using configuration file /nix/store/fdcid30aik4dggsz9h1qs55xnd2wl1ll-slskd.yml
+dez 08 08:14:48 Elisheva slskd[1063]: [08:14:48 INF] Storing application data in /var/lib/slskd/data
+dez 08 08:14:49 Elisheva slskd[1063]: [08:14:49 INF] Listening for HTTP requests at http://0.0.0.0:5030/
+dez 08 08:14:49 Elisheva slskd[1063]: [08:14:49 INF] Databases are up to date!
+dez 08 08:14:49 Elisheva slskd[1063]: [08:14:49 INF] Set default script executable to '/run/current-system/sw/bin/fish'
+dez 08 08:14:49 Elisheva slskd[1063]: [08:14:49 INF] Using base url /
+dez 08 08:14:49 Elisheva slskd[1063]: [08:14:49 INF] Serving static content from /nix/store/7prbdihzvcdpjsh10cjqvjc4x1byi4ds-slskd-0.24.1/lib/slskd/wwwroot
+dez 08 08:14:49 Elisheva slskd[1063]: [08:14:49 INF] Configuration complete.  Starting application...
+dez 08 08:14:49 Elisheva slskd[1063]: [08:14:49 INF] Blacklist disabled
+dez 08 08:14:49 Elisheva slskd[1063]: [08:14:49 INF] Application started
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] Options reconfigured successfully
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] Listening for incoming connections on 0.0.0.0:50300
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] Initializing shares
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] Share cache StorageMode is 'Memory'. Attempting to load from backup...
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] Share cache backup validated. Attempting to restore...
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] Share cache successfully restored from backup
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] Share cache loaded from disk successfully. Sharing 0 directories and 0 files
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] Warming browse response cache...
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] Starting system clock...
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] Browse response cached successfully in 17ms
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] System clock started
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] Attempting to connect to the Soulseek server...
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 ERR] Failed to reconnect: Failed to resolve address 'vps.slsknet.org': Name or service not known
+dez 08 08:14:50 Elisheva slskd[1063]: [08:14:50 INF] Waiting about a second before attempting to reconnect
+dez 08 08:14:51 Elisheva slskd[1063]: [08:14:51 INF] Attempting to connect to the Soulseek server (#1)...
+dez 08 08:14:51 Elisheva slskd[1063]: [08:14:51 ERR] Failed to reconnect: Failed to resolve address 'vps.slsknet.org': Name or service not known
+dez 08 08:14:51 Elisheva slskd[1063]: [08:14:51 INF] Waiting about 2 seconds before attempting to reconnect
+dez 08 08:14:52 Elisheva slskd[1063]: [08:14:52 INF] Attempting to connect to the Soulseek server (#2)...
+dez 08 08:14:52 Elisheva slskd[1063]: [08:14:52 INF] Connected to the Soulseek server
+dez 08 08:14:52 Elisheva slskd[1063]: [08:14:52 INF] Logged in to the Soulseek server as rPlakama230
+dez 08 08:17:43 Elisheva slskd[1063]: [08:17:43 INF] User info sent to FlipFlopFlap
+dez 08 08:17:58 Elisheva slskd[1063]: [08:17:58 INF] Search for 'BlackStart' completed with 2 responses
+dez 08 08:18:01 Elisheva slskd[1063]: [08:18:01 INF] Search for 'BlackStar' was cancelled
+dez 08 08:18:01 Elisheva slskd[1063]: [08:18:01 INF] Search for 'BlackStar' completed with 150 responses
+dez 08 08:22:58 Elisheva slskd[1063]: [08:22:58 ERR] An unhandled exception has occurred while executing the request.
+dez 08 08:22:58 Elisheva slskd[1063]: Soulseek.SoulseekClientException: Failed to retrieve information for user rPlakama230: Failed to establish a direct or indirect message connection to rPlakama230 (187.19.244.55:50300)
+dez 08 08:22:58 Elisheva slskd[1063]:  ---> Soulseek.ConnectionException: Failed to establish a direct or indirect message connection to rPlakama230 (187.19.244.55:50300)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Soulseek.Network.PeerConnectionManager.<>c__DisplayClass39_0.<<GetOrAddMessageConnectionAsync>g__GetConnection|0>d.MoveNext()
+dez 08 08:22:58 Elisheva slskd[1063]: --- End of stack trace from previous location ---
+dez 08 08:22:58 Elisheva slskd[1063]:    at Soulseek.Network.PeerConnectionManager.GetOrAddMessageConnectionAsync(ConnectToPeerResponse connectToPeerResponse)
+dez 08 08:22:58 Elisheva slskd[1063]:    --- End of inner exception stack trace ---
+dez 08 08:22:58 Elisheva slskd[1063]:    at Soulseek.SoulseekClient.GetUserInfoInternalAsync(String username, CancellationToken cancellationToken)
+dez 08 08:22:58 Elisheva slskd[1063]:    at slskd.Users.UserService.GetInfoAsync(String username) in /build/source/src/slskd/Users/UserService.cs:line 193
+dez 08 08:22:58 Elisheva slskd[1063]:    at slskd.Users.API.UsersController.Info(String username) in /build/source/src/slskd/Users/API/Controllers/UsersController.cs:line 204
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+dez 08 08:22:58 Elisheva slskd[1063]:    at slskd.HTMLInjectionMiddleware.InvokeAsync(HttpContext context) in /build/source/src/slskd/Common/Middleware/HTMLInjectionMiddleware.cs:line 137
+dez 08 08:22:58 Elisheva slskd[1063]:    at slskd.HTMLRewriteMiddleware.InvokeAsync(HttpContext context) in /build/source/src/slskd/Common/Middleware/HTMLRewriteMiddleware.cs:line 127
+dez 08 08:22:58 Elisheva slskd[1063]:    at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+dez 08 08:28:12 Elisheva systemd[1]: Stopping A modern client-server application for the Soulseek file sharing network...
+dez 08 08:28:12 Elisheva slskd[1063]: [08:28:12 WRN] Application is shutting down
+dez 08 08:28:12 Elisheva slskd[1063]: [08:28:12 INF] Disconnected from the Soulseek server: the client is shutting down
+dez 08 08:28:12 Elisheva slskd[1063]: [08:28:12 INF] Client stopped
+dez 08 08:28:12 Elisheva systemd[1]: slskd.service: Deactivated successfully.
+dez 08 08:28:12 Elisheva systemd[1]: Stopped A modern client-server application for the Soulseek file sharing network.
+dez 08 08:28:12 Elisheva systemd[1]: slskd.service: Consumed 1min 9.848s CPU time, 510.7M memory peak, 84.3M read from disk, 1.5M written to disk, 1.5M incoming IP traffic, 1.8M outgoing IP traffic.
+dez 08 08:28:13 Elisheva systemd[1]: Started A modern client-server application for the Soulseek file sharing network.
+dez 08 08:28:13 Elisheva slskd[8181]:                    ▄▄▄▄         ▄▄▄▄       ▄▄▄▄
+dez 08 08:28:13 Elisheva slskd[8181]:            ▄▄▄▄▄▄▄ █  █ ▄▄▄▄▄▄▄ █  █▄▄▄ ▄▄▄█  █
+dez 08 08:28:13 Elisheva slskd[8181]:            █__ --█ █  █ █__ --█ █    ◄█ █  -  █
+dez 08 08:28:13 Elisheva slskd[8181]:            █▄▄▄▄▄█ █▄▄█ █▄▄▄▄▄█ █▄▄█▄▄█ █▄▄▄▄▄█
+dez 08 08:28:13 Elisheva slskd[8181]: ╒════════════════════════════════════════════════════════╕
+dez 08 08:28:13 Elisheva slskd[8181]: │           GNU AFFERO GENERAL PUBLIC LICENSE            │
+dez 08 08:28:13 Elisheva slskd[8181]: │                   https://slskd.org                    │
+dez 08 08:28:13 Elisheva slskd[8181]: │                                                        │
+dez 08 08:28:13 Elisheva slskd[8181]: │                    0.24.1 (0.24.1)                     │
+dez 08 08:28:13 Elisheva slskd[8181]: └────────────────────────────────────────────────────────┘
+dez 08 08:28:13 Elisheva slskd[8181]: [08:28:13 INF] Version: 0.24.1 (0.24.1)
+dez 08 08:28:13 Elisheva slskd[8181]: [08:28:13 INF] System: .NET 8.0.22, Unix 6.18.0.0, 64 bit, 16 processors
+dez 08 08:28:13 Elisheva slskd[8181]: [08:28:13 INF] Process ID: 8181 (64 bit)
+dez 08 08:28:13 Elisheva slskd[8181]: [08:28:13 INF] Invocation ID: d002de71-5f3c-4557-8dff-e1761059ba77
+dez 08 08:28:13 Elisheva slskd[8181]: [08:28:13 INF] Instance Name: default
+dez 08 08:28:13 Elisheva slskd[8181]: [08:28:13 INF] Configuring application...
+dez 08 08:28:13 Elisheva slskd[8181]: [08:28:13 INF] Using application directory /var/lib/slskd
+dez 08 08:28:13 Elisheva slskd[8181]: [08:28:13 INF] Using configuration file /nix/store/yay2nbkpp3xzvxsw95vhpagb947gad2x-slskd.yml
+dez 08 08:28:13 Elisheva slskd[8181]: [08:28:13 INF] Storing application data in /var/lib/slskd/data
+dez 08 08:28:15 Elisheva slskd[8181]: [08:28:15 INF] Listening for HTTP requests at http://0.0.0.0:5030/
+dez 08 08:28:15 Elisheva slskd[8181]: [08:28:15 INF] Databases are up to date!
+dez 08 08:28:15 Elisheva slskd[8181]: [08:28:15 INF] Set default script executable to '/run/current-system/sw/bin/fish'
+dez 08 08:28:15 Elisheva slskd[8181]: [08:28:15 INF] Using base url /
+dez 08 08:28:15 Elisheva slskd[8181]: [08:28:15 INF] Serving static content from /nix/store/7prbdihzvcdpjsh10cjqvjc4x1byi4ds-slskd-0.24.1/lib/slskd/wwwroot
+dez 08 08:28:15 Elisheva slskd[8181]: [08:28:15 INF] Configuration complete.  Starting application...
+dez 08 08:28:15 Elisheva slskd[8181]: [08:28:15 INF] Blacklist disabled
+dez 08 08:28:15 Elisheva slskd[8181]: [08:28:15 INF] Application started
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Options reconfigured successfully
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Listening for incoming connections on 0.0.0.0:50300
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Initializing shares
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Share cache StorageMode is 'Memory'. Attempting to load from backup...
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Share cache backup validated. Attempting to restore...
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Share cache successfully restored from backup
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 WRN] Error initializing shares: Share options changed since previous scan
+dez 08 08:28:16 Elisheva slskd[8181]: slskd.ShareInitializationException: Share options changed since previous scan
+dez 08 08:28:16 Elisheva slskd[8181]:    at slskd.Shares.ShareService.InitializeAsync(Boolean forceRescan) in /build/source/src/slskd/Shares/ShareService.cs:line 495
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 WRN] Re-attempting initialization
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Initializing shares
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 WRN] Performing a forced re-scan of shares
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Share scan started
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Starting shared file scan
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Sharing /home/rplakama/Music as Music
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Enumerating shared directories
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Found 0 shared directories (and 0 were excluded) in 26ms.  Starting file scan.
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Scan found 0 files (and 0 were filtered) in 27ms
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Removed or renamed 0 files and 0 directories in 1ms
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Rebuilding filename index...
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Filename index rebuild complete
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Shares scanned successfully. Found 0 directories and 0 files in 317.8015ms
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Share cache loaded from disk successfully. Sharing 0 directories and 0 files
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Warming browse response cache...
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Browse response cached successfully in 82ms
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Warming browse response cache...
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Browse response cached successfully in 1ms
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Starting system clock...
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] System clock started
+dez 08 08:28:16 Elisheva slskd[8181]: [08:28:16 INF] Attempting to connect to the Soulseek server...
+dez 08 08:28:17 Elisheva slskd[8181]: [08:28:17 INF] Connected to the Soulseek server
+dez 08 08:28:17 Elisheva slskd[8181]: [08:28:17 INF] Logged in to the Soulseek server as rPlakama230
+dez 08 08:30:23 Elisheva systemd[1]: Stopping A modern client-server application for the Soulseek file sharing network...
+dez 08 08:30:23 Elisheva slskd[8181]: [08:30:23 WRN] Application is shutting down
+dez 08 08:30:23 Elisheva slskd[8181]: [08:30:23 INF] Disconnected from the Soulseek server: the client is shutting down
+dez 08 08:30:23 Elisheva slskd[8181]: [08:30:23 INF] Client stopped
+dez 08 08:30:24 Elisheva systemd[1]: slskd.service: Deactivated successfully.
+dez 08 08:30:24 Elisheva systemd[1]: Stopped A modern client-server application for the Soulseek file sharing network.
+dez 08 08:30:24 Elisheva systemd[1]: slskd.service: Consumed 17.289s CPU time, 170.3M memory peak, 24K read from disk, 292K written to disk, 382K incoming IP traffic, 86.3K outgoing IP traffic.
+dez 08 08:30:25 Elisheva systemd[1]: Started A modern client-server application for the Soulseek file sharing network.
+dez 08 08:30:25 Elisheva slskd[11279]:                    ▄▄▄▄         ▄▄▄▄       ▄▄▄▄
+dez 08 08:30:25 Elisheva slskd[11279]:            ▄▄▄▄▄▄▄ █  █ ▄▄▄▄▄▄▄ █  █▄▄▄ ▄▄▄█  █
+dez 08 08:30:25 Elisheva slskd[11279]:            █__ --█ █  █ █__ --█ █    ◄█ █  -  █
+dez 08 08:30:25 Elisheva slskd[11279]:            █▄▄▄▄▄█ █▄▄█ █▄▄▄▄▄█ █▄▄█▄▄█ █▄▄▄▄▄█
+dez 08 08:30:25 Elisheva slskd[11279]: ╒════════════════════════════════════════════════════════╕
+dez 08 08:30:25 Elisheva slskd[11279]: │           GNU AFFERO GENERAL PUBLIC LICENSE            │
+dez 08 08:30:25 Elisheva slskd[11279]: │                   https://slskd.org                    │
+dez 08 08:30:25 Elisheva slskd[11279]: │                                                        │
+dez 08 08:30:25 Elisheva slskd[11279]: │                    0.24.1 (0.24.1)                     │
+dez 08 08:30:25 Elisheva slskd[11279]: └────────────────────────────────────────────────────────┘
+dez 08 08:30:25 Elisheva slskd[11279]: [08:30:25 INF] Version: 0.24.1 (0.24.1)
+dez 08 08:30:25 Elisheva slskd[11279]: [08:30:25 INF] System: .NET 8.0.22, Unix 6.18.0.0, 64 bit, 16 processors
+dez 08 08:30:25 Elisheva slskd[11279]: [08:30:25 INF] Process ID: 11279 (64 bit)
+dez 08 08:30:25 Elisheva slskd[11279]: [08:30:25 INF] Invocation ID: 88ef983d-e832-4b59-ba1f-db3932af706a
+dez 08 08:30:25 Elisheva slskd[11279]: [08:30:25 INF] Instance Name: default
+dez 08 08:30:25 Elisheva slskd[11279]: [08:30:25 INF] Configuring application...
+dez 08 08:30:25 Elisheva slskd[11279]: [08:30:25 INF] Using application directory /var/lib/slskd
+dez 08 08:30:25 Elisheva slskd[11279]: [08:30:25 INF] Using configuration file /nix/store/f6nfvivv75s6man9mhn0wq8wp7jfa31g-slskd.yml
+dez 08 08:30:25 Elisheva slskd[11279]: [08:30:25 INF] Storing application data in /var/lib/slskd/data
+dez 08 08:30:27 Elisheva slskd[11279]: [08:30:27 INF] Listening for HTTP requests at http://0.0.0.0:5030/
+dez 08 08:30:27 Elisheva slskd[11279]: [08:30:27 INF] Databases are up to date!
+dez 08 08:30:27 Elisheva slskd[11279]: [08:30:27 INF] Set default script executable to '/run/current-system/sw/bin/fish'
+dez 08 08:30:27 Elisheva slskd[11279]: [08:30:27 INF] Using base url /
+dez 08 08:30:27 Elisheva slskd[11279]: [08:30:27 INF] Serving static content from /nix/store/7prbdihzvcdpjsh10cjqvjc4x1byi4ds-slskd-0.24.1/lib/slskd/wwwroot
+dez 08 08:30:27 Elisheva slskd[11279]: [08:30:27 INF] Configuration complete.  Starting application...
+dez 08 08:30:27 Elisheva slskd[11279]: [08:30:27 INF] Blacklist disabled
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Application started
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Options reconfigured successfully
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Listening for incoming connections on 0.0.0.0:50300
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Initializing shares
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Share cache StorageMode is 'Memory'. Attempting to load from backup...
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Share cache backup validated. Attempting to restore...
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Share cache successfully restored from backup
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 WRN] Error initializing shares: Share options changed since previous scan
+dez 08 08:30:28 Elisheva slskd[11279]: slskd.ShareInitializationException: Share options changed since previous scan
+dez 08 08:30:28 Elisheva slskd[11279]:    at slskd.Shares.ShareService.InitializeAsync(Boolean forceRescan) in /build/source/src/slskd/Shares/ShareService.cs:line 495
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 WRN] Re-attempting initialization
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Initializing shares
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 WRN] Performing a forced re-scan of shares
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Share scan started
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Starting shared file scan
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Sharing /home/rplakama/Music as Music
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Enumerating shared directories
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Found 0 shared directories (and 0 were excluded) in 2ms.  Starting file scan.
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Scan found 0 files (and 0 were filtered) in 7ms
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Removed or renamed 0 files and 0 directories in 0ms
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Rebuilding filename index...
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Filename index rebuild complete
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Shares scanned successfully. Found 0 directories and 0 files in 103.8968ms
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Share cache loaded from disk successfully. Sharing 0 directories and 0 files
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Warming browse response cache...
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Browse response cached successfully in 17ms
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Warming browse response cache...
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Starting system clock...
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Browse response cached successfully in 1ms
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] System clock started
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Attempting to connect to the Soulseek server...
+dez 08 08:30:28 Elisheva slskd[11279]: [08:30:28 INF] Connected to the Soulseek server
+dez 08 08:30:29 Elisheva slskd[11279]: [08:30:29 INF] Logged in to the Soulseek server as rPlakama230
