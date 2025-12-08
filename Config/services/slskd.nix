@@ -1,5 +1,4 @@
-{lib, ...}: {
-  systemd.services.slskd.serviceConfig.ProtectHome = lib.mkForce "false";
+{...}: {
   services.slskd = {
     enable = true;
     domain = "slskd.nix.com";
