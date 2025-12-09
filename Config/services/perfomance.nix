@@ -16,7 +16,10 @@
       scx = {
         scheduler = "scx_bpfland";
         extraArgs = [
-          "-s 20000 -m powersave -I 100 -t 100"
+          "-s 20000"
+	  "-m powersave"
+	  "-I 100"
+	  "-t 100"
         ];
       };
     })
