@@ -14,9 +14,9 @@
         settings.dynamic_tuning = true;
       };
       scx = {
-        scheduler = "scx_lavd";
+        scheduler = "scx_bpfland";
         extraArgs = [
-          "--autopilot"
+          "-s 20000 -m powersave -I 100 -t 100"
         ];
       };
     })

@@ -8,7 +8,6 @@
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +35,6 @@
     niri,
     home-manager,
     stylix,
-    chaotic,
     ...
   } @ inputs: {
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
@@ -72,7 +70,6 @@
       specialArgs = {inherit inputs;};
       modules = [
         stylix.nixosModules.stylix
-        chaotic.nixosModules.default
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
         {
