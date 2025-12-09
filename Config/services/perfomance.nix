@@ -10,15 +10,10 @@
     }
     (lib.mkIf (config.networking.hostName == "Elisheva") {
       tuned = {
-        enable = true;
+        enable = false;
         settings.dynamic_tuning = true;
       };
-      scx = {
-        scheduler = "scx_bpfland";
-        extraArgs = [
-          "-s" "20000" "-m" "powersave" "-I" "100" "-t" "100"
-        ];
-      };
+      scx.scheduler = "scx_bpfland";
     })
 
     (lib.mkIf (config.networking.hostName == "Centuria") {
