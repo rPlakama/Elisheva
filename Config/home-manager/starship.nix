@@ -14,14 +14,14 @@
         nu_indicator = " >";
         bash_indicator = " 󱆃";
       };
-
       character = {
-        success_symbol = "";
-        error_symbol = "";
-        vimcmd_symbol = "";
-        vimcmd_visual_symbol = " ";
-      };
-
+      success_symbol = "[](white)";
+      error_symbol = "[](red)";
+      vimcmd_symbol = "[](green)";
+      vimcmd_visual_symbol = "[ ](green)";
+      vimcmd_replace_symbol = "[](purple)";
+      vimcmd_replace_one_symbol = "[](purple)";
+    };
       username = {
         show_always = true;
       };
