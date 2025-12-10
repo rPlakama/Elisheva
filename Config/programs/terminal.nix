@@ -1,17 +1,14 @@
 {...}: {
   programs = {
     starship.enable = true;
+    zsh = {
+      enable = true;
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+    };
     zoxide = {
       enable = true;
-      enableBashIntegration = true;
-      enableFishIntegration = true;
-    };
-    fish = {
-      enable = true;
-      shellInit = ''
-        set -g fish_key_bindings fish_vi_key_bindings
-        set -g fish_greeting ""
-      '';
+      enableZshIntegration = true;
     };
   };
 }
