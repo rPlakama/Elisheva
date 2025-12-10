@@ -8,5 +8,6 @@
     ./media.nix
     ./starship.nix
     ./niri/default.nix
+    ./fish.nix
   ];
 }

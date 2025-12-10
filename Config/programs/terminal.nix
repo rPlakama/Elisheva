@@ -1,14 +1,13 @@
 {...}: {
   programs = {
     starship.enable = true;
-    zsh = {
+    fish = {
       enable = true;
-      autosuggestions.enable = true;
-      syntaxHighlighting.enable = true;
+      generateCompletions = true;
     };
     zoxide = {
       enable = true;
-      enableZshIntegration = true;
+      enableFishIntegration = true;
     };
   };
 }
