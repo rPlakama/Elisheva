@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs = {
     git.enable = true;
     delta = {

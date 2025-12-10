@@ -2,7 +2,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./niri-outputs.nix
     ./niri-window_rules.nix
@@ -24,7 +25,7 @@
       };
       layer-rules = [
         {
-          matches = [{namespace = "^quickshell$";}];
+          matches = [ { namespace = "^quickshell$"; } ];
           place-within-backdrop = true;
         }
       ];

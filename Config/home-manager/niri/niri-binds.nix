@@ -3,27 +3,123 @@
   lib,
   config,
   ...
-}: {
-  programs.niri.settings.binds = with config.lib.niri.actions;
+}:
+{
+  programs.niri.settings.binds =
+    with config.lib.niri.actions;
     lib.mkMerge [
       {
-        "Mod+Space".action = spawn ["dms" "ipc" "call" "spotlight" "toggle"];
-        "Mod+V".action = spawn ["dms" "ipc" "call" "clipboard" "toggle"];
-        "Mod+M".action = spawn ["dms" "ipc" "call" "processlist" "toggle"];
-        "Mod+N".action = spawn ["dms" "ipc" "call" "notifications" "toggle"];
+        "Mod+Space".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "spotlight"
+          "toggle"
+        ];
+        "Mod+V".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "clipboard"
+          "toggle"
+        ];
+        "Mod+M".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "processlist"
+          "toggle"
+        ];
+        "Mod+N".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "notifications"
+          "toggle"
+        ];
 
-        "Ctrl+Alt+D".action = spawn ["dms" "ipc" "call" "dash" "toggle" "media"];
-        "Ctrl+Alt+A".action = spawn ["dms" "ipc" "call" "dash" "toggle" "overview"];
-        "Ctrl+Alt+W".action = spawn ["dms" "ipc" "call" "dankdash" "wallpaper"];
-        "Ctrl+Alt+L".action = spawn ["dms" "ipc" "call" "wallpaper" "next"];
-        "Ctrl+Alt+C".action = spawn ["dms" "ipc" "call" "control-center" "toggle"];
-        "Ctrl+Alt+S".action = spawn ["dms" "ipc" "call" "powermenu" "toggle"];
-        "XF86AudioPlay".action = spawn ["dms" "ipc" "call" "mpris" "playPause"];
-        "XF86AudioMute".action = spawn ["dms" "ipc" "call" "audio" "mute"];
-        "XF86MonBrightnessUp".action = spawn ["dms" "ipc" "call" "brightness" "increment" "5" ""];
-        "XF86MonBrightnessDown".action = spawn ["dms" "ipc" "call" "brightness" "decrement" "5" ""];
-        "XF86AudioRaiseVolume".action = spawn-sh ["wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+; dms ipc call audio increment 0"];
-        "XF86AudioLowerVolume".action = spawn-sh ["wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-; dms ipc call audio increment 0"];
+        "Ctrl+Alt+D".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "dash"
+          "toggle"
+          "media"
+        ];
+        "Ctrl+Alt+A".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "dash"
+          "toggle"
+          "overview"
+        ];
+        "Ctrl+Alt+W".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "dankdash"
+          "wallpaper"
+        ];
+        "Ctrl+Alt+L".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "wallpaper"
+          "next"
+        ];
+        "Ctrl+Alt+C".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "control-center"
+          "toggle"
+        ];
+        "Ctrl+Alt+S".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "powermenu"
+          "toggle"
+        ];
+        "XF86AudioPlay".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "mpris"
+          "playPause"
+        ];
+        "XF86AudioMute".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "audio"
+          "mute"
+        ];
+        "XF86MonBrightnessUp".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "brightness"
+          "increment"
+          "5"
+          ""
+        ];
+        "XF86MonBrightnessDown".action = spawn [
+          "dms"
+          "ipc"
+          "call"
+          "brightness"
+          "decrement"
+          "5"
+          ""
+        ];
+        "XF86AudioRaiseVolume".action = spawn-sh [
+          "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+; dms ipc call audio increment 0"
+        ];
+        "XF86AudioLowerVolume".action = spawn-sh [
+          "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-; dms ipc call audio increment 0"
+        ];
 
         "Mod+1".action = focus-workspace 1;
         "Mod+2".action = focus-workspace 2;
@@ -46,7 +142,7 @@
         "Mod+F".action = maximize-column;
         "Mod+Shift+F".action = fullscreen-window;
 
-        "Print".action.screenshot = [];
+        "Print".action.screenshot = [ ];
 
         "Mod+L".action = focus-column-right;
         "Mod+H".action = focus-column-left;

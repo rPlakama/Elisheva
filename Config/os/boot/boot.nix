@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   boot = {
     initrd = {
       systemd.network.wait-online.enable = false;

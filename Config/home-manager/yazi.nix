@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
@@ -6,7 +7,7 @@
       mgr.prepend_keymap = [
         {
           run = "shell 'ripdrag -H 80 \"$@\" -x 2>/dev/null &' --confirm";
-          on = ["<C-n>"];
+          on = [ "<C-n>" ];
         }
       ];
     };

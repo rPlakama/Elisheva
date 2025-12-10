@@ -1,8 +1,9 @@
-{...}: {
+{ ... }:
+{
   programs.niri.settings = {
     window-rules = [
       {
-        matches = [{is-focused = false;}];
+        matches = [ { is-focused = false; } ];
         opacity = 0.95;
       }
       {

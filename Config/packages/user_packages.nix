@@ -3,8 +3,10 @@
   lib,
   config,
   ...
-}: {
-  environment.systemPackages = with pkgs;
+}:
+{
+  environment.systemPackages =
+    with pkgs;
     [
       dust
       dropbox

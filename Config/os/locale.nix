@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   console.keyMap = "br-abnt";
   time.timeZone = "America/Recife";
   i18n = {

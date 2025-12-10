@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   services = lib.mkMerge [
     {
       scx.enable = true;

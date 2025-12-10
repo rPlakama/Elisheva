@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   # -- Shell Decoration -- #
   programs.starship = {
     enable = true;
@@ -142,7 +143,7 @@
         symbol = " ";
       };
 
-      memory_usage = {};
+      memory_usage = { };
 
       nix_shell = {
         symbol = " ";
