@@ -12,7 +12,6 @@
     niri.enableKeybinds = false;
     niri.enableSpawn = false;
     enableDynamicTheming = false;
-    enableColorPicker = false;
     quickshell.package = inputs.quickshell.packages.x86_64-linux.default;
   };
 }
