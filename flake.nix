@@ -1,6 +1,5 @@
 {
   description = "My multi-host flake";
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
