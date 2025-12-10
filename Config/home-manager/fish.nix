@@ -1,10 +1,10 @@
-{ ... }: {
+{...}: {
   programs.fish = {
     enable = true;
-    interactiveShellInit = "
+    shellInit = "
     function fish_greeting
-    echo Time is: (set_color yellow)(date +%T)(set_color normal) and we are in $hostname
 end
+fish_vi_key_bindings
 ";
   };
 }
