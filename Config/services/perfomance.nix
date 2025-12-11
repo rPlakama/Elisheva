@@ -12,7 +12,6 @@
     (lib.mkIf (config.networking.hostName == "Elisheva") {
       tuned = {
         enable = true;
-        settings.dynamic_tuning = true;
       };
       scx = {
 	scheduler = "scx_lavd";
