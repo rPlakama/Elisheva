@@ -24,13 +24,13 @@
       };
       border = {
         enable = true;
-        inactive.color = "#f5f5f519";
-        active.color = "#303030ff";
+        inactive.color = "#95959519";
+        active.color = "#101010ff";
         width = 2;
       };
       shadow = {
         enable = true;
-        spread = 3;
+        spread = 6;
         softness = 10;
         draw-behind-window = true;
       };

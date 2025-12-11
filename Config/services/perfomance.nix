@@ -14,7 +14,7 @@
         enable = true;
         settings.dynamic_tuning = true;
       };
-      scx.scheduler = "scx_flash";
+      scx.scheduler = "scx_rusty";
     })
 
     (lib.mkIf (config.networking.hostName == "Centuria") {
