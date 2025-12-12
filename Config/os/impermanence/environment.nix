@@ -19,6 +19,7 @@
         ".config/nvim"
         ".local/share/nvim"
         ".local/state/nvim"
+        ".config/vesktop"
         ".mozilla"
         "Downloads"
         "Torrents"
