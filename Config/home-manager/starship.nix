@@ -33,118 +33,118 @@
       };
 
       hostname = {
-        ssh_symbol = "";
+        ssh_symbol = " ";
       };
       memory_usage = {
-        symbol = "󰍛";
+        symbol = "󰍛 ";
       };
 
       aws = {
-        symbol = "";
+        symbol = "  ";
       };
       docker_context = {
-        symbol = "";
+        symbol = " ";
       };
       gcloud = {
-        symbol = "";
+        symbol = " ";
       };
 
       buf = {
-        symbol = "";
+        symbol = " ";
       };
       bun = {
-        symbol = "";
+        symbol = " ";
       };
       c = {
-        symbol = "";
+        symbol = " ";
       };
       cmake = {
-        symbol = "";
+        symbol = " ";
       };
       conda = {
-        symbol = "";
+        symbol = " ";
       };
       cpp = {
-        symbol = "";
+        symbol = " ";
       };
       crystal = {
-        symbol = "";
+        symbol = " ";
       };
       dart = {
-        symbol = "";
+        symbol = " ";
       };
       deno = {
-        symbol = "";
+        symbol = " ";
       };
       elixir = {
-        symbol = "";
+        symbol = " ";
       };
       elm = {
-        symbol = "";
+        symbol = " ";
       };
       fennel = {
-        symbol = "";
+        symbol = " ";
       };
       golang = {
-        symbol = "";
+        symbol = " ";
       };
       gradle = {
-        symbol = "";
+        symbol = " ";
       };
       haskell = {
-        symbol = "";
+        symbol = " ";
       };
       haxe = {
-        symbol = "";
+        symbol = " ";
       };
       java = {
-        symbol = "";
+        symbol = " ";
       };
       julia = {
-        symbol = "";
+        symbol = " ";
       };
       kotlin = {
-        symbol = "";
+        symbol = " ";
       };
       lua = {
-        symbol = "";
+        symbol = " ";
       };
       nim = {
-        symbol = "";
+        symbol = " ";
       };
       nodejs = {
-        symbol = "";
+        symbol = " ";
       };
       ocaml = {
-        symbol = "";
+        symbol = " ";
       };
       python = {
-        symbol = "";
+        symbol = " ";
       };
       rust = {
-        symbol = "";
+        symbol = " ";
       };
       scala = {
-        symbol = "";
+        symbol = " ";
       };
       swift = {
-        symbol = "";
+        symbol = " ";
       };
       zig = {
-        symbol = "";
+        symbol = " ";
       };
 
       git_branch = {
-        symbol = "";
+        symbol = " ";
       };
       git_commit = {
-        tag_symbol = "";
+        tag_symbol = " ";
       };
       fossil_branch = {
-        symbol = "";
+        symbol = " ";
       };
       hg_branch = {
-        symbol = "";
+        symbol = " ";
       };
 
       nix_shell = {
