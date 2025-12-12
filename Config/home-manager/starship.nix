@@ -3,17 +3,11 @@
   programs.starship = {
     enable = true;
     enableBashIntegration = true;
-    enableZshIntegration = true;
+    enableFishIntegration = true;
     settings = {
       add_newline = true;
-      format = "$username$directory$git_branch$git_commit$git_state$git_status$c$elixir$elm$golang$gradle$haskell$java$julia$nodejs$nim$rust$scala$docker_context$jobs$cmd_duration$character";
+      format = "$username$hostname$directory$git_branch$git_commit$git_state$git_status$aws$buf$bun$c$cmake$conda$cpp$crystal$dart$deno$docker_context$elixir$elm$fennel$gcloud$golang$gradle$guix_shell$haskell$haxe$java$julia$kotlin$lua$memory_usage$nim$nix_shell$nodejs$ocaml$python$rust$scala$swift$zig$jobs$cmd_duration$shell$character";
 
-      shell = {
-        disabled = false;
-        fish_indicator = " ";
-        nu_indicator = " >";
-        bash_indicator = " 󱆃";
-      };
       character = {
         success_symbol = "[](white)";
         error_symbol = "[](red)";
@@ -22,162 +16,149 @@
         vimcmd_replace_symbol = "[](purple)";
         vimcmd_replace_one_symbol = "[](purple)";
       };
-      username = {
-        show_always = true;
-      };
-
-      aws = {
-        symbol = "  ";
-      };
-
-      buf = {
-        symbol = "  ";
-      };
-
-      bun = {
-        symbol = " ";
-      };
-
-      c = {
-        symbol = " ";
-      };
-
-      cpp = {
-        symbol = " ";
-      };
-
-      cmake = {
-        symbol = " ";
-      };
-
-      conda = {
-        symbol = " ";
-      };
-
-      crystal = {
-        symbol = " ";
-      };
-
-      dart = {
-        symbol = " ";
-      };
-
-      deno = {
-        symbol = " ";
-      };
 
       directory = {
         read_only = " 󰀼 ";
       };
 
-      docker_context = {
-        symbol = " ";
+      shell = {
+        disabled = true;
+        fish_indicator = " ";
+        nu_indicator = " >";
+        bash_indicator = " 󱆃";
       };
 
-      elixir = {
-        symbol = " ";
-      };
-
-      elm = {
-        symbol = " ";
-      };
-
-      fennel = {
-        symbol = " ";
-      };
-
-      fossil_branch = {
-        symbol = " ";
-      };
-
-      gcloud = {
-        symbol = "  ";
-      };
-
-      git_branch = {
-        symbol = " ";
-      };
-
-      git_commit = {
-        tag_symbol = "  ";
-      };
-
-      golang = {
-        symbol = " ";
-      };
-
-      guix_shell = {
-        symbol = " ";
-      };
-
-      haskell = {
-        symbol = " ";
-      };
-
-      haxe = {
-        symbol = " ";
-      };
-
-      hg_branch = {
-        symbol = " ";
+      username = {
+        show_always = true;
       };
 
       hostname = {
         ssh_symbol = " ";
       };
 
+      cmd_duration = { };
+      jobs = { };
+      memory_usage = {
+        symbol = "󰍛 ";
+      };
+
+      aws = {
+        symbol = "  ";
+      };
+      docker_context = {
+        symbol = " ";
+      };
+      gcloud = {
+        symbol = "  ";
+      };
+
+      buf = {
+        symbol = "  ";
+      };
+      bun = {
+        symbol = " ";
+      };
+      c = {
+        symbol = " ";
+      };
+      cmake = {
+        symbol = " ";
+      };
+      conda = {
+        symbol = " ";
+      };
+      cpp = {
+        symbol = " ";
+      };
+      crystal = {
+        symbol = " ";
+      };
+      dart = {
+        symbol = " ";
+      };
+      deno = {
+        symbol = " ";
+      };
+      elixir = {
+        symbol = " ";
+      };
+      elm = {
+        symbol = " ";
+      };
+      fennel = {
+        symbol = " ";
+      };
+      golang = {
+        symbol = " ";
+      };
+      gradle = {
+        symbol = " ";
+      };
+      guix_shell = {
+        symbol = " ";
+      };
+      haskell = {
+        symbol = " ";
+      };
+      haxe = {
+        symbol = " ";
+      };
       java = {
         symbol = " ";
       };
-
       julia = {
         symbol = " ";
       };
-
       kotlin = {
         symbol = " ";
       };
-
       lua = {
         symbol = " ";
       };
-
-      memory_usage = { };
-
-      nix_shell = {
-        symbol = " ";
+      nim = {
+        symbol = " ";
       };
-
       nodejs = {
         symbol = " ";
       };
-
       ocaml = {
         symbol = " ";
       };
-
       python = {
         symbol = " ";
       };
-
       rust = {
         symbol = " ";
       };
-
       scala = {
         symbol = " ";
       };
-
       swift = {
         symbol = " ";
       };
-
       zig = {
         symbol = " ";
       };
 
-      gradle = {
-        symbol = " ";
+      git_branch = {
+        symbol = " ";
+      };
+      git_commit = {
+        tag_symbol = "  ";
+      };
+      fossil_branch = {
+        symbol = " ";
+      };
+      hg_branch = {
+        symbol = " ";
+      };
+
+      nix_shell = {
+        impure_msg = "[impure](bold red)";
+        pure_msg = "[pure](bold green)";
+        unknown_msg = "[unknown shell](bold yellow)";
+        symbol = " ";
+        format = "via [$symbol$state](bold blue) ";
       };
     };
   };
