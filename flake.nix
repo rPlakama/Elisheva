@@ -3,10 +3,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-   impermanence = {
-     url = "github:nix-community/impermanence";
-     inputs.nixpkgs.follows = "nixpkgs";
-   };
     dankMaterialShell = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,7 +30,6 @@
       nixpkgs,
       niri,
       home-manager,
-      impermanence,
       stylix,
       ...
     }@inputs:
@@ -44,7 +39,6 @@
         specialArgs = { inherit inputs; };
         modules = [
           stylix.nixosModules.stylix
-          impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
           niri.nixosModules.niri
           {
@@ -74,7 +68,6 @@
           stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           niri.nixosModules.niri
-          impermanence.nixosModules.impermanence
           {
             nixpkgs.overlays = [ niri.overlays.niri ];
           }
