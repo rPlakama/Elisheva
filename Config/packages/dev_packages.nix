@@ -8,6 +8,7 @@
     typst
     tinymist
     # Others
+    nixfmt-rfc-style
     nodejs
     fish-lsp
     jq

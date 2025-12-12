@@ -18,7 +18,7 @@
       };
 
       directory = {
-        read_only = "󰀼";
+        read_only = " READ_ONLY";
       };
 
       shell = {
