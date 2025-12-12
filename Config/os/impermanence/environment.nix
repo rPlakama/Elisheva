@@ -1,7 +1,7 @@
 { ... }:
 {
   environment.persistence."/persistent" = {
-    enable = false;
+    enable = true;
     hideMounts = true;
     directories = [
       "/var/log"
@@ -19,7 +19,7 @@
         ".config/nvim"
         ".local/share/nvim"
         ".local/state/nvim"
-        ".mozzila"
+        ".mozilla"
         "Downloads"
         "Torrents"
         "Dropbox"

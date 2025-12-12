@@ -6,5 +6,6 @@
     ./portals.nix
     ./boot/default.nix
     ./hardware/default.nix
+    ./impermanence/default.nix
   ];
 }
