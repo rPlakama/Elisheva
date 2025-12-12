@@ -7,6 +7,7 @@
       sfs = "echo -e 'Rebuild Type: \\033[32m SWITCH \\033[0m'; sudo nixos-rebuild switch --flake .#$HOSTNAME";
       sfb = "echo -e 'Rebuild Type: \\033[32m BOOT \\033[0m'; sudo nixos-rebuild boot --flake .#$HOSTNAME";
       sft = "echo -e 'Rebuild Type: \\033[32m TEST \\033[0m'; sudo nixos-rebuild test --flake .#$HOSTNAME";
+      nf = "echo -e 'Checking for: \\033 [32m $HOSTNAME \\033[0m'; nix flake check .#$HOSTNAME";
 
       cl = "echo -e 'Cleaning Type: \\033[32m SIMPLE \\033[0m'; sudo nix store gc;";
       cla = "echo -e 'Cleaning Type: \\033[32m ALL \\033[0m'; sudo nix-collect-garbage -d; nix-collect-garbage; nix-store --optimise";
