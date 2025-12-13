@@ -12,7 +12,6 @@
       dropbox
       firefox
       vesktop
-      microfetch
       materialgram
       qimgv
       kdePackages.okular
