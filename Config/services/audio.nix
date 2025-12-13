@@ -1,6 +1,6 @@
 { ... }:
 {
-  services.pipewire = {
-    alsa.enable = true;
+  services = {
+    pipewire.alsa.enable = true;
   };
 }
