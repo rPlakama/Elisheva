@@ -11,7 +11,7 @@
       dust
       dropbox
       firefox
-      vesktop
+      dissent
       microfetch
       materialgram
       qimgv
