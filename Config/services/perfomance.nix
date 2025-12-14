@@ -9,12 +9,15 @@
       scx.enable = true;
       upower.enable = true;
     }
+
     (lib.mkIf (config.networking.hostName == "Elisheva") {
       tuned = {
         enable = true;
-        settings.dynamic_tuning = true;
+        settings = {
+          dynamic_tuning = true;
+        };
       };
-      scx.scheduler = "scx_rusty";
+      scx.scheduler = "scx_lavd";
     })
 
     (lib.mkIf (config.networking.hostName == "Centuria") {

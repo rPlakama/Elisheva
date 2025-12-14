@@ -1,7 +1,10 @@
 { ... }:
 {
   environment = {
-    sessionVariables.NIXOS_OZONE_WL = "1";
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+      MANPAGER = "nvim +Man!";
+    };
     shellAliases = {
 
       sfs = "echo -e 'Rebuild Type: \\033[32m SWITCH \\033[0m'; sudo nixos-rebuild switch --flake .#$HOSTNAME";
