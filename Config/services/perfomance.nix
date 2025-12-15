@@ -17,7 +17,7 @@
           dynamic_tuning = true;
         };
       };
-      scx.scheduler = "scx_rusty";
+      scx.scheduler = "scx_rustland";
     })
 
     (lib.mkIf (config.networking.hostName == "Centuria") {
