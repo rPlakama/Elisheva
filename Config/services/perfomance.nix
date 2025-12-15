@@ -21,12 +21,8 @@
     })
 
     (lib.mkIf (config.networking.hostName == "Centuria") {
-      scx = {
-        scheduler = "scx_lavd";
-        extraArgs = [
-          "--performance"
-        ];
-      };
+      scx.scheduler = "scx_rusty";
+      bpftune.enable = true;
     })
   ];
 }
