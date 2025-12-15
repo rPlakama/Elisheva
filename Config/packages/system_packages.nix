@@ -1,26 +1,19 @@
 {
-  config,
-  lib,
   pkgs,
   ...
 }:
 {
-  environment.systemPackages =
-    with pkgs;
-    [
-      bat
-      fd
-      ripgrep
-      p7zip
-      yazi
-      ripdrag
-      cliphist
-      wl-clipboard
-      wl-mirror
-    ]
-    ++ lib.optionals (config.networking.hostName == "Elisheva") [
-      ryzenadj
-    ];
+  environment.systemPackages = with pkgs; [
+    bat
+    fd
+    ripgrep
+    p7zip
+    yazi
+    ripdrag
+    cliphist
+    wl-clipboard
+    wl-mirror
+  ];
   fonts.packages = with pkgs; [
     nerd-fonts.caskaydia-cove
     montserrat
