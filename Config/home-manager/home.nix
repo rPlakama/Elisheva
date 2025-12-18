@@ -19,10 +19,4 @@
       package = pkgs.papirus-icon-theme;
     };
   };
-  stylix.enable = true;
-  stylix.targets = {
-    gtk.enable = true;
-    qt.enable = false;
-    niri.enable = false;
-  };
 }

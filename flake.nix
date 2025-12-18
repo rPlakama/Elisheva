@@ -7,10 +7,6 @@
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,7 +26,6 @@
       nixpkgs,
       niri,
       home-manager,
-      stylix,
       ...
     }@inputs:
     {
@@ -38,7 +33,6 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           niri.nixosModules.niri
           {
@@ -65,7 +59,6 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           niri.nixosModules.niri
           {

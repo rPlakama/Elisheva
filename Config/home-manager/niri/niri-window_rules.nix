@@ -4,7 +4,7 @@
     window-rules = [
       {
         matches = [ { is-focused = false; } ];
-        opacity = 0.95;
+        opacity = 1.0;
       }
       {
         clip-to-geometry = true;

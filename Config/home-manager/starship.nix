@@ -148,11 +148,8 @@
       };
 
       nix_shell = {
-        impure_msg = "[impure](bold purple)";
-        pure_msg = "[pure](bold purple)";
-        unknown_msg = "[unknown shell](bold yellow)";
-        symbol = " ";
-        format = "via [$symbol$state](bold blue) ";
+        symbol = "";
+	format = "via [$symbol](bold blue) ";
       };
     };
   };
