@@ -2,7 +2,6 @@
 {
   imports = [
     ./default.nix
-    ./matugen/matugen.nix
   ];
 
   home.stateVersion = "25.05";
