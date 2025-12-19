@@ -2,7 +2,6 @@
   description = "Elisheva-OS";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
     dankMaterialShell = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -61,6 +60,7 @@
         modules = [
           home-manager.nixosModules.home-manager
           niri.nixosModules.niri
+
           {
             nixpkgs.overlays = [ niri.overlays.niri ];
           }
