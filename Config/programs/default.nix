@@ -6,5 +6,6 @@
     ./terminal.nix
     ./steam.nix
     ./adb.nix
+    ./hyprland.nix
   ];
 }
