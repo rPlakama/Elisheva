@@ -60,7 +60,6 @@
         modules = [
           home-manager.nixosModules.home-manager
           niri.nixosModules.niri
-
           {
             nixpkgs.overlays = [ niri.overlays.niri ];
           }

@@ -154,6 +154,7 @@
         "Mod+Shift+K".action = move-column-to-workspace-up;
         "Mod+Shift+J".action = move-column-to-workspace-down;
 
+        "Mod+B".action = spawn-sh "foot -e ~/Music/music.sh";
         "Mod+Return".action = spawn "foot";
         "Mod+Y".action = spawn-sh "foot -e yazi";
         "Mod+P".action = spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)";
