@@ -11,12 +11,14 @@ lib.mkMerge [
         ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1022", ATTR{device}=="0x1483", ATTR{power/wakeup}="disabled"
       '';
     };
+    boot.blacklistedKernelModules = [ "nouveau" "nova_core" ];
     hardware.nvidia = {
+      modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
       open = false;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
     };
   })
 
