@@ -23,6 +23,10 @@
         enable = true;
         path = lib.getExe pkgs.xwayland-satellite;
       };
+      cursor = {
+        size = 24;
+        theme = "volantes_light_cursors";
+      };
       layer-rules = [
         {
           matches = [ { namespace = "^quickshell$"; } ];

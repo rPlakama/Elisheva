@@ -17,6 +17,9 @@
       cliphist
       wl-clipboard
       wl-mirror
+
+      # Extras
+      volantes-cursors
     ]
     ++ lib.optionals (config.networking.hostName == "Elisheva") [
       mesa
