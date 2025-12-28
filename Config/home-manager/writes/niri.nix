@@ -9,7 +9,7 @@ let
   nestedMod = if isCenturia then "Super" else "Alt";
 
   extraBind = lib.optionalString isCenturia ''
-    Ctrl+Space+K { switch-layout "next"; }
+    Ctrl+Alt+K { switch-layout "next"; }
   '';
 in
 {
@@ -104,7 +104,6 @@ in
       hotkey-overlay { skip-at-startup; }
 
       binds {
-          // Bind condicional para troca de layout (apenas Centuria)
           ${extraBind}
 
           Ctrl+Alt+A { spawn "dms" "ipc" "call" "dash" "toggle" "overview"; }
