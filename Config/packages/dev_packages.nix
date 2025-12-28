@@ -12,5 +12,6 @@
     nodejs
     fish-lsp
     jq
+    git
   ];
 }

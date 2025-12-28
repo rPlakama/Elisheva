@@ -1,7 +1,7 @@
 {
   imports = [
-    ./niri
-    ./scripts
+    ./dms.nix
+    ./writes
     ./git.nix
     ./foot.nix
     ./yazi.nix

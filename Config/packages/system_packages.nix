@@ -20,6 +20,9 @@
 
       # Extras
       volantes-cursors
+      papirus-folders
+      papirus-icon-theme
+
     ]
     ++ lib.optionals (config.networking.hostName == "Elisheva") [
       mesa

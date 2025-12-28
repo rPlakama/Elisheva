@@ -10,10 +10,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +19,6 @@
   outputs =
     {
       nixpkgs,
-      niri,
       home-manager,
       ...
     }@inputs:
@@ -33,10 +28,6 @@
         specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
-          niri.nixosModules.niri
-          {
-            nixpkgs.overlays = [ niri.overlays.niri ];
-          }
           ./Elisheva.nix
           ./Config
           {
@@ -59,9 +50,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
-          niri.nixosModules.niri
           {
-            nixpkgs.overlays = [ niri.overlays.niri ];
           }
           ./Config
           ./Centuria.nix
