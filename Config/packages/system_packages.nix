@@ -14,11 +14,9 @@
       p7zip
       yazi
       ripdrag
-      cliphist
-      wl-clipboard
-      wl-mirror
 
       # Extras
+      xwayland-satellite
       volantes-cursors
       papirus-folders
       papirus-icon-theme
