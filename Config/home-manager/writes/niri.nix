@@ -2,12 +2,7 @@
 
 let
   isCenturia = osConfig.networking.hostName == "Centuria";
-
   layoutConfig = if isCenturia then "us,br" else "br";
-
-  mainMod = if isCenturia then "Alt" else "Super";
-  nestedMod = if isCenturia then "Super" else "Alt";
-
   extraBind = lib.optionalString isCenturia ''
     Ctrl+Alt+K { switch-layout "next"; }
   '';
@@ -43,8 +38,8 @@ in
           workspace-auto-back-and-forth
 
           // Mod keys dinâmicas baseadas no host
-          mod-key "${mainMod}"
-          mod-key-nested "${nestedMod}"
+          mod-key "Super"
+          mod-key-nested "Alt"
       }
 
       output "HDMI-A-1" {
