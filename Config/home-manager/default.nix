@@ -2,7 +2,6 @@
   imports = [
     ./dms.nix
     ./writes
-    ./git.nix
     ./foot.nix
     ./yazi.nix
     ./cli.nix
