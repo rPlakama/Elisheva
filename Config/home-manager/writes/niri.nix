@@ -65,8 +65,7 @@ in
 
                   layout {
             	  border {
-            	    on
-            	  width 2
+            	  width 1.5
 
             	  }
       	  focus-ring {
@@ -153,10 +152,6 @@ in
                       opacity 1.000000
                   }
                   window-rule {
-                      geometry-corner-radius 2.000000 2.000000 2.000000 2.000000
-                      clip-to-geometry true
-                  }
-                  window-rule {
                       match app-id="firefox$" title="^Picture-in-Picture$"
                       open-floating true
                   }
@@ -168,31 +163,31 @@ in
                       slowdown 1.000000
                       horizontal-view-movement {
                           duration-ms 300
-                          curve "cubic-bezier" 0 1 0 1
+                          curve "cubic-bezier" 0.25 1 0.25 1
                       }
                       overview-open-close {
                           duration-ms 300
-                          curve "cubic-bezier" 0 1 0 1
+                          curve "cubic-bezier" 0.25 1 0.25 1
                       }
                       window-close {
                           duration-ms 300
-                          curve "cubic-bezier" 0 1 0 1
+                          curve "cubic-bezier" 0.25 1 0.25 1
                       }
                       window-movement {
                           duration-ms 300
-                          curve "cubic-bezier" 0 1 0 1
+                          curve "cubic-bezier" 0.25 1 0.25 1
                       }
                       window-open {
                           duration-ms 300
-                          curve "cubic-bezier" 0 1 0 1
+                          curve "cubic-bezier" 0.25 1 0.25 1
                       }
                       window-resize {
                           duration-ms 300
-                          curve "cubic-bezier" 0 1 0 1
+                          curve "cubic-bezier" 0.25 1 0.25 1
                       }
                       workspace-switch {
                           duration-ms 300
-                          curve "cubic-bezier" 0 1 0 1
+                          curve "cubic-bezier" 0.25 1 0.25 1
                       }
                   }
 

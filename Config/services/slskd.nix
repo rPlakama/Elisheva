@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   services.slskd = {
-    enable = false;
+    enable = true;
     openFirewall = true;
     domain = "slskd.nix.com";
     environmentFile = "/home/rplakama/Dropbox/env.yaml";
