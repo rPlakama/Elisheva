@@ -14,6 +14,10 @@
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hjem = {
+      url = "github:feel-co/hjem";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,6 +32,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
+          inputs.hjem.nixosModules.default
           ./Elisheva.nix
           ./Config
           {
@@ -49,9 +54,8 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
+          inputs.hjem.nixosModules.default
           home-manager.nixosModules.home-manager
-          {
-          }
           ./Config
           ./Centuria.nix
           {
