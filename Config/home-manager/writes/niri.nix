@@ -69,6 +69,9 @@ in
         border {
           width 1.5
         }
+	shadow {
+	  on
+	}
         focus-ring {
           off
         }
@@ -152,38 +155,43 @@ in
         slowdown 1.0
 
         horizontal-view-movement {
-          duration-ms 500
+          duration-ms 300
           curve "cubic-bezier" 0.0 1.0 0.0 1.0
         }
 
         overview-open-close {
-          duration-ms 400
-          curve "cubic-bezier" 0.05 0.9 0.1 1.0
+	  duration-ms 300
+          curve "cubic-bezier" 0.0 1.0 0.0 1.0
+
         }
 
         window-close {
-          duration-ms 500
-          curve "cubic-bezier" 0.05 0.9 0.1 1.0
+	  duration-ms 300
+          curve "cubic-bezier" 0.0 1.0 0.0 1.0
         }
 
         window-movement {
-          duration-ms 400
-          curve "cubic-bezier" 0.05 0.9 0.1 1.0
+	  duration-ms 300
+          curve "cubic-bezier" 0.0 1.0 0.0 1.0
+
         }
 
         window-open {
-          duration-ms 400
-          curve "cubic-bezier" 0.05 0.9 0.1 1.0
+	  duration-ms 300
+          curve "cubic-bezier" 0.0 1.0 0.0 1.0
+
         }
 
         window-resize {
-          duration-ms 400
-          curve "cubic-bezier" 0.05 0.9 0.1 1.0
+	  duration-ms 300
+          curve "cubic-bezier" 0.0 1.0 0.0 1.0
+
         }
 
         workspace-switch {
-          duration-ms 400
-          curve "cubic-bezier" 0.05 0.9 0.1 1.0
+	  duration-ms 300
+          curve "cubic-bezier" 0.0 1.0 0.0 1.0
+
         }
       }
 

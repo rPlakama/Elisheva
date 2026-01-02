@@ -11,7 +11,7 @@
       "amd_pstate=active"
     ]
     ++ lib.optionals (config.networking.hostName == "Elisheva") [
-      "video=eDP-1:1920x1080@75"
+      "video=eDP-1:1920x1080@80"
     ];
   };
 }
