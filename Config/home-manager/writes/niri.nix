@@ -13,7 +13,6 @@ in
       include "./dms/alttab.kdl"
       include "./dms/colors.kdl"
       include "./dms/wpblur.kdl"
-      include "./dms/layout.kdl"
 
       input {
         keyboard {
@@ -51,8 +50,7 @@ in
       output "eDP-1" {
         scale 1.4
         transform "normal"
-        // Explicitly requesting 75Hz
-        mode "1920x1080@75"
+        mode "1920x1080@80"
       }
 
       screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
@@ -66,16 +64,15 @@ in
       }
 
       layout {
-        border {
-          width 1.5
-        }
-	shadow {
-	  on
-	}
-        focus-ring {
-          off
-        }
 
+	border {
+	  off
+	  width 0
+	}
+	focus-ring {
+	  on
+	  width 2
+	}
         default-column-width { proportion 0.5; }
         preset-column-widths {
           proportion 0.25
@@ -161,7 +158,7 @@ in
 
         overview-open-close {
 	  duration-ms 300
-          curve "cubic-bezier" 0.0 1.0 0.0 1.0
+          curve "cubic-bezier" 0.0 1.0 0.0 1
 
         }
 
@@ -190,15 +187,11 @@ in
 
         workspace-switch {
 	  duration-ms 300
-          curve "cubic-bezier" 0.0 1.0 0.0 1.0
+          curve "cubic-bezier" 0.1 1.0 0.1 1.0
 
         }
       }
 
-      window-rule {
-        match is-focused=false
-        opacity 1.0
-      }
       window-rule {
         match app-id="firefox$" title="^Picture-in-Picture$"
         open-floating true
