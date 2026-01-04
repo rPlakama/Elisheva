@@ -11,7 +11,7 @@
       dust
       dropbox
       firefox
-      vesktop
+      discord-canary
       materialgram
       qimgv
       kdePackages.okular
