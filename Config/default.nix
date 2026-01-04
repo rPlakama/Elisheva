@@ -5,6 +5,5 @@
     ./packages
     ./programs
     ./services
-    ./hjem
   ];
 }
