@@ -5,5 +5,6 @@
     ./network.nix
     ./torrent.nix
     ./slskd.nix
+    ./flatpak.nix
   ];
 }
