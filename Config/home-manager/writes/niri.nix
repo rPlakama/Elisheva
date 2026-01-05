@@ -50,7 +50,7 @@ in
       output "eDP-1" {
         scale 1.4
         transform "normal"
-        mode "1920x1080@80"
+        mode "1920x1080@60"
       }
 
       screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
