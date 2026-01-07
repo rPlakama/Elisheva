@@ -11,13 +11,8 @@
     }
 
     (lib.mkIf (config.networking.hostName == "Elisheva") {
-      tuned = {
-        enable = true;
-        settings = {
-          dynamic_tuning = true;
-        };
-      };
-      scx.scheduler = "scx_rustland";
+      tuned.enable = true;
+      scx.scheduler = "scx_lavd";
     })
 
     (lib.mkIf (config.networking.hostName == "Centuria") {
