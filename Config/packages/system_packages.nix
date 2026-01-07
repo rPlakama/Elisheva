@@ -14,6 +14,7 @@
       p7zip
       yazi
       ripdrag
+      android-tools
 
       # Extras
       xwayland-satellite

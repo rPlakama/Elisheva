@@ -14,6 +14,7 @@
       discord-canary
       materialgram
       qimgv
+      fresh-editor
       kdePackages.okular
     ]
     ++ lib.optionals (config.networking.hostName == "Centuria") [

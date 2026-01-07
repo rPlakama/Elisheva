@@ -5,6 +5,5 @@
     ./niri.nix
     ./terminal.nix
     ./steam.nix
-    ./adb.nix
   ];
 }
