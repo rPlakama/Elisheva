@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "dankMaterialShell": {
+    "dms": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -8,16 +8,37 @@
         "quickshell": "quickshell"
       },
       "locked": {
-        "lastModified": 1768311656,
-        "narHash": "sha256-u8ag2bxkOmsn5l20sdWDnSKZX+HAjGRZGzsADEpKah0=",
+        "lastModified": 1768311110,
+        "narHash": "sha256-LNKeqhYWpx688ytSW//H+kdaupWf0pStPhfFLxAFV8k=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "8891c388d0f06343da507087412d07199ddad153",
+        "rev": "cd9d92d884bcbe7fc224472882c82ec7fa6788fb",
         "type": "github"
       },
       "original": {
         "owner": "AvengeMedia",
+        "ref": "stable",
         "repo": "DankMaterialShell",
+        "type": "github"
+      }
+    },
+    "dms-plugin-registry": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1768164556,
+        "narHash": "sha256-16FT7ap9uqL1I1l056nwO0MvHJBons4wK9mHsO7fBVI=",
+        "owner": "AvengeMedia",
+        "repo": "dms-plugin-registry",
+        "rev": "55f268608f23828a8b853c058ed4bd255c994763",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AvengeMedia",
+        "repo": "dms-plugin-registry",
         "type": "github"
       }
     },
@@ -60,7 +81,7 @@
     "quickshell": {
       "inputs": {
         "nixpkgs": [
-          "dankMaterialShell",
+          "dms",
           "nixpkgs"
         ]
       },
@@ -79,32 +100,12 @@
         "url": "https://git.outfoxxed.me/quickshell/quickshell"
       }
     },
-    "quickshell_2": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1768296338,
-        "narHash": "sha256-EGLpLVsKDrT+XWlncDKK3LBM+C6Gm6tyLTIxWsLuHA0=",
-        "ref": "refs/heads/master",
-        "rev": "dca652366ad0d005ac8ec7991417d88afcbcbd60",
-        "revCount": 725,
-        "type": "git",
-        "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
-      }
-    },
     "root": {
       "inputs": {
-        "dankMaterialShell": "dankMaterialShell",
+        "dms": "dms",
+        "dms-plugin-registry": "dms-plugin-registry",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs",
-        "quickshell": "quickshell_2"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

@@ -1,6 +1,5 @@
 {
   imports = [
-    ./dms.nix
     ./writes
     ./foot.nix
     ./yazi.nix

@@ -6,5 +6,6 @@
     ./torrent.nix
     ./slskd.nix
     ./flatpak.nix
+    ./dms.nix
   ];
 }
