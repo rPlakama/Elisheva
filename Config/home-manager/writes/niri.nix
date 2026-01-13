@@ -13,6 +13,8 @@ in
       include "./dms/alttab.kdl"
       include "./dms/colors.kdl"
       include "./dms/wpblur.kdl"
+      include "./dms/cursor.kdl"
+      include "./dms/outputs.kdl"
 
       input {
         keyboard {
@@ -80,11 +82,6 @@ in
           proportion 0.75
         }
         center-focused-column "never"
-      }
-
-      cursor {
-        xcursor-theme "volantes_light_cursors"
-        xcursor-size 24
       }
 
       hotkey-overlay { skip-at-startup; }
