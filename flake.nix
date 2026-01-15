@@ -30,6 +30,7 @@
           home-manager.nixosModules.home-manager
           ./Elisheva.nix
           ./Config
+	  ./shared.nix
           {
             home-manager = {
               useGlobalPkgs = true;
@@ -51,6 +52,7 @@
         modules = [
           home-manager.nixosModules.home-manager
           ./Config
+	  ./shared.nix
           ./Centuria.nix
           {
             home-manager = {
@@ -73,6 +75,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./Moontier
+	  ./shared.nix
         ];
       };
     };
