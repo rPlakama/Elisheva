@@ -11,9 +11,9 @@
     group = "users";
 
     settings = {
-      download-dir = "/var/lib/transmission/Downloads";
-      incomplete-dir = "/var/lib/transmission/.incomplete";
-      incomplete-dir-enabled = true;
+      "incomplete-dir" = "/mnt/secondary/animes/.incomplete";
+      "incomplete-dir-enabled" = true;
+      "download-dir" = "/mnt/secondary/animes";
 
       rpc-bind-address = "0.0.0.0";
       rpc-port = 9091;
