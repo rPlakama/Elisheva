@@ -22,5 +22,12 @@
     ]
     ++ lib.optionals (config.networking.hostName == "Elisheva") [
       btop-rocm
+    ]
+    ++ lib.lists.subtractLists (config.networking.hostName == "Moontier") [
+      firefox
+      vesktop
+      materialgram
+      qimgv
+      kdePackages.okular
     ];
 }

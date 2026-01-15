@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
 
   programs = {
     steam = {
-      enable = true;
+      enable = config.networking.hostName == "Centuria" || config.networking.hostName == "Elisheva";
       extraCompatPackages = with pkgs; [
         proton-ge-bin
       ];

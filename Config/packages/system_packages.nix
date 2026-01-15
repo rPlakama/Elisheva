@@ -16,12 +16,15 @@
       ripdrag
       android-tools
 
-      # Extras
       xwayland-satellite
       volantes-cursors
       papirus-folders
       papirus-icon-theme
 
+    ]
+
+    ++ lib.lists.subtractLists (config.networking.hostName == "Moontier") [
+      android-tools
     ]
     ++ lib.optionals (config.networking.hostName == "Elisheva") [
       mesa

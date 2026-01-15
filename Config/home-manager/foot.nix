@@ -1,7 +1,7 @@
-{ ... }:
+{ osConfig, ... }:
 {
   programs.foot = {
-    enable = true;
+    enable = osConfig.networking.hostName == "Centuria" || osConfig.networking.hostName == "Elisheva";
     settings = {
       main = {
         dpi-aware = false;

@@ -6,9 +6,8 @@
     inputs.dms-plugin-registry.modules.default
   ];
 
-
   programs.dank-material-shell = {
-    enable = true;
+    enable = config.networking.hostName == "Elisheva" || config.networking.hostName == "Centuria";
     systemd = {
       enable = true;
       restartIfChanged = true;

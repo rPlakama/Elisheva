@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ osConfig, pkgs, ... }:
 let
   # PEQ Profile
   # Filters:
@@ -11,7 +11,7 @@ in
 {
   programs = {
     mpv = {
-      enable = true;
+      enable = osConfig.networking.hostName == "Centuria" || osConfig.networking.hostName == "Elisheva";
       scripts = with pkgs; [ mpvScripts.mpris ];
 
       config = {
