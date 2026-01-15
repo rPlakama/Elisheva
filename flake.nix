@@ -74,8 +74,23 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
+	  home-manager.nixosModules.home-manager
           ./Moontier
 	  ./shared.nix
+	  ./Config
+	  ./Moontier.nix
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+            };
+            home-manager.users.rplakama = {
+              imports = [
+                ./Config/home-manager/home.nix
+              ];
+            };
+          }
         ];
       };
     };

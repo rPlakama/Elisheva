@@ -10,6 +10,11 @@
       upower.enable = true;
     }
 
+    (lib.mkIf (config.networking.hostName == "Moontier") {
+      tuned.enable = true;
+      scx.scheduler = "scx_lavd";
+    })
+
     (lib.mkIf (config.networking.hostName == "Elisheva") {
       tuned = {
         enable = true;
