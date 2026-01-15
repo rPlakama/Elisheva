@@ -1,17 +1,8 @@
 { ... }:
 let
-  myServerIP = "http://Moontier.local";
+  myServerIP = "http://moontier";
 in
 {
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-    publish = {
-      enable = true;
-      addresses = true;
-    };
-  };
   services.homer = {
     virtualHost.domain = "dashboard.moontier.lan";
     virtualHost.nginx.enable = true;
