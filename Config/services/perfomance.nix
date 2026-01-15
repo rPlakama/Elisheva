@@ -11,7 +11,10 @@
     }
 
     (lib.mkIf (config.networking.hostName == "Elisheva") {
-      power-profiles-daemon.enable = true;
+      tuned = {
+        enable = true;
+        settings.dynamic_tuning = true;
+      };
       scx.scheduler = "scx_lavd";
     })
 

@@ -30,7 +30,6 @@
           home-manager.nixosModules.home-manager
           ./Elisheva.nix
           ./Config
-	  ./Moontier
           {
             home-manager = {
               useGlobalPkgs = true;
@@ -73,7 +72,7 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-	  ./Moontier
+          ./Moontier
         ];
       };
     };
