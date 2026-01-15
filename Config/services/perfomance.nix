@@ -12,6 +12,7 @@
 
     (lib.mkIf (config.networking.hostName == "Moontier") {
       tuned.enable = true;
+      bpftune.enable = true;
       scx.scheduler = "scx_lavd";
     })
 
