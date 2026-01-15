@@ -12,16 +12,11 @@
 
     settings = {
       "incomplete-dir" = "/mnt/secondary/animes/.incomplete";
-      "incomplete-dir-enabled" = true;
       "download-dir" = "/mnt/secondary/animes";
-
+      "incomplete-dir-enabled" = true;
       rpc-bind-address = "0.0.0.0";
       rpc-port = 9091;
-
       umask = 2;
-
-      rpc-whitelist-enabled = false;
-      rpc-host-whitelist-enabled = false;
     };
   };
 }

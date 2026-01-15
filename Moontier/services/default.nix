@@ -6,5 +6,6 @@
     ./slskd.nix
     ./torrent.nix
     ./openssh.nix
+    ./intel.nix
   ];
 }
