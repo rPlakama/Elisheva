@@ -38,14 +38,25 @@ in
               target = "_blank";
             }
             {
-              name = "Transmission";
-              logo = "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/transmission.png";
+              name = "Deluge";
+              logo = "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/deluge.png";
               url = "${myServerIP}:9091";
               subtitle = "Torrent Client";
             }
           ];
         }
-
+        {
+          name = "Management";
+          icon = "fas fa-tools";
+          items = [
+            {
+              name = "Prowlarr";
+              logo = "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/prowlarr.png";
+              url = "${myServerIP}:9696";
+              subtitle = "Indexers";
+            }
+          ];
+        }
       ];
 
     };

@@ -7,5 +7,6 @@
     ./torrent.nix
     ./openssh.nix
     ./intel.nix
+    ./rrstack.nix
   ];
 }

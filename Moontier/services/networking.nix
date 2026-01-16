@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   networking = {
     firewall.allowedUDPPorts = [ 41641 ];
@@ -8,6 +8,8 @@
       8085
       8096
       5030
+      # Torrent
+      58846
       9091
     ];
   };
