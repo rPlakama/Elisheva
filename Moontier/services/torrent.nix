@@ -12,8 +12,8 @@
 
     settings = {
       "incomplete-dir" = "/mnt/secondary/animes/.incomplete";
-      "download-dir" = "/mnt/secondary/animes";
-      "incomplete-dir-enabled" = true;
+      "download-dir" = "/mnt/secondary/torrent";
+      "incomplete-dir-enabled" = false;
       rpc-bind-address = "0.0.0.0";
       rpc-port = 9091;
       umask = 2;
