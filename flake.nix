@@ -2,7 +2,6 @@
   description = "Elisheva-OS";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,7 +20,6 @@
     {
       nixpkgs,
       home-manager,
-      nixos-hardware,
       ...
     }@inputs:
     {
@@ -53,7 +51,6 @@
         specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
-          nixos-hardware.nixosModules.gigabyte-b550
           ./Config
           ./shared.nix
           ./Centuria.nix
