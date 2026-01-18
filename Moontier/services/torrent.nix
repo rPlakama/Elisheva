@@ -17,7 +17,12 @@
       speed-limit-up-enabled = false;
       rpc-bind-address = "0.0.0.0";
       rpc-port = 9091;
+      peer-port = 51413;
+      peer-port-random-on-start = false;
     };
   };
 
+  systemd.services.transmission.serviceConfig.ReadWritePaths = [ "/mnt/secondary" ];
+
 }
+

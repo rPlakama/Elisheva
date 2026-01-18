@@ -1,7 +1,7 @@
-{ ... }:
+{ config, ... }:
 {
   boot.plymouth = {
-    enable = true;
+    enable = config.networking.hostName == "Centuria" || config.networking.hostName == "Elisheva";
     theme = "bgrt";
   };
 }
