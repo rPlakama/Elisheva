@@ -14,14 +14,4 @@
       9091
     ];
   };
-  services = {
-    nginx.virtualHosts."dashboard.moontier.lan" = {
-      listen = [
-        {
-          addr = "0.0.0.0";
-          port = 8085;
-        }
-      ];
-    };
-  };
 }

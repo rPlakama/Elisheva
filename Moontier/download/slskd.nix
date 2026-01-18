@@ -9,12 +9,12 @@
 
     settings = {
       directories = {
-        downloads = "/mnt/secondary/music/downloads";
-        incomplete = "/mnt/secondary/music/incomplete";
+        downloads = "/mnt/@media/music/downloads";
+        incomplete = "/mnt/@media/music/incomplete";
       };
 
       shares = {
-        directories = [ "/home/rplakama/Music/" ];
+        directories = [ "/mnt/@media/music/downloads" ];
       };
 
       flags = {
@@ -27,5 +27,5 @@
     };
   };
 
-  systemd.services.slskd.serviceConfig.ReadWritePaths = [ "/mnt/secondary" ];
+  systemd.services.slskd.serviceConfig.ReadWritePaths = [ "/mnt/@media" ];
 }

@@ -10,9 +10,9 @@
     webHome = pkgs.flood-for-transmission;
 
     settings = {
-      download-dir = "/mnt/secondary/torrent";
+      download-dir = "/mnt/@media/torrent";
       incomplete-dir-enabled = true;
-      incomplete-dir = "/mnt/secondary/torrent/.incomplete";
+      incomplete-dir = "/mnt/@media/torrent/.incomplete";
       rpc-whitelist-enabled = false;
       speed-limit-up-enabled = false;
       rpc-bind-address = "0.0.0.0";
@@ -22,7 +22,7 @@
     };
   };
 
-  systemd.services.transmission.serviceConfig.ReadWritePaths = [ "/mnt/secondary" ];
+  systemd.services.transmission.serviceConfig.ReadWritePaths = [ "/mnt/@media" ];
 
 }
 

@@ -13,8 +13,4 @@
     jellyfin-ffmpeg
     intel-gpu-tools
   ];
-
-  systemd.services.jellyfin.serviceConfig.BindReadOnlyPaths = [
-    "/home/rplakama/Music:/media/Music"
-  ];
 }

@@ -7,9 +7,8 @@ in
     virtualHost.domain = "dashboard.moontier.lan";
     virtualHost.nginx.enable = true;
     enable = true;
-
     settings = {
-      title = "Home Lab";
+      title = "Moontier";
       icon = "fas fa-server";
 
       services = [
