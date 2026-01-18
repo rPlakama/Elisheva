@@ -40,10 +40,17 @@
       ];
     };
   };
-# Tailscale
-# configuration.nix
   services.tailscale.enable = true;
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
   environment.systemPackages = [ pkgs.tailscale ];
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      workstation = true;
+    };
+  };
 }
-
