@@ -2,6 +2,7 @@
   description = "Elisheva-OS";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,6 +21,7 @@
     {
       nixpkgs,
       home-manager,
+      nixos-hardware,
       ...
     }@inputs:
     {
@@ -30,7 +32,7 @@
           home-manager.nixosModules.home-manager
           ./Elisheva.nix
           ./Config
-	  ./shared.nix
+          ./shared.nix
           {
             home-manager = {
               useGlobalPkgs = true;
@@ -51,8 +53,9 @@
         specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
+          nixos-hardware.nixosModules.gigabyte-b550
           ./Config
-	  ./shared.nix
+          ./shared.nix
           ./Centuria.nix
           {
             home-manager = {
@@ -74,11 +77,11 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-	  home-manager.nixosModules.home-manager
+          home-manager.nixosModules.home-manager
           ./Moontier
-	  ./shared.nix
-	  ./Config
-	  ./Moontier.nix
+          ./shared.nix
+          ./Config
+          ./Moontier.nix
           {
             home-manager = {
               useGlobalPkgs = true;
