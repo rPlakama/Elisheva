@@ -4,5 +4,6 @@
     ./download
     ./hardware
     ./network
+    ./managers
   ];
 }

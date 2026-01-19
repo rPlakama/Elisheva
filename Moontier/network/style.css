@@ -1,0 +1,57 @@
+:root {
+    --text-primary: #ffffff;
+    --text-secondary: #cbd5e1;
+    --card-bg: rgba(30, 41, 59, 0.6);
+    --card-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+}
+
+.services .service {
+    min-height: 120px;
+
+    background: var(--card-bg) !important;
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+
+    transition: all 0.2s ease-in-out;
+    margin-bottom: 0.5rem;
+}
+
+.services .service:hover {
+    transform: scale(1.01);
+    background: rgba(30, 41, 59, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.service-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary) !important;
+}
+
+.service-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+.service-icon {
+    width: 64px !important;
+    margin-right: 20px;
+}
+.service-icon img {
+    width: 100%;
+    height: auto;
+}

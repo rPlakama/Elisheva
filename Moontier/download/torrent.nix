@@ -1,28 +1,16 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
-  services.transmission = {
+  services.deluge = {
     enable = true;
-    openFirewall = true;
-    openRPCPort = true;
-    group = "users";
-    package = pkgs.transmission_4;
-    webHome = pkgs.flood-for-transmission;
-
-    settings = {
-      download-dir = "/mnt/@media/torrent";
-      incomplete-dir-enabled = true;
-      incomplete-dir = "/mnt/@media/torrent/.incomplete";
-      rpc-whitelist-enabled = false;
-      speed-limit-up-enabled = false;
-      rpc-bind-address = "0.0.0.0";
-      rpc-port = 9091;
-      peer-port = 51413;
-      peer-port-random-on-start = false;
+    web = {
+      enable = true;
+      openFirewall = true;
+      port = 8112;
     };
+    openFirewall = true;
+    group = "users";
   };
 
-  systemd.services.transmission.serviceConfig.ReadWritePaths = [ "/mnt/@media" ];
-
+  systemd.services.deluged.serviceConfig.ReadWritePaths = [ "/mnt/@media" ];
 }
-
