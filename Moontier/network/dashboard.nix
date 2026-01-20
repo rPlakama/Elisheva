@@ -1,18 +1,8 @@
-{ config, pkgs, ... }:
+{ ... }:
 let
   myServerIP = "http://moontier";
 in
 {
-  services.flaresolverr = {
-    enable = true;
-    openFirewall = true;
-    port = 8191;
-  };
-
-  services.prowlarr = {
-    enable = true;
-    openFirewall = true;
-  };
 
   services.glances = {
     enable = true;
@@ -155,7 +145,7 @@ in
               widget = {
                 type = "shoko";
                 url = "http://127.0.0.1:8111";
-		key = "000c55d0-3e6c-4c92-aeae-9ef0aabe0ff6";
+                key = "000c55d0-3e6c-4c92-aeae-9ef0aabe0ff6";
               };
             };
           }

@@ -3,11 +3,12 @@
   services.slskd = {
     enable = true;
     openFirewall = true;
+    group = "users";
     domain = "slskd.nix.com";
     environmentFile = "/home/rplakama/Dropbox/env.yaml";
     settings = {
-      shares.directories = [ "/mnt/@media/music/downloads" ];
-      slskd.settings.directories.downloads = "/home/rplakama/Music/";
+      shares.directories = [ "/home/rplakama/Music/" ];
+      directories.downloads = "/mnt/@media/music/downloads";
       flags.force_share_scan = true;
       soulseek.listen_port = 50300;
       web.authentication.api_keys = {
