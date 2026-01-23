@@ -15,6 +15,7 @@ in
       include "./dms/wpblur.kdl"
       include "./dms/cursor.kdl"
       include "./dms/outputs.kdl"
+      include "./dms/layout.kdl"
 
       input {
         keyboard {
@@ -73,7 +74,6 @@ in
 	}
 	focus-ring {
 	  on
-	  width 2
 	}
         default-column-width { proportion 0.5; }
         preset-column-widths {

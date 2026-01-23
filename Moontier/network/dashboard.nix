@@ -1,14 +1,10 @@
-{ ... }:
+{ lib, ... }:
+
 let
   myServerIP = "http://moontier";
+  readKey = path: lib.removeSuffix "\n" (builtins.readFile path);
 in
 {
-
-  services.glances = {
-    enable = true;
-    openFirewall = true;
-  };
-
   services.homepage-dashboard = {
     enable = true;
     listenPort = 8082;
@@ -77,7 +73,7 @@ in
               widget = {
                 type = "jellyfin";
                 url = "${myServerIP}:8096";
-                key = "d991b6579c4a4ef68838b4016013af83";
+                key = readKey /home/rplakama/Keys/jellyfin-key.txt;
                 enableBlocks = true;
               };
             };
@@ -106,7 +102,7 @@ in
               widget = {
                 type = "slskd";
                 url = "http://127.0.0.1:5030";
-                key = "6434bc876f03b35431d91284403c7988aa6c0c8cccb2801456a4b70997063203";
+                key = readKey /home/rplakama/Keys/slskd-key.txt;
               };
             };
           }
@@ -122,7 +118,7 @@ in
               widget = {
                 type = "prowlarr";
                 url = "http://127.0.0.1:9696";
-                key = "49a9fd15105a4f02b4917252b5cf18e2";
+                key = readKey /home/rplakama/Keys/prowlarr-key.txt;
               };
             };
           }
@@ -138,6 +134,18 @@ in
             };
           }
           {
+            "Lidarr" = {
+              href = "${myServerIP}:8686";
+              icon = "lidarr.png";
+              description = "Music Manager";
+              widget = {
+                type = "lidarr";
+                url = "http://127.0.0.1:8686";
+                key = readKey /home/rplakama/Keys/lidarr-key.txt;
+              };
+            };
+          }
+          {
             "Shoko" = {
               href = "${myServerIP}:8111";
               icon = "shoko.png";
@@ -145,7 +153,7 @@ in
               widget = {
                 type = "shoko";
                 url = "http://127.0.0.1:8111";
-                key = "000c55d0-3e6c-4c92-aeae-9ef0aabe0ff6";
+                key = readKey /home/rplakama/Keys/shoko-key.txt;
               };
             };
           }
