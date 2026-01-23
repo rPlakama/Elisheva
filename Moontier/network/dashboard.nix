@@ -89,6 +89,19 @@ in
       {
         "Downloaders" = [
           {
+            "Jellyseer" = {
+              href = "${myServerIP}:5055";
+              icon = "sonarr.png";
+              description = "Requester";
+              widget = {
+                type = "jellyseerr";
+                url = "https://127.0.0.1:5055";
+                key = readKey /home/rplakama/Keys/jellyseerr-key.txt;
+              };
+            };
+          }
+
+          {
             "Deluge" = {
               href = "${myServerIP}:8112";
               icon = "deluge.png";
@@ -152,14 +165,14 @@ in
             };
           }
           {
-            "Shoko" = {
-              href = "${myServerIP}:8111";
-              icon = "shoko.png";
-              description = "Anime Catalog";
+            "Sonarr" = {
+              href = "${myServerIP}:8989";
+              icon = "sonarr.png";
+              description = "General Shows Manager";
               widget = {
-                type = "shoko";
-                url = "http://127.0.0.1:8111";
-                key = readKey /home/rplakama/Keys/shoko-key.txt;
+                type = "sonarr";
+                url = "https://127.0.0.1:8989";
+                key = readKey /home/rplakama/Keys/sonarr-key.txt;
               };
             };
           }

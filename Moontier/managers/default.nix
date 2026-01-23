@@ -2,7 +2,8 @@
   imports = [
     ./flaresolverr.nix
     ./prowlarr.nix
-    ./shoko.nix
     ./lidarr.nix
+    ./sonarr.nix
+    ./jellyseerr.nix
   ];
 }
