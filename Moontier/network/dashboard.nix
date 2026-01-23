@@ -4,7 +4,13 @@ let
   myServerIP = "http://moontier";
   readKey = path: lib.removeSuffix "\n" (builtins.readFile path);
 in
+
 {
+  services.glances = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.homepage-dashboard = {
     enable = true;
     listenPort = 8082;
