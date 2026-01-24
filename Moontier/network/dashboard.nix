@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   ...
 }:
@@ -17,6 +18,7 @@ in
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     age.keyFile = "/var/lib/sops-nix/key.txt";
     age.generateKey = true;
+
     secrets = {
       "dashboard/radarr_apikey" = { };
       "dashboard/sonarr_apikey" = { };
@@ -26,11 +28,21 @@ in
       "dashboard/jellyfin_apikey" = { };
       "dashboard/jellyseerr_apikey" = { };
     };
-  };
 
-  services.glances = {
-    enable = true;
-    openFirewall = true;
+    templates."homepage.env" = {
+      content = ''
+        HOMEPAGE_VAR_RADARR=${config.sops.placeholder."dashboard/radarr_apikey"}
+        HOMEPAGE_VAR_SONARR=${config.sops.placeholder."dashboard/sonarr_apikey"}
+        HOMEPAGE_VAR_LIDARR=${config.sops.placeholder."dashboard/lidarr_apikey"}
+        HOMEPAGE_VAR_PROWLARR=${config.sops.placeholder."dashboard/prowlarr_apikey"}
+        HOMEPAGE_VAR_SLSKD=${config.sops.placeholder."dashboard/slskd_apikey"}
+        HOMEPAGE_VAR_JELLYFIN=${config.sops.placeholder."dashboard/jellyfin_apikey"}
+        HOMEPAGE_VAR_JELLYSEERR=${config.sops.placeholder."dashboard/jellyseerr_apikey"}
+      '';
+      owner = "root";
+      group = "users";
+      mode = "0440";
+    };
   };
 
   services.homepage-dashboard = {
@@ -39,6 +51,7 @@ in
     openFirewall = true;
     allowedHosts = "*";
     customCSS = builtins.readFile ./style.css;
+    environmentFile = config.sops.templates."homepage.env".path;
 
     settings = {
       title = "Moontier";
@@ -57,42 +70,11 @@ in
         };
         "Management" = {
           style = "row";
-          columns = 2;
+          columns = 1;
         };
       };
     };
     services = [
-      {
-        "Glances" = [
-          {
-            "Glances" = {
-              href = "${myServerIP}:61208";
-              icon = "glances.png";
-              description = "System Monitor";
-              widget = {
-                type = "glances";
-                url = "${myServerIP}:61208";
-                cpu = true;
-                diskUnits = "bytes";
-                refreshInterval = 5000;
-                pointsLimit = 15;
-                memory = true;
-                cputemp = true;
-                disk = "/";
-              };
-            };
-          }
-          {
-            "CPU Usage" = {
-              widget = {
-                type = "glances";
-                url = "${myServerIP}:61208";
-                metric = "cpu";
-              };
-            };
-          }
-        ];
-      }
       {
         "Media" = [
           {
@@ -207,7 +189,7 @@ in
               widget = {
                 type = "radarr";
                 url = "http://127.0.0.1:7878";
-                #key = config.sops.secrets.
+                key = "{{HOMEPAGE_VAR_RADARR}}";
               };
             };
           }
