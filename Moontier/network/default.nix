@@ -4,5 +4,6 @@
     ./jellyfin.nix
     ./networking.nix
     ./openssh.nix
+    ./cloudflared.nix
   ];
 }

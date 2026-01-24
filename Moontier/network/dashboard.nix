@@ -1,11 +1,33 @@
-{ lib, ... }:
+{
+  inputs,
+  ...
+}:
 
 let
   myServerIP = "http://moontier";
-  readKey = path: lib.removeSuffix "\n" (builtins.readFile path);
 in
 
 {
+  imports = [
+    inputs.sops-nix.nixosModules.sops
+  ];
+
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    age.keyFile = "/var/lib/sops-nix/key.txt";
+    age.generateKey = true;
+    secrets = {
+      "dashboard/radarr_apikey" = { };
+      "dashboard/sonarr_apikey" = { };
+      "dashboard/lidarr_apikey" = { };
+      "dashboard/prowlarr_apikey" = { };
+      "dashboard/slskd_apikey" = { };
+      "dashboard/jellyfin_apikey" = { };
+      "dashboard/jellyseerr_apikey" = { };
+    };
+  };
+
   services.glances = {
     enable = true;
     openFirewall = true;
@@ -20,73 +42,53 @@ in
 
     settings = {
       title = "Moontier";
-
-      widgets = [
-        {
-          resources = {
-            cpu = true;
-            memory = true;
-            disk = "/";
-          };
-        }
-      ];
-
       layout = {
         "Monitoring" = {
           style = "row";
-          columns = 2;
+          columns = 1;
         };
         "Media" = {
           style = "row";
-          columns = 2;
+          columns = 1;
         };
         "Downloaders" = {
           style = "row";
-          columns = 2;
+          columns = 1;
         };
         "Management" = {
           style = "row";
-          columns = 4;
+          columns = 2;
         };
       };
     };
-
     services = [
       {
-        "Monitoring" = [
+        "Glances" = [
           {
             "Glances" = {
               href = "${myServerIP}:61208";
               icon = "glances.png";
               description = "System Monitor";
-              # CHANGED: widget is now a LIST [ ] of metrics
-              widget = [
-                {
-                  type = "glances";
-                  url = "http://127.0.0.1:61208";
-                  metric = "cpu";
-                  label = "CPU";
-                }
-                {
-                  type = "glances";
-                  url = "http://127.0.0.1:61208";
-                  metric = "memory";
-                  label = "RAM";
-                }
-                {
-                  type = "glances";
-                  url = "http://127.0.0.1:61208";
-                  metric = "disk";
-                  mount = "/";
-                  label = "Stor";
-                }
-                {
-                  type = "glances";
-                  url = "http://127.0.0.1:61208";
-                  metric = "temperature";
-                  label = "Temp";
-                }
-              ];
+              widget = {
+                type = "glances";
+                url = "${myServerIP}:61208";
+                cpu = true;
+                diskUnits = "bytes";
+                refreshInterval = 5000;
+                pointsLimit = 15;
+                memory = true;
+                cputemp = true;
+                disk = "/";
+              };
+            };
+          }
+          {
+            "CPU Usage" = {
+              widget = {
+                type = "glances";
+                url = "${myServerIP}:61208";
+                metric = "cpu";
+              };
             };
           }
         ];
@@ -101,8 +103,8 @@ in
               widget = {
                 type = "jellyfin";
                 url = "${myServerIP}:8096";
-                key = readKey /home/rplakama/Keys/jellyfin-key.txt;
                 enableBlocks = true;
+                key = "{{HOMEPAGE_VAR_JELLYFIN}}";
               };
             };
           }
@@ -118,7 +120,7 @@ in
               widget = {
                 type = "jellyseerr";
                 url = "http://127.0.0.1:5055";
-                key = readKey /home/rplakama/Keys/jellyseerr-key.txt;
+                key = "{{HOMEPAGE_VAR_JELLYSEERR}}";
               };
             };
           }
@@ -142,7 +144,7 @@ in
               widget = {
                 type = "slskd";
                 url = "http://127.0.0.1:5030";
-                key = readKey /home/rplakama/Keys/slskd-key.txt;
+                key = "{{HOMEPAGE_VAR_SLSKD}}";
               };
             };
           }
@@ -158,7 +160,7 @@ in
               widget = {
                 type = "prowlarr";
                 url = "http://127.0.0.1:9696";
-                key = readKey /home/rplakama/Keys/prowlarr-key.txt;
+                key = "{{HOMEPAGE_VAR_PROWLARR}}";
               };
             };
           }
@@ -181,7 +183,7 @@ in
               widget = {
                 type = "lidarr";
                 url = "http://127.0.0.1:8686";
-                key = readKey /home/rplakama/Keys/lidarr-key.txt;
+                key = "{{HOMEPAGE_VAR_LIDARR}}";
               };
             };
           }
@@ -193,7 +195,7 @@ in
               widget = {
                 type = "sonarr";
                 url = "http://127.0.0.1:8989";
-                key = readKey /home/rplakama/Keys/sonarr-key.txt;
+                key = "{{HOMEPAGE_VAR_SONARR}}";
               };
             };
           }
@@ -205,7 +207,7 @@ in
               widget = {
                 type = "radarr";
                 url = "http://127.0.0.1:7878";
-                key = readKey /home/rplakama/Keys/radarr-key.txt;
+                #key = config.sops.secrets.
               };
             };
           }

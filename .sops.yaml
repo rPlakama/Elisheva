@@ -1,0 +1,14 @@
+keys:
+  - &Elisheva age1nahmfd6uh5f8ugmayz2q5vr7d2j2w8ev30cm2c6ug7lm3acx8u7q3z0q88
+  - &Moontier age14jca6hsfzk6l4dsya5wrf0rjjzl0v5vyt63qf69l9lmwwj7ewdcszfy7pf
+creation_rules:
+  - path_regex: Moontier/network/secrets.yaml$
+    key_groups:
+    - age:
+      - *Elisheva
+      - *Moontier
+  - path_regex: secrets/secrets.yaml$
+    key_groups:
+    - age:
+      - *Elisheva
+      - *Moontier

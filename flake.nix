@@ -1,6 +1,10 @@
 {
   description = "Elisheva-OS";
   inputs = {
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
@@ -18,6 +22,7 @@
 
   outputs =
     {
+      sops-nix,
       nixpkgs,
       home-manager,
       ...
@@ -28,6 +33,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
           ./Elisheva.nix
           ./Config
           ./shared.nix
@@ -51,6 +57,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
           ./Config
           ./shared.nix
           ./Centuria.nix
@@ -75,6 +82,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
           ./Moontier
           ./shared.nix
           ./Config

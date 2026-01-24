@@ -9,12 +9,13 @@
     with pkgs;
     [
       bat
+      age
+      sops
       fd
       ripgrep
       p7zip
       yazi
       ripdrag
-
       xwayland-satellite
       papirus-folders
       papirus-icon-theme
