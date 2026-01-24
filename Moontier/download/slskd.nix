@@ -1,15 +1,32 @@
-{ lib, ... }:
+{ config, inputs, ... }:
 
-let
-  readKey = path: lib.removeSuffix "\n" (builtins.readFile path);
-in
 {
+  imports = [ inputs.sops-nix.nixosModules.sops ];
+
+  sops = {
+    defaultSopsFile = ../network/secrets.yaml;
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    secrets."dashboard/slskd_apikey" = {
+      owner = "slskd";
+    };
+    templates."slskd.env" = {
+      content = ''
+        SLSKD_WEB__AUTHENTICATION__API_KEYS__homepage__KEY=${config.sops.placeholder."dashboard/slskd_apikey"}
+        SLSKD_WEB__AUTHENTICATION__API_KEYS__homepage__ROLE=readonly
+        SLSKD_WEB__AUTHENTICATION__API_KEYS__homepage__CIDR=0.0.0.0/0
+      '';
+      owner = "slskd";
+      group = "users";
+    };
+  };
+
   services.slskd = {
     enable = true;
     openFirewall = true;
     group = "users";
     domain = "slskd.nix.com";
-    environmentFile = "/home/rplakama/Keys/slskd.yaml";
+
+    environmentFile = config.sops.templates."slskd.env".path;
 
     settings = {
       shares.directories = [ "/home/rplakama/Music/" ];
@@ -17,14 +34,6 @@ in
       directories.incomplete = "/mnt/@media/music/downloads";
       flags.force_share_scan = true;
       soulseek.listen_port = 50300;
-
-      web.authentication.api_keys = {
-        "homepage" = {
-          key = readKey /home/rplakama/Keys/slskd-key.txt;
-          role = "readonly";
-          cidr = [ "0.0.0.0/0" ];
-        };
-      };
     };
   };
 }
