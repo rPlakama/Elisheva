@@ -5,7 +5,6 @@
     ./yazi.nix
     ./cli.nix
     ./media.nix
-    ./starship.nix
     ./fish.nix
   ];
 }
