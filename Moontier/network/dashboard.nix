@@ -34,19 +34,19 @@ in
       layout = {
         "Monitoring" = {
           style = "row";
-          columns = 1;
+          columns = 2;
         };
         "Media" = {
           style = "row";
-          columns = 1;
+          columns = 2;
         };
         "Downloaders" = {
           style = "row";
-          columns = 1;
+          columns = 2;
         };
         "Management" = {
           style = "row";
-          columns = 1;
+          columns = 4;
         };
       };
     };
@@ -59,12 +59,34 @@ in
               href = "${myServerIP}:61208";
               icon = "glances.png";
               description = "System Monitor";
-              widget = {
-                type = "glances";
-                url = "http://127.0.0.1:61208";
-                metric = "cpu";
-                version = 4;
-              };
+              # CHANGED: widget is now a LIST [ ] of metrics
+              widget = [
+                {
+                  type = "glances";
+                  url = "http://127.0.0.1:61208";
+                  metric = "cpu";
+                  label = "CPU";
+                }
+                {
+                  type = "glances";
+                  url = "http://127.0.0.1:61208";
+                  metric = "memory";
+                  label = "RAM";
+                }
+                {
+                  type = "glances";
+                  url = "http://127.0.0.1:61208";
+                  metric = "disk";
+                  mount = "/";
+                  label = "Stor";
+                }
+                {
+                  type = "glances";
+                  url = "http://127.0.0.1:61208";
+                  metric = "temperature";
+                  label = "Temp";
+                }
+              ];
             };
           }
         ];
@@ -91,16 +113,15 @@ in
           {
             "Jellyseer" = {
               href = "${myServerIP}:5055";
-              icon = "sonarr.png";
+              icon = "jellyseerr.png";
               description = "Requester";
               widget = {
                 type = "jellyseerr";
-                url = "https://127.0.0.1:5055";
+                url = "http://127.0.0.1:5055";
                 key = readKey /home/rplakama/Keys/jellyseerr-key.txt;
               };
             };
           }
-
           {
             "Deluge" = {
               href = "${myServerIP}:8112";
@@ -171,8 +192,20 @@ in
               description = "General Shows Manager";
               widget = {
                 type = "sonarr";
-                url = "https://127.0.0.1:8989";
+                url = "http://127.0.0.1:8989";
                 key = readKey /home/rplakama/Keys/sonarr-key.txt;
+              };
+            };
+          }
+          {
+            "Radarr" = {
+              href = "${myServerIP}:7878";
+              icon = "radarr.png";
+              description = "General Movie Manager";
+              widget = {
+                type = "radarr";
+                url = "http://127.0.0.1:7878";
+                key = readKey /home/rplakama/Keys/radarr-key.txt;
               };
             };
           }

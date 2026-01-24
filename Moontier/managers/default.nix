@@ -5,5 +5,6 @@
     ./lidarr.nix
     ./sonarr.nix
     ./jellyseerr.nix
+    ./radarr.nix
   ];
 }
