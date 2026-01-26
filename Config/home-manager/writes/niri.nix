@@ -149,41 +149,41 @@ in
         slowdown 1.0
 
         horizontal-view-movement {
-          duration-ms 300
+          duration-ms 500
           curve "cubic-bezier" 0.0 1.0 0.0 1.0
         }
 
         overview-open-close {
-	  duration-ms 300
+	  duration-ms 500
           curve "cubic-bezier" 0.0 1.0 0.0 1
 
         }
 
         window-close {
-	  duration-ms 300
+	  duration-ms 500
           curve "cubic-bezier" 0.0 1.0 0.0 1.0
         }
 
         window-movement {
-	  duration-ms 300
+	  duration-ms 500
           curve "cubic-bezier" 0.0 1.0 0.0 1.0
 
         }
 
         window-open {
-	  duration-ms 300
+	  duration-ms 500
           curve "cubic-bezier" 0.0 1.0 0.0 1.0
 
         }
 
         window-resize {
-	  duration-ms 300
+	  duration-ms 500
           curve "cubic-bezier" 0.0 1.0 0.0 1.0
 
         }
 
         workspace-switch {
-	  duration-ms 300
+	  duration-ms 500
           curve "cubic-bezier" 0.1 1.0 0.1 1.0
 
         }

@@ -10,6 +10,10 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    auto-cpufreq = {
+      url = "github:AdnanHodzic/auto-cpufreq";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,6 +29,7 @@
       sops-nix,
       nixpkgs,
       home-manager,
+      auto-cpufreq,
       ...
     }@inputs:
     {
@@ -34,6 +39,7 @@
         modules = [
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops
+          auto-cpufreq.nixosModules.default
           ./Elisheva.nix
           ./Config
           ./shared.nix

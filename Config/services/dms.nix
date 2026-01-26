@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ lib, config, inputs, ... }:
 {
 
   imports = [
@@ -6,6 +6,7 @@
     inputs.dms-plugin-registry.modules.default
   ];
 
+  services.power-profiles-daemon.enable = lib.mkForce false;
   programs.dank-material-shell = {
     enable = config.networking.hostName == "Elisheva" || config.networking.hostName == "Centuria";
     systemd = {
