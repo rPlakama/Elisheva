@@ -6,28 +6,30 @@
   sops = {
     defaultSopsFile = ../network/secrets.yaml;
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
     secrets = {
       "dashboard/slskd_apikey" = {
-        owner = "slskd";
+        owner = "rplakama";
       };
       "slskd/username" = {
-        owner = "slskd";
+        owner = "rplakama";
       };
       "slskd/password" = {
-        owner = "slskd";
+        owner = "rplakama";
       };
     };
+
     templates."slskd.env" = {
       content = ''
-                SLSKD_WEB__AUTHENTICATION__API_KEYS__homepage__KEY=${
-                  config.sops.placeholder."dashboard/slskd_apikey"
-                }
-                SLSKD_WEB__AUTHENTICATION__API_KEYS__homepage__ROLE=readonly
-                SLSKD_WEB__AUTHENTICATION__API_KEYS__homepage__CIDR=0.0.0.0/0
-        	SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
-        	SLSKD_SLSK_PASSWORD=${config.sops.placeholder."slskd/password"}
+        SLSKD_WEB__AUTHENTICATION__API_KEYS__homepage__KEY=${
+          config.sops.placeholder."dashboard/slskd_apikey"
+        }
+        SLSKD_WEB__AUTHENTICATION__API_KEYS__homepage__ROLE=readonly
+        SLSKD_WEB__AUTHENTICATION__API_KEYS__homepage__CIDR=0.0.0.0/0
+        SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
+        SLSKD_SLSK_PASSWORD=${config.sops.placeholder."slskd/password"}
       '';
-      owner = "slskd";
+      owner = "rplakama";
       group = "users";
     };
   };
@@ -35,17 +37,33 @@
   services.slskd = {
     enable = true;
     openFirewall = true;
+
+    user = "rplakama";
     group = "users";
     domain = "slskd.nix.com";
 
     environmentFile = config.sops.templates."slskd.env".path;
 
     settings = {
-      shares.directories = [ "/home/rplakama/Music/" ];
-      directories.downloads = "/mnt/@media/music/library";
-      directories.incomplete = "/mnt/@media/music/downloads";
-      flags.force_share_scan = true;
-      soulseek.listen_port = 50300;
+      shares = {
+        directories = [ "/home/rplakama/Music/" ];
+        filters = [
+          "Thumbs.db"
+          "Desktop.ini"
+          ".DS_Store"
+        ];
+      };
+      directories = {
+        downloads = "/mnt/@media/music/library";
+        incomplete = "/mnt/@media/music/downloads";
+      };
+      flags = {
+        force_share_scan = true;
+        no_auth = false;
+      };
+      soulseek = {
+        listen_port = 50300;
+      };
     };
   };
 }

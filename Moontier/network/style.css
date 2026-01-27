@@ -1,90 +1,137 @@
 :root {
-    --chalk-base00: #151515;
-    --chalk-base01: #202020;
-    --chalk-base02: #303030;
-    --chalk-base03: #505050;
-    --chalk-base04: #b0b0b0;
-    --chalk-base05: #d0d0d0;
-    --chalk-base06: #e0e0e0;
-    --chalk-base0D: #6fc2ef; /
+    --md-sys-color-background: #111114;
+    --md-sys-color-surface: #1e1f23;
 
-    --bg-body: var(--chalk-base00);
-    --text-primary: var(--chalk-base06);
-    --text-secondary: var(--chalk-base04);
-    --card-bg: var(--chalk-base01);
-    --card-hover-bg: var(--chalk-base02);
-    --card-border: var(--chalk-base02);
+    --md-sys-color-on-surface: #e2e2e6;
+    --md-sys-color-on-surface-variant: #c4c7d0;
+
+    --md-sys-color-primary: #a8c7fa;
+    --md-sys-color-outline: rgba(255, 255, 255, 0.08);
+
+    --card-radius: 5px;
+    --card-blur: 20px;
+    --card-gap: 1.5rem;
+    background-image: "./wall.png"
 }
 
 body {
-    background-color: var(--bg-body);
-    color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
+    background-color: var(--md-sys-color-background);
+    background-image:
+        radial-gradient(circle at 5% 5%, rgba(66, 133, 244, 0.12), transparent 45%),
+        radial-gradient(circle at 95% 95%, rgba(219, 68, 55, 0.08), transparent 45%);
+    background-attachment: fixed;
+    color: var(--md-sys-color-on-surface);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     margin: 0;
     padding: 2rem;
+    min-height: 100vh;
+}
+
+.category-header {
+    display: none !important;
 }
 
 .services {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    max-width: 1200px;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--card-gap);
+    max-width: 1400px;
     margin: 0 auto;
+    padding-top: 1rem;
 }
 
 .services .service {
-    min-height: 140px;
+    min-height: 120px;
 
-    background-color: var(--card-bg) !important;
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
+    background-color: rgba(30, 31, 35, 0.6) !important;
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: var(--card-radius);
 
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    backdrop-filter: blur(var(--card-blur));
+    -webkit-backdrop-filter: blur(var(--card-blur));
 
     display: flex;
     align-items: center;
-    padding: 0 2rem;
+    padding: 1.5rem 2rem;
+    margin-bottom: 0 !important;
 
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-
-    margin-bottom: 0;
+    transition: all 0.3s cubic-bezier(0.2, 0.0, 0, 1.0);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
 .services .service:hover {
-    transform: translateY(-4px);
-    background-color: var(--card-hover-bg) !important;
-    border-color: var(--chalk-base03);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    transform: scale(1.02);
+    background-color: rgba(45, 46, 50, 0.85) !important;
+    border-color: rgba(168, 199, 250, 0.3);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+}
+
+.service-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .service-name {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 600;
-    color: var(--text-primary) !important;
-    letter-spacing: 0.02em;
+    color: var(--md-sys-color-on-surface) !important;
+    margin-bottom: 4px;
+    letter-spacing: 0.01em;
 }
 
 .service-subtitle {
-    color: var(--text-secondary) !important;
-    font-size: 0.95rem;
-    margin-top: 4px;
+    color: var(--md-sys-color-on-surface-variant) !important;
+    font-size: 0.9rem;
+    opacity: 0.85;
+    line-height: 1.4;
+    font-weight: 400;
 }
 
 .service-icon {
-    width: 56px !important;
-    min-width: 56px;
+    width: 52px !important;
+    min-width: 52px;
     margin-right: 24px;
-    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .service-icon img {
     width: 100%;
     height: auto;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    transition: transform 0.3s ease;
+}
+
+.services .service:hover .service-icon img {
+    transform: scale(1.1) rotate(3deg);
+}
+
+.widget-body, .widget-content {
+    color: var(--md-sys-color-on-surface) !important;
 }
 
 @media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
     .services {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+
+    .services .service {
+        padding: 1.25rem;
+        min-height: 100px;
+        border-radius: 20px;
+    }
+
+    .service-icon {
+        width: 42px !important;
+        min-width: 42px;
+        margin-right: 16px;
     }
 }

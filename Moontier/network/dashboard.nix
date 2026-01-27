@@ -56,27 +56,16 @@ in
     settings = {
       title = "Moontier";
       layout = {
-        "Monitoring" = {
+        "Main" = {
           style = "row";
-          columns = 1;
-        };
-        "Media" = {
-          style = "row";
-          columns = 1;
-        };
-        "Downloaders" = {
-          style = "row";
-          columns = 1;
-        };
-        "Management" = {
-          style = "row";
-          columns = 1;
+          columns = 2;
         };
       };
     };
+
     services = [
       {
-        "Media" = [
+        "Main" = [
           {
             "Jellyfin" = {
               href = "${myServerIP}:8096";
@@ -90,90 +79,12 @@ in
               };
             };
           }
-        ];
-      }
-      {
-        "Downloaders" = [
-          {
-            "Jellyseer" = {
-              href = "${myServerIP}:5055";
-              icon = "jellyseerr.png";
-              description = "Requester";
-              widget = {
-                type = "jellyseerr";
-                url = "http://127.0.0.1:5055";
-                key = "{{HOMEPAGE_VAR_JELLYSEERR}}";
-              };
-            };
-          }
-          {
-            "Deluge" = {
-              href = "${myServerIP}:8112";
-              icon = "deluge.png";
-              description = "Torrent Client";
-              widget = {
-                type = "deluge";
-                url = "${myServerIP}:8112";
-                password = "deluge";
-              };
-            };
-          }
-          {
-            "Slskd" = {
-              href = "${myServerIP}:5030";
-              icon = "slskd.png";
-              description = "Soulseek Client";
-              widget = {
-                type = "slskd";
-                url = "http://127.0.0.1:5030";
-                key = "{{HOMEPAGE_VAR_SLSKD}}";
-              };
-            };
-          }
-        ];
-      }
-      {
-        "Management" = [
-          {
-            "Prowlarr" = {
-              href = "${myServerIP}:9696";
-              icon = "prowlarr.png";
-              description = "Indexer Manager";
-              widget = {
-                type = "prowlarr";
-                url = "http://127.0.0.1:9696";
-                key = "{{HOMEPAGE_VAR_PROWLARR}}";
-              };
-            };
-          }
-          {
-            "FlareSolverr" = {
-              href = "${myServerIP}:8191";
-              icon = "flaresolverr.png";
-              description = "Proxy Solver";
-              widget = {
-                type = "flaresolverr";
-                url = "http://127.0.0.1:8191";
-              };
-            };
-          }
-          {
-            "Lidarr" = {
-              href = "${myServerIP}:8686";
-              icon = "lidarr.png";
-              description = "Music Manager";
-              widget = {
-                type = "lidarr";
-                url = "http://127.0.0.1:8686";
-                key = "{{HOMEPAGE_VAR_LIDARR}}";
-              };
-            };
-          }
+          # 3. Managers
           {
             "Sonarr" = {
               href = "${myServerIP}:8989";
               icon = "sonarr.png";
-              description = "General Shows Manager";
+              description = "TV Shows";
               widget = {
                 type = "sonarr";
                 url = "http://127.0.0.1:8989";
@@ -185,11 +96,72 @@ in
             "Radarr" = {
               href = "${myServerIP}:7878";
               icon = "radarr.png";
-              description = "General Movie Manager";
+              description = "Movies";
               widget = {
                 type = "radarr";
                 url = "http://127.0.0.1:7878";
                 key = "{{HOMEPAGE_VAR_RADARR}}";
+              };
+            };
+          }
+          {
+            "Lidarr" = {
+              href = "${myServerIP}:8686";
+              icon = "lidarr.png";
+              description = "Music";
+              widget = {
+                type = "lidarr";
+                url = "http://127.0.0.1:8686";
+                key = "{{HOMEPAGE_VAR_LIDARR}}";
+              };
+            };
+          }
+          {
+            "Prowlarr" = {
+              href = "${myServerIP}:9696";
+              icon = "prowlarr.png";
+              description = "Indexers";
+              widget = {
+                type = "prowlarr";
+                url = "http://127.0.0.1:9696";
+                key = "{{HOMEPAGE_VAR_PROWLARR}}";
+              };
+            };
+          }
+          # 4. Downloaders
+          {
+            "Jellyseerr" = {
+              href = "${myServerIP}:5055";
+              icon = "jellyseerr.png";
+              description = "Requests";
+              widget = {
+                type = "jellyseerr";
+                url = "http://127.0.0.1:5055";
+                key = "{{HOMEPAGE_VAR_JELLYSEERR}}";
+              };
+            };
+          }
+          {
+            "Deluge" = {
+              href = "${myServerIP}:8112";
+              icon = "deluge.png";
+              description = "Torrents";
+              widget = {
+                type = "deluge";
+                url = "${myServerIP}:8112";
+                password = "deluge";
+              };
+            };
+          }
+          {
+            "Slskd" = {
+              href = "${myServerIP}:5030";
+              icon = "slskd.png";
+              description = "Soulseek";
+              widget = {
+                type = "slskd";
+                url = "http://127.0.0.1:5030";
+                key = "{{HOMEPAGE_VAR_SLSKD}}";
               };
             };
           }
