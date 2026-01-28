@@ -53,7 +53,7 @@ in
       output "eDP-1" {
         scale 1.4
         transform "normal"
-        mode "1920x1080@79.982"
+        mode "1920x1080@72.002"
       }
 
       screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
@@ -68,12 +68,19 @@ in
 
       layout {
 
+	shadow {
+	  on
+	  spread 5
+	  softness 5
+	}
 	border {
-	  off
-	  width 0
+	  on
+	  width 1
+	  active-color "#404040"
+	  inactive-color "#242424"
 	}
 	focus-ring {
-	  on
+	  off
 	}
         default-column-width { proportion 0.5; }
         preset-column-widths {
@@ -81,7 +88,7 @@ in
           proportion 0.5
           proportion 0.75
         }
-        center-focused-column "never"
+        center-focused-column "on-overflow"
       }
 
       hotkey-overlay { skip-at-startup; }
@@ -145,53 +152,59 @@ in
         XF86MonBrightnessUp { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
       }
 
+
       animations {
-        slowdown 1.0
+    slowdown 1.0
 
-        horizontal-view-movement {
-          duration-ms 500
-          curve "cubic-bezier" 0.0 1.0 0.0 1.0
-        }
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=480 epsilon=0.0001
+    }
 
-        overview-open-close {
-	  duration-ms 500
-          curve "cubic-bezier" 0.0 1.0 0.0 1
+    window-open {
+        duration-ms 347
+        curve "cubic-bezier" 0.34 1.0 0.64 1.0
+    }
 
-        }
+    window-close {
+        duration-ms 305
+        curve "cubic-bezier" 0.22 0.61 0.36 1.0
+    }
 
-        window-close {
-	  duration-ms 500
-          curve "cubic-bezier" 0.0 1.0 0.0 1.0
-        }
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=450 epsilon=0.0001
+    }
 
-        window-movement {
-	  duration-ms 500
-          curve "cubic-bezier" 0.0 1.0 0.0 1.0
+    window-movement {
+        spring damping-ratio=1.0 stiffness=450 epsilon=0.0001
+    }
 
-        }
+    window-resize {
+        spring damping-ratio=1.0 stiffness=450 epsilon=0.0001
+    }
 
-        window-open {
-	  duration-ms 500
-          curve "cubic-bezier" 0.0 1.0 0.0 1.0
+    overview-open-close {
+        spring damping-ratio=1.0 stiffness=420 epsilon=0.0001
+    }
 
-        }
+    config-notification-open-close {
+        spring damping-ratio=1.0 stiffness=500 epsilon=0.001
+    }
 
-        window-resize {
-	  duration-ms 500
-          curve "cubic-bezier" 0.0 1.0 0.0 1.0
+    exit-confirmation-open-close {
+        spring damping-ratio=1.0 stiffness=400 epsilon=0.01
+    }
 
-        }
+    screenshot-ui-open {
+        duration-ms 305
+        curve "cubic-bezier" 0.45 0.0 0.55 1.0
+    }
 
-        workspace-switch {
-	  duration-ms 500
-          curve "cubic-bezier" 0.1 1.0 0.1 1.0
-
-        }
-      }
-
+    recent-windows-close {
+        spring damping-ratio=1.0 stiffness=450 epsilon=0.001
+    }
+}
       window-rule {
-        match app-id="firefox$" title="^Picture-in-Picture$"
-        open-floating true
+	match is-focused=false
       }
       layer-rule {
         match namespace="^quickshell$"
