@@ -17,7 +17,7 @@
     })
 
     (lib.mkIf (config.networking.hostName == "Elisheva") {
-      scx.scheduler = "scx_lavd";
+      scx.scheduler = "scx_rustland";
     })
 
     (lib.mkIf (config.networking.hostName == "Centuria") {
