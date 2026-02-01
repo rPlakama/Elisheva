@@ -13,5 +13,9 @@
     ++ lib.optionals (config.networking.hostName == "Elisheva") [
       "video=eDP-1:1920x1080@72"
     ];
+    plymouth = {
+      enable = config.networking.hostName == "Centuria" || config.networking.hostName == "Elisheva";
+      theme = "bgrt";
+    };
   };
 }

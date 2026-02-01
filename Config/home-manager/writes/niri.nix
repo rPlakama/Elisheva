@@ -10,216 +10,227 @@ in
 {
   home.file.".config/niri/config.kdl" = {
     text = ''
-            include "./dms/alttab.kdl"
-            include "./dms/colors.kdl"
-            include "./dms/wpblur.kdl"
-            include "./dms/cursor.kdl"
-            include "./dms/outputs.kdl"
-            include "./dms/layout.kdl"
+                  include "./dms/alttab.kdl"
+                  include "./dms/colors.kdl"
+                  include "./dms/wpblur.kdl"
+                  include "./dms/cursor.kdl"
+                  include "./dms/outputs.kdl"
+                  include "./dms/layout.kdl"
 
-            input {
-              keyboard {
-                xkb {
-                  layout "${layoutConfig}"
-                  options "caps:swapescape"
+                  input {
+                    keyboard {
+                      xkb {
+                        layout "${layoutConfig}"
+                        options "caps:swapescape"
+                      }
+                      repeat-delay 600
+                      repeat-rate 25
+                      track-layout "global"
+                      numlock
+                    }
+                    touchpad {
+                      tap
+                      dwt
+                      natural-scroll
+                      accel-speed 0.1
+                      accel-profile "adaptive"
+                      scroll-method "two-finger"
+                    }
+                    mouse { accel-speed -0.5; }
+                    warp-mouse-to-focus
+                    workspace-auto-back-and-forth
+
+                    mod-key "Super"
+                    mod-key-nested "Alt"
+                  }
+
+                  output "HDMI-A-1" {
+                    scale 1.0
+                    transform "normal"
+                    position x=0 y=0
+                  }
+
+                  output "eDP-1" {
+                    scale 1.4
+                    transform "normal"
+                    mode "1920x1080@72.002"
+                  }
+
+                  screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+                  prefer-no-csd
+
+                  overview {
+                    workspace-shadow {
+                      softness 300
+                      spread 300
+                    }
+                  }
+
+                  layout {
+
+                shadow {
+                  on
+                  spread 5
+                  softness 5
                 }
-                repeat-delay 600
-                repeat-rate 25
-                track-layout "global"
-                numlock
-              }
-              touchpad {
-                tap
-                dwt
-                natural-scroll
-                accel-speed 0.1
-                accel-profile "adaptive"
-                scroll-method "two-finger"
-              }
-              mouse { accel-speed -0.5; }
-              warp-mouse-to-focus
-              workspace-auto-back-and-forth
+                border {
+                  on
+                  width 1
+                  active-color "#404040"
+                  inactive-color "#242424"
+                }
+                focus-ring {
+                  off
+                }
+                    default-column-width { proportion 0.5; }
+                    preset-column-widths {
+                      proportion 0.25
+                      proportion 0.5
+                      proportion 0.75
+                    }
+                    center-focused-column "never"
+                  }
 
-              mod-key "Super"
-              mod-key-nested "Alt"
-            }
+                  hotkey-overlay { skip-at-startup; }
 
-            output "HDMI-A-1" {
-              scale 1.0
-              transform "normal"
-              position x=0 y=0
-            }
+                  binds {
+                    ${extraBind}
 
-            output "eDP-1" {
-              scale 1.4
-              transform "normal"
-              mode "1920x1080@72.002"
-            }
+                    Ctrl+Alt+A { spawn "dms" "ipc" "call" "dash" "toggle" "overview"; }
+                    Ctrl+Alt+C { spawn "dms" "ipc" "call" "control-center" "toggle"; }
+                    Ctrl+Alt+D { spawn "dms" "ipc" "call" "dash" "toggle" "media"; }
+                    Ctrl+Alt+L { spawn "dms" "ipc" "call" "wallpaper" "next"; }
+                    Ctrl+Alt+S { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+                    Ctrl+Alt+W { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
 
-            screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
-            prefer-no-csd
+                    Mod+0 { focus-workspace 10; }
+                    Mod+1 { focus-workspace 1; }
+                    Mod+2 { focus-workspace 2; }
+                    Mod+3 { focus-workspace 3; }
+                    Mod+4 { focus-workspace 4; }
+                    Mod+5 { focus-workspace 5; }
+                    Mod+6 { focus-workspace 6; }
+                    Mod+7 { focus-workspace 7; }
+                    Mod+8 { focus-workspace 8; }
+                    Mod+9 { focus-workspace 9; }
 
-            overview {
-              workspace-shadow {
-                softness 300
-                spread 300
-              }
-            }
+                    Mod+B { spawn-sh "foot -e ~/Music/music.sh"; }
+                    Mod+BracketLeft { consume-or-expel-window-left; }
+                    Mod+BracketRight { consume-or-expel-window-right; }
+                    Mod+C { center-column; }
+                    Mod+F { maximize-column; }
+                    Mod+H { focus-column-left; }
+                    Mod+J { focus-window-or-workspace-down; }
+                    Mod+K { focus-window-or-workspace-up; }
+                    Mod+L { focus-column-right; }
+                    Mod+M { spawn "dms" "ipc" "call" "processlist" "toggle"; }
+                    Mod+N { spawn "dms" "ipc" "call" "notifications" "toggle"; }
+                    Mod+P { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
+                    Mod+R { switch-preset-column-width-back; }
 
-            layout {
+                    Mod+Return { spawn "foot"; }
+                    Mod+Shift+C { center-visible-columns; }
+                    Mod+Shift+F { fullscreen-window; }
+                    Mod+Shift+H { move-column-left; }
+                    Mod+Shift+J { move-column-to-workspace-down; }
+                    Mod+Shift+K { move-column-to-workspace-up; }
+                    Mod+Shift+L { move-column-right; }
+                    Mod+Shift+R { switch-preset-column-width; }
 
-          shadow {
-            on
-            spread 5
-            softness 5
-          }
-          border {
-            on
-            width 1
-            active-color "#404040"
-            inactive-color "#242424"
-          }
-          focus-ring {
-            off
-          }
-              default-column-width { proportion 0.5; }
-              preset-column-widths {
-                proportion 0.25
-                proportion 0.5
-                proportion 0.75
-              }
-              center-focused-column "never"
-            }
+                    Mod+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+                    Mod+Tab { toggle-overview; }
+                    Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+                    Mod+W { close-window; }
+                    Mod+Y { spawn-sh "foot -e yazi"; }
+                    Print { screenshot; }
 
-            hotkey-overlay { skip-at-startup; }
-
-            binds {
-              ${extraBind}
-
-              Ctrl+Alt+A { spawn "dms" "ipc" "call" "dash" "toggle" "overview"; }
-              Ctrl+Alt+C { spawn "dms" "ipc" "call" "control-center" "toggle"; }
-              Ctrl+Alt+D { spawn "dms" "ipc" "call" "dash" "toggle" "media"; }
-              Ctrl+Alt+L { spawn "dms" "ipc" "call" "wallpaper" "next"; }
-              Ctrl+Alt+S { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
-              Ctrl+Alt+W { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
-
-              Mod+0 { focus-workspace 10; }
-              Mod+1 { focus-workspace 1; }
-              Mod+2 { focus-workspace 2; }
-              Mod+3 { focus-workspace 3; }
-              Mod+4 { focus-workspace 4; }
-              Mod+5 { focus-workspace 5; }
-              Mod+6 { focus-workspace 6; }
-              Mod+7 { focus-workspace 7; }
-              Mod+8 { focus-workspace 8; }
-              Mod+9 { focus-workspace 9; }
-
-              Mod+B { spawn-sh "foot -e ~/Music/music.sh"; }
-              Mod+BracketLeft { consume-or-expel-window-left; }
-              Mod+BracketRight { consume-or-expel-window-right; }
-              Mod+C { center-column; }
-              Mod+F { maximize-column; }
-              Mod+H { focus-column-left; }
-              Mod+J { focus-window-or-workspace-down; }
-              Mod+K { focus-window-or-workspace-up; }
-              Mod+L { focus-column-right; }
-              Mod+M { spawn "dms" "ipc" "call" "processlist" "toggle"; }
-              Mod+N { spawn "dms" "ipc" "call" "notifications" "toggle"; }
-              Mod+P { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
-              Mod+R { switch-preset-column-width-back; }
-
-              Mod+Return { spawn "foot"; }
-              Mod+Shift+C { center-visible-columns; }
-              Mod+Shift+F { fullscreen-window; }
-              Mod+Shift+H { move-column-left; }
-              Mod+Shift+J { move-column-to-workspace-down; }
-              Mod+Shift+K { move-column-to-workspace-up; }
-              Mod+Shift+L { move-column-right; }
-              Mod+Shift+R { switch-preset-column-width; }
-
-              Mod+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
-              Mod+Tab { toggle-overview; }
-              Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
-              Mod+W { close-window; }
-              Mod+Y { spawn-sh "foot -e yazi"; }
-              Print { screenshot; }
-
-              XF86AudioLowerVolume { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-; dms ipc call audio increment 0"; }
-              XF86AudioMute { spawn "dms" "ipc" "call" "audio" "mute"; }
-              XF86AudioPlay { spawn "dms" "ipc" "call" "mpris" "playPause"; }
-              XF86AudioRaiseVolume { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+; dms ipc call audio increment 0"; }
-              XF86MonBrightnessDown { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
-              XF86MonBrightnessUp { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
-            }
+                    XF86AudioLowerVolume { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-; dms ipc call audio increment 0"; }
+                    XF86AudioMute { spawn "dms" "ipc" "call" "audio" "mute"; }
+                    XF86AudioPlay { spawn "dms" "ipc" "call" "mpris" "playPause"; }
+                    XF86AudioRaiseVolume { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+; dms ipc call audio increment 0"; }
+                    XF86MonBrightnessDown { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
+                    XF86MonBrightnessUp { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
+                  }
 
 
-        animations {
+      	    animations {
           slowdown 1.0
 
           workspace-switch {
-              spring damping-ratio=1.0 stiffness=680 epsilon=0.0001
+              duration-ms 324
+              curve "cubic-bezier" 0.23 1 0.32 1
           }
 
           window-open {
-              spring damping-ratio=1.0 stiffness=680 epsilon=0.0001
+              duration-ms 324
+              curve "cubic-bezier" 0.23 1 0.32 1
           }
 
           window-close {
-              spring damping-ratio=1.0 stiffness=680 epsilon=0.0001
+              duration-ms 324
+              curve "cubic-bezier" 0.23 1 0.32 1
           }
 
           horizontal-view-movement {
-              spring damping-ratio=1.0 stiffness=680 epsilon=0.0001
+              duration-ms 324
+              curve "cubic-bezier" 0.23 1 0.32 1
           }
 
           window-movement {
-              spring damping-ratio=1.0 stiffness=680 epsilon=0.0001
+              duration-ms 324
+              curve "cubic-bezier" 0.23 1 0.32 1
           }
 
           window-resize {
-              spring damping-ratio=1.0 stiffness=680 epsilon=0.0001
+              duration-ms 324
+              curve "cubic-bezier" 0.23 1 0.32 1
           }
 
           overview-open-close {
-              spring damping-ratio=1.0 stiffness=680 epsilon=0.0001
+              duration-ms 324
+              curve "cubic-bezier" 0.23 1 0.32 1
           }
 
           config-notification-open-close {
-              spring damping-ratio=1.0 stiffness=680 epsilon=0.0001
+              duration-ms 324
+              curve "cubic-bezier" 0.23 1 0.32 1
           }
 
           exit-confirmation-open-close {
-              spring damping-ratio=1.0 stiffness=680 epsilon=0.0001
+              duration-ms 324
+              curve "cubic-bezier" 0.23 1 0.32 1
           }
 
           screenshot-ui-open {
-              spring damping-ratio=1.0 stiffness=680 epsilon=0.0001
+              duration-ms 324
+              curve "cubic-bezier" 0.23 1 0.32 1
           }
 
           recent-windows-close {
-              spring damping-ratio=1.0 stiffness=680 epsilon=0.0001
+              duration-ms 324
+              curve "cubic-bezier" 0.23 1 0.32 1
           }
       }
-            window-rule {
-          match is-focused=false
-            }
-            layer-rule {
-              match namespace="^quickshell$"
-              place-within-backdrop true
-            }
+                  window-rule {
+                match is-focused=false
+                  }
+                  layer-rule {
+                    match namespace="^quickshell$"
+                    place-within-backdrop true
+                  }
 
-            recent-windows {
-              debounce-ms 750
-              open-delay-ms 0
-              previews {
-                max-height 600
-                max-scale 0.3
-              }
-              binds {
-                Ctrl+Alt+E { next-window; }
-                Ctrl+Alt+Q { previous-window; }
-              }
-            }
+                  recent-windows {
+                    debounce-ms 750
+                    open-delay-ms 0
+                    previews {
+                      max-height 600
+                      max-scale 0.3
+                    }
+                    binds {
+                      Ctrl+Alt+E { next-window; }
+                      Ctrl+Alt+Q { previous-window; }
+                    }
+                  }
     '';
   };
 }

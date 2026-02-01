@@ -1,9 +1,7 @@
 {
   imports = [
-    ./env.nix
-    ./locale.nix
-    ./security.nix
-    ./boot/default.nix
-    ./hardware/default.nix
+    ./general.nix
+    ./hardware.nix
+    ./boot.nix
   ];
 }

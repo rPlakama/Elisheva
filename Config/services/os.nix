@@ -1,11 +1,18 @@
+{ lib, config, ... }:
+
 {
-  config,
-  lib,
-  ...
-}:
-{
+
+  # System services (Storage, DNS, Scheduling...)
+  networking.nameservers = [
+    "1.1.1.1"
+    "8.8.8.8"
+  ];
   services = lib.mkMerge [
     {
+      gvfs.enable = true;
+      udisks2.enable = true;
+      pipewire.alsa.enable = true;
+      resolved.enable = true;
       scx.enable = true;
       upower.enable = true;
     }

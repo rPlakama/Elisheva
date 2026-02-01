@@ -1,10 +1,16 @@
-{ lib, config, inputs, ... }:
+{
+  lib,
+  config,
+  inputs,
+  ...
+}:
 {
 
   imports = [
     inputs.dms.nixosModules.dank-material-shell
   ];
 
+  # Using TuneD instead.
   services.power-profiles-daemon.enable = lib.mkForce false;
   programs.dank-material-shell = {
     enable = config.networking.hostName == "Elisheva" || config.networking.hostName == "Centuria";
