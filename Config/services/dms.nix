@@ -3,7 +3,6 @@
 
   imports = [
     inputs.dms.nixosModules.dank-material-shell
-    inputs.dms-plugin-registry.modules.default
   ];
 
   services.power-profiles-daemon.enable = lib.mkForce false;
