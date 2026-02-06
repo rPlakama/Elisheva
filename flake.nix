@@ -14,6 +14,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri.url = "github:sodiboo/niri-flake";
   };
 
   outputs =
@@ -21,6 +22,7 @@
       sops-nix,
       nixpkgs,
       home-manager,
+      niri,
       ...
     }@inputs:
     {
@@ -29,7 +31,11 @@
         specialArgs = { inherit inputs; };
         modules = [
           home-manager.nixosModules.home-manager
+          niri.nixosModules.niri
           sops-nix.nixosModules.sops
+          {
+            nixpkgs.overlays = [ niri.overlays.niri ];
+          }
           ./Elisheva.nix
           ./Config
           ./shared.nix
@@ -39,7 +45,6 @@
               useUserPackages = true;
               extraSpecialArgs = { inherit inputs; };
             };
-
             home-manager.users.rplakama = {
               imports = [
                 ./Config/home-manager/home.nix
@@ -54,9 +59,13 @@
         modules = [
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops
+          niri.nixosModules.niri
           ./Config
           ./shared.nix
           ./Centuria.nix
+          {
+            nixpkgs.overlays = [ niri.overlays.niri ];
+          }
           {
             home-manager = {
               useGlobalPkgs = true;

@@ -1,6 +1,11 @@
+{ ... }:
 {
   imports = [
-  ./user.nix
-  ./os.nix
+    ./niri.nix
+    ./neovim.nix
+    ./fish.nix
+    ./zoxide.nix
+    ./firefox.nix
+    ./steam.nix
   ];
 }
