@@ -17,6 +17,8 @@
       materialgram
       qimgv
       kdePackages.okular
+      blender
+      yt-dlp
     ]
     ++ lib.optionals (config.networking.hostName == "Centuria") [
       bottles

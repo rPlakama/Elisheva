@@ -12,9 +12,9 @@ let
     curve = "cubic-bezier";
     duration-ms = 324;
     curve-args = [
-      0.23
+      0.10
       1.0
-      0.32
+      0.10
       1.0
     ];
   };
@@ -58,8 +58,8 @@ in
       prefer-no-csd = true;
       overview = {
         workspace-shadow = {
-          softness = 300;
-          spread = 300;
+          softness = 30;
+          spread = 30;
         };
       };
 

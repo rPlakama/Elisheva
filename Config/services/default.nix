@@ -13,5 +13,6 @@
     ./power-profiles-daemon.nix
     ./dank-material-shell.nix
     ./podman.nix
+    ./flatpak.nix
   ];
 }
