@@ -25,6 +25,7 @@
       android-tools
       volantes-cursors
       ripdrag
+      distrobox
     ];
   fonts.packages = with pkgs; [
     nerd-fonts.caskaydia-cove

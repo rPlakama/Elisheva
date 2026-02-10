@@ -1,8 +1,7 @@
-{ lib, config, ... }:
+{ config, ... }:
 {
   services.scx.enable = true;
 
   services.scx.scheduler =
-    if config.networking.hostName == "Centuria" then "scx_rusty"
-    else "scx_lavd";
+    if config.networking.hostName == "Elisheva" then "scx_rustland" else "scx_lavd";
 }

@@ -12,9 +12,9 @@ let
     curve = "cubic-bezier";
     duration-ms = 324;
     curve-args = [
-      0.10
+      0.20
       1.0
-      0.10
+      0.20
       1.0
     ];
   };
