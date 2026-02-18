@@ -1,7 +1,0 @@
-{ ... }:
-
-{
-  services.readarr = {
-    enable = true;
-  };
-}

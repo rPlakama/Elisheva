@@ -1,4 +1,4 @@
-{ ... }:
+{ isDesktop, lib, ... }:
 {
   imports = [
     ./networking.nix
@@ -11,8 +11,7 @@
     ./tuned.nix
     ./bpftune.nix
     ./power-profiles-daemon.nix
-    ./dank-material-shell.nix
     ./podman.nix
     ./flatpak.nix
-  ];
+  ] ++ lib.optional isDesktop ./dank-material-shell.nix;
 }

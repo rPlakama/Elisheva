@@ -14,7 +14,7 @@
       "video=eDP-1:1920x1080@72"
     ];
     plymouth = {
-      enable = config.networking.hostName == "Centuria" || config.networking.hostName == "Elisheva";
+      enable = config.networking.hostName == "Centuria";
       theme = "bgrt";
     };
   };

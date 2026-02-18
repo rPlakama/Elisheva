@@ -16,6 +16,9 @@
       p7zip
       yazi
       ripdrag
+      nvd
+      nh
+      nix-output-monitor
       xwayland-satellite
       papirus-folders
       papirus-icon-theme
@@ -26,6 +29,10 @@
       volantes-cursors
       ripdrag
       distrobox
+    ]
+    ++ lib.optionals (config.networking.hostName == "Moontier") [
+      beets
+      ffmpeg-full
     ];
   fonts.packages = with pkgs; [
     nerd-fonts.caskaydia-cove

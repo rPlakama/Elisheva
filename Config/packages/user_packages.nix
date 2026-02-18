@@ -9,6 +9,7 @@
     with pkgs;
     [
       dust
+      helix
       dropbox
     ]
     ++ lib.optionals (config.networking.hostName != "Moontier") [

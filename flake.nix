@@ -28,7 +28,7 @@
     {
       nixosConfigurations."Elisheva" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs; isDesktop = true; };
         modules = [
           home-manager.nixosModules.home-manager
           niri.nixosModules.niri
@@ -43,7 +43,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; };
+              extraSpecialArgs = { inherit inputs; isDesktop = true; };
             };
             home-manager.users.rplakama = {
               imports = [
@@ -55,7 +55,7 @@
       };
       nixosConfigurations."Centuria" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs; isDesktop = true; };
         modules = [
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops
@@ -70,7 +70,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; };
+              extraSpecialArgs = { inherit inputs; isDesktop = true; };
             };
 
             home-manager.users.rplakama = {
@@ -84,7 +84,7 @@
 
       nixosConfigurations."Moontier" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs; isDesktop = false; };
         modules = [
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops
@@ -96,7 +96,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; };
+              extraSpecialArgs = { inherit inputs; isDesktop = false; };
             };
             home-manager.users.rplakama = {
               imports = [
