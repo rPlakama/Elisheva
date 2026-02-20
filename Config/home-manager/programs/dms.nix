@@ -7,6 +7,7 @@
       override = true;
       originalFileName = "hm";
       filesToInclude = [
+	"windowrules"
         "alttab"
         "binds"
         "colors"

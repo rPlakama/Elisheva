@@ -2,6 +2,7 @@
 
 {
   services = {
+
     bazarr = {
       enable = true;
       openFirewall = true;
@@ -11,11 +12,6 @@
       enable = true;
       openFirewall = true;
       port = 8191;
-    };
-
-    jellyseerr = {
-      enable = true;
-      openFirewall = true;
     };
 
     lidarr = {

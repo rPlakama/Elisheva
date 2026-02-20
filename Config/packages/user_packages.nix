@@ -18,6 +18,7 @@
       materialgram
       qimgv
       kdePackages.okular
+      kdePackages.dolphin
       blender
       yt-dlp
     ]

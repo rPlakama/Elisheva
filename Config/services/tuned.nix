@@ -1,4 +1,4 @@
 { config, ... }:
 {
-  services.tuned.enable = config.networking.hostName == "Moontier";
+  services.tuned.enable = config.networking.hostName == "Moontier" || config.networking.hostName == "Elisheva";
 }
