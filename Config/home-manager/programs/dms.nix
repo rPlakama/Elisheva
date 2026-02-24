@@ -1,7 +1,7 @@
-{ osConfig, ... }:
+{ isDesktop, osConfig, ... }:
 {
   programs.dank-material-shell = {
-    enable = osConfig.networking.hostName == "Centuria" || osConfig.networking.hostName == "Elisheva";
+    enable = isDesktop;
     niri.includes = {
       enable = true;
       override = true;

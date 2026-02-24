@@ -6,7 +6,10 @@
     allowedTCPPorts = [ 25565 ];
     allowedUDPPorts = [ 25565 ];
   };
-  services.zerotierone.enable = true;
+  services = {
+    resolved.enable = true;
+  };
+
   networking.nameservers = [
     "1.1.1.1"
     "8.8.8.8"

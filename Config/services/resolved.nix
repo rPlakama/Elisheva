@@ -1,4 +1,0 @@
-{ ... }:
-{
-  services.resolved.enable = true;
-}
