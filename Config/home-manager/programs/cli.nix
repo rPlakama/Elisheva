@@ -21,7 +21,7 @@
                 set nix_indicator (set_color cyan)" direnv "(set_color normal)
             end
 
-	      echo -s (set_color white) (whoami) "@" (set_color yellow) (hostname) " " (set_color blue) (prompt_pwd) (set_color normal) (fish_git_prompt) " " $nix_indicator
+	      echo -s (set_color white) (whoami) "@" (set_color normal) (hostname) " " (set_color blue) (prompt_pwd) (set_color normal) (fish_git_prompt) " " $nix_indicator
 
             echo -n "> "
         end
