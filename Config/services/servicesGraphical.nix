@@ -1,4 +1,5 @@
 {
+  isDesktop,
   config,
   inputs,
   ...
@@ -9,7 +10,8 @@
   ];
 
   programs.dank-material-shell = {
-    enable = config.networking.hostName == "Elisheva" || config.networking.hostName == "Centuria";
+    enable = isDesktop;
+    enableCalendarEvents = false;
     systemd = {
       enable = true;
       restartIfChanged = true;

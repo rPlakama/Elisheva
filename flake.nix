@@ -7,7 +7,7 @@
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
+      url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -34,7 +34,15 @@
           niri.nixosModules.niri
           sops-nix.nixosModules.sops
           {
-            nixpkgs.overlays = [ niri.overlays.niri ];
+            nixpkgs.overlays = [
+              niri.overlays.niri
+              (final: prev: {
+                khal = prev.khal.overrideAttrs (oldAttrs: {
+                  doCheck = false;
+                  nativeBuildInputs = builtins.filter (p: p.pname or "" != "sphinx") oldAttrs.nativeBuildInputs;
+                });
+              })
+            ];
           }
           ./Elisheva.nix
           ./Config
@@ -64,7 +72,15 @@
           ./shared.nix
           ./Centuria.nix
           {
-            nixpkgs.overlays = [ niri.overlays.niri ];
+            nixpkgs.overlays = [
+              niri.overlays.niri
+              (final: prev: {
+                khal = prev.khal.overrideAttrs (oldAttrs: {
+                  doCheck = false;
+                  nativeBuildInputs = builtins.filter (p: p.pname or "" != "sphinx") oldAttrs.nativeBuildInputs;
+                });
+              })
+            ];
           }
           {
             home-manager = {
