@@ -16,6 +16,11 @@
     };
   };
 
+  services.hardware.openrgb = {
+    enable = config.networking.hostName == "Centuria";
+    motherboard = "amd";
+  };
+
   services.displayManager.dms-greeter = {
     enable = config.networking.hostName == "Elisheva" || config.networking.hostName == "Centuria";
     compositor = {
