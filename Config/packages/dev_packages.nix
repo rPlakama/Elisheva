@@ -1,17 +1,22 @@
-{ pkgs, ... }:
+{ isDesktop, pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [
-    lua-language-server
-    # NIX
-    nixd
-    # TYPST
-    typst
-    tinymist
-    # Others
-    nixfmt-rfc-style
-    nodejs
-    fish-lsp
-    jq
-    git
-  ];
+  environment.systemPackages =
+    with pkgs;
+    [
+      lua-language-server
+      # NIX
+      nixd
+      # TYPST
+      typst
+      tinymist
+      # Others
+      nixfmt-rfc-style
+      nodejs
+      fish-lsp
+      jq
+      git
+    ]
+    ++ lib.options isDesktop [
+      android-studio
+    ];
 }

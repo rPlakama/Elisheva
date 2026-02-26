@@ -2,4 +2,6 @@
 {
   nix.package = pkgs.lix;
   security.sudo-rs.enable = true;
+  nixpkgs.config.allowUnfree = true;
+
 }
