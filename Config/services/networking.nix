@@ -2,16 +2,11 @@
 {
   networking.firewall = {
     enable = true;
-    trustedInterfaces = [ "zt+" ];
-    allowedTCPPorts = [ 25565 ];
-    allowedUDPPorts = [ 25565 ];
   };
   services = {
     resolved.enable = true;
     syncthing = {
       enable = true;
-      user = "rplakama";
-      group = "users";
     };
   };
 
