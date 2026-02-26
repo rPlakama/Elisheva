@@ -1,6 +1,7 @@
 {
   description = "Elisheva-OS";
   inputs = {
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,6 +21,7 @@
   outputs =
     {
       sops-nix,
+      affinity-nix,
       nixpkgs,
       home-manager,
       niri,
@@ -28,7 +30,10 @@
     {
       nixosConfigurations."Elisheva" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; isDesktop = true; };
+        specialArgs = {
+          inherit inputs;
+          isDesktop = true;
+        };
         modules = [
           home-manager.nixosModules.home-manager
           niri.nixosModules.niri
@@ -36,12 +41,6 @@
           {
             nixpkgs.overlays = [
               niri.overlays.niri
-              (final: prev: {
-                khal = prev.khal.overrideAttrs (oldAttrs: {
-                  doCheck = false;
-                  nativeBuildInputs = builtins.filter (p: p.pname or "" != "sphinx") oldAttrs.nativeBuildInputs;
-                });
-              })
             ];
           }
           ./Elisheva.nix
@@ -51,7 +50,10 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; isDesktop = true; };
+              extraSpecialArgs = {
+                inherit inputs;
+                isDesktop = true;
+              };
             };
             home-manager.users.rplakama = {
               imports = [
@@ -63,7 +65,10 @@
       };
       nixosConfigurations."Centuria" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; isDesktop = true; };
+        specialArgs = {
+          inherit inputs;
+          isDesktop = true;
+        };
         modules = [
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops
@@ -74,19 +79,18 @@
           {
             nixpkgs.overlays = [
               niri.overlays.niri
-              (final: prev: {
-                khal = prev.khal.overrideAttrs (oldAttrs: {
-                  doCheck = false;
-                  nativeBuildInputs = builtins.filter (p: p.pname or "" != "sphinx") oldAttrs.nativeBuildInputs;
-                });
-              })
             ];
+
+            environment.systemPackages = [ affinity-nix.packages.x86_64-linux.v3 ];
           }
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; isDesktop = true; };
+              extraSpecialArgs = {
+                inherit inputs;
+                isDesktop = true;
+              };
             };
 
             home-manager.users.rplakama = {
@@ -100,7 +104,10 @@
 
       nixosConfigurations."Moontier" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; isDesktop = false; };
+        specialArgs = {
+          inherit inputs;
+          isDesktop = false;
+        };
         modules = [
           home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops
@@ -112,7 +119,10 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs; isDesktop = false; };
+              extraSpecialArgs = {
+                inherit inputs;
+                isDesktop = false;
+              };
             };
             home-manager.users.rplakama = {
               imports = [
