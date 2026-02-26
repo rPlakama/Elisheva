@@ -7,6 +7,10 @@
     resolved.enable = true;
     syncthing = {
       enable = true;
+      user = "rplakama";
+      dataDir = "/home/rplakama";
+      configDir = "/home/rplakama/.config/syncthing";
+      openDefaultPorts = true;
     };
   };
 
