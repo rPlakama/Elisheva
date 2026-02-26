@@ -8,6 +8,11 @@
   };
   services = {
     resolved.enable = true;
+    syncthing = {
+      enable = true;
+      user = "rplakama";
+      group = "users";
+    };
   };
 
   networking.nameservers = [
