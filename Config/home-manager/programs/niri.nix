@@ -66,8 +66,8 @@ in
       layout = {
         shadow = {
           enable = true;
-          spread = 3;
-          softness = 3;
+          spread = 1;
+          softness = 1;
         };
 
         border = {
