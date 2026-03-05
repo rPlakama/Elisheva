@@ -1,8 +1,6 @@
 {
   description = "Elisheva-OS";
   inputs = {
-    nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,7 +20,6 @@
   outputs =
     {
       sops-nix,
-      nixvim,
       nixpkgs,
       home-manager,
       niri,
