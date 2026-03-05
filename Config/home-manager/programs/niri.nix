@@ -59,13 +59,13 @@ in
       overview = {
         workspace-shadow = {
           softness = 30;
-          spread = 30;
+          spread = 20;
         };
       };
 
       layout = {
         shadow = {
-          enable = true;
+          enable = false;
           spread = 1;
           softness = 1;
         };

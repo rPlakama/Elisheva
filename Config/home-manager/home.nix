@@ -7,6 +7,7 @@
 {
   imports = [
     ./programs
+    inputs.nixvim.homeManagerModules.nixvim
   ]
   ++ lib.optionals isDesktop [
     inputs.dms.homeModules.dank-material-shell
