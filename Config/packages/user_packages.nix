@@ -25,6 +25,7 @@
     ++ lib.optionals (config.networking.hostName == "Centuria") [
       bottles
       btop-cuda
+      lutris
     ]
     ++ lib.optionals (config.networking.hostName == "Elisheva") [
       btop-rocm

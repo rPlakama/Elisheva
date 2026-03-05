@@ -1,6 +1,7 @@
 {
   description = "Elisheva-OS";
   inputs = {
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,6 +21,7 @@
   outputs =
     {
       sops-nix,
+      affinity-nix,
       nixpkgs,
       home-manager,
       niri,
@@ -78,6 +80,8 @@
             nixpkgs.overlays = [
               niri.overlays.niri
             ];
+
+            environment.systemPackages = [ affinity-nix.packages.x86_64-linux.v3 ];
           }
           {
             home-manager = {
