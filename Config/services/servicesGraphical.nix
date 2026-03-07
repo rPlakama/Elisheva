@@ -23,8 +23,15 @@
     motherboard = "amd";
   };
 
+  services.sunshine = {
+    enable = config.networking.hostName == "Centuria";
+    autoStart = true;
+    capSysAdmin = true;
+    openFirewall = true;
+  };
+
   services.displayManager.dms-greeter = {
-    enable = config.networking.hostName == "Elisheva" || config.networking.hostName == "Centuria";
+    enable = isDesktop;
     compositor = {
       name = "niri";
     };
