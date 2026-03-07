@@ -26,6 +26,7 @@
       bottles
       btop-cuda
       lutris
+      qbittorrent
     ]
     ++ lib.optionals (config.networking.hostName == "Elisheva") [
       btop-rocm
