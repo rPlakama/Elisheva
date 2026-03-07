@@ -130,18 +130,6 @@ in
           }
           # 4. Downloaders
           {
-            "Jellyseerr" = {
-              href = "${myServerIP}:5055";
-              icon = "jellyseerr.png";
-              description = "Requests";
-              widget = {
-                type = "jellyseerr";
-                url = "http://127.0.0.1:5055";
-                key = "{{HOMEPAGE_VAR_JELLYSEERR}}";
-              };
-            };
-          }
-          {
             "Deluge" = {
               href = "${myServerIP}:8112";
               icon = "deluge.png";

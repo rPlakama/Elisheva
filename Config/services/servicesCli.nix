@@ -26,7 +26,7 @@
     pipewire.alsa.enable = true;
 
     # --- Package Management
-    flatpak.enable = config.networking.hostName == "Centuria";
+    flatpak.enable = isDesktop;
   };
 
   # --- Virtualisation & Containers
