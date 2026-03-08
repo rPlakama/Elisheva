@@ -1,10 +1,6 @@
 { ... }:
 {
   programs = {
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
     fish = {
       enable = true;
       generateCompletions = true;

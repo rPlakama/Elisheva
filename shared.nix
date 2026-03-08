@@ -49,4 +49,6 @@
     openFirewall = true;
   };
 
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
+
 }

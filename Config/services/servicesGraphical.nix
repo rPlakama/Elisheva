@@ -1,6 +1,7 @@
 {
   isDesktop,
   config,
+  lib,
   inputs,
   ...
 }:
@@ -17,6 +18,10 @@
       restartIfChanged = true;
     };
   };
+
+  
+  # -- What I can say.
+  services.power-profiles-daemon.enable = lib.mkForce false;
 
   services.hardware.openrgb = {
     enable = config.networking.hostName == "Centuria";

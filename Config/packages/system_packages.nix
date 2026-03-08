@@ -16,9 +16,6 @@
       p7zip
       yazi
       ripdrag
-      nvd
-      nh
-      nix-output-monitor
       xwayland-satellite
       papirus-folders
       papirus-icon-theme

@@ -44,7 +44,7 @@
         mgr.show_hidden = true;
         opener.edit = [
           {
-            run = "nvim \"$@\"";
+            run = "helix \"$@\"";
             block = true;
           }
         ];

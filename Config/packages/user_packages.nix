@@ -9,7 +9,6 @@
     with pkgs;
     [
       dust
-      helix
       dropbox
     ]
     ++ lib.optionals (config.networking.hostName != "Moontier") [
@@ -19,11 +18,10 @@
       qimgv
       kdePackages.okular
       kdePackages.dolphin
-      blender
-      yt-dlp
     ]
     ++ lib.optionals (config.networking.hostName == "Centuria") [
       bottles
+      blender
       btop-cuda
       lutris
       qbittorrent

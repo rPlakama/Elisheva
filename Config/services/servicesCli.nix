@@ -11,12 +11,9 @@
     bpftune.enable =
       config.networking.hostName == "Moontier" || config.networking.hostName == "Centuria";
     scx = {
-      scheduler = if config.networking.hostName == "Elisheva" then "scx_bpfland" else "scx_rusty";
+      scheduler = if config.networking.hostName == "Elisheva" then "scx_lavd" else "scx_rusty";
       enable = true;
     };
-    # Using Tuned instead of power-profiles-daemon
-    tuned.enable = config.networking.hostName == "Moontier" || config.networking.hostName == "Elisheva";
-    power-profiles-daemon.enable = lib.mkForce false;
 
     # --- Storage
     devmon.enable = true;

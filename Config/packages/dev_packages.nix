@@ -10,7 +10,7 @@
     [
       git
       fish-lsp
-      nil
+      nixd
     ]
     ++ lib.optionals isDesktop [
       jq
