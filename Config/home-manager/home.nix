@@ -14,7 +14,6 @@
     ./programs/niri.nix
     ./programs/dms.nix
   ];
-
   home = {
     stateVersion = "26.05";
   };

@@ -32,14 +32,14 @@
       sops-nix.nixosModules.sops
       ./shared.nix
       ./Config
-      {
+      ({ isDesktop, ... }: {
         home-manager = {
           useGlobalPkgs = true;
           useUserPackages = true;
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = { inherit inputs isDesktop; };
           users.rplakama = import ./Config/home-manager/home.nix;
         };
-      }
+      })
     ];
   in
   {
