@@ -1,6 +1,7 @@
 {
   description = "Elisheva-OS";
   inputs = {
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     affinity-nix.url = "github:mrshmllow/affinity-nix";
     sops-nix = {
       url = "github:Mic92/sops-nix";

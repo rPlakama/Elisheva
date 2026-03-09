@@ -10,10 +10,12 @@
     upower.enable = true;
     bpftune.enable =
       config.networking.hostName == "Moontier" || config.networking.hostName == "Centuria";
+
     scx = {
-      scheduler = if config.networking.hostName == "Elisheva" then "scx_lavd" else "scx_rusty";
-      enable = true;
-    };
+  enable = true;
+  scheduler = if config.networking.hostName == "Elisheva" then "scx_lavd" else "scx_rusty";
+  extraArgs = if config.networking.hostName == "Elisheva" then [ "--powersave" ] else [ ];
+};
 
     # --- Storage
     devmon.enable = true;
