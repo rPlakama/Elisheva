@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 {
@@ -25,6 +26,8 @@
       btop-cuda
       lutris
       qbittorrent
+      inputs.affinity-nix.packages.${pkgs.system}.v3
+
     ]
     ++ lib.optionals (config.networking.hostName == "Elisheva") [
       btop-rocm

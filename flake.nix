@@ -1,13 +1,19 @@
 {
   description = "Elisheva-OS";
+
+  nixConfig = {
+    extra-substituters = [ "https://nix-community.cachix.org" ];
+    extra-trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
+  };
+
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     affinity-nix.url = "github:mrshmllow/affinity-nix";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,119 +25,51 @@
     niri.url = "github:sodiboo/niri-flake";
   };
 
-  outputs =
-    {
-      sops-nix,
-      affinity-nix,
-      nixpkgs,
-      home-manager,
-      niri,
-      ...
-    }@inputs:
-    {
-      nixosConfigurations."Elisheva" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-          isDesktop = true;
+  outputs = inputs@{ nixpkgs, home-manager, niri, sops-nix, ... }:
+  let
+    sharedModules = [
+      home-manager.nixosModules.home-manager
+      sops-nix.nixosModules.sops
+      ./shared.nix
+      ./Config
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          extraSpecialArgs = { inherit inputs; };
+          users.rplakama = import ./Config/home-manager/home.nix;
         };
-        modules = [
-          home-manager.nixosModules.home-manager
+      }
+    ];
+  in
+  {
+    nixosConfigurations = {
+
+      "Elisheva" = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; isDesktop = true; };
+        modules = sharedModules ++ [
           niri.nixosModules.niri
-          sops-nix.nixosModules.sops
-          {
-            nixpkgs.overlays = [
-              niri.overlays.niri
-            ];
-          }
           ./Elisheva.nix
-          ./Config
-          ./shared.nix
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {
-                inherit inputs;
-                isDesktop = true;
-              };
-            };
-            home-manager.users.rplakama = {
-              imports = [
-                ./Config/home-manager/home.nix
-              ];
-            };
-          }
+          { nixpkgs.overlays = [ niri.overlays.niri ]; }
         ];
       };
-      nixosConfigurations."Centuria" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-          isDesktop = true;
-        };
-        modules = [
-          home-manager.nixosModules.home-manager
-          sops-nix.nixosModules.sops
+
+      "Centuria" = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; isDesktop = true; };
+        modules = sharedModules ++ [
           niri.nixosModules.niri
-          ./Config
-          ./shared.nix
           ./Centuria.nix
-          {
-            nixpkgs.overlays = [
-              niri.overlays.niri
-            ];
-
-            environment.systemPackages = [ affinity-nix.packages.x86_64-linux.v3 ];
-          }
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {
-                inherit inputs;
-                isDesktop = true;
-              };
-            };
-
-            home-manager.users.rplakama = {
-              imports = [
-                ./Config/home-manager/home.nix
-              ];
-            };
-          }
+          { nixpkgs.overlays = [ niri.overlays.niri ]; }
         ];
       };
 
-      nixosConfigurations."Moontier" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-          isDesktop = false;
-        };
-        modules = [
-          home-manager.nixosModules.home-manager
-          sops-nix.nixosModules.sops
-          ./Moontier
-          ./shared.nix
-          ./Config
+      "Moontier" = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; isDesktop = false; };
+        modules = sharedModules ++ [
           ./Moontier.nix
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = {
-                inherit inputs;
-                isDesktop = false;
-              };
-            };
-            home-manager.users.rplakama = {
-              imports = [
-                ./Config/home-manager/home.nix
-              ];
-            };
-          }
         ];
       };
+
     };
+  };
 }
