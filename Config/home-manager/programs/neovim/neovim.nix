@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ isDesktop, pkgs, inputs, ... }:
 
 {
   programs.neovim = {
@@ -11,6 +11,7 @@
     plugins = with pkgs.vimPlugins; [
       base16-nvim
       nvim-lspconfig
+      oil-nvim
       fzf-lua
       indent-blankline-nvim
       nvim-treesitter.withAllGrammars
@@ -19,12 +20,14 @@
 
     extraPackages = with pkgs; [
       nixd
-      nixpkgs-fmt
-      rust-analyzer
-      kotlin-language-server
-      fzf 
+      nixfmt
+      fzf
       ripgrep
-    ];
+    ] ++ lib.optionals isDesktop [
+      kotlin-language-server
+      rust-analyzer
+      lua-language-server
+  ];
 
     extraLuaConfig = ''
       require('configs')

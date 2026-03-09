@@ -3,7 +3,9 @@
 
   nixConfig = {
     extra-substituters = [ "https://nix-community.cachix.org" ];
-    extra-trusted-public-keys = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
   };
 
   inputs = {
@@ -25,51 +27,69 @@
     niri.url = "github:sodiboo/niri-flake";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, niri, sops-nix, ... }:
-  let
-    sharedModules = [
-      home-manager.nixosModules.home-manager
-      sops-nix.nixosModules.sops
-      ./shared.nix
-      ./Config
-      ({ isDesktop, ... }: {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          extraSpecialArgs = { inherit inputs isDesktop; };
-          users.rplakama = import ./Config/home-manager/home.nix;
+  outputs =
+    inputs@{
+      nixpkgs,
+      home-manager,
+      niri,
+      sops-nix,
+      ...
+    }:
+    let
+      sharedModules = [
+        home-manager.nixosModules.home-manager
+        sops-nix.nixosModules.sops
+        ./shared.nix
+        ./Config
+        (
+          { isDesktop, ... }:
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs isDesktop; };
+              users.rplakama = import ./Config/home-manager/home.nix;
+            };
+          }
+        )
+      ];
+    in
+    {
+      nixosConfigurations = {
+
+        "Elisheva" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            isDesktop = true;
+          };
+          modules = sharedModules ++ [
+            niri.nixosModules.niri
+            ./Elisheva.nix
+            { nixpkgs.overlays = [ niri.overlays.niri ]; }
+          ];
         };
-      })
-    ];
-  in
-  {
-    nixosConfigurations = {
 
-      "Elisheva" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; isDesktop = true; };
-        modules = sharedModules ++ [
-          niri.nixosModules.niri
-          ./Elisheva.nix
-          { nixpkgs.overlays = [ niri.overlays.niri ]; }
-        ];
+        "Centuria" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            isDesktop = true;
+          };
+          modules = sharedModules ++ [
+            niri.nixosModules.niri
+            ./Centuria.nix
+            { nixpkgs.overlays = [ niri.overlays.niri ]; }
+          ];
+        };
+
+        "Moontier" = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            isDesktop = false;
+          };
+          modules = sharedModules ++ [
+            ./Moontier.nix
+          ];
+        };
       };
-
-      "Centuria" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; isDesktop = true; };
-        modules = sharedModules ++ [
-          niri.nixosModules.niri
-          ./Centuria.nix
-          { nixpkgs.overlays = [ niri.overlays.niri ]; }
-        ];
-      };
-
-      "Moontier" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; isDesktop = false; };
-        modules = sharedModules ++ [
-          ./Moontier.nix
-        ];
-      };
-
     };
-  };
 }

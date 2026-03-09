@@ -6,23 +6,13 @@ require('blink.cmp').setup({
   },
 })
 
--- Lsp list
-local capabilities = require('blink.cmp').get_lsp_capabilities()
-local lsp_servers = {
+vim.lsp.enable({
   "rust_analyzer",
   "nixd",
   "lua-language-server",
   "kotlin_language_server"
-}
+})
 
--- Enabling
-for _, server in ipairs(lsp_servers) do
-  vim.lsp.enable(server, {
-    capabilities = capabilities,
-  })
-end
-
--- Extras
 vim.lsp.enable('nixd', {
   capabilities = capabilities,
   settings = {
@@ -31,7 +21,7 @@ vim.lsp.enable('nixd', {
         expr = "import <nixpkgs> { }",
       },
       formatting = {
-        command = { "nixpkgs-fmt" },
+        command = { "nixfmt" },
       },
     },
   },
