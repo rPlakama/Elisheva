@@ -1,4 +1,9 @@
-{ isDesktop, pkgs, inputs, ... }:
+{
+  isDesktop,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   programs.neovim = {
@@ -16,20 +21,24 @@
       indent-blankline-nvim
       nvim-treesitter.withAllGrammars
       blink-cmp
+
     ];
 
-    extraPackages = with pkgs; [
-      nixd
-      nixfmt
-      fzf
-      ripgrep
-    ] ++ lib.optionals isDesktop [
-      kotlin-language-server
-      rust-analyzer
-      lua-language-server
-  ];
+    extraPackages =
+      with pkgs;
+      [
+        nixd
+        nixfmt
+        fzf
+        ripgrep
+      ]
+      ++ lib.optionals isDesktop [
+        kotlin-language-server
+        rust-analyzer
+        lua-language-server
+      ];
 
-    extraLuaConfig = ''
+    initLua = ''
       require('configs')
       require('keybinds')
       require('lsp')

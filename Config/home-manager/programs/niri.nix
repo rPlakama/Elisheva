@@ -71,25 +71,25 @@ in
         };
 
         border = {
-          enable = true;
+          enable = false;
           width = 1;
           active.color = "#404040";
           inactive.color = "#242424";
         };
 
-        focus-ring.enable = false;
+        focus-ring.enable = true;
 
         default-column-width = {
-          proportion = 0.5;
+          proportion = 0.7;
         };
 
         preset-column-widths = [
-          { proportion = 0.25; }
-          { proportion = 0.5; }
-          { proportion = 0.75; }
+          { proportion = 0.35; }
+          { proportion = 0.6; }
+          { proportion = 0.85; }
         ];
 
-        center-focused-column = "never";
+        center-focused-column = "on-overflow";
       };
 
       hotkey-overlay.skip-at-startup = true;

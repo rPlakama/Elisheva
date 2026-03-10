@@ -3,7 +3,7 @@
   environment = {
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
-      MANPAGER = "hx +Man!";
+      MANPAGER = "nvim +Man!";
     };
     shellAliases = {
       "..." = "cd ../../";
