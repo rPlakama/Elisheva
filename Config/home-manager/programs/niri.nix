@@ -163,7 +163,12 @@ in
             "toggle"
           ];
           "Mod+P" = sh "wl-mirror $(niri msg --json focused-output | jq -r .name)";
+
           "Mod+R".action.switch-preset-column-width-back = [ ];
+          "Mod+Shift+R".action.switch-preset-column-width = [ ];
+
+          "Mod+Q".action.set-window-height = "+10%";
+          "Mod+Shift+Q".action.set-window-height = "-10%";
 
           "Mod+Return".action.spawn = "foot";
           "Mod+Shift+C".action.center-visible-columns = [ ];
@@ -172,7 +177,6 @@ in
           "Mod+Shift+J".action.move-column-to-workspace-down = [ ];
           "Mod+Shift+K".action.move-column-to-workspace-up = [ ];
           "Mod+Shift+L".action.move-column-right = [ ];
-          "Mod+Shift+R".action.switch-preset-column-width = [ ];
 
           "Mod+Space" = dms [
             "spotlight"
