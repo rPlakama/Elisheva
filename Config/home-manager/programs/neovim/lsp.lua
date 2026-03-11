@@ -9,7 +9,7 @@ require('blink.cmp').setup({
 vim.lsp.enable({
   "rust_analyzer",
   "nixd",
-  "lua-language-server",
+  "lua_ls",
   "kotlin_language_server"
 })
 
@@ -24,5 +24,12 @@ vim.lsp.enable('nixd', {
         command = { "nixfmt" },
       },
     },
+  },
+})
+
+vim.lsp.enable('kotlin_language_server', {
+  capabilities = capabilities,
+  root_dir = vim.fs.root(0, { 'build.gradle', 'build.gradle.kts', '.git' }),
+  settings = {
   },
 })

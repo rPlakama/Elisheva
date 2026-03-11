@@ -36,6 +36,7 @@
         kotlin-language-server
         rust-analyzer
         lua-language-server
+        luaformatter
       ];
 
     initLua = ''

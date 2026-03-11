@@ -18,7 +18,7 @@
       "kvm-amd"
     ];
     plymouth = {
-      enable = config.networking.hostName == "Centuria";
+      enable = isDesktop;
       theme = "bgrt";
     };
   };
