@@ -1,7 +1,7 @@
-{ pkgs, osConfig, ... }:
+{ isDesktop, pkgs, ... }:
 {
   programs.mpv = {
-    enable = osConfig.networking.hostName == "Centuria" || osConfig.networking.hostName == "Elisheva";
+    enable = isDesktop;
     scripts = with pkgs; [ mpvScripts.mpris ];
 
     config = {
