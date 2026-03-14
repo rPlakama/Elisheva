@@ -1,5 +1,5 @@
 {
-  description = "Elisheva-OS";
+  description = "Elisheva";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -23,64 +23,69 @@
     inputs@{
       nixpkgs,
       home-manager,
-      niri,
       sops-nix,
+      niri,
       ...
     }:
     let
-      sharedModules = [
-        home-manager.nixosModules.home-manager
-        sops-nix.nixosModules.sops
-        ./shared.nix
-        ./Config
-        (
-          { isDesktop, ... }:
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inherit inputs isDesktop; };
-              users.rplakama = import ./Config/home-manager/home.nix;
-            };
-          }
-        )
-      ];
+      system = "x86_64-linux";
+      mkHost =
+        {
+          hostname,
+          isDesktop ? true,
+          extraModules ? [ ],
+        }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs isDesktop; };
+          modules = [
+            home-manager.nixosModules.home-manager
+            sops-nix.nixosModules.sops
+            ./shared.nix
+            ./Config
+            ./hardwares/${hostname}-hardware.nix
+            { networking.hostName = hostname; }
+            (
+              { isDesktop, ... }:
+
+              {
+                system.stateVersion = "25.05";
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = { inherit inputs isDesktop; };
+                  users.rplakama = import ./Config/home-manager/home.nix;
+                };
+              }
+            )
+          ]
+          ++ extraModules;
+        };
     in
     {
       nixosConfigurations = {
-
-        "Elisheva" = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            isDesktop = true;
-          };
-          modules = sharedModules ++ [
+        "Elisheva" = mkHost {
+          hostname = "Elisheva";
+          isDesktop = true;
+          extraModules = [
             niri.nixosModules.niri
-            ./Elisheva.nix
             { nixpkgs.overlays = [ niri.overlays.niri ]; }
           ];
         };
 
-        "Centuria" = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            isDesktop = true;
-          };
-          modules = sharedModules ++ [
+        "Centuria" = mkHost {
+          hostname = "Centuria";
+          isDesktop = true;
+          extraModules = [
             niri.nixosModules.niri
-            ./Centuria.nix
             { nixpkgs.overlays = [ niri.overlays.niri ]; }
           ];
         };
 
-        "Moontier" = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            isDesktop = false;
-          };
-          modules = sharedModules ++ [
-            ./Moontier.nix
-          ];
+        "Moontier" = mkHost {
+          hostname = "Moontier";
+          isDesktop = false;
+          extraModules = [ ];
         };
       };
     };
