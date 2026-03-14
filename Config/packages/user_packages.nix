@@ -19,6 +19,7 @@
       qimgv
       kdePackages.okular
       kdePackages.dolphin
+      feishin
     ]
     ++ lib.optionals (config.networking.hostName == "Centuria") [
       bottles
