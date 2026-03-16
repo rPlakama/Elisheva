@@ -1,8 +1,19 @@
 { ... }:
 
 {
+  nixarr = {
+    enable = true;
+    mediaDir = "/media";
+    radarr = {
+      enable = true;
+      openFirewall = true;
+    };
+    sonarr = {
+      enable = true;
+      openFirewall = true;
+    };
+  };
   services = {
-
     bazarr = {
       enable = true;
       openFirewall = true;
@@ -16,7 +27,6 @@
 
     lidarr = {
       enable = true;
-      group = "users";
       openFirewall = true;
     };
 
@@ -25,20 +35,8 @@
       openFirewall = true;
     };
 
-    radarr = {
-      enable = true;
-      group = "users";
-      openFirewall = true;
-    };
-
     readarr = {
       enable = true;
-    };
-
-    sonarr = {
-      enable = true;
-      group = "users";
-      openFirewall = true;
     };
   };
 }

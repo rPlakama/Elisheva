@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nixarr.url = "github:nix-media-server/nixarr";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +27,7 @@
   outputs =
     inputs@{
       nixpkgs,
+      nixarr,
       home-manager,
       sops-nix,
       niri,
@@ -91,6 +93,7 @@
           isDesktop = false;
           extraModules = [
             ./Moontier
+            nixarr.nixosModules.default
           ];
         };
       };
