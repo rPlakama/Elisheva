@@ -1,7 +1,6 @@
 { ... }:
 
 {
-
   services.navidrome = {
     enable = true;
     openFirewall = true;

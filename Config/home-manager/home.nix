@@ -11,6 +11,7 @@
   ++ lib.optionals isDesktop [
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
+    inputs.danksearch.homeModules.dsearch
     ./programs/niri.nix
     ./programs/dms.nix
   ];

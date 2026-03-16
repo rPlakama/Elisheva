@@ -20,6 +20,7 @@
       kdePackages.okular
       kdePackages.dolphin
       feishin
+      krita
     ]
     ++ lib.optionals (config.networking.hostName == "Centuria") [
       bottles

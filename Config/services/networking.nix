@@ -1,7 +1,8 @@
 { ... }:
 {
-  networking.firewall = {
-    enable = true;
+  networking = {
+    firewall.enable = true;
+    networkmanager.enable = true;
   };
   services = {
     resolved.enable = true;

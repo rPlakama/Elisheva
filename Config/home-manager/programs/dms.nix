@@ -1,6 +1,7 @@
 { isDesktop, ... }:
 {
   programs = {
+    dsearch.enable = true;
     dank-material-shell = {
       enable = isDesktop;
       niri.includes = {
