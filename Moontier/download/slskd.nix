@@ -1,13 +1,8 @@
-{ config, inputs, ... }:
+{ config, ... }:
 
 {
   sops = {
-    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-
     secrets = {
-      "dashboard/slskd_apikey" = {
-        owner = "rplakama";
-      };
       "slskd/username" = {
         owner = "rplakama";
       };
@@ -18,9 +13,6 @@
 
     templates."slskd.env" = {
       content = ''
-        SLSKD_WEB__AUTHENTICATION__API_KEYS__homepage__KEY=${
-          config.sops.placeholder."dashboard/slskd_apikey"
-        }
         SLSKD_WEB__AUTHENTICATION__API_KEYS__homepage__ROLE=readonly
         SLSKD_WEB__AUTHENTICATION__API_KEYS__homepage__CIDR=0.0.0.0/0
         SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
@@ -35,28 +27,31 @@
     enable = true;
     openFirewall = true;
 
-    user = "rplakama";
     group = "users";
+    user = "rplakama";
     domain = "slskd.nix.com";
 
     environmentFile = config.sops.templates."slskd.env".path;
 
     settings = {
       shares = {
-        directories = [ "/home/rplakama/Music/" ];
+        directories = [ "/media/music" ];
         filters = [
           "Thumbs.db"
           "Desktop.ini"
           ".DS_Store"
         ];
       };
+      web = {
+        address = "0.0.0.0";
+        port = 5030;
+      };
       directories = {
-        downloads = "/mnt/@media/music/library";
-        incomplete = "/mnt/@media/music/downloads";
+        downloads = "/media/music/library";
+        incomplete = "/media/music/downloads";
       };
       flags = {
-        force_share_scan = true;
-        no_auth = false;
+        no_auth = true;
       };
       soulseek = {
         listen_port = 50300;

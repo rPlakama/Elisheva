@@ -1,19 +1,19 @@
 {
   config,
-  inputs,
   pkgs,
   ...
 }:
 {
   sops = {
-    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets = {
       "cloudflared/cert.pem" = {
-        path = "/home/rplakama/.cloudflared/cert.pem";
-        owner = "rplakama";
+        path = "/var/lib/cloudflared/cert.pem";
+        owner = "cloudflared";
+        group = "cloudflared";
       };
       "cloudflared/tunnel_credentials" = {
-        owner = "rplakama";
+        owner = "cloudflared";
+        group = "cloudflared";
       };
     };
   };

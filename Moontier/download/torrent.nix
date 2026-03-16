@@ -11,6 +11,4 @@
     openFirewall = true;
     group = "users";
   };
-
-  systemd.services.deluged.serviceConfig.ReadWritePaths = [ "/mnt/@media" ];
 }

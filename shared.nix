@@ -48,7 +48,5 @@
     nssmdns4 = true;
     openFirewall = true;
   };
-
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
-
+  sops.defaultSopsFile = ./secrets.yaml;
 }
