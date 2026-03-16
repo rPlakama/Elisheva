@@ -7,11 +7,11 @@
 
 {
   programs.neovim = {
-    enable = true;
+    enable = isDesktop;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
+    defaultEditor = isDesktop;
+    viAlias = isDesktop;
+    vimAlias = isDesktop;
 
     plugins = with pkgs.vimPlugins; [
       base16-nvim

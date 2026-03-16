@@ -89,7 +89,9 @@
         "Moontier" = mkHost {
           hostname = "Moontier";
           isDesktop = false;
-          extraModules = [ ];
+          extraModules = [
+            ./Moontier
+          ];
         };
       };
     };
