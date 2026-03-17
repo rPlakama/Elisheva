@@ -1,5 +1,6 @@
 {
   config,
+  isDesktop,
   lib,
   ...
 }:
@@ -29,7 +30,17 @@ lib.mkMerge [
   })
 
   {
-    hardware.enableAllFirmware = true;
-    hardware.graphics.enable = true;
+    hardware = {
+      enableAllFirmware = true;
+      bluetooth = {
+        enable = isDesktop;
+        powerOnBoot = false;
+        settings.General.Experimental = true;
+      };
+      graphic = {
+        enable = true;
+        enable32Bit = true;
+      };
+    };
   }
 ]
