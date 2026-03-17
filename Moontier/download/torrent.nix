@@ -9,6 +9,6 @@
       port = 8112;
     };
     openFirewall = true;
-    group = "users";
+    group = "media";
   };
 }

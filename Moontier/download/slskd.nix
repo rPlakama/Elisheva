@@ -27,7 +27,7 @@
     enable = true;
     openFirewall = true;
 
-    group = "users";
+    group = "media";
     user = "rplakama";
     domain = "slskd.nix.com";
 
