@@ -1,5 +1,4 @@
 {
-  lib,
   isDesktop,
   config,
   ...
@@ -12,10 +11,10 @@
       config.networking.hostName == "Moontier" || config.networking.hostName == "Centuria";
 
     scx = {
-  enable = true;
-  scheduler = if config.networking.hostName == "Elisheva" then "scx_lavd" else "scx_rusty";
-  extraArgs = if config.networking.hostName == "Elisheva" then [ "--powersave" ] else [ ];
-};
+      enable = true;
+      scheduler = if config.networking.hostName == "Elisheva" then "scx_lavd" else "scx_rusty";
+      extraArgs = if config.networking.hostName == "Elisheva" then [ "--powersave" ] else [ ];
+    };
 
     # --- Storage
     devmon.enable = true;
@@ -31,9 +30,9 @@
   # --- Virtualisation & Containers
   hardware.nvidia-container-toolkit.enable = config.networking.hostName == "Centuria";
 
-  virtualisation.podman = {
-    enable = isDesktop;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
+  virtualisation.docker = {
+    enable = config.networking.hostName == "Moontier";
+    enableOnBoot = true;
+    autoPrune.enable = true;
   };
 }
