@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  inputs,
   ...
 }:
 {
@@ -19,7 +18,6 @@
       qimgv
       kdePackages.okular
       kdePackages.dolphin
-      feishin
       krita
     ]
     ++ lib.optionals (config.networking.hostName == "Centuria") [
@@ -28,7 +26,6 @@
       btop-cuda
       lutris
       qbittorrent
-
     ]
     ++ lib.optionals (config.networking.hostName == "Elisheva") [
       btop-rocm
