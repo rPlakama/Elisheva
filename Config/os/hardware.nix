@@ -37,7 +37,7 @@ lib.mkMerge [
         powerOnBoot = false;
         settings.General.Experimental = true;
       };
-      graphic = {
+      graphics = {
         enable = true;
         enable32Bit = true;
       };
