@@ -11,6 +11,7 @@
       jellyfin.extraGroups = [ "media" ];
       deluge.extraGroups = [ "media" ];
       slskd.extraGroups = [ "media" ];
+      lidarr.extraGroups = [ "media" ];
     };
   };
 }
