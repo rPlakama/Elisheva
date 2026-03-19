@@ -12,6 +12,7 @@
       deluge.extraGroups = [ "media" ];
       slskd.extraGroups = [ "media" ];
       lidarr.extraGroups = [ "media" ];
+      nzbget.extraGroups = [ "media" ];
     };
   };
 }
