@@ -45,7 +45,6 @@
           modules = [
             home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
-            ./shared.nix
             ./Config
             ./hardwares/${hostname}-hardware.nix
             { networking.hostName = hostname; }
@@ -54,6 +53,7 @@
 
               {
                 system.stateVersion = "25.05";
+                sops.defaultSopsFile = ./secrets.yaml;
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;
