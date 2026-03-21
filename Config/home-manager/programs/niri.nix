@@ -58,8 +58,8 @@ in
       prefer-no-csd = true;
       overview = {
         workspace-shadow = {
-          softness = 30;
-          spread = 20;
+          softness = 40;
+          spread = 50;
         };
       };
 
@@ -80,13 +80,14 @@ in
         focus-ring.enable = true;
 
         default-column-width = {
-          proportion = 0.7;
+          proportion = 0.75;
         };
 
         preset-column-widths = [
-          { proportion = 0.35; }
-          { proportion = 0.6; }
-          { proportion = 0.85; }
+          { proportion = 0.25; }
+          { proportion = 0.333333; }
+          { proportion = 0.75; }
+          { proportion = 1.0; }
         ];
 
         center-focused-column = "on-overflow";
