@@ -9,7 +9,7 @@
     serviceConfig = {
       ExecStart = "/home/rplakama/bot-ascending/whatsapp-summarizer-linux-amd64";
       WorkingDirectory = "/home/rplakama/bot-ascending";
-      User = "Elisheva";
+      User = "rplakama";
       Restart = "on-failure";
       RestartSec = "5s";
     };
