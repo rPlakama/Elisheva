@@ -5,7 +5,7 @@
     description = "Sleep and wake";
 
     script = ''
-      WAKE_TIME=$(${pkgs.coreutils}/bin/date -d '08:00' +%s)
+      WAKE_TIME=$(${pkgs.coreutils}/bin/date -d '07:30' +%s)
 
       ${pkgs.util-linux}/bin/rtcwake -m off -t $WAKE_TIME
     '';

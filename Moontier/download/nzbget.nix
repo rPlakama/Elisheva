@@ -1,7 +1,6 @@
 { ... }:
 {
 
-  systemd.services.nzbget.serviceConfig.LimitNOFILE = 65536;
   services.nzbget = {
     enable = true;
     group = "media";
