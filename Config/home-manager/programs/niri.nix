@@ -80,17 +80,15 @@ in
         focus-ring.enable = true;
 
         default-column-width = {
-          proportion = 0.75;
+          proportion = 0.333333;
         };
 
         preset-column-widths = [
-          { proportion = 0.25; }
           { proportion = 0.333333; }
-          { proportion = 0.75; }
-          { proportion = 1.0; }
+          { proportion = 0.666667; }
         ];
 
-        center-focused-column = "on-overflow";
+        center-focused-column = "never";
       };
 
       hotkey-overlay.skip-at-startup = true;

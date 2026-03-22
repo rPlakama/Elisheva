@@ -1,14 +1,12 @@
 {
   isDesktop,
   pkgs,
-  inputs,
   ...
 }:
 
 {
   programs.neovim = {
-    enable = isDesktop;
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    enable = true;
     defaultEditor = isDesktop;
     viAlias = isDesktop;
     vimAlias = isDesktop;
@@ -16,7 +14,6 @@
     plugins = with pkgs.vimPlugins; [
       base16-nvim
       nvim-lspconfig
-      oil-nvim
       fzf-lua
       indent-blankline-nvim
       nvim-treesitter.withAllGrammars
