@@ -70,14 +70,8 @@ in
           softness = 1;
         };
 
-        border = {
-          enable = false;
-          width = 1;
-          active.color = "#404040";
-          inactive.color = "#242424";
-        };
-
-        focus-ring.enable = true;
+        border.enable = false;
+        focus-ring.enable = false;
 
         default-column-width = {
           proportion = 0.333333;
@@ -220,8 +214,17 @@ in
           "Ctrl+Alt+K".action.switch-layout = "next";
         };
 
+      window-rules = [
+        {
+          matches = [
+            { is-active = false; }
+          ];
+          opacity = 0.95;
+        }
+      ];
+
       animations = {
-        slowdown = 1.0;
+        slowdown = 0.8;
 
         workspace-switch.kind.easing = standardBezier;
         window-open.kind.easing = standardBezier;
