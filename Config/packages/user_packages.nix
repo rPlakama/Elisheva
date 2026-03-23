@@ -19,6 +19,7 @@
       kdePackages.okular
       kdePackages.dolphin
       krita
+      jellyfin-desktop
     ]
     ++ lib.optionals (config.networking.hostName == "Centuria") [
       bottles

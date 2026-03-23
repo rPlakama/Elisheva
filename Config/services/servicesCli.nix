@@ -31,7 +31,7 @@
   hardware.nvidia-container-toolkit.enable = config.networking.hostName == "Centuria";
 
   virtualisation.docker = {
-    enable = config.networking.hostName == "Moontier";
+    enable = true;
     enableOnBoot = true;
     autoPrune.enable = true;
   };
