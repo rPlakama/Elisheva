@@ -1,13 +1,10 @@
 {
   lib,
-  osConfig,
+  isCenturia,
   ...
 }:
 
 let
-  isCenturia = osConfig.networking.hostName == "Centuria";
-  layoutConfig = if isCenturia then "us,br" else "br";
-
   standardBezier = {
     curve = "cubic-bezier";
     duration-ms = 324;
@@ -25,7 +22,7 @@ in
       input = {
         keyboard = {
           xkb = {
-            layout = layoutConfig;
+            layout = if isCenturia then "us,br" else "br";
             options = "caps:swapescape";
           };
           repeat-delay = 600;
@@ -58,16 +55,16 @@ in
       prefer-no-csd = true;
       overview = {
         workspace-shadow = {
-          softness = 40;
-          spread = 50;
+          softness = 15;
+          spread = 10;
         };
       };
 
       layout = {
         shadow = {
-          enable = false;
+          enable = true;
           spread = 1;
-          softness = 1;
+          softness = 10;
         };
 
         border.enable = false;
@@ -227,15 +224,15 @@ in
         slowdown = 0.8;
 
         workspace-switch.kind.easing = standardBezier;
-        window-open.kind.easing = standardBezier;
-        window-close.kind.easing = standardBezier;
         horizontal-view-movement.kind.easing = standardBezier;
-        window-movement.kind.easing = standardBezier;
-        window-resize.kind.easing = standardBezier;
         overview-open-close.kind.easing = standardBezier;
         config-notification-open-close.kind.easing = standardBezier;
         exit-confirmation-open-close.kind.easing = standardBezier;
         screenshot-ui-open.kind.easing = standardBezier;
+        window-open.kind.easing = standardBezier;
+        window-resize.kind.easing = standardBezier;
+        window-close.kind.easing = standardBezier;
+        window-movement.kind.easing = standardBezier;
       };
     };
   };

@@ -1,8 +1,8 @@
 {
   lib,
-  config,
   pkgs,
   isDesktop,
+  isElisheva,
   ...
 }:
 {
@@ -20,7 +20,7 @@
     kernelParams = [
       "amd_pstate=active"
     ]
-    ++ lib.optionals (config.networking.hostName == "Elisheva") [
+    ++ lib.optionals isElisheva [
       "video=eDP-1:1920x1080@72"
     ]
     ++ lib.optionals isDesktop [

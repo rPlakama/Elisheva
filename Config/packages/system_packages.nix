@@ -1,6 +1,7 @@
 {
-  config,
   lib,
+  isDesktop,
+  isMoontier,
   pkgs,
   ...
 }:
@@ -9,25 +10,25 @@
     with pkgs;
     [
       bat
-      age
-      sops
       fd
       ripgrep
       p7zip
       yazi
-      ripdrag
+
+    ]
+    ++ lib.optionals isDesktop [
+      android-tools
+      volantes-cursors
+      age
+      sops
       xwayland-satellite
+      ripdrag
+      distrobox
       papirus-folders
       papirus-icon-theme
 
     ]
-    ++ lib.optionals (config.networking.hostName != "Moontier") [
-      android-tools
-      volantes-cursors
-      ripdrag
-      distrobox
-    ]
-    ++ lib.optionals (config.networking.hostName == "Moontier") [
+    ++ lib.optionals isMoontier [
       beets
       ffmpeg-full
     ];

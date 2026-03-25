@@ -1,11 +1,13 @@
 {
   config,
   isDesktop,
+  isElisheva,
+  isCenturia,
   lib,
   ...
 }:
 lib.mkMerge [
-  (lib.mkIf (config.networking.hostName == "Centuria") {
+  (lib.mkIf isCenturia {
     services.xserver.videoDrivers = [ "nvidia" ];
     boot.blacklistedKernelModules = [
       "nouveau"
@@ -21,7 +23,7 @@ lib.mkMerge [
     };
   })
 
-  (lib.mkIf (config.networking.hostName == "Elisheva") {
+  (lib.mkIf isElisheva {
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = false;

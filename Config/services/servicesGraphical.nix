@@ -1,6 +1,6 @@
 {
   isDesktop,
-  config,
+  isCenturia,
   lib,
   inputs,
   ...
@@ -19,17 +19,16 @@
     };
   };
 
-  
   # -- What I can say.
   services.power-profiles-daemon.enable = lib.mkForce false;
 
   services.hardware.openrgb = {
-    enable = config.networking.hostName == "Centuria";
+    enable = isCenturia;
     motherboard = "amd";
   };
 
   services.sunshine = {
-    enable = config.networking.hostName == "Centuria";
+    enable = isCenturia;
     autoStart = true;
     capSysAdmin = true;
     openFirewall = true;

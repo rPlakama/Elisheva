@@ -9,12 +9,15 @@
     ./programs
   ]
   ++ lib.optionals isDesktop [
+    ./programs/mpv.nix
+    ./programs/niri.nix
+    ./programs/dms.nix
+
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
     inputs.danksearch.homeModules.dsearch
-    ./programs/niri.nix
-    ./programs/dms.nix
   ];
+
   home = {
     stateVersion = "26.05";
   };

@@ -1,7 +1,7 @@
 {
   isDesktop,
+  isCenturia,
   pkgs,
-  config,
   ...
 }:
 {
@@ -13,7 +13,7 @@
     };
     firefox.enable = isDesktop;
     steam = {
-      enable = config.networking.hostName == "Centuria";
+      enable = isCenturia;
       extraCompatPackages = with pkgs; [
         proton-ge-bin
       ];

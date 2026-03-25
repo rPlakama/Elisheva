@@ -1,6 +1,7 @@
 {
   isDesktop,
-  config,
+  isElisheva,
+  isCenturia,
   ...
 }:
 {
@@ -10,8 +11,8 @@
 
     scx = {
       enable = true;
-      scheduler = if config.networking.hostName == "Elisheva" then "scx_lavd" else "scx_rusty";
-      extraArgs = if config.networking.hostName == "Elisheva" then [ "--powersave" ] else [ ];
+      scheduler = if isElisheva then "scx_lavd" else "scx_rusty";
+      extraArgs = if isElisheva then [ "--powersave" ] else [ ];
     };
 
     devmon.enable = true;
@@ -20,7 +21,7 @@
     flatpak.enable = isDesktop;
   };
 
-  hardware.nvidia-container-toolkit.enable = config.networking.hostName == "Centuria";
+  hardware.nvidia-container-toolkit.enable = isCenturia;
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;

@@ -1,7 +1,9 @@
 {
   pkgs,
   lib,
-  config,
+  isDesktop,
+  isElisheva,
+  isCenturia,
   ...
 }:
 {
@@ -9,29 +11,38 @@
     with pkgs;
     [
       dust
-      dropbox
+      git
     ]
-    ++ lib.optionals (config.networking.hostName != "Moontier") [
+    ++ lib.optionals isDesktop [
+      jq
+      typst
+      nodejs
+      lua-language-server
+      android-studio
+
       firefox
       vesktop
       materialgram
       qimgv
+
       kdePackages.okular
       kdePackages.dolphin
+
       krita
       jellyfin-desktop
+      lorien
     ]
-    ++ lib.optionals (config.networking.hostName == "Centuria") [
+    ++ lib.optionals isCenturia [
       bottles
       blender
       btop-cuda
       lutris
       qbittorrent
     ]
-    ++ lib.optionals (config.networking.hostName == "Elisheva") [
+    ++ lib.optionals isElisheva [
       btop-rocm
     ]
-    ++ lib.optionals (config.networking.hostName == "Moontier") [
+    ++ lib.optionals (!isDesktop) [
       btop
     ];
 

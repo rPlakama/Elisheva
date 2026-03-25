@@ -9,6 +9,7 @@ require("blink.cmp").setup({
 vim.lsp.enable({
   "rust_analyzer",
   "ts_ls",
+  "fish_lsp",
   "nixd",
   "lua_ls",
   "kotlin_language_server"

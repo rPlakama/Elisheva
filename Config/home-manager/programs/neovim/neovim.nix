@@ -7,9 +7,9 @@
 {
   programs.neovim = {
     enable = true;
-    defaultEditor = isDesktop;
-    viAlias = isDesktop;
-    vimAlias = isDesktop;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
 
     plugins = with pkgs.vimPlugins; [
       base16-nvim
@@ -27,6 +27,8 @@
         nixfmt
         fzf
         ripgrep
+        lua-language-server
+        fish-lsp
       ]
       ++ lib.optionals isDesktop [
         kotlin-language-server
