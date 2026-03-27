@@ -1,13 +1,13 @@
 {
   config,
   isDesktop,
-  isElisheva,
   isCenturia,
   lib,
   ...
 }:
 lib.mkMerge [
   (lib.mkIf isCenturia {
+    hardware.nvidia-container-toolkit.enable = true;
     services.xserver.videoDrivers = [ "nvidia" ];
     boot.blacklistedKernelModules = [
       "nouveau"
@@ -23,7 +23,7 @@ lib.mkMerge [
     };
   })
 
-  (lib.mkIf isElisheva {
+  (lib.mkIf isDesktop {
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = false;
@@ -34,11 +34,6 @@ lib.mkMerge [
   {
     hardware = {
       enableAllFirmware = true;
-      bluetooth = {
-        enable = isDesktop;
-        powerOnBoot = false;
-        settings.General.Experimental = true;
-      };
       graphics = {
         enable = true;
         enable32Bit = true;

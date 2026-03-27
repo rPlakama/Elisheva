@@ -1,8 +1,5 @@
 {
-  lib,
   pkgs,
-  isDesktop,
-  isElisheva,
   ...
 }:
 {
@@ -17,18 +14,5 @@
       timeout = 0;
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [
-      "amd_pstate=active"
-    ]
-    ++ lib.optionals isElisheva [
-      "video=eDP-1:1920x1080@72"
-    ]
-    ++ lib.optionals isDesktop [
-      "kvm-amd"
-    ];
-    plymouth = {
-      enable = isDesktop;
-      theme = "bgrt";
-    };
   };
 }

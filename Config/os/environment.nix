@@ -7,7 +7,6 @@
 }:
 
 {
-  virtualisation.libvirtd.enable = isDesktop;
   security.sudo-rs.enable = true;
   nixpkgs.config.allowUnfree = true;
   nix.package = pkgs.lix;

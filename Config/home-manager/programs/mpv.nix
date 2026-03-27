@@ -1,9 +1,8 @@
-{ isDesktop, pkgs, ... }:
+{ pkgs, ... }:
 {
   programs.mpv = {
-    enable = isDesktop;
+    enable = true;
     scripts = with pkgs; [ mpvScripts.mpris ];
-
     config = {
       save-position-on-quit = true;
     };

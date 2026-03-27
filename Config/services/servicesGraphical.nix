@@ -1,23 +1,9 @@
 {
-  isDesktop,
   isCenturia,
   lib,
-  inputs,
   ...
 }:
 {
-  imports = [
-    inputs.dms.nixosModules.dank-material-shell
-  ];
-
-  programs.dank-material-shell = {
-    enable = isDesktop;
-    enableCalendarEvents = false;
-    systemd = {
-      enable = true;
-      restartIfChanged = true;
-    };
-  };
 
   # -- What I can say.
   services.power-profiles-daemon.enable = lib.mkForce false;
@@ -34,11 +20,4 @@
     openFirewall = true;
   };
 
-  services.displayManager.dms-greeter = {
-    enable = isDesktop;
-    compositor = {
-      name = "niri";
-    };
-    configHome = "/home/rplakama";
-  };
 }

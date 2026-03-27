@@ -1,9 +1,14 @@
-{ isDesktop, ... }:
+{ inputs, ... }:
 {
+  imports = [
+    inputs.dms.homeModules.dank-material-shell
+    inputs.danksearch.homeModules.dsearch
+    inputs.dms.homeModules.niri
+  ];
   programs = {
-    dsearch.enable = isDesktop;
+    dsearch.enable = true;
     dank-material-shell = {
-      enable = isDesktop;
+      enable = true;
       niri.includes = {
         enable = true;
         override = true;
