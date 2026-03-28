@@ -1,7 +1,6 @@
 {
   lib,
   isCenturia,
-  isDesktop,
   ...
 }:
 {
@@ -10,8 +9,5 @@
   ]
   ++ lib.optionals isCenturia [
     ./Centuria-graphical.nix
-  ]
-  ++ lib.optionals isDesktop [
-    ./graphical.nix
   ];
 }

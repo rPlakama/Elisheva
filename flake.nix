@@ -18,6 +18,7 @@
     }:
     let
       system = "x86_64-linux";
+      lib = nixpkgs.lib;
       mkHost =
         {
           hostname,
@@ -41,7 +42,6 @@
               ;
           };
           modules = [
-
             home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
             ./services
@@ -73,6 +73,13 @@
                 users.rplakama = import ./home-manager/home.nix;
               };
             }
+          ]
+          ++ lib.optionals isDesktop [
+            ./pkgs/desktop-pkgs.nix
+            ./system/desktop-boot.nix
+            ./system/desktop-hardware.nix
+            ./services/Desktop-services.nix
+            ./executables/graphical.nix
           ]
           ++ extraModules;
         };

@@ -2,12 +2,12 @@
 {
   imports = [
     ./programs.nix
-./neovim/neovim.nix
+    ./neovim/neovim.nix
   ]
   ++ lib.optionals isDesktop [
     ./desktop-programs.nix
     ./desktop-niri.nix
   ];
 
-  home.stateVersion = "26.05";
+  home.stateVersion = "25.05";
 }
