@@ -9,6 +9,7 @@
     dust
     git
     jq
+    fd
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.caskaydia-cove
