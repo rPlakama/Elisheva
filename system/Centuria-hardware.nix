@@ -1,10 +1,10 @@
 { config, ... }:
 {
-  harware = {
-    nvidia-container.toolkit.enable = true; # <-- Docker
+  hardware = {
+    nvidia-container-toolkit.enable = true;
     nvidia = {
-      modsetting.enable = true;
-      powerManagment.enable = false;
+      modesetting.enable = true;
+      powerManagement.enable = false;
       open = false;
       package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
     };
