@@ -9,5 +9,6 @@
     materialgram
     volantes-cursors
     distrobox
+    nautilus
   ];
 }
