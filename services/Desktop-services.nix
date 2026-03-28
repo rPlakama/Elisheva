@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ lib, inputs, ... }:
 {
 
   imports = [
@@ -6,6 +6,7 @@
   ];
 
   services = {
+    power-profiles-daemon.enable = lib.mkForce false;
     flatpak.enable = true;
     pipewire.alsa.enable = true;
 

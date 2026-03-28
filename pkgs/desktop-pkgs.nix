@@ -8,5 +8,6 @@
     firefox
     materialgram
     volantes-cursors
+    distrobox
   ];
 }
