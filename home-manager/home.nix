@@ -2,6 +2,7 @@
 {
   imports = [
     ./programs.nix
+./neovim/neovim.nix
   ]
   ++ lib.optionals isDesktop [
     ./desktop-programs.nix

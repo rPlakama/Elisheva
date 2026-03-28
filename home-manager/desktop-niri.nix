@@ -159,7 +159,6 @@ in
             "Mod+8".action.focus-workspace = 8;
             "Mod+9".action.focus-workspace = 9;
 
-            "Mod+B" = sh "foot -e ~/Music/music.sh";
             "Mod+BracketLeft".action.consume-or-expel-window-left = [ ];
             "Mod+BracketRight".action.consume-or-expel-window-right = [ ];
             "Mod+C".action.center-column = [ ];
