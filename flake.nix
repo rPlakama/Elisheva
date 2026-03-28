@@ -1,5 +1,5 @@
 {
-  description = "Nix_OS. <3 <3 Cho-cho!";
+  description = "Something here should... be written?";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -7,9 +7,7 @@
     dms.url = "github:AvengeMedia/DankMaterialShell/";
     home-manager.url = "github:nix-community/home-manager";
     niri.url = "github:sodiboo/niri-flake";
-    danksearch.url = "github:AvengeMedia/danksearch";
   };
-
   outputs =
     inputs@{
       nixpkgs,
@@ -20,11 +18,10 @@
     }:
     let
       system = "x86_64-linux";
-
       mkHost =
         {
           hostname,
-          extraModules ? [ ],
+          extraModules ? [ ], # --> Host variable.
         }:
         let
           isCenturia = hostname == "Centuria";
@@ -34,22 +31,26 @@
         in
         nixpkgs.lib.nixosSystem {
           inherit system;
-
           specialArgs = {
             inherit
               inputs
               isCenturia
-              isElisheva
               isMoontier
+              isElisheva
               isDesktop
               ;
           };
-
           modules = [
+
             home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
-            ./Config
-            ./hardwares/${hostname}-hardware.nix
+            ./services
+            ./system
+            ./executables
+
+            ./pkgs/shared-pkgs.nix
+            ./pkgs/${hostname}-pkgs.nix
+            ./hosts/${hostname}-hardware.nix
 
             {
               networking.hostName = hostname;
@@ -69,7 +70,7 @@
                     isDesktop
                     ;
                 };
-                users.rplakama = import ./Config/home-manager/home.nix;
+                users.rplakama = import ./home-manager/home.nix;
               };
             }
           ]
@@ -77,6 +78,7 @@
         };
     in
     {
+
       nixosConfigurations = {
         "Elisheva" = mkHost {
           hostname = "Elisheva";
