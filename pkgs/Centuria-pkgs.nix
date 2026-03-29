@@ -7,6 +7,7 @@
     bottles
     blender
     lutris
+    heroic
     qbittorrent
   ];
 }

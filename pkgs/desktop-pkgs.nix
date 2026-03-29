@@ -14,5 +14,6 @@
     nautilus
     lorien
     evince
+    xwayland-satellite
   ];
 }
