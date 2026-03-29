@@ -10,5 +10,7 @@
     volantes-cursors
     distrobox
     nautilus
+    lorien
+    evince
   ];
 }
