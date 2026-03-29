@@ -6,7 +6,9 @@
     papirus-folders
     papirus-icon-theme
     firefox
+    vesktop
     materialgram
+    jellyfin-desktop
     volantes-cursors
     distrobox
     nautilus
