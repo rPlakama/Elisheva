@@ -1,19 +1,26 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    # Security
     age
     sops
+    # Visuals
     papirus-folders
     papirus-icon-theme
+    volantes-cursors
+    # Graphical Applications
     firefox
     vesktop
     materialgram
     jellyfin-desktop
-    volantes-cursors
-    distrobox
+    # General Tools
     nautilus
     lorien
-    evince
+    papers
+    loupe
+    # Others
+    distrobox
     xwayland-satellite
+
   ];
 }
