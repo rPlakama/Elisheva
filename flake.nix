@@ -1,13 +1,29 @@
 {
   description = "Something here should... be written?";
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    sops-nix.url = "github:Mic92/sops-nix";
-    dms.url = "github:AvengeMedia/DankMaterialShell/";
-    home-manager.url = "github:nix-community/home-manager";
-    niri.url = "github:sodiboo/niri-flake";
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
+
   outputs =
     inputs@{
       nixpkgs,
@@ -22,7 +38,7 @@
       mkHost =
         {
           hostname,
-          extraModules ? [ ], # --> Host variable.
+          extraModules ? [ ],
         }:
         let
           isCenturia = hostname == "Centuria";
@@ -47,16 +63,13 @@
             ./services
             ./system
             ./executables
-
             ./pkgs/shared-pkgs.nix
             ./pkgs/${hostname}-pkgs.nix
             ./hosts/${hostname}-hardware.nix
-
             {
               networking.hostName = hostname;
               system.stateVersion = "25.05";
               sops.defaultSopsFile = ./secrets.yaml;
-
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
@@ -85,7 +98,6 @@
         };
     in
     {
-
       nixosConfigurations = {
         "Elisheva" = mkHost {
           hostname = "Elisheva";
@@ -94,7 +106,6 @@
             { nixpkgs.overlays = [ niri.overlays.niri ]; }
           ];
         };
-
         "Centuria" = mkHost {
           hostname = "Centuria";
           extraModules = [
@@ -102,7 +113,6 @@
             { nixpkgs.overlays = [ niri.overlays.niri ]; }
           ];
         };
-
         "Moontier" = mkHost {
           hostname = "Moontier";
           extraModules = [
