@@ -116,7 +116,7 @@
         "Moontier" = mkHost {
           hostname = "Moontier";
           extraModules = [
-            ./Moontier
+            ./services/Moontier-services
           ];
         };
       };

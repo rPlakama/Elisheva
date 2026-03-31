@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-
   systemd.services = {
     whatsapp-summarizer = {
       description = "WhatsApp Bot";
@@ -16,27 +15,26 @@
       };
     };
 
-    # < -- Time to "Bater o ponto"
     moontier-sleep-wake = {
       description = "Sleep and wake";
-
       script = ''
+        # Ensures it picks 07:30 AM of the upcoming morning
         WAKE_TIME=$(${pkgs.coreutils}/bin/date -d '07:30' +%s)
         ${pkgs.util-linux}/bin/rtcwake -m off -t $WAKE_TIME
       '';
-
       serviceConfig = {
         Type = "oneshot";
+        User = "root";
       };
     };
-    systemd.timers.moontier-sleep-wake = {
-      description = "Sleep cycle timer";
-      wantedBy = [ "timers.target" ];
+  };
 
-      timerConfig = {
-        OnCalendar = "*-*-* 01:00:00";
-        Persistent = true;
-      };
+  systemd.timers.moontier-sleep-wake = {
+    description = "Sleep cycle timer";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 01:00:00";
+      Persistent = true;
     };
   };
 }

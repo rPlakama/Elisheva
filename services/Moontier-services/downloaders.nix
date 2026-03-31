@@ -1,21 +1,22 @@
 { config, ... }:
 
 {
-  sops.secrets."slskd/username" = { };
-  sops.secrets."slskd/password" = { };
 
-  sops.templates."slskd.env".content = ''
-    SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
-    SLSKD_SLSK_PASSWORD=${config.sops.placeholder."slskd/password"}
-  '';
+  sops = {
+    secrets."slskd/username" = { };
+    secrets."slskd/password" = { };
 
+    templates."slskd.env".content = ''
+      SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
+      SLSKD_SLSK_PASSWORD=${config.sops.placeholder."slskd/password"}
+    '';
+  };
+  networking.firewall.allowedTCPPorts = [ 6789 ]; # <-- nzbget port
   services = {
     nzbget = {
       enable = true;
       group = "media";
     };
-    networking.firewall.allowedTCPPorts = [ 6789 ]; # <-- nzbget port
-
     deluge = {
       enable = true;
       web = {
@@ -25,16 +26,6 @@
       };
       openFirewall = true;
       group = "media";
-    };
-
-    sops = {
-      secrets."slskd/username" = { };
-      secrets."slskd/password" = { };
-
-      templates."slskd.env".content = ''
-        SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
-        SLSKD_SLSK_PASSWORD=${config.sops.placeholder."slskd/password"}
-      '';
     };
 
     slskd = {
