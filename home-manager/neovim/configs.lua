@@ -12,17 +12,10 @@ opt.termguicolors = true
 opt.clipboard = "unnamedplus"
 
 -- Plugin Configs
-require('base16-colorscheme').setup('chalk')
 require("ibl").setup()
-
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
-    -- Save cursor position
-    local save_cursor = vim.fn.getpos(".")
-    -- Remove trailing whitespace
     vim.cmd([[%s/\s\+$//e]])
-
-    vim.fn.setpos(".", save_cursor)
     vim.lsp.buf.format({ async = false })
   end,
 })

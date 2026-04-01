@@ -9,5 +9,6 @@
     mediainfo
     ffmpeg
     flac
+    btop
   ];
 }

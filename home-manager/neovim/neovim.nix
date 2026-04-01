@@ -1,5 +1,6 @@
 {
   isDesktop,
+  lib,
   pkgs,
   ...
 }:
@@ -11,14 +12,28 @@
     viAlias = true;
     vimAlias = true;
 
-    plugins = with pkgs.vimPlugins; [
-      base16-nvim
-      nvim-lspconfig
-      fzf-lua
-      indent-blankline-nvim
-      nvim-treesitter.withAllGrammars
-      blink-cmp
-    ];
+    plugins =
+      with pkgs.vimPlugins;
+      [
+        nvim-lspconfig
+        fzf-lua
+        indent-blankline-nvim
+        nvim-treesitter.withAllGrammars
+        blink-cmp
+
+      ]
+      ++ lib.optionals isDesktop [
+        (pkgs.vimUtils.buildVimPlugin {
+          name = "base46";
+          doCheck = false;
+          src = pkgs.fetchFromGitHub {
+            owner = "AvengeMedia";
+            repo = "base46";
+            rev = "master";
+            hash = "sha256-+FNEJBBa33onbq+BCQA1kO9dXDhGEUYbVIMnhrpr98U=";
+          };
+        })
+      ];
 
     extraPackages =
       with pkgs;
@@ -40,6 +55,9 @@
       require('configs')
       require('keybinds')
       require('lsp')
+    ''
+    + lib.optionalString isDesktop ''
+      vim.cmd.colorscheme("dms")
     '';
   };
 
