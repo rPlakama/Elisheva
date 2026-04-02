@@ -11,7 +11,10 @@
       SLSKD_SLSK_PASSWORD=${config.sops.placeholder."slskd/password"}
     '';
   };
-  networking.firewall.allowedTCPPorts = [ 6789 ]; # <-- nzbget port
+  networking.firewall.allowedTCPPorts = [
+    6789 # <-- nzbget port
+    50000 # <-- soulseek port
+  ];
   services = {
     nzbget = {
       enable = true;
@@ -36,6 +39,10 @@
       environmentFile = config.sops.templates."slskd.env".path;
 
       settings = {
+        soulseek = {
+          listen_port = 50000;
+          upnp = true;
+        };
         shares = {
           directories = [ "/media/music" ];
           filters = [

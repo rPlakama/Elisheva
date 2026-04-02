@@ -18,7 +18,6 @@
     moontier-sleep-wake = {
       description = "Sleep and wake";
       script = ''
-        # Ensures it picks 07:30 AM of the upcoming morning
         WAKE_TIME=$(${pkgs.coreutils}/bin/date -d '07:30' +%s)
         ${pkgs.util-linux}/bin/rtcwake -m off -t $WAKE_TIME
       '';
@@ -33,7 +32,7 @@
     description = "Sleep cycle timer";
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "*-*-* 02:00:00";
+      OnCalendar = "*-*-* 01:30:00";
       Persistent = true;
     };
   };
