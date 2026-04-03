@@ -33,7 +33,7 @@
 
     slskd = {
       enable = true;
-      domain = "slskd.placeholder.com";
+      domain = null;
       group = "media";
 
       environmentFile = config.sops.templates."slskd.env".path;
