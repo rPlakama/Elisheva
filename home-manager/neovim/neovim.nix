@@ -49,6 +49,7 @@
         rust-analyzer
         lua-language-server
         luaformatter
+        tinymist
       ];
 
     initLua = ''

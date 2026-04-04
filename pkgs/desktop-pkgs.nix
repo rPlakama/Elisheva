@@ -12,7 +12,6 @@
     firefox
     vesktop
     materialgram
-    jellyfin-desktop
     # General Tools
     nautilus
     lorien
@@ -20,6 +19,7 @@
     loupe
     # Others
     distrobox
+    typst
     xwayland-satellite
 
   ];

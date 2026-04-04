@@ -8,6 +8,7 @@ require("blink.cmp").setup({
 
 vim.lsp.enable({
   "rust_analyzer",
+  "tinymist",
   "ts_ls",
   "fish_lsp",
   "nixd",

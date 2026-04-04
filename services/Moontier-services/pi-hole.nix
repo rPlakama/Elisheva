@@ -1,6 +1,7 @@
 { ... }:
 {
   networking = {
+    defaultGateway = "192.168.1.1";
     hosts = {
       "192.168.1.1" = [
         "gateway.moontier.me"
@@ -63,8 +64,9 @@
           cnameRecords = [ ];
           domain = "moontier.me";
           domainNeeded = true;
+          listeningMode = "ALL";
           expandHosts = true;
-          interface = "enp2s0";
+          interface = "all";
           hosts = [
             "192.168.1.1   gateway"
             "192.168.1.106   pi-hole"
