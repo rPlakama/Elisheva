@@ -110,12 +110,14 @@
           hostname = "Centuria";
           extraModules = [
             niri.nixosModules.niri
+            ./system/Centuria-hardware.nix
             { nixpkgs.overlays = [ niri.overlays.niri ]; }
           ];
         };
         "Moontier" = mkHost {
           hostname = "Moontier";
           extraModules = [
+            ./system/Moontier-hardware.nix
             ./services/Moontier-services
           ];
         };

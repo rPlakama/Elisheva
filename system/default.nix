@@ -1,9 +1,4 @@
-{
-  lib,
-  isDesktop,
-  isCenturia,
-  ...
-}:
+{ ... }:
 {
   imports = [
     ./boot.nix
@@ -12,8 +7,5 @@
     ./networking.nix
     ./users.nix
     ./nix-configuration.nix
-  ]
-  ++ lib.optionals isCenturia [
-    ./Centuria-hardware.nix
   ];
 }
