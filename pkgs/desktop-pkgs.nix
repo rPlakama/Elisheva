@@ -12,6 +12,7 @@
     firefox
     vesktop
     materialgram
+    jellyfin-desktop
     # General Tools
     nautilus
     lorien
