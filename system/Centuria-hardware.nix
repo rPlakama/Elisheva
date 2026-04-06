@@ -1,6 +1,11 @@
 { config, ... }:
 {
   services.xserver.videoDrivers = [ "nvidia" ];
+  boot = {
+    blacklistedKernelModules = [ "nouveau" ];
+    kernelParams = [ "modprobe.blacklist=nouveau" ];
+  };
+
   hardware = {
     nvidia-container-toolkit.enable = true;
     nvidia = {
