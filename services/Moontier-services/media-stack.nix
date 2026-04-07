@@ -1,13 +1,13 @@
 { ... }:
 {
+  networking.firewall.allowedTCPPorts = [ 32400 ];
   services = {
 
-    jellyfin = {
+    plex = {
       enable = true;
       group = "media";
       openFirewall = true;
     };
-
     bazarr = {
       enable = true;
       group = "media";
