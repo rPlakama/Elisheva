@@ -5,6 +5,7 @@
     ./services-permissions.nix
     ./systemctl.nix
     ./pi-hole.nix
+    ./pangolin.nix
   ];
   sops = {
     # NOTE: <-- I mean it can be inhereted by >>flake<<... But! Only {Moontier} uses this for now.
