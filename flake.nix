@@ -44,7 +44,6 @@
           isCenturia = hostname == "Centuria";
           isElisheva = hostname == "Elisheva";
           isMoontier = hostname == "Moontier";
-          isSunshir = hostname == "Sunshir";
           isDesktop = hostname != "Moontier";
         in
         nixpkgs.lib.nixosSystem {
