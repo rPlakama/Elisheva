@@ -3,6 +3,11 @@
   networking.firewall.allowedTCPPorts = [ 32400 ];
   services = {
 
+    jellyfin = {
+      enable = true;
+      group = "media";
+      openFirewall = true;
+    };
     plex = {
       enable = true;
       group = "media";

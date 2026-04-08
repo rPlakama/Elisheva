@@ -12,7 +12,6 @@
     firefox
     vesktop
     materialgram
-    plex-desktop
     # General Tools
     nautilus
     lorien
