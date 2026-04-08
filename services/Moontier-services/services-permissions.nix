@@ -8,7 +8,6 @@
       slskd.extraGroups = [ "media" ];
       lidarr.extraGroups = [ "media" ];
       nzbget.extraGroups = [ "media" ];
-      plex.extraGroups = [ "media" ];
       jellyfin.extraGroups = [ "media" ];
     };
   };

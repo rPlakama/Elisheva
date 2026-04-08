@@ -8,11 +8,6 @@
       group = "media";
       openFirewall = true;
     };
-    plex = {
-      enable = true;
-      group = "media";
-      openFirewall = true;
-    };
     bazarr = {
       enable = true;
       group = "media";
