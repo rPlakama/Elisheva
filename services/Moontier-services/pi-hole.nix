@@ -72,11 +72,27 @@
             "192.168.1.106   pi-hole"
           ];
           upstreams = [
+            # Cloudflare
             "1.1.1.1"
+            "1.0.0.1"
+            # Cloudflare malware-blocking
             "1.1.1.2"
+            # Google
+            "8.8.8.8"
+            "8.8.4.4"
+            # Quad9 (threat-blocking)
             "9.9.9.9"
+            "149.112.112.112"
+            # OpenDNS (Cisco)
+            "208.67.222.222"
+            "208.67.220.220"
+            # Level3 / CenturyLink
             "4.2.2.1"
             "209.244.0.3"
+            "209.244.0.4"
+            # Comodo Secure
+            "8.26.56.26"
+            "8.20.247.20"
           ];
         };
         ntp = {

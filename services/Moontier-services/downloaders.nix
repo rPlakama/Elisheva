@@ -12,23 +12,29 @@
     '';
   };
   networking.firewall.allowedTCPPorts = [
-    6789 # <-- nzbget port
-    50000 # <-- soulseek port
+    6789
+    50000
   ];
   services = {
     nzbget = {
       enable = true;
       group = "media";
     };
-    deluge = {
+    qbittorrent = {
       enable = true;
-      web = {
-        enable = true;
-        openFirewall = true;
-        port = 8112;
-      };
       openFirewall = true;
       group = "media";
+      serverConfig = {
+        LegalNotice.Accepted = true;
+        Preferences = {
+          WebUI = {
+            Username = "rplakama";
+            Password_PBKDF2 = "@ByteArray(ttJDfjqsdk8ccksmlOI15A==:/WoWQEN+/ObzbkNCDVVZ4/3yfxkTXz58jXYvxYmHXWayB0VHghFapn+RFJZOFZyNcpcsaOUWW2+QtgAkwzJwFQ==)";
+          };
+          General.Locale = "en";
+          Downloads.SavePath = "/media/downloads";
+        };
+      };
     };
 
     slskd = {
