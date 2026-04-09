@@ -3,6 +3,11 @@
   networking.firewall.allowedTCPPorts = [ 32400 ];
   services = {
 
+    jackett = {
+      enable = true;
+      openFirewall = true;
+      group = "media";
+    };
     jellyfin = {
       enable = true;
       group = "media";
