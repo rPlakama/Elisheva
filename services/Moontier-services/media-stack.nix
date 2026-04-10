@@ -1,55 +1,35 @@
-{ ... }:
+{ lib, ... }:
+
+let
+  mediaServicesWithPermissions = [
+    "jackett"
+    "jellyfin"
+    "bazarr"
+    "sonarr"
+    "radarr"
+    "readarr"
+  ];
+  mediaNonPermissions = [
+    "prowlarr"
+    "flaresolverr"
+  ];
+in
+
 {
-  networking.firewall.allowedTCPPorts = [ 32400 ];
-  services = {
+  services = (
+    lib.genAttrs mediaServicesWithPermissions
+      (name: {
+        enable = true;
+        openFirewall = true;
+        group = "media";
+      })
 
-    jackett = {
-      enable = true;
-      openFirewall = true;
-      group = "media";
-    };
-    jellyfin = {
-      enable = true;
-      group = "media";
-      openFirewall = true;
-    };
-    bazarr = {
-      enable = true;
-      group = "media";
-      openFirewall = true;
-    };
+      lib.genAttrs
+      mediaNonPermissions
+      (name: {
+        enable = true;
+        openFirewall = true;
+      })
 
-    flaresolverr = {
-      enable = true;
-      openFirewall = true;
-    };
-    prowlarr = {
-      enable = true;
-      openFirewall = true;
-    };
-
-    radarr = {
-      enable = true;
-      group = "media";
-      openFirewall = true;
-    };
-
-    lidarr = {
-      enable = true;
-      group = "media";
-      openFirewall = true;
-    };
-
-    readarr = {
-      enable = true;
-      group = "media";
-      openFirewall = true;
-    };
-
-    sonarr = {
-      enable = true;
-      group = "media";
-      openFirewall = true;
-    };
-  };
+  );
 }
