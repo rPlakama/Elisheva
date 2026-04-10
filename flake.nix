@@ -62,7 +62,7 @@
             sops-nix.nixosModules.sops
             ./services
             ./system
-            ./executables
+            ./executables/term.nix
             ./pkgs/shared-pkgs.nix
             ./pkgs/${hostname}-pkgs.nix
             ./hosts/${hostname}-hardware.nix
