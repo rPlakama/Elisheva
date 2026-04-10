@@ -1,4 +1,9 @@
-{ lib, inputs, ... }:
+{
+  isCenturia,
+  lib,
+  inputs,
+  ...
+}:
 {
 
   imports = [
@@ -32,6 +37,7 @@
     libvirtd.enable = true;
     docker = {
       enable = true;
+      enableNvidia = isCenturia;
       enableOnBoot = true;
       autoPrune.enable = true;
     };
