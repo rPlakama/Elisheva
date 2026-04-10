@@ -13,9 +13,9 @@ let
     "rplakama"
     "qbittorrent"
     "slskd"
-    "lidarr"
     "nzbget"
     "jackett"
+    "readarr"
   ];
 in
 {

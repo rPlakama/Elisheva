@@ -17,19 +17,14 @@ in
 
 {
   services = (
-    lib.genAttrs mediaServicesWithPermissions
-      (name: {
-        enable = true;
-        openFirewall = true;
-        group = "media";
-      })
-
-      lib.genAttrs
-      mediaNonPermissions
-      (name: {
-        enable = true;
-        openFirewall = true;
-      })
-
+    lib.genAttrs mediaServicesWithPermissions (name: {
+      enable = true;
+      openFirewall = true;
+      group = "media";
+    })
+    // lib.genAttrs mediaNonPermissions (name: {
+      enable = true;
+      openFirewall = true;
+    })
   );
 }
