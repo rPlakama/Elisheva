@@ -7,7 +7,7 @@
 let
   standardBezier = {
     curve = "cubic-bezier";
-    duration-ms = 324;
+    duration-ms = 452;
     curve-args = [
       0.20
       1.0
