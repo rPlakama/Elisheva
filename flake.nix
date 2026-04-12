@@ -3,6 +3,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,6 +31,7 @@
   outputs =
     inputs@{
       nixpkgs,
+      cosmic,
       home-manager,
       sops-nix,
       niri,
@@ -113,7 +118,7 @@
           extraModules = [
             niri.nixosModules.niri
             ./system/Centuria-hardware.nix
-            { nixpkgs.overlays = [ niri.overlays.niri ]; }
+            cosmic.nixosModules.default
           ];
         };
         "Moontier" = mkHost {
