@@ -1,6 +1,18 @@
 { pkgs, ... }:
 {
-  services.desktopManager.gnome.enable = true;
+
+  services = {
+    displayManager = {
+      gdm.enable = true;
+      gnome.enable = true;
+    };
+    gnome = {
+      core-apps.enable = false;
+      core-developer-tools.enable = false;
+      games.enable = false;
+    };
+  };
+
   programs = {
     steam = {
       enable = true;
