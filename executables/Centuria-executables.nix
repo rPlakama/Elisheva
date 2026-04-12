@@ -1,16 +1,13 @@
 { pkgs, ... }:
 {
 
+  imports = [
+    ./workaround-plasma6.nix
+  ];
   services = {
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
-    gnome = {
-      core-apps.enable = false;
-      core-developer-tools.enable = false;
-      games.enable = false;
-    };
+    displayManager.plasma-login-manager.enable = true;
+    desktopManager.plasma6.enable = true;
   };
-
   programs = {
     steam = {
       enable = true;
