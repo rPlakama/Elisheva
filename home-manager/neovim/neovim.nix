@@ -1,5 +1,6 @@
 {
   isElisheva,
+  isDesktop,
   lib,
   pkgs,
   ...
@@ -57,7 +58,7 @@
       require('keybinds')
       require('lsp')
     ''
-    + lib.optionalString isDesktop ''
+    + lib.optionalString isElisheva ''
       vim.cmd.colorscheme("dms")
     '';
   };
