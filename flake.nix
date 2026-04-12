@@ -60,12 +60,14 @@
           modules = [
             home-manager.nixosModules.home-manager
             sops-nix.nixosModules.sops
-            ./services
             ./system
             ./executables/term.nix
             ./pkgs/shared-pkgs.nix
+            ./services/shared-services.nix
             ./pkgs/${hostname}-pkgs.nix
             ./hosts/${hostname}-hardware.nix
+            ./services/${hostname}-services.nix
+
             {
               networking.hostName = hostname;
               system.stateVersion = "25.05";
@@ -92,7 +94,7 @@
             ./system/desktop-boot.nix
             ./system/desktop-hardware.nix
             ./services/Desktop-services.nix
-            ./executables/graphical.nix
+            ./executables/${hostname}-executables.nix
           ]
           ++ extraModules;
         };
@@ -118,7 +120,6 @@
           hostname = "Moontier";
           extraModules = [
             ./system/Moontier-hardware.nix
-            ./services/Moontier-services
           ];
         };
       };

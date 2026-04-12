@@ -2,19 +2,39 @@
 {
   networking = {
     defaultGateway = "192.168.1.1";
-    hosts = {
-      "192.168.1.1" = [
-        "gateway.moontier.me"
-        "gateway"
-      ];
-      "192.168.1.106" = [
-        "pi-hole.moontier.me"
-        "pi-hole"
-      ];
-    };
+    nameservers = [ "127.0.0.1" ];
   };
 
   services = {
+
+    unbound = {
+      enable = true;
+      settings = {
+        server = {
+          interface = [
+            "127.0.0.1"
+            "::1"
+          ];
+          port = 5335;
+
+          access-control = [
+            "127.0.0.0/8 allow"
+            "::1/128 allow"
+          ];
+
+          harden-glue = true;
+          harden-dnssec-stripped = true;
+          use-caps-for-id = false;
+          edns-buffer-size = 1232;
+          prefetch = true;
+          num-threads = 1;
+
+          qname-minimisation = true;
+          do-not-query-localhost = false;
+        };
+      };
+    };
+
     dnsmasq = {
       enable = false;
       settings = {
@@ -40,6 +60,18 @@
           type = "block";
           enabled = true;
           description = "Steven Black's HOSTS";
+        }
+        {
+          url = "https://big.oisd.nl";
+          type = "block";
+          enabled = true;
+          description = "OISD Big";
+        }
+        {
+          url = "https://v.firebog.net/hosts/Easyprivacy.txt";
+          type = "block";
+          enabled = true;
+          description = "EasyPrivacy";
         }
       ];
       openFirewallDNS = true;
@@ -68,31 +100,16 @@
           expandHosts = true;
           interface = "all";
           hosts = [
-            "192.168.1.1   gateway"
-            "192.168.1.106   pi-hole"
+            "192.168.1.1    gateway"
+            "192.168.1.1    gateway.moontier.me"
+            "192.168.1.106  pi-hole"
+            "192.168.1.106  pi-hole.moontier.me"
           ];
           upstreams = [
             # Cloudflare
-            "1.1.1.1"
-            "1.0.0.1"
-            # Cloudflare malware-blocking
-            "1.1.1.2"
-            # Google
-            "8.8.8.8"
-            "8.8.4.4"
-            # Quad9 (threat-blocking)
-            "9.9.9.9"
-            "149.112.112.112"
-            # OpenDNS (Cisco)
-            "208.67.222.222"
-            "208.67.220.220"
-            # Level3 / CenturyLink
-            "4.2.2.1"
-            "209.244.0.3"
-            "209.244.0.4"
-            # Comodo Secure
-            "8.26.56.26"
-            "8.20.247.20"
+            "127.0.0.1#5335"
+            #"1.1.1.1"
+            #"1.0.0.1"
           ];
         };
         ntp = {

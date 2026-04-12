@@ -1,5 +1,5 @@
 {
-  isDesktop,
+  isElisheva,
   lib,
   pkgs,
   ...
@@ -22,7 +22,7 @@
         blink-cmp
 
       ]
-      ++ lib.optionals isDesktop [
+      ++ lib.optionals isElisheva [
         (pkgs.vimUtils.buildVimPlugin {
           name = "base46";
           doCheck = false;
