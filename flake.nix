@@ -1,23 +1,20 @@
 {
-  description = "Something here should... be written?";
+  description = "Declarating... Imperative machines...";
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
     sops-nix = {
-      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Mic92/sops-nix";
     };
-
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,99 +25,41 @@
     inputs@{
       nixpkgs,
       home-manager,
-      sops-nix,
-      niri,
       ...
     }:
     let
-      system = "x86_64-linux";
-      lib = nixpkgs.lib;
-      mkHost =
-        {
-          hostname,
-          extraModules ? [ ],
-        }:
-        let
-          isCenturia = hostname == "Centuria";
-          isElisheva = hostname == "Elisheva";
-          isMoontier = hostname == "Moontier";
-          isDesktop = hostname != "Moontier";
-        in
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit
-              inputs
-              isCenturia
-              isMoontier
-              isElisheva
-              isDesktop
-              ;
-          };
-          modules = [
-            home-manager.nixosModules.home-manager
-            sops-nix.nixosModules.sops
-            ./system
-            ./executables/term.nix
-            ./pkgs/shared-pkgs.nix
-            ./services/shared-services.nix
-            ./pkgs/${hostname}-pkgs.nix
-            ./hosts/${hostname}-hardware.nix
-            ./services/${hostname}-services.nix
-
-            {
-              networking.hostName = hostname;
-              system.stateVersion = "25.05";
-              sops.defaultSopsFile = ./secrets.yaml;
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit
-                    inputs
-                    hostname
-                    isElisheva
-                    isMoontier
-                    isCenturia
-                    isDesktop
-                    ;
-                };
-                users.rplakama = import ./home-manager/home.nix;
-              };
-            }
-          ]
-          ++ lib.optionals isDesktop [
-            ./pkgs/desktop-pkgs.nix
-            ./system/desktop-boot.nix
-            ./system/desktop-hardware.nix
-            ./services/Desktop-services.nix
-            ./executables/${hostname}-executables.nix
-          ]
-          ++ extraModules;
-        };
+      stVersion = "26.05";
+      hostNames = builtins.attrNames (
+        nixpkgs.lib.filterAttrs (name: type: type == "directory") (builtins.readDir ./Hosts)
+      );
     in
     {
-      nixosConfigurations = {
-        "Elisheva" = mkHost {
-          hostname = "Elisheva";
-          extraModules = [
-            niri.nixosModules.niri
-            { nixpkgs.overlays = [ niri.overlays.niri ]; }
+      nixosConfigurations = nixpkgs.lib.genAttrs hostNames (
+        hostname:
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            home-manager.nixosModules.home-manager
+
+            ./Hosts/${hostname}
+            (
+              { config, ... }:
+              {
+                networking.hostName = hostname;
+                system.stateVersion = stVersion;
+
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = { inherit inputs; };
+                  users.${config.core.user}.home.stateVersion = stVersion;
+
+                };
+              }
+            )
           ];
-        };
-        "Centuria" = mkHost {
-          hostname = "Centuria";
-          extraModules = [
-            niri.nixosModules.niri
-            ./system/Centuria-hardware.nix
-          ];
-        };
-        "Moontier" = mkHost {
-          hostname = "Moontier";
-          extraModules = [
-            ./system/Moontier-hardware.nix
-          ];
-        };
-      };
+        }
+      );
     };
 }
