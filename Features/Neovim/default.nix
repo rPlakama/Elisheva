@@ -9,7 +9,6 @@ let
   cfg = config.optionals.features.neovim;
   user = config.core.user;
   niriEnabled = config.optionals.features.niri.enable;
-
 in
 
 {

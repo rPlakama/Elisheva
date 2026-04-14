@@ -1,7 +1,6 @@
 { config, lib, ... }:
 
 let
-
   cfg = config.optionals.features.neovim;
 in
 {
