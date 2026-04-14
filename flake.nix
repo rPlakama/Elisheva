@@ -45,13 +45,9 @@
 
             ./Hosts/${hostname}
             {
-              options.core.user = nixpkgs.lib.mkOption {
-                type = nixpkgs.lib.types.str;
-                description = "The primary username for the system.";
-              };
               networking.hostName = hostname;
               system.stateVersion = "25.11";
-              sops.defaultSopsFile = ./secrets.yaml;
+              sops.defaultSopsFile = ./Secrets/secrets.yaml;
 
               home-manager = {
                 useGlobalPkgs = true;

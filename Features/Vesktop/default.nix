@@ -9,7 +9,11 @@ let
   user = config.core.user;
 in
 {
-  options.mySystem.features.vesktop.enable = lib.mkEnableOption "Vesktop, a better Discord for Linux";
+  options.optionals.features.vesktop.enable = lib.mkEnableOption {
+    description = "Vesktop, a better Discord for Linux";
+    type = lib.types.bool;
+    default = false;
+  };
 
   config = lib.mkIf cfg.enable {
     home-manager.users.${user} = {
