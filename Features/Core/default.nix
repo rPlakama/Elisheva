@@ -28,6 +28,7 @@
       montserrat
       arkpandora_ttf
     ];
+    networking.networkmanager.enable = true;
     services = {
 
       upower.enable = true;
