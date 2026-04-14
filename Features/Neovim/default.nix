@@ -1,5 +1,4 @@
 {
-  isDesktop,
   config,
   lib,
   pkgs,
@@ -22,6 +21,8 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.users.${user} = {
       programs.neovim = {
+        withRuby = false;
+        withPython3 = false;
         enable = true;
         defaultEditor = true;
         viAlias = true;
