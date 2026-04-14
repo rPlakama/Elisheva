@@ -11,9 +11,9 @@
     default = true;
     description = "Essential system segments";
   };
-
   config = lib.mkIf config.core.features.core.enable {
     environment.systemPackages = with pkgs; [
+      wl-clipboard
       wget
       age
       sops
@@ -35,6 +35,11 @@
       devmon.enable = true;
       udisks2.enable = true;
       resolved.enable = true;
+      pipewire = {
+        enable = true;
+        alsa.enable = true;
+        pulse.enable = true;
+      };
 
       tailscale = {
         enable = true;
