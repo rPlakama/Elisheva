@@ -7,7 +7,7 @@
   ...
 }:
 let
-  cfg = config.mySystem.features.niri;
+  cfg = config.optionals.features.niri;
   user = config.core.user;
 
   standardBezier = {

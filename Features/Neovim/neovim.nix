@@ -7,13 +7,13 @@
 }:
 
 let
-  cfg = config.mySystem.features.neovim;
+  cfg = config.optionals.features.neovim;
   user = config.core.user;
 
 in
 
 {
-  options.mySystem.features.neovim.enable = lib.mkEnableOption {
+  options.optionals.features.neovim.enable = lib.mkEnableOption {
     type = lib.types.bool;
     description = "Neovim Configuration";
     default = true;
