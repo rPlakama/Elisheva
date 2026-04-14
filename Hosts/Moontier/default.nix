@@ -11,5 +11,6 @@
   optionals.features = {
     niri.enable = true;
     neovim.enable = true;
+    graphicalPkgs.enable = false;
   };
 }

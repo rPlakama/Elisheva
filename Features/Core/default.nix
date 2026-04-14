@@ -6,15 +6,17 @@
 }:
 
 {
-  options.mySystem.features.core.enable = lib.mkOption {
+  options.core.features.core.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
     description = "Essential system packages";
   };
 
-  config = lib.mkIf config.mySystem.features.core.enable {
+  config = lib.mkIf config.core.features.core.enable {
     environment.systemPackages = with pkgs; [
       wget
+      age
+      sops
       git
       unzip
       dust
@@ -26,6 +28,5 @@
       montserrat
       arkpandora_ttf
     ];
-
   };
 }

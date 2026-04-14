@@ -54,6 +54,15 @@ in
       };
     };
 
+    environment.systemPackages = with pkgs; [
+      papers
+      nautilus
+      loupe
+      xwayland-satellite
+      papirus-folders
+      papirus-icon-theme
+      volantes-cursors
+    ];
     services = {
       power-profiles-daemon.enable = lib.mkForce false;
       displayManager.dms-greeter = {
