@@ -18,7 +18,7 @@ let
   ];
 in
 {
-  options.mySystem.features.rrstack.enable = lib.mkOption {
+  options.optionals.features.rrstack.enable = lib.mkOption {
     type = lib.types.bool;
     description = "*-rr stack, with media-group permissions.";
     default = false;

@@ -25,10 +25,10 @@
     inputs@{
       nixpkgs,
       home-manager,
-      sops-nix,
       ...
     }:
     let
+      stVersion = "25.11";
       hostNames = builtins.attrNames (
         nixpkgs.lib.filterAttrs (name: type: type == "directory") (builtins.readDir ./Hosts)
       );
@@ -41,20 +41,23 @@
           specialArgs = { inherit inputs; };
           modules = [
             home-manager.nixosModules.home-manager
-            sops-nix.nixosModules.sops
 
             ./Hosts/${hostname}
-            {
-              networking.hostName = hostname;
-              system.stateVersion = "25.11";
-              sops.defaultSopsFile = ./Secrets/secrets.yaml;
+            (
+              { config, ... }:
+              {
+                networking.hostName = hostname;
+                system.stateVersion = stVersion;
 
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit inputs; };
-              };
-            }
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = { inherit inputs; };
+                  users.${config.core.user}.home.stateVersion = stVersion;
+
+                };
+              }
+            )
           ];
         }
       );

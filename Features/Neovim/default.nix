@@ -9,6 +9,7 @@
 let
   cfg = config.optionals.features.neovim;
   user = config.core.user;
+  niriEnabled = config.optionals.features.niri.enable;
 
 in
 
@@ -19,7 +20,7 @@ in
     default = true;
   };
   config = lib.mkIf cfg.enable {
-    home-manager.${user} = {
+    home-manager.users.${user} = {
       programs.neovim = {
         enable = true;
         defaultEditor = true;
@@ -36,7 +37,7 @@ in
             blink-cmp
 
           ]
-          ++ lib.optionals isDesktop [
+          ++ lib.optionals niriEnabled [
             (pkgs.vimUtils.buildVimPlugin {
               name = "base46";
               doCheck = false;
@@ -64,7 +65,7 @@ in
           require('keybinds')
           require('lsp')
         ''
-        + lib.optionalString isDesktop ''
+        + lib.optionalString niriEnabled ''
           vim.cmd.colorscheme("dms")
         '';
       };

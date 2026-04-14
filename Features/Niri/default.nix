@@ -1,7 +1,6 @@
 {
   inputs,
   lib,
-  isCenturia,
   config,
   pkgs,
   ...
@@ -9,6 +8,7 @@
 let
   cfg = config.optionals.features.niri;
   user = config.core.user;
+  currentHost = config.networking.hostName;
 
   standardBezier = {
     curve = "cubic-bezier";
@@ -24,18 +24,19 @@ in
 
 {
 
-  options.mySystem.features.niri.enable = lib.mkOption {
+  imports = [
+    inputs.niri.nixosModules.niri
+    inputs.dms.nixosModules.dank-material-shell
+    { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
+
+  ];
+
+  options.optionals.features.niri.enable = lib.mkOption {
     description = "Niri Configuration";
     type = lib.types.bool;
     default = false;
   };
   config = lib.mkIf cfg.enable {
-    imports = [
-      inputs.niri.nixosModules.niri
-      { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
-      inputs.dms.nixosModules.dank-material-shell
-
-    ];
 
     systemd.user.services.niri-flake-polkit.enable = false; # <-- DMS.
     programs = {
@@ -65,7 +66,7 @@ in
 
     };
 
-    home-manager.${user} = {
+    home-manager.users.${user} = {
       imports = [
         inputs.dms.homeModules.dank-material-shell
         inputs.dms.homeModules.niri
@@ -95,7 +96,7 @@ in
             input = {
               keyboard = {
                 xkb = {
-                  layout = if isCenturia then "us,br" else "br";
+                  layout = if currentHost == "Centuria" then "us,br" else "br";
                   options = "caps:swapescape";
                 };
                 repeat-delay = 600;
@@ -279,7 +280,7 @@ in
                 ];
 
               }
-              // lib.optionalAttrs isCenturia {
+              // lib.optionalAttrs (currentHost == "Centuria") {
                 "Ctrl+Alt+K".action.switch-layout = "next";
               };
 

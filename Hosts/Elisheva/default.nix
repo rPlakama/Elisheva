@@ -7,8 +7,8 @@
 
   networking.hostName = "Elisheva";
 
-  mySystem.user = "rplakama";
-  mySystem.features = {
+  core.user = "rplakama";
+  optionals.features = {
     niri.enable = true;
     neovim.enable = true;
   };
