@@ -17,7 +17,7 @@ in
   config = lib.mkIf cfg.enable {
 
     core.features.mediaPermissions.enable = true;
-    qbittorrent = {
+    services.qbittorrent = {
       enable = true;
       openFirewall = true;
       group = "media";

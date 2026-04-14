@@ -4,7 +4,7 @@ let
   isNvidia = config.optionals.features.nvidia.enable;
 in
 {
-  options.optionals.virtualization.enable = lib.mkOption {
+  options.optionals.features.virtualization.enable = lib.mkOption {
     type = lib.types.bool;
     description = "Virtualization";
     default = false;
