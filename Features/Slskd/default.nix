@@ -4,7 +4,7 @@ let
   cfg = config.optionals.features.slskd;
 in
 {
-  options.optionals.features.slskd.enable = lib.mkEnableOption {
+  options.optionals.features.slskd.enable = lib.mkOption {
     type = lib.types.bool;
     description = "Slskd, a morden Soulseek client.";
     default = false;

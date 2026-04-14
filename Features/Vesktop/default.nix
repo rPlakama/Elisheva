@@ -9,7 +9,7 @@ let
   user = config.core.user;
 in
 {
-  options.optionals.features.vesktop.enable = lib.mkEnableOption {
+  options.optionals.features.vesktop.enable = lib.mkOption {
     description = "Vesktop, a better Discord for Linux";
     type = lib.types.bool;
     default = false;

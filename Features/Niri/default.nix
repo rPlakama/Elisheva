@@ -24,7 +24,7 @@ in
 
 {
 
-  options.mySystem.features.niri.enable = lib.mkEnableOption {
+  options.mySystem.features.niri.enable = lib.mkOption {
     description = "Niri Configuration";
     type = lib.types.bool;
     default = false;

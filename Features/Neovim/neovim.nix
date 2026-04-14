@@ -13,7 +13,7 @@ let
 in
 
 {
-  options.optionals.features.neovim.enable = lib.mkEnableOption {
+  options.optionals.features.neovim.enable = lib.mkOption {
     type = lib.types.bool;
     description = "Neovim Configuration";
     default = true;

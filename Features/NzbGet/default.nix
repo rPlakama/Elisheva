@@ -5,12 +5,21 @@ let
 in
 {
 
-  options.optionals.features.nzbget.enable = lib.mkEnableOption {
-    description = "An usernet downloader";
+  options.optionals.features.nzbget.enable = lib.mkOption {
     type = lib.types.bool;
+    description = "NZBget service";
     default = false;
   };
   config = lib.mkIf cfg.enable {
+
+    core.features.mediaPermissions.enable = true;
+    services.nzbget = {
+      enable = true;
+      group = "media";
+    };
+
+    networking.firewall.allowedTCPPorts = [ 6789 ];
+
   };
 
 }

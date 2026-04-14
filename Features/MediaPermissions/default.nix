@@ -5,7 +5,7 @@ let
   user = config.core.user;
 
   base_path = "d /media";
-  rules_group = " 2775 nobody media - - ";
+  rules_group = "2775 nobody media - - ";
   mediaFolders = [
     "films"
     "music"
@@ -15,7 +15,7 @@ let
   ];
 in
 {
-  options.core.features.mediaCore.enable = lib.mkOption {
+  options.core.features.mediaPermissions.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Shared media folders and group permissions";
