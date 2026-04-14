@@ -1,0 +1,1750 @@
+{ pkgs, ... }:
+
+{
+  boot = {
+    initrd = {
+      systemd.network.wait-online.enable = false;
+      systemd.enable = true;
+    };
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+      timeout = 0;
+    };
+    kernelPackages = pkgs.linuxPackages_latest;
+  };
+}
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+{
+  options.core.features.core.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = true;
+    description = "Essential system segments";
+  };
+  config = lib.mkIf config.core.features.core.enable {
+    environment.systemPackages = with pkgs; [
+      wl-clipboard
+      wget
+      age
+      sops
+      git
+      unzip
+      dust
+      jq
+      fd
+    ];
+    fonts.packages = with pkgs; [
+      nerd-fonts.caskaydia-cove
+      montserrat
+      arkpandora_ttf
+    ];
+    services = {
+
+      upower.enable = true;
+      bpftune.enable = true;
+      devmon.enable = true;
+      udisks2.enable = true;
+      resolved.enable = true;
+      pipewire = {
+        enable = true;
+        alsa.enable = true;
+        pulse.enable = true;
+      };
+
+      tailscale = {
+        enable = true;
+        openFirewall = true;
+      };
+
+      avahi = {
+        enable = true;
+        nssmdns4 = true;
+        openFirewall = true;
+      };
+
+      openssh = {
+        enable = true;
+        settings = {
+          PasswordAuthentication = true;
+          PermitRootLogin = "no";
+        };
+      };
+
+      scx = {
+        enable = true;
+        scheduler = "scx_lavd";
+      };
+    };
+  };
+}
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+let
+  cfg = config.optionals.features.graphicalPkgs;
+  user = config.core.user;
+
+in
+{
+  options.optionals.features.graphicalPkgs.enable = lib.mkOption {
+    description = "Graphical Packages";
+    type = lib.types.bool;
+    default = true;
+  };
+
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      firefox
+      materialgram
+      jellyfin-desktop
+    ];
+
+    home-manager.users.${user} = {
+      programs.foot = {
+        enable = true;
+        settings.main = {
+          dpi-aware = false;
+          font = "CaskaydiaCove Nerd Font Mono:size=9";
+          include = "/home/${user}/.config/foot/dank-colors.ini";
+        };
+      };
+    };
+  };
+}
+{ config, lib, ... }:
+
+let
+  cfg = config.core.features.mediaPermissions;
+  user = config.core.user;
+
+  base_path = "d /media";
+  rules_group = "2775 nobody media - - ";
+  mediaFolders = [
+    "films"
+    "music"
+    "downloads"
+    "series"
+    "torrents"
+  ];
+in
+{
+  options.core.features.mediaPermissions.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = false;
+    description = "Shared media folders and group permissions";
+  };
+
+  config = lib.mkIf cfg.enable {
+    users.groups.media = { };
+    users.users.${user}.extraGroups = [ "media" ];
+
+    systemd.tmpfiles.rules = map (folder: "${base_path}/${folder} ${rules_group}") mediaFolders;
+  };
+}
+local opt = vim.opt
+
+-- Base settings
+opt.shortmess:append("I")
+opt.expandtab = true
+opt.shiftwidth = 2
+opt.softtabstop = 2
+opt.tabstop = 2
+opt.number = true
+opt.relativenumber = true
+opt.termguicolors = true
+opt.clipboard = "unnamedplus"
+
+-- Plugin Configs
+require("ibl").setup()
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    vim.cmd([[%s/\s\+$//e]])
+    vim.lsp.buf.format({ async = false })
+  end,
+})
+
+vim.api.nvim_create_autocmd("VimResized", {
+  desc = "Automatically resize splits when the host window is resized",
+  group = vim.api.nvim_create_augroup("resize_splits", { clear = true }),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
+  end,
+})
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+let
+  cfg = config.optionals.features.neovim;
+  user = config.core.user;
+  niriEnabled = config.optionals.features.niri.enable;
+in
+
+{
+  options.optionals.features.neovim.enable = lib.mkOption {
+    type = lib.types.bool;
+    description = "Neovim Configuration";
+    default = true;
+  };
+  config = lib.mkIf cfg.enable {
+    home-manager.users.${user} = {
+      programs.neovim = {
+        withRuby = false;
+        withPython3 = false;
+        enable = true;
+        defaultEditor = true;
+        viAlias = true;
+        vimAlias = true;
+
+        plugins =
+          with pkgs.vimPlugins;
+          [
+            nvim-lspconfig
+            fzf-lua
+            indent-blankline-nvim
+            nvim-treesitter.withAllGrammars
+            blink-cmp
+
+          ]
+          ++ lib.optionals niriEnabled [
+            (pkgs.vimUtils.buildVimPlugin {
+              name = "base46";
+              doCheck = false;
+              src = pkgs.fetchFromGitHub {
+                owner = "AvengeMedia";
+                repo = "base46";
+                rev = "master";
+                hash = "sha256-+FNEJBBa33onbq+BCQA1kO9dXDhGEUYbVIMnhrpr98U=";
+              };
+            })
+          ];
+
+        extraPackages = with pkgs; [
+          nixd
+          nixfmt
+          ripgrep
+          lua-language-server
+          luaformatter
+
+          fish-lsp
+        ];
+
+        initLua = ''
+          require('configs')
+          require('keybinds')
+          require('lsp')
+        ''
+        + lib.optionalString niriEnabled ''
+          vim.cmd.colorscheme("dms")
+        '';
+      };
+
+      xdg.configFile = {
+        "nvim/lua/configs.lua".source = ./configs.lua;
+        "nvim/lua/keybinds.lua".source = ./keybinds.lua;
+        "nvim/lua/lsp.lua".source = ./lsp.lua;
+      };
+    };
+  };
+}
+local map = vim.keymap.set
+
+-- Leader as space
+vim.g.mapleader = " "
+
+-- Fzf-lua search pickers
+local fzf = require('fzf-lua')
+fzf.setup({})
+fzf.register_ui_select()
+
+-- Keymaps / fzf
+map('n', '<leader>f', fzf.files, { desc = "Search files" })
+map('n', '<leader>g', fzf.live_grep, { desc = "Grep search" })
+map('n', '<leader>a', fzf.buffers, { desc = "Buffer search" })
+map('n', '<leader>s', fzf.spell_suggest, { desc = "Spell suggestions" })
+
+-- Keymaps extras
+map('n', '<leader>lf', vim.lsp.buf.format, { desc = "LSP Format buffer" })
+
+-- Spell settings
+map('n', '<C-M-1>', function()
+  vim.opt.spell = true
+  vim.opt.spelllang = 'en_us'
+  print("Spell: English (US)")
+end, { desc = "English spell check on" })
+
+map('n', '<C-M-2>', function()
+  vim.opt.spell = true
+  vim.opt.spelllang = 'pt_br'
+  print("Spell: Portuguese (BR)")
+end, { desc = "Portuguese BR spell check on" })
+
+map('n', '<C-M-3>', function()
+  vim.opt.spell = false
+  print("Spell: Off")
+end, { desc = "Spell check off" })
+-- Blink
+require("blink.cmp").setup({
+  keymap = { preset = "default" },
+  sources = {
+    default = { "lsp", "path", "snippets", "buffer" },
+  },
+})
+
+vim.lsp.enable({
+  "rust_analyzer",
+  "tinymist",
+  "ts_ls",
+  "fish_lsp",
+  "nixd",
+  "lua_ls",
+  "kotlin_language_server"
+})
+
+vim.lsp.enable("ts_ls", {
+  capabilities = capabilities,
+  root_dir = vim.fs.root(0, { "tsconfig.json", "package.json", ".git" }),
+  settings = {
+    typescript = {
+      format = {
+        enable = true,
+      },
+    },
+    javascript = {
+      format = {
+        enable = true,
+      },
+    },
+  },
+})
+vim.lsp.enable("nixd", {
+  capabilities = capabilities,
+  settings = {
+    nixd = {
+      nixpkgs = {
+        expr = "import <nixpkgs> { }",
+      },
+      formatting = {
+        command = { "nixfmt" },
+      },
+    },
+  },
+})
+
+vim.lsp.enable("kotlin_language_server", {
+  capabilities = capabilities,
+  root_dir = vim.fs.root(0, { "build.gradle", "build.gradle.kts", ".git" }),
+  settings = {
+  },
+})
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.optionals.features.niri;
+  user = config.core.user;
+  currentHost = config.networking.hostName;
+
+  standardBezier = {
+    curve = "cubic-bezier";
+    duration-ms = 452;
+    curve-args = [
+      0.20
+      1.0
+      0.20
+      1.0
+    ];
+  };
+in
+
+{
+
+  imports = [
+    inputs.niri.nixosModules.niri
+    inputs.dms.nixosModules.dank-material-shell
+    { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
+
+  ];
+
+  options.optionals.features.niri.enable = lib.mkOption {
+    description = "Niri Configuration";
+    type = lib.types.bool;
+    default = false;
+  };
+  config = lib.mkIf cfg.enable {
+
+    systemd.user.services.niri-flake-polkit.enable = false; # <-- DMS.
+    programs = {
+      niri = {
+        enable = true;
+        package = pkgs.niri-unstable;
+      };
+      dank-material-shell = {
+        enable = true;
+        enableCalendarEvents = false;
+        systemd = {
+          enable = true;
+          restartIfChanged = true;
+        };
+      };
+    };
+
+    environment.systemPackages = with pkgs; [
+      papers
+      nautilus
+      loupe
+      xwayland-satellite
+      papirus-folders
+      papirus-icon-theme
+      volantes-cursors
+    ];
+    services = {
+      power-profiles-daemon.enable = lib.mkForce false;
+      displayManager.dms-greeter = {
+        enable = true;
+        compositor = {
+          name = "niri";
+        };
+        configHome = "/home/${user}";
+      };
+
+    };
+
+    home-manager.users.${user} = {
+      imports = [
+        inputs.dms.homeModules.dank-material-shell
+        inputs.dms.homeModules.niri
+      ];
+      programs = {
+        dank-material-shell = {
+          enable = true;
+          niri.includes = {
+            enable = true;
+            override = true;
+            originalFileName = "hm";
+            filesToInclude = [
+              "windowrules"
+              "alttab"
+              "binds"
+              "colors"
+              "layout"
+              "outputs"
+              "wpblur"
+              "cursor"
+            ];
+          };
+        };
+
+        niri = {
+          settings = {
+            input = {
+              keyboard = {
+                xkb = {
+                  layout = if currentHost == "Centuria" then "us,br" else "br";
+                  options = "caps:swapescape";
+                };
+                repeat-delay = 600;
+                repeat-rate = 25;
+                track-layout = "global";
+                numlock = true;
+              };
+
+              touchpad = {
+                tap = true;
+                dwt = true;
+                natural-scroll = true;
+                accel-speed = 0.1;
+                accel-profile = "adaptive";
+                scroll-method = "two-finger";
+              };
+
+              mouse = {
+                accel-speed = -0.5;
+              };
+
+              warp-mouse-to-focus.enable = true;
+              workspace-auto-back-and-forth = true;
+
+              mod-key = "Super";
+              mod-key-nested = "Alt";
+            };
+
+            screenshot-path = "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png";
+            prefer-no-csd = true;
+            overview = {
+              workspace-shadow = {
+                softness = 15;
+                spread = 10;
+              };
+            };
+
+            layout = {
+              shadow = {
+                enable = true;
+                spread = 1;
+                softness = 10;
+              };
+
+              border.enable = false;
+              focus-ring.enable = false;
+
+              default-column-width = {
+                proportion = 0.333333;
+              };
+
+              preset-column-widths = [
+                { proportion = 0.333333; }
+                { proportion = 0.666667; }
+              ];
+
+              center-focused-column = "never";
+            };
+
+            hotkey-overlay.skip-at-startup = true;
+
+            binds =
+              let
+                dms = args: {
+                  action.spawn = [
+                    "dms"
+                    "ipc"
+                    "call"
+                  ]
+                  ++ args;
+                };
+                sh = cmd: { action.spawn-sh = cmd; };
+              in
+              {
+                "Ctrl+Alt+A" = dms [
+                  "dash"
+                  "toggle"
+                  "overview"
+                ];
+                "Ctrl+Alt+C" = dms [
+                  "control-center"
+                  "toggle"
+                ];
+                "Ctrl+Alt+D" = dms [
+                  "dash"
+                  "toggle"
+                  "media"
+                ];
+                "Ctrl+Alt+L" = dms [
+                  "wallpaper"
+                  "next"
+                ];
+                "Ctrl+Alt+S" = dms [
+                  "powermenu"
+                  "toggle"
+                ];
+                "Ctrl+Alt+W" = dms [
+                  "dankdash"
+                  "wallpaper"
+                ];
+
+                "Mod+0".action.focus-workspace = 10;
+                "Mod+1".action.focus-workspace = 1;
+                "Mod+2".action.focus-workspace = 2;
+                "Mod+3".action.focus-workspace = 3;
+                "Mod+4".action.focus-workspace = 4;
+                "Mod+5".action.focus-workspace = 5;
+                "Mod+6".action.focus-workspace = 6;
+                "Mod+7".action.focus-workspace = 7;
+                "Mod+8".action.focus-workspace = 8;
+                "Mod+9".action.focus-workspace = 9;
+
+                "Mod+BracketLeft".action.consume-or-expel-window-left = [ ];
+                "Mod+BracketRight".action.consume-or-expel-window-right = [ ];
+                "Mod+C".action.center-column = [ ];
+                "Mod+F".action.maximize-column = [ ];
+                "Mod+H".action.focus-column-left = [ ];
+                "Mod+J".action.focus-window-or-workspace-down = [ ];
+                "Mod+K".action.focus-window-or-workspace-up = [ ];
+                "Mod+L".action.focus-column-right = [ ];
+                "Mod+M" = dms [
+                  "processlist"
+                  "toggle"
+                ];
+                "Mod+N" = dms [
+                  "notifications"
+                  "toggle"
+                ];
+                "Mod+P" = sh "wl-mirror $(niri msg --json focused-output | jq -r .name)";
+
+                "Mod+R".action.switch-preset-column-width-back = [ ];
+                "Mod+Shift+R".action.switch-preset-column-width = [ ];
+
+                "Mod+Q".action.set-window-height = "+10%";
+                "Mod+Shift+Q".action.set-window-height = "-10%";
+
+                "Mod+Return".action.spawn = "foot";
+                "Mod+Shift+C".action.center-visible-columns = [ ];
+                "Mod+Shift+F".action.fullscreen-window = [ ];
+                "Mod+Shift+H".action.move-column-left = [ ];
+                "Mod+Shift+J".action.move-column-to-workspace-down = [ ];
+                "Mod+Shift+K".action.move-column-to-workspace-up = [ ];
+                "Mod+Shift+L".action.move-column-right = [ ];
+
+                "Mod+Space" = dms [
+                  "spotlight"
+                  "toggle"
+                ];
+                "Mod+Tab".action.toggle-overview = [ ];
+                "Mod+V" = dms [
+                  "clipboard"
+                  "toggle"
+                ];
+                "Mod+W".action.close-window = [ ];
+                "Mod+Y" = sh "foot -e yazi";
+                "Print".action.screenshot = [ ];
+
+                "XF86AudioLowerVolume" =
+                  sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-; dms ipc call audio increment 0";
+                "XF86AudioMute" = dms [
+                  "audio"
+                  "mute"
+                ];
+                "XF86AudioPlay" = dms [
+                  "mpris"
+                  "playPause"
+                ];
+                "XF86AudioRaiseVolume" =
+                  sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+; dms ipc call audio increment 0";
+                "XF86MonBrightnessDown" = dms [
+                  "brightness"
+                  "decrement"
+                  "5"
+                  ""
+                ];
+                "XF86MonBrightnessUp" = dms [
+                  "brightness"
+                  "increment"
+                  "5"
+                  ""
+                ];
+
+              }
+              // lib.optionalAttrs (currentHost == "Centuria") {
+                "Ctrl+Alt+K".action.switch-layout = "next";
+              };
+
+            window-rules = [
+              {
+                matches = [
+                  { is-active = false; }
+                ];
+                opacity = 0.95;
+              }
+            ];
+
+            animations = {
+              slowdown = 0.8;
+
+              workspace-switch.kind.easing = standardBezier;
+              horizontal-view-movement.kind.easing = standardBezier;
+              overview-open-close.kind.easing = standardBezier;
+              config-notification-open-close.kind.easing = standardBezier;
+              exit-confirmation-open-close.kind.easing = standardBezier;
+              screenshot-ui-open.kind.easing = standardBezier;
+              window-open.kind.easing = standardBezier;
+              window-resize.kind.easing = standardBezier;
+              window-close.kind.easing = standardBezier;
+              window-movement.kind.easing = standardBezier;
+            };
+          };
+        };
+      };
+    };
+  };
+}
+{ config, pkgs, ... }:
+
+{
+
+  nixpkgs.config.allowUnfree = true;
+  programs.nix-ld.enable = true;
+  nix = {
+    package = pkgs.lix;
+    settings = {
+      show-trace = true;
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      trusted-users = [
+        "${config.core.user}"
+        "networkmanager"
+        "root"
+        "@wheel"
+      ];
+    };
+  };
+}
+{ config, lib, ... }:
+
+let
+  cfg = config.core.nvidia;
+in
+{
+  options.core.nvidia.enable = lib.mkOption {
+    type = lib.types.bool;
+    description = "Nvidia driver configuration";
+    default = false;
+  };
+
+  config = lib.mkIf cfg.enable {
+    services.xserver.videoDrivers = [ "nvidia" ];
+
+    boot = {
+      blacklistedKernelModules = [ "nouveau" ];
+      kernelParams = [ "modprobe.blacklist=nouveau" ];
+    };
+
+    hardware = {
+      nvidia-container-toolkit.enable = true;
+      nvidia = {
+        modesetting.enable = true;
+        powerManagement.enable = false;
+        open = false;
+        package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+      };
+    };
+  };
+}
+{ config, lib, ... }:
+
+let
+  cfg = config.optionals.features.nzbget;
+in
+{
+
+  options.optionals.features.nzbget.enable = lib.mkOption {
+    type = lib.types.bool;
+    description = "NZBget service";
+    default = false;
+  };
+  config = lib.mkIf cfg.enable {
+
+    core.features.mediaPermissions.enable = true;
+    services.nzbget = {
+      enable = true;
+      group = "media";
+    };
+
+    networking.firewall.allowedTCPPorts = [ 6789 ];
+
+  };
+
+}
+{
+  config,
+  lib,
+  ...
+}:
+
+let
+  cfg = config.optionals.features.pi-hole;
+in
+
+{
+  options.optionals.features.pi-hole.enable = lib.mkOption {
+    type = lib.types.bool;
+    description = "pi-hole Configuration";
+    default = false;
+  };
+  config = lib.mkIf cfg.enable {
+
+    networking = {
+      defaultGateway = "192.168.1.1";
+      nameservers = [ "127.0.0.1" ];
+    };
+
+    services = {
+
+      unbound = {
+        enable = true;
+        settings = {
+          server = {
+            interface = [
+              "127.0.0.1"
+              "::1"
+            ];
+            port = 5335;
+
+            access-control = [
+              "127.0.0.0/8 allow"
+              "::1/128 allow"
+            ];
+
+            harden-glue = true;
+            harden-dnssec-stripped = true;
+            use-caps-for-id = false;
+            edns-buffer-size = 1232;
+            prefetch = true;
+            num-threads = 1;
+
+            qname-minimisation = true;
+            do-not-query-localhost = false;
+          };
+        };
+      };
+
+      dnsmasq = {
+        enable = false;
+        settings = {
+          dhcp-name-match = [
+            "set:hostname-ignore,wpad"
+            "set:hostname-ignore,localhost"
+          ];
+          dhcp-option = [
+            "vendor:MSFT,2,1i"
+            "6,192.168.1.106"
+          ];
+          domain = [
+            "moontier.me,192.168.1.0/24,local"
+          ];
+        };
+      };
+
+      pihole-ftl = {
+        enable = true;
+        lists = [
+          {
+            url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
+            type = "block";
+            enabled = true;
+            description = "Steven Black's HOSTS";
+          }
+          {
+            url = "https://big.oisd.nl";
+            type = "block";
+            enabled = true;
+            description = "OISD Big";
+          }
+          {
+            url = "https://v.firebog.net/hosts/Easyprivacy.txt";
+            type = "block";
+            enabled = true;
+            description = "EasyPrivacy";
+          }
+        ];
+        openFirewallDNS = true;
+        openFirewallDHCP = true;
+        openFirewallWebserver = true;
+        queryLogDeleter.enable = true;
+        settings = {
+          dhcp = {
+            active = false;
+            end = "192.168.0.254";
+            hosts = [ ];
+            ipv6 = false;
+            leaseTime = "24h";
+            start = "192.168.0.61";
+            rapidCommit = true;
+            resolver = {
+              resolveIPv6 = false;
+            };
+            router = "192.168.1.1";
+          };
+          dns = {
+            cnameRecords = [ ];
+            domain = "moontier.me";
+            domainNeeded = true;
+            listeningMode = "ALL";
+            expandHosts = true;
+            interface = "all";
+            hosts = [
+              "192.168.1.1    gateway"
+              "192.168.1.1    gateway.moontier.me"
+              "192.168.1.106  pi-hole"
+              "192.168.1.106  pi-hole.moontier.me"
+            ];
+            upstreams = [
+              # Cloudflare
+              "127.0.0.1#5335"
+              #"1.1.1.1"
+              #"1.0.0.1"
+            ];
+          };
+          ntp = {
+            ipv4.active = false;
+            ipv6.active = false;
+            sync.active = false;
+          };
+          webserver = {
+            api = {
+              pwhash = "";
+            };
+            session = {
+              timeout = 43200;
+            };
+          };
+        };
+        useDnsmasqConfig = true;
+      };
+
+      pihole-web = {
+        enable = true;
+        ports = [ 80 ];
+      };
+
+      resolved = {
+        settings = {
+          Resolve = {
+            DNSStubListener = "no";
+            MulticastDNS = "no";
+          };
+        };
+      };
+    };
+
+    system.activationScripts = {
+      print-pi-hole = {
+        text = builtins.trace "building the pi-hole configuration..." "";
+      };
+    };
+
+    systemd.tmpfiles.rules = [
+      "f /etc/pihole/versions 0644 pihole pihole - -"
+    ];
+  };
+}
+{
+  config,
+  lib,
+  ...
+}:
+
+let
+  cfg = config.optionals.features.qbit;
+  user = config.core.user;
+
+in
+
+{
+  options.optionals.features.qbit.enable = lib.mkOption {
+    type = lib.types.bool;
+    description = "qbit Configuration";
+    default = false;
+  };
+  config = lib.mkIf cfg.enable {
+
+    core.features.mediaPermissions.enable = true;
+    services.qbittorrent = {
+      enable = true;
+      openFirewall = true;
+      group = "media";
+      serverConfig = {
+        LegalNotice.Accepted = true;
+        Preferences = {
+          WebUI = {
+            Username = "${user}";
+            Password_PBKDF2 = "@ByteArray(ttJDfjqsdk8ccksmlOI15A==:/WoWQEN+/ObzbkNCDVVZ4/3yfxkTXz58jXYvxYmHXWayB0VHghFapn+RFJZOFZyNcpcsaOUWW2+QtgAkwzJwFQ==)";
+          };
+          General.Locale = "en";
+          Downloads.SavePath = "/media/downloads";
+        };
+      };
+    };
+  };
+}
+{ config, lib, ... }:
+
+let
+  cfg = config.optionals.features.rrstack;
+
+  mediaServicesWithPermissions = [
+    "jackett"
+    "jellyfin"
+    "bazarr"
+    "sonarr"
+    "radarr"
+    "readarr"
+  ];
+
+  mediaNonPermissions = [
+    "prowlarr"
+    "flaresolverr"
+  ];
+in
+{
+  options.optionals.features.rrstack.enable = lib.mkOption {
+    type = lib.types.bool;
+    description = "*-rr stack, with media-group permissions.";
+    default = false;
+  };
+
+  config = lib.mkIf cfg.enable {
+    core.features.mediaPermissions.enable = true;
+    users.users.jellyfin.extraGroups = [
+      "video"
+      "render"
+    ];
+
+    services = (
+      lib.genAttrs mediaServicesWithPermissions (name: {
+        enable = true;
+        openFirewall = true;
+        group = "media";
+      })
+      // lib.genAttrs mediaNonPermissions (name: {
+        enable = true;
+        openFirewall = true;
+      })
+    );
+  };
+}
+{ config, ... }:
+
+let
+  user = config.core.user;
+in
+{
+
+  programs = {
+    fish = {
+      enable = true;
+      generateCompletions = true;
+    };
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+  };
+  home-manager.users.${user} = {
+    programs = {
+      fish = {
+        enable = true;
+        shellInit = ''
+          function fish_greeting
+          end
+          fish_vi_key_bindings
+          function fish_prompt
+              set -l nix_indicator ""
+
+              if set -q IN_NIX_SHELL
+                  if test "$IN_NIX_SHELL" = pure
+                      set nix_indicator (set_color cyan)" pure "(set_color normal)
+                  else
+                      set nix_indicator (set_color cyan)" nix "(set_color normal)
+                  end
+              else if set -q DIRENV_DIR
+                  set nix_indicator (set_color cyan)" direnv "(set_color normal)
+              end
+
+              echo -s (set_color normal) (hostname) " " (set_color blue) (prompt_pwd) (set_color normal) (fish_git_prompt) " " $nix_indicator
+              echo -n " > "
+          end
+        '';
+      };
+      yazi = {
+        enable = true;
+        enableFishIntegration = true;
+        settings = {
+          mgr.show_hidden = true;
+          opener.edit = [
+            {
+              run = "nvim \"$@\"";
+              block = true;
+            }
+          ];
+        };
+        keymap.mgr.prepend_keymap = [
+          {
+            on = [ "<C-n>" ];
+            run = "shell 'ripdrag -H 80 \"$@\" -x 2>/dev/null &' --confirm";
+          }
+        ];
+      };
+    };
+  };
+}
+{ lib, config, ... }:
+
+let
+  cfg = config.optionals.features.slskd;
+in
+{
+  options.optionals.features.slskd.enable = lib.mkOption {
+    type = lib.types.bool;
+    description = "Slskd, a modern Soulseek client.";
+    default = false;
+  };
+
+  config = lib.mkMerge [
+    {
+      sops.secrets."slskd/username" = { };
+      sops.secrets."slskd/password" = { };
+
+      sops.templates."slskd.env".content = ''
+        SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
+        SLSKD_SLSK_PASSWORD=${config.sops.placeholder."slskd/password"}
+      '';
+    }
+
+    (lib.mkIf cfg.enable {
+      core.features.mediaPermissions.enable = true;
+
+      services.slskd = {
+        enable = true;
+        group = "media";
+        environmentFile = config.sops.templates."slskd.env".path;
+
+        settings = {
+          soulseek = {
+            listen_port = 50000;
+            upnp = true;
+          };
+          shares.directories = [ "/media/music" ];
+          directories = {
+            downloads = "/media/music/library";
+            incomplete = "/media/music/downloads";
+          };
+          web = {
+            address = "0.0.0.0";
+            port = 5030;
+          };
+        };
+      };
+    })
+  ];
+}
+{ inputs, ... }:
+{
+  imports = [
+    inputs.sops-nix.nixosModules.sops
+  ];
+
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    age = {
+      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      keyFile = "/var/lib/sops-nix/key.txt";
+      generateKey = true;
+    };
+  };
+}
+slskd:
+    username: ENC[AES256_GCM,data:2MYSGa3piKXdIhA=,iv:G9HSuQhjaRBB38tRhkHvkoI6O1vmBGvug/aK2Nakzwc=,tag:VU7ltcB9WYsbMfAQ7VsS9w==,type:str]
+    password: ENC[AES256_GCM,data:W58NoamZcEU=,iv:3oSljuHqN8rRACtJqgDV/B2pj6gWUpiuaK4ASekNMGY=,tag:uSWlmqawDXiYEoq/JjbaXw==,type:str]
+nzb:
+    api_key: ENC[AES256_GCM,data:1C4VO9kgmBNAWZ+27uAsfC+Vgez8ONV+JzgR0RM+UcU=,iv:8j3lvlM0CXUC9oM3B+zy73rRpcs5JW3V/QuvzEUmW1w=,tag:N2gsTxkKnPf54s/rnl7TsQ==,type:str]
+    nzb_key: ENC[AES256_GCM,data:1GwHck37R1N2ZgQ4aZvjN09bv2xXxeFLp7Zj6QP0IAo=,iv:RYfcN/JzjJSi+ZHjVjH8IUfCUmH1yioykxKlWX/ZT6w=,tag:W0T4Xmhs1fi7pdMuOk8fCA==,type:str]
+frugal_usernet:
+    username: ENC[AES256_GCM,data:Etzyb0iMVsc=,iv:LEJzAcDJz19Flikj0OChkqUWSpcDQl6qCib6x4yBtQs=,tag:5uUYRw957naB8gw9WG5OpA==,type:str]
+    password: ENC[AES256_GCM,data:nT9ulQikzEnuF3wl,iv:ycNV1Nwn2pahvtNk+C2kPmexzsr//IP6AY2HaPMG7QQ=,tag:NDUlm6Wv0B3Vue7m6vTcsA==,type:str]
+newt:
+    endpoint: ENC[AES256_GCM,data:SbGJTJ14mYkVdwjgJPGYatJZLoPVDD6+b1vz8qEa,iv:I145y0BhlXUvikKghxw/6fd5YN82XoPkqsO3QVWqvRQ=,tag:I6G7fc/tvKCGsRz+uS25sg==,type:str]
+    id: ENC[AES256_GCM,data:41X1MyiZ954ZjI1sXLeS,iv:vwgQXrhxMmUN6xOw6bH79Ejf1yNWfiupxkXMIcAhvf0=,tag:knBnTOsHsiG3jRWvaz0HgQ==,type:str]
+    secret: ENC[AES256_GCM,data:dXMxxXbfFvLFJ1h97kiuKV5IGL1riSiRKFzyjWzA7C2UlCVzGUoco/FU1UrzjifY,iv:UdvMyuJXaAEfMEUzqKWqmzMTN5M+iIKi3Ib8vb7Jm6w=,tag:iydjMifkMgl3lvfVf/qV8w==,type:str]
+sops:
+    age:
+        - recipient: age1nahmfd6uh5f8ugmayz2q5vr7d2j2w8ev30cm2c6ug7lm3acx8u7q3z0q88
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBLRk5UZjVUQUdyeEh5VXpW
+            aEN1Tlo5OEdJay9SS0dVbzBqb2w0UmNTckVVCkxWV0t6ZXhNcU53SE9MV055SGpO
+            S0xKWTdBRlpPVmpHbEMzVDZnTkRKT2sKLS0tIE1KeXFuTWo0dGFXYURYRDJLVUlX
+            cHdIVUxJUlR4dTNQSVdVeDJremF6UWMKFvdLP4DpjQsCaq3mjd/9ONEZL0bdbL8e
+            3HIjDEiBSEamafXx1OQRG+zP2ULciz9UgSalckIMgJ9VHO0vTI4/og==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1fhad5cu8sw0rcyejcq9gwgjp92dghe068yjn75euk3a26wwkug9q596f0h
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBzbFZROWlobENaUGx5RWRa
+            cWhieDY3VW4za1A3cEp5MnFranhSZFhoNUJZCmJCWGpmMkRZS2FNK3BqUXd1Z0sv
+            djdtM2xPQmVjV3lxWWkwUUNlSkY2T3MKLS0tIEhhakVWbGxmVDVoUmViUHR1d3FW
+            YUd6UnZpbVJuc0lMLzFPMmpiUldTejAKNMIzpQAuK8x5RKKWazki+uSE1BpqR5uh
+            1JHkdVTyzSDmnZwl6DA256LQMPLJ9JYu8Po9x/+w20RQzziNyry39A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-04-08T14:50:52Z"
+    mac: ENC[AES256_GCM,data:j6FPZ3ArskyefbHSXgUzif/SW3JX3a53VbBaUHlW+KGpS/x99h07HwHEyvJ97FqmL4LSUZucm5FtyMQgNZUJZ14gy80d3Ot1BUX2QTyTQwLWzkg62q+o1+sQK23pRQldHaIM53ehIafkgUdSB2QdQRX+FZNkVk8W4bntajNVvSw=,iv:HLwYafwJE3bSp8suXYVXpnvJiVjuWskRpaifhSs1ii8=,tag:f1Xi0fdkkzVNFIA12u5wmQ==,type:str]
+    unencrypted_suffix: _unencrypted
+    version: 3.12.2
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+let
+  cfg = config.optionals.features.steam;
+in
+
+{
+  options.optionals.features.steam.enable = lib.mkOption {
+    type = lib.types.bool;
+    description = "steam Configuration";
+    default = false;
+  };
+  config = lib.mkIf cfg.enable {
+    programs = {
+      steam = {
+        enable = true;
+        extraCompatPackages = with pkgs; [
+          proton-ge-bin
+        ];
+      };
+    };
+  };
+}
+{ config, lib, ... }:
+
+let
+  cfg = config.optionals.features.sunshine;
+in
+{
+  options.optionals.features.sunshine.enable = lib.mkOption {
+    type = lib.types.bool;
+    description = "Sunshine, transmit desktop to any host";
+    default = false;
+  };
+  config = lib.mkIf cfg.enable {
+    services.sunshine = {
+      enable = true;
+      openFirewall = true;
+      autoStart = true;
+    };
+  };
+}
+{ config, lib, ... }:
+let
+  user = config.core.user;
+in
+{
+
+  options.core.user = lib.mkOption {
+    type = lib.types.str;
+    description = "The primary user";
+  };
+  config = lib.mkIf (user != "") {
+    users = {
+      groups.${user} = { };
+      users.${user} = {
+        isNormalUser = true;
+        group = user;
+        extraGroups = [
+          "wheel"
+          "video"
+          "audio"
+        ];
+      };
+    };
+  };
+}
+{
+  config,
+  lib,
+  ...
+}:
+
+let
+  cfg = config.optionals.features.vesktop;
+  user = config.core.user;
+in
+{
+  options.optionals.features.vesktop.enable = lib.mkOption {
+    description = "Vesktop, a better Discord for Linux";
+    type = lib.types.bool;
+    default = false;
+  };
+
+  config = lib.mkIf cfg.enable {
+    home-manager.users.${user} = {
+      programs.vesktop = {
+        enable = true;
+        settings = {
+          discordBranch = "stable";
+          minimizeToTray = true;
+          spellCheckLanguages = [
+            "en-US"
+            "en"
+            "br"
+            "PT-br"
+          ];
+        };
+        vencord = {
+          settings = {
+            notifyAboutUpdates = false;
+            autoUpdate = true;
+            autoUpdateNotification = false;
+            useQuickCss = true;
+            enableReactDevtools = false;
+            frameless = false;
+            transparent = false;
+            winCtrlQ = false;
+            disableMinSize = false;
+            winNativeTitleBar = false;
+
+            notifications = {
+              timeout = 5000;
+              position = "top-right";
+              useNative = "not-focused";
+              logLimit = 5;
+            };
+
+            cloud = {
+              authenticated = false;
+              url = "https://api.vencord.dev/";
+              settingsSync = false;
+              settingsSyncVersion = 174533173837;
+            };
+
+            eagerPatches = false;
+
+            plugins = {
+              BadgeAPI.enabled = true;
+              ChatInputButtonAPI.enabled = true;
+              CommandsAPI.enabled = true;
+              ContextMenuAPI.enabled = true;
+              MemberListDecoratorsAPI.enabled = true;
+              MessageAccessoriesAPI.enabled = true;
+              MessageDecorationsAPI.enabled = true;
+              MessageEventsAPI.enabled = true;
+              MessagePopoverAPI.enabled = true;
+              NoticesAPI.enabled = true;
+              ServerListAPI.enabled = true;
+              SupportHelper.enabled = true;
+              BetterGifAltText.enabled = true;
+              BetterGifPicker.enabled = true;
+              BetterUploadButton.enabled = true;
+              ClearURLs.enabled = true;
+              ColorSighted.enabled = true;
+              CopyUserURLs.enabled = true;
+              CrashHandler.enabled = true;
+              DisableCallIdle.enabled = true;
+              FavoriteEmojiFirst.enabled = true;
+              FavoriteGifSearch.enabled = true;
+              FixCodeblockGap.enabled = true;
+              FixSpotifyEmbeds.enabled = true;
+              FixYoutubeEmbeds.enabled = true;
+              ForceOwnerCrown.enabled = true;
+              FriendsSince.enabled = true;
+              GreetStickerPicker.enabled = true;
+              MessageTags.enabled = true;
+              MoreKaomoji.enabled = true;
+              NoF1.enabled = true;
+              NoTypingAnimation.enabled = true;
+              NoUnblockToJump.enabled = true;
+              NSFWGateBypass.enabled = true;
+              petpet.enabled = true;
+              PreviewMessage.enabled = true;
+              QuickReply.enabled = true;
+              ReadAllNotificationsButton.enabled = true;
+              ReverseImageSearch.enabled = true;
+              Unindent.enabled = true;
+              UrbanDictionary.enabled = true;
+              ValidUser.enabled = true;
+              VoiceMessages.enabled = true;
+              WebKeybinds.enabled = true;
+              WhoReacted.enabled = true;
+              Wikisearch.enabled = true;
+              UnlockedAvatarZoom.enabled = true;
+              ValidReply.enabled = true;
+              WebScreenShareFixes.enabled = true;
+              MessageUpdaterAPI.enabled = true;
+              ServerInfo.enabled = true;
+              SettingsStoreAPI.enabled = true;
+              NoOnboardingDelay.enabled = true;
+              UserSettingsAPI.enabled = true;
+              YoutubeAdblock.enabled = true;
+              FullSearchContext.enabled = true;
+              CopyFileContents.enabled = true;
+              DynamicImageModalAPI.enabled = true;
+              HideMedia.enabled = true;
+              DisableDeepLinks.enabled = true;
+
+              NoTrack = {
+                enabled = true;
+                disableAnalytics = true;
+              };
+              Settings = {
+                enabled = true;
+                settingsLocation = "aboveActivity";
+              };
+              AlwaysTrust = {
+                enabled = true;
+                domain = true;
+                file = true;
+              };
+              BetterNotesBox = {
+                enabled = true;
+                hide = true;
+                noSpellCheck = false;
+              };
+              BetterRoleContext = {
+                enabled = true;
+                roleIconFileFormat = "png";
+              };
+              BetterSettings = {
+                enabled = true;
+                disableFade = true;
+                eagerLoad = true;
+              };
+              BlurNSFW = {
+                enabled = true;
+                blurAmount = 10;
+              };
+              Dearrow = {
+                enabled = true;
+                hideButton = false;
+                replaceElements = 0;
+                dearrowByDefault = true;
+              };
+              LoadingQuotes = {
+                enabled = true;
+                replaceEvents = true;
+                enableDiscordPresetQuotes = false;
+                additionalQuotes = "";
+                additionalQuotesDelimiter = "|";
+                enablePluginPresetQuotes = true;
+              };
+              MemberCount = {
+                enabled = true;
+                memberList = true;
+                toolTip = true;
+              };
+              MessageLinkEmbeds = {
+                enabled = true;
+                listMode = "blacklist";
+                idList = ",";
+                automodEmbeds = "never";
+              };
+              NoPendingCount = {
+                enabled = true;
+                hideFriendRequestsCount = false;
+                hideMessageRequestsCount = false;
+                hidePremiumOffersCount = true;
+              };
+              OnePingPerDM = {
+                enabled = true;
+                channelToAffect = "both_dms";
+                allowMentions = false;
+                allowEveryone = false;
+              };
+              OpenInApp = {
+                enabled = true;
+                spotify = true;
+                steam = true;
+                epic = true;
+                tidal = true;
+                itunes = true;
+              };
+              PlatformIndicators = {
+                enabled = true;
+                colorMobileIndicator = true;
+                list = true;
+                badges = true;
+                messages = true;
+              };
+              RelationshipNotifier = {
+                enabled = true;
+                offlineRemovals = true;
+                groups = true;
+                servers = true;
+                friends = true;
+                friendRequestCancels = true;
+                notices = false;
+              };
+              ShowHiddenChannels = {
+                enabled = true;
+                showMode = 0;
+                hideUnreads = true;
+                defaultAllowedUsersAndRolesDropdownState = true;
+              };
+              ShowMeYourName = {
+                enabled = true;
+                mode = "nick-user";
+                displayNames = false;
+                inReplies = true;
+              };
+              SilentMessageToggle = {
+                enabled = true;
+                persistState = false;
+                autoDisable = true;
+              };
+              Translate = {
+                enabled = true;
+                autoTranslate = false;
+                receivedInput = "auto";
+                receivedOutput = "en";
+                showChatBarButton = true;
+                sentInput = "auto";
+                sentOutput = "en";
+              };
+              TypingTweaks = {
+                enabled = true;
+                alternativeFormatting = true;
+                showRoleColors = true;
+                showAvatars = true;
+              };
+              UserVoiceShow = {
+                enabled = true;
+                showVoiceChannelSectionHeader = true;
+                showInUserProfileModal = true;
+                showInMemberList = true;
+                showInMessages = true;
+              };
+              ViewIcons = {
+                enabled = true;
+                format = "webp";
+                imgSize = 1024;
+              };
+              ViewRaw = {
+                enabled = true;
+                clickMethod = "Left";
+              };
+              WebContextMenus = {
+                enabled = true;
+                addBack = true;
+              };
+              ShowHiddenThings = {
+                enabled = true;
+                showTimeouts = true;
+                showInvitesPaused = true;
+                showModView = true;
+                disableDiscoveryFilters = true;
+                disableDisallowedDiscoveryFilters = true;
+              };
+              MentionAvatars = {
+                enabled = true;
+                showAtSymbol = true;
+              };
+            };
+          };
+        };
+      };
+    };
+  };
+}
+{ lib, config, ... }:
+let
+  cfg = config.optionals.features.virtualization;
+  isNvidia = config.optionals.features.nvidia.enable;
+in
+{
+  options.optionals.features.virtualization.enable = lib.mkOption {
+    type = lib.types.bool;
+    description = "Virtualization";
+    default = false;
+  };
+
+  config = lib.mkIf cfg.enable {
+    virtualisation = {
+      libvirtd.enable = true;
+      docker = {
+        enable = true;
+        enableNvidia = isNvidia;
+        enableOnBoot = true;
+        autoPrune.enable = true;
+      };
+    };
+  };
+}
+{ ... }:
+{
+  imports = [
+    ./hardware.nix
+    ../../Features
+  ];
+
+  networking.hostName = "Centuria";
+
+  core = {
+    user = "rplakama";
+    nvidia.enable = true;
+  };
+  optionals.features = {
+    niri.enable = true;
+    neovim.enable = true;
+    sunshine.enable = true;
+    steam.enable = true;
+    qbit.enable = true;
+  };
+}
+# Do not modify this file!  It was generated by ‘nixos-generate-config’
+# and may be overwritten by future invocations.  Please make changes
+# to /etc/nixos/configuration.nix instead.
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+
+{
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
+
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "usb_storage"
+    "usbhid"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/74c3ad22-23f4-4b76-a651-9f29afd5ef08";
+    fsType = "xfs";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/2DA1-CCCE";
+    fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
+  };
+
+  swapDevices = [ ];
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+}
+{ pkgs, ... }:
+{
+  imports = [
+    ./hardware.nix
+    ../../Features
+  ];
+
+  networking.hostName = "Elisheva";
+  environment.systemPackages = with pkgs; [
+    moonlight-qt # << Victim of evil sunshine
+  ];
+
+  core.user = "rplakama";
+  optionals.features = {
+    niri.enable = true;
+    neovim.enable = true;
+  };
+}
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+
+{
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
+
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/025ff2b0-5f0d-4975-806e-e2d714f50241";
+    fsType = "xfs";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/A27F-2CB5";
+    fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
+  };
+
+  swapDevices = [ ];
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+}
+{ ... }:
+{
+  imports = [
+    ./hardware.nix
+    ../../Features
+  ];
+
+  networking.hostName = "Moontier";
+
+  core.user = "rplakama";
+  optionals.features = {
+    niri.enable = false;
+    neovim.enable = true;
+    graphicalPkgs.enable = false;
+    pi-hole.enable = true;
+    nzbget.enable = true;
+    rrstack.enable = true;
+    qbit.enable = true;
+  };
+}
+{
+  config,
+  lib,
+  modulesPath,
+  ...
+}:
+
+{
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
+
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "usb_storage"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/3d02f997-4ef4-4d04-a40a-734742b53660";
+    fsType = "xfs";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/6B54-471D";
+    fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
+  };
+
+  swapDevices = [ ];
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+}
