@@ -15,5 +15,6 @@
     niri.enable = true;
     neovim.enable = true;
     sunshine.enable = true;
+    steam.enable = true;
   };
 }
