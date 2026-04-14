@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 let
   user = config.core.user;
 in
@@ -13,6 +18,8 @@ in
       groups.${user} = { };
       users.${user} = {
         isNormalUser = true;
+        shell = pkgs.fish;
+
         group = user;
         extraGroups = [
           "wheel"
