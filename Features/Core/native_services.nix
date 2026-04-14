@@ -8,6 +8,7 @@
     devmon.enable = true;
     udisks2.enable = true;
     resolved.enable = true;
+    networking.networkmanager.enable = true;
 
     tailscale = {
       enable = true;

@@ -23,15 +23,15 @@ in
       materialgram
       jellyfin-desktop
     ];
-  };
 
-  home-manager.users.${user} = {
-    programs.foot = {
-      enable = true;
-      settings.main = {
-        dpi-aware = false;
-        font = "CaskaydiaCove Nerd Font Mono:size=9";
-        include = "/home/${user}/.config/foot/dank-colors.ini";
+    home-manager.users.${user} = {
+      programs.foot = {
+        enable = true;
+        settings.main = {
+          dpi-aware = false;
+          font = "CaskaydiaCove Nerd Font Mono:size=9";
+          include = "/home/${user}/.config/foot/dank-colors.ini";
+        };
       };
     };
   };
