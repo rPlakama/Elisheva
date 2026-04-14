@@ -16,5 +16,6 @@
     neovim.enable = true;
     sunshine.enable = true;
     steam.enable = true;
+    qbit.enable = true;
   };
 }

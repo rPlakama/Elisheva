@@ -9,8 +9,12 @@
 
   core.user = "rplakama";
   optionals.features = {
-    niri.enable = true;
+    niri.enable = false;
     neovim.enable = true;
     graphicalPkgs.enable = false;
+    pi-hole.enable = true;
+    nzbget.enable = true;
+    rrstack.enable = true;
+    qbit.enable = true;
   };
 }

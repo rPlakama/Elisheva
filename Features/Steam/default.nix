@@ -13,7 +13,7 @@ in
   options.optionals.features.steam.enable = lib.mkOption {
     type = lib.types.bool;
     description = "steam Configuration";
-    default = true;
+    default = false;
   };
   config = lib.mkIf cfg.enable {
     programs = {
