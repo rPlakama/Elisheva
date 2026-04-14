@@ -28,7 +28,7 @@
       ...
     }:
     let
-      stVersion = "25.11";
+      stVersion = "26.05";
       hostNames = builtins.attrNames (
         nixpkgs.lib.filterAttrs (name: type: type == "directory") (builtins.readDir ./Hosts)
       );
