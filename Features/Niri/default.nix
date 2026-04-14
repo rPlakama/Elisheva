@@ -70,7 +70,7 @@ in
         compositor = {
           name = "niri";
         };
-        configHome = "/home/rplakama";
+        configHome = "/home/${user}";
       };
 
     };

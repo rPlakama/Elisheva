@@ -6,6 +6,8 @@
 
 let
   cfg = config.optionals.features.qbit;
+  user = config.core.user;
+
 in
 
 {
@@ -25,7 +27,7 @@ in
         LegalNotice.Accepted = true;
         Preferences = {
           WebUI = {
-            Username = "rplakama";
+            Username = "${user}";
             Password_PBKDF2 = "@ByteArray(ttJDfjqsdk8ccksmlOI15A==:/WoWQEN+/ObzbkNCDVVZ4/3yfxkTXz58jXYvxYmHXWayB0VHghFapn+RFJZOFZyNcpcsaOUWW2+QtgAkwzJwFQ==)";
           };
           General.Locale = "en";

@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware.nix
@@ -6,6 +6,9 @@
   ];
 
   networking.hostName = "Elisheva";
+  environment.systemPackages = with pkgs; [
+    moonlight-qt # << Victim of evil sunshine
+  ];
 
   core.user = "rplakama";
   optionals.features = {

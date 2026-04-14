@@ -15,7 +15,6 @@
       trusted-users = [
         "${config.core.user}"
         "networkmanager"
-        "rplakama"
         "root"
         "@wheel"
       ];
