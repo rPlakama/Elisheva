@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  cfg = config.optionals.features.neovim;
+  cfg = config.optionals.features.sunshine;
 in
 {
   options.optionals.features.sunshine.enable = lib.mkOption {
