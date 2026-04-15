@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware.nix
@@ -7,6 +7,9 @@
 
   networking.hostName = "Centuria";
 
+  environment.systemPackages = [
+    pkgs.ckan
+  ];
   core = {
     user = "rplakama";
     nvidia.enable = true;
