@@ -21,5 +21,6 @@
     steam.enable = true;
     qbit.enable = true;
     scx.enable = true;
+    vesktop.enable = true;
   };
 }

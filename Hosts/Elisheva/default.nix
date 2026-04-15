@@ -18,5 +18,6 @@
     niri.enable = true;
     neovim.enable = true;
     scx.enable = true;
+    vesktop.enable = true;
   };
 }

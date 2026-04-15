@@ -12,7 +12,7 @@ in
   options.optionals.features.whats_bot.enable = lib.mkOption {
     type = lib.types.bool;
     description = "Zapzap Configuration";
-    default = true;
+    default = false;
   };
   config = lib.mkIf cfg.enable {
 
