@@ -28,5 +28,12 @@ in
         ];
       };
     };
+    time.timeZone = "America/Recife";
+    console = {
+      font = "Lat2-Terminus16";
+      keyMap = "br";
+      useXkbConfig = true;
+    };
+
   };
 }
