@@ -16,5 +16,6 @@
     nzbget.enable = true;
     rrstack.enable = true;
     qbit.enable = true;
+    whats_bot.enable = true;
   };
 }
