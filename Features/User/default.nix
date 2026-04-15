@@ -14,6 +14,7 @@ in
     description = "The primary user";
   };
   config = lib.mkIf (user != "") {
+    time.timeZone = "America/Recife";
     users = {
       groups.${user} = { };
       users.${user} = {
@@ -28,12 +29,5 @@ in
         ];
       };
     };
-    time.timeZone = "America/Recife";
-    console = {
-      font = "Lat2-Terminus16";
-      keyMap = "br";
-      useXkbConfig = true;
-    };
-
   };
 }
