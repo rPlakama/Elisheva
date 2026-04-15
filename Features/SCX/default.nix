@@ -15,7 +15,7 @@ in
     default = false;
   };
   config = lib.mkIf cfg.enable {
-    scx = {
+    services.scx = {
       enable = true;
       scheduler = "scx_lavd";
     };
