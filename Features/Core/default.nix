@@ -12,6 +12,7 @@
     description = "Essential system segments";
   };
   config = lib.mkIf config.core.features.core.enable {
+    security.sudo-rs.enable = true;
     environment.systemPackages = with pkgs; [
       wl-clipboard
       wget

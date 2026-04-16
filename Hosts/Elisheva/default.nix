@@ -7,10 +7,11 @@
 
   networking.hostName = "Elisheva";
   environment.systemPackages = with pkgs; [
-    moonlight-qt # << Victim of evil sunshine
+    moonlight-qt
+    ciscoPacketTracer9
   ];
   boot.kernelParams = [
-    "video=eDP-1:1920x1080@72" # <-- Shitty Screen
+    "video=eDP-1:1920x1080@72"
   ];
 
   core.user = "rplakama";
