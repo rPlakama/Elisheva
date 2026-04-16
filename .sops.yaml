@@ -1,8 +1,8 @@
 keys:
-  - &Elisheva age1evrxhkekty6ltj9a8rdeyjml2qeeynh40ghj3hywgnpdy2uq2u4q2a8uyn
+  - &Elisheva age1nahmfd6uh5f8ugmayz2q5vr7d2j2w8ev30cm2c6ug7lm3acx8u7q3z0q88
   - &Moontier age1fhad5cu8sw0rcyejcq9gwgjp92dghe068yjn75euk3a26wwkug9q596f0h
 creation_rules:
-  - path_regex: secrets\.yaml$
+  - path_regex: secrets.yaml
     key_groups:
     - age:
       - *Elisheva

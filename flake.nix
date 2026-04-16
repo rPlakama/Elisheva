@@ -24,6 +24,7 @@
   outputs =
     inputs@{
       nixpkgs,
+      sops-nix,
       home-manager,
       ...
     }:
@@ -41,13 +42,14 @@
           specialArgs = { inherit inputs; };
           modules = [
             home-manager.nixosModules.home-manager
-
+            sops-nix.nixosModules.sops
             ./Hosts/${hostname}
             (
               { config, ... }:
               {
                 networking.hostName = hostname;
                 system.stateVersion = stVersion;
+                sops.defaultSopsFile = ./secrets.yaml;
 
                 home-manager = {
                   useGlobalPkgs = true;
