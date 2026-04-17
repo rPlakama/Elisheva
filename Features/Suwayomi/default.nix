@@ -21,6 +21,8 @@ in
       group = "media";
       openFirewall = true;
       settings.server = {
+        downloadsPath = "/media/mangas";
+        downloadAsCbz = true;
         port = 6721;
         extensionRepos = [
           "https://raw.githubusercontent.com/keiyoushi/extensions/repo/index.min.json"
