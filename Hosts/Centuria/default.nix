@@ -7,15 +7,18 @@
 
   networking.hostName = "Centuria";
 
-  environment.systemPackages = [
-    pkgs.ckan
+  environment.systemPackages = with pkgs; [
+    ckan
+    ollama-cuda
+    opencode
   ];
   core = {
     user = "rplakama";
-    nvidia.enable = true;
   };
   optionals.features = {
+    nvidia.enable = true;
     niri.enable = true;
+    virtualization.enable = true;
     neovim.enable = true;
     sunshine.enable = true;
     steam.enable = true;

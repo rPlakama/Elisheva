@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.core.nvidia;
+  cfg = config.optionals.features.nvidia;
 in
 {
-  options.core.nvidia.enable = lib.mkOption {
+  options.optionals.features.nvidia.enable = lib.mkOption {
     type = lib.types.bool;
     description = "Nvidia driver configuration";
     default = false;
