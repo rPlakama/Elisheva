@@ -19,5 +19,6 @@
     rrstack.enable = true;
     qbit.enable = true;
     whats_bot.enable = true;
+    slskd.enable = true;
   };
 }
