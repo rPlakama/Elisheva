@@ -9,6 +9,7 @@ let
   mediaFolders = [
     "films"
     "music"
+    "mangas"
     "downloads"
     "series"
     "torrents"
