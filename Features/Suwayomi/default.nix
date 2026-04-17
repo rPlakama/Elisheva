@@ -12,7 +12,7 @@ in
   options.optionals.features.suwayomi.enable = lib.mkOption {
     type = lib.types.bool;
     description = "Suwayomi Configuration";
-    default = true;
+    default = false;
   };
   config = lib.mkIf cfg.enable {
     core.features.mediaPermissions.enable = true;

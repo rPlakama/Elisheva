@@ -12,6 +12,7 @@
     niri.enable = false;
     neovim.enable = true;
     graphicalPkgs.enable = false;
+    suwayomi.enable = true;
     pi-hole.enable = true;
     nzbget.enable = true;
     rrstack.enable = true;
