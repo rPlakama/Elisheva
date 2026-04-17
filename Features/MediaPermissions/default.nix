@@ -4,8 +4,7 @@ let
   cfg = config.core.features.mediaPermissions;
   user = config.core.user;
 
-  base_path = "d /media";
-  rules_group = "2775 nobody media - - ";
+  base_path = "/media";
   mediaFolders = [
     "films"
     "music"
@@ -26,6 +25,9 @@ in
     users.groups.media = { };
     users.users.${user}.extraGroups = [ "media" ];
 
-    systemd.tmpfiles.rules = map (folder: "${base_path}/${folder} ${rules_group}") mediaFolders;
+    systemd.tmpfiles.rules = builtins.concatMap (folder: [
+      "d ${base_path}/${folder} 2775 nobody media - -" # directory exists
+      "Z ${base_path}/${folder} 2775 nobody media - -" # Recursively permissions
+    ]) mediaFolders;
   };
 }

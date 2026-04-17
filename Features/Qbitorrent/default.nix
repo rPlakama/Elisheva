@@ -25,9 +25,9 @@ in
       group = "media";
       serverConfig = {
         LegalNotice.Accepted = true;
-         Queueing = {
+        Queueing = {
           QueueingEnabled = false;
-         };
+        };
         Preferences = {
           WebUI = {
             Username = "${user}";
