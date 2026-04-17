@@ -25,19 +25,15 @@ in
       group = "media";
       serverConfig = {
         LegalNotice.Accepted = true;
-        BitTorrent = {
-          "Session.MaxActiveDownloads" = 15;
-          "Session.MaxActiveUploads" = 500;
-          "Session.MaxActiveTorrents" = 500;
-          "Session.QueueingSystemEnabled" = true;
-        };
+         Queueing = {
+          QueueingEnabled = false;
+         };
         Preferences = {
           WebUI = {
             Username = "${user}";
             Password_PBKDF2 = "@ByteArray(ttJDfjqsdk8ccksmlOI15A==:/WoWQEN+/ObzbkNCDVVZ4/3yfxkTXz58jXYvxYmHXWayB0VHghFapn+RFJZOFZyNcpcsaOUWW2+QtgAkwzJwFQ==)";
           };
           "General.Locale" = "en";
-          "Downloads.SavePath" = "/media/downloads";
         };
       };
     };
