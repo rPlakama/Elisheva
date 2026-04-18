@@ -9,6 +9,7 @@ let
     "films"
     "music"
     "mangas"
+    "novels"
     "downloads"
     "series"
     "torrents"

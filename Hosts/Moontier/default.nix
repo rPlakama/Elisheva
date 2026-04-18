@@ -14,7 +14,8 @@
     graphicalPkgs.enable = false;
     suwayomi.enable = true;
     komga.enable = true;
-    pi-hole.enable = true;
+    pi-hole.enable = false;
+    adguard.enable = true;
     nzbget.enable = true;
     rrstack.enable = true;
     qbit.enable = true;
