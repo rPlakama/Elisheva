@@ -15,6 +15,7 @@
     security.sudo-rs.enable = true;
     environment.systemPackages = with pkgs; [
       wl-clipboard
+      ripgrep
       wget
       age
       sops

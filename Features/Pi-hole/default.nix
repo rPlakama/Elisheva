@@ -19,6 +19,11 @@ in
     networking = {
       defaultGateway = "192.168.1.1";
       nameservers = [ "127.0.0.1" ];
+      firewall.allowedTCPPorts = [
+        80
+        443
+        8081
+      ];
     };
 
     services = {
@@ -27,6 +32,7 @@ in
         enable = true;
         settings = {
           server = {
+            tcp-idle-timeout = 1000;
             interface = [
               "127.0.0.1"
               "::1"
@@ -120,12 +126,10 @@ in
               "192.168.1.1    gateway.moontier.me"
               "192.168.1.106  pi-hole"
               "192.168.1.106  pi-hole.moontier.me"
+              "192.168.1.106  moontier.local.lan"
             ];
             upstreams = [
-              # Cloudflare
               "127.0.0.1#5335"
-              #"1.1.1.1"
-              #"1.0.0.1"
             ];
           };
           ntp = {
@@ -147,7 +151,7 @@ in
 
       pihole-web = {
         enable = true;
-        ports = [ 80 ];
+        ports = [ 8081 ];
       };
 
       resolved = {
