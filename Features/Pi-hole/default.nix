@@ -6,6 +6,8 @@
 
 let
   cfg = config.optionals.features.pi-hole;
+  currentIP = "192.168.1.106";
+  gatewayIP = "192.168.1.1";
 in
 
 {
@@ -17,7 +19,7 @@ in
   config = lib.mkIf cfg.enable {
 
     networking = {
-      defaultGateway = "192.168.1.1";
+      defaultGateway = "${gatewayIP}";
       nameservers = [ "127.0.0.1" ];
       firewall.allowedTCPPorts = [
         80
@@ -66,7 +68,7 @@ in
           ];
           dhcp-option = [
             "vendor:MSFT,2,1i"
-            "6,192.168.1.106"
+            "6,${gatewayIP}06"
           ];
           domain = [
             "moontier.me,192.168.1.0/24,local"
@@ -112,7 +114,7 @@ in
             resolver = {
               resolveIPv6 = false;
             };
-            router = "192.168.1.1";
+            router = "${gatewayIP}";
           };
           dns = {
             cnameRecords = [ ];
@@ -122,11 +124,11 @@ in
             expandHosts = true;
             interface = "all";
             hosts = [
-              "192.168.1.1    gateway"
-              "192.168.1.1    gateway.moontier.me"
-              "192.168.1.106  pi-hole"
-              "192.168.1.106  pi-hole.moontier.me"
-              "192.168.1.106  moontier.local.lan"
+              "${gatewayIP}    gateway"
+              "${gatewayIP}    gateway.moontier.me"
+              "${currentIP}  pi-hole"
+              "${currentIP}  pi-hole.moontier.me"
+              "${currentIP}  moontier.home"
             ];
             upstreams = [
               "127.0.0.1#5335"
@@ -163,13 +165,6 @@ in
         };
       };
     };
-
-    system.activationScripts = {
-      print-pi-hole = {
-        text = builtins.trace "building the pi-hole configuration..." "";
-      };
-    };
-
     systemd.tmpfiles.rules = [
       "f /etc/pihole/versions 0644 pihole pihole - -"
     ];

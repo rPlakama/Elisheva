@@ -34,29 +34,36 @@ in
       443
     ];
 
-    services.nginx = {
-      enable = true;
+    services = {
+      nginx = {
+        enable = true;
 
-      recommendedGzipSettings = true;
-      recommendedOptimisation = true;
-      recommendedProxySettings = true;
-      recommendedTlsSettings = true;
+        recommendedGzipSettings = true;
+        recommendedOptimisation = true;
+        recommendedProxySettings = true;
+        recommendedTlsSettings = true;
 
-      virtualHosts."moontier.local" = {
-        forceSSL = true;
+        virtualHosts."moontier.home" = {
+          forceSSL = true;
 
-        sslCertificate = config.sops.secrets."nginx/moontier_crt".path;
-        sslCertificateKey = config.sops.secrets."nginx/moontier_key".path;
+          sslCertificate = config.sops.secrets."nginx/moontier_crt".path;
+          sslCertificateKey = config.sops.secrets."nginx/moontier_key".path;
 
-        extraConfig = ''
-          allow 192.168.1.0/24;
-          allow 127.0.0.1;
-          deny all;
-        '';
+          extraConfig = ''
+            allow 192.168.1.0/24;
+            allow 127.0.0.1;
+            deny all;
+          '';
 
-        locations."/evil" = {
-          proxyPass = "http://192.168.1.106:8096";
-          proxyWebsockets = true;
+          locations."/sonarr" = {
+            proxyPass = "http://192.168.1.106:8989";
+            proxyWebsockets = true;
+          };
+
+          locations."/jellyfin" = {
+            proxyPass = "http://192.168.1.106:8096";
+            proxyWebsockets = true;
+          };
         };
       };
     };
