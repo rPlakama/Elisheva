@@ -22,5 +22,6 @@ in
       group = "media";
       settings.server.port = 3210;
     };
+    optionals.features.nginx.proxyServices.komga = 3210;
   };
 }

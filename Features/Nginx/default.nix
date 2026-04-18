@@ -3,30 +3,32 @@
   lib,
   ...
 }:
-
 let
   cfg = config.optionals.features.nginx;
+  currentIP = "192.168.1.106";
+  domain = "moontier.online";
 in
-
 {
-  options.optionals.features.nginx.enable = lib.mkOption {
-    type = lib.types.bool;
-    description = "Nginx Configuration with SOPS SSL";
-    default = false;
+  options.optionals.features.nginx = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Nginx with Let's Encrypt via Hetzner DNS-01";
+      default = false;
+    };
+
+    # 1. Define the new custom option here
+    proxyServices = lib.mkOption {
+      type = lib.types.attrsOf lib.types.port;
+      default = { };
+      description = "Map of subpaths to their local ports. e.g., { jellyfin = 8096; }";
+    };
   };
 
   config = lib.mkIf cfg.enable {
-
-    sops.secrets."nginx/moontier_key" = {
-      owner = "nginx";
-      group = "nginx";
+    sops.secrets."hetzner/api" = {
+      owner = "acme";
+      group = "acme";
       mode = "0400";
-    };
-
-    sops.secrets."nginx/moontier_crt" = {
-      owner = "nginx";
-      group = "nginx";
-      mode = "0444";
     };
 
     networking.firewall.allowedTCPPorts = [
@@ -34,37 +36,41 @@ in
       443
     ];
 
-    services = {
-      nginx = {
-        enable = true;
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "rPlakama@proton.me";
+      certs."${domain}" = {
+        domain = "${domain}";
+        dnsProvider = "hetzner";
+        credentialsFile = config.sops.secrets."hetzner/api".path;
+        dnsPropagationCheck = true;
+      };
+    };
 
-        recommendedGzipSettings = true;
-        recommendedOptimisation = true;
-        recommendedProxySettings = true;
-        recommendedTlsSettings = true;
+    users.users.nginx.extraGroups = [ "acme" ];
 
-        virtualHosts."moontier.home" = {
-          forceSSL = true;
+    services.nginx = {
+      enable = true;
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+      virtualHosts."${domain}" = {
+        useACMEHost = "${domain}";
+        forceSSL = true;
+        extraConfig = ''
+          allow 192.168.1.0/24;
+          allow 127.0.0.1;
+          deny all;
+        '';
 
-          sslCertificate = config.sops.secrets."nginx/moontier_crt".path;
-          sslCertificateKey = config.sops.secrets."nginx/moontier_key".path;
-
-          extraConfig = ''
-            allow 192.168.1.0/24;
-            allow 127.0.0.1;
-            deny all;
-          '';
-
-          locations."/sonarr" = {
-            proxyPass = "http://192.168.1.106:8989";
+        locations = lib.mapAttrs' (
+          name: port:
+          lib.nameValuePair "/${name}" {
+            proxyPass = "http://${currentIP}:${toString port}";
             proxyWebsockets = true;
-          };
-
-          locations."/jellyfin" = {
-            proxyPass = "http://192.168.1.106:8096";
-            proxyWebsockets = true;
-          };
-        };
+          }
+        ) cfg.proxyServices;
       };
     };
   };

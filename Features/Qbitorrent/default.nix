@@ -7,6 +7,8 @@
 let
   cfg = config.optionals.features.qbit;
   user = config.core.user;
+  domain = "moontier.online";
+  currentIP = "192.168.1.106";
 
 in
 
@@ -36,6 +38,19 @@ in
           "General.Locale" = "en";
         };
       };
+    };
+    services.nginx.virtualHosts."${domain}".locations."^~ /qbittorrent/" = {
+      proxyPass = "http://${currentIP}:8080/";
+      proxyWebsockets = true;
+      extraConfig = ''
+        proxy_set_header X-Forwarded-Host $http_host;
+
+        # Prevent qBittorrent from blocking the login due to CSRF protection
+        proxy_hide_header Referer;
+        proxy_hide_header Origin;
+        proxy_set_header Referer "";
+        proxy_set_header Origin "";
+      '';
     };
   };
 }

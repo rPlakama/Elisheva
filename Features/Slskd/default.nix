@@ -23,7 +23,7 @@ in
 
     (lib.mkIf cfg.enable {
       core.features.mediaPermissions.enable = true;
-
+      optionals.features.nginx.proxyServices.slskd = 5030;
       services.slskd = {
         enable = true;
         group = "media";
@@ -42,6 +42,7 @@ in
           web = {
             address = "0.0.0.0";
             port = 5030;
+            url_base = "/slskd";
           };
         };
       };

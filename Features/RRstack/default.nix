@@ -3,19 +3,19 @@
 let
   cfg = config.optionals.features.rrstack;
 
-  mediaServicesWithPermissions = [
-    "jackett"
-    "jellyfin"
-    "bazarr"
-    "sonarr"
-    "radarr"
-    "readarr"
-  ];
+  mediaServicesWithPermissions = {
+    jackett = 9117;
+    jellyfin = 8096;
+    bazarr = 6767;
+    sonarr = 8989;
+    radarr = 7878;
+    readarr = 8787;
+  };
 
-  mediaNonPermissions = [
-    "prowlarr"
-    "flaresolverr"
-  ];
+  mediaNonPermissions = {
+    prowlarr = 9696;
+    flaresolverr = 8191;
+  };
 in
 {
   options.optionals.features.rrstack.enable = lib.mkOption {
@@ -31,16 +31,16 @@ in
       "render"
     ];
 
-    services = (
-      lib.genAttrs mediaServicesWithPermissions (name: {
+    services =
+      (lib.mapAttrs (name: port: {
         enable = true;
         openFirewall = true;
         group = "media";
-      })
-      // lib.genAttrs mediaNonPermissions (name: {
+      }) mediaServicesWithPermissions)
+      // (lib.mapAttrs (name: port: {
         enable = true;
         openFirewall = true;
-      })
-    );
+      }) mediaNonPermissions);
+    optionals.features.nginx.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
   };
 }

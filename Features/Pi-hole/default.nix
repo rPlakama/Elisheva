@@ -124,11 +124,9 @@ in
             expandHosts = true;
             interface = "all";
             hosts = [
-              "${gatewayIP}    gateway"
-              "${gatewayIP}    gateway.moontier.me"
+              "${gatewayIP}  gateway"
               "${currentIP}  pi-hole"
-              "${currentIP}  pi-hole.moontier.me"
-              "${currentIP}  moontier.home"
+              "${currentIP}  moontier.online"
             ];
             upstreams = [
               "127.0.0.1#5335"
