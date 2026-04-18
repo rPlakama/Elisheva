@@ -36,6 +36,7 @@
       bpftune.enable = true;
       devmon.enable = true;
       udisks2.enable = true;
+      resolved.enable = true;
       pipewire = {
         enable = true;
         alsa.enable = true;
