@@ -12,8 +12,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri-nix = {
-      url = "git+https://codeberg.org/BANanaD3V/niri-nix";
+    niri = {
+      url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     quickshell = {
