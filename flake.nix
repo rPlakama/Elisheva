@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nixCats = {
+    url = "github:BirdeeHub/nixCats-nvim";
+    inputs.nixpkgs.follows = "nixpkgs";
+    };
     hjem = {
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";

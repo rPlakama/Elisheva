@@ -15,27 +15,27 @@ in
     description = "Neovim Configuration";
     default = true;
   };
-  
   config = lib.mkIf cfg.enable {
-
+    environment.variables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
     environment.systemPackages = [
       (pkgs.neovim.override {
         configure = {
-          
-          # ---> THIS IS THE FIX <---
-          # Forces the Nix wrapper to source your hjem configuration
           customRC = ''
-            luafile ~/.config/nvim/init.lua
+            luafile /home/${user}/.config/nvim/init.lua
           '';
-          
-          packages.myPlugins = {
-            start = with pkgs.vimPlugins; [
+          packages.myPlugins.start =
+            with pkgs.vimPlugins;
+            [
               nvim-lspconfig
               fzf-lua
               indent-blankline-nvim
               nvim-treesitter.withAllGrammars
               blink-cmp
-            ] ++ lib.optionals niriEnabled [
+            ]
+            ++ lib.optionals niriEnabled [
               (pkgs.vimUtils.buildVimPlugin {
                 name = "base46";
                 doCheck = false;
@@ -47,24 +47,22 @@ in
                 };
               })
             ];
-          };
         };
       })
     ];
+    hjem.users.${user}.files = {
+      ".config/nvim/lua/configs.lua".source = ./configs.lua;
+      ".config/nvim/lua/lsp.lua".source = ./lsp.lua;
+      ".config/nvim/lua/keybinds.lua".source = ./keybinds.lua;
+      ".config/nvim/init.lua".text = ''
+        require('configs')
+        require('keybinds')
+        require('lsp')
+      ''
+      + lib.optionalString niriEnabled ''
+        vim.cmd.colorscheme("dms")
+      '';
 
-    hjem.users.${user} = {
-      files = {
-        ".config/nvim/lua/configs.lua".source = ./configs.lua;
-        ".config/nvim/lua/lsp.lua".source = ./lsp.lua;
-        ".config/nvim/lua/keybinds.lua".source = ./keybinds.lua;
-        ".config/nvim/init.lua".text = ''
-          require('configs')
-          require('keybinds')
-          require('lsp')
-        '' + lib.optionalString niriEnabled ''
-          vim.cmd.colorscheme("dms")
-        '';
-      };
     };
   };
 }
