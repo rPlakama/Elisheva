@@ -12,10 +12,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:Mic92/sops-nix";
     };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,7 +31,6 @@
     inputs@{
       nixpkgs,
       sops-nix,
-      home-manager,
       ...
     }:
     let
@@ -51,23 +46,23 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            home-manager.nixosModules.home-manager
             inputs.hjem.nixosModules.default
             sops-nix.nixosModules.sops
             ./Hosts/${hostname}
             (
               { config, ... }:
+
+              let
+                user = config.core.user;
+              in
+
               {
                 networking.hostName = hostname;
                 system.stateVersion = stVersion;
                 sops.defaultSopsFile = ./secrets.yaml;
-
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  extraSpecialArgs = { inherit inputs; };
-                  users.${config.core.user}.home.stateVersion = stVersion;
-
+                hjem.users.${user} = {
+                  enable = true;
+                  clobberFiles = true;
                 };
               }
             )

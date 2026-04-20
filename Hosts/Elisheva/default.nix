@@ -16,8 +16,8 @@
 
   core.user = "rplakama";
   optionals.features = {
-    niri.enable = true;
     neovim.enable = true;
     scx.enable = true;
+    niri.enable = true;
   };
 }

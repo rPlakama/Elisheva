@@ -16,12 +16,18 @@ in
     { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
   ];
 
-  options.optionals.features.niri.enable = lib.mkOption {
-    description = "Niri Configuration";
-    type = lib.types.bool;
-    default = false;
+  options.optionals.features.niri = {
+    enable = lib.mkOption {
+      description = "Niri Configuration";
+      type = lib.types.bool;
+      default = false;
+    };
+    keyboardLayout = lib.mkOption {
+      description = "Keyboard layout";
+      type = lib.types.str;
+      default = "br";
+    };
   };
-
   config = lib.mkIf cfg.enable {
 
     systemd.user.services.niri-flake-polkit.enable = false;
@@ -49,6 +55,8 @@ in
       papirus-folders
       papirus-icon-theme
       volantes-cursors
+      wl-clipboard
+
     ];
 
     services = {
@@ -61,9 +69,9 @@ in
     };
 
     hjem.users.${user} = {
-      files = {
-        ".config/niri".source = ./config.kdl;
-      };
+      files.".config/niri/config.kdl".text =
+        builtins.replaceStrings [ "@keyboardLayout@" ] [ cfg.keyboardLayout ]
+          (builtins.readFile ./config.kdl);
     };
   };
 }

@@ -8,7 +8,7 @@
 let
   cfg = config.optionals.features.graphicalPkgs;
   user = config.core.user;
-
+  niriEnabled = config.optionals.features.niri.enable;
 in
 {
   options.optionals.features.graphicalPkgs.enable = lib.mkOption {
@@ -23,17 +23,18 @@ in
       firefox
       materialgram
       jellyfin-desktop
+      foot
     ];
 
-    home-manager.users.${user} = {
-      programs.foot = {
-        enable = true;
-        settings.main = {
-          dpi-aware = false;
-          font = "CaskaydiaCove Nerd Font Mono:size=9";
-          include = "/home/${user}/.config/foot/dank-colors.ini";
-        };
-      };
+    hjem.users.${user} = {
+      files.".config/foot/foot.ini".text = ''
+        [main]
+        dpi-aware=false
+        font=CaskaydiaCove Nerd Font Mono:size=9
+      ''
+      + lib.optionalString niriEnabled ''
+        include=/home/${user}/.config/foot/dank-colors.ini
+      '';
     };
   };
 }

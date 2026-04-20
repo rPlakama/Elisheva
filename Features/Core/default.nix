@@ -14,11 +14,19 @@
   config = lib.mkIf config.core.features.core.enable {
     security.sudo-rs.enable = true;
     environment.systemPackages = with pkgs; [
-      wl-clipboard
+      nixd
+      nixfmt
       ripgrep
+      lua-language-server
+      luaformatter
+      fish-lsp
+
+      ripgrep
+      neovim
       wget
       age
       sops
+      fzf
       git
       unzip
       dust
@@ -46,12 +54,6 @@
 
       tailscale = {
         enable = true;
-        openFirewall = true;
-      };
-
-      avahi = {
-        enable = true;
-        nssmdns4 = true;
         openFirewall = true;
       };
 
