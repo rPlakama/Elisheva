@@ -136,7 +136,7 @@ binds {
 
 window-rule {
     match is-active=false
-    opacity 0.750000
+    opacity 0.950000
 }
 
 animations {

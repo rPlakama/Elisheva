@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./hardware.nix
@@ -7,6 +7,9 @@
 
   networking.hostName = "Moontier";
 
+  environment.systemPackages = with pkgs; [
+    btop
+  ];
   core.user = "rplakama";
   optionals.features = {
     niri.enable = false;
