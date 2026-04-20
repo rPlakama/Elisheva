@@ -1,0 +1,3 @@
+[[mgr.prepend_keymap]]
+on = ["<C-n>"]
+run = "shell 'ripdrag -H 80 \"$@\" -x 2>/dev/null &' --confirm"

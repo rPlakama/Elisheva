@@ -1,10 +1,13 @@
-{ config, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
 
 let
   user = config.core.user;
 in
 {
-
   programs = {
     fish = {
       enable = true;
@@ -15,51 +18,18 @@ in
       enableFishIntegration = true;
     };
   };
-  home-manager.users.${user} = {
-    programs = {
-      fish = {
-        enable = true;
-        shellInit = ''
-          function fish_greeting
-          end
-          fish_vi_key_bindings
-          function fish_prompt
-              set -l nix_indicator ""
 
-              if set -q IN_NIX_SHELL
-                  if test "$IN_NIX_SHELL" = pure
-                      set nix_indicator (set_color cyan)" pure "(set_color normal)
-                  else
-                      set nix_indicator (set_color cyan)" nix "(set_color normal)
-                  end
-              else if set -q DIRENV_DIR
-                  set nix_indicator (set_color cyan)" direnv "(set_color normal)
-              end
+  environment.systemPackages = with pkgs; [
+    yazi
+  ];
 
-              echo -s (set_color normal) (hostname) " " (set_color blue) (prompt_pwd) (set_color normal) (fish_git_prompt) " " $nix_indicator
-              echo -n " > "
-          end
-        '';
-      };
-      yazi = {
-        enable = true;
-        enableFishIntegration = true;
-        settings = {
-          mgr.show_hidden = true;
-          opener.edit = [
-            {
-              run = "nvim \"$@\"";
-              block = true;
-            }
-          ];
-        };
-        keymap.mgr.prepend_keymap = [
-          {
-            on = [ "<C-n>" ];
-            run = "shell 'ripdrag -H 80 \"$@\" -x 2>/dev/null &' --confirm";
-          }
-        ];
-      };
+  hjem.users.${user} = {
+    enable = true;
+
+    xdg.config.files = {
+      "fish/config.fish".source = ./config.fish;
+      "yazi/yazi.toml".source = ./yazi.toml;
+      "yazi/keymap.toml".source = ./keymap.toml;
     };
   };
 }

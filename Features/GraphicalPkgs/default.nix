@@ -19,6 +19,7 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      vesktop
       firefox
       materialgram
       jellyfin-desktop

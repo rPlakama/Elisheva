@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    hjem = {
+      url = "github:feel-co/hjem";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:Mic92/sops-nix";
@@ -48,6 +52,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             home-manager.nixosModules.home-manager
+            inputs.hjem.nixosModules.default
             sops-nix.nixosModules.sops
             ./Hosts/${hostname}
             (
