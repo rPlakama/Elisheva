@@ -7,6 +7,19 @@ include "dms/outputs.kdl"
 include "dms/wpblur.kdl"
 include "dms/cursor.kdl"
 
+window-rule {
+    background-effect {
+        blur true
+    }
+}
+
+blur {
+    passes 2
+    offset 2.0
+    noise 0.02
+    saturation 1.5
+}
+
 input {
     keyboard {
         xkb {
@@ -123,8 +136,9 @@ binds {
 
 window-rule {
     match is-active=false
-    opacity 0.950000
+    opacity 0.750000
 }
+
 animations {
     slowdown 0.800000
     config-notification-open-close {
