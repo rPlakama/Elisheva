@@ -21,7 +21,6 @@
       luaformatter
       fish-lsp
 
-      p7zip
       ripgrep
       neovim
       wget
