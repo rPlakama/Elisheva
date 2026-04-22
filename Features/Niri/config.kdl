@@ -14,10 +14,10 @@ window-rule {
 }
 
 blur {
-    passes 2
+    passes 5
     offset 2.0
-    noise 0.02
-    saturation 1.5
+    noise 0.03
+    saturation 1.6
 }
 
 input {
@@ -48,6 +48,7 @@ input {
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 prefer-no-csd
 overview {
+  backdrop-color "#080808"
     workspace-shadow {
         softness 15
         spread 10
@@ -136,7 +137,7 @@ binds {
 
 window-rule {
     match is-active=false
-    opacity 0.950000
+    opacity 0.920000
 }
 
 animations {

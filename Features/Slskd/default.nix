@@ -14,7 +14,6 @@ in
     {
       sops.secrets."slskd/username" = { };
       sops.secrets."slskd/password" = { };
-      #sops.secrets."slskd/api-key" = { };
 
       sops.templates."slskd.env".content = ''
         SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
