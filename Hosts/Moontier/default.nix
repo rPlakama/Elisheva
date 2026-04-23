@@ -19,7 +19,6 @@
     suwayomi.enable = true;
     komga.enable = true;
     pi-hole.enable = true;
-    adguard.enable = false;
     nzbget.enable = true;
     rrstack.enable = true;
     qbit.enable = true;
