@@ -8,6 +8,7 @@ let
   cfg = config.optionals.features.pi-hole;
   currentIP = "192.168.1.106";
   gatewayIP = "192.168.1.1";
+  tailscaleIP = "100.119.129.77";
 in
 
 {
@@ -21,11 +22,16 @@ in
     networking = {
       defaultGateway = "${gatewayIP}";
       nameservers = [ "127.0.0.1" ];
-      firewall.allowedTCPPorts = [
-        80
-        443
-        8081
-      ];
+      firewall = {
+        trustedInterfaces = [
+          "tailscale0 "
+        ];
+        allowedTCPPorts = [
+          80
+          443
+          8081
+        ];
+      };
     };
 
     services = {
@@ -127,6 +133,7 @@ in
               "${gatewayIP}  gateway"
               "${currentIP}  pi-hole"
               "${currentIP}  moontier.online"
+              "${tailscaleIP}  moontier.online"
             ];
             upstreams = [
               "127.0.0.1#5335"

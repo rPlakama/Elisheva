@@ -16,7 +16,6 @@ in
       default = false;
     };
 
-    # 1. Define the new custom option here
     proxyServices = lib.mkOption {
       type = lib.types.attrsOf lib.types.port;
       default = { };
@@ -60,6 +59,7 @@ in
         forceSSL = true;
         extraConfig = ''
           allow 192.168.1.0/24;
+          allow 100.64.0.0/10;
           allow 127.0.0.1;
           deny all;
         '';
