@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
     hjem = {
       url = "github:feel-co/hjem";
@@ -30,6 +31,7 @@
   outputs =
     inputs@{
       nixpkgs,
+      nix-cachyos-kernel,
       sops-nix,
       ...
     }:
@@ -57,6 +59,15 @@
               in
 
               {
+                nixpkgs.overlays = [
+                  nix-cachyos-kernel.overlays.pinned
+                ];
+
+                nix.settings = {
+                  substituters = [ "https://attic.xuyh0120.win/lantian" ];
+                  trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+                };
+
                 networking.hostName = hostname;
                 system.stateVersion = stVersion;
                 sops.defaultSopsFile = ./secrets.yaml;

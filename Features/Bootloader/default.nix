@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   boot = {
@@ -11,6 +11,5 @@
       systemd-boot.enable = true;
       timeout = 0;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
   };
 }
