@@ -9,6 +9,7 @@
   environment.systemPackages = with pkgs; [
     moonlight-qt
     ciscoPacketTracer9
+    btop-rocm
   ];
 
   boot = {
