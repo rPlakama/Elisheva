@@ -12,9 +12,8 @@
     ollama-cuda
     opencode
   ];
-  core = {
-    user = "rplakama";
-  };
+  core.user = "rplakama";
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-x86_64-v3;
   optionals.features = {
     nvidia.enable = true;
     virtualization.enable = true;
