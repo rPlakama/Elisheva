@@ -34,7 +34,7 @@ in
             listen_port = 50000;
             upnp = true;
           };
-          shares.directories = [ "/media/music" ];
+          shares.directories = [ "/media/music/library" ];
           directories = {
             downloads = "/media/music/library";
             incomplete = "/media/music/downloads";
