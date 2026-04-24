@@ -34,11 +34,11 @@ in
             listen_port = 50000;
             upnp = true;
           };
-          shares.directories = [ "/media/music/library" ];
-          directories = {
-            downloads = "/media/music/library";
-            incomplete = "/media/music/downloads";
-          };
+          shares.directories = [
+            "-/media/music/downloads"
+            "/media/music"
+          ];
+          directories.downloads = "/media/music/library";
           web = {
             address = "0.0.0.0";
             port = 5030;
