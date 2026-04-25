@@ -24,6 +24,7 @@ in
       materialgram
       jellyfin-desktop
       foot
+      ripdrag
     ];
 
     hjem.users.${user} = {
