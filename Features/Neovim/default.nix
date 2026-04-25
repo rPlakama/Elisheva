@@ -38,7 +38,8 @@ in
             ]
             ++ lib.optionals niriEnabled [
               (pkgs.vimUtils.buildVimPlugin {
-                name = "base46";
+                pname = "base46";
+                version = "unstable-2025-04-25";
                 doCheck = false;
                 src = pkgs.fetchFromGitHub {
                   owner = "AvengeMedia";
