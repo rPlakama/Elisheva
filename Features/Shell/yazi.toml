@@ -1,6 +1,0 @@
-[mgr]
-show_hidden = true
-
-[[opener.edit]]
-block = true
-run = "nvim \"$@\""
