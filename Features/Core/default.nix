@@ -83,6 +83,7 @@ in
         };
       };
     };
+    hardware.enableAllFirmware = true;
     hjem.users.${user} = {
       enable = true;
 

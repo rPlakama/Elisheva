@@ -24,5 +24,6 @@
     neovim.enable = true;
     scx.enable = true;
     niri.enable = true;
+    steam.enable = true;
   };
 }
