@@ -21,36 +21,58 @@ in
   config = lib.mkIf cfg.enable {
 
     core.features.mediaPermissions.enable = true;
-    services.qbittorrent = {
-      enable = true;
-      openFirewall = true;
+    sops.secrets."qui/secret" = {
       group = "media";
-      serverConfig = {
-        LegalNotice.Accepted = true;
-        Queueing = {
-          QueueingEnabled = false;
+    };
+
+    optionals.features.nginx.proxyServices.qui = 3000;
+
+    services = {
+      qui = {
+        secretFile = config.sops.secrets."qui/secret".path;
+        openFirewall = true;
+        group = "media";
+        enable = true;
+        settings = {
+          port = 3000; # Just to make sure.
+          host = "0.0.0.0";
         };
-        Preferences = {
-          WebUI = {
-            Username = "${user}";
-            Password_PBKDF2 = "@ByteArray(ttJDfjqsdk8ccksmlOI15A==:/WoWQEN+/ObzbkNCDVVZ4/3yfxkTXz58jXYvxYmHXWayB0VHghFapn+RFJZOFZyNcpcsaOUWW2+QtgAkwzJwFQ==)";
+      };
+      qbittorrent = {
+        enable = true;
+        openFirewall = true;
+        group = "media";
+        serverConfig = {
+          LegalNotice.Accepted = true;
+          Preferences = {
+            Queueing = {
+              QueueingEnabled = false;
+            };
+            WebUI = {
+              Username = "${user}";
+              Password_PBKDF2 = "@ByteArray(ttJDfjqsdk8ccksmlOI15A==:/WoWQEN+/ObzbkNCDVVZ4/3yfxkTXz58jXYvxYmHXWayB0VHghFapn+RFJZOFZyNcpcsaOUWW2+QtgAkwzJwFQ==)";
+            };
+            "General.Locale" = "en";
           };
-          "General.Locale" = "en";
         };
       };
     };
-    services.nginx.virtualHosts."${domain}".locations."^~ /qbittorrent/" = {
-      proxyPass = "http://${currentIP}:8080/";
-      proxyWebsockets = true;
-      extraConfig = ''
-        proxy_set_header X-Forwarded-Host $http_host;
+    services = {
+      nginx.virtualHosts."${domain}".locations = {
+        "^~ /qbittorrent/" = {
+          proxyPass = "http://${currentIP}:8080/";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_set_header X-Forwarded-Host $http_host;
 
-        # Prevent qBittorrent from blocking the login due to CSRF protection
-        proxy_hide_header Referer;
-        proxy_hide_header Origin;
-        proxy_set_header Referer "";
-        proxy_set_header Origin "";
-      '';
+            # Prevent qBittorrent from blocking the login due to CSRF protection
+            proxy_hide_header Referer;
+            proxy_hide_header Origin;
+            proxy_set_header Referer "";
+            proxy_set_header Origin "";
+          '';
+        };
+      };
     };
   };
 }

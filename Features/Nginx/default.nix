@@ -41,7 +41,7 @@ in
       certs."${domain}" = {
         domain = "${domain}";
         dnsProvider = "hetzner";
-        credentialsFile = config.sops.secrets."hetzner/api".path;
+        environmentFile = config.sops.secrets."hetzner/api".path;
         dnsPropagationCheck = true;
       };
     };
