@@ -9,8 +9,6 @@
 
   environment.systemPackages = with pkgs; [
     ckan
-    ollama-cuda
-    opencode
     btop-cuda
   ];
   core.user = "rplakama";
