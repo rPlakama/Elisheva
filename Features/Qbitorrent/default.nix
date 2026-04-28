@@ -36,6 +36,7 @@ in
         settings = {
           port = 3000; # Just to make sure.
           host = "0.0.0.0";
+          baseUrl = "/qui";
         };
       };
       qbittorrent = {
