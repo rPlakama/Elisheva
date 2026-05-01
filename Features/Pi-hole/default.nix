@@ -3,14 +3,12 @@
   lib,
   ...
 }:
-
 let
   cfg = config.optionals.features.pi-hole;
   currentIP = "192.168.1.106";
   gatewayIP = "192.168.1.1";
   tailscaleIP = "100.119.129.77";
 in
-
 {
   options.optionals.features.pi-hole.enable = lib.mkOption {
     type = lib.types.bool;
@@ -18,13 +16,14 @@ in
     default = false;
   };
   config = lib.mkIf cfg.enable {
+    optionals.features.nginx.proxyServices.pi-hole = 8081;
 
     networking = {
       defaultGateway = "${gatewayIP}";
       nameservers = [ "127.0.0.1" ];
       firewall = {
         trustedInterfaces = [
-          "tailscale0 "
+          "tailscale0"
         ];
         allowedTCPPorts = [
           80
@@ -33,9 +32,7 @@ in
         ];
       };
     };
-
     services = {
-
       unbound = {
         enable = true;
         settings = {
@@ -46,25 +43,21 @@ in
               "::1"
             ];
             port = 5335;
-
             access-control = [
               "127.0.0.0/8 allow"
               "::1/128 allow"
             ];
-
             harden-glue = true;
             harden-dnssec-stripped = true;
             use-caps-for-id = false;
             edns-buffer-size = 1232;
             prefetch = true;
             num-threads = 1;
-
             qname-minimisation = true;
             do-not-query-localhost = false;
           };
         };
       };
-
       dnsmasq = {
         enable = false;
         settings = {
@@ -81,10 +74,36 @@ in
           ];
         };
       };
-
       pihole-ftl = {
         enable = true;
         lists = [
+          {
+            # Bets
+            url = "https://raw.githubusercontent.com/zangadoprojets/pi-hole-blocklist/main/BlockBets.txt";
+            type = "block";
+            enabled = true;
+            description = "Block Bets - Apostas";
+          }
+          {
+            url = "https://raw.githubusercontent.com/zangadoprojets/pi-hole-blocklist/main/PagesMalicious.txt";
+            type = "block";
+            enabled = true;
+            description = "Pages Malicious";
+          }
+          # Spam
+          {
+            url = "https://raw.githubusercontent.com/zangadoprojets/pi-hole-blocklist/main/BlockSpam.txt";
+            type = "block";
+            enabled = true;
+            description = "Block Spam";
+          }
+          # Gambling
+          {
+            url = "https://blocklistproject.github.io/Lists/gambling.txt";
+            type = "block";
+            enabled = true;
+            description = "Blocklist Project - Gambling";
+          }
           {
             url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
             type = "block";
@@ -155,12 +174,10 @@ in
         };
         useDnsmasqConfig = true;
       };
-
       pihole-web = {
         enable = true;
         ports = [ 8081 ];
       };
-
       resolved = {
         settings = {
           Resolve = {
