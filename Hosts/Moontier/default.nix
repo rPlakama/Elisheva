@@ -18,6 +18,7 @@
     graphicalPkgs.enable = false;
     suwayomi.enable = true;
     komga.enable = true;
+    kavita.enable = true;
     pi-hole.enable = true;
     nzbget.enable = true;
     rrstack.enable = true;
