@@ -9,9 +9,10 @@
   environment.systemPackages = with pkgs; [
     moonlight-qt
     ciscoPacketTracer9
-    android-studio-full
+    android-studio
     btop-rocm
   ];
+  nixpkgs.config.android_sdk.accept_license = true;
 
   boot = {
     kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-x86_64-v3;

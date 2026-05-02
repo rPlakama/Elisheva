@@ -29,5 +29,6 @@
     whats_bot.enable = true;
     slskd.enable = true;
     nginx.enable = true;
+    Samba.enable = true;
   };
 }

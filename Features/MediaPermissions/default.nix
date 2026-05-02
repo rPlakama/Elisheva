@@ -16,6 +16,7 @@ let
     "downloads"
     "series"
     "torrents"
+    "calibre"
   ];
 in
 {

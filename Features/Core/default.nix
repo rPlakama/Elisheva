@@ -16,7 +16,13 @@ in
     description = "Essential system segments";
   };
   config = lib.mkIf config.core.features.core.enable {
-    security.sudo-rs.enable = true;
+    security = {
+      pam.services.login = {
+        startSession = true;
+        gnupg.enable = false;
+      };
+      sudo-rs.enable = true;
+    };
     environment.systemPackages = with pkgs; [
       nixd
       nixfmt
