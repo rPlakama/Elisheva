@@ -24,6 +24,7 @@ in
       materialgram
       jellyfin-desktop
       foot
+      zed-editor
       ripdrag
     ];
 

@@ -9,6 +9,9 @@
 
   environment.systemPackages = with pkgs; [
     btop
+    exiftool
+    calibre
+    zip
   ];
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-server-lto;
   core.user = "rplakama";

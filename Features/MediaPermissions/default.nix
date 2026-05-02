@@ -8,10 +8,11 @@ let
   mediaFolders = [
     "films"
     "music"
-    "music/library" # -->
-    "music/downloads" # Not necessay in new install
+    "music/library"
+    "music/downloads"
     "mangas"
     "novels"
+    "books"
     "downloads"
     "series"
     "torrents"
