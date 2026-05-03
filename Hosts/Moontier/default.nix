@@ -20,7 +20,7 @@
     neovim.enable = true;
     graphicalPkgs.enable = false;
     suwayomi.enable = true;
-    komga.enable = true;
+    komga.enable = false;
     kavita.enable = true;
     pi-hole.enable = true;
     nzbget.enable = true;
