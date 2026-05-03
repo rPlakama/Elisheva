@@ -10,13 +10,13 @@ let
     "music"
     "music/library"
     "music/downloads"
+    "mangas/local"
     "mangas"
     "novels"
     "books"
     "downloads"
     "series"
     "torrents"
-    "calibre"
   ];
 in
 {

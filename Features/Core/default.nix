@@ -28,6 +28,7 @@ in
       nixfmt
       ripgrep
       lua-language-server
+      cifs-utils
       luaformatter
       fish-lsp
 
@@ -69,6 +70,7 @@ in
       devmon.enable = true;
       udisks2.enable = true;
       resolved.enable = true;
+      gvfs.enable = true;
 
       pipewire = {
         enable = true;

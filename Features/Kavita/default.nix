@@ -2,8 +2,6 @@
 
 let
   cfg = config.optionals.features.kavita;
-  domain = "moontier.online";
-
 in
 {
   options.optionals.features.kavita.enable = lib.mkOption {
@@ -19,29 +17,16 @@ in
 
     (lib.mkIf cfg.enable {
       core.features.mediaPermissions.enable = true;
+
       networking.firewall.allowedTCPPorts = [
         3034
       ];
-
-      services.nginx.virtualHosts."${domain}".locations."^~ /kavita/" = {
-        proxyPass = "http://127.0.0.1:3034";
-        proxyWebsockets = true;
-        extraConfig = ''
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header X-Forwarded-Proto $scheme;
-          proxy_set_header X-Forwarded-Host $http_host;
-          aio threads;
-        '';
-      };
-
       systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
+      optionals.features.nginx.proxyServices.kavita = 5030;
       services.kavita = {
         enable = true;
         settings = {
           Port = 3034;
-          baseUrl = "/kavita/";
         };
         tokenKeyFile = config.sops.secrets."kavita/token".path;
       };
