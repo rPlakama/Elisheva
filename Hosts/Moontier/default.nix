@@ -30,5 +30,9 @@
     slskd.enable = true;
     nginx.enable = true;
     Samba.enable = true;
+    galleryDl = {
+      enable = true;
+      urls = [ "https://mangafire.to/manga/madan-no-ichii.w5x17" ];
+    };
   };
 }

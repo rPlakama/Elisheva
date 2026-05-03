@@ -11,6 +11,7 @@ let
     "music/library"
     "music/downloads"
     "mangas/local"
+    "mangas/download"
     "mangas"
     "novels"
     "books"

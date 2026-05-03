@@ -15,7 +15,7 @@
   nixpkgs.config.android_sdk.accept_license = true;
 
   boot = {
-    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-x86_64-v3;
+    #kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-x86_64-v3;
     kernelParams = [
       "video=eDP-1:1920x1080@72"
     ];
