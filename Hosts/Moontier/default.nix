@@ -32,6 +32,7 @@
       urls = [
         "https://mangafire.to/manga/madan-no-ichii.w5x17"
         "https://mangafire.to/manga/centuriaa.zxvjp"
+        "https://mangafire.to/manga/gachiakutaa.1n2xq"
       ];
     };
   };

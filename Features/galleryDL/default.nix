@@ -15,16 +15,17 @@ let
       archive = "${downloadPath}/.archive.sqlite3";
       mangafire = {
         lang = "pt-br";
-        postprocessors = [
-          {
-            name = "zip";
-            extension = "cbz";
-          }
-        ];
       };
     };
+    postprocessors = [
+      {
+        name = "zip";
+        extension = "cbz";
+        mode = "after";
+      }
+    ];
     downloader = {
-      retries = 3;
+      retries = 15;
       timeout = 8.0;
     };
   };
@@ -50,6 +51,10 @@ in
 
     systemd.services.gallery-dl = {
       description = "gallery-dl manga downloader";
+      path = [
+        pkgs.p7zip
+        pkgs.zip
+      ];
       serviceConfig = {
         Type = "oneshot";
         User = user;
