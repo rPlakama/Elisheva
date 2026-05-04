@@ -2,12 +2,14 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 let
   cfg = config.optionals.features.kavita;
   domain = "moontier.online";
   currentIP = "192.168.1.106";
+  pkgs-kavita = import inputs.nixpkgs-kavita { inherit (pkgs) system; };
 in
 {
   options.optionals.features.kavita.enable = lib.mkOption {
@@ -25,6 +27,7 @@ in
       systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
       services.kavita = {
         enable = true;
+        package = pkgs-kavita.kavita;
         tokenKeyFile = config.sops.secrets."kavita/token".path;
         settings = {
           BaseUrl = "/kavita/";

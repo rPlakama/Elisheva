@@ -245,6 +245,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-kavita": {
+      "locked": {
+        "lastModified": 1777614932,
+        "narHash": "sha256-lYqzL/bA6GaRyV/uD9NTMS3ApkL1xvl10fI3Ew1MfSY=",
+        "owner": "nevivurn",
+        "repo": "nixpkgs",
+        "rev": "44e33d361da8d525f4c6bf65fc7a6e6d7442f472",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nevivurn",
+        "ref": "update/kavita",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1777168982,
@@ -319,6 +335,7 @@
         "niri": "niri",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-kavita": "nixpkgs-kavita",
         "quickshell": "quickshell",
         "sops-nix": "sops-nix"
       }
