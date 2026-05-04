@@ -15,6 +15,7 @@ let
       rate = "2.5M";
       sleep = "1.5-4.0";
       sleep-request = "0.2-1.5";
+      sleep-extractor = "1.0-3.0";
       user-agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
       headers = {
         Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8";
@@ -36,6 +37,12 @@ let
       retries = 15;
       timeout = 8.0;
       rate = "2.5M";
+      retry-codes = [
+        429
+        503
+        403
+        503
+      ];
     };
   };
 in
