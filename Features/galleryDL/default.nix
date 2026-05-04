@@ -37,12 +37,12 @@ let
       postprocessors = [
         {
           name = "zip";
-          extension = "cbz";
+          extension = "cbz"; # ---> Better accept by Kavita-chan
           mode = "after";
         }
       ];
       mangafire = {
-        lang = "pt-br";
+        lang = "pt-br"; # ---> Take a wild guess
       };
     };
     downloader = {
