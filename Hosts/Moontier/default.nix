@@ -27,6 +27,7 @@
     slskd.enable = true;
     nginx.enable = true;
     Samba.enable = true;
+    ST.enable = true;
     galleryDl = {
       enable = true;
       urls = [

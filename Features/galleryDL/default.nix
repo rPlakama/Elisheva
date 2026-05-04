@@ -9,15 +9,18 @@ let
   user = config.core.user;
   downloadPath = "/media/mangas/download";
 
-  # More fingerprint from browser;
   galleryDlConfig = {
     extractor = {
       base-directory = downloadPath;
       archive = "${downloadPath}/.archive.sqlite3";
-      rate = "2.5M";
-      sleep = "1.5-4.0";
-      sleep-request = "0.2-1.5";
+      rate = "1.5M";
+
+      sleep = "2.0-4.5";
+      sleep-request = "0.5-2.0";
       sleep-extractor = "1.0-3.0";
+      sleep-chapter = "05.0-10.0";
+      sleep-gallery = "15.0-35.0";
+
       user-agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
       headers = {
         Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7";
@@ -37,23 +40,22 @@ let
       postprocessors = [
         {
           name = "zip";
-          extension = "cbz"; # ---> Better accept by Kavita-chan
+          extension = "cbz"; # Better accepted by Kavita
           mode = "after";
         }
       ];
       mangafire = {
-        lang = "pt-br"; # ---> Take a wild guess
+        lang = "pt-br";
       };
     };
     downloader = {
       retries = 5;
-      timeout = 8.0;
-      rate = "2.5M";
+      timeout = 10.0;
+      rate = "1.5M";
       retry-codes = [
         429
         503
         403
-        503
         520
       ];
     };
@@ -64,7 +66,7 @@ in
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "gallery-dl manga downloader with daily systemd timer";
+      description = "gallery-dl manga downloader (Direct connection with stealth/slow intervals)";
     };
     urls = lib.mkOption {
       type = lib.types.listOf lib.types.str;
@@ -76,31 +78,21 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       gallery-dl
-      torsocks
-      tor
     ];
 
     hjem.users.${user}.files.".config/gallery-dl/config.json".text = builtins.toJSON galleryDlConfig;
 
-    services.tor = {
-      enable = true;
-      client.enable = true;
-    };
-
     systemd.services.gallery-dl = {
-      description = "gallery-dl manga downloader";
-      after = [ "tor.service" ];
-      requires = [ "tor.service" ];
+      description = "gallery-dl Manga Downloader (Stealth Mode)";
       path = with pkgs; [
         p7zip
         zip
-        torsocks
       ];
       serviceConfig = {
         Type = "oneshot";
         User = user;
         ExecStart = pkgs.writeShellScript "gallery-dl-run" ''
-          torsocks ${pkgs.gallery-dl}/bin/gallery-dl \
+          ${pkgs.gallery-dl}/bin/gallery-dl \
             --config /home/${user}/.config/gallery-dl/config.json \
             ${lib.concatMapStringsSep " \\\n            " (url: "\"${url}\"") cfg.urls}
         '';
@@ -110,12 +102,12 @@ in
     };
 
     systemd.timers.gallery-dl = {
-      description = "Daily manga download at 8PM";
+      description = "Multi-download a day";
       wantedBy = [ "timers.target" ];
       timerConfig = {
         OnCalendar = [
-          "06:00"
-          "18:00"
+          "12:00"
+          "00:00"
         ];
         Persistent = true;
       };
