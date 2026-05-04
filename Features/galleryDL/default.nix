@@ -8,25 +8,34 @@ let
   cfg = config.optionals.features.galleryDl;
   user = config.core.user;
   downloadPath = "/media/mangas/download";
-
   galleryDlConfig = {
     extractor = {
       base-directory = downloadPath;
       archive = "${downloadPath}/.archive.sqlite3";
+      rate = "2.5M";
+      sleep = 1.5;
+      sleep-request = 0.5;
+      user-agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+      headers = {
+        Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8";
+        Accept-Language = "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7";
+        Accept-Encoding = "gzip, deflate, br";
+      };
+      postprocessors = [
+        {
+          name = "zip";
+          extension = "cbz";
+          mode = "after";
+        }
+      ];
       mangafire = {
         lang = "pt-br";
       };
     };
-    postprocessors = [
-      {
-        name = "zip";
-        extension = "cbz";
-        mode = "after";
-      }
-    ];
     downloader = {
       retries = 15;
       timeout = 8.0;
+      rate = "2.5M";
     };
   };
 in
@@ -43,23 +52,31 @@ in
       description = "List of manga URLs to download daily";
     };
   };
-
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.gallery-dl ];
-
+    environment.systemPackages = with pkgs; [
+      gallery-dl
+      torsocks
+      tor
+    ];
     hjem.users.${user}.files.".config/gallery-dl/config.json".text = builtins.toJSON galleryDlConfig;
-
+    services.tor = {
+      enable = true;
+      client.enable = true;
+    };
     systemd.services.gallery-dl = {
       description = "gallery-dl manga downloader";
-      path = [
-        pkgs.p7zip
-        pkgs.zip
+      after = [ "tor.service" ];
+      requires = [ "tor.service" ];
+      path = with pkgs; [
+        p7zip
+        zip
+        torsocks
       ];
       serviceConfig = {
         Type = "oneshot";
         User = user;
         ExecStart = pkgs.writeShellScript "gallery-dl-run" ''
-          ${pkgs.gallery-dl}/bin/gallery-dl \
+          torsocks ${pkgs.gallery-dl}/bin/gallery-dl \
             --config /home/${user}/.config/gallery-dl/config.json \
             ${lib.concatMapStringsSep " \\\n            " (url: "\"${url}\"") cfg.urls}
         '';
@@ -67,7 +84,6 @@ in
         StandardError = "journal";
       };
     };
-
     systemd.timers.gallery-dl = {
       description = "Daily manga download at 8PM";
       wantedBy = [ "timers.target" ];
