@@ -54,6 +54,7 @@ let
         503
         403
         503
+        520
       ];
     };
   };
@@ -112,7 +113,10 @@ in
       description = "Daily manga download at 8PM";
       wantedBy = [ "timers.target" ];
       timerConfig = {
-        OnCalendar = "*-*-* 20:00:00";
+        OnCalendar = [
+          "06:00"
+          "18:00"
+        ];
         Persistent = true;
       };
     };
