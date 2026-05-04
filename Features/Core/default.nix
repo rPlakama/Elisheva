@@ -33,7 +33,9 @@ in
       fish-lsp
 
       p7zip
+      zip
       ripgrep
+      comma
       neovim
       yazi
       wget
