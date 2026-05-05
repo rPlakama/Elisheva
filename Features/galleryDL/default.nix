@@ -102,13 +102,10 @@ in
     };
 
     systemd.timers.gallery-dl = {
-      description = "Multi-download a day";
+      description = "Once a day";
       wantedBy = [ "timers.target" ];
       timerConfig = {
-        OnCalendar = [
-          "12:00"
-          "00:00"
-        ];
+        OnCalendar = "00:00";
         Persistent = true;
       };
     };
