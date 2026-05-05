@@ -152,6 +152,7 @@ in
               "${gatewayIP}  gateway"
               "${currentIP}  pi-hole"
               "${currentIP}  moontier.online"
+              "${currentIP}  st.moontier.online"
               "${tailscaleIP}  moontier.online"
             ];
             upstreams = [
