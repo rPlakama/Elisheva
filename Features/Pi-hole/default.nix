@@ -5,6 +5,7 @@
 }:
 let
   cfg = config.optionals.features.pi-hole;
+  domain = config.core.domain;
   currentIP = config.core.ip;
   gatewayIP = "192.168.1.1";
   tailscaleIP = "100.119.129.77";
@@ -111,8 +112,8 @@ in
           };
           misc = {
             dnsmasq_lines = [
-              "address=/moontier.online/${currentIP}"
-              "address=/moontier.online/${tailscaleIP}"
+              "address=/${domain}/${currentIP}"
+              "address=/${domain}/${tailscaleIP}"
             ];
           };
           ntp = {

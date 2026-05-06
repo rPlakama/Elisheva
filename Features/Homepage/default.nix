@@ -30,6 +30,7 @@ in
       settings = {
         title = "Moontier Dashboard";
         background = "https://w.wallhaven.cc/full/8g/wallhaven-8gdpgo.png";
+        cardBlur = "md";
       };
 
       services = [
