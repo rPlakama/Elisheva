@@ -70,9 +70,6 @@ in
             "vendor:MSFT,2,1i"
             "6,${gatewayIP}06"
           ];
-          domain = [
-            "moontier.me,192.168.1.0/24,local"
-          ];
         };
       };
       pihole-ftl = {
@@ -105,15 +102,11 @@ in
             hosts = [
               "${gatewayIP}  gateway"
               "${currentIP}  pi-hole"
-            ];
+              "${currentIP} ${domain}"
+            ]
+            ++ (lib.mapAttrsToList (name: port: "${currentIP}  ${name}.${domain}") cfg.proxyServices);
             upstreams = [
               "127.0.0.1#5335"
-            ];
-          };
-          misc = {
-            dnsmasq_lines = [
-              "address=/${domain}/${currentIP}"
-              "address=/${domain}/${tailscaleIP}"
             ];
           };
           ntp = {
