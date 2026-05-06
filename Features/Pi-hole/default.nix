@@ -6,6 +6,7 @@
 let
   cfg = config.optionals.features.pi-hole;
   domain = config.core.domain;
+  nginxCfg = config.optionals.features.nginx;
   currentIP = config.core.ip;
   gatewayIP = "192.168.1.1";
   tailscaleIP = "100.119.129.77";
@@ -103,8 +104,12 @@ in
               "${gatewayIP}  gateway"
               "${currentIP}  pi-hole"
               "${currentIP} ${domain}"
+              "${tailscaleIP} ${domain}"
+
             ]
-            ++ (lib.mapAttrsToList (name: port: "${currentIP}  ${name}.${domain}") cfg.proxyServices);
+            ++ (lib.mapAttrsToList (name: port: "${currentIP}  ${name}.${domain}") nginxCfg.proxyServices)
+            ++ (lib.mapAttrsToList (name: port: "${tailscaleIP}  ${name}.${domain}") nginxCfg.proxyServices);
+
             upstreams = [
               "127.0.0.1#5335"
             ];
