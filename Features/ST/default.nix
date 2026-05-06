@@ -9,7 +9,7 @@ let
     pkgs.writeText "sillytavern-config.yaml" ''
       listen: true
       listenAddress:
-        ipv4: 127.0.0.1
+        ipv4: 0.0.0.0
         ipv6: '[::]'
       protocol:
         ipv4: true
