@@ -71,6 +71,10 @@ in
             "vendor:MSFT,2,1i"
             "6,${gatewayIP}06"
           ];
+          domain = [
+            "moontier.me,192.168.1.0/24,local"
+          ];
+
         };
       };
       pihole-ftl = {
