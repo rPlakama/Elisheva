@@ -44,10 +44,9 @@ in
         dnsProvider = "hetzner";
         environmentFile = config.sops.secrets."hetzner/api".path;
         dnsPropagationCheck = true;
+        group = "nginx";
       };
     };
-
-    users.users.nginx.extraGroups = [ "acme" ];
 
     services.nginx = {
       enable = true;
