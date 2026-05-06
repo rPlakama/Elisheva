@@ -7,9 +7,6 @@
 let
   cfg = config.optionals.features.qbit;
   user = config.core.user;
-  domain = "moontier.online";
-  currentIP = "192.168.1.106";
-
 in
 
 {

@@ -25,32 +25,13 @@ in
       core.features.mediaPermissions.enable = true;
       networking.firewall.allowedTCPPorts = [ 3034 ];
       systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
+      optionals.features.nginx.proxyServices.kavita = 3034;
       services.kavita = {
         enable = true;
         package = pkgs-kavita.kavita;
         tokenKeyFile = config.sops.secrets."kavita/token".path;
         settings = {
-          BaseUrl = "/kavita/";
           Port = 3034;
-        };
-      };
-      services.nginx = {
-        additionalModules = [ pkgs.nginxModules.subsFilter ];
-        virtualHosts."${domain}".locations = {
-          "^~ /kavita/" = {
-            proxyPass = "http://${currentIP}:3034";
-            proxyWebsockets = true;
-            extraConfig = ''
-              proxy_set_header Accept-Encoding "";
-              sub_filter '<base href="/">' '<base href="/kavita/">';
-              sub_filter_once on;
-              sub_filter_types text/html;
-            '';
-          };
-          "^~ /kavita/api" = {
-            proxyPass = "http://${currentIP}:3034";
-            proxyWebsockets = true;
-          };
         };
       };
     })
