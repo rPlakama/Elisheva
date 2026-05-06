@@ -76,53 +76,6 @@ in
       };
       pihole-ftl = {
         enable = true;
-        lists = [
-          {
-            # Bets
-            url = "https://raw.githubusercontent.com/zangadoprojets/pi-hole-blocklist/main/BlockBets.txt";
-            type = "block";
-            enabled = true;
-            description = "Block Bets - Apostas";
-          }
-          {
-            url = "https://raw.githubusercontent.com/zangadoprojets/pi-hole-blocklist/main/PagesMalicious.txt";
-            type = "block";
-            enabled = true;
-            description = "Pages Malicious";
-          }
-          # Spam
-          {
-            url = "https://raw.githubusercontent.com/zangadoprojets/pi-hole-blocklist/main/BlockSpam.txt";
-            type = "block";
-            enabled = true;
-            description = "Block Spam";
-          }
-          # Gambling
-          {
-            url = "https://blocklistproject.github.io/Lists/gambling.txt";
-            type = "block";
-            enabled = true;
-            description = "Blocklist Project - Gambling";
-          }
-          {
-            url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
-            type = "block";
-            enabled = true;
-            description = "Steven Black's HOSTS";
-          }
-          {
-            url = "https://big.oisd.nl";
-            type = "block";
-            enabled = true;
-            description = "OISD Big";
-          }
-          {
-            url = "https://v.firebog.net/hosts/Easyprivacy.txt";
-            type = "block";
-            enabled = true;
-            description = "EasyPrivacy";
-          }
-        ];
         openFirewallDNS = true;
         openFirewallDHCP = true;
         openFirewallWebserver = true;
@@ -151,12 +104,15 @@ in
             hosts = [
               "${gatewayIP}  gateway"
               "${currentIP}  pi-hole"
-              "${currentIP}  moontier.online"
-              "${currentIP}  st.moontier.online"
-              "${tailscaleIP}  moontier.online"
             ];
             upstreams = [
               "127.0.0.1#5335"
+            ];
+          };
+          misc = {
+            dnsmasq_lines = [
+              "address=/moontier.online/${currentIP}"
+              "address=/moontier.online/${tailscaleIP}"
             ];
           };
           ntp = {
@@ -164,14 +120,8 @@ in
             ipv6.active = false;
             sync.active = false;
           };
-          webserver = {
-            api = {
-              pwhash = "";
-            };
-            session = {
-              timeout = 43200;
-            };
-          };
+          webserver.api.pwhash = "";
+          session.timeout = 43200;
         };
         useDnsmasqConfig = true;
       };

@@ -36,7 +36,7 @@ in
         settings = {
           port = 3000; # Just to make sure.
           host = "0.0.0.0";
-          baseUrl = "/qui";
+          # baseUrl = "/qui";
         };
       };
       qbittorrent = {
@@ -58,22 +58,6 @@ in
         };
       };
     };
-    services = {
-      nginx.virtualHosts."${domain}".locations = {
-        "^~ /qbittorrent/" = {
-          proxyPass = "http://${currentIP}:8080/";
-          proxyWebsockets = true;
-          extraConfig = ''
-            proxy_set_header X-Forwarded-Host $http_host;
-
-            # Prevent qBittorrent from blocking the login due to CSRF protection
-            proxy_hide_header Referer;
-            proxy_hide_header Origin;
-            proxy_set_header Referer "";
-            proxy_set_header Origin "";
-          '';
-        };
-      };
-    };
+    optionals.features.nginx.proxyServices.qbit = 8080;
   };
 }
