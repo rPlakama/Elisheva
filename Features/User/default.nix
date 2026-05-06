@@ -13,6 +13,18 @@ in
     description = "The primary user";
   };
 
+  options.core.ip = lib.mkOption {
+    type = lib.types.str;
+    description = "IP";
+    default = "";
+  };
+
+  options.core.domain = lib.mkOption {
+    type = lib.types.str;
+    description = "Domain";
+    default = "";
+  };
+
   config = lib.mkIf (user != "") {
     time.timeZone = "America/Recife";
 

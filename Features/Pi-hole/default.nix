@@ -5,7 +5,7 @@
 }:
 let
   cfg = config.optionals.features.pi-hole;
-  currentIP = "192.168.1.106";
+  currentIP = config.core.ip;
   gatewayIP = "192.168.1.1";
   tailscaleIP = "100.119.129.77";
 in

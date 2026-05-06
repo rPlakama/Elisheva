@@ -14,7 +14,11 @@
     zip
   ];
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-server-lto;
+
   core.user = "rplakama";
+  core.ip = "192.168.1.106";
+  core.domain = "moontier.online";
+
   optionals.features = {
     neovim.enable = true;
     graphicalPkgs.enable = false;
@@ -27,6 +31,7 @@
     slskd.enable = true;
     nginx.enable = true;
     Samba.enable = true;
+    homepage.enable = true;
     ST.enable = true;
     galleryDl = {
       enable = true;

@@ -7,8 +7,6 @@
 }:
 let
   cfg = config.optionals.features.kavita;
-  domain = "moontier.online";
-  currentIP = "192.168.1.106";
   pkgs-kavita = import inputs.nixpkgs-kavita { inherit (pkgs) system; };
 in
 {
