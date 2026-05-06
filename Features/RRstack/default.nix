@@ -6,7 +6,6 @@ let
   mediaServicesWithPermissions = {
     jackett = 9117;
     jellyfin = 8096;
-    bazarr = 6767;
     sonarr = 8989;
     radarr = 7878;
     readarr = 8787;
