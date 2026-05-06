@@ -43,8 +43,10 @@ in
         extraDomainNames = [ "*.${domain}" ];
         dnsProvider = "hetzner";
         environmentFile = config.sops.secrets."hetzner/api".path;
+        dnsResolver = "1.1.1.1:53";
         dnsPropagationCheck = true;
         group = "nginx";
+        webroot = null;
       };
     };
 
