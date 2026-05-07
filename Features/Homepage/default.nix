@@ -20,7 +20,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    optionals.features.optionals.unifiedDNS.dashboard = 8082;
+    optionals.features.unifiedDNS.proxyServices.homepage = 8082;
 
     services.homepage-dashboard = {
       enable = true;
