@@ -3,6 +3,7 @@ let
   cfg = config.optionals.features.unifiedDNS;
   domain = config.core.domain;
   currentIP = config.core.ip;
+  gatewayIP = "192.168.1.1";
   tailscaleIP = "100.119.129.77";
 
   mkDnsRecords = ip: lib.mapAttrsToList (name: port: "${ip} ${name}.${domain}") cfg.proxyServices;
@@ -25,52 +26,123 @@ in
       mode = "0400";
     };
 
-    networking.firewall.allowedTCPPorts = [
-      80
-      443
-      8081
+    networking.firewall = {
+      trustedInterfaces = [ "tailscale0" ];
+      allowedTCPPorts = [
+        80
+        443
+        8081
+      ];
+    };
+
+    systemd.tmpfiles.rules = [
+      "f /etc/pihole/versions 0644 pihole pihole - -"
     ];
 
     services = {
-      pihole-ftl = {
-        enable = true;
-        settings.dns = {
-          hosts = [
-            "${currentIP} pi-hole"
-            "${currentIP} ${domain}"
-            "${tailscaleIP} ${domain}"
-          ]
-          ++ (mkDnsRecords currentIP)
-          ++ (mkDnsRecords tailscaleIP);
-
-          upstreams = [ "127.0.0.1#5335" ];
-        };
+      resolved.settings.Resolve = {
+        DNSStubListener = "no";
+        MulticastDNS = "no";
       };
 
       unbound = {
         enable = true;
-        settings = {
-          server = {
-            tcp-idle-timeout = 1000;
-            interface = [
-              "127.0.0.1"
-              "::1"
-            ];
-            port = 5335;
-            access-control = [
-              "127.0.0.0/8 allow"
-              "::1/128 allow"
-            ];
-            harden-glue = true;
-            harden-dnssec-stripped = true;
-            use-caps-for-id = false;
-            edns-buffer-size = 1232;
-            prefetch = true;
-            num-threads = 1;
-            qname-minimisation = true;
-            do-not-query-localhost = false;
-          };
+        settings.server = {
+          tcp-idle-timeout = 1000;
+          interface = [
+            "127.0.0.1"
+            "::1"
+          ];
+          port = 5335;
+          access-control = [
+            "127.0.0.0/8 allow"
+            "::1/128 allow"
+          ];
+          harden-glue = true;
+          harden-dnssec-stripped = true;
+          use-caps-for-id = false;
+          edns-buffer-size = 1232;
+          prefetch = true;
+          num-threads = 1;
+          qname-minimisation = true;
+          do-not-query-localhost = false;
         };
+      };
+
+      pihole-ftl = {
+        enable = true;
+        openFirewallDNS = true;
+        openFirewallDHCP = true;
+        openFirewallWebserver = true;
+        queryLogDeleter.enable = true;
+        useDnsmasqConfig = true;
+        settings = {
+          dhcp = {
+            active = false;
+            end = "192.168.0.254";
+            hosts = [ ];
+            ipv6 = false;
+            leaseTime = "24h";
+            start = "192.168.0.61";
+            rapidCommit = true;
+            resolver.resolveIPv6 = false;
+            router = gatewayIP;
+          };
+          dns = {
+            cnameRecords = [ ];
+            domain = domain;
+            domainNeeded = true;
+            listeningMode = "ALL";
+            expandHosts = true;
+            interface = "all";
+            hosts = [
+              "${gatewayIP} gateway"
+              "${currentIP} pi-hole"
+              "${currentIP} ${domain}"
+              "${tailscaleIP} ${domain}"
+            ]
+            ++ (mkDnsRecords currentIP)
+            ++ (mkDnsRecords tailscaleIP);
+            upstreams = [ "127.0.0.1#5335" ];
+          };
+          ntp = {
+            ipv4.active = false;
+            ipv6.active = false;
+            sync.active = false;
+          };
+          webserver.api.pwhash = "";
+          session.timeout = 43200;
+        };
+      };
+
+      pihole-web = {
+        enable = true;
+        ports = [ 8081 ];
+      };
+
+      nginx = {
+        enable = true;
+        recommendedGzipSettings = true;
+        recommendedOptimisation = true;
+        recommendedProxySettings = true;
+        recommendedTlsSettings = true;
+        virtualHosts = lib.mapAttrs' (
+          name: port:
+          lib.nameValuePair "${name}.${domain}" {
+            useACMEHost = domain;
+            forceSSL = true;
+            extraConfig = ''
+              allow 192.168.1.0/24;
+              allow 100.64.0.0/10;
+              allow 127.0.0.1;
+              deny all;
+            '';
+            locations."/" = {
+              proxyPass = "http://${currentIP}:${toString port}";
+              proxyWebsockets = true;
+            };
+          }
+        ) cfg.proxyServices;
       };
     };
 
@@ -87,32 +159,6 @@ in
         group = "nginx";
         webroot = null;
       };
-    };
-
-    services.nginx = {
-      enable = true;
-      recommendedGzipSettings = true;
-      recommendedOptimisation = true;
-      recommendedProxySettings = true;
-      recommendedTlsSettings = true;
-
-      virtualHosts = lib.mapAttrs' (
-        name: port:
-        lib.nameValuePair "${name}.${domain}" {
-          useACMEHost = domain;
-          forceSSL = true;
-          extraConfig = ''
-            allow 192.168.1.0/24;
-            allow 100.64.0.0/10;
-            allow 127.0.0.1;
-            deny all;
-          '';
-          locations."/" = {
-            proxyPass = "http://${currentIP}:${toString port}";
-            proxyWebsockets = true;
-          };
-        }
-      ) cfg.proxyServices;
     };
 
     optionals.features.unifiedDNS.proxyServices.pi-hole = 8081;
