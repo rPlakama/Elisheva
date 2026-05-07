@@ -23,7 +23,7 @@ in
 
     (lib.mkIf cfg.enable {
       core.features.mediaPermissions.enable = true;
-      optionals.features.nginx.proxyServices.slskd = 5030;
+      optionals.features.unifiedDNS.proxyServices.slskd = 5030;
       services.slskd = {
         enable = true;
         group = "media";

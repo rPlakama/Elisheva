@@ -22,14 +22,13 @@
   optionals.features = {
     neovim.enable = true;
     graphicalPkgs.enable = false;
+    unifiedDNS.enable = true;
     kavita.enable = true;
-    pi-hole.enable = true;
     nzbget.enable = true;
     rrstack.enable = true;
     qbit.enable = true;
     whats_bot.enable = true;
     slskd.enable = true;
-    nginx.enable = true;
     Samba.enable = true;
     homepage.enable = true;
     ST.enable = true;

@@ -6,7 +6,7 @@
 let
   cfg = config.optionals.features.homepage;
   currentIP = config.core.ip;
-  nginxCfg = config.optionals.features.nginx;
+  gen = config.optionals.features.unifiedDNS;
   domain = config.core.domain;
 in
 {
@@ -20,7 +20,7 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    optionals.features.nginx.proxyServices.dashboard = 8082;
+    optionals.features.optionals.unifiedDNS.dashboard = 8082;
 
     services.homepage-dashboard = {
       enable = true;
@@ -41,7 +41,7 @@ in
               href = "https://${name}.${domain}";
               description = "Auto-generated link for ${name}";
             };
-          }) nginxCfg.proxyServices;
+          }) gen.proxyServices;
         }
       ];
     };

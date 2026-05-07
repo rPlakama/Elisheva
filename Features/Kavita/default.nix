@@ -23,7 +23,7 @@ in
       core.features.mediaPermissions.enable = true;
       networking.firewall.allowedTCPPorts = [ 3034 ];
       systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
-      optionals.features.nginx.proxyServices.kavita = 3034;
+      optionals.features.unifiedDNS.proxyServices.kavita = 3034;
       services.kavita = {
         enable = true;
         package = pkgs-kavita.kavita;

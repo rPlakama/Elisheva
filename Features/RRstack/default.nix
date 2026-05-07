@@ -40,6 +40,6 @@ in
         enable = true;
         openFirewall = true;
       }) mediaNonPermissions);
-    optionals.features.nginx.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
+    optionals.features.unifiedDNS.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
   };
 }

@@ -37,6 +37,6 @@ in
 
     systemd.services.sillytavern.serviceConfig.ExecStartPre =
       "${pkgs.bash}/bin/bash -c 'cp --remove-destination ${configSrc} /var/lib/SillyTavern/config.yaml && chmod 600 /var/lib/SillyTavern/config.yaml'";
-    optionals.features.nginx.proxyServices.st = 6720;
+    optionals.features.unifiedDNS.proxyServices.st = 6720;
   };
 }
