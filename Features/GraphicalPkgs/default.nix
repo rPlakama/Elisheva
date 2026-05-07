@@ -22,7 +22,6 @@ in
       vesktop
       firefox
       materialgram
-      jellyfin-desktop
       foot
       zed-editor
       ripdrag
