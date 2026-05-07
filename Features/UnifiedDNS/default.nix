@@ -31,22 +31,48 @@ in
       8081
     ];
 
-    services.pihole-ftl = {
-      enable = true;
-      settings.dns = {
-        hosts = [
-          "${currentIP} pi-hole"
-          "${currentIP} ${domain}"
-          "${tailscaleIP} ${domain}"
-        ]
-        ++ (mkDnsRecords currentIP)
-        ++ (mkDnsRecords tailscaleIP);
+    services = {
+      pihole-ftl = {
+        enable = true;
+        settings.dns = {
+          hosts = [
+            "${currentIP} pi-hole"
+            "${currentIP} ${domain}"
+            "${tailscaleIP} ${domain}"
+          ]
+          ++ (mkDnsRecords currentIP)
+          ++ (mkDnsRecords tailscaleIP);
 
-        upstreams = [ "127.0.0.1#5335" ];
+          upstreams = [ "127.0.0.1#5335" ];
+        };
+      };
+
+      unbound = {
+        enable = true;
+        settings = {
+          server = {
+            tcp-idle-timeout = 1000;
+            interface = [
+              "127.0.0.1"
+              "::1"
+            ];
+            port = 5335;
+            access-control = [
+              "127.0.0.0/8 allow"
+              "::1/128 allow"
+            ];
+            harden-glue = true;
+            harden-dnssec-stripped = true;
+            use-caps-for-id = false;
+            edns-buffer-size = 1232;
+            prefetch = true;
+            num-threads = 1;
+            qname-minimisation = true;
+            do-not-query-localhost = false;
+          };
+        };
       };
     };
-
-    services.unbound.enable = true;
 
     security.acme = {
       acceptTerms = true;
