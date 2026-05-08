@@ -22,6 +22,7 @@ in
       vesktop
       firefox
       materialgram
+      nextcloud-client
       foot
       zed-editor
       ripdrag
