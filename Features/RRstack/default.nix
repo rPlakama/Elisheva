@@ -8,7 +8,6 @@ let
     jellyfin = 8096;
     sonarr = 8989;
     radarr = 7878;
-    readarr = 8787;
   };
 
   mediaNonPermissions = {
