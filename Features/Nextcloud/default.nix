@@ -5,29 +5,55 @@
 }:
 let
   cfg = config.optionals.features.nextcloud;
+  domain = config.core.domain;
+  ncHost = "nextcloud.${domain}";
 in
 {
   options.optionals.features.nextcloud.enable = lib.mkOption {
     type = lib.types.bool;
-    description = "Nextcloud Storage Solution";
+    description = "Nextcloud Service";
     default = false;
   };
 
-  config = {
-    sops.secrets."nextcloud/admin" = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
+
+    sops.secrets."nextcloud/admin" = {
       owner = "nextcloud";
       group = "nextcloud";
+      mode = "0400";
     };
-
-    optionals.features.unifiedDNS.proxyServices.nextcloud = lib.mkIf cfg.enable 8080;
-
-    services.nextcloud = lib.mkIf cfg.enable {
+    services.nextcloud = {
       enable = true;
-      hostName = "nextcloud.moontier";
+      hostName = ncHost;
+      https = true;
+
+      database.createLocally = true;
+
       config = {
-        dbtype = "sqlite";
+        dbtype = "pgsql";
         adminpassFile = config.sops.secrets."nextcloud/admin".path;
       };
+
+      settings = {
+        overwriteprotocol = "https";
+        default_phone_region = "BR";
+      };
     };
+
+    services.nginx.virtualHosts."${ncHost}" = {
+      forceSSL = true;
+      useACMEHost = domain;
+      extraConfig = ''
+        allow 192.168.1.0/24;
+        allow 100.64.0.0/10;
+        allow 127.0.0.1;
+        deny all;
+      '';
+    };
+
+    services.pihole-ftl.settings.dns.hosts = [
+      "${config.core.ip} ${ncHost}"
+      "100.119.129.77 ${ncHost}"
+    ];
   };
 }
