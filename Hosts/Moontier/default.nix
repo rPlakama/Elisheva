@@ -32,6 +32,7 @@
     Samba.enable = true;
     homepage.enable = true;
     ST.enable = true;
+    nextcloud.enable = true;
     galleryDl = {
       enable = true;
       urls = [
