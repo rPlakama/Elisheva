@@ -6,6 +6,22 @@
 }:
 
 let
+
+  vesktop-with-keybinds = pkgs.vesktop.overrideAttrs (old: rec {
+    src = pkgs.fetchFromGitHub {
+      owner = "Vencord";
+      repo = "Vesktop";
+      rev = "global-shortcuts";
+      hash = lib.fakeHash;
+    };
+
+    pnpmDeps = pkgs.fetchpnpmDeps {
+      inherit src;
+      inherit (old) pname version;
+      hash = lib.fakeHash;
+    };
+  });
+
   cfg = config.optionals.features.graphicalPkgs;
   user = config.core.user;
   niriEnabled = config.optionals.features.niri.enable;
@@ -19,7 +35,8 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      vesktop
+      #vesktop
+      vesktop-with-keybinds
       firefox
       materialgram
       nextcloud-client

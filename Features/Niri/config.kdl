@@ -56,7 +56,7 @@ overview {
 }
 
 layout {
-    gaps 16
+    gaps 5
     struts {
         left 0
         right 0
