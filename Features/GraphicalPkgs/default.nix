@@ -43,6 +43,7 @@ in
       foot
       zed-editor
       ripdrag
+      helium
     ];
 
     hjem.users.${user} = {

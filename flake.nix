@@ -9,6 +9,12 @@
       url = "github:nevivurn/nixpkgs/update/kavita";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    helium-flake = {
+      url = "github:oxcl/nix-flake-helium-browser";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hjem = {
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,6 +41,7 @@
   outputs =
     inputs@{
       nixpkgs,
+      helium-flake,
       nix-cachyos-kernel,
       sops-nix,
       ...
@@ -65,6 +72,7 @@
               {
                 nixpkgs.overlays = [
                   nix-cachyos-kernel.overlays.pinned
+                  helium-flake.overlays.default
                 ];
 
                 networking.hostName = hostname;
