@@ -24,6 +24,7 @@ input {
     keyboard {
         xkb {
             layout "@keyboardLayout@"
+            variant "@Variant@"
             options "caps:swapescape"
         }
         repeat-delay 600

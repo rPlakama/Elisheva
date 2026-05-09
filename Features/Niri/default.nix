@@ -22,6 +22,12 @@ in
       type = lib.types.bool;
       default = false;
     };
+    VariantKB = lib.mkOption {
+      description = "Keyboard Variant";
+      type = lib.types.str;
+      default = "";
+    };
+
     keyboardLayout = lib.mkOption {
       description = "Keyboard layout";
       type = lib.types.str;
@@ -70,7 +76,10 @@ in
 
     hjem.users.${user} = {
       files.".config/niri/config.kdl".text =
-        builtins.replaceStrings [ "@keyboardLayout@" ] [ cfg.keyboardLayout ]
+
+        builtins.replaceStrings [ "@keyboardLayout@" ] [ cfg.keyboardLayout ] builtins.replaceStrings
+          [ "@Variant@" ]
+          [ cfg.keyboardLayout ]
           (builtins.readFile ./config.kdl);
     };
   };
