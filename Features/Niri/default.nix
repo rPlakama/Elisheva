@@ -76,10 +76,7 @@ in
 
     hjem.users.${user} = {
       files.".config/niri/config.kdl".text =
-
-        builtins.replaceStrings [ "@keyboardLayout@" ] [ cfg.keyboardLayout ] builtins.replaceStrings
-          [ "@Variant@" ]
-          [ cfg.keyboardLayout ]
+        builtins.replaceStrings [ "@keyboardLayout@" "@Variant@" ] [ cfg.keyboardLayout cfg.VariantKB ]
           (builtins.readFile ./config.kdl);
     };
   };

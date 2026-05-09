@@ -9,6 +9,7 @@
 
   environment.systemPackages = with pkgs; [
     ckan
+    heroic
     btop-cuda
   ];
   core.user = "rplakama";
