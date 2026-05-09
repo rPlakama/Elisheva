@@ -37,7 +37,6 @@ in
     environment.systemPackages = with pkgs; [
       #vesktop
       vesktop-with-keybinds
-      firefox
       materialgram
       nextcloud-client
       foot
