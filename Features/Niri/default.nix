@@ -8,6 +8,16 @@
 let
   cfg = config.optionals.features.niri;
   user = config.core.user;
+  usesGpuScreenRecorder = config.optionals.features.gpuScreenRecorder.enable;
+
+  gsrBinds =
+    if usesGpuScreenRecorder then
+      ''
+        Mod+z { spawn-sh "notify-send 'Replay Saved' 'Saved to ~/Clips/' -i video-x-generic ; pkill -SIGUSR1 -f gpu-screen-recorder"; }
+      ''
+    else
+      "";
+
 in
 {
   imports = [
@@ -76,7 +86,9 @@ in
 
     hjem.users.${user} = {
       files.".config/niri/config.kdl".text =
-        builtins.replaceStrings [ "@keyboardLayout@" "@Variant@" ] [ cfg.keyboardLayout cfg.VariantKB ]
+        builtins.replaceStrings
+          [ "@keyboardLayout@" "@Variant@" "@gsrBinds@" ]
+          [ cfg.keyboardLayout cfg.VariantKB gsrBinds ]
           (builtins.readFile ./config.kdl);
     };
   };
