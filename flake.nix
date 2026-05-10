@@ -8,8 +8,8 @@
       inputs.quickshell.follows = "quickshell";
     };
 
-    gpu-screen-recorder-ui-nix = {
-      url = "git+https://codeberg.org/iWisp360/gpu-screen-recorder-ui-nix.git";
+    gsr-ui.url = {
+      url = "github:rPlakama/gsr-ui-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

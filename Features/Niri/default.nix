@@ -17,6 +17,18 @@ let
       ''
     else
       "";
+  gsrWindowRule =
+    if usesGpuScreenRecorder then
+      ''
+         window-rule {
+            match app-id="gsr-ui"
+            match title="gsr ui"
+            opacity 0.420000
+            open-floating true
+            default-floating-position x=0.5 y=0.5
+        } ''
+    else
+      "";
 
 in
 {
@@ -87,8 +99,8 @@ in
     hjem.users.${user} = {
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
-          [ "@keyboardLayout@" "@Variant@" "@gsrBinds@" ]
-          [ cfg.keyboardLayout cfg.VariantKB gsrBinds ]
+          [ "@keyboardLayout@" "@Variant@" "@gsrBinds@" "@gsrWindowRule@" ]
+          [ cfg.keyboardLayout cfg.VariantKB gsrBinds gsrWindowRule ]
           (builtins.readFile ./config.kdl);
     };
   };

@@ -7,6 +7,8 @@ include "dms/outputs.kdl"
 include "dms/wpblur.kdl"
 include "dms/cursor.kdl"
 
+@gsrWindowRule@
+
 window-rule {
     background-effect {
         blur true
