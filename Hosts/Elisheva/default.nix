@@ -24,6 +24,7 @@
   core.user = "rplakama";
   optionals.features = {
     neovim.enable = true;
+    gpuScreenRecorder.enable = true;
     scx.enable = true;
     niri.enable = true;
     steam.enable = true;
