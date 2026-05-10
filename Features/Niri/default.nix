@@ -34,7 +34,6 @@ in
 {
   imports = [
     inputs.niri.nixosModules.niri
-    inputs.dms.nixosModules.dank-material-shell
     { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
   ];
 
@@ -58,20 +57,10 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    systemd.user.services.niri-flake-polkit.enable = false;
-
     programs = {
       niri = {
         enable = true;
         package = pkgs.niri-unstable;
-      };
-      dank-material-shell = {
-        enable = true;
-        enableCalendarEvents = false;
-        systemd = {
-          enable = true;
-          restartIfChanged = true;
-        };
       };
     };
 
@@ -90,12 +79,7 @@ in
     ];
 
     services = {
-      power-profiles-daemon.enable = lib.mkForce false;
-      displayManager.dms-greeter = {
-        enable = true;
-        compositor.name = "niri";
-        configHome = "/home/${user}";
-      };
+      power-profiles-daemon.enable = lib.mkForce false; # <- SCX
     };
 
     hjem.users.${user} = {
