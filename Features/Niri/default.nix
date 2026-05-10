@@ -13,7 +13,7 @@ let
   gsrBinds =
     if usesGpuScreenRecorder then
       ''
-        Mod+z { spawn-sh "gpu-screen-recorder-ui"; }
+        Mod+z { spawn-sh "gsr-ui"; }
       ''
     else
       "";
