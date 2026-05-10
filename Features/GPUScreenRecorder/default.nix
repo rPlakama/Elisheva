@@ -25,7 +25,7 @@
 
       serviceConfig = {
         ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p %h/Clips";
-        ExecStart = "${pkgs.gpu-screen-recorder}/bin/gpu-screen-recorder -w portal -c mp4 -f 60 -r 60 -o %h/Clips/";
+        ExecStart = "${pkgs.gpu-screen-recorder}/bin/gpu-screen-recorder -w portal -c mp4 -f 60 -r 60 -a default_output -a default_input -o %h/Clips/";
         Restart = "always";
         RestartSec = 3;
       };
