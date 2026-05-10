@@ -16,6 +16,7 @@
 
     environment.systemPackages = with pkgs; [
       libnotify
+      pulseaudio
     ];
 
     systemd.user.services.gpu-screen-recorder-replay = {

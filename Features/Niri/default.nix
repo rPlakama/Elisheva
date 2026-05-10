@@ -13,8 +13,8 @@ let
   gsrBinds =
     if usesGpuScreenRecorder then
       ''
-        Mod+z { spawn-sh "notify-send 'Replay Saved' 'Saved to ~/Clips/' -i video-x-generic ; pkill -SIGUSR1 -f gpu-screen-recorder"; }
-      ''
+        Mod+z { spawn-sh "paplay /run/current-system/sw/share/sounds/freedesktop/stereo/camera-shutter.oga; notify-send -i camera 'Replay Saved' 'Clip Saved!' ; pkill -SIGUSR1 -f gpu-screen-recorder"; }
+      '' # Made with intent to be used with papirus-icon-themes
     else
       "";
 
