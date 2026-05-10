@@ -8,7 +8,7 @@
       inputs.quickshell.follows = "quickshell";
     };
 
-    gsr-ui.url = {
+    gsr-ui-nix = {
       url = "github:rPlakama/gsr-ui-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
