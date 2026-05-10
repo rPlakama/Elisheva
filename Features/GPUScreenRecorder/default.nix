@@ -17,9 +17,9 @@
   };
 
   config = lib.mkIf config.optionals.features.gpuScreenRecorder.enable {
-    programs.gpu-screen-recorder.enable = true;
-    environment.systemPackages = [
-      inputs.gpu-screen-recorder-ui-nix.packages.${pkgs.system}.default
-    ];
+    programs.gpu-screen-recorder = {
+      enable = true;
+      ui.enable = true;
+    };
   };
 }
