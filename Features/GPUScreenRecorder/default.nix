@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    inputs.gpu-screen-recorder-ui-nix.nixosModules.default
+    inputs.gsr-ui-nix.nixosModules.default
   ];
 
   options.optionals.features.gpuScreenRecorder.enable = lib.mkOption {
