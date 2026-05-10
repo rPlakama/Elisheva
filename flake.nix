@@ -2,11 +2,14 @@
   description = "Declarating... Imperative machines...";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.quickshell.follows = "quickshell";
+    };
 
-    nixpkgs-kavita = {
-      url = "github:nevivurn/nixpkgs/update/kavita";
+    gpu-screen-recorder-ui-nix = {
+      url = "git+https://codeberg.org/iWisp360/gpu-screen-recorder-ui-nix.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -19,30 +22,37 @@
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    sops-nix = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:Mic92/sops-nix";
-    };
+
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    nixpkgs-kavita = {
+      url = "github:nevivurn/nixpkgs/update/kavita";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     quickshell = {
       url = "git+https://git.outfoxxed.me/quickshell/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
+
+    sops-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell";
+      url = "github:Mic92/sops-nix";
     };
   };
 
   outputs =
     inputs@{
-      nixpkgs,
       helium-flake,
       nix-cachyos-kernel,
+      nixpkgs,
       sops-nix,
       ...
     }:
@@ -71,8 +81,8 @@
 
               {
                 nixpkgs.overlays = [
-                  nix-cachyos-kernel.overlays.pinned
                   helium-flake.overlays.default
+                  nix-cachyos-kernel.overlays.pinned
                 ];
 
                 networking.hostName = hostname;
