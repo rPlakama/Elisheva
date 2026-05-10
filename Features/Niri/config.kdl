@@ -154,10 +154,17 @@ window-rule {
 }
 
 window-rule {
-    match app-id="helium$" title="^Picture-in-Picture$"
+    match title="^Picture in picture$"
     open-floating true
     default-column-width { fixed 480; }
     default-window-height { fixed 270; }
+    default-floating-position x=10 y=10 relative-to="bottom-left"
+}
+
+window-rule {
+    match app-id="helium" title="^Picture-in-Picture"
+    open-floating true
+    default-floating-position x=20 y=20 relative-to="bottom-left"
 }
 
 
