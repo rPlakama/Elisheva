@@ -14,8 +14,6 @@ let
     if usesGpuScreenRecorder then
       ''
         Mod+z { spawn-sh "gsr-ui"; }
-        Alt+F10 { spawn-sh "gsr-ui-cli replay-save; paplay /run/current-system/sw/share/sounds/freedesktop/stereo/camera-shutter.oga; DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus notify-send 'Replay Saved' 'Clip Saved!' -i camera"; }
-        Alt+F11 { spawn-sh "gsr-ui-cli replay-save-1-min; paplay /run/current-system/sw/share/sounds/freedesktop/stereo/camera-shutter.oga; DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus notify-send 'Replay Saved' 'Clip Saved!' -i camera"; }
       ''
     else
       "";
@@ -82,6 +80,7 @@ in
       nautilus
       loupe
       xwayland-satellite
+      libnotify
       papirus-folders
       papirus-icon-theme
       volantes-cursors

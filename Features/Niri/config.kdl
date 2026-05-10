@@ -143,8 +143,6 @@ binds {
 
   }
 
-  spawn-at-startup "gpu-screen-recorder" "-w" "screen" "-c" "mp4" "-f" "60" "-r" "60" "-o" "/home/rplakama/Videos/"
-
 window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
     default-floating-position x=10 y=10 relative-to="bottom-right"

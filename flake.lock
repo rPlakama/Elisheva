@@ -132,11 +132,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778442729,
-        "narHash": "sha256-Ffr3jX+Ecj05z7f6tCNtasRkB3WHuUNK+joCh1EZGis=",
+        "lastModified": 1778444472,
+        "narHash": "sha256-MECAIGbSzNDV1IUvIr+HcqfnE3vj/4Dfe7qngcN4A2U=",
         "owner": "rPlakama",
         "repo": "gsr-ui-nix",
-        "rev": "2636d530c648553fdd85d056c8f333d12cd47133",
+        "rev": "a274671cfd794745c9d8e181b4bccf0507d6846a",
         "type": "github"
       },
       "original": {
