@@ -39,6 +39,7 @@ in
       materialgram
       nextcloud-client
       foot
+      mpv
       zed-editor
       ripdrag
       helium
