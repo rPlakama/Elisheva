@@ -13,7 +13,7 @@ let
   gsrBinds =
     if usesGpuScreenRecorder then
       ''
-        Mod+z { spawn-sh "notify-send 'Replay Saved' 'Saved to ~/Clips/' -i video-x-generic ; pkill -SIGUSR1 -f gpu-screen-recorder"; }
+        Mod+z { spawn-sh "gpu-screen-recorder-ui"; }
       ''
     else
       "";
