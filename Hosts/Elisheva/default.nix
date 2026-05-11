@@ -25,7 +25,6 @@
   optionals.features = {
     neovim.enable = true;
     scx.enable = true;
-    gpuScreenRecorder.enable = true;
     niri.enable = true;
     steam.enable = true;
   };
