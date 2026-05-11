@@ -22,7 +22,11 @@
     sunshine.enable = true;
     steam.enable = true;
     qbit.enable = true;
-    scx.enable = true;
+
+    scx = {
+      enable = true;
+      flags = [ "--performance" ];
+    };
 
     niri = {
       keyboardLayout = "br,us";
