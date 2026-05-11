@@ -10,6 +10,9 @@
   environment.systemPackages = with pkgs; [
     ckan
     heroic
+    winetricks
+    cabextract
+    wine
     btop-cuda
   ];
   core.user = "rplakama";
