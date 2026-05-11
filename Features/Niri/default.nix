@@ -21,11 +21,10 @@ let
     if usesGpuScreenRecorder then
       ''
          window-rule {
-            match app-id="gsr-ui"
-            match title="gsr ui"
-            opacity 0.420000
-            open-floating true
-            default-floating-position x=0.5 y=0.5
+            match app-id="gsr-notify"
+            match title="gsr notify"
+            default-floating-position x=10 y=10 relative-to="top-left"
+            open-focused false
         } ''
     else
       "";

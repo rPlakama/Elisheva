@@ -127,22 +127,17 @@
     "gsr-ui-nix": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1778444472,
-        "narHash": "sha256-MECAIGbSzNDV1IUvIr+HcqfnE3vj/4Dfe7qngcN4A2U=",
-        "owner": "rPlakama",
-        "repo": "gsr-ui-nix",
-        "rev": "a274671cfd794745c9d8e181b4bccf0507d6846a",
-        "type": "github"
+        "lastModified": 1778539148,
+        "narHash": "sha256-yVMHs3e+xlCau8Bdm5fRmXXD2as66nlU7pC/qSkq6Gs=",
+        "path": "/home/rplakama/gsr-ui-nix",
+        "type": "path"
       },
       "original": {
-        "owner": "rPlakama",
-        "repo": "gsr-ui-nix",
-        "type": "github"
+        "path": "/home/rplakama/gsr-ui-nix",
+        "type": "path"
       }
     },
     "helium-flake": {
@@ -250,7 +245,7 @@
         "cachyos-kernel-patches": "cachyos-kernel-patches",
         "flake-compat": "flake-compat_2",
         "flake-parts": "flake-parts",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1778094799,
@@ -290,16 +285,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1778060440,
-        "narHash": "sha256-5uwxUCXwDNzqIA5TWMIG9gSk1nZf+z//Wae4PLuwydw=",
+        "lastModified": 1777954456,
+        "narHash": "sha256-hGdgeU2Nk87RAuZyYjyDjFL6LK7dAZN5RE9+hrDTkDU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "39d9e4fcf3976da8dd0d523723747ee11a3d6f7a",
+        "rev": "549bd84d6279f9852cae6225e372cc67fb91a4c1",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable-small",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -353,6 +348,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1778060440,
+        "narHash": "sha256-5uwxUCXwDNzqIA5TWMIG9gSk1nZf+z//Wae4PLuwydw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "39d9e4fcf3976da8dd0d523723747ee11a3d6f7a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable-small",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1777954456,
         "narHash": "sha256-hGdgeU2Nk87RAuZyYjyDjFL6LK7dAZN5RE9+hrDTkDU=",
         "owner": "NixOS",
@@ -395,7 +406,7 @@
         "hjem": "hjem",
         "niri": "niri",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-kavita": "nixpkgs-kavita",
         "quickshell": "quickshell",
         "sops-nix": "sops-nix"
