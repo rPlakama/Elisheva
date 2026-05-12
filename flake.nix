@@ -8,7 +8,7 @@
       inputs.quickshell.follows = "quickshell";
     };
 
-    gsr-ui-nix.url = "path:/home/rplakama/gsr-ui-nix";
+    gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
 
     helium-flake = {
       url = "github:oxcl/nix-flake-helium-browser";

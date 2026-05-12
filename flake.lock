@@ -130,8 +130,8 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1778539148,
-        "narHash": "sha256-yVMHs3e+xlCau8Bdm5fRmXXD2as66nlU7pC/qSkq6Gs=",
+        "lastModified": 1778612306,
+        "narHash": "sha256-ajoDX4GVQ7QjGpOlUdXtcvp8ytVxQ26CF0yy7KbrMo4=",
         "path": "/home/rplakama/gsr-ui-nix",
         "type": "path"
       },
