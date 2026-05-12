@@ -7,8 +7,6 @@ include "dms/outputs.kdl"
 include "dms/wpblur.kdl"
 include "dms/cursor.kdl"
 
-@gsrWindowRule@
-
 window-rule {
     background-effect {
         blur true
@@ -138,8 +136,6 @@ binds {
     XF86MonBrightnessDown { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
     XF86MonBrightnessUp { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
     Ctrl+Alt+K { switch-layout "next"; }
-
-    @gsrBinds@
 
   }
 
