@@ -24,18 +24,12 @@ in
       sudo-rs.enable = true;
     };
     environment.systemPackages = with pkgs; [
-      nixd
-      nixfmt
       ripgrep
-      lua-language-server
       cifs-utils
-      luaformatter
-      fish-lsp
 
       p7zip
       zip
       ripgrep
-      comma
       neovim
       yazi
       wget
