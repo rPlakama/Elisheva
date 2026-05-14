@@ -1,3 +1,4 @@
+// Core - Includes
 include "dms/windowrules.kdl"
 include "dms/alttab.kdl"
 include "dms/binds.kdl"
@@ -7,18 +8,10 @@ include "dms/outputs.kdl"
 include "dms/wpblur.kdl"
 include "dms/cursor.kdl"
 
-window-rule {
-    background-effect {
-        blur true
-    }
-}
-
-blur {
-    passes 5
-    offset 2.0
-    noise 0.03
-    saturation 1.6
-}
+// System - Input
+prefer-no-csd
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+hotkey-overlay { skip-at-startup; }
 
 input {
     keyboard {
@@ -41,19 +34,27 @@ input {
         scroll-method "two-finger"
     }
     mouse { accel-speed -0.500000; }
+
     warp-mouse-to-focus
     workspace-auto-back-and-forth
     mod-key "Super"
     mod-key-nested "Alt"
 }
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
-prefer-no-csd
+
+// Appearance - Layout
 overview {
-  backdrop-color "#080808"
+    backdrop-color "#080808"
     workspace-shadow {
         softness 15
         spread 10
     }
+}
+
+blur {
+    passes 5
+    offset 2.0
+    noise 0.03
+    saturation 1.6
 }
 
 layout {
@@ -81,72 +82,35 @@ layout {
     }
     center-focused-column "never"
 }
-hotkey-overlay { skip-at-startup; }
-binds {
-    Ctrl+Alt+A { spawn "dms" "ipc" "call" "dash" "toggle" "overview"; }
-    Ctrl+Alt+C { spawn "dms" "ipc" "call" "control-center" "toggle"; }
-    Ctrl+Alt+D { spawn "dms" "ipc" "call" "dash" "toggle" "media"; }
-    Ctrl+Alt+L { spawn "dms" "ipc" "call" "wallpaper" "next"; }
-    Ctrl+Alt+S { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
-    Ctrl+Alt+W { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
-    Mod+0 { focus-workspace 10; }
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
-    Mod+3 { focus-workspace 3; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
-    Mod+BracketLeft { consume-or-expel-window-left; }
-    Mod+BracketRight { consume-or-expel-window-right; }
-    Mod+C { center-column; }
-    Mod+F { maximize-column; }
-    Mod+H { focus-column-left; }
-    Mod+J { focus-window-or-workspace-down; }
-    Mod+K { focus-window-or-workspace-up; }
-    Mod+L { focus-column-right; }
-    Mod+M { spawn "dms" "ipc" "call" "processlist" "toggle"; }
-    Mod+N { spawn "dms" "ipc" "call" "notifications" "toggle"; }
-    Mod+P { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
-    Ctrl+Alt+M { spawn-sh "echo run-shortcut:toggleMute | nc -U -w1 $XDG_RUNTIME_DIR/vesktop.sock"; }
 
-    Mod+Q { set-window-height "+10%"; }
-    Mod+R { switch-preset-column-width-back; }
-    Mod+Return { spawn "foot"; }
-    Mod+Shift+C { center-visible-columns; }
-    Mod+Shift+F { fullscreen-window; }
-    Mod+Shift+H { move-column-left; }
-    Mod+Shift+J { move-column-to-workspace-down; }
-    Mod+Shift+K { move-column-to-workspace-up; }
-    Mod+Shift+L { move-column-right; }
-    Mod+Shift+Q { set-window-height "-10%"; }
-    Mod+Shift+R { switch-preset-column-width; }
-    Mod+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
-    Mod+Tab { toggle-overview; }
-    Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
-    Mod+W { close-window; }
-    Mod+Y { spawn-sh "foot -e yazi"; }
-    Print { screenshot; }
-    XF86AudioLowerVolume { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-; dms ipc call audio increment 0"; }
-    XF86AudioMute { spawn "dms" "ipc" "call" "audio" "mute"; }
-    XF86AudioPlay { spawn "dms" "ipc" "call" "mpris" "playPause"; }
-    XF86AudioRaiseVolume { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+; dms ipc call audio increment 0"; }
-    XF86MonBrightnessDown { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
-    XF86MonBrightnessUp { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
-    Ctrl+Alt+K { switch-layout "next"; }
+animations {
+    slowdown 0.800000
+    config-notification-open-close { duration-ms 452; curve "cubic-bezier" 0.2 1.0 0.2 1.0; }
+    exit-confirmation-open-close   { duration-ms 452; curve "cubic-bezier" 0.2 1.0 0.2 1.0; }
+    horizontal-view-movement       { duration-ms 452; curve "cubic-bezier" 0.2 1.0 0.2 1.0; }
+    overview-open-close            { duration-ms 452; curve "cubic-bezier" 0.2 1.0 0.2 1.0; }
+    screenshot-ui-open             { duration-ms 452; curve "cubic-bezier" 0.2 1.0 0.2 1.0; }
+    window-close                   { duration-ms 452; curve "cubic-bezier" 0.2 1.0 0.2 1.0; }
+    window-movement                { duration-ms 452; curve "cubic-bezier" 0.2 1.0 0.2 1.0; }
+    window-open                    { duration-ms 452; curve "cubic-bezier" 0.2 1.0 0.2 1.0; }
+    window-resize                  { duration-ms 452; curve "cubic-bezier" 0.2 1.0 0.2 1.0; }
+    workspace-switch               { duration-ms 452; curve "cubic-bezier" 0.2 1.0 0.2 1.0; }
+}
 
-  }
+// Window - Rules
+window-rule {
+    background-effect { blur true; }
+}
+
+window-rule {
+    match is-active=false
+    opacity 0.920000
+}
 
 window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
     default-floating-position x=10 y=10 relative-to="bottom-right"
     open-focused false
-}
-window-rule {
-    match is-active=false
-    opacity 0.920000
 }
 
 window-rule {
@@ -163,48 +127,76 @@ window-rule {
     default-floating-position x=20 y=20 relative-to="bottom-left"
 }
 
+// Binds - Applications
+binds {
+    Mod+Return { spawn "foot"; }
+    Mod+Y      { spawn-sh "foot -e yazi"; }
+    Mod+W      { close-window; }
+    Mod+P      { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
+    Print      { screenshot; }
 
+// Binds - System Overlays
+    Mod+Tab    { toggle-overview; }
+    Mod+Space  { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Mod+V      { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+    Mod+M      { spawn "dms" "ipc" "call" "processlist" "toggle"; }
+    Mod+N      { spawn "dms" "ipc" "call" "notifications" "toggle"; }
+    Ctrl+Alt+A { spawn "dms" "ipc" "call" "dash" "toggle" "overview"; }
+    Ctrl+Alt+C { spawn "dms" "ipc" "call" "control-center" "toggle"; }
+    Ctrl+Alt+D { spawn "dms" "ipc" "call" "dash" "toggle" "media"; }
+    Ctrl+Alt+S { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+    Ctrl+Alt+W { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
+    Ctrl+Alt+L { spawn "dms" "ipc" "call" "wallpaper" "next"; }
 
-animations {
-    slowdown 0.800000
-    config-notification-open-close {
-        duration-ms 452
-        curve "cubic-bezier" 0.200000 1.000000 0.200000 1.000000
-    }
-    exit-confirmation-open-close {
-        duration-ms 452
-        curve "cubic-bezier" 0.200000 1.000000 0.200000 1.000000
-    }
-    horizontal-view-movement {
-        duration-ms 452
-        curve "cubic-bezier" 0.200000 1.000000 0.200000 1.000000
-    }
-    overview-open-close {
-        duration-ms 452
-        curve "cubic-bezier" 0.200000 1.000000 0.200000 1.000000
-    }
-    screenshot-ui-open {
-        duration-ms 452
-        curve "cubic-bezier" 0.200000 1.000000 0.200000 1.000000
-    }
-    window-close {
-        duration-ms 452
-        curve "cubic-bezier" 0.200000 1.000000 0.200000 1.000000
-    }
-    window-movement {
-        duration-ms 452
-        curve "cubic-bezier" 0.200000 1.000000 0.200000 1.000000
-    }
-    window-open {
-        duration-ms 452
-        curve "cubic-bezier" 0.200000 1.000000 0.200000 1.000000
-    }
-    window-resize {
-        duration-ms 452
-        curve "cubic-bezier" 0.200000 1.000000 0.200000 1.000000
-    }
-    workspace-switch {
-        duration-ms 452
-        curve "cubic-bezier" 0.200000 1.000000 0.200000 1.000000
-    }
+// Binds - Workspaces
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+0 { focus-workspace 10; }
+
+// Binds - Navigation
+    Mod+H            { focus-column-left; }
+    Mod+J            { focus-window-or-workspace-down; }
+    Mod+K            { focus-window-or-workspace-up; }
+    Mod+L            { focus-column-right; }
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+
+// Binds - Swapping
+    Mod+Ctrl+H { swap-window-left; }
+    Mod+Ctrl+J { move-window-down; }
+    Mod+Ctrl+K { move-window-up; }
+    Mod+Ctrl+L { swap-window-right; }
+
+// Binds - Moving
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+J { move-column-to-workspace-down; }
+    Mod+Shift+K { move-column-to-workspace-up; }
+    Mod+Shift+L { move-column-right; }
+
+// Binds - Layout & Sizing
+    Mod+C       { center-column; }
+    Mod+Shift+C { center-visible-columns; }
+    Mod+F       { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+Q       { set-window-height "+25%"; }
+    Mod+E       { set-window-height "-25%"; }
+    Mod+R       { switch-preset-column-width-back; }
+    Mod+Shift+R { switch-preset-column-width; }
+
+// Binds - Hardware & Media
+    XF86AudioRaiseVolume  { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+; dms ipc call audio increment 0"; }
+    XF86AudioLowerVolume  { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-; dms ipc call audio increment 0"; }
+    XF86AudioMute         { spawn "dms" "ipc" "call" "audio" "mute"; }
+    XF86AudioPlay         { spawn "dms" "ipc" "call" "mpris" "playPause"; }
+    XF86MonBrightnessUp   { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
+    XF86MonBrightnessDown { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
+    Ctrl+Alt+M            { spawn-sh "echo run-shortcut:toggleMute | nc -U -w1 $XDG_RUNTIME_DIR/vesktop.sock"; }
+    Ctrl+Alt+K            { switch-layout "next"; }
 }

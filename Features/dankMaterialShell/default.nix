@@ -6,13 +6,12 @@
 }:
 let
   cfgNiri = config.optionals.features.niri;
-  cfgHypr = config.optionals.features.hypr;
   user = config.core.user;
 in
 {
   imports = [ inputs.dms.nixosModules.dank-material-shell ];
 
-  config = lib.mkIf (cfgNiri.enable || cfgHypr.enable) {
+  config = lib.mkIf cfgNiri.enable {
 
     systemd.user.services.niri-flake-polkit.enable = false; # We use DMS polkit.
 
