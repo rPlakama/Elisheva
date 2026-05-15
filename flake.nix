@@ -9,6 +9,7 @@
     };
 
     gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
+    kavita.url = "github:nevivurn/nixpkgs/update/kavita";
 
     helium-flake = {
       url = "github:oxcl/nix-flake-helium-browser";
@@ -28,11 +29,6 @@
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    nixpkgs-kavita = {
-      url = "github:nevivurn/nixpkgs/update/kavita";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     quickshell = {
       url = "git+https://git.outfoxxed.me/quickshell/quickshell";
