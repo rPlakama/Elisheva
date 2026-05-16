@@ -32,12 +32,10 @@ in
     services =
       (lib.mapAttrs (name: port: {
         enable = true;
-        openFirewall = true;
         group = "media";
       }) mediaServicesWithPermissions)
       // (lib.mapAttrs (name: port: {
         enable = true;
-        openFirewall = true;
       }) mediaNonPermissions);
     optionals.features.unifiedDNS.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
   };

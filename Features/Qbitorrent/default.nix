@@ -29,7 +29,6 @@ in
     services = {
       qui = {
         secretFile = config.sops.secrets."qui/secret".path;
-        openFirewall = true;
         group = "media";
         enable = true;
         settings = {
@@ -39,7 +38,6 @@ in
       };
       qbittorrent = {
         enable = true;
-        openFirewall = true;
         group = "media";
         serverConfig = {
           LegalNotice.Accepted = true;

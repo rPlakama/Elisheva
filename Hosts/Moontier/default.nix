@@ -36,6 +36,7 @@
     homepage.enable = true;
     ST.enable = true;
     nextcloud.enable = true;
+    iperf3.enable = true;
     galleryDl = {
       enable = true;
       urls = [

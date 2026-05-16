@@ -184,6 +184,22 @@
         "type": "github"
       }
     },
+    "kavita": {
+      "locked": {
+        "lastModified": 1778853295,
+        "narHash": "sha256-2DygfsVvzaMsq/ul/qHZg5HwNgYpPVzyJA11twHOddU=",
+        "owner": "nevivurn",
+        "repo": "nixpkgs",
+        "rev": "ea883a790ac0c405cf37980576f0213f0a11c10a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nevivurn",
+        "ref": "update/kavita",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
@@ -302,22 +318,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-kavita": {
-      "locked": {
-        "lastModified": 1777614932,
-        "narHash": "sha256-lYqzL/bA6GaRyV/uD9NTMS3ApkL1xvl10fI3Ew1MfSY=",
-        "owner": "nevivurn",
-        "repo": "nixpkgs",
-        "rev": "44e33d361da8d525f4c6bf65fc7a6e6d7442f472",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nevivurn",
-        "ref": "update/kavita",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1777168982,
@@ -407,10 +407,10 @@
         "gsr-ui-nix": "gsr-ui-nix",
         "helium-flake": "helium-flake",
         "hjem": "hjem",
+        "kavita": "kavita",
         "niri": "niri",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-kavita": "nixpkgs-kavita",
         "quickshell": "quickshell",
         "sops-nix": "sops-nix"
       }

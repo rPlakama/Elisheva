@@ -7,7 +7,7 @@
 }:
 let
   cfg = config.optionals.features.kavita;
-  pkgs-kavita = import inputs.nixpkgs-kavita { inherit (pkgs) system; };
+  pkgs-kavita = import inputs.kavita { inherit (pkgs) system; };
 in
 {
   options.optionals.features.kavita.enable = lib.mkOption {
