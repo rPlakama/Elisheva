@@ -10,6 +10,7 @@
   environment.systemPackages = with pkgs; [
     btop
     exiftool
+    smartmontools
     calibre
     zip
   ];
