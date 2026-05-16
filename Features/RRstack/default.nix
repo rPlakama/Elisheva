@@ -5,7 +5,6 @@ let
 
   mediaServicesWithPermissions = {
     jackett = 9117;
-    jellyfin = 8096;
     sonarr = 8989;
     radarr = 7878;
   };
@@ -24,11 +23,6 @@ in
 
   config = lib.mkIf cfg.enable {
     core.features.mediaPermissions.enable = true;
-    users.users.jellyfin.extraGroups = [
-      "video"
-      "render"
-    ];
-
     services =
       (lib.mapAttrs (name: port: {
         enable = true;
@@ -37,6 +31,7 @@ in
       // (lib.mapAttrs (name: port: {
         enable = true;
       }) mediaNonPermissions);
+
     optionals.features.unifiedDNS.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
   };
 }
