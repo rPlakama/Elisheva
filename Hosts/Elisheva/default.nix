@@ -21,7 +21,7 @@
     ];
   };
 
-  harwdare.bluetooth.enable = true;
+  hardware.bluetooth.enable = true;
   core.user = "rplakama";
   optionals.features = {
     neovim.enable = true;
