@@ -37,6 +37,7 @@
     ST.enable = true;
     nextcloud.enable = true;
     iperf3.enable = true;
+    jellyfin.enable = true;
     galleryDl = {
       enable = true;
       urls = [
