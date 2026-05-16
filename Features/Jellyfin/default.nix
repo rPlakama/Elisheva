@@ -19,15 +19,11 @@ in
     services.jellyfin = {
       enable = true;
       group = "media";
-      openFirewall = false; # Explicity  just in case;
+      openFirewall = true;
     };
     users.users.jellyfin.extraGroups = [
       "video"
       "render"
-    ];
-    networking.firewall.allowedUDPPorts = [
-      1900 # DLNA
-      7359 # Auto-discovery
     ];
   };
 }
