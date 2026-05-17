@@ -54,10 +54,9 @@ in
       default = false;
       description = "gallery-dl manga downloader (Direct connection with stealth/slow intervals)";
     };
-    urls = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ "" ];
-      description = "List of manga URLs to download daily";
+    secretFile = lib.mkOption {
+      type = lib.types.path;
+      description = "Path to the decrypted SOPS file containing manga URLs";
     };
   };
 
@@ -82,10 +81,11 @@ in
       serviceConfig = {
         Type = "oneshot";
         User = user;
+        # Pass the SOPS file directly using --input-file
         ExecStart = pkgs.writeShellScript "gallery-dl-run" ''
           ${pkgs.gallery-dl}/bin/gallery-dl \
             --config /home/${user}/.config/gallery-dl/config.json \
-            ${lib.concatMapStringsSep " \\\n            " (url: "\"${url}\"") cfg.urls}
+            --input-file "${cfg.secretFile}"
         '';
         StandardOutput = "journal";
         StandardError = "journal";

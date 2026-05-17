@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./hardware.nix
@@ -23,6 +23,10 @@
   core.ip = "192.168.1.106";
   core.domain = "moontier.online";
 
+  sops.secrets."gallery_dl_urls" = {
+    owner = config.core.user;
+  };
+
   optionals.features = {
     neovim.enable = true;
     graphicalPkgs.enable = false;
@@ -41,11 +45,7 @@
     jellyfin.enable = true;
     galleryDl = {
       enable = true;
-      urls = [
-        "https://mangafire.to/manga/madan-no-ichii.w5x17"
-        "https://mangafire.to/manga/centuriaa.zxvjp"
-        "https://mangafire.to/manga/gachiakutaa.1n2xq"
-      ];
+      secretFile = config.sops.secrets."gallery_dl_urls".path;
     };
   };
 }
