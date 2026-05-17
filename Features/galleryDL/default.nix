@@ -148,7 +148,7 @@ in
       path = with pkgs; [
         fanficfare
         gnugrep
-        findutils
+        fd
       ];
       serviceConfig = {
         Type = "oneshot";
@@ -160,7 +160,7 @@ in
 
             # Extract work ID from URL to find existing epub
             id=$(echo "$url" | grep -oP '\d{6,}')
-            existing=$(find "${cfg.literature.downloadPath}" -name "*''${id}*" -name "*.epub" | head -1)
+            existing=$(fd -t f -g "*''${id}*.epub" "${cfg.literature.downloadPath}" | head -n 1)
 
             if [[ -n "$existing" ]]; then
               # Update in place — only fetches new chapters
