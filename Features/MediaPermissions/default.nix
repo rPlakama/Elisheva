@@ -12,6 +12,7 @@ let
     "music/downloads"
     "mangas/local"
     "mangas/download"
+    "fanfics"
     "mangas"
     "novels"
     "books"

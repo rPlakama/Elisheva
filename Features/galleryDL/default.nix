@@ -20,9 +20,7 @@ let
         lang = "pt-br";
         flaresolverr = "http://127.0.0.1:8191/v1";
       };
-      ao3 = {
-        format = "epub";
-      };
+      ao3.formats = [ "epub" ];
     };
     downloader = {
       retries = 5;
@@ -43,7 +41,7 @@ let
     // {
       extractor = baseConfig.extractor // {
         base-directory = path;
-        archive = "${path}/.archive.sqlite3";
+        archive = "${path}.archive.sqlite3";
         postprocessors = postprocessors;
       };
     };
@@ -57,8 +55,9 @@ let
     }
   ];
 
-  # Literature is already a single epub file, no postprocessing needed
+  # Literature:
   literatureConfig = mkGalleryDlConfig cfg.literature.downloadPath [ ];
+
 in
 {
   options.optionals.features.galleryDl = {
@@ -110,7 +109,6 @@ in
     hjem.users.${user}.files = {
       ".config/gallery-dl/mangas.json".text = builtins.toJSON mangasConfig;
       ".config/gallery-dl/literature.json".text = builtins.toJSON literatureConfig;
-
     };
 
     # --- Mangas ---
@@ -151,10 +149,7 @@ in
     systemd.services.gallery-dl-literature = {
       description = "gallery-dl Literature/Fanfic Downloader";
       after = [ "network.target" ];
-      path = with pkgs; [
-        p7zip
-        zip
-      ];
+      # Removed weasyprint and coreutils from path as the post-processor was deleted
       serviceConfig = {
         Type = "oneshot";
         User = user;
