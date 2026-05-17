@@ -23,7 +23,7 @@
   core.ip = "192.168.1.106";
   core.domain = "moontier.online";
 
-  sops.secrets."gallery_dl" = {
+  sops.secrets."gallery-dl" = {
     owner = config.core.user;
   };
 
