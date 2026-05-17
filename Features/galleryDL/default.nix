@@ -90,8 +90,12 @@ in
       gallery-dl
     ];
 
-    sops.secrets."gallery-dl/ao3-username" = { };
-    sops.secrets."gallery-dl/ao3-password" = { };
+    sops.secrets = {
+      "gallery-dl/ao3-username" = { };
+      "gallery-dl/ao3-password" = { };
+      "gallery-dl/mangas-urls" = { };
+      "gallery-dl/literature-urls" = { };
+    };
 
     sops.templates."gallery-dl-secrets.json" = {
       owner = user;
