@@ -45,7 +45,14 @@
     jellyfin.enable = true;
     galleryDl = {
       enable = true;
-      secretFile = config.sops.secrets."gallery_dl_urls".path;
+      mangas = {
+        downloadPath = "/media/mangas/download";
+        secretFile = config.sops.secrets."gallery-dl/mangas-urls".path;
+      };
+      literature = {
+        downloadPath = "/media/novels/";
+        secretFile = config.sops.secrets."gallery-dl/literature-urls".path;
+      };
     };
   };
 }
