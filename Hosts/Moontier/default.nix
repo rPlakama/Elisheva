@@ -23,8 +23,19 @@
   core.ip = "192.168.1.106";
   core.domain = "moontier.online";
 
-  sops.secrets."gallery-dl" = {
-    owner = config.core.user;
+  sops.secrets = {
+    "gallery-dl/ao3-username" = {
+      owner = config.core.user;
+    };
+    "gallery-dl/ao3-password" = {
+      owner = config.core.user;
+    };
+    "gallery-dl/mangas-urls" = {
+      owner = config.core.user;
+    };
+    "gallery-dl/literature-urls" = {
+      owner = config.core.user;
+    };
   };
 
   optionals.features = {
