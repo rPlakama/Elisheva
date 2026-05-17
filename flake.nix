@@ -5,7 +5,6 @@
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.quickshell.follows = "quickshell";
     };
 
     gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
@@ -27,13 +26,7 @@
     };
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     sops-nix = {
       inputs.nixpkgs.follows = "nixpkgs";

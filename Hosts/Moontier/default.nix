@@ -61,7 +61,7 @@
         secretFile = config.sops.secrets."gallery-dl/mangas-urls".path;
       };
       literature = {
-        downloadPath = "/media/fanfics/";
+        downloadPath = "/media/fanfics/download";
         secretFile = config.sops.secrets."gallery-dl/literature-urls".path;
       };
     };

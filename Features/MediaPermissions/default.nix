@@ -13,6 +13,7 @@ let
     "mangas/local"
     "mangas/download"
     "fanfics"
+    "fanfics/download"
     "mangas"
     "novels"
     "books"
