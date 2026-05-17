@@ -20,7 +20,6 @@ let
         lang = "pt-br";
         flaresolverr = "http://127.0.0.1:8191/v1";
       };
-      ao3.formats = [ "epub" ];
     };
     downloader = {
       retries = 5;
@@ -55,16 +54,13 @@ let
     }
   ];
 
-  # Literature:
-  literatureConfig = mkGalleryDlConfig cfg.literature.downloadPath [ ];
-
 in
 {
   options.optionals.features.galleryDl = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "gallery-dl manga/literature downloader (stealth/slow intervals)";
+      description = "gallery-dl (manga) & FanFicFare (literature) downloader";
     };
     mangas.secretFile = lib.mkOption {
       type = lib.types.path;
@@ -87,6 +83,7 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       gallery-dl
+      fanficfare
     ];
 
     sops.secrets = {
@@ -96,22 +93,21 @@ in
       "gallery-dl/literature-urls" = { };
     };
 
-    sops.templates."gallery-dl-secrets.json" = {
+    sops.templates."fanficfare-personal.ini" = {
       owner = user;
-      content = builtins.toJSON {
-        extractor.ao3 = {
-          username = config.sops.placeholder."gallery-dl/ao3-username";
-          password = config.sops.placeholder."gallery-dl/ao3-password";
-        };
-      };
+      content = ''
+        [archiveofourown.org]
+        is_adult:true
+        user = ${config.sops.placeholder."gallery-dl/ao3-username"}
+        pass = ${config.sops.placeholder."gallery-dl/ao3-password"}
+      '';
     };
 
     hjem.users.${user}.files = {
       ".config/gallery-dl/mangas.json".text = builtins.toJSON mangasConfig;
-      ".config/gallery-dl/literature.json".text = builtins.toJSON literatureConfig;
     };
 
-    # --- Mangas ---
+    # --- Mangas (gallery-dl) ---
     systemd.services.gallery-dl-mangas = {
       description = "gallery-dl Manga Downloader";
       after = [
@@ -145,27 +141,52 @@ in
       };
     };
 
-    # --- Literature ---
-    systemd.services.gallery-dl-literature = {
-      description = "gallery-dl Literature/Fanfic Downloader";
+    # --- Literature (FanFicFare) ---
+    systemd.services.fanficfare-literature = {
+      description = "FanFicFare AO3 Literature Updater";
       after = [ "network.target" ];
-      # Removed weasyprint and coreutils from path as the post-processor was deleted
+      path = with pkgs; [
+        fanficfare
+        gnugrep
+        findutils
+      ];
       serviceConfig = {
         Type = "oneshot";
         User = user;
-        ExecStart = pkgs.writeShellScript "gallery-dl-literature-run" ''
-          ${pkgs.gallery-dl}/bin/gallery-dl \
-            --config /home/${user}/.config/gallery-dl/literature.json \
-            --config ${config.sops.templates."gallery-dl-secrets.json".path} \
-            --input-file "${cfg.literature.secretFile}"
+        ExecStart = pkgs.writeShellScript "fanficfare-literature-run" ''
+          while IFS= read -r url; do
+            # Skip empty lines and comments
+            [[ -z "$url" || "$url" == \#* ]] && continue
+
+            # Extract work ID from URL to find existing epub
+            id=$(echo "$url" | grep -oP '\d{6,}')
+            existing=$(find "${cfg.literature.downloadPath}" -name "*''${id}*" -name "*.epub" | head -1)
+
+            if [[ -n "$existing" ]]; then
+              # Update in place — only fetches new chapters
+              ${pkgs.fanficfare}/bin/fanficfare \
+                -c ${config.sops.templates."fanficfare-personal.ini".path} \
+                --update-epub \
+                --non-interactive \
+                -o "output_filename=$existing" \
+                "$url" || true
+            else
+              # First download
+              ${pkgs.fanficfare}/bin/fanficfare \
+                -c ${config.sops.templates."fanficfare-personal.ini".path} \
+                --non-interactive \
+                -o "output_filename=${cfg.literature.downloadPath}/\''${title}-\''${author}.epub" \
+                "$url" || true
+            fi
+          done < "${cfg.literature.secretFile}"
         '';
         StandardOutput = "journal";
         StandardError = "journal";
       };
     };
 
-    systemd.timers.gallery-dl-literature = {
-      description = "gallery-dl literature — once a day";
+    systemd.timers.fanficfare-literature = {
+      description = "FanFicFare literature — once a day";
       wantedBy = [ "timers.target" ];
       timerConfig = {
         OnCalendar = "01:00";
