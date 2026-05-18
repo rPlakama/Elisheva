@@ -43,7 +43,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      papers
+      kdePackages.okular
       nautilus
       loupe
       xwayland-satellite
