@@ -13,6 +13,7 @@ vim.lsp.enable({
   "fish_lsp",
   "nixd",
   "lua_ls",
+  "clangd",
   "kotlin_language_server"
 })
 
