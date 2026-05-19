@@ -16,6 +16,7 @@ in
     default = false;
   };
   config = lib.mkIf cfg.enable {
+    boot.kernelModules = [ "ntsync" ];
     programs = {
       steam = {
         enable = true;
