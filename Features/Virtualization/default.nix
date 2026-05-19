@@ -16,7 +16,7 @@ in
       docker = {
         enable = true;
         enableNvidia = isNvidia;
-        enableOnBoot = true;
+        enableOnBoot = false;
         autoPrune.enable = true;
       };
     };
