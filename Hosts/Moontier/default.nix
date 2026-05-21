@@ -54,6 +54,7 @@
     nextcloud.enable = true;
     iperf3.enable = true;
     jellyfin.enable = true;
+    searxng.enable = true;
     galleryDl = {
       enable = true;
       mangas = {

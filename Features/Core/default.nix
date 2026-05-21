@@ -13,16 +13,10 @@ in
   options.core.features.core.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
-    description = "Essential system segments";
+    description = "Essential system segments for my Hosts";
   };
   config = lib.mkIf config.core.features.core.enable {
-    security = {
-      pam.services.login = {
-        startSession = true;
-        gnupg.enable = false;
-      };
-      sudo-rs.enable = true;
-    };
+    security.sudo-rs.enable = true;
     environment.systemPackages = with pkgs; [
       ripgrep
       cifs-utils
