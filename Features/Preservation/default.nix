@@ -140,15 +140,6 @@ in
                         ++ ssdOpts;
                         mountpoint = "/persist";
                       };
-                      "/home" = {
-                        mountOptions = [
-                          "subvol=home"
-                          "noatime"
-                          "compress=zstd:6"
-                        ]
-                        ++ ssdOpts;
-                        mountpoint = "/home";
-                      };
                     })
                   ];
                 };
@@ -177,15 +168,6 @@ in
                     ]
                     ++ ssdOpts;
                     mountpoint = "/persist";
-                  };
-                  "/home" = {
-                    mountOptions = [
-                      "subvol=home"
-                      "noatime"
-                      "compress=zstd:6"
-                    ]
-                    ++ ssdOpts;
-                    mountpoint = "/home";
                   };
                 };
               };
