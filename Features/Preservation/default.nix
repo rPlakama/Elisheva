@@ -194,9 +194,13 @@ in
 
       preservation.preserveAt."/persist" = {
         directories = [
+          "/etc/nixos"
           "/var/lib/tailscale"
           "/var/lib/bluetooth"
-          "/var/lib/nixos"
+          {
+            directory = "/var/lib/nixos";
+            inInitrd = true;
+          }
           "/var/log"
           "/etc/NetworkManager/system-connections"
           "/etc/ssh"
@@ -204,7 +208,10 @@ in
         ++ preservationCfg.additionalDirs;
 
         files = [
-          "/etc/machine-id"
+          {
+            file = "/etc/machine-id";
+            inInitrd = true;
+          }
         ]
         ++ preservationCfg.additionalFiles;
 
