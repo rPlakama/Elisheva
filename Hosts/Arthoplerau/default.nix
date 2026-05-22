@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ./hardware.nix
+    # ./hardware.nix
     ../../Features
   ];
 
@@ -14,5 +14,17 @@
     scx.enable = true;
     niri.enable = true;
     virtualization.enable = true;
+    disko = {
+      enable = true;
+      dualDrive = true;
+      primaryDrive = "/dev/nvme0n1p1"; # -- Placeholder
+      secondaryDrive = "/dev/nvme0n1p2"; # -- Placeholder
+    };
+    preservation = {
+      additionalHomeDirs = [
+        ".config/vesktop" # -- Imma not doing it manually
+        ".config/niri" # -- Cause 'dms generated files
+      ];
+    };
   };
 }
