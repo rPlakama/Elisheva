@@ -6,14 +6,25 @@
   ];
 
   networking.hostName = "Arthoplerau";
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-zen4;
+  boot = {
+    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-zen4;
+    kernelParams = [ "amd_pstate=active" ]; # -- Useful.
+  };
 
   hardware.bluetooth.enable = true;
   core.user = "rplakama";
+  services.power-profiles-daemon.enable = true; # -- Only Arthoplerau uses it anyway
   optionals.features = {
-    scx.enable = true;
     niri.enable = true;
     virtualization.enable = true;
+    scx = {
+      enable = true;
+      scheduler = "scx_lavd";
+      flags = [
+        "--performance" # Max computing when needed.
+        "--autopoint" # Also manages itself for lower consume.
+      ];
+    };
     disko = {
       enable = true;
       dualDrive = true;
