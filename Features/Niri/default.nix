@@ -23,7 +23,7 @@ in
     };
     ppd = {
       enable = lib.mkOption {
-        description = "Allow power-profiles-daemon alongside Niri (SCX takes over by default)";
+        description = "Allow ppd";
         type = lib.types.bool;
         default = false;
       };
@@ -65,7 +65,7 @@ in
     ];
 
     services = lib.mkIf (!cfg.ppd.enable) {
-      power-profiles-daemon.enable = lib.mkForce false; # <- SCX
+      power-profiles-daemon.enable = lib.mkForce false; # <- Its get enabled by dms
     };
 
     hjem.users.${user} = {
