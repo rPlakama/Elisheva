@@ -3,7 +3,10 @@ let
   diskoCfg = config.optionals.features.disko;
   preservationCfg = config.optionals.features.preservation;
   user = config.core.user;
-  ssdOpts = lib.optionals diskoCfg.isSSD [ "discard=async" "ssd" ];
+  ssdOpts = lib.optionals diskoCfg.isSSD [
+    "discard=async"
+    "ssd"
+  ];
 in
 {
   options.optionals.features = {
@@ -121,7 +124,8 @@ in
                           "subvol=nix"
                           "noatime"
                           "compress=zstd:1"
-                        ] ++ ssdOpts;
+                        ]
+                        ++ ssdOpts;
                         mountpoint = "/nix";
                       };
                     }
@@ -132,7 +136,8 @@ in
                           "subvol=persist"
                           "noatime"
                           "compress=zstd:6"
-                        ] ++ ssdOpts;
+                        ]
+                        ++ ssdOpts;
                         mountpoint = "/persist";
                       };
                       "/home" = {
@@ -140,7 +145,8 @@ in
                           "subvol=home"
                           "noatime"
                           "compress=zstd:6"
-                        ] ++ ssdOpts;
+                        ]
+                        ++ ssdOpts;
                         mountpoint = "/home";
                       };
                     })
@@ -168,7 +174,8 @@ in
                       "subvol=persist"
                       "noatime"
                       "compress=zstd:6"
-                    ] ++ ssdOpts;
+                    ]
+                    ++ ssdOpts;
                     mountpoint = "/persist";
                   };
                   "/home" = {
@@ -176,7 +183,8 @@ in
                       "subvol=home"
                       "noatime"
                       "compress=zstd:6"
-                    ] ++ ssdOpts;
+                    ]
+                    ++ ssdOpts;
                     mountpoint = "/home";
                   };
                 };
