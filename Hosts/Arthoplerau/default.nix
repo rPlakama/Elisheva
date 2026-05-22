@@ -28,8 +28,8 @@
     disko = {
       enable = true;
       dualDrive = true;
-      primaryDrive = "/dev/nvme0n1p1"; # -- Placeholder
-      secondaryDrive = "/dev/nvme0n1p2"; # -- Placeholder
+      primaryDrive = "/dev/nvme0n1"; # -- Placeholder
+      secondaryDrive = "/dev/nvme1n1"; # -- Placeholder
     };
     preservation = {
       additionalHomeDirs = [
