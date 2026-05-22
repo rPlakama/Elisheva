@@ -28,17 +28,11 @@
       scheduler = "scx_lavd";
       flags = [ "--autopower" ];
     };
-    disko = {
+    preservation = {
       enable = true;
       dualDrive = true;
       primaryDrive = "/dev/nvme0n1"; # -- Placeholder
       secondaryDrive = "/dev/nvme1n1"; # -- Placeholder
-    };
-    preservation = {
-      additionalHomeDirs = [
-        ".config/vesktop" # -- Imma not doing it manually
-        ".config/niri" # -- Cause 'dms generated files
-      ];
     };
   };
 }

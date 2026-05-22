@@ -7,6 +7,7 @@
 let
   cfg = config.optionals.features.qbit;
   user = config.core.user;
+  persistEnabled = config.optionals.features.preservation.enable;
 in
 
 {
@@ -54,5 +55,10 @@ in
         };
       };
     };
+
+    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
+      "/var/lib/qbittorrent"
+      "/var/lib/qui"
+    ];
   };
 }

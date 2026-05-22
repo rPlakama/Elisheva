@@ -2,6 +2,7 @@
 let
   cfg = config.optionals.features.virtualization;
   isNvidia = config.core.features.nvidia.enable;
+  persistEnabled = config.optionals.features.preservation.enable;
 in
 {
   options.optionals.features.virtualization.enable = lib.mkOption {
@@ -20,5 +21,9 @@ in
         autoPrune.enable = true;
       };
     };
+
+    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
+      "/var/lib/docker"
+    ];
   };
 }

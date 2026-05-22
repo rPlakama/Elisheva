@@ -8,6 +8,7 @@
 
 let
   cfg = config.optionals.features.gpuScreenRecorder;
+  persistEnabled = config.optionals.features.preservation.enable;
 in
 
 {
@@ -27,5 +28,9 @@ in
       enable = true;
       ui.enable = true;
     };
+
+    optionals.features.preservation.keepDirs.homeDirs = lib.mkIf persistEnabled [
+      ".config/gpu-screen-recorder"
+    ];
   };
 }

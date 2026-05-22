@@ -8,6 +8,7 @@
 let
   cfg = config.optionals.features.kavita;
   pkgs-kavita = import inputs.kavita { inherit (pkgs) system; };
+  persistEnabled = config.optionals.features.preservation.enable;
 in
 {
   options.optionals.features.kavita.enable = lib.mkOption {
@@ -34,6 +35,10 @@ in
           Port = 3034;
         };
       };
+
+      optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
+        "/var/lib/kavita"
+      ];
     })
   ];
 }

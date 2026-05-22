@@ -9,6 +9,7 @@ let
   cfg = config.core.features.graphicalPkgs;
   user = config.core.user;
   niriEnabled = config.optionals.features.niri.enable;
+  persistEnabled = config.optionals.features.preservation.enable;
 
   vesktop-with-keybinds =
     (pkgs.vesktop.override {
@@ -56,5 +57,9 @@ in
         include=/home/${user}/.config/foot/dank-colors.ini
       '';
     };
+
+    optionals.features.preservation.keepDirs.homeDirs = lib.mkIf persistEnabled [
+      ".config/vesktop"
+    ];
   };
 }

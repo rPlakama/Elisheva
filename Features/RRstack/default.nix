@@ -2,6 +2,7 @@
 
 let
   cfg = config.optionals.features.rrstack;
+  persistEnabled = config.optionals.features.preservation.enable;
 
   mediaServicesWithPermissions = {
     jackett = 9117;
@@ -33,5 +34,12 @@ in
       }) mediaNonPermissions);
 
     optionals.features.unifiedDNS.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
+
+    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
+      "/var/lib/jackett"
+      "/var/lib/sonarr"
+      "/var/lib/radarr"
+      "/var/lib/prowlarr"
+    ];
   };
 }

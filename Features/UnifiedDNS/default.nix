@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.optionals.features.unifiedDNS;
+  persistEnabled = config.optionals.features.preservation.enable;
   domain = config.core.domain;
   currentIP = config.core.ip;
   gatewayIP = "192.168.1.1";
@@ -162,5 +163,10 @@ in
     };
 
     optionals.features.unifiedDNS.proxyServices.pi-hole = 8081;
+
+    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
+      "/etc/pihole"
+      "/var/lib/acme"
+    ];
   };
 }

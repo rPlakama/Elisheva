@@ -2,6 +2,7 @@
 
 let
   cfg = config.optionals.features.slskd;
+  persistEnabled = config.optionals.features.preservation.enable;
 in
 {
   options.optionals.features.slskd.enable = lib.mkOption {
@@ -46,6 +47,10 @@ in
           };
         };
       };
+
+      optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
+        "/var/lib/slskd"
+      ];
     })
   ];
 }

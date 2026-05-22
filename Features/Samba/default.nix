@@ -6,6 +6,7 @@
 
 let
   cfg = config.optionals.features.samba;
+  persistEnabled = config.optionals.features.preservation.enable;
 in
 
 {
@@ -44,5 +45,9 @@ in
       enable = true;
       openFirewall = true;
     };
+
+    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
+      "/var/lib/samba"
+    ];
   };
 }

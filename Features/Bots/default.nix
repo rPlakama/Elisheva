@@ -6,6 +6,7 @@
 
 let
   cfg = config.optionals.features.whatsBot;
+  persistEnabled = config.optionals.features.preservation.enable;
 in
 
 {
@@ -31,5 +32,9 @@ in
         };
       };
     };
+
+    optionals.features.preservation.keepDirs.homeDirs = lib.mkIf persistEnabled [
+      "bot-ascending"
+    ];
   };
 }

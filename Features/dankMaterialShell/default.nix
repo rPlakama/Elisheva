@@ -8,6 +8,7 @@
 let
   cfg = config.optionals.features.dankMaterialShell;
   user = config.core.user;
+  persistEnabled = config.optionals.features.preservation.enable;
 in
 
 {
@@ -37,5 +38,9 @@ in
       compositor.name = "niri";
       configHome = "/home/${user}";
     };
+
+    optionals.features.preservation.keepDirs.homeDirs = lib.mkIf persistEnabled [
+      ".config/dank-material-shell"
+    ];
   };
 }

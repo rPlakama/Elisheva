@@ -2,6 +2,7 @@
 
 let
   cfg = config.optionals.features.sunshine;
+  persistEnabled = config.optionals.features.preservation.enable;
 in
 {
   options.optionals.features.sunshine.enable = lib.mkOption {
@@ -15,5 +16,9 @@ in
       openFirewall = true;
       autoStart = true;
     };
+
+    optionals.features.preservation.keepDirs.homeDirs = lib.mkIf persistEnabled [
+      ".config/sunshine"
+    ];
   };
 }

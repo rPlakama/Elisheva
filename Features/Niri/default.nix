@@ -8,6 +8,7 @@
 let
   cfg = config.optionals.features.niri;
   user = config.core.user;
+  persistEnabled = config.optionals.features.preservation.enable;
 in
 {
   imports = [
@@ -73,5 +74,9 @@ in
         builtins.replaceStrings [ "@keyboardLayout@" "@Variant@" ] [ cfg.keyboardLayout cfg.VariantKB ]
           (builtins.readFile ./config.kdl);
     };
+
+    optionals.features.preservation.keepDirs.homeDirs = lib.mkIf persistEnabled [
+      ".config/niri"
+    ];
   };
 }
