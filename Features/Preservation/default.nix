@@ -15,18 +15,18 @@ in
       dualDrive = lib.mkOption {
         type = lib.types.bool;
         default = false;
-        description = "Enable dual Driver Scheme";
+        description = "Enable dual Drive Scheme";
       };
       primaryDrive = lib.mkOption {
         type = lib.types.str;
         default = "";
-        description = "Fatest Driver";
+        description = "Fastest Drive";
         example = "/dev/nvme0n1";
       };
       secondaryDrive = lib.mkOption {
         type = lib.types.str;
         default = "";
-        description = "Slowest Driver";
+        description = "Slowest Drive";
         example = "/dev/nvme1n1";
       };
     };
@@ -102,20 +102,43 @@ in
                   resumeDevice = true;
                 };
               };
-              nix = {
-                name = "nix";
+              root = {
+                name = "root";
                 size = "100%";
                 content = {
                   type = "btrfs";
                   extraArgs = [ "-f" ];
-                  subvolumes."/nix" = {
-                    mountOptions = [
-                      "subvol=nix"
-                      "noatime"
-                      "compress=zstd"
-                    ];
-                    mountpoint = "/nix";
-                  };
+                  subvolumes = lib.mkMerge [
+                    {
+                      "/nix" = {
+                        mountOptions = [
+                          "subvol=nix"
+                          "noatime"
+                          "compress=zstd"
+                        ];
+                        mountpoint = "/nix";
+                      };
+                    }
+                    # If dualDrive false; put /persist and /home here
+                    (lib.mkIf (!diskoCfg.dualDrive) {
+                      "/persist" = {
+                        mountOptions = [
+                          "subvol=persist"
+                          "noatime"
+                          "compress=zstd"
+                        ];
+                        mountpoint = "/persist";
+                      };
+                      "/home" = {
+                        mountOptions = [
+                          "subvol=home"
+                          "noatime"
+                          "compress=zstd"
+                        ];
+                        mountpoint = "/home";
+                      };
+                    })
+                  ];
                 };
               };
             };
