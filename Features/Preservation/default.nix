@@ -123,7 +123,6 @@ in
                         mountOptions = [
                           "subvol=nix"
                           "noatime"
-                          "compress=zstd:1"
                         ]
                         ++ ssdOpts;
                         mountpoint = "/nix";
@@ -135,7 +134,6 @@ in
                         mountOptions = [
                           "subvol=persist"
                           "noatime"
-                          "compress=zstd:6"
                         ]
                         ++ ssdOpts;
                         mountpoint = "/persist";
@@ -164,7 +162,6 @@ in
                     mountOptions = [
                       "subvol=persist"
                       "noatime"
-                      "compress=zstd:6"
                     ]
                     ++ ssdOpts;
                     mountpoint = "/persist";
