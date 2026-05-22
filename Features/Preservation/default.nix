@@ -164,47 +164,48 @@ in
     (lib.mkIf preservationCfg.enable {
       fileSystems."/persist".neededForBoot = true;
 
-      preservation.enable = true;
-
-      preservation.preserveAt."/persist" = {
-        directories = [
-          "/etc/nixos"
-          "/var/lib/tailscale"
-          "/var/lib/bluetooth"
-          "/var/log"
-          "/etc/NetworkManager/system-connections"
-          "/etc/ssh"
-          "/tmp"
-          {
-            directory = "/var/lib/nixos";
-            inInitrd = true;
-          }
-        ]
-        ++ preservationCfg.additionalDirs;
-
-        files = [
-          {
-            file = "/etc/machine-id";
-            inInitrd = true;
-          }
-        ]
-        ++ preservationCfg.additionalFiles;
-
-        users.${user} = {
+      preservation = {
+        enable = true;
+        preserveAt."/persist" = {
           directories = [
-            "Downloads"
-            "Projects"
-            "Pictures"
-            "Documents"
-            "Music"
-            "Videos"
-            ".local/share"
-            ".local/state"
-            ".cache"
-            ".ssh"
-            ".gnupg"
+            "/etc/nixos"
+            "/var/lib/tailscale"
+            "/var/lib/bluetooth"
+            "/var/log"
+            "/etc/NetworkManager/system-connections"
+            "/etc/ssh"
+            "/tmp"
+            {
+              directory = "/var/lib/nixos";
+              inInitrd = true;
+            }
           ]
-          ++ preservationCfg.additionalHomeDirs;
+          ++ preservationCfg.additionalDirs;
+
+          files = [
+            {
+              file = "/etc/machine-id";
+              inInitrd = true;
+            }
+          ]
+          ++ preservationCfg.additionalFiles;
+
+          users.${user} = {
+            directories = [
+              "Downloads"
+              "Projects"
+              "Pictures"
+              "Documents"
+              "Music"
+              "Videos"
+              ".local/share"
+              ".local/state"
+              ".cache"
+              ".ssh"
+              ".gnupg"
+            ]
+            ++ preservationCfg.additionalHomeDirs;
+          };
         };
       };
     })
