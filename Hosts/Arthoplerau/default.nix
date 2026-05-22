@@ -13,15 +13,17 @@
 
   hardware.bluetooth.enable = true;
   core.user = "rplakama";
-  services.power-profiles-daemon.enable = true; # -- Only Arthoplerau uses it anyway
   optionals.features = {
     niri.enable = true;
+    dankMaterialShell.enable = true;
+    steam.enable = true;
+    gpuScreenRecorder.enable = true;
+    sunshine.enable = true;
     virtualization.enable = true;
     scx = {
       enable = true;
       scheduler = "scx_lavd";
       flags = [
-        "--performance" # Max computing when needed.
         "--autopoint" # Also manages itself for lower consume.
       ];
     };

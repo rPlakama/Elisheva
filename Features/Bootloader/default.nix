@@ -12,14 +12,14 @@ in
   options.optionals.features.bootloader.enable = lib.mkOption {
     type = lib.types.bool;
     description = "Bootloader Configuration";
-    default = false;
+    default = true;
   };
   config = lib.mkIf cfg.enable {
     systemd.services.NetworkManager-wait-online.enable = false;
     boot = {
       plymouth = {
         enable = true;
-        theme = "spinner";
+        theme = "bgrt";
       };
 
       loader = {

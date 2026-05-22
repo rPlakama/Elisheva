@@ -53,8 +53,7 @@
     nextcloud.enable = true;
     iperf3.enable = true;
     jellyfin.enable = true;
-    searxng.enable = true;
-    galleryDl = {
+    galleryDL = {
       enable = true;
       mangas = {
         downloadPath = "/media/mangas/download";

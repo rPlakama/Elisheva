@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.optionals.features.galleryDl;
+  cfg = config.optionals.features.galleryDL;
   user = config.core.user;
 
   baseConfig = {
@@ -56,7 +56,7 @@ let
 
 in
 {
-  options.optionals.features.galleryDl = {
+  options.optionals.features.galleryDL = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;

@@ -21,6 +21,13 @@ in
       type = lib.types.bool;
       default = false;
     };
+    ppd = {
+      enable = lib.mkOption {
+        description = "Allow power-profiles-daemon alongside Niri (SCX takes over by default)";
+        type = lib.types.bool;
+        default = false;
+      };
+    };
     VariantKB = lib.mkOption {
       description = "Keyboard Variant";
       type = lib.types.str;
@@ -57,7 +64,7 @@ in
 
     ];
 
-    services = {
+    services = lib.mkIf (!cfg.ppd.enable) {
       power-profiles-daemon.enable = lib.mkForce false; # <- SCX
     };
 
