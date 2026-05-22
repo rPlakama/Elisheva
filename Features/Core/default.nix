@@ -6,6 +6,7 @@
 }:
 
 let
+  cfg = config.core.features.core;
   user = config.core.user;
 in
 
@@ -15,7 +16,7 @@ in
     default = true;
     description = "Essential system segments for my Hosts";
   };
-  config = lib.mkIf config.core.features.core.enable {
+  config = lib.mkIf cfg.enable {
     security.sudo-rs.enable = true;
     environment.systemPackages = with pkgs; [
       ripgrep

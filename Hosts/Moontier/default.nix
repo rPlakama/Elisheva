@@ -22,6 +22,7 @@
   core.user = "rplakama";
   core.ip = "192.168.1.106";
   core.domain = "moontier.online";
+  core.features.graphicalPkgs.enable = false;
 
   sops.secrets = {
     "gallery-dl/ao3-username" = {
@@ -39,18 +40,16 @@
   };
 
   optionals.features = {
-    neovim.enable = true;
-    graphicalPkgs.enable = false;
     unifiedDNS.enable = true;
     kavita.enable = true;
     nzbget.enable = true;
     rrstack.enable = true;
     qbit.enable = true;
-    whats_bot.enable = true;
+    whatsBot.enable = true;
     slskd.enable = true;
-    Samba.enable = true;
+    samba.enable = true;
     homepage.enable = true;
-    ST.enable = true;
+    st.enable = true;
     nextcloud.enable = true;
     iperf3.enable = true;
     jellyfin.enable = true;

@@ -1,9 +1,4 @@
-{
-
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.optionals.features.jellyfin;
 in

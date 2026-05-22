@@ -6,6 +6,10 @@
 }:
 
 let
+  cfg = config.core.features.graphicalPkgs;
+  user = config.core.user;
+  niriEnabled = config.optionals.features.niri.enable;
+
   vesktop-with-keybinds =
     (pkgs.vesktop.override {
       electron_40 = pkgs.electron_41;
@@ -22,12 +26,9 @@ let
           hash = "sha256-nOwl/e5lL8UGjwUexm/EiA7cPmWYif9PHwa0vAX5VbM=";
         };
       });
-  cfg = config.optionals.features.graphicalPkgs;
-  user = config.core.user;
-  niriEnabled = config.optionals.features.niri.enable;
 in
 {
-  options.optionals.features.graphicalPkgs.enable = lib.mkOption {
+  options.core.features.graphicalPkgs.enable = lib.mkOption {
     description = "Graphical Packages";
     type = lib.types.bool;
     default = true;

@@ -12,18 +12,16 @@ in
 {
   options.optionals.features.steam.enable = lib.mkOption {
     type = lib.types.bool;
-    description = "steam Configuration";
+    description = "Steam Configuration";
     default = false;
   };
   config = lib.mkIf cfg.enable {
     boot.kernelModules = [ "ntsync" ];
-    programs = {
-      steam = {
-        enable = true;
-        extraCompatPackages = with pkgs; [
-          proton-ge-bin
-        ];
-      };
+    programs.steam = {
+      enable = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
     };
   };
 }

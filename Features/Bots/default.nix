@@ -5,11 +5,11 @@
 }:
 
 let
-  cfg = config.optionals.features.whats_bot;
+  cfg = config.optionals.features.whatsBot;
 in
 
 {
-  options.optionals.features.whats_bot.enable = lib.mkOption {
+  options.optionals.features.whatsBot.enable = lib.mkOption {
     type = lib.types.bool;
     description = "Zapzap Configuration";
     default = false;

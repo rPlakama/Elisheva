@@ -47,6 +47,7 @@ in
       groups.${user} = { };
       users.${user} = {
         isNormalUser = true;
+        hashedPassword = "$y$j9T$qE7EkQbvME02UxqkVVJa91$qLOUcUnfU6IAaP17gkeQiAF2xVh6nPcnyp6K3b6yrK/";
         shell = pkgs.fish;
         group = user;
         extraGroups = [

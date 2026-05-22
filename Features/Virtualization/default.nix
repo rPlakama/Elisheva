@@ -1,7 +1,7 @@
 { lib, config, ... }:
 let
   cfg = config.optionals.features.virtualization;
-  isNvidia = config.optionals.features.nvidia.enable;
+  isNvidia = config.core.features.nvidia.enable;
 in
 {
   options.optionals.features.virtualization.enable = lib.mkOption {

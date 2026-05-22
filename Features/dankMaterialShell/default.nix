@@ -4,16 +4,24 @@
   inputs,
   ...
 }:
+
 let
-  cfgNiri = config.optionals.features.niri;
+  cfg = config.optionals.features.dankMaterialShell;
   user = config.core.user;
 in
+
 {
   imports = [ inputs.dms.nixosModules.dank-material-shell ];
 
-  config = lib.mkIf cfgNiri.enable {
+  options.optionals.features.dankMaterialShell.enable = lib.mkOption {
+    type = lib.types.bool;
+    description = "Dank Material Shell for Niri";
+    default = false;
+  };
 
-    systemd.user.services.niri-flake-polkit.enable = false; # We use DMS polkit.
+  config = lib.mkIf cfg.enable {
+
+    systemd.user.services.niri-flake-polkit.enable = false;
 
     programs.dank-material-shell = {
       enable = true;

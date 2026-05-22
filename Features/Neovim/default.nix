@@ -4,8 +4,9 @@
   pkgs,
   ...
 }:
+
 let
-  cfg = config.optionals.features.neovim;
+  cfg = config.core.features.neovim;
   user = config.core.user;
   niriEnabled = config.optionals.features.niri.enable;
 
@@ -38,7 +39,7 @@ let
   };
 in
 {
-  options.optionals.features.neovim.enable = lib.mkOption {
+  options.core.features.neovim.enable = lib.mkOption {
     type = lib.types.bool;
     description = "Neovim Configuration";
     default = true;

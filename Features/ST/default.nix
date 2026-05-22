@@ -4,7 +4,9 @@
   pkgs,
   ...
 }:
+
 let
+  cfg = config.optionals.features.st;
   configSrc = toString (
     pkgs.writeText "sillytavern-config.yaml" ''
       listen: true
@@ -22,13 +24,13 @@ let
   );
 in
 {
-  options.optionals.features.ST.enable = lib.mkOption {
+  options.optionals.features.st.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "ST, AI RPG Service";
   };
 
-  config = lib.mkIf config.optionals.features.ST.enable {
+  config = lib.mkIf cfg.enable {
     services.sillytavern = {
       enable = true;
       port = 6720;
