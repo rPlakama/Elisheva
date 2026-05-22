@@ -19,7 +19,7 @@ let
           owner = "Vencord";
           repo = "Vesktop";
           rev = "e6954304f79cd7e4247ad1c49ec1a308403f8779";
-          hash = "sha256-23stIKkoAP+5atym3suYttSirEKbBJ+g7F8V7YdjWfM=";
+          hash = "sha256-TuFTXDrgLGJD0jaTeo66eHpHLjHKYofrZwn61aQLArY=";
         };
         pnpmDeps = old.pnpmDeps.override {
           inherit src;
