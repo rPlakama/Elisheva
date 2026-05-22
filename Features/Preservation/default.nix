@@ -3,6 +3,7 @@ let
   diskoCfg = config.optionals.features.disko;
   preservationCfg = config.optionals.features.preservation;
   user = config.core.user;
+  ssdOpts = lib.optionals diskoCfg.isSSD [ "discard=async" "ssd" ];
 in
 {
   options.optionals.features = {
@@ -28,6 +29,11 @@ in
         default = "";
         description = "Slowest Drive";
         example = "/dev/nvme1n1";
+      };
+      isSSD = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Whether drives are SSDs (enables discard=async and ssd mount options)";
       };
     };
 
@@ -114,8 +120,8 @@ in
                         mountOptions = [
                           "subvol=nix"
                           "noatime"
-                          "compress=zstd"
-                        ];
+                          "compress=zstd:1"
+                        ] ++ ssdOpts;
                         mountpoint = "/nix";
                       };
                     }
@@ -125,16 +131,16 @@ in
                         mountOptions = [
                           "subvol=persist"
                           "noatime"
-                          "compress=zstd"
-                        ];
+                          "compress=zstd:6"
+                        ] ++ ssdOpts;
                         mountpoint = "/persist";
                       };
                       "/home" = {
                         mountOptions = [
                           "subvol=home"
                           "noatime"
-                          "compress=zstd"
-                        ];
+                          "compress=zstd:6"
+                        ] ++ ssdOpts;
                         mountpoint = "/home";
                       };
                     })
@@ -161,16 +167,16 @@ in
                     mountOptions = [
                       "subvol=persist"
                       "noatime"
-                      "compress=zstd"
-                    ];
+                      "compress=zstd:6"
+                    ] ++ ssdOpts;
                     mountpoint = "/persist";
                   };
                   "/home" = {
                     mountOptions = [
                       "subvol=home"
                       "noatime"
-                      "compress=zstd"
-                    ];
+                      "compress=zstd:6"
+                    ] ++ ssdOpts;
                     mountpoint = "/home";
                   };
                 };
