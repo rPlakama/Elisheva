@@ -120,22 +120,13 @@ in
                   subvolumes = lib.mkMerge [
                     {
                       "/nix" = {
-                        mountOptions = [
-                          "subvol=nix"
-                          "noatime"
-                        ]
-                        ++ ssdOpts;
+                        mountOptions = [ "noatime" ] ++ ssdOpts;
                         mountpoint = "/nix";
                       };
                     }
-                    # If dualDrive false; put /persist and /home here
                     (lib.mkIf (!diskoCfg.dualDrive) {
                       "/persist" = {
-                        mountOptions = [
-                          "subvol=persist"
-                          "noatime"
-                        ]
-                        ++ ssdOpts;
+                        mountOptions = [ "noatime" ] ++ ssdOpts;
                         mountpoint = "/persist";
                       };
                     })
@@ -159,11 +150,7 @@ in
                 extraArgs = [ "-f" ];
                 subvolumes = {
                   "/persist" = {
-                    mountOptions = [
-                      "subvol=persist"
-                      "noatime"
-                    ]
-                    ++ ssdOpts;
+                    mountOptions = [ "noatime" ] ++ ssdOpts;
                     mountpoint = "/persist";
                   };
                 };
@@ -184,13 +171,14 @@ in
           "/etc/nixos"
           "/var/lib/tailscale"
           "/var/lib/bluetooth"
+          "/var/log"
+          "/etc/NetworkManager/system-connections"
+          "/etc/ssh"
+          "/tmp"
           {
             directory = "/var/lib/nixos";
             inInitrd = true;
           }
-          "/var/log"
-          "/etc/NetworkManager/system-connections"
-          "/etc/ssh"
         ]
         ++ preservationCfg.additionalDirs;
 
