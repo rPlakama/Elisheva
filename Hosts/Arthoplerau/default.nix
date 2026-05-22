@@ -8,13 +8,16 @@
   networking.hostName = "Arthoplerau";
   boot = {
     kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-zen4;
-    kernelParams = [ "amd_pstate=active" ]; # -- Useful.
+    kernelParams = [ "amd_pstate=active" ]; # -- Useful for scx / ppd
   };
 
   hardware.bluetooth.enable = true;
   core.user = "rplakama";
   optionals.features = {
-    niri.enable = true;
+    niri = {
+      enable = true;
+      ppd.enable = true;
+    };
     dankMaterialShell.enable = true;
     steam.enable = true;
     gpuScreenRecorder.enable = true;
@@ -23,9 +26,7 @@
     scx = {
       enable = true;
       scheduler = "scx_lavd";
-      flags = [
-        "--autopoint" # Also manages itself for lower consume.
-      ];
+      flags = [ "--autopower" ];
     };
     disko = {
       enable = true;
