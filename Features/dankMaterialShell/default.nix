@@ -16,7 +16,7 @@ in
   options.optionals.features.dankMaterialShell.enable = lib.mkOption {
     type = lib.types.bool;
     description = "Dank Material Shell for Niri";
-    default = false;
+    default = config.optionals.features.niri.enable;
   };
 
   config = lib.mkIf cfg.enable {
