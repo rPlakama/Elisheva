@@ -42,7 +42,6 @@ in
       nextcloud-client
       foot
       mpv
-      zed-editor
       ripdrag
       helium
     ];
@@ -60,6 +59,7 @@ in
 
     optionals.features.preservation.keepDirs.homeDirs = lib.mkIf persistEnabled [
       ".config/vesktop"
+      "/home/${user}/Nextcloud"
     ];
   };
 }
