@@ -28,11 +28,15 @@
       scheduler = "scx_lavd";
       flags = [ "--autopower" ];
     };
-    preservation = {
+    disko = {
       enable = true;
       dualDrive = true;
       primaryDrive = "/dev/nvme0n1"; # -- Placeholder
       secondaryDrive = "/dev/nvme1n1"; # -- Placeholder
+      swap.enable = true;
+    };
+    preservation = {
+      enable = true;
     };
   };
 }
