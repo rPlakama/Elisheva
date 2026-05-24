@@ -7,6 +7,11 @@ in
   options.features.virtualization.enable = lib.mkEnableOption "Virtualization (libvirtd + Docker)";
 
   config = lib.mkIf cfg.enable {
+    features.preservation.persistDirs.system = [
+      "/var/lib/docker"
+      "/var/lib/libvirt"
+    ];
+
     virtualisation = {
       libvirtd.enable = true;
       docker = {

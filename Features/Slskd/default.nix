@@ -19,6 +19,7 @@ in
 
     (lib.mkIf cfg.enable {
       features.mediaPermissions.enable = true;
+      features.preservation.persistDirs.system = [ "/var/lib/slskd" ];
       features.unifiedDNS.proxyServices.slskd = 5030;
       services.slskd = {
         enable = true;

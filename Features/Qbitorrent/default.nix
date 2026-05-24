@@ -18,10 +18,17 @@ in
       group = "media";
     };
 
-    features.unifiedDNS.proxyServices = {
-      qui = 3000;
-      qbit = 8080;
+    features = {
+      preservation.persistDirs.system = [
+        "/var/lib/qbittorrent"
+        "/var/lib/qui"
+      ];
+      unifiedDNS.proxyServices = {
+        qui = 3000;
+        qbit = 8080;
+      };
     };
+
     services = {
       qui = {
         secretFile = config.sops.secrets."qui/secret".path;

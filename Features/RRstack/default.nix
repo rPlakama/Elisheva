@@ -19,6 +19,12 @@ in
 
   config = lib.mkIf cfg.enable {
     features.mediaPermissions.enable = true;
+    features.preservation.persistDirs.system = [
+      "/var/lib/jackett"
+      "/var/lib/sonarr"
+      "/var/lib/radarr"
+      "/var/lib/prowlarr"
+    ];
     services =
       (lib.mapAttrs (name: port: {
         enable = true;

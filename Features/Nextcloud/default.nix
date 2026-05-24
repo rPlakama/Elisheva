@@ -13,6 +13,8 @@ in
 
   config = lib.mkIf cfg.enable {
 
+    features.preservation.persistDirs.system = [ "/var/lib/nextcloud" ];
+
     sops.secrets."nextcloud/admin" = {
       owner = "nextcloud";
       group = "nextcloud";

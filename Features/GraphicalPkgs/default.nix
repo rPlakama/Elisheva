@@ -35,6 +35,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    features.preservation.persistDirs.home = [
+      ".config/vesktop"
+      ".config/foot"
+    ];
+
     environment.systemPackages = with pkgs; [
       vesktop-with-keybinds
       materialgram

@@ -6,6 +6,7 @@ in
   options.features.jellyfin.enable = lib.mkEnableOption "Jellyfin media server";
   config = lib.mkIf cfg.enable {
     features.mediaPermissions.enable = true;
+    features.preservation.persistDirs.system = [ "/var/lib/jellyfin" ];
     features.unifiedDNS.proxyServices.jellyfin = 8096;
     services.jellyfin = {
       enable = true;

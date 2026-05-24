@@ -12,6 +12,8 @@ in
   options.features.whatsBot.enable = lib.mkEnableOption "WhatsApp Bot";
   config = lib.mkIf cfg.enable {
 
+    features.preservation.persistDirs.home = [ "bot-ascending" ];
+
     systemd.services = {
       whatsapp-summarizer = {
         description = "WhatsApp Bot";

@@ -17,6 +17,7 @@ in
     }
     (lib.mkIf cfg.enable {
       features.mediaPermissions.enable = true;
+      features.preservation.persistDirs.system = [ "/var/lib/kavita" ];
       networking.firewall.allowedTCPPorts = [ 3034 ];
 
       systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];

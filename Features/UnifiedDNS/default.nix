@@ -171,6 +171,8 @@ in
       };
     };
 
+    features.preservation.persistDirs.system = [ "/etc/pihole" ];
+
     features.unifiedDNS.proxyServices.pi-hole = 8081;
   };
 }
