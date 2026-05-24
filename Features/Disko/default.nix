@@ -159,9 +159,22 @@ in
   };
 
   config = lib.mkIf diskoCfg.enable {
-    disko.devices.disk = lib.mkMerge [
-      primaryDisk
-      (lib.mkIf diskoCfg.dualDrive secondaryDisk)
-    ];
+    disko.devices = {
+      nodev."/" = {
+        fsType = "tmpfs";
+        mountOptions = [
+          "size=25%"
+          "mode=755"
+        ];
+      };
+      disk = lib.mkMerge [
+        primaryDisk
+        (lib.mkIf diskoCfg.dualDrive secondaryDisk)
+      ];
+    };
+    fileSystems = {
+      "/nix".neededForBoot = true;
+      "/persistent".neededForBoot = true;
+    };
   };
 }
