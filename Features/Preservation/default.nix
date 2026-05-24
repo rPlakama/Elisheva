@@ -3,6 +3,47 @@ let
   cfg = config.optionals.features.preservation;
   diskoCfg = config.optionals.features.disko;
   user = config.core.user;
+
+  # --- State preserved
+
+  defaultSystemDirs = [
+    "/etc/nixos"
+    "/var/lib/tailscale"
+    "/var/lib/bluetooth"
+    "/var/log"
+    "/etc/NetworkManager/system-connections"
+    "/etc/ssh"
+    {
+      directory = "/var/lib/nixos";
+      inInitrd = true;
+    }
+  ];
+
+  defaultSystemFiles = [
+    {
+      file = "/etc/machine-id";
+      inInitrd = true;
+    }
+  ];
+
+  defaultHomeDirs = [
+    "Downloads"
+    "Projects"
+    "Pictures"
+    "Documents"
+    "Videos"
+    ".local/share"
+    ".local/state"
+    ".ssh"
+  ];
+
+  tmpfsRoot = {
+    fsType = "tmpfs";
+    mountOptions = [
+      "size=25%"
+      "mode=755"
+    ];
+  };
 in
 {
   options.optionals.features.preservation = {
@@ -43,59 +84,19 @@ in
 
     fileSystems = {
       "/nix".neededForBoot = true;
-      "/persist".neededForBoot = true;
+      "/persistent".neededForBoot = true;
+      "/tmp".neededForBoot = true;
     };
 
-    disko.devices.nodev."/" = {
-      fsType = "tmpfs";
-      mountOptions = [
-        "size=25%"
-        "mode=755"
-      ];
-    };
+    boot.tmp.cleanOnBoot = true;
+    disko.devices.nodev."/" = tmpfsRoot;
 
     preservation = {
       enable = true;
-      preserveAt."/persist" = {
-        directories = [
-          "/etc/nixos"
-          "/var/lib/tailscale"
-          "/var/lib/bluetooth"
-          "/var/log"
-          "/etc/NetworkManager/system-connections"
-          "/etc/ssh"
-          "/tmp"
-          {
-            directory = "/var/lib/nixos";
-            inInitrd = true;
-          }
-        ]
-        ++ cfg.keepDirs.additionalDirs;
-
-        files = [
-          {
-            file = "/etc/machine-id";
-            inInitrd = true;
-          }
-        ]
-        ++ cfg.keepDirs.additionalFiles;
-
-        users.${user} = {
-          directories = [
-            "Downloads"
-            "Projects"
-            "Pictures"
-            "Documents"
-            "Music"
-            "Videos"
-            ".local/share"
-            ".local/state"
-            ".cache"
-            ".ssh"
-            ".gnupg"
-          ]
-          ++ cfg.keepDirs.homeDirs;
-        };
+      preserveAt."/persistent" = {
+        directories = defaultSystemDirs ++ cfg.keepDirs.additionalDirs;
+        files = defaultSystemFiles ++ cfg.keepDirs.additionalFiles;
+        users.${user}.directories = defaultHomeDirs ++ cfg.keepDirs.homeDirs;
       };
     };
   };
