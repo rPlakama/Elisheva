@@ -3,6 +3,7 @@ let
   cfg = config.features.preservation;
   diskoCfg = config.features.disko;
   user = config.core.user;
+
   defaultSystemDirs = [
     "/etc/nixos"
     "/var/lib/tailscale"
@@ -15,12 +16,14 @@ let
       inInitrd = true;
     }
   ];
+
   defaultSystemFiles = [
     {
       file = "/etc/machine-id";
       inInitrd = true;
     }
   ];
+
   defaultHomeDirs = [
     "Downloads"
     "Projects"
@@ -31,17 +34,11 @@ let
     ".local/state"
     ".ssh"
   ];
-  tmpfsRoot = {
-    fsType = "tmpfs";
-    mountOptions = [
-      "size=25%"
-      "mode=755"
-    ];
-  };
 in
 {
   options.features.preservation = {
     enable = lib.mkEnableOption "impermanence with persistent state";
+
     persistDirs = {
       system = lib.mkOption {
         type = lib.types.listOf lib.types.str;
@@ -56,6 +53,7 @@ in
         example = [ ".config/vesktop" ];
       };
     };
+
     keepDirs = {
       homeDirs = lib.mkOption {
         type = lib.types.listOf lib.types.str;
@@ -77,6 +75,7 @@ in
       };
     };
   };
+
   config = lib.mkIf cfg.enable {
     assertions = [
       {
@@ -84,13 +83,10 @@ in
         message = "Requires Disko enabled to be used";
       }
     ];
-    fileSystems = {
-      "/nix".neededForBoot = true;
-      "/persistent".neededForBoot = true;
-      "/tmp".neededForBoot = true;
-    };
+
+    # Wipe /tmp
     boot.tmp.cleanOnBoot = true;
-    disko.devices.nodev."/" = tmpfsRoot;
+
     preservation = {
       enable = true;
       preserveAt."/persistent" = {

@@ -172,9 +172,11 @@ in
         (lib.mkIf diskoCfg.dualDrive secondaryDisk)
       ];
     };
+
     fileSystems = {
       "/nix".neededForBoot = true;
       "/persistent".neededForBoot = true;
+      "/tmp".neededForBoot = true;
     };
   };
 }
