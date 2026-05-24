@@ -5,16 +5,11 @@
 }:
 
 let
-  cfg = config.optionals.features.samba;
-  persistEnabled = config.optionals.features.preservation.enable;
+  cfg = config.features.samba;
 in
 
 {
-  options.optionals.features.samba.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Samba, open my /media to network";
-  };
+  options.features.samba.enable = lib.mkEnableOption "Samba file sharing";
   config = lib.mkIf cfg.enable {
     services.samba = {
       enable = true;
@@ -22,8 +17,8 @@ in
       settings = {
         global = {
           "workgroup" = "WORKGROUP";
-          "server string" = "Moontier Media Server";
-          "netbios name" = "moontier";
+          "server string" = "${config.networking.hostName} Media Server";
+          "netbios name" = config.networking.hostName;
           "security" = "user";
           "hosts allow" = "192.168.1. 127.0.0.1 localhost";
           "hosts deny" = "0.0.0.0/0";
@@ -45,9 +40,5 @@ in
       enable = true;
       openFirewall = true;
     };
-
-    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
-      "/var/lib/samba"
-    ];
   };
 }

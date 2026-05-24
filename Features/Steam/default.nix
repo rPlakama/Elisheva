@@ -6,15 +6,11 @@
 }:
 
 let
-  cfg = config.optionals.features.steam;
+  cfg = config.features.steam;
 in
 
 {
-  options.optionals.features.steam.enable = lib.mkOption {
-    type = lib.types.bool;
-    description = "Steam Configuration";
-    default = false;
-  };
+  options.features.steam.enable = lib.mkEnableOption "Steam + Proton GE";
   config = lib.mkIf cfg.enable {
     boot.kernelModules = [ "ntsync" ];
     programs.steam = {

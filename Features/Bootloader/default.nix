@@ -5,14 +5,14 @@
 }:
 
 let
-  cfg = config.optionals.features.bootloader;
+  cfg = config.features.bootloader;
 in
 
 {
-  options.optionals.features.bootloader.enable = lib.mkOption {
+  options.features.bootloader.enable = lib.mkOption {
     type = lib.types.bool;
-    description = "Bootloader Configuration";
     default = true;
+    description = "Bootloader Configuration";
   };
   config = lib.mkIf cfg.enable {
     systemd.services.NetworkManager-wait-online.enable = false;

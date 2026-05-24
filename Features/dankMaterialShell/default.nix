@@ -6,21 +6,25 @@
 }:
 
 let
-  cfg = config.optionals.features.dankMaterialShell;
+  cfg = config.features.dankMaterialShell;
   user = config.core.user;
-  persistEnabled = config.optionals.features.preservation.enable;
 in
 
 {
   imports = [ inputs.dms.nixosModules.dank-material-shell ];
 
-  options.optionals.features.dankMaterialShell.enable = lib.mkOption {
+  options.features.dankMaterialShell.enable = lib.mkOption {
     type = lib.types.bool;
+    default = config.features.niri.enable;
     description = "Dank Material Shell for Niri";
-    default = config.optionals.features.niri.enable;
   };
 
   config = lib.mkIf cfg.enable {
+
+    assertions = [{
+      assertion = config.features.niri.enable;
+      message = "dankMaterialShell requires niri";
+    }];
 
     systemd.user.services.niri-flake-polkit.enable = false;
 
@@ -38,9 +42,5 @@ in
       compositor.name = "niri";
       configHome = "/home/${user}";
     };
-
-    optionals.features.preservation.keepDirs.homeDirs = lib.mkIf persistEnabled [
-      ".config/dank-material-shell"
-    ];
   };
 }

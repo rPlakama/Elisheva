@@ -16,7 +16,7 @@ Features <-- Contains a default.nix which create imports from dir inside of it; 
 What happens after is it create an option which can be enabled by a Host, per example:
 
 ```
-  options.optionals.features.neovim.enable = lib.mkOption {
+  options.features.neovim.enable = lib.mkOption {
     type = lib.types.bool;
     description = "Neovim Configuration";
     default = true;
@@ -26,7 +26,7 @@ What happens after is it create an option which can be enabled by a Host, per ex
 
 ### Disko Installation
 
-For hosts with `optionals.features.disko.enable = true`:
+For hosts with `features.disko.enable = true`:
 
 ```bash
 # From NixOS live ISO, clone the flake:
@@ -41,7 +41,7 @@ nixos-install --flake /mnt/etc/nixos#<hostname>
 
 ### Disko & Preservation Options
 
-Available under `optionals.features` in any host config:
+Available under `features` in any host config:
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
@@ -56,6 +56,6 @@ Available under `optionals.features` in any host config:
 | `preservation.additionalFiles` | list | `[]` | Extra system files to persist, e.g. `["/etc/adjtime"]` |
 
 **Default persisted directories:**
-- System: `/var/lib/tailscale`, `/var/lib/bluetooth`, `/var/lib/nixos`, `/var/log`, `/etc/NetworkManager/system-connections`, `/etc/ssh`
+- System: `/etc/nixos`, `/var/lib/tailscale`, `/var/lib/bluetooth`, `/var/lib/nixos`, `/var/log`, `/etc/NetworkManager/system-connections`, `/etc/ssh`
 - System files: `/etc/machine-id`
-- User: `Downloads`, `Projects`, `Pictures`, `Documents`, `Music`, `Videos`, `.local/share`, `.local/state`, `.cache`, `.ssh`, `.gnupg`
+- User: `Downloads`, `Projects`, `Pictures`, `Documents`, `Videos`, `.local/share`, `.local/state`, `.ssh`

@@ -6,14 +6,14 @@
 }:
 
 let
-  cfg = config.core.features.nix;
+  cfg = config.features.nix;
 in
 
 {
-  options.core.features.nix.enable = lib.mkOption {
+  options.features.nix.enable = lib.mkOption {
     type = lib.types.bool;
-    description = "Nix package manager configuration";
     default = true;
+    description = "Nix package manager configuration";
   };
 
   config = lib.mkIf cfg.enable {

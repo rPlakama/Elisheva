@@ -6,15 +6,11 @@
 
 let
 
-  cfg = config.optionals.features.iperf3;
+  cfg = config.features.iperf3;
 
 in
 {
-  options.optionals.features.iperf3.enable = lib.mkOption {
-    type = lib.types.bool;
-    description = "Iperf3";
-    default = false;
-  };
+  options.features.iperf3.enable = lib.mkEnableOption "iperf3 network testing";
   config = lib.mkIf cfg.enable {
     services.iperf3 = {
       enable = true;

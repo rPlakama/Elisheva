@@ -6,8 +6,7 @@
 }:
 
 let
-  cfg = config.optionals.features.st;
-  persistEnabled = config.optionals.features.preservation.enable;
+  cfg = config.features.st;
   configSrc = toString (
     pkgs.writeText "sillytavern-config.yaml" ''
       listen: true
@@ -25,11 +24,7 @@ let
   );
 in
 {
-  options.optionals.features.st.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "ST, AI RPG Service";
-  };
+  options.features.st.enable = lib.mkEnableOption "SillyTavern AI RPG";
 
   config = lib.mkIf cfg.enable {
     services.sillytavern = {
@@ -40,10 +35,6 @@ in
 
     systemd.services.sillytavern.serviceConfig.ExecStartPre =
       "${pkgs.bash}/bin/bash -c 'cp --remove-destination ${configSrc} /var/lib/SillyTavern/config.yaml && chmod 600 /var/lib/SillyTavern/config.yaml'";
-    optionals.features.unifiedDNS.proxyServices.st = 6720;
-
-    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
-      "/var/lib/SillyTavern"
-    ];
+    features.unifiedDNS.proxyServices.st = 6720;
   };
 }

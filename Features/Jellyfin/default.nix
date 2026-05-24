@@ -1,17 +1,12 @@
 { config, lib, ... }:
 let
-  cfg = config.optionals.features.jellyfin;
-  persistEnabled = config.optionals.features.preservation.enable;
+  cfg = config.features.jellyfin;
 in
 {
-  options.optionals.features.jellyfin.enable = lib.mkOption {
-    type = lib.types.bool;
-    description = "Jellyfin is an... media server thingy";
-    default = false;
-  };
+  options.features.jellyfin.enable = lib.mkEnableOption "Jellyfin media server";
   config = lib.mkIf cfg.enable {
-    core.features.mediaPermissions.enable = true;
-    optionals.features.unifiedDNS.proxyServices.jellyfin = 8096;
+    features.mediaPermissions.enable = true;
+    features.unifiedDNS.proxyServices.jellyfin = 8096;
     services.jellyfin = {
       enable = true;
       group = "media";
@@ -20,10 +15,6 @@ in
     users.users.jellyfin.extraGroups = [
       "video"
       "render"
-    ];
-
-    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
-      "/var/lib/jellyfin"
     ];
   };
 }

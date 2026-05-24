@@ -5,16 +5,11 @@
 }:
 
 let
-  cfg = config.optionals.features.whatsBot;
-  persistEnabled = config.optionals.features.preservation.enable;
+  cfg = config.features.whatsBot;
 in
 
 {
-  options.optionals.features.whatsBot.enable = lib.mkOption {
-    type = lib.types.bool;
-    description = "Zapzap Configuration";
-    default = false;
-  };
+  options.features.whatsBot.enable = lib.mkEnableOption "WhatsApp Bot";
   config = lib.mkIf cfg.enable {
 
     systemd.services = {
@@ -24,17 +19,13 @@ in
         after = [ "network.target" ];
 
         serviceConfig = {
-          ExecStart = "/home/rplakama/bot-ascending/whatsapp-summarizer-linux-amd64";
-          WorkingDirectory = "/home/rplakama/bot-ascending";
-          User = "rplakama";
+          ExecStart = "/home/${config.core.user}/bot-ascending/whatsapp-summarizer-linux-amd64";
+          WorkingDirectory = "/home/${config.core.user}/bot-ascending";
+          User = config.core.user;
           Restart = "on-failure";
           RestartSec = "5s";
         };
       };
     };
-
-    optionals.features.preservation.keepDirs.homeDirs = lib.mkIf persistEnabled [
-      "bot-ascending"
-    ];
   };
 }

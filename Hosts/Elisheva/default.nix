@@ -23,7 +23,7 @@
 
   hardware.bluetooth.enable = true;
   core.user = "rplakama";
-  optionals.features = {
+  features = {
     #scx.enable = true;
     niri.enable = true;
     steam.enable = true;

@@ -5,25 +5,20 @@
 }:
 
 let
-  cfg = config.optionals.features.qbit;
+  cfg = config.features.qbit;
   user = config.core.user;
-  persistEnabled = config.optionals.features.preservation.enable;
 in
 
 {
-  options.optionals.features.qbit.enable = lib.mkOption {
-    type = lib.types.bool;
-    description = "qbit Configuration";
-    default = false;
-  };
+  options.features.qbit.enable = lib.mkEnableOption "qBittorrent + Qui";
   config = lib.mkIf cfg.enable {
 
-    core.features.mediaPermissions.enable = true;
+    features.mediaPermissions.enable = true;
     sops.secrets."qui/secret" = {
       group = "media";
     };
 
-    optionals.features.unifiedDNS.proxyServices = {
+    features.unifiedDNS.proxyServices = {
       qui = 3000;
       qbit = 8080;
     };
@@ -55,10 +50,5 @@ in
         };
       };
     };
-
-    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
-      "/var/lib/qbittorrent"
-      "/var/lib/qui"
-    ];
   };
 }

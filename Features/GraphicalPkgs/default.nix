@@ -6,10 +6,9 @@
 }:
 
 let
-  cfg = config.core.features.graphicalPkgs;
+  cfg = config.features.graphicalPkgs;
   user = config.core.user;
-  niriEnabled = config.optionals.features.niri.enable;
-  persistEnabled = config.optionals.features.preservation.enable;
+  niriEnabled = config.features.niri.enable;
 
   vesktop-with-keybinds =
     (pkgs.vesktop.override {
@@ -29,10 +28,10 @@ let
       });
 in
 {
-  options.core.features.graphicalPkgs.enable = lib.mkOption {
-    description = "Graphical Packages";
+  options.features.graphicalPkgs.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
+    description = "Graphical Packages";
   };
 
   config = lib.mkIf cfg.enable {
@@ -56,10 +55,5 @@ in
         include=/home/${user}/.config/foot/dank-colors.ini
       '';
     };
-
-    optionals.features.preservation.keepDirs.homeDirs = lib.mkIf persistEnabled [
-      ".config/vesktop"
-      "/home/${user}/Nextcloud"
-    ];
   };
 }

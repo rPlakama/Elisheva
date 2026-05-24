@@ -4,23 +4,24 @@
   ...
 }:
 let
-  cfg = config.optionals.features.homepage;
+  cfg = config.features.homepage;
   currentIP = config.core.ip;
-  gen = config.optionals.features.unifiedDNS;
+  gen = config.features.unifiedDNS;
   domain = config.core.domain;
 in
 {
-  options.optionals.features.homepage = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      description = "Homepage dashboard";
-      default = false;
-    };
+  options.features.homepage = {
+    enable = lib.mkEnableOption "Homepage dashboard";
   };
 
   config = lib.mkIf cfg.enable {
 
-    optionals.features.unifiedDNS.proxyServices.dashboard = 8082;
+    assertions = [{
+      assertion = config.features.unifiedDNS.enable;
+      message = "Homepage requires unifiedDNS";
+    }];
+
+    features.unifiedDNS.proxyServices.dashboard = 8082;
 
     services.homepage-dashboard = {
       enable = true;

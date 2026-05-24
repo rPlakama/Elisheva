@@ -6,12 +6,12 @@
 }:
 
 let
-  cfg = config.core.features.core;
+  cfg = config.features.core;
   user = config.core.user;
 in
 
 {
-  options.core.features.core.enable = lib.mkOption {
+  options.features.core.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
     description = "Essential system segments for my Hosts";

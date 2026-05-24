@@ -1,13 +1,9 @@
 { config, lib, ... }:
 let
-  cfg = config.core.features.nvidia;
+  cfg = config.features.nvidia;
 in
 {
-  options.core.features.nvidia.enable = lib.mkOption {
-    type = lib.types.bool;
-    description = "Nvidia driver configuration";
-    default = false;
-  };
+  options.features.nvidia.enable = lib.mkEnableOption "Nvidia GPU driver";
   config = lib.mkIf cfg.enable {
     services.xserver.videoDrivers = [ "nvidia" ];
     boot = {

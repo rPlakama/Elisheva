@@ -1,22 +1,31 @@
 { config, lib, ... }:
 let
-  cfg = config.optionals.features.unifiedDNS;
-  persistEnabled = config.optionals.features.preservation.enable;
+  cfg = config.features.unifiedDNS;
   domain = config.core.domain;
   currentIP = config.core.ip;
-  gatewayIP = "192.168.1.1";
-  tailscaleIP = "100.119.129.77";
 
   mkDnsRecords = ip: lib.mapAttrsToList (name: port: "${ip} ${name}.${domain}") cfg.proxyServices;
 in
 {
-  options.optionals.features.unifiedDNS = {
+  options.features.unifiedDNS = {
     enable = lib.mkEnableOption "Unified DNS and Reverse Proxy (Pi-hole + Nginx)";
 
     proxyServices = lib.mkOption {
       type = lib.types.attrsOf lib.types.port;
       default = { };
       description = "Services to be proxied by Nginx and registered in Pi-hole";
+    };
+
+    gateway = lib.mkOption {
+      type = lib.types.str;
+      default = "192.168.1.1";
+      description = "LAN gateway/router IP for Pi-hole DHCP";
+    };
+
+    tailscaleIP = lib.mkOption {
+      type = lib.types.str;
+      default = "100.119.129.77";
+      description = "Tailscale IP of this machine for DNS records";
     };
   };
 
@@ -87,7 +96,7 @@ in
             start = "192.168.0.61";
             rapidCommit = true;
             resolver.resolveIPv6 = false;
-            router = gatewayIP;
+            router = cfg.gateway;
           };
           dns = {
             cnameRecords = [ ];
@@ -97,13 +106,13 @@ in
             expandHosts = true;
             interface = "all";
             hosts = [
-              "${gatewayIP} gateway"
+              "${cfg.gateway} gateway"
               "${currentIP} pi-hole"
               "${currentIP} ${domain}"
-              "${tailscaleIP} ${domain}"
+              "${cfg.tailscaleIP} ${domain}"
             ]
             ++ (mkDnsRecords currentIP)
-            ++ (mkDnsRecords tailscaleIP);
+            ++ (mkDnsRecords cfg.tailscaleIP);
             upstreams = [ "127.0.0.1#5335" ];
           };
           ntp = {
@@ -162,11 +171,6 @@ in
       };
     };
 
-    optionals.features.unifiedDNS.proxyServices.pi-hole = 8081;
-
-    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
-      "/etc/pihole"
-      "/var/lib/acme"
-    ];
+    features.unifiedDNS.proxyServices.pi-hole = 8081;
   };
 }

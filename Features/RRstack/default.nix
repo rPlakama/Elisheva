@@ -1,8 +1,7 @@
 { config, lib, ... }:
 
 let
-  cfg = config.optionals.features.rrstack;
-  persistEnabled = config.optionals.features.preservation.enable;
+  cfg = config.features.rrstack;
 
   mediaServicesWithPermissions = {
     jackett = 9117;
@@ -16,14 +15,10 @@ let
   };
 in
 {
-  options.optionals.features.rrstack.enable = lib.mkOption {
-    type = lib.types.bool;
-    description = "*-rr stack, with media-group permissions.";
-    default = false;
-  };
+  options.features.rrstack.enable = lib.mkEnableOption "*-rr stack (Sonarr, Radarr, Jackett, Prowlarr)";
 
   config = lib.mkIf cfg.enable {
-    core.features.mediaPermissions.enable = true;
+    features.mediaPermissions.enable = true;
     services =
       (lib.mapAttrs (name: port: {
         enable = true;
@@ -33,13 +28,6 @@ in
         enable = true;
       }) mediaNonPermissions);
 
-    optionals.features.unifiedDNS.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
-
-    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
-      "/var/lib/jackett"
-      "/var/lib/sonarr"
-      "/var/lib/radarr"
-      "/var/lib/prowlarr"
-    ];
+    features.unifiedDNS.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
   };
 }

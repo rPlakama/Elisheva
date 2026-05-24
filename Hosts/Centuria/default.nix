@@ -17,8 +17,8 @@
   ];
   core.user = "rplakama";
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-x86_64-v3;
-  core.features.nvidia.enable = true;
-  optionals.features = {
+  features.nvidia.enable = true;
+  features = {
     gpuScreenRecorder.enable = true;
     virtualization.enable = true;
     sunshine.enable = true;

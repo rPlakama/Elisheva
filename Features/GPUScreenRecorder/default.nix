@@ -7,8 +7,7 @@
 }:
 
 let
-  cfg = config.optionals.features.gpuScreenRecorder;
-  persistEnabled = config.optionals.features.preservation.enable;
+  cfg = config.features.gpuScreenRecorder;
 in
 
 {
@@ -16,11 +15,7 @@ in
     inputs.gsr-ui-nix.nixosModules.default
   ];
 
-  options.optionals.features.gpuScreenRecorder.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "GPU Screen Recorder Replay Buffer";
-  };
+  options.features.gpuScreenRecorder.enable = lib.mkEnableOption "GPU Screen Recorder replay buffer";
 
   config = lib.mkIf cfg.enable {
     programs.gpu-screen-recorder = {
@@ -28,9 +23,5 @@ in
       enable = true;
       ui.enable = true;
     };
-
-    optionals.features.preservation.keepDirs.homeDirs = lib.mkIf persistEnabled [
-      ".config/gpu-screen-recorder"
-    ];
   };
 }

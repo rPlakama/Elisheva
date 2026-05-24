@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  diskoCfg = config.optionals.features.disko;
+  diskoCfg = config.features.disko;
 
   ssdOpts = lib.optionals diskoCfg.isSSD [
     "discard=async"
@@ -116,7 +116,7 @@ let
   };
 in
 {
-  options.optionals.features.disko = {
+  options.features.disko = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;

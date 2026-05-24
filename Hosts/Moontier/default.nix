@@ -22,7 +22,7 @@
   core.user = "rplakama";
   core.ip = "192.168.1.106";
   core.domain = "moontier.online";
-  core.features.graphicalPkgs.enable = false;
+  features.graphicalPkgs.enable = false;
 
   sops.secrets = {
     "gallery-dl/ao3-username" = {
@@ -39,7 +39,7 @@
     };
   };
 
-  optionals.features = {
+  features = {
     unifiedDNS.enable = true;
     kavita.enable = true;
     nzbget.enable = true;

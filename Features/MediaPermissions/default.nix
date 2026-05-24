@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  cfg = config.core.features.mediaPermissions;
+  cfg = config.features.mediaPermissions;
   user = config.core.user;
 
   base_path = "/media";
@@ -23,11 +23,7 @@ let
   ];
 in
 {
-  options.core.features.mediaPermissions.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Shared media folders and group permissions";
-  };
+  options.features.mediaPermissions.enable = lib.mkEnableOption "Shared media folders and group permissions";
 
   config = lib.mkIf cfg.enable {
     users.groups.media = { };

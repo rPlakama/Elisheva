@@ -4,17 +4,12 @@
   ...
 }:
 let
-  cfg = config.optionals.features.nextcloud;
+  cfg = config.features.nextcloud;
   domain = config.core.domain;
   ncHost = "nextcloud.${domain}";
-  persistEnabled = config.optionals.features.preservation.enable;
 in
 {
-  options.optionals.features.nextcloud.enable = lib.mkOption {
-    type = lib.types.bool;
-    description = "Nextcloud Service";
-    default = false;
-  };
+  options.features.nextcloud.enable = lib.mkEnableOption "Nextcloud";
 
   config = lib.mkIf cfg.enable {
 
@@ -54,12 +49,7 @@ in
 
     services.pihole-ftl.settings.dns.hosts = [
       "${config.core.ip} ${ncHost}"
-      "100.119.129.77 ${ncHost}"
-    ];
-
-    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
-      "/var/lib/nextcloud"
-      "/var/lib/postgresql"
+      "${config.features.unifiedDNS.tailscaleIP} ${ncHost}"
     ];
   };
 }

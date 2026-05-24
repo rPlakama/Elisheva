@@ -6,9 +6,8 @@
   ...
 }:
 let
-  cfg = config.optionals.features.niri;
+  cfg = config.features.niri;
   user = config.core.user;
-  persistEnabled = config.optionals.features.preservation.enable;
 in
 {
   imports = [
@@ -16,29 +15,29 @@ in
     { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
   ];
 
-  options.optionals.features.niri = {
+  options.features.niri = {
     enable = lib.mkOption {
-      description = "Niri Configuration";
       type = lib.types.bool;
       default = false;
+      description = "Niri Configuration";
     };
     ppd = {
       enable = lib.mkOption {
-        description = "Allow ppd";
         type = lib.types.bool;
         default = false;
+        description = "Allow ppd";
       };
     };
     VariantKB = lib.mkOption {
-      description = "Keyboard Variant";
       type = lib.types.str;
       default = "";
+      description = "Keyboard Variant";
     };
 
     keyboardLayout = lib.mkOption {
-      description = "Keyboard layout";
       type = lib.types.str;
       default = "br";
+      description = "Keyboard layout";
     };
   };
   config = lib.mkIf cfg.enable {
@@ -74,9 +73,5 @@ in
         builtins.replaceStrings [ "@keyboardLayout@" "@Variant@" ] [ cfg.keyboardLayout cfg.VariantKB ]
           (builtins.readFile ./config.kdl);
     };
-
-    optionals.features.preservation.keepDirs.homeDirs = lib.mkIf persistEnabled [
-      ".config/niri"
-    ];
   };
 }

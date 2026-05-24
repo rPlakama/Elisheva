@@ -1,15 +1,10 @@
 { lib, config, ... }:
 
 let
-  cfg = config.optionals.features.slskd;
-  persistEnabled = config.optionals.features.preservation.enable;
+  cfg = config.features.slskd;
 in
 {
-  options.optionals.features.slskd.enable = lib.mkOption {
-    type = lib.types.bool;
-    description = "Slskd, a modern Soulseek client.";
-    default = false;
-  };
+  options.features.slskd.enable = lib.mkEnableOption "Soulseek client";
 
   config = lib.mkMerge [
     {
@@ -23,8 +18,8 @@ in
     }
 
     (lib.mkIf cfg.enable {
-      core.features.mediaPermissions.enable = true;
-      optionals.features.unifiedDNS.proxyServices.slskd = 5030;
+      features.mediaPermissions.enable = true;
+      features.unifiedDNS.proxyServices.slskd = 5030;
       services.slskd = {
         enable = true;
         group = "media";
@@ -48,9 +43,6 @@ in
         };
       };
 
-      optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
-        "/var/lib/slskd"
-      ];
     })
   ];
 }

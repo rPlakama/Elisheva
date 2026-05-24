@@ -6,26 +6,21 @@
   ...
 }:
 let
-  cfg = config.optionals.features.kavita;
+  cfg = config.features.kavita;
   pkgs-kavita = import inputs.kavita { inherit (pkgs) system; };
-  persistEnabled = config.optionals.features.preservation.enable;
 in
 {
-  options.optionals.features.kavita.enable = lib.mkOption {
-    type = lib.types.bool;
-    description = "Kavita.";
-    default = false;
-  };
+  options.features.kavita.enable = lib.mkEnableOption "Kavita reading server";
   config = lib.mkMerge [
     {
       sops.secrets."kavita/token" = { };
     }
     (lib.mkIf cfg.enable {
-      core.features.mediaPermissions.enable = true;
+      features.mediaPermissions.enable = true;
       networking.firewall.allowedTCPPorts = [ 3034 ];
 
       systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
-      optionals.features.unifiedDNS.proxyServices.kavita = 3034;
+      features.unifiedDNS.proxyServices.kavita = 3034;
 
       services.kavita = {
         enable = true;
@@ -35,10 +30,6 @@ in
           Port = 3034;
         };
       };
-
-      optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
-        "/var/lib/kavita"
-      ];
     })
   ];
 }

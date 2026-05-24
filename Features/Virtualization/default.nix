@@ -1,15 +1,10 @@
 { lib, config, ... }:
 let
-  cfg = config.optionals.features.virtualization;
-  isNvidia = config.core.features.nvidia.enable;
-  persistEnabled = config.optionals.features.preservation.enable;
+  cfg = config.features.virtualization;
+  isNvidia = config.features.nvidia.enable;
 in
 {
-  options.optionals.features.virtualization.enable = lib.mkOption {
-    type = lib.types.bool;
-    description = "Virtualization";
-    default = false;
-  };
+  options.features.virtualization.enable = lib.mkEnableOption "Virtualization (libvirtd + Docker)";
 
   config = lib.mkIf cfg.enable {
     virtualisation = {
@@ -21,9 +16,5 @@ in
         autoPrune.enable = true;
       };
     };
-
-    optionals.features.preservation.keepDirs.additionalDirs = lib.mkIf persistEnabled [
-      "/var/lib/docker"
-    ];
   };
 }

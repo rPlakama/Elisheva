@@ -6,9 +6,9 @@
 }:
 
 let
-  cfg = config.core.features.neovim;
+  cfg = config.features.neovim;
   user = config.core.user;
-  niriEnabled = config.optionals.features.niri.enable;
+  niriEnabled = config.features.niri.enable;
 
   base46Plugin = pkgs.vimUtils.buildVimPlugin {
     pname = "base46";
@@ -39,10 +39,10 @@ let
   };
 in
 {
-  options.core.features.neovim.enable = lib.mkOption {
+  options.features.neovim.enable = lib.mkOption {
     type = lib.types.bool;
-    description = "Neovim Configuration";
     default = true;
+    description = "Neovim Configuration";
   };
 
   config = lib.mkIf cfg.enable {

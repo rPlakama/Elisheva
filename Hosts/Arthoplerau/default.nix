@@ -13,7 +13,7 @@
 
   hardware.bluetooth.enable = true;
   core.user = "rplakama";
-  optionals.features = {
+  features = {
     niri = {
       enable = true;
       ppd.enable = true;

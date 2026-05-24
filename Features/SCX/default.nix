@@ -5,10 +5,10 @@
 }:
 
 let
-  cfg = config.optionals.features.scx;
+  cfg = config.features.scx;
 in
 {
-  options.optionals.features.scx = {
+  options.features.scx = {
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enable SCX Configuration";
