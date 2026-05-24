@@ -55,6 +55,7 @@
     nextcloud.enable = true;
     iperf3.enable = true;
     jellyfin.enable = true;
+    navidrome.enable = true;
     galleryDL = {
       enable = true;
       mangas = {
