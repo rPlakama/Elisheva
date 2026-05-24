@@ -19,9 +19,11 @@
   '';
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-server-lto;
 
-  core.user = "rplakama";
-  core.ip = "192.168.1.106";
-  core.domain = "moontier.online";
+  core = {
+    user = "rplakama";
+    ip = "192.168.1.106";
+    domain = "moontier.online";
+  };
   features.graphicalPkgs.enable = false;
 
   sops.secrets = {
@@ -53,6 +55,7 @@
     nextcloud.enable = true;
     iperf3.enable = true;
     jellyfin.enable = true;
+    navidrome.enable = true;
     galleryDL = {
       enable = true;
       mangas = {

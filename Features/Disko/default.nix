@@ -78,19 +78,21 @@ let
     main = {
       device = diskoCfg.primaryDrive;
       type = "disk";
-      content.type = "gpt";
-      content.partitions = lib.mkMerge [
-        {
-          boot = bootPartition;
-          esp = espPartition;
-        }
-        (lib.mkIf diskoCfg.swap.enable {
-          swap = swapPartition;
-        })
-        {
-          root = rootPartition;
-        }
-      ];
+      content = {
+        type = "gpt";
+        partitions = lib.mkMerge [
+          {
+            boot = bootPartition;
+            esp = espPartition;
+          }
+          (lib.mkIf diskoCfg.swap.enable {
+            swap = swapPartition;
+          })
+          {
+            root = rootPartition;
+          }
+        ];
+      };
     };
   };
 

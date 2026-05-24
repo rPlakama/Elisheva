@@ -16,12 +16,14 @@ in
       sops.secrets."kavita/token" = { };
     }
     (lib.mkIf cfg.enable {
-      features.mediaPermissions.enable = true;
-      features.preservation.persistDirs.system = [ "/var/lib/kavita" ];
+      features = {
+        mediaPermissions.enable = true;
+        preservation.persistDirs.system = [ "/var/lib/kavita" ];
+        unifiedDNS.proxyServices.kavita = 3034;
+      };
       networking.firewall.allowedTCPPorts = [ 3034 ];
 
       systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
-      features.unifiedDNS.proxyServices.kavita = 3034;
 
       services.kavita = {
         enable = true;

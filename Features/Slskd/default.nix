@@ -18,9 +18,11 @@ in
     }
 
     (lib.mkIf cfg.enable {
-      features.mediaPermissions.enable = true;
-      features.preservation.persistDirs.system = [ "/var/lib/slskd" ];
-      features.unifiedDNS.proxyServices.slskd = 5030;
+      features = {
+        mediaPermissions.enable = true;
+        preservation.persistDirs.system = [ "/var/lib/slskd" ];
+        unifiedDNS.proxyServices.slskd = 5030;
+      };
       services.slskd = {
         enable = true;
         group = "media";

@@ -18,13 +18,16 @@ in
   options.features.rrstack.enable = lib.mkEnableOption "*-rr stack (Sonarr, Radarr, Jackett, Prowlarr)";
 
   config = lib.mkIf cfg.enable {
-    features.mediaPermissions.enable = true;
-    features.preservation.persistDirs.system = [
-      "/var/lib/jackett"
-      "/var/lib/sonarr"
-      "/var/lib/radarr"
-      "/var/lib/prowlarr"
-    ];
+    features = {
+      mediaPermissions.enable = true;
+      preservation.persistDirs.system = [
+        "/var/lib/jackett"
+        "/var/lib/sonarr"
+        "/var/lib/radarr"
+        "/var/lib/prowlarr"
+      ];
+      unifiedDNS.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
+    };
     services =
       (lib.mapAttrs (name: port: {
         enable = true;
@@ -33,7 +36,5 @@ in
       // (lib.mapAttrs (name: port: {
         enable = true;
       }) mediaNonPermissions);
-
-    features.unifiedDNS.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
   };
 }
