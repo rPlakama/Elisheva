@@ -5,7 +5,6 @@ let
   ssdOpts = lib.optionals diskoCfg.isSSD [
     "discard=async"
     "ssd"
-    "compress=zstd"
   ];
 
   subvolOpts =
@@ -13,6 +12,7 @@ let
     [
       "subvol=${subvol}"
       "noatime"
+      "compress=zstd"
     ]
     ++ ssdOpts;
 
