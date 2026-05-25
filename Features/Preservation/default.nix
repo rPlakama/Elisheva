@@ -5,7 +5,6 @@ let
   user = config.core.user;
 
   defaultSystemDirs = [
-    "/etc/nixos"
     "/var/lib/tailscale"
     "/var/lib/bluetooth"
     "/var/log"

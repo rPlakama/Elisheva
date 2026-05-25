@@ -2,24 +2,16 @@
 let
   diskoCfg = config.features.disko;
 
-  ssdOpts = lib.optionals diskoCfg.isSSD [
-    "discard=async"
-    "ssd"
-  ];
-
-  subvolOpts =
-    subvol:
+  subvolOpts = subvol: isSSD:
     [
       "subvol=${subvol}"
       "noatime"
       "compress=zstd"
     ]
-    ++ ssdOpts;
-
-  persistentSubvol = {
-    mountOptions = subvolOpts "persistent";
-    mountpoint = "/persistent";
-  };
+    ++ lib.optionals isSSD [
+      "discard=async"
+      "ssd"
+    ];
 
   # --- Partitions
 
@@ -50,11 +42,11 @@ let
 
   rootSubvolumes = {
     "/tmp" = {
-      mountOptions = subvolOpts "tmp";
+      mountOptions = subvolOpts "tmp" diskoCfg.isSSD.primary;
       mountpoint = "/tmp";
     };
     "/nix" = {
-      mountOptions = subvolOpts "nix";
+      mountOptions = subvolOpts "nix" diskoCfg.isSSD.primary;
       mountpoint = "/nix";
     };
   };
@@ -68,7 +60,10 @@ let
       subvolumes = lib.mkMerge [
         rootSubvolumes
         (lib.mkIf (!diskoCfg.dualDrive) {
-          "/persistent" = persistentSubvol;
+          "/persistent" = {
+            mountOptions = subvolOpts "persistent" diskoCfg.isSSD.primary;
+            mountpoint = "/persistent";
+          };
         })
       ];
     };
@@ -109,7 +104,10 @@ let
             type = "btrfs";
             extraArgs = [ "-f" ];
             subvolumes = {
-              "/persistent" = persistentSubvol;
+              "/persistent" = {
+                mountOptions = subvolOpts "persistent" diskoCfg.isSSD.secondary;
+                mountpoint = "/persistent";
+              };
             };
           };
         };
@@ -124,10 +122,17 @@ in
       default = false;
       description = "Enable declarative disk layout (disko)";
     };
-    isSSD = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Whether drives are SSDs (enables discard=async and ssd mount options)";
+    isSSD = {
+      primary = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Whether the primary drive is an SSD (enables discard=async and ssd mount options)";
+      };
+      secondary = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Whether the secondary drive is an SSD (enables discard=async and ssd mount options)";
+      };
     };
     dualDrive = lib.mkOption {
       type = lib.types.bool;
@@ -161,11 +166,22 @@ in
   };
 
   config = lib.mkIf diskoCfg.enable {
+    assertions = [
+      {
+        assertion = diskoCfg.primaryDrive != "";
+        message = "features.disko.primaryDrive must be set when disko is enabled";
+      }
+      {
+        assertion = !diskoCfg.dualDrive || diskoCfg.secondaryDrive != "";
+        message = "features.disko.secondaryDrive must be set when dualDrive is enabled";
+      }
+    ];
+
     disko.devices = {
       nodev."/" = {
         fsType = "tmpfs";
         mountOptions = [
-          "size=25%"
+          "size=50%"
           "mode=755"
         ];
       };
