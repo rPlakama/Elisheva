@@ -160,26 +160,6 @@
         "type": "github"
       }
     },
-    "helium-flake": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1779362613,
-        "narHash": "sha256-gYJQTjBYuYOB/yii5bd9xGkxph+eL+mq4kj4F8PC/aA=",
-        "owner": "oxcl",
-        "repo": "nix-flake-helium-browser",
-        "rev": "c1db1cc295118e95923a95fbcd2346a619fbe159",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxcl",
-        "repo": "nix-flake-helium-browser",
-        "type": "github"
-      }
-    },
     "hjem": {
       "inputs": {
         "nix-darwin": "nix-darwin",
@@ -434,7 +414,6 @@
         "disko": "disko",
         "dms": "dms",
         "gsr-ui-nix": "gsr-ui-nix",
-        "helium-flake": "helium-flake",
         "hjem": "hjem",
         "kavita": "kavita",
         "niri": "niri",

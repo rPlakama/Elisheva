@@ -26,6 +26,7 @@ in
 
     environment.systemPackages = with pkgs; [
       vesktop
+      firefox
       materialgram
       nextcloud-client
       foot
