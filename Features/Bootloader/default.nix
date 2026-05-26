@@ -15,6 +15,12 @@ in
     description = "Bootloader Configuration";
   };
   config = lib.mkIf cfg.enable {
+    services.userborn.enable = true;
+
+    system = {
+      etc.overlay.enable = true;
+      nixos-init.enable = true;
+    };
     systemd.services.NetworkManager-wait-online.enable = false;
     boot = {
       plymouth = {
