@@ -2,7 +2,8 @@
 let
   diskoCfg = config.features.disko;
 
-  subvolOpts = subvol: isSSD:
+  subvolOpts =
+    subvol: isSSD:
     [
       "subvol=${subvol}"
       "noatime"
@@ -181,7 +182,7 @@ in
       nodev."/" = {
         fsType = "tmpfs";
         mountOptions = [
-          "size=50%"
+          "size=25%"
           "mode=755"
         ];
       };
@@ -194,7 +195,6 @@ in
     fileSystems = {
       "/nix".neededForBoot = true;
       "/persistent".neededForBoot = true;
-      "/tmp".neededForBoot = true;
     };
   };
 }
