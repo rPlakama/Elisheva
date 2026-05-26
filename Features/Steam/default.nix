@@ -10,6 +10,7 @@ let
 in
 
 {
+  features.preservation.persistDirs.system = [ ".steam" ];
   options.features.steam.enable = lib.mkEnableOption "Steam + Proton GE";
   config = lib.mkIf cfg.enable {
     boot.kernelModules = [ "ntsync" ];
