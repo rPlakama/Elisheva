@@ -21,12 +21,15 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    assertions = [{
-      assertion = config.features.niri.enable;
-      message = "dankMaterialShell requires niri";
-    }];
+    assertions = [
+      {
+        assertion = config.features.niri.enable;
+        message = "dankMaterialShell requires niri";
+      }
+    ];
 
     systemd.user.services.niri-flake-polkit.enable = false;
+    features.preservation.persistDirs.system = [ ".config/DankMaterialShell" ];
 
     programs.dank-material-shell = {
       enable = true;
