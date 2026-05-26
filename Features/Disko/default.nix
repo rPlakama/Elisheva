@@ -173,7 +173,7 @@ in
         message = "features.disko.secondaryDrive must be set when dualDrive is enabled";
       }
     ];
-
+    nix.settings.auto-optimise-store = diskoCfg.dualDrive;
     disko.devices = {
       nodev."/" = {
         fsType = "tmpfs";
