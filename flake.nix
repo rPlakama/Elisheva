@@ -15,11 +15,6 @@
     gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
     kavita.url = "github:nevivurn/nixpkgs/update/kavita";
 
-    helium-flake = {
-      url = "github:oxcl/nix-flake-helium-browser";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     hjem = {
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,7 +38,6 @@
 
   outputs =
     inputs@{
-      helium-flake,
       nix-cachyos-kernel,
       nixpkgs,
       sops-nix,
@@ -78,7 +72,6 @@
 
               {
                 nixpkgs.overlays = [
-                  helium-flake.overlays.default
                   nix-cachyos-kernel.overlays.pinned
                 ];
 
