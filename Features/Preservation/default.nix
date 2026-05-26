@@ -10,6 +10,7 @@ let
     "/var/log"
     "/etc/NetworkManager/system-connections"
     "/etc/ssh"
+    "/tmp"
     {
       directory = "/var/lib/nixos";
       inInitrd = true;

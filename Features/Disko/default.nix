@@ -42,10 +42,6 @@ let
   };
 
   rootSubvolumes = {
-    "/tmp" = {
-      mountOptions = subvolOpts "tmp" diskoCfg.isSSD.primary;
-      mountpoint = "/tmp";
-    };
     "/nix" = {
       mountOptions = subvolOpts "nix" diskoCfg.isSSD.primary;
       mountpoint = "/nix";
