@@ -7,7 +7,7 @@ let
     [
       "subvol=${subvol}"
       "noatime"
-      "compress=zstd"
+      "compress=zstd:1"
     ]
     ++ lib.optionals isSSD [
       "discard=async"
