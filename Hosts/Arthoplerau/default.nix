@@ -1,15 +1,14 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     # ./hardware.nix
     ../../Features
+    inputs.nixos-hardware.nixosModules.lenovo-ideapad-slim-5
+
   ];
 
   networking.hostName = "Arthoplerau";
-  boot = {
-    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-zen4;
-    kernelParams = [ "amd_pstate=active" ]; # -- Useful for scx / ppd
-  };
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-zen4;
 
   hardware.bluetooth.enable = true;
   core.user = "rplakama";
