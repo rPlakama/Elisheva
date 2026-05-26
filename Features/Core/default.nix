@@ -56,6 +56,11 @@ in
 
     services = {
 
+      ananicy = {
+        enable = true;
+        package = pkgs.ananicy-cpp;
+      };
+
       upower.enable = true;
       bpftune.enable = true;
       devmon.enable = true;
