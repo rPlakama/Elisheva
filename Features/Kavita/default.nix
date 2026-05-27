@@ -1,10 +1,13 @@
 {
+  pkgs,
+  inputs,
   lib,
   config,
   ...
 }:
 let
   cfg = config.features.kavita;
+  pkgs-kavita = import inputs.kavita { inherit (pkgs) system; };
 in
 {
   options.features.kavita.enable = lib.mkEnableOption "Kavita reading server";
@@ -20,6 +23,7 @@ in
     networking.firewall.allowedTCPPorts = [ 3034 ];
     systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
     services.kavita = {
+      package = pkgs-kavita.kavita;
       enable = true;
       tokenKeyFile = config.sops.secrets."kavita/token".path;
       settings.Port = 3034;

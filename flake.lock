@@ -181,6 +181,22 @@
         "type": "github"
       }
     },
+    "kavita": {
+      "locked": {
+        "lastModified": 1779119340,
+        "narHash": "sha256-lv2n+BsNmiGSiyaEQ4wEw0SFyHkmItaFpaSM9TZ9iF8=",
+        "owner": "nevivurn",
+        "repo": "nixpkgs",
+        "rev": "08dc6a8739ca34918ea72812f94bd4873bd514aa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nevivurn",
+        "ref": "update/kavita",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
@@ -399,6 +415,7 @@
         "dms": "dms",
         "gsr-ui-nix": "gsr-ui-nix",
         "hjem": "hjem",
+        "kavita": "kavita",
         "niri": "niri",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
         "nixos-hardware": "nixos-hardware",

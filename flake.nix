@@ -12,6 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    kavita.url = "github:nevivurn/nixpkgs/update/kavita";
     gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
 
     hjem = {
