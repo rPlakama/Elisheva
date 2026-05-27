@@ -13,6 +13,7 @@ map('n', '<leader>f', fzf.files, { desc = "Search files" })
 map('n', '<leader>g', fzf.live_grep, { desc = "Grep search" })
 map('n', '<leader>a', fzf.buffers, { desc = "Buffer search" })
 map('n', '<leader>s', fzf.spell_suggest, { desc = "Spell suggestions" })
+map('n', '<leader>t', '<Cmd>TodoFzfLua', { desc = "All Todos" })
 
 -- Keymaps extras
 map('n', '<leader>lf', vim.lsp.buf.format, { desc = "LSP Format buffer" })

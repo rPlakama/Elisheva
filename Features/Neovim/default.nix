@@ -29,8 +29,8 @@ let
         with pkgs.vimPlugins;
         [
           nvim-lspconfig
+          todo-comments-nvim
           fzf-lua
-          indent-blankline-nvim
           nvim-treesitter.withAllGrammars
           blink-cmp
         ]
