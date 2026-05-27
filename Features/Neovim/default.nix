@@ -29,7 +29,6 @@ let
         with pkgs.vimPlugins;
         [
           nvim-lspconfig
-          todo-comments-nvim
           fzf-lua
           nvim-treesitter.withAllGrammars
           blink-cmp
