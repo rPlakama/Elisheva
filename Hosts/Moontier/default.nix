@@ -47,7 +47,7 @@
     nzbget.enable = true;
     rrstack.enable = true;
     qbit.enable = true;
-    whatsBot.enable = true;
+    # whatsBot.enable = true;
     slskd.enable = true;
     samba.enable = true;
     homepage.enable = true;
