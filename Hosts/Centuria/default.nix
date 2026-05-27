@@ -24,7 +24,7 @@
     sunshine.enable = true;
     steam.enable = true;
     qbit.enable = true;
-
+    bootloader.nixos-init.enable = true;
     scx = {
       enable = true;
       flags = [ "--performance" ];

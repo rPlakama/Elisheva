@@ -28,5 +28,6 @@
     niri.enable = true;
     steam.enable = true;
     virtualization.enable = true;
+    bootloader.nixos-init.enable = true;
   };
 }
