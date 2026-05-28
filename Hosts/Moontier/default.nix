@@ -1,4 +1,8 @@
 { config, pkgs, ... }:
+
+let
+  cfgSops = config.sops.secrets;
+in
 {
   imports = [
     ./hardware.nix
@@ -47,7 +51,7 @@
     nzbget.enable = true;
     rrstack.enable = true;
     qbit.enable = true;
-    # whatsBot.enable = true;
+    whatsBot.enable = true;
     slskd.enable = true;
     samba.enable = true;
     homepage.enable = true;
@@ -59,11 +63,11 @@
       enable = true;
       mangas = {
         downloadPath = "/media/mangas/download";
-        secretFile = config.sops.secrets."gallery-dl/mangas-urls".path;
+        secretFile = cfgSops."gallery-dl/mangas-urls".path;
       };
       literature = {
         downloadPath = "/media/fanfics/download";
-        secretFile = config.sops.secrets."gallery-dl/literature-urls".path;
+        secretFile = cfgSops."gallery-dl/literature-urls".path;
       };
     };
   };
