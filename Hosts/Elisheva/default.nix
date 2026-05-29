@@ -27,7 +27,6 @@
   };
   core.user = "rplakama";
   features = {
-    #scx.enable = true;
     niri.enable = true;
     steam.enable = true;
     virtualization.enable = true;
