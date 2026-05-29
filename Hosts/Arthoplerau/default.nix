@@ -13,20 +13,10 @@
   hardware.bluetooth.enable = true;
   core.user = "rplakama";
   features = {
-    niri = {
-      enable = true;
-      ppd.enable = true;
-    };
+    niri.enable = true;
     dankMaterialShell.enable = true;
     steam.enable = true;
-    gpuScreenRecorder.enable = true;
-    sunshine.enable = true;
     virtualization.enable = true;
-    scx = {
-      enable = true;
-      scheduler = "scx_lavd";
-      flags = [ "--autopower" ];
-    };
     disko = {
       enable = true;
       dualDrive = true;

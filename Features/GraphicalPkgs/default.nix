@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  inputs,
   pkgs,
   ...
 }:
@@ -9,6 +10,7 @@ let
   cfg = config.features.graphicalPkgs;
   user = config.core.user;
   niriEnabled = config.features.niri.enable;
+  system = pkgs.stdenv.hostPlatform.system;
 in
 {
   options.features.graphicalPkgs.enable = lib.mkOption {
@@ -24,7 +26,10 @@ in
       ".config/mozilla"
     ];
 
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = [
+      inputs.zen-browser.packages."${system}".default
+    ]
+    ++ (with pkgs; [
       vesktop
       firefox
       materialgram
@@ -32,7 +37,7 @@ in
       foot
       mpv
       ripdrag
-    ];
+    ]);
 
     hjem.users.${user} = {
       files.".config/foot/foot.ini".text = ''
