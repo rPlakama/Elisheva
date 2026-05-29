@@ -7,6 +7,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # flake.nix inputs
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";

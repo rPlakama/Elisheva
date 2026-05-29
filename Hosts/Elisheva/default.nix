@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
+
 {
   imports = [
     ./hardware.nix
@@ -7,11 +11,13 @@
 
   networking.hostName = "Elisheva";
   environment.systemPackages = with pkgs; [
+
     moonlight-qt
     ciscoPacketTracer9
     android-studio
     btop-rocm
   ];
+
   nixpkgs.config.android_sdk.accept_license = true;
 
   boot = {
@@ -25,6 +31,7 @@
     enable = true;
     powerOnBoot = false;
   };
+
   core.user = "rplakama";
   features = {
     niri.enable = true;
