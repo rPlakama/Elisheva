@@ -28,6 +28,7 @@ in
       vesktop
       materialgram
       nextcloud-client
+      firefox-beta
       foot
       mpv
       ripdrag
