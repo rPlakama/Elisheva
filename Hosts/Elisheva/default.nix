@@ -21,7 +21,10 @@
     ];
   };
 
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
   core.user = "rplakama";
   features = {
     #scx.enable = true;

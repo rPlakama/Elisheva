@@ -10,7 +10,11 @@
   networking.hostName = "Arthoplerau";
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-zen4;
 
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
+
   core.user = "rplakama";
   features = {
     niri.enable = true;
