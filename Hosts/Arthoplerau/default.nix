@@ -16,6 +16,7 @@
   };
 
   core.user = "rplakama";
+  services.tlp.enable = false;
   features = {
     niri.enable = true;
     dankMaterialShell.enable = true;
