@@ -2,7 +2,6 @@
   description = "Declarating... Imperative machines...";
 
   inputs = {
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
