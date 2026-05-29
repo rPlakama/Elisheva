@@ -18,7 +18,7 @@ let
       owner = "AvengeMedia";
       repo = "base46";
       rev = "master";
-      hash = "sha256-+FNEJBBa33onbq+BCQA1kO9dXDhGEUYbVIMnhrpr98U=";
+      hash = "sha256-dbVuQwFCOIBK9y7fklulxHHt57KbS/8KaiTvfe5rmco=";
     };
   };
 
