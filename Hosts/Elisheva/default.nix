@@ -16,6 +16,7 @@
     ciscoPacketTracer9
     android-studio
     btop-rocm
+
   ];
 
   nixpkgs.config.android_sdk.accept_license = true;
