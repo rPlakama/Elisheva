@@ -7,9 +7,12 @@ let
   base_path = "/media";
   mediaFolders = [
     "films"
+
     "music"
     "music/library"
     "music/downloads"
+
+    # To be moved.
     "mangas/local"
     "mangas/download"
     "fanfics"
@@ -17,6 +20,14 @@ let
     "mangas"
     "novels"
     "books"
+    # Ends here.
+
+    "literature"
+    "literature/novels"
+    "literature/books"
+    "literature/articles"
+    "literature/mangas"
+
     "downloads"
     "series"
     "torrents"

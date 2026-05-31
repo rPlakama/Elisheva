@@ -44,7 +44,6 @@ let
         postprocessors = postprocessors;
       };
     };
-
   # Mangas get zipped into cbz archives
   mangasConfig = mkGalleryDlConfig cfg.mangas.downloadPath [
     {

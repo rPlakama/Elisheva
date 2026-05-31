@@ -59,6 +59,7 @@ in
     nextcloud.enable = true;
     iperf3.enable = true;
     jellyfin.enable = true;
+    calibre.enable = true;
     galleryDL = {
       enable = true;
       mangas = {
