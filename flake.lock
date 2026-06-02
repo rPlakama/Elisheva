@@ -147,17 +147,14 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1780430604,
-        "narHash": "sha256-XpDJfHaMSDM5aa9kM8JSL9Ku6EPsBX4CacFkdsvs1Vw=",
-        "owner": "rPlakama",
-        "repo": "gsr-ui-nix",
-        "rev": "28adb6c568d8ac6fd42676e5036246a5961881af",
-        "type": "github"
+        "lastModified": 1780431781,
+        "narHash": "sha256-lfX4rBqOn7KP8OcMNuU4BnBI4MyEkE1LznV2jPqo/6o=",
+        "path": "/home/rplakama/gsr-ui-nix/",
+        "type": "path"
       },
       "original": {
-        "owner": "rPlakama",
-        "repo": "gsr-ui-nix",
-        "type": "github"
+        "path": "/home/rplakama/gsr-ui-nix/",
+        "type": "path"
       }
     },
     "hjem": {

@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }:
 {
   imports = [
-    # ./hardware.nix
+    ./hardware.nix
     ../../Features
     inputs.nixos-hardware.nixosModules.lenovo-ideapad-slim-5
 
@@ -25,8 +25,8 @@
     disko = {
       enable = true;
       dualDrive = true;
-      primaryDrive = "/dev/nvme0n1"; # -- Placeholder
-      secondaryDrive = "/dev/nvme1n1"; # -- Placeholder
+      primaryDrive = "/dev/nvme1n1";
+      secondaryDrive = "/dev/nvme0n1";
       swap.enable = true;
     };
     preservation = {
