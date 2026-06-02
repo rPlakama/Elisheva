@@ -30,13 +30,20 @@ For hosts with `features.disko.enable = true`:
 
 ```bash
 # From NixOS live ISO, clone the flake:
-git clone https://github.com/rPlakama/Elisheva.git /mnt/etc/nixos
+
+mkdir nixos;
+
+git clone https://github.com/rPlakama/Elisheva.git ./nixos
 
 # Partition the disk according to the host's disko config:
-nix run github:nix-community/disko -- --mode disko --flake /mnt/etc/nixos#<hostname>
 
-# Then install:
-nixos-install --flake /mnt/etc/nixos#<hostname>
+sudo nix --extra-experimental-features "nix-command flakes" \
+  run 'github:nix-community/disko/latest#disko-install' -- \
+  --flake .#<host> \
+  --disk main /dev/nvme1n1 \
+  --disk secondary /dev/nvme0n1 #
+
+nixos-install --flake .#<hostname>
 ```
 
 ### Disko & Preservation Options

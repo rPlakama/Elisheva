@@ -14,7 +14,7 @@
     };
 
     kavita.url = "github:nevivurn/nixpkgs/update/kavita";
-    gsr-ui-nix.url = "path:/home/rplakama/gsr-ui-nix/";
+    gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
 
     hjem = {
       url = "github:feel-co/hjem";
