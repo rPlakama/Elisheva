@@ -17,6 +17,12 @@ map('n', '<leader>s', fzf.spell_suggest, { desc = "Spell suggestions" })
 -- Keymaps extras
 map('n', '<leader>lf', vim.lsp.buf.format, { desc = "LSP Format buffer" })
 
+map({ 'n', 't' }, '<A-h>', '<cmd>wincmd h<CR>', { desc = 'Move to left window' })
+map({ 'n', 't' }, '<A-l>', '<cmd>wincmd l<CR>', { desc = 'Move to right window' })
+map({ 'n', 't' }, '<A-j>', '<cmd>wincmd j<CR>', { desc = 'Move to lower window' })
+map({ 'n', 't' }, '<A-k>', '<cmd>wincmd k<CR>', { desc = 'Move to upper window' })
+
+
 -- Spell settings
 map('n', '<C-M-1>', function()
   vim.opt.spell = true
