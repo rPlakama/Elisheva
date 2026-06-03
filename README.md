@@ -1,8 +1,7 @@
 ### Hosts
-- **Elisheva**: Ryzen 7 5700U | 32GB RAM DDR4 | 1TB NVME - XFS
 - **Centuria (Desktop)**: Ryzen 7 5700X | 32GB RAM DDR4 | 512GB NVME - XFS | (Desktop) Discrete GPU, RTX 3060 12GB GDDR6
 - **Moontier (Server)**: i3 6100 | 8GB DDR4 | 6TB HDD + 1TB HDD - XFS
-- **Arthoplerau** (Laptop) Ryzen AI 350 | 2*8 DDR5 | 512GB + 1TB NVME | BTRFS (Yet to arrival)
+- **Arthoplerau** (Laptop) Ryzen AI 350 | 2*8 DDR5 | 512GB + 1TB NVME | TMPFS BTRFS | Lenovo Ideapad 5 Slim
 
 ### Features?
 --> This configuration follows the feature style of configuration, which:
