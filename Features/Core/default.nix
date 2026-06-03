@@ -68,6 +68,7 @@ in
       udisks2.enable = true;
       resolved.enable = true;
       gvfs.enable = true;
+      fwupd.enable = true;
 
       pipewire = {
         enable = true;
@@ -88,6 +89,11 @@ in
         };
       };
     };
+
+    features.preservation.persistDirs.system = [
+      "/var/lib/fwupd"
+    ];
+
     hardware.enableAllFirmware = true;
     hjem.users.${user} = {
       enable = true;

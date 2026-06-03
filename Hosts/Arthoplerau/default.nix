@@ -22,11 +22,7 @@
       user = "rPlakama";
     };
   };
-  services = {
-    tlp.enable = false;
-    fwupd.enable = true;
-  };
-
+  services.tlp.enable = false;
   features = {
     niri.enable = true;
     dankMaterialShell.enable = true;
@@ -39,11 +35,6 @@
       secondaryDrive = "/dev/nvme0n1";
       swap.enable = true;
     };
-    preservation = {
-      enable = true;
-      persistDirs.system = [
-        "/var/lib/fwupd"
-      ];
-    };
+    preservation.enable = true;
   };
 }
