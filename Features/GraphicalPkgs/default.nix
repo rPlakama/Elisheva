@@ -22,7 +22,7 @@ in
       ".config/vesktop"
       ".config/foot"
       ".config/mozilla"
-      "Nextcloud"
+      ".config/Nextcloud"
     ];
 
     environment.systemPackages = with pkgs; [
