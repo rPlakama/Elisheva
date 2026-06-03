@@ -19,6 +19,17 @@ in
     default = "";
   };
 
+  options.core.git.email = lib.mkOption {
+    type = lib.types.str;
+    description = "git cfg email";
+    default = "";
+  };
+  options.core.git.user = lib.mkOption {
+    type = lib.types.str;
+    description = "git cfg user";
+    default = "";
+  };
+
   options.core.domain = lib.mkOption {
     type = lib.types.str;
     description = "Domain";
@@ -41,6 +52,14 @@ in
         LC_TELEPHONE = "pt_BR.UTF-8";
         LC_TIME = "pt_BR.UTF-8";
       };
+    };
+
+    hjem.users.${user} = {
+      files.".gitconfig".text = ''
+        [user]
+        name = ${config.core.git.user}
+        email = ${config.core.git.email}
+      '';
     };
 
     users = {

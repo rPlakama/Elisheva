@@ -10,7 +10,12 @@ let
     "/var/log"
     "/etc/NetworkManager/system-connections"
     "/etc/ssh"
-    "/tmp"
+    "/var/lib/sops-nix"
+
+    {
+      directory = "/tmp";
+      mode = "1777";
+    }
     {
       directory = "/var/lib/nixos";
       inInitrd = true;
@@ -62,6 +67,13 @@ in
         description = "Additional home directories to preserve";
         example = [ ".config/vesktop" ];
       };
+      homeFiles = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
+        description = "Additional user home files to preserve";
+        example = [ ".gitconfig" ];
+      };
+
       additionalDirs = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [ ];
@@ -78,15 +90,14 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    systemd.services."systemd-machine-id-commit".enable = false;
+    sops.age.sshKeyPaths = [ "/persistent/etc/ssh/ssh_host_ed25519_key" ];
     assertions = [
       {
         assertion = diskoCfg.enable;
         message = "Requires Disko enabled to be used";
       }
     ];
-
-    # Wipe /tmp
-    boot.tmp.cleanOnBoot = true;
 
     preservation = {
       enable = true;
@@ -95,6 +106,7 @@ in
         files = defaultSystemFiles ++ cfg.keepDirs.additionalFiles;
         users.${user} = {
           directories = defaultHomeDirs ++ cfg.keepDirs.homeDirs ++ cfg.persistDirs.home;
+          files = cfg.keepDirs.homeFiles;
         };
       };
     };

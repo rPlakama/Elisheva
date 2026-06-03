@@ -29,7 +29,10 @@ in
     ];
 
     systemd.user.services.niri-flake-polkit.enable = false;
-    features.preservation.persistDirs.system = [ ".config/DankMaterialShell" ];
+    features.preservation.persistDirs.home = [
+      ".config/DankMaterialShell"
+      ".config/niri"
+    ];
 
     programs.dank-material-shell = {
       enable = true;

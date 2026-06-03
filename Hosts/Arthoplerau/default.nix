@@ -15,7 +15,13 @@
     powerOnBoot = false;
   };
 
-  core.user = "rplakama";
+  core = {
+    user = "rplakama";
+    git = {
+      email = "rPlakama@proton.me";
+      user = "rPlakama";
+    };
+  };
   services = {
     tlp.enable = false;
     fwupd.enable = true;

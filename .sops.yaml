@@ -10,3 +10,4 @@ creation_rules:
       - *Main
       - *Moontier
       - *Centuria
+      - *Arthoplerau
