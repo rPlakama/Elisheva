@@ -12,11 +12,16 @@ in
 {
   options.features.noctalia.enable = lib.mkOption {
     type = lib.types.bool;
-    default = false;
+    default = config.features.niri.NoctaliaEnabled;
     description = "Enable Noctalia window manager environment.";
   };
   config = lib.mkIf cfg.enable {
     assertions = [
+      {
+        assertion = !config.features.niri.DMSEnabled;
+        message = "Shall not run two Desktop Shells at same time, choose (Err DMS / Noctalia )";
+      }
+
       {
         assertion = config.features.niri.enable;
         message = "noctalia requires niri";

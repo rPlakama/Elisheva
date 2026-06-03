@@ -40,6 +40,18 @@ in
       description = "Additional KDL if Noctalia is added";
     };
 
+    NoctaliaEnabled = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "If Noctalia is enabled";
+    };
+
+    DMSEnabled = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "If DMS is enabled";
+    };
+
     keyboardLayout = lib.mkOption {
       type = lib.types.str;
       default = "br";
@@ -78,7 +90,7 @@ in
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
           [ "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" ]
-          [ cfg.keyboardLayout cfg.VariantKB ]
+          [ cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB ]
           (builtins.readFile ./config.kdl);
     };
   };

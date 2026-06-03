@@ -1,4 +1,6 @@
 // Core - Includes
+@ImportNoctalia@
+
 include "dms/windowrules.kdl"
 include "dms/alttab.kdl"
 include "dms/binds.kdl"

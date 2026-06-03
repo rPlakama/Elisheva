@@ -24,7 +24,12 @@
   };
   services.tlp.enable = false;
   features = {
-    niri.enable = true;
+
+    niri = {
+      enable = true;
+      NoctaliaEnabled = true;
+    };
+
     dankMaterialShell.enable = true;
     steam.enable = true;
     virtualization.enable = true;
