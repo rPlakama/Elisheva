@@ -34,13 +34,16 @@ in
       ".config/gtk-4.0"
       ".config/gtk-3.0"
       ".config/dconf"
-
     ];
 
+    boot.consoleLogLevel = 0;
     services.displayManager.ly = {
       enable = true;
-      x11Support = false;
+      settings = {
+        default_input = "password";
+      };
     };
+
     programs.dank-material-shell = {
       enable = true;
       enableCalendarEvents = false;
