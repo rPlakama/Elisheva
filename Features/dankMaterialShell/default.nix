@@ -32,6 +32,9 @@ in
     features.preservation.persistDirs.home = [
       ".config/DankMaterialShell"
       ".config/niri"
+      ".config/gtk-4.0"
+      ".config/gtk-3.0"
+
     ];
 
     programs.dank-material-shell = {
