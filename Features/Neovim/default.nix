@@ -10,6 +10,13 @@ let
   user = config.core.user;
   niriEnabled = config.features.niri.enable;
 
+  extraInit = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    default = [ ];
+    description = "Additional Lua lines to append to init.lua, declared by other features";
+    example = [ "vim.opt.relativenumber = true" ];
+  };
+
   base46Plugin = pkgs.vimUtils.buildVimPlugin {
     pname = "base46";
     version = "unstable-2025-04-25";
@@ -52,7 +59,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      myNvim
+      # myNvim
 
       tinymist
       lua-language-server
@@ -71,9 +78,8 @@ in
         require('keybinds')
         require('lsp')
       ''
-      + lib.optionalString niriEnabled ''
-        vim.cmd.colorscheme("dms")
-      '';
+      + "\n"
+      + (lib.concatStringsSep "\n" cfg.extraInit);
     };
   };
 }

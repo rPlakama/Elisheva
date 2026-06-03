@@ -34,6 +34,12 @@ in
       description = "Keyboard Variant";
     };
 
+    ImportNoctalia = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "Additional KDL if Noctalia is added";
+    };
+
     keyboardLayout = lib.mkOption {
       type = lib.types.str;
       default = "br";
@@ -65,12 +71,14 @@ in
     ];
 
     services = lib.mkIf (!cfg.ppd.enable) {
-      power-profiles-daemon.enable = lib.mkForce false; # <- Its get enabled by dms
+      power-profiles-daemon.enable = lib.mkForce false;
     };
 
     hjem.users.${user} = {
       files.".config/niri/config.kdl".text =
-        builtins.replaceStrings [ "@keyboardLayout@" "@Variant@" ] [ cfg.keyboardLayout cfg.VariantKB ]
+        builtins.replaceStrings
+          [ "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" ]
+          [ cfg.keyboardLayout cfg.VariantKB ]
           (builtins.readFile ./config.kdl);
     };
   };

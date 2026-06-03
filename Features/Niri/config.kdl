@@ -141,6 +141,7 @@ binds {
     Mod+V      { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
     Mod+M      { spawn "dms" "ipc" "call" "processlist" "toggle"; }
     Mod+N      { spawn "dms" "ipc" "call" "notifications" "toggle"; }
+
     Ctrl+Alt+A { spawn "dms" "ipc" "call" "dash" "toggle" "overview"; }
     Ctrl+Alt+C { spawn "dms" "ipc" "call" "control-center" "toggle"; }
     Ctrl+Alt+D { spawn "dms" "ipc" "call" "dash" "toggle" "media"; }
@@ -191,12 +192,15 @@ binds {
     Mod+Shift+R { switch-preset-column-width; }
 
 // Binds - Hardware & Media
-    XF86AudioRaiseVolume  { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+; dms ipc call audio increment 0"; }
-    XF86AudioLowerVolume  { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-; dms ipc call audio increment 0"; }
+    XF86AudioRaiseVolume  { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+;" }
+    XF86AudioLowerVolume  { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-;" }
+
     XF86AudioMute         { spawn "dms" "ipc" "call" "audio" "mute"; }
     XF86AudioPlay         { spawn "dms" "ipc" "call" "mpris" "playPause"; }
+
     XF86MonBrightnessUp   { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
     XF86MonBrightnessDown { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
+
     Ctrl+Alt+M            { spawn-sh "echo run-shortcut:toggleMute | nc -U -w1 $XDG_RUNTIME_DIR/vesktop.sock"; }
     Ctrl+Alt+K            { switch-layout "next"; }
 }

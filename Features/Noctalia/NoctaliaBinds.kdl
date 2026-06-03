@@ -1,0 +1,12 @@
+binds {
+
+Ctrl+Alt+A { spawn "noctalia" "msg" "panel-toggle" "control-center"
+Ctrl+Alt+S { spawn "noctalia" "msg" "panel-toggle" "session"; }
+Ctrl+Alt+W { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
+Ctrl+Alt+D { spawn "noctalia" "msg" "wallpaper-random"; }
+
+
+XF86MonBrightnessUp   { spawn "noctalia" "msg" "brightness-up"; }
+XF86MonBrightnessDown   { spawn "noctalia" "msg" "brightness-down"; }
+
+}
