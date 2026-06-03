@@ -33,6 +33,7 @@ let
     ".local/share"
     ".local/state"
     ".ssh"
+    ".config/sops"
   ];
 in
 {

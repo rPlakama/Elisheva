@@ -1,6 +1,6 @@
 keys:
   - &Main age1nahmfd6uh5f8ugmayz2q5vr7d2j2w8ev30cm2c6ug7lm3acx8u7q3z0q88
-  - &Elisheva age1wllrsxvpmcsnkhk0n62cfm3763uv9kqpm34wzhx5h5n45dfq3geqgvcwjt
+  - &Arthoplerau age14efka776c5n4th3rh48fn2wwh9fpehklmy0f2ektdfen57rdwqgsxqu44n
   - &Moontier age1fhad5cu8sw0rcyejcq9gwgjp92dghe068yjn75euk3a26wwkug9q596f0h
   - &Centuria age1lllfj087p5fw0zevy8ljqsfu79ttr44az00lpagd2xsgzdn5a4rqfyuey8
 creation_rules:
@@ -8,6 +8,5 @@ creation_rules:
     key_groups:
     - age:
       - *Main
-      - *Elisheva
       - *Moontier
       - *Centuria

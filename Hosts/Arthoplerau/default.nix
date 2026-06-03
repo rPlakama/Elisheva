@@ -16,7 +16,10 @@
   };
 
   core.user = "rplakama";
-  services.tlp.enable = false;
+  services = {
+    tlp.enable = false;
+    fwupd.enable = true;
+  };
   features = {
     niri.enable = true;
     dankMaterialShell.enable = true;
