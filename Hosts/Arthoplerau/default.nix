@@ -26,6 +26,7 @@
     tlp.enable = false;
     fwupd.enable = true;
   };
+
   features = {
     niri.enable = true;
     dankMaterialShell.enable = true;
@@ -40,6 +41,9 @@
     };
     preservation = {
       enable = true;
+      persistDirs.system = [
+        "/var/lib/fwupd"
+      ];
     };
   };
 }
