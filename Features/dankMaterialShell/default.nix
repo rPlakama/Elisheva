@@ -7,7 +7,6 @@
 
 let
   cfg = config.features.dankMaterialShell;
-  user = config.core.user;
 in
 
 {
@@ -38,6 +37,10 @@ in
 
     ];
 
+    services.displayManager.ly = {
+      enable = true;
+      x11Support = false;
+    };
     programs.dank-material-shell = {
       enable = true;
       enableCalendarEvents = false;
@@ -45,12 +48,6 @@ in
         enable = true;
         restartIfChanged = true;
       };
-    };
-
-    services.displayManager.dms-greeter = {
-      enable = true;
-      compositor.name = "niri";
-      configHome = "/home/${user}";
     };
   };
 }
