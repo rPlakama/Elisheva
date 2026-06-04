@@ -1,3 +1,9 @@
+switch-events {
+
+    lid-close {
+        spawn "noctalia" "msg" "session" "lock"
+    }
+}
 
 cursor {
     xcursor-theme "volantes_light_cursors"
