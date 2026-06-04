@@ -1,3 +1,9 @@
+
+cursor {
+    xcursor-theme "volantes_light_cursors"
+    xcursor-size 24
+}
+
 binds {
 
 Ctrl+Alt+A { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
@@ -5,6 +11,8 @@ Ctrl+Alt+S { spawn "noctalia" "msg" "panel-toggle" "session"; }
 Ctrl+Alt+W { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
 Ctrl+Alt+D { spawn "noctalia" "msg" "wallpaper-random"; }
 
+Mod+Space  { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+Mod+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
 
 XF86MonBrightnessUp   { spawn "noctalia" "msg" "brightness-up"; }
 XF86MonBrightnessDown   { spawn "noctalia" "msg" "brightness-down"; }

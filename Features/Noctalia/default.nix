@@ -58,8 +58,10 @@ in
 
         programs.noctalia = {
           enable = true;
+          systemd.enable = true;
           settings = {
             shell = {
+              launch_apps_as_systemd_services = true;
               corner_radius_scale = 0.25;
               font_family = "Montserrat Medium";
               niri_overview_type_to_launch_enabled = true;

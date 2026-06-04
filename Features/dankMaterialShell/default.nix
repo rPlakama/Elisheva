@@ -34,10 +34,10 @@ in
     ];
 
     systemd.user.services.niri-flake-polkit.enable = false;
-    hjme.users.${user}.files.".config/DMSbinds.kdl".source = ./DMS.kdl;
+    hjem.users.${user}.files.".config/DMSbinds.kdl".source = ./DMS.kdl;
 
     features = {
-      niri.ImportDMS = ''include "DMSbinds.kdl"'';
+      niri.importDMS = ''include "DMSbinds.kdl"'';
       preservation.persistDirs.home = [
         ".config/DankMaterialShell"
         ".config/niri"

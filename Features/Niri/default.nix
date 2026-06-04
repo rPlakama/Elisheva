@@ -96,7 +96,7 @@ in
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
           [ "@ImportDMS@" "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" ]
-          [ cfg.ImportDMS cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB ]
+          [ cfg.importDMS cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB ]
           (builtins.readFile ./config.kdl);
     };
   };
