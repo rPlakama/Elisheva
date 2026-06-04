@@ -121,6 +121,9 @@ in
               background_opacity = 0.88;
               radius = 3;
               margin_ends = 105;
+              capsule = true;
+              capsule_radius = 3;
+              capsule_opacity = 0.30;
               start = [
                 "launcher"
                 "keyboard_layout"
@@ -159,6 +162,7 @@ in
                 display_mode = "graphic";
                 scale = 0.75;
                 show_label = false;
+                hide_when_full = true;
               };
               bluetooth = { };
             };
