@@ -1,4 +1,13 @@
-{ inputs, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
+
+let
+  user = config.core.user;
+in
 {
   imports = [
     ./hardware.nix
@@ -10,6 +19,7 @@
   environment.systemPackages = with pkgs; [
     ciscoPacketTracer9
   ];
+
   networking.hostName = "Arthoplerau";
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-zen4;
 
@@ -40,6 +50,9 @@
       secondaryDrive = "/dev/nvme0n1";
       swap.enable = true;
     };
-    preservation.enable = true;
+    preservation = {
+      enable = true;
+      additionalFiles = "/home/${user}/.packettracer";
+    };
   };
 }
