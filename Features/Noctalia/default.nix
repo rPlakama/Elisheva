@@ -81,7 +81,7 @@ in
               enabled = true;
               directory = "/home/${user}/Documents/Nextcloud/wallpapers/";
               transition_on_startup = true;
-              default.path = "/home/${user}/Documents/Nextcloud/wallpapers/";
+              default.path = "/home/rplakama/Documents/Nextcloud/wallpapers/cloudorange.jpg";
             };
             location.auto_locate = true;
             lockscreen = {
