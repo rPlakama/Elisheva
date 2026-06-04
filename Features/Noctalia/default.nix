@@ -123,7 +123,7 @@ in
               margin_ends = 105;
               capsule = true;
               capsule_radius = 3;
-              capsule_opacity = 0.30;
+              capsule_opacity = 0.0;
               start = [
                 "launcher"
                 "keyboard_layout"
