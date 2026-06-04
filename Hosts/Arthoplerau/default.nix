@@ -30,7 +30,6 @@
       NoctaliaEnabled = true;
     };
 
-    dankMaterialShell.enable = true;
     steam.enable = true;
     virtualization.enable = true;
     disko = {
