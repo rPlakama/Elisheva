@@ -14,10 +14,15 @@
     wine
     btop-cuda
   ];
-  core.user = "rplakama";
+  core = {
+    user = "rplakama";
+    git = {
+      email = "rPlakama@proton.me";
+      user = "rPlakama";
+    };
+  };
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-x86_64-v3;
   features.nvidia.enable = true;
-  programs.hyprland.enable = true;
   features = {
     gpuScreenRecorder.enable = true;
     virtualization.enable = true;
@@ -25,11 +30,10 @@
     steam.enable = true;
     qbit.enable = true;
     bootloader.nixos-init.enable = true;
-
     niri = {
       keyboardLayout = "br,us";
       enable = true;
+      NoctaliaEnabled = true;
     };
-
   };
 }
