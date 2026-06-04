@@ -76,7 +76,12 @@ in
               source = "wallpaper";
               templates = {
                 community_ids = [ "neovim" ];
-                builtin_ids = [ "foot" ];
+                builtin_ids = [
+                  "foot"
+                  "gtk3"
+                  "gtk4"
+                  "qt"
+                ];
               };
               wallpaper_scheme = "m3-tonal-spot";
             };
