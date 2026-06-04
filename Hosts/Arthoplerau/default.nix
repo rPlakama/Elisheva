@@ -7,6 +7,9 @@
 
   ];
 
+  environment.systemPackages = with pkgs; [
+    ciscoPacketTracer9
+  ];
   networking.hostName = "Arthoplerau";
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-zen4;
 
@@ -22,14 +25,12 @@
       user = "rPlakama";
     };
   };
-  services.tlp.enable = false;
+  services.tlp.enable = false; # <- Declared in nixos-hardware
   features = {
-
     niri = {
       enable = true;
       NoctaliaEnabled = true;
     };
-
     steam.enable = true;
     virtualization.enable = true;
     disko = {
