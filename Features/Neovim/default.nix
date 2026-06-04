@@ -10,13 +10,6 @@ let
   user = config.core.user;
   niriEnabled = config.features.niri.enable;
 
-  extraInit = lib.mkOption {
-    type = lib.types.listOf lib.types.str;
-    default = [ ];
-    description = "Additional Lua lines to append to init.lua, declared by other features";
-    example = [ "vim.opt.relativenumber = true" ];
-  };
-
   base46Plugin = pkgs.vimUtils.buildVimPlugin {
     pname = "base46";
     version = "unstable-2025-04-25";
@@ -45,10 +38,18 @@ let
   };
 in
 {
-  options.features.neovim.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-    description = "Neovim Configuration";
+  options.features.neovim = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Neovim Configuration";
+    };
+    extraInit = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "Additional Lua lines to append to init.lua, declared by other features";
+      example = [ "vim.opt.relativenumber = true" ];
+    };
   };
 
   config = lib.mkIf cfg.enable {

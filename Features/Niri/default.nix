@@ -34,6 +34,12 @@ in
       description = "Keyboard Variant";
     };
 
+    importDMS = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "Additional KDL for DMS is added";
+    };
+
     ImportNoctalia = lib.mkOption {
       type = lib.types.str;
       default = "";
@@ -89,8 +95,8 @@ in
     hjem.users.${user} = {
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
-          [ "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" ]
-          [ cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB ]
+          [ "@ImportDMS@" "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" ]
+          [ cfg.ImportDMS cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB ]
           (builtins.readFile ./config.kdl);
     };
   };

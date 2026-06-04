@@ -155,20 +155,20 @@ in
           };
         };
       };
-      features = {
-        niri.ImportNoctalia = "include noctaliaBinds.kdl";
-        neovim.extraInit = [
-          "require('matugen')"
+    };
+    features = {
+      niri.ImportNoctalia = ''include "noctaliaBinds.kdl"'';
+      neovim.extraInit = [
+        "require('matugen')"
+      ];
+      preservation = {
+        persistDirs.home = [
+          ".config/niri"
+          ".config/gtk-4.0"
+          ".config/gtk-3.0"
+          ".config/dconf"
+          ".config/nvim/matugen.lua"
         ];
-        preservation = {
-          persistDirs.home = [
-            ".config/niri"
-            ".config/gtk-4.0"
-            ".config/gtk-3.0"
-            ".config/dconf"
-            ".config/nvim/matugen.lua"
-          ];
-        };
       };
     };
   };

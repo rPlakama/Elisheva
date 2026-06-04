@@ -1,14 +1,6 @@
 // Core - Includes
 @ImportNoctalia@
-
-include "dms/windowrules.kdl"
-include "dms/alttab.kdl"
-include "dms/binds.kdl"
-include "dms/colors.kdl"
-include "dms/layout.kdl"
-include "dms/outputs.kdl"
-include "dms/wpblur.kdl"
-include "dms/cursor.kdl"
+@ImportDMS@
 
 // System - Input
 prefer-no-csd
@@ -139,17 +131,7 @@ binds {
 
 // Binds - System Overlays
     Mod+Tab    { toggle-overview; }
-    Mod+Space  { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
-    Mod+V      { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
-    Mod+M      { spawn "dms" "ipc" "call" "processlist" "toggle"; }
-    Mod+N      { spawn "dms" "ipc" "call" "notifications" "toggle"; }
 
-    Ctrl+Alt+A { spawn "dms" "ipc" "call" "dash" "toggle" "overview"; }
-    Ctrl+Alt+C { spawn "dms" "ipc" "call" "control-center" "toggle"; }
-    Ctrl+Alt+D { spawn "dms" "ipc" "call" "dash" "toggle" "media"; }
-    Ctrl+Alt+S { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
-    Ctrl+Alt+W { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
-    Ctrl+Alt+L { spawn "dms" "ipc" "call" "wallpaper" "next"; }
 
 // Binds - Workspaces
     Mod+1 { focus-workspace 1; }
@@ -194,14 +176,9 @@ binds {
     Mod+Shift+R { switch-preset-column-width; }
 
 // Binds - Hardware & Media
-    XF86AudioRaiseVolume  { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+;" }
-    XF86AudioLowerVolume  { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-;" }
+    XF86AudioRaiseVolume  { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"; }
+    XF86AudioLowerVolume  { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"; }
 
-    XF86AudioMute         { spawn "dms" "ipc" "call" "audio" "mute"; }
-    XF86AudioPlay         { spawn "dms" "ipc" "call" "mpris" "playPause"; }
-
-    XF86MonBrightnessUp   { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
-    XF86MonBrightnessDown { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
 
     Ctrl+Alt+M            { spawn-sh "echo run-shortcut:toggleMute | nc -U -w1 $XDG_RUNTIME_DIR/vesktop.sock"; }
     Ctrl+Alt+K            { switch-layout "next"; }

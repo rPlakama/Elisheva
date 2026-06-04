@@ -7,6 +7,7 @@
 
 let
   cfg = config.features.dankMaterialShell;
+  user = config.core.user;
 in
 
 {
@@ -33,13 +34,18 @@ in
     ];
 
     systemd.user.services.niri-flake-polkit.enable = false;
-    features.preservation.persistDirs.home = [
-      ".config/DankMaterialShell"
-      ".config/niri"
-      ".config/gtk-4.0"
-      ".config/gtk-3.0"
-      ".config/dconf"
-    ];
+    hjme.users.${user}.files.".config/DMSbinds.kdl".source = ./DMS.kdl;
+
+    features = {
+      niri.ImportDMS = ''include "DMSbinds.kdl"'';
+      preservation.persistDirs.home = [
+        ".config/DankMaterialShell"
+        ".config/niri"
+        ".config/gtk-4.0"
+        ".config/gtk-3.0"
+        ".config/dconf"
+      ];
+    };
 
     boot.consoleLogLevel = 0;
     services.displayManager.ly = {
