@@ -45,23 +45,3 @@ sudo nix --extra-experimental-features "nix-command flakes" \
 nixos-install --flake .#<hostname>
 ```
 
-### Disko & Preservation Options
-
-Available under `features` in any host config:
-
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `disko.enable` | bool | `false` | Enable disko partitioning |
-| `disko.dualDrive` | bool | `false` | Split `/persist` + `/home` onto secondary drive |
-| `disko.primaryDrive` | str | `""` | Primary (fastest) drive, e.g. `/dev/nvme0n1` |
-| `disko.secondaryDrive` | str | `""` | Secondary (slower) drive, e.g. `/dev/nvme1n1` |
-| `disko.isSSD` | bool | `true` | Enables `discard=async` + `ssd` mount options |
-| `preservation.enable` | bool | `disko.enable` | Enable persistent state (impermanence) |
-| `preservation.additionalHomeDirs` | list | `[]` | Extra home dirs to persist, e.g. `[".config/vesktop"]` |
-| `preservation.additionalDirs` | list | `[]` | Extra system dirs to persist, e.g. `["/var/lib/docker"]` |
-| `preservation.additionalFiles` | list | `[]` | Extra system files to persist, e.g. `["/etc/adjtime"]` |
-
-**Default persisted directories:**
-- System: `/etc/nixos`, `/var/lib/tailscale`, `/var/lib/bluetooth`, `/var/lib/nixos`, `/var/log`, `/etc/NetworkManager/system-connections`, `/etc/ssh`
-- System files: `/etc/machine-id`
-- User: `Downloads`, `Projects`, `Pictures`, `Documents`, `Videos`, `.local/share`, `.local/state`, `.ssh`

@@ -1,13 +1,9 @@
 {
-  config,
   inputs,
   pkgs,
   ...
 }:
 
-let
-  user = config.core.user;
-in
 {
   imports = [
     ./hardware.nix
@@ -21,7 +17,7 @@ in
   ];
 
   networking.hostName = "Arthoplerau";
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-zen4;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v4;
 
   hardware.bluetooth = {
     enable = true;
@@ -52,7 +48,7 @@ in
     };
     preservation = {
       enable = true;
-      additionalFiles = "/home/${user}/.packettracer";
+      keepDirs.homeDirs = [ "pt" ];
     };
   };
 }
