@@ -17,7 +17,7 @@
   ];
 
   networking.hostName = "Arthoplerau";
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v4;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-zen4;
 
   hardware.bluetooth = {
     enable = true;
