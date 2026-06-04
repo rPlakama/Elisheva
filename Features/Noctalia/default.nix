@@ -172,7 +172,7 @@ in
         "include=/home/${user}/.config/foot/themes/noctalia"
       ];
       neovim.extraInit = [
-        "require('matugen')"
+        "require('matugen').setup()"
       ];
       preservation = {
         persistDirs.home = [
