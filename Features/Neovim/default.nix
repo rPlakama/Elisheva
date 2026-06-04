@@ -8,7 +8,6 @@
 let
   cfg = config.features.neovim;
   user = config.core.user;
-  niriEnabled = config.features.niri.enable;
 
   base46Plugin = pkgs.vimUtils.buildVimPlugin {
     pname = "base46";
@@ -32,8 +31,10 @@ let
           fzf-lua
           nvim-treesitter.withAllGrammars
           blink-cmp
+          base16-nvim
+
         ]
-        ++ lib.optionals niriEnabled [ base46Plugin ];
+        ++ lib.optionals (config.features.dankMaterialShell.enable) [ base46Plugin ];
     };
   };
 in
