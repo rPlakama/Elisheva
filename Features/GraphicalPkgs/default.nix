@@ -8,13 +8,20 @@
 let
   cfg = config.features.graphicalPkgs;
   user = config.core.user;
-  niriEnabled = config.features.niri.enable;
 in
 {
-  options.features.graphicalPkgs.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-    description = "Graphical Packages";
+  options.features.graphicalPkgs = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Graphical Packages";
+    };
+    foot.theme = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "Import themes for Foot";
+      example = "include=path";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -41,9 +48,8 @@ in
         dpi-aware=false
         font=CaskaydiaCove Nerd Font Mono:size=9
       ''
-      + lib.optionalString niriEnabled ''
-        include=/home/${user}/.config/foot/dank-colors.ini
-      '';
+      + "\n"
+      + (lib.concatStringsSep "\n" cfg.foot.theme);
     };
   };
 }

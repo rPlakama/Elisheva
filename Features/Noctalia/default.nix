@@ -160,6 +160,9 @@ in
     };
     features = {
       niri.ImportNoctalia = ''include "noctaliaBinds.kdl"'';
+      graphicalPkgs.foot.theme = [
+        "include=/home/${user}/.config/foot/themes/noctalia"
+      ];
       neovim.extraInit = [
         "require('matugen')"
       ];

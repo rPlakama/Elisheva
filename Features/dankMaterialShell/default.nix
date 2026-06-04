@@ -37,6 +37,10 @@ in
     hjem.users.${user}.files.".config/DMSbinds.kdl".source = ./DMS.kdl;
 
     features = {
+      graphicalPkgs.foot.theme = [
+        "include=/home/${user}/.config/foot/dank-colors.ini"
+      ];
+
       niri.importDMS = ''include "DMSbinds.kdl"'';
       preservation.persistDirs.home = [
         ".config/DankMaterialShell"
