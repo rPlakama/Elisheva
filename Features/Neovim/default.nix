@@ -60,7 +60,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      # myNvim
+      myNvim
 
       tinymist
       lua-language-server
