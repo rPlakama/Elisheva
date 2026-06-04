@@ -74,7 +74,10 @@ in
             };
             theme = {
               source = "wallpaper";
-              templates.community_ids = [ "neovim" ];
+              templates = {
+                community_ids = [ "neovim" ];
+                builtin_ids = [ "foot" ];
+              };
               wallpaper_scheme = "m3-tonal-spot";
             };
             wallpaper = {

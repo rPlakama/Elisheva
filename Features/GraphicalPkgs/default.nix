@@ -27,7 +27,7 @@ in
   config = lib.mkIf cfg.enable {
     features.preservation.persistDirs.home = [
       ".config/vesktop"
-      ".config/foot"
+      ".config/foot" # Themes aren't implemented by hjem
       ".config/mozilla"
       ".config/Nextcloud"
     ];
