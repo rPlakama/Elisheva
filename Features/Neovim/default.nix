@@ -7,6 +7,7 @@
 
 let
   cfg = config.features.neovim;
+  cfgF = config.features;
   user = config.core.user;
 
   base46Plugin = pkgs.vimUtils.buildVimPlugin {
@@ -31,10 +32,10 @@ let
           fzf-lua
           nvim-treesitter.withAllGrammars
           blink-cmp
-          base16-nvim
 
         ]
-        ++ lib.optionals (config.features.dankMaterialShell.enable) [ base46Plugin ];
+        ++ lib.optionals (cfgF.dankMaterialShell.enable) [ base46Plugin ]
+        ++ lib.optionals (cfgF.noctalia.enable) [ base16-nvim ];
     };
   };
 in
