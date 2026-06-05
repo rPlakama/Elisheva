@@ -67,7 +67,7 @@ in
               niri_overview_type_to_launch_enabled = true;
               password_style = "random";
               polkit_agent = true;
-              animation.speed = 1.45;
+              animation.speed = 0.8;
               panel = {
                 launcher_categories = false;
               };
