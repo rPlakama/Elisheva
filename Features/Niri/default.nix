@@ -79,7 +79,9 @@ in
     ];
 
     services = lib.mkIf (!cfg.ppd.enable) {
-      power-profiles-daemon.enable = lib.mkForce false;
+      power-profiles-daemon = {
+        enable = lib.mkForce cfg.ppd.enable;
+      };
     };
 
     hjem.users.${user} = {

@@ -36,6 +36,7 @@
     niri = {
       enable = true;
       DMSEnabled = true;
+      ppd.enable = true;
     };
     steam.enable = true;
     virtualization.enable = true;
