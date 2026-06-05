@@ -35,7 +35,7 @@
   features = {
     niri = {
       enable = true;
-      NoctaliaEnabled = true;
+      DMSEnabled = true;
     };
     steam.enable = true;
     virtualization.enable = true;

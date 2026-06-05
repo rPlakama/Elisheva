@@ -1,3 +1,12 @@
+   include "dms/alttab.kdl"
+   include "dms/binds.kdl"
+   include "dms/colors.kdl"
+   include "dms/cursor.kdl"
+   include "dms/layout.kdl"
+   include "dms/outputs.kdl"
+   include "dms/windowrules.kdl"
+   include "dms/wpblur.kdl"
+
 binds {
 
     Mod+Space  { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
@@ -5,12 +14,11 @@ binds {
     Mod+M      { spawn "dms" "ipc" "call" "processlist" "toggle"; }
     Mod+N      { spawn "dms" "ipc" "call" "notifications" "toggle"; }
 
-    Ctrl+Alt+A { spawn "dms" "ipc" "call" "dash" "toggle" "overview"; }
     Ctrl+Alt+C { spawn "dms" "ipc" "call" "control-center" "toggle"; }
-    Ctrl+Alt+D { spawn "dms" "ipc" "call" "dash" "toggle" "media"; }
+    Ctrl+Alt+A { spawn "dms" "ipc" "call" "dash" "toggle" "media"; }
     Ctrl+Alt+S { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
     Ctrl+Alt+W { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
-    Ctrl+Alt+L { spawn "dms" "ipc" "call" "wallpaper" "next"; }
+    Ctrl+Alt+D { spawn "dms" "ipc" "call" "wallpaper" "next"; }
 
     XF86AudioMute         { spawn "dms" "ipc" "call" "audio" "mute"; }
     XF86AudioPlay         { spawn "dms" "ipc" "call" "mpris" "playPause"; }

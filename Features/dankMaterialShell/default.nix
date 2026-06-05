@@ -34,14 +34,14 @@ in
     ];
 
     systemd.user.services.niri-flake-polkit.enable = false;
-    hjem.users.${user}.files.".config/DMSbinds.kdl".source = ./DMS.kdl;
+    hjem.users.${user}.files.".config/niri/DMS.kdl".source = ./DMS.kdl;
 
     features = {
       graphicalPkgs.foot.theme = [
         "include=/home/${user}/.config/foot/dank-colors.ini"
       ];
 
-      niri.importDMS = ''include "DMSbinds.kdl"'';
+      niri.importDMS = ''include "DMS.kdl"'';
       preservation.persistDirs.home = [
         ".config/DankMaterialShell"
         ".config/niri"
