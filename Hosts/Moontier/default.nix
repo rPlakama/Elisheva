@@ -21,7 +21,7 @@ in
   services.udev.extraRules = ''
     ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
   '';
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-server-lto;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bmq-lto;
 
   core = {
     user = "rplakama";
