@@ -21,7 +21,7 @@
       user = "rPlakama";
     };
   };
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-x86_64-v3;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto;
   features.nvidia.enable = true;
   features = {
     gpuScreenRecorder.enable = true;
@@ -33,7 +33,7 @@
     niri = {
       keyboardLayout = "br,us";
       enable = true;
-      NoctaliaEnabled = true;
+      DMSEnabled = true;
     };
   };
 }
