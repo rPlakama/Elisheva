@@ -69,11 +69,12 @@ in
               polkit_agent = true;
               animation.speed = 0.8;
               panel = {
-                launcher_categories = false;
+                launcher_categories = true;
               };
             };
             theme = {
-              source = "wallpaper";
+              source = "community";
+              community_palette = "Flexoki";
               templates = {
                 community_ids = [ "neovim" ];
                 builtin_ids = [
@@ -89,13 +90,33 @@ in
               enabled = true;
               directory = "/home/${user}/Documents/Nextcloud/wallpapers/";
               transition_on_startup = true;
-              default.path = "/home/rplakama/Documents/Nextcloud/wallpapers/cloudorange.jpg";
+              default.path = "/home/${user}/Documents/Nextcloud/wallpapers/bsd.png";
+              last.path = "/home/${user}/Documents/Nextcloud/wallpapers/bsd.png";
+              monitors."eDP-1".path = "/home/${user}/Documents/Nextcloud/wallpapers/bsd.png";
             };
             location.auto_locate = true;
             lockscreen = {
               blurred_desktop = true;
               blur_intensity = 0.65;
               tint_intensity = 0.0;
+            };
+            lockscreen_widgets = {
+              enabled = false;
+              schema_version = 1;
+              widget_order = [ "lockscreen-login-box@eDP-1" ];
+              grid = {
+                cell_size = 16;
+                major_interval = 4;
+                visible = true;
+              };
+              widget."lockscreen-login-box@eDP-1" = {
+                cx = 768.0;
+                cy = 837.0;
+                output = "eDP-1";
+                rotation = 0.0;
+                scale = 1.0;
+                type = "login_box";
+              };
             };
             idle = {
               behavior = {
@@ -121,25 +142,85 @@ in
               background_opacity = 0.88;
               radius = 3;
               margin_ends = 105;
-              capsule = true;
+              capsule = false;
               capsule_radius = 3;
               capsule_opacity = 0.0;
-              start = [
-                "launcher"
-                "keyboard_layout"
-                "workspaces"
-              ];
-              center = [
-                "clock"
-                "weather"
-              ];
+              start = [ "group:g5" ];
+              center = [ "group:g6" ];
               end = [
-                "tray"
-                "notifications"
-                "network"
-                "volume"
-                "battery"
-                "bluetooth"
+                "group:g4"
+                "group:g3"
+                "group:g2"
+                "group:g1"
+              ];
+              capsule_group = [
+                {
+                  fill = "surface_variant";
+                  id = "g1";
+                  members = [
+                    "volume"
+                    "network"
+                  ];
+                  opacity = 0.60000002384185791;
+                  padding = 6.0;
+                  radius = 3.0;
+                }
+                {
+                  fill = "surface_variant";
+                  id = "g2";
+                  members = [
+                    "bluetooth"
+                    "notifications"
+                  ];
+                  opacity = 0.60000002384185791;
+                  padding = 6.0;
+                  radius = 3.0;
+                }
+                {
+                  fill = "surface_variant";
+                  id = "g3";
+                  members = [
+                    "cpu"
+                    "battery"
+                  ];
+                  opacity = 0.60000002384185791;
+                  padding = 6.0;
+                  radius = 3.0;
+                }
+                {
+                  fill = "surface_variant";
+                  id = "g4";
+                  members = [
+                    "tray"
+                    "control-center"
+                  ];
+                  opacity = 0.60000002384185791;
+                  padding = 6.0;
+                  radius = 3.0;
+                }
+                {
+                  fill = "surface_variant";
+                  id = "g5";
+                  members = [
+                    "workspaces"
+                    "keyboard_layout"
+                    "launcher"
+                  ];
+                  opacity = 0.60000002384185791;
+                  padding = 6.0;
+                  radius = 3.0;
+                }
+                {
+                  fill = "surface_variant";
+                  id = "g6";
+                  members = [
+                    "weather"
+                    "clock"
+                  ];
+                  opacity = 0.60000002384185791;
+                  padding = 6.0;
+                  radius = 3.0;
+                }
               ];
             };
             control_center.shortcuts = [
@@ -156,15 +237,29 @@ in
               clock = { };
               weather.show_condition = false;
               notifications.show_label = false;
-              network = { };
+              network = {
+                scale = 1.05;
+                show_label = false;
+              };
               volume.show_label = false;
               battery = {
                 display_mode = "graphic";
-                scale = 0.75;
+                capsule_radius = 3;
+                scale = 0.69999999999999996;
                 show_label = false;
                 hide_when_full = true;
+                hide_when_plugged = true;
               };
               bluetooth = { };
+              control-center = {
+                glyph = "topology-star-3";
+              };
+              cpu = {
+                show_label = false;
+              };
+              keyboard_layout = {
+                hide_when_single_layout = true;
+              };
             };
           };
         };
@@ -184,7 +279,7 @@ in
           ".config/gtk-4.0"
           ".config/gtk-3.0"
           ".config/dconf"
-          ".config/nvim" # Needs to specifiy
+          ".config/nvim/lua/matugen.lua"
         ];
       };
     };
