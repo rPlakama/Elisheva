@@ -51,6 +51,7 @@ in
         ".config/gtk-4.0"
         ".config/gtk-3.0"
         ".config/dconf"
+        ".config/colors"
       ];
     };
 
