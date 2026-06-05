@@ -41,6 +41,10 @@ in
         "include=/home/${user}/.config/foot/dank-colors.ini"
       ];
 
+      neovim.extraInit = [
+        ''vim.cmd.colorscheme("dms")''
+      ];
+
       niri.importDMS = ''include "DMS.kdl"'';
       preservation.persistDirs.home = [
         ".config/DankMaterialShell"
