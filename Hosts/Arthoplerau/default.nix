@@ -31,12 +31,11 @@
       user = "rPlakama";
     };
   };
-  services.tlp.enable = false; # <- Declared in nixos-hardware
   features = {
     niri = {
       enable = true;
       DMSEnabled = true;
-      ppd.enable = true;
+      ppd.enable = false;
     };
     steam.enable = true;
     virtualization.enable = true;
