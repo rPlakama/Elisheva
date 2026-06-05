@@ -31,6 +31,7 @@
       user = "rPlakama";
     };
   };
+
   features = {
     niri = {
       enable = true;
