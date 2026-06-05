@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   config,
   pkgs,
@@ -10,10 +9,6 @@ let
   user = config.core.user;
 in
 {
-  imports = [
-    inputs.niri.nixosModules.niri
-    { nixpkgs.overlays = [ inputs.niri.overlays.niri ]; }
-  ];
 
   options.features.niri = {
     enable = lib.mkOption {
@@ -66,12 +61,7 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    programs = {
-      niri = {
-        enable = true;
-        package = pkgs.niri-unstable;
-      };
-    };
+    programs.niri.enable = true;
 
     environment.systemPackages = with pkgs; [
 

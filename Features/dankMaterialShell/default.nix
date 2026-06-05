@@ -33,7 +33,6 @@ in
       }
     ];
 
-    systemd.user.services.niri-flake-polkit.enable = false;
     hjem.users.${user}.files.".config/niri/DMS.kdl".source = ./DMS.kdl;
 
     features = {
