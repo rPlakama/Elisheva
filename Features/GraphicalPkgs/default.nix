@@ -36,6 +36,7 @@ in
       vesktop
       materialgram
       nextcloud-client
+      jellyfin-desktop
       firefox-beta
       foot
       mpv

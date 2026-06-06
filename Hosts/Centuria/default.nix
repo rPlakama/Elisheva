@@ -33,7 +33,7 @@
     niri = {
       keyboardLayout = "br,us";
       enable = true;
-      DMSEnabled = true;
+      NoctaliaEnabled = true;
     };
   };
 }
