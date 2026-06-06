@@ -143,7 +143,7 @@ in
             };
             brightness.enable_ddcutil = true;
             bar.default = {
-              background_opacity = 0.88;
+              background_opacity = 1.0;
               radius = 3;
               margin_ends = 105;
               capsule = false;
