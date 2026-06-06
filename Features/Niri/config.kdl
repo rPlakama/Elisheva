@@ -178,6 +178,7 @@ binds {
 // Binds - Hardware & Media
     XF86AudioRaiseVolume  { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"; }
     XF86AudioLowerVolume  { spawn-sh "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-"; }
+    XF86AudioMute { spawn-sh " wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle;"; }
 
 
     Ctrl+Alt+M            { spawn-sh "echo run-shortcut:toggleMute | nc -U -w1 $XDG_RUNTIME_DIR/vesktop.sock"; }

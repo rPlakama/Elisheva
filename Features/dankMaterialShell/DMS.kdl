@@ -20,9 +20,7 @@ binds {
     Ctrl+Alt+W { spawn "dms" "ipc" "call" "dankdash" "wallpaper"; }
     Ctrl+Alt+D { spawn "dms" "ipc" "call" "wallpaper" "next"; }
 
-    XF86AudioMute         { spawn "dms" "ipc" "call" "audio" "mute"; }
     XF86AudioPlay         { spawn "dms" "ipc" "call" "mpris" "playPause"; }
-
     XF86MonBrightnessUp   { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
     XF86MonBrightnessDown { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
 }
