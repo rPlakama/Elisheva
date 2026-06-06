@@ -36,6 +36,10 @@ in
       dust
       jq
       fd
+
+      man-pages-posix
+      man-pages
+
     ];
     fonts.packages = with pkgs; [
       nerd-fonts.caskaydia-cove
@@ -93,6 +97,11 @@ in
     features.preservation.persistDirs.system = [
       "/var/lib/fwupd"
     ];
+
+    documentation = {
+      dev.enable = true;
+      man.enable = true;
+    };
 
     hardware = {
       enableAllFirmware = true;

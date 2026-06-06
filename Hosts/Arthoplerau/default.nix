@@ -7,6 +7,7 @@
 {
   imports = [
     ./MicFix.nix
+    ./TLP.nix
     ./hardware.nix
     ../../Features
     inputs.nixos-hardware.nixosModules.lenovo-ideapad-slim-5
@@ -36,7 +37,7 @@
   features = {
     niri = {
       enable = true;
-      NoctaliaEnabled = true;
+      DMSEnabled = true;
       ppd.enable = false;
     };
     steam.enable = true;
