@@ -94,7 +94,11 @@ in
       "/var/lib/fwupd"
     ];
 
-    hardware.enableAllFirmware = true;
+    hardware = {
+      enableAllFirmware = true;
+      enableRedistributableFirmware = true;
+    };
+
     hjem.users.${user} = {
       enable = true;
 

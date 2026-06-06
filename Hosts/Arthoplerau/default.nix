@@ -6,6 +6,7 @@
 
 {
   imports = [
+    ./MicFix.nix
     ./hardware.nix
     ../../Features
     inputs.nixos-hardware.nixosModules.lenovo-ideapad-slim-5
