@@ -76,6 +76,12 @@ in
                 launcher_categories = true;
               };
             };
+            keybinds = {
+              down = [ "Ctrl+n" ];
+              left = [ "Ctrl+h" ];
+              right = [ "Ctrl+l" ];
+              up = [ "Ctrl+p" ];
+            };
             theme = {
               source = "community";
               community_palette = "Flexoki";
