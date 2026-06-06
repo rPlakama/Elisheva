@@ -8,6 +8,10 @@
 let
   cfg = config.features.noctalia;
   user = config.core.user;
+  widgetsGroupOpacity = 0.0;
+  widgetsGroupSpacing = 6.0;
+  widgetsGroupRadius = 3.0;
+
 in
 {
   options.features.noctalia.enable = lib.mkOption {
@@ -161,9 +165,10 @@ in
                     "volume"
                     "network"
                   ];
-                  opacity = 0.60000002384185791;
-                  padding = 6.0;
-                  radius = 3.0;
+                  opacity = widgetsGroupOpacity;
+                  padding = widgetsGroupSpacing;
+                  radius = widgetsGroupRadius;
+
                 }
                 {
                   fill = "surface_variant";
@@ -172,9 +177,9 @@ in
                     "bluetooth"
                     "notifications"
                   ];
-                  opacity = 0.60000002384185791;
-                  padding = 6.0;
-                  radius = 3.0;
+                  opacity = widgetsGroupOpacity;
+                  padding = widgetsGroupSpacing;
+                  radius = widgetsGroupRadius;
                 }
                 {
                   fill = "surface_variant";
@@ -183,9 +188,11 @@ in
                     "cpu"
                     "battery"
                   ];
-                  opacity = 0.60000002384185791;
-                  padding = 6.0;
-                  radius = 3.0;
+
+                  opacity = widgetsGroupOpacity;
+                  padding = widgetsGroupSpacing;
+                  radius = widgetsGroupRadius;
+
                 }
                 {
                   fill = "surface_variant";
@@ -194,9 +201,9 @@ in
                     "tray"
                     "control-center"
                   ];
-                  opacity = 0.60000002384185791;
-                  padding = 6.0;
-                  radius = 3.0;
+                  opacity = widgetsGroupOpacity;
+                  padding = widgetsGroupSpacing;
+                  radius = widgetsGroupRadius;
                 }
                 {
                   fill = "surface_variant";
@@ -206,9 +213,9 @@ in
                     "keyboard_layout"
                     "launcher"
                   ];
-                  opacity = 0.60000002384185791;
-                  padding = 6.0;
-                  radius = 3.0;
+                  opacity = widgetsGroupOpacity;
+                  padding = widgetsGroupSpacing;
+                  radius = widgetsGroupRadius;
                 }
                 {
                   fill = "surface_variant";
@@ -217,9 +224,10 @@ in
                     "weather"
                     "clock"
                   ];
-                  opacity = 0.60000002384185791;
-                  padding = 6.0;
-                  radius = 3.0;
+                  opacity = widgetsGroupOpacity;
+                  padding = widgetsGroupSpacing;
+                  radius = widgetsGroupRadius;
+
                 }
               ];
             };
