@@ -60,6 +60,9 @@ in
       VISUAL = "nvim";
       MANPAGER = "nvim +Man!";
     };
+    preservation.persistDirs.home = [
+      ".config/nvim"
+    ];
 
     environment.systemPackages = with pkgs; [
       myNvim
