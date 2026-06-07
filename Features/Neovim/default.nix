@@ -32,6 +32,7 @@ let
           fzf-lua
           nvim-treesitter.withAllGrammars
           blink-cmp
+          oil-nvim
 
         ]
         ++ lib.optionals (cfgF.dankMaterialShell.enable) [ base46Plugin ]

@@ -4,9 +4,6 @@
   services.tlp = {
     enable = true;
     settings = {
-      DISK_DEVICES = "nvme0n1 nvme1n1";
-
-      RUNTIME_PM_DENYLIST = "mei_me nouveau radeon xhci_hcd 0000:04:00.0";
 
       CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
       CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";

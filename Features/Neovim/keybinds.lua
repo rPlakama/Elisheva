@@ -22,6 +22,8 @@ map({ 'n', 't' }, '<A-l>', '<cmd>wincmd l<CR>', { desc = 'Move to right window' 
 map({ 'n', 't' }, '<A-j>', '<cmd>wincmd j<CR>', { desc = 'Move to lower window' })
 map({ 'n', 't' }, '<A-k>', '<cmd>wincmd k<CR>', { desc = 'Move to upper window' })
 
+-- Oil
+map('n', '<C-n>', '<cmd>Oil<CR>', { desc = "Open Oil file explorer" })
 
 -- Spell settings
 map('n', '<C-M-1>', function()
