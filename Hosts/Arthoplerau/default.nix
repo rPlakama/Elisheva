@@ -6,7 +6,6 @@
 
 {
   imports = [
-    ./TLP.nix
     ./hardware.nix
     ../../Features
     inputs.nixos-hardware.nixosModules.lenovo-ideapad-14akp10

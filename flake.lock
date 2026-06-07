@@ -246,11 +246,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1780847013,
-        "narHash": "sha256-f+dMPwkE7WjHOJDn7e0x2kinWcOUS3tO3DXLR/Z/3fw=",
+        "lastModified": 1780847654,
+        "narHash": "sha256-cihpIfYVpfuDwlf1ecfZ/GYzCQFOS7jfC+CPhllUUeE=",
         "owner": "rPlakama",
         "repo": "nixos-hardware",
-        "rev": "9a515367b4c4db960da3ebf968aed563c6ec1c5f",
+        "rev": "043eefbc739ca77842886cc22eef62b99eb8830e",
         "type": "github"
       },
       "original": {
