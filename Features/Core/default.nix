@@ -8,6 +8,7 @@
 let
   cfg = config.features.core;
   user = config.core.user;
+  isNvidia = config.features.nvidia.enable;
 in
 
 {
@@ -18,29 +19,44 @@ in
   };
   config = lib.mkIf cfg.enable {
     security.sudo-rs.enable = true;
-    environment.systemPackages = with pkgs; [
-      ripgrep
-      cifs-utils
+    environment.systemPackages =
+      with pkgs;
+      [
+        ripgrep
+        cifs-utils
 
-      p7zip
-      zip
-      ripgrep
-      neovim
-      yazi
-      wget
-      age
-      sops
-      fzf
-      git
-      unzip
-      dust
-      jq
-      fd
+        p7zip
+        zip
+        ripgrep
+        neovim
+        yazi
+        wget
+        age
+        sops
+        fzf
+        git
+        unzip
+        dust
+        jq
+        fd
 
-      man-pages-posix
-      man-pages
+        man-pages-posix
+        man-pages
 
-    ];
+      ]
+
+      ++ lib.optionals (!isNvidia) [
+
+        btop-rocm
+
+      ]
+
+      ++ lib.optionals isNvidia [
+
+        btop-cuda
+
+      ];
+
     fonts.packages = with pkgs; [
       nerd-fonts.caskaydia-cove
       montserrat

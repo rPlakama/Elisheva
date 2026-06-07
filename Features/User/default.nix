@@ -8,32 +8,34 @@ let
   user = config.core.user;
 in
 {
-  options.core.user = lib.mkOption {
-    type = lib.types.str;
-    description = "The primary user";
-  };
+  options.core = {
+    user = lib.mkOption {
+      type = lib.types.str;
+      description = "The primary user";
+    };
 
-  options.core.ip = lib.mkOption {
-    type = lib.types.str;
-    description = "IP";
-    default = "";
-  };
+    ip = lib.mkOption {
+      type = lib.types.str;
+      description = "IP";
+      default = "";
+    };
 
-  options.core.git.email = lib.mkOption {
-    type = lib.types.str;
-    description = "git cfg email";
-    default = "";
-  };
-  options.core.git.user = lib.mkOption {
-    type = lib.types.str;
-    description = "git cfg user";
-    default = "";
-  };
+    git.email = lib.mkOption {
+      type = lib.types.str;
+      description = "git cfg email";
+      default = "";
+    };
+    git.user = lib.mkOption {
+      type = lib.types.str;
+      description = "git cfg user";
+      default = "";
+    };
 
-  options.core.domain = lib.mkOption {
-    type = lib.types.str;
-    description = "Domain";
-    default = "";
+    domain = lib.mkOption {
+      type = lib.types.str;
+      description = "Domain";
+      default = "";
+    };
   };
 
   config = lib.mkIf (user != "") {
