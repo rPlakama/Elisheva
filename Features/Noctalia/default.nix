@@ -293,7 +293,6 @@ in
                 scale = 0.69999999999999996;
                 show_label = false;
                 hide_when_full = true;
-                hide_when_plugged = true;
               };
               bluetooth = { };
               control-center = {
