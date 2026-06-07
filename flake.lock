@@ -241,25 +241,6 @@
         "type": "github"
       }
     },
-    "nixos-hardware": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_3"
-      },
-      "locked": {
-        "lastModified": 1780847654,
-        "narHash": "sha256-cihpIfYVpfuDwlf1ecfZ/GYzCQFOS7jfC+CPhllUUeE=",
-        "owner": "rPlakama",
-        "repo": "nixos-hardware",
-        "rev": "043eefbc739ca77842886cc22eef62b99eb8830e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rPlakama",
-        "ref": "master",
-        "repo": "nixos-hardware",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1777954456,
@@ -308,19 +289,6 @@
       }
     },
     "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1767892417,
-        "narHash": "sha256-8bW3q88CEg2u4hSP66Vf4lpbLonHz7hqDNBMcCY7E9U=",
-        "rev": "3497aa5c9457a9d88d71fa93a4a8368816fbeeba",
-        "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre924538.3497aa5c9457/nixexprs.tar.xz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
-      }
-    },
-    "nixpkgs_4": {
       "locked": {
         "lastModified": 1780243769,
         "narHash": "sha256-x5UQuRsH3MqI0U9afaXSNqzTPSeZlRLvFAav2Ux1pNw=",
@@ -380,8 +348,7 @@
         "hjem": "hjem",
         "kavita": "kavita",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
-        "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_3",
         "noctalia": "noctalia",
         "preservation": "preservation",
         "sops-nix": "sops-nix"

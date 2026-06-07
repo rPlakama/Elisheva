@@ -28,7 +28,6 @@
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     preservation.url = "github:nix-community/preservation";
-    nixos-hardware.url = "github:rPlakama/nixos-hardware/master";
 
     sops-nix = {
       inputs.nixpkgs.follows = "nixpkgs";

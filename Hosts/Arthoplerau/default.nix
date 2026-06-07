@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   ...
 }:
@@ -8,8 +7,6 @@
   imports = [
     ./hardware.nix
     ../../Features
-    inputs.nixos-hardware.nixosModules.lenovo-ideapad-14akp10
-
   ];
 
   environment.systemPackages = with pkgs; [

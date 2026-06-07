@@ -2,6 +2,7 @@
   config,
   lib,
   modulesPath,
+  pkgs,
   ...
 }:
 
@@ -20,34 +21,31 @@
 
   boot.kernelModules = [ "kvm-amd" ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  services.tlp = {
+    enable = true;
+    settings = {
 
-  services.pipewire.wireplumber.extraConfig = {
-    "10-alsa-fallback" = {
-      "monitor.alsa.rules" = [
-        {
-          matches = [
-            { "device.name" = "~alsa_card.*"; }
-          ];
-          actions = {
-            update-props = {
-              "api.alsa.use-ucm" = false;
-            };
-          };
-        }
-        {
-          matches = [
-            { "node.name" = "~alsa_input.*"; }
-          ];
-          actions = {
-            update-props = {
-              "audio.format" = "S32_LE";
-              "audio.rate" = 48000;
-              "audio.channels" = 2;
-            };
-          };
-        }
-      ];
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+      CPU_ENERGY_PERF_POLICY_ON_SAV = "power";
+
+      PLATFORM_PROFILE_ON_AC = "performance";
+      PLATFORM_PROFILE_ON_BAT = "balanced";
+      PLATFORM_PROFILE_ON_SAV = "low-power";
+
+      STOP_CHARGE_THRESH_BAT0 = 1;
+      SOUND_POWER_SAVE_ON_AC = 1;
+      SOUND_POWER_SAVE_ON_BAT = 1;
+      SOUND_POWER_SAVE_CONTROLLER = "Y";
+
+      WIFI_PWR_ON_AC = "off";
+      WIFI_PWR_ON_BAT = "on";
     };
   };
+
+  hardware = {
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    firmware = [ pkgs.sof-firmware ];
+  };
+
 }
