@@ -215,9 +215,9 @@ in
                   fill = "surface_variant";
                   id = "g5";
                   members = [
-                    "workspaces"
-                    "keyboard_layout"
                     "launcher"
+                    "keyboard_layout"
+                    "workspaces"
                   ];
                   opacity = widgetsGroupOpacity;
                   padding = widgetsGroupSpacing;
