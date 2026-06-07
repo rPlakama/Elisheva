@@ -9,10 +9,9 @@
     ./TLP.nix
     ./hardware.nix
     ../../Features
-    inputs.nixos-hardware.nixosModules.lenovo-ideapad-slim-5
+    inputs.nixos-hardware.nixosModules.lenovo-ideapad-14akp10
 
   ];
-  hardware.firmware = [ pkgs.sof-firmware ];
 
   environment.systemPackages = with pkgs; [
     ciscoPacketTracer9
