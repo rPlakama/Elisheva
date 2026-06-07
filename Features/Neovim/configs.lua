@@ -29,7 +29,6 @@ vim.api.nvim_create_autocmd("VimResized", {
   end,
 })
 
-
 -- Oil
 require("oil").setup({
   default_file_explorer = true,
@@ -96,72 +95,8 @@ require("oil").setup({
       { "type", "asc" },
       { "name", "asc" },
     },
-    highlight_filename = function(entry, is_hidden, is_link_target, is_link_orphan)
+    highlight_filename = function(entry, is_link_target, is_link_orphan)
       return nil
     end,
-  },
-  git = {
-    add = function(path)
-      return false
-    end,
-    mv = function(src_path, dest_path)
-      return false
-    end,
-    rm = function(path)
-      return false
-    end,
-  },
-  float = {
-    padding = 2,
-    max_width = 0,
-    max_height = 0,
-    border = nil,
-    win_options = {
-      winblend = 0,
-    },
-    get_win_title = nil,
-    preview_split = "auto",
-    override = function(conf)
-      return conf
-    end,
-  },
-  preview_win = {
-    update_on_cursor_moved = true,
-    preview_method = "fast_scratch",
-    disable_preview = function(filename)
-      return false
-    end,
-    win_options = {},
-  },
-  confirmation = {
-    max_width = 0.9,
-    min_width = { 40, 0.4 },
-    width = nil,
-    max_height = 0.9,
-    min_height = { 5, 0.1 },
-    height = nil,
-    border = nil,
-    win_options = {
-      winblend = 0,
-    },
-  },
-  progress = {
-    max_width = 0.9,
-    min_width = { 40, 0.4 },
-    width = nil,
-    max_height = { 10, 0.9 },
-    min_height = { 5, 0.1 },
-    height = nil,
-    border = nil,
-    minimized_border = "none",
-    win_options = {
-      winblend = 0,
-    },
-  },
-  ssh = {
-    border = nil,
-  },
-  keymaps_help = {
-    border = nil,
   },
 })

@@ -33,6 +33,7 @@ let
           nvim-treesitter.withAllGrammars
           blink-cmp
           oil-nvim
+          zoxide-vim
 
         ]
         ++ lib.optionals (cfgF.dankMaterialShell.enable) [ base46Plugin ]
