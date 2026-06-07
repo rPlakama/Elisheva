@@ -64,28 +64,40 @@
             preservation.nixosModules.default
             ./Hosts/${hostname}
             (
-              { config, ... }:
+              { lib, config, ... }:
 
               let
                 user = config.core.user;
               in
 
               {
-                nixpkgs.overlays = [
-                  nix-cachyos-kernel.overlays.pinned
-                ];
+                options.core = {
 
-                nix.settings = {
-                  substituters = [ "https://attic.xuyh0120.win/lantian" ];
-                  trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+                  host = lib.mkOption {
+                    type = lib.types.str;
+                    description = "Hostname option explicity";
+                    default = "${hostname}";
+                    readOnly = true;
+                  };
                 };
 
-                networking.hostName = hostname;
-                system.stateVersion = stVersion;
-                sops.defaultSopsFile = ./secrets.yaml;
-                hjem.users.${user} = {
-                  enable = true;
-                  clobberFiles = true;
+                config = {
+                  nixpkgs.overlays = [
+                    nix-cachyos-kernel.overlays.pinned
+                  ];
+
+                  nix.settings = {
+                    substituters = [ "https://attic.xuyh0120.win/lantian" ];
+                    trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+                  };
+
+                  networking.hostName = hostname;
+                  system.stateVersion = stVersion;
+                  sops.defaultSopsFile = ./secrets.yaml;
+                  hjem.users.${user} = {
+                    enable = true;
+                    clobberFiles = true;
+                  };
                 };
               }
             )

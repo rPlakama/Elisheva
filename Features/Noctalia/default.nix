@@ -6,11 +6,11 @@
   ...
 }:
 let
-  cfg = config.features.noctalia;
   user = config.core.user;
   widgetsGroupOpacity = 0.0;
   widgetsGroupSpacing = 6.0;
   widgetsGroupRadius = 3.0;
+  host = config.core.host;
 
 in
 {
@@ -19,7 +19,7 @@ in
     default = config.features.niri.NoctaliaEnabled;
     description = "Enable Noctalia window manager environment.";
   };
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.features.noctalia.enable {
     assertions = [
       {
         assertion = !config.features.niri.DMSEnabled;
@@ -64,6 +64,7 @@ in
           enable = true;
           systemd.enable = true;
           settings = {
+
             shell = {
               launch_apps_as_systemd_services = true;
               corner_radius_scale = 0.25;
@@ -98,34 +99,64 @@ in
             };
             wallpaper = {
               enabled = true;
-              directory = "/home/${user}/Documents/Nextcloud/wallpapers/";
               transition_on_startup = true;
-              default.path = "/home/${user}/Documents/Nextcloud/wallpapers/bsd.png";
-              last.path = "/home/${user}/Documents/Nextcloud/wallpapers/bsd.png";
-              monitors."eDP-1".path = "/home/${user}/Documents/Nextcloud/wallpapers/bsd.png";
             };
             location.auto_locate = true;
             lockscreen = {
-              blurred_desktop = true;
+              blurred_desktop = false;
               blur_intensity = 0.65;
               tint_intensity = 0.0;
             };
             lockscreen_widgets = {
-              enabled = false;
+              enabled = true;
               schema_version = 1;
-              widget_order = [ "lockscreen-login-box@eDP-1" ];
+              widget_order = [
+                "lockscreen-login-box@eDP-1"
+                "lockscreen-widget-0000000000000001"
+                "lockscreen-widget-0000000000000002"
+              ];
               grid = {
                 cell_size = 16;
                 major_interval = 4;
                 visible = true;
               };
-              widget."lockscreen-login-box@eDP-1" = {
-                cx = 768.0;
-                cy = 837.0;
-                output = "eDP-1";
-                rotation = 0.0;
-                scale = 1.0;
-                type = "login_box";
+              widget = {
+                "lockscreen-login-box@eDP-1" = {
+                  box_height = 0.0;
+                  box_width = 0.0;
+                  cx = 768.0;
+                  cy = 480.0;
+                  output = "eDP-1";
+                  rotation = 0.0;
+                  type = "login_box";
+                };
+                "lockscreen-widget-0000000000000001" = {
+                  box_height = 64.0;
+                  box_width = 512.0;
+                  cx = 768.0;
+                  cy = 400.0;
+                  output = "eDP-1";
+                  rotation = 0.0;
+                  type = "clock";
+                  settings = {
+                    background_radius = widgetsGroupRadius;
+                    format = "{:%H:%M}";
+                  };
+                };
+                "lockscreen-widget-0000000000000002" = {
+                  box_height = 64.0;
+                  box_width = 512.0;
+                  cx = 768.0;
+                  cy = 560.0;
+                  output = "eDP-1";
+                  rotation = 0.0;
+                  type = "label";
+                  settings = {
+                    description = "NixOS ${config.system.nixos.release} ${config.system.nixos.codeName}";
+                    background_radius = widgetsGroupRadius;
+                    title = "${host}";
+                  };
+                };
               };
             };
             idle = {
