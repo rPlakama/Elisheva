@@ -274,7 +274,7 @@ in
               { type = "caffeine"; }
               { type = "notification"; }
               { type = "mic_mute"; }
-              { type = "sysmon"; }
+              { type = "system"; }
             ];
             widget = {
               launcher.glyph = "snowflake";

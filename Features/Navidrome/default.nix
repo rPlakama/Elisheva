@@ -17,7 +17,7 @@ in
     enable = lib.mkEnableOption "Navidrome music server";
     musicFolder = lib.mkOption {
       type = lib.types.str;
-      default = "/media/music";
+      default = "/media/music/library";
       description = "Path to the music library";
     };
   };
@@ -38,6 +38,7 @@ in
       enable = true;
       group = "media";
       settings = {
+        "PID.Album" = "folder";
         MusicFolder = cfg.musicFolder;
         "Plugins.Enabled" = true;
         "Plugins.Folder" = "/var/lib/navidrome/plugins";
