@@ -25,7 +25,7 @@ in
 
   core = {
     user = "rplakama";
-    ip = "192.168.0.106";
+    ip = "192.168.0.160";
     domain = "moontier.online";
   };
   features.graphicalPkgs.enable = false;
@@ -46,7 +46,10 @@ in
   };
 
   features = {
-    unifiedDNS.enable = true;
+    unifiedDNS = {
+      enable = true;
+      gateway = "192.168.0.1";
+    };
     kavita.enable = true;
     nzbget.enable = true;
     rrstack.enable = true;
