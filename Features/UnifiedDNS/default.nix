@@ -54,7 +54,6 @@ in
         DNSStubListener = "no";
         MulticastDNS = "no";
       };
-
       unbound = {
         enable = true;
         settings.server = {
