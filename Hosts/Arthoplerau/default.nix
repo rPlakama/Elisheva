@@ -30,7 +30,6 @@
   };
 
   features = {
-    gpuScreenRecorder.enable = true;
     niri = {
       enable = true;
       NoctaliaEnabled = true;
