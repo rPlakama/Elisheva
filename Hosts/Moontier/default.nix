@@ -63,7 +63,7 @@ in
     iperf3.enable = true;
     jellyfin.enable = true;
     calibre.enable = true;
-    Navidrome.enable = true;
+    navidrome.enable = true;
     galleryDL = {
       enable = true;
       mangas = {
