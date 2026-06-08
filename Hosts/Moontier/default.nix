@@ -25,7 +25,7 @@ in
 
   core = {
     user = "rplakama";
-    ip = "192.168.1.106";
+    ip = "192.168.0.106";
     domain = "moontier.online";
   };
   features.graphicalPkgs.enable = false;
