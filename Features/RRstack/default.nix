@@ -7,6 +7,7 @@ let
     jackett = 9117;
     sonarr = 8989;
     radarr = 7878;
+    lidarr = 8686;
   };
 
   mediaNonPermissions = {
