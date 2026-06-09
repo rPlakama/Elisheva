@@ -51,11 +51,12 @@ in
         };
       };
     };
-    systemd.user.services.niri-flake-polkit.enable = false;
+    environment.sessionVariables.QT_QPA_PLATFORMTHEME = "qt6ct";
     hjem = {
       extraModules = [
         inputs.noctalia.hjemModules.default
       ];
+
       users.${user} = {
 
         files.".config/niri/noctaliaBinds.kdl".source = ./NoctaliaBinds.kdl;
