@@ -14,11 +14,14 @@ in
   config = lib.mkIf cfg.enable {
     features.preservation.persistDirs.home = [ ".steam" ];
     boot.kernelModules = [ "ntsync" ];
-    programs.steam = {
-      enable = true;
-      extraCompatPackages = with pkgs; [
-        proton-ge-bin
-      ];
+    programs = {
+      gamemode.enable = true;
+      steam = {
+        enable = true;
+        extraCompatPackages = with pkgs; [
+          proton-ge-bin
+        ];
+      };
     };
   };
 }
