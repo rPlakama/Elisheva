@@ -51,18 +51,15 @@ in
       gateway = "192.168.0.1";
     };
     kavita.enable = true;
-    nzbget.enable = true;
     rrstack.enable = true;
     qbit.enable = true;
     whatsBot.enable = true;
     slskd.enable = true;
-    samba.enable = true;
     homepage.enable = true;
     st.enable = true;
     nextcloud.enable = true;
     iperf3.enable = true;
     jellyfin.enable = true;
-    calibre.enable = true;
     navidrome.enable = true;
     galleryDL = {
       enable = true;
