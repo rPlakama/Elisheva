@@ -90,6 +90,7 @@ in
               templates = {
                 community_ids = [ "neovim" ];
                 builtin_ids = [
+                  "kcolorscheme"
                   "foot"
                   "gtk3"
                   "gtk4"
