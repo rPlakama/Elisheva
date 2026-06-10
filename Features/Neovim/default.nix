@@ -34,6 +34,7 @@ let
           blink-cmp
           oil-nvim
           zoxide-vim
+          render-markdown-nvim
 
         ]
         ++ lib.optionals (cfgF.dankMaterialShell.enable) [ base46Plugin ]
