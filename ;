@@ -13,7 +13,7 @@ let
   };
   lyricsPlugin = pkgs.fetchurl {
     url = "https://github.com/J0R6IT0/navidrome-lyrics-plugin/releases/latest/download/nd-lyrics.ndp";
-    hash = "sha256-U54KfULuMBDkJYzn4nuV8oKdaqJU20MMhnDv43rB9dY=";
+    hash = ""; # run: nix-prefetch-url --type sha256 <url>
   };
 in
 {
@@ -48,7 +48,6 @@ in
         "Plugins.Enabled" = true;
         "Plugins.Folder" = "/var/lib/navidrome/plugins";
         Agents = "apple-music,deezer,listenbrainz";
-        LyricsPriority = ".lrc,nd-lyrics,embedded";
       };
     };
   };

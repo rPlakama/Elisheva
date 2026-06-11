@@ -48,6 +48,7 @@ in
         enable = true;
         settings = {
           default_input = "password";
+          bigclock = true;
         };
       };
     };
