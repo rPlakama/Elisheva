@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    kavita-pkg.url = "path:/home/rplakama/Projects/Kavita-flake";
+    kavita-pkg.url = "github:rPlakama/Kavita-flake";
     gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
 
     hjem = {

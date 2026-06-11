@@ -205,14 +205,17 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1781189173,
-        "narHash": "sha256-UJwOFGZKZaNZCD3te0C9U8ntzIUkODB2K/O2NUyGNEU=",
-        "path": "/home/rplakama/Projects/Kavita-flake",
-        "type": "path"
+        "lastModified": 1781190017,
+        "narHash": "sha256-XoVqfe6DVxNEtM86By7H25p8GutzGxmFvL4KPr+PgRU=",
+        "owner": "rPlakama",
+        "repo": "Kavita-flake",
+        "rev": "7355ffb5e9766d6945e0e328eb43178a4782ecdf",
+        "type": "github"
       },
       "original": {
-        "path": "/home/rplakama/Projects/Kavita-flake",
-        "type": "path"
+        "owner": "rPlakama",
+        "repo": "Kavita-flake",
+        "type": "github"
       }
     },
     "nix-cachyos-kernel": {

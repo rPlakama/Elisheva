@@ -7,6 +7,7 @@
 }:
 let
   cfg = config.features.kavita;
+  portCFG = 3034;
 in
 {
 
@@ -18,15 +19,15 @@ in
     features = {
       mediaPermissions.enable = true;
       preservation.persistDirs.system = [ "/var/lib/kavita" ];
-      unifiedDNS.proxyServices.kavita = 3034;
+      unifiedDNS.proxyServices.kavita = portCFG;
     };
-    networking.firewall.allowedTCPPorts = [ 3034 ];
+    networking.firewall.allowedTCPPorts = [ portCFG ];
     systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
     services.kavita = {
       package = inputs.kavita-pkg.packages.${pkgs.stdenv.hostPlatform.system}.kavita;
       enable = true;
       tokenKeyFile = config.sops.secrets."kavita/token".path;
-      settings.Port = 3034;
+      settings.Port = portCFG;
     };
   };
 }
