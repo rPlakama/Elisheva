@@ -41,6 +41,7 @@ in
       foot
       mpv
       ripdrag
+      obsidian
     ];
 
     hjem.users.${user} = {
