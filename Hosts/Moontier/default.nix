@@ -53,7 +53,6 @@ in
     kavita.enable = true;
     rrstack.enable = true;
     qbit.enable = true;
-    whatsBot.enable = true;
     slskd.enable = true;
     homepage.enable = true;
     st.enable = true;
@@ -61,7 +60,10 @@ in
     iperf3.enable = true;
     jellyfin.enable = true;
     navidrome.enable = true;
-
+    bots = {
+      whatsapp-bot.enable = true;
+      discord-bot.enable = true;
+    };
     galleryDL = {
       enable = true;
       mangas = {
