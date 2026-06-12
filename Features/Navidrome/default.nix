@@ -28,8 +28,11 @@ in
 
   config = lib.mkIf cfg.enable {
     features = {
-      mediaPermissions.enable = true;
       preservation.persistDirs.system = [ "/var/lib/navidrome" ];
+      mediaPermissions = {
+        enable = true;
+        writableServices = [ "navidrome" ];
+      };
       unifiedDNS.proxyServices.navidrome = 4533;
     };
 
@@ -39,16 +42,19 @@ in
       "L+ /var/lib/navidrome/plugins/nd-lyrics.ndp - - - - ${lyricsPlugin}"
     ];
 
-    services.navidrome = {
-      enable = true;
-      group = "media";
-      settings = {
-        "PID.Album" = "folder";
-        MusicFolder = cfg.musicFolder;
-        "Plugins.Enabled" = true;
-        "Plugins.Folder" = "/var/lib/navidrome/plugins";
-        Agents = "apple-music,deezer,listenbrainz";
-        LyricsPriority = ".lrc,nd-lyrics,embedded";
+    services = {
+      navidrome = {
+        enable = true;
+        group = "media";
+        settings = {
+          "PID.Album" = "folder";
+          MusicFolder = cfg.musicFolder;
+          "Plugins.Enabled" = true;
+          "Plugins.Folder" = "/var/lib/navidrome/plugins";
+          Agents = "nd-lyrics, apple-music,deezer,listenbrainz";
+          LyricsPriority = ".lrc,nd-lyrics,embedded";
+          SaveLyrics = true;
+        };
       };
     };
   };
