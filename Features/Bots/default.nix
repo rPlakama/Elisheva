@@ -5,29 +5,67 @@
 }:
 
 let
-  cfg = config.features.whatsBot;
+  cfg = config.features.bots;
 in
 
 {
-  options.features.whatsBot.enable = lib.mkEnableOption "WhatsApp Bot";
-  config = lib.mkIf cfg.enable {
-
-    features.preservation.persistDirs.home = [ "bot-ascending" ];
-
-    systemd.services = {
-      whatsapp-summarizer = {
-        description = "WhatsApp Bot";
-        wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" ];
-
-        serviceConfig = {
-          ExecStart = "/home/${config.core.user}/bot-ascending/whatsapp-summarizer-linux-amd64";
-          WorkingDirectory = "/home/${config.core.user}/bot-ascending";
-          User = config.core.user;
-          Restart = "on-failure";
-          RestartSec = "5s";
-        };
+  options.features.bots = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Bots Configuration";
+    };
+    whatsapp-bot = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable WhatsApp Bot";
       };
     };
+    discord-bot = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable Discord Bot";
+      };
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    features.preservation.persistDirs.home = [ "ascending-bots" ];
+
+    systemd.services = lib.mkMerge [
+      (lib.mkIf cfg.whatsapp-bot.enable {
+        whatsapp-bot = {
+          description = "WhatsApp Bot";
+          wantedBy = [ "multi-user.target" ];
+          after = [ "network.target" ];
+
+          serviceConfig = {
+            ExecStart = "/home/${config.core.user}/ascending-bots/whatsapp-bot/whatsapp-summarizer-linux-amd64";
+            WorkingDirectory = "/home/${config.core.user}/ascending-bots/whatsapp-bot";
+            User = config.core.user;
+            Restart = "on-failure";
+            RestartSec = "5s";
+          };
+        };
+      })
+
+      (lib.mkIf cfg.discord-bot.enable {
+        discord-bot = {
+          description = "Discord Bot";
+          wantedBy = [ "multi-user.target" ];
+          after = [ "network.target" ];
+
+          serviceConfig = {
+            ExecStart = "/home/${config.core.user}/ascending-bots/discord-bot/discord-bot-linux-amd64";
+            WorkingDirectory = "/home/${config.core.user}/ascending-bots/discord-bot";
+            User = config.core.user;
+            Restart = "on-failure";
+            RestartSec = "5s";
+          };
+        };
+      })
+    ];
   };
 }
