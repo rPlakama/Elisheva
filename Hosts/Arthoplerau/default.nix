@@ -23,6 +23,7 @@
 
   core = {
     user = "rplakama";
+    gpu.amd = true;
     git = {
       email = "rPlakama@proton.me";
       user = "rPlakama";

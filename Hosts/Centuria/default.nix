@@ -9,20 +9,16 @@
 
   environment.systemPackages = with pkgs; [
     ckan
-    winetricks
-    cabextract
-    wine
-    btop-cuda
   ];
   core = {
     user = "rplakama";
+    gpu.nvidia = true;
     git = {
       email = "rPlakama@proton.me";
       user = "rPlakama";
     };
   };
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto;
-  features.nvidia.enable = true;
   features = {
     gpuScreenRecorder.enable = true;
     virtualization.enable = true;

@@ -1,8 +1,8 @@
 { lib, config, ... }:
 let
   cfg = config.features.virtualization;
-  isNvidia = config.features.nvidia.enable;
   user = config.core.user;
+  isNvidia = config.core.gpu.nvidia;
 in
 {
   options.features.virtualization.enable = lib.mkEnableOption "Virtualization (libvirtd + Docker)";

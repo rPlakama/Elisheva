@@ -27,6 +27,7 @@ in
     user = "rplakama";
     ip = "192.168.0.160";
     domain = "moontier.online";
+    gpu.intel = true;
   };
   features.graphicalPkgs.enable = false;
 
@@ -61,6 +62,7 @@ in
     jellyfin.enable = true;
     navidrome.enable = true;
     bots = {
+      enable = true;
       whatsapp-bot.enable = true;
       discord-bot.enable = true;
     };

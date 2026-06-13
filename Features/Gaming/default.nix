@@ -16,6 +16,7 @@ in
     boot.kernelModules = [ "ntsync" ];
     programs = {
       gamemode.enable = true;
+      gamescope.enable = true;
       steam = {
         enable = true;
         extraCompatPackages = with pkgs; [

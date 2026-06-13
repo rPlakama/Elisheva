@@ -20,15 +20,35 @@ in
       default = "";
     };
 
-    git.email = lib.mkOption {
-      type = lib.types.str;
-      description = "git cfg email";
-      default = "";
+    gpu = {
+      amd = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "AMD GPU (RADV/amdgpu)";
+      };
+      nvidia = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Nvidia GPU (nvidia/nouveau)";
+      };
+      intel = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Intel GPU (i915/Xe)";
+      };
     };
-    git.user = lib.mkOption {
-      type = lib.types.str;
-      description = "git cfg user";
-      default = "";
+
+    git = {
+      email = lib.mkOption {
+        type = lib.types.str;
+        description = "git cfg email";
+        default = "";
+      };
+      user = lib.mkOption {
+        type = lib.types.str;
+        description = "git cfg user";
+        default = "";
+      };
     };
 
     domain = lib.mkOption {
