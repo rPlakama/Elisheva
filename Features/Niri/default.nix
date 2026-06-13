@@ -65,7 +65,6 @@ in
 
     environment.systemPackages = with pkgs; [
 
-      kdePackages.okular
       nautilus
       loupe
       xwayland-satellite

@@ -30,6 +30,10 @@ in
       ".config/foot" # Themes aren't implemented by hjem
       ".config/mozilla"
       ".config/Nextcloud"
+      ".config/okularpartrc"
+      ".config/okularrc"
+      ".config/QtProject.conf"
+
     ];
 
     environment.systemPackages = with pkgs; [
@@ -42,6 +46,8 @@ in
       mpv
       ripdrag
       obsidian
+      kdePackages.okular
+
     ];
 
     hjem.users.${user} = {
