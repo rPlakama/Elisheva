@@ -47,7 +47,7 @@ in
       gpu-screen-recorder = {
         package = inputs.gsr-ui-nix.packages.${pkgs.stdenv.hostPlatform.system}.gpu-screen-recorder;
         enable = cfg.gsr.enable;
-        ui.enable = true;
+        ui.enable = cfg.gsr.enable;
       };
       steam = {
         enable = cfg.steam.enable;
