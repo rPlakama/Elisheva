@@ -11,6 +11,8 @@
 
   environment.systemPackages = with pkgs; [
     ciscoPacketTracer9
+    ollama-vulkan
+    opencode
   ];
 
   networking.hostName = "Arthoplerau";
@@ -46,7 +48,10 @@
     };
     preservation = {
       enable = true;
-      keepDirs.homeDirs = [ "pt" ];
+      keepDirs.homeDirs = [
+        "pt"
+        ".ollama"
+      ];
     };
   };
 }
