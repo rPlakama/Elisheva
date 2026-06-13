@@ -63,7 +63,7 @@ in
       VISUAL = "nvim";
       MANPAGER = "nvim +Man!";
     };
-    features.preservation.persistDirs.home = [
+    features.preservation.home.directories = [
       ".config/nvim"
     ];
 

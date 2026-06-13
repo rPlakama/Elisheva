@@ -25,16 +25,19 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    features.preservation.persistDirs.home = [
-      ".config/vesktop"
-      ".config/foot" # Themes aren't implemented by hjem
-      ".config/mozilla"
-      ".config/Nextcloud"
-      ".config/okularpartrc"
-      ".config/okularrc"
-      ".config/QtProject.conf"
-
-    ];
+    features.preservation = {
+      home.directories = [
+        ".config/vesktop"
+        ".config/foot" # <- Themes aren't implemented by hjem.
+        ".config/mozilla"
+        ".config/Nextcloud"
+      ];
+      home.files = [
+        ".config/okularpartrc"
+        ".config/okularrc"
+        ".config/QtProject.conf"
+      ];
+    };
 
     environment.systemPackages = with pkgs; [
       vesktop

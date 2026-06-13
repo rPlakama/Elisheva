@@ -28,7 +28,7 @@ in
 
   config = lib.mkIf cfg.enable {
     features = {
-      preservation.persistDirs.system = [ "/var/lib/navidrome" ];
+      preservation.system.directories = [ "/var/lib/navidrome" ];
       mediaPermissions = {
         enable = true;
         writableServices = [ "navidrome" ];

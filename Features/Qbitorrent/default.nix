@@ -19,7 +19,7 @@ in
     };
 
     features = {
-      preservation.persistDirs.system = [
+      preservation.system.directories = [
         "/var/lib/qbittorrent"
         "/var/lib/qui"
       ];

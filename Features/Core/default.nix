@@ -110,7 +110,7 @@ in
       };
     };
 
-    features.preservation.persistDirs.system = [
+    features.preservation.system.directories = [
       "/var/lib/fwupd"
     ];
 

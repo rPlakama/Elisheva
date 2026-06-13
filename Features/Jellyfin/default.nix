@@ -7,7 +7,7 @@ in
   config = lib.mkIf cfg.enable {
     features = {
       mediaPermissions.enable = true;
-      preservation.persistDirs.system = [ "/var/lib/jellyfin" ];
+      preservation.system.directories = [ "/var/lib/jellyfin" ];
       unifiedDNS.proxyServices.jellyfin = 8096;
     };
     services.jellyfin = {

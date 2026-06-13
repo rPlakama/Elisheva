@@ -11,7 +11,6 @@ let
     "/etc/NetworkManager/system-connections"
     "/etc/ssh"
     "/var/lib/sops-nix"
-
     {
       directory = "/tmp";
       mode = "1777";
@@ -45,46 +44,33 @@ in
   options.features.preservation = {
     enable = lib.mkEnableOption "impermanence with persistent state";
 
-    persistDirs = {
-      system = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
+    system = {
+      directories = lib.mkOption {
+        type = lib.types.listOf lib.types.anything;
         default = [ ];
-        description = "System directories to persist, declared by features";
+        description = "System directories to persist.";
         example = [ "/var/lib/qbittorrent" ];
       };
-      home = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
+      files = lib.mkOption {
+        type = lib.types.listOf lib.types.anything;
         default = [ ];
-        description = "Home directories to persist, declared by features";
-        example = [ ".config/vesktop" ];
+        description = "System files to persist.";
+        example = [ "/etc/adjtime" ];
       };
     };
 
-    keepDirs = {
-      homeDirs = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
+    home = {
+      directories = lib.mkOption {
+        type = lib.types.listOf lib.types.anything;
         default = [ ];
-        description = "Additional home directories to preserve";
+        description = "Home directories to persist.";
         example = [ ".config/vesktop" ];
       };
-      homeFiles = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
+      files = lib.mkOption {
+        type = lib.types.listOf lib.types.anything;
         default = [ ];
-        description = "Additional user home files to preserve";
+        description = "Home files to persist.";
         example = [ ".gitconfig" ];
-      };
-
-      additionalDirs = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [ ];
-        description = "Additional system directories to preserve";
-        example = [ "/var/lib/docker" ];
-      };
-      additionalFiles = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [ ];
-        description = "Additional system files to preserve";
-        example = [ "/etc/adjtime" ];
       };
     };
   };
@@ -92,21 +78,22 @@ in
   config = lib.mkIf cfg.enable {
     systemd.services."systemd-machine-id-commit".enable = false;
     sops.age.sshKeyPaths = [ "/persistent/etc/ssh/ssh_host_ed25519_key" ];
+
     assertions = [
       {
         assertion = diskoCfg.enable;
-        message = "Requires Disko enabled to be used";
+        message = "features.preservation requires Disko to be enabled.";
       }
     ];
 
     preservation = {
       enable = true;
       preserveAt."/persistent" = {
-        directories = defaultSystemDirs ++ cfg.keepDirs.additionalDirs ++ cfg.persistDirs.system;
-        files = defaultSystemFiles ++ cfg.keepDirs.additionalFiles;
+        directories = defaultSystemDirs ++ cfg.system.directories;
+        files = defaultSystemFiles ++ cfg.system.files;
         users.${user} = {
-          directories = defaultHomeDirs ++ cfg.keepDirs.homeDirs ++ cfg.persistDirs.home;
-          files = cfg.keepDirs.homeFiles;
+          directories = defaultHomeDirs ++ cfg.home.directories;
+          files = cfg.home.files;
         };
       };
     };

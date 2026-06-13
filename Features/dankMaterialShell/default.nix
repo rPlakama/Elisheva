@@ -45,7 +45,7 @@ in
       ];
 
       niri.importDMS = ''include "DMS.kdl"'';
-      preservation.persistDirs.home = [
+      preservation.home.directories = [
         ".config/DankMaterialShell"
         ".config/niri"
         ".config/gtk-4.0"

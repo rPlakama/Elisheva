@@ -46,7 +46,7 @@
     };
     preservation = {
       enable = true;
-      keepDirs.homeDirs = [
+      home.directories = [
         "pt"
       ];
     };

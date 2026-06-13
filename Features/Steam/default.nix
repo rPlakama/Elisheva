@@ -12,7 +12,7 @@ in
 {
   options.features.steam.enable = lib.mkEnableOption "Steam + Proton GE";
   config = lib.mkIf cfg.enable {
-    features.preservation.persistDirs.home = [ ".steam" ];
+    features.preservation.home.directories = [ ".steam" ];
     boot.kernelModules = [ "ntsync" ];
     programs = {
       gamemode.enable = true;

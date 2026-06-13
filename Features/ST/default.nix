@@ -27,7 +27,7 @@ in
   options.features.st.enable = lib.mkEnableOption "SillyTavern AI RPG";
 
   config = lib.mkIf cfg.enable {
-    features.preservation.persistDirs.system = [ "/var/lib/SillyTavern" ];
+    features.preservation.system.directories = [ "/var/lib/SillyTavern" ];
 
     services.sillytavern = {
       enable = true;

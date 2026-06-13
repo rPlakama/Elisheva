@@ -18,7 +18,7 @@ in
     };
     features = {
       mediaPermissions.enable = true;
-      preservation.persistDirs.system = [ "/var/lib/kavita" ];
+      preservation.system.directories = [ "/var/lib/kavita" ];
       unifiedDNS.proxyServices.kavita = portCFG;
     };
     networking.firewall.allowedTCPPorts = [ portCFG ];

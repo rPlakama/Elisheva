@@ -32,7 +32,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    features.preservation.persistDirs.home = [ "ascending-bots" ];
+    features.preservation.home.directories = [ "ascending-bots" ];
 
     systemd.services = lib.mkMerge [
       (lib.mkIf cfg.whatsapp-bot.enable {

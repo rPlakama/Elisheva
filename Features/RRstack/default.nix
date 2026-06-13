@@ -21,7 +21,7 @@ in
   config = lib.mkIf cfg.enable {
     features = {
       mediaPermissions.enable = true;
-      preservation.persistDirs.system = [
+      preservation.system.directories = [
         "/var/lib/jackett"
         "/var/lib/sonarr"
         "/var/lib/radarr"
