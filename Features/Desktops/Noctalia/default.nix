@@ -42,17 +42,10 @@ in
       inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
       pkgs.ddcutil
     ];
-    services = {
-      ddccontrol.enable = true;
-      displayManager.ly = {
-        enable = true;
-        settings = {
-          default_input = "password";
-          bigclock = true;
-        };
-      };
-    };
+
+    services.ddccontrol.enable = true;
     environment.sessionVariables.QT_QPA_PLATFORMTHEME = "qt6ct";
+
     hjem = {
       extraModules = [
         inputs.noctalia.hjemModules.default

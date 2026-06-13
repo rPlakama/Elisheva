@@ -36,6 +36,7 @@
       NoctaliaEnabled = true;
       ppd.enable = false;
     };
+
     gaming.enable = true;
     qbit.enable = true;
     virtualization.enable = true;

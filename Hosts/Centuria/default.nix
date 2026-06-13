@@ -20,7 +20,6 @@
   };
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto;
   features = {
-    gpuScreenRecorder.enable = true;
     virtualization.enable = true;
     sunshine.enable = true;
     gaming = {

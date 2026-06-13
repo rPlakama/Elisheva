@@ -55,14 +55,6 @@ in
       ];
     };
 
-    boot.consoleLogLevel = 0;
-    services.displayManager.ly = {
-      enable = true;
-      settings = {
-        default_input = "password";
-      };
-    };
-
     programs.dank-material-shell = {
       enable = true;
       enableCalendarEvents = false;
