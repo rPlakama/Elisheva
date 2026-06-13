@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -29,11 +30,17 @@ in
       };
     };
 
+    environment.systemPackages = lib.optionals config.features.graphicalPkgs.enable (
+      with pkgs;
+      [
+        qbittorrent
+      ]
+    );
     services = {
       qui = {
         secretFile = config.sops.secrets."qui/secret".path;
         group = "media";
-        enable = true;
+        enable = !(config.features.graphicalPkgs.enable);
         settings = {
           port = 3000; # Just to make sure.
           host = "0.0.0.0";

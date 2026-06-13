@@ -12,8 +12,16 @@ in
 {
   options.features.steam.enable = lib.mkEnableOption "Steam + Proton GE";
   config = lib.mkIf cfg.enable {
-    features.preservation.home.directories = [ ".steam" ];
+    features.preservation.home.directories = [
+      ".steam"
+      "Games"
+    ];
     boot.kernelModules = [ "ntsync" ];
+
+    environment.systemPackages = with pkgs; [
+      bottles
+    ];
+
     programs = {
       gamemode.enable = true;
       gamescope.enable = true;
