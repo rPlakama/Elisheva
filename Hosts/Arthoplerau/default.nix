@@ -36,8 +36,9 @@
       NoctaliaEnabled = true;
       ppd.enable = false;
     };
-    steam.enable = true;
+    gaming.enable = true;
     virtualization.enable = true;
+
     disko = {
       enable = true;
       dualDrive = true;

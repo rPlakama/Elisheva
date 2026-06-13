@@ -23,7 +23,7 @@
     gpuScreenRecorder.enable = true;
     virtualization.enable = true;
     sunshine.enable = true;
-    steam.enable = true;
+    gaming.enable = true;
     qbit.enable = true;
     bootloader.nixos-init.enable = true;
     niri = {
