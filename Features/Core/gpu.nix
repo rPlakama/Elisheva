@@ -21,6 +21,7 @@ in
         };
         amdgpu.opencl.enable = true;
       };
+      programs.corectrl.enable = true;
       environment.systemPackages = with pkgs; [ radeontop ];
     })
 
