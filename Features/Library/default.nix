@@ -56,6 +56,11 @@ let
       extension = "cbz";
       mode = "after";
     }
+    {
+      name = "exec";
+      command = "rm -rf \"{_directory}\"";
+      mode = "after";
+    }
   ];
 
 in
@@ -197,6 +202,7 @@ in
           ];
           wants = [ "flaresolverr.service" ];
           path = with pkgs; [
+            coreutils
             p7zip
             zip
           ];
