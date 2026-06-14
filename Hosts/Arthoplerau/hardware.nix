@@ -20,6 +20,7 @@
   ];
 
   boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelParams = [ "mem_sleep_default=deep" ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   services.tlp = {
