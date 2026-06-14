@@ -18,9 +18,11 @@ in
     calibre
     zip
   ];
+
   services.udev.extraRules = ''
     ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
   '';
+
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bmq-lto;
 
   core = {
@@ -29,6 +31,7 @@ in
     domain = "moontier.online";
     gpu.intel = true;
   };
+
   features.graphicalPkgs.enable = false;
 
   sops.secrets = {
@@ -51,7 +54,22 @@ in
       enable = true;
       gateway = "192.168.0.1";
     };
-    kavita.enable = true;
+
+    library = {
+      enable = true;
+      gallery-dl = {
+        mangas = {
+          downloadPath = "/media/mangas/download";
+          secretFile = cfgSops."gallery-dl/mangas-urls".path;
+        };
+        literature = {
+          downloadPath = "/media/fanfics/download";
+          secretFile = cfgSops."gallery-dl/literature-urls".path;
+        };
+      };
+    };
+    # -------------------------------------
+
     rrstack.enable = true;
     qbit.enable = true;
     slskd.enable = true;
@@ -61,21 +79,11 @@ in
     iperf3.enable = true;
     jellyfin.enable = true;
     navidrome.enable = true;
+
     bots = {
       enable = true;
       whatsapp-bot.enable = true;
       discord-bot.enable = true;
-    };
-    galleryDL = {
-      enable = true;
-      mangas = {
-        downloadPath = "/media/mangas/download";
-        secretFile = cfgSops."gallery-dl/mangas-urls".path;
-      };
-      literature = {
-        downloadPath = "/media/fanfics/download";
-        secretFile = cfgSops."gallery-dl/literature-urls".path;
-      };
     };
   };
 }
