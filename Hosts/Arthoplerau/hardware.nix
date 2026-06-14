@@ -11,16 +11,29 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "usb_storage"
-    "sd_mod"
-    "sdhci_pci"
-  ];
+  boot = {
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "usb_storage"
+      "sd_mod"
+      "sdhci_pci"
+    ];
 
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.kernelParams = [ "mem_sleep_default=deep" ];
+    blacklistedKernelModules = [
+      "snd_acp_pci"
+      "snd_pci_acp3x"
+      "snd_pci_acp5x"
+      "snd_pci_acp6x"
+    ];
+
+    extraModprobeConfig = ''
+      options snd-hda-intel dmic_detect=0
+    '';
+    kernelModules = [ "kvm-amd" ];
+    kernelParams = [ "mem_sleep_default=deep" ];
+  };
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   services.tlp = {
@@ -52,7 +65,10 @@
   };
   hardware = {
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    firmware = [ pkgs.sof-firmware ];
+    firmware = [
+      pkgs.alsa-firmware
+      pkgs.sof-firmware
+    ];
   };
 
 }
