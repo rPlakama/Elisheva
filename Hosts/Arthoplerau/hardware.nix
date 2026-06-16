@@ -20,7 +20,11 @@
       "sdhci_pci"
     ];
 
-    kernelParams = [ "amd_pstate=active" ];
+    kernelParams = [
+      "amd_pstate=active"
+      "mem_sleep_default=deep"
+      "pcie_aspm.policy=powersupersave"
+    ];
 
     blacklistedKernelModules = [
       "snd_acp_pci"
@@ -30,7 +34,7 @@
     ];
 
     extraModprobeConfig = ''
-      options snd-hda-intel dmic_detect=0
+      options snd-hda-intel dmic_detect=0 rtw89_pci disable_clkreq=y disable_aspm_l1=y disable_aspm_l1ss=y
     '';
     kernelModules = [ "kvm-amd" ];
   };
