@@ -77,11 +77,8 @@ in
 
     ];
 
-    services = lib.mkIf (!cfg.ppd.enable) {
-      power-profiles-daemon = {
-        enable = lib.mkForce cfg.ppd.enable;
-      };
-    };
+    # XDG_CURRENT_DESKTOP=GNOME gnome-control-center online-accounts --> Might be useful.
+    services.gnome.gnome-online-accounts.enable = true;
 
     hjem.users.${user} = {
       files.".config/niri/config.kdl".text =

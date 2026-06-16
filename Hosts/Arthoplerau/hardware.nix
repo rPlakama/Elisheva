@@ -20,6 +20,8 @@
       "sdhci_pci"
     ];
 
+    kernelParams = [ "amd_pstate=active" ];
+
     blacklistedKernelModules = [
       "snd_acp_pci"
       "snd_pci_acp3x"
@@ -31,38 +33,10 @@
       options snd-hda-intel dmic_detect=0
     '';
     kernelModules = [ "kvm-amd" ];
-    kernelParams = [ "mem_sleep_default=deep" ];
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  services.tlp = {
-    enable = false;
-    settings = {
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
-
-      PLATFORM_PROFILE_ON_AC = "performance";
-      PLATFORM_PROFILE_ON_BAT = "balanced";
-
-      STOP_CHARGE_THRESH_BAT0 = 80;
-
-      SOUND_POWER_SAVE_ON_AC = 0;
-      SOUND_POWER_SAVE_ON_BAT = 1;
-      SOUND_POWER_SAVE_CONTROLLER = "Y";
-
-      WIFI_PWR_ON_AC = "off";
-      WIFI_PWR_ON_BAT = "on";
-
-      SCHED_POWERSAVE_ON_AC = 0;
-      SCHED_POWERSAVE_ON_BAT = 1;
-      NMI_WATCHDOG = 0;
-      WOL_DISABLE = "Y";
-      USB_AUTOSUSPEND = 1;
-      PCIE_ASPM_ON_AC = "performance";
-      PCIE_ASPM_ON_BAT = "powersave";
-    };
-  };
   hardware = {
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     firmware = [

@@ -65,6 +65,7 @@ in
     };
 
     services = {
+      tuned.enable = true;
       ananicy = {
         enable = true;
         package = pkgs.ananicy-cpp;
