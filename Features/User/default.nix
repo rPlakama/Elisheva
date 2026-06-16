@@ -13,13 +13,11 @@ in
       type = lib.types.str;
       description = "The primary user";
     };
-
     ip = lib.mkOption {
       type = lib.types.str;
       description = "IP";
       default = "";
     };
-
     gpu = {
       amd = lib.mkOption {
         type = lib.types.bool;
@@ -37,7 +35,23 @@ in
         description = "Intel GPU (i915/Xe)";
       };
     };
-
+    cpu = {
+      amd = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "AMD CPU (amd_pstate)";
+      };
+      intel = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Intel CPU (intel_pstate)";
+      };
+    };
+    isLaptop = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Whether this host is a laptop (enables battery-aware features)";
+    };
     git = {
       email = lib.mkOption {
         type = lib.types.str;
@@ -50,17 +64,14 @@ in
         default = "";
       };
     };
-
     domain = lib.mkOption {
       type = lib.types.str;
       description = "Domain";
       default = "";
     };
   };
-
   config = lib.mkIf (user != "") {
     time.timeZone = "America/Recife";
-
     i18n = {
       defaultLocale = "en_US.UTF-8";
       extraLocaleSettings = {
@@ -75,7 +86,6 @@ in
         LC_TIME = "pt_BR.UTF-8";
       };
     };
-
     hjem.users.${user} = {
       files.".gitconfig".text = ''
         [user]
@@ -83,7 +93,6 @@ in
         email = ${config.core.git.email}
       '';
     };
-
     users = {
       groups.${user} = { };
       users.${user} = {
