@@ -16,13 +16,6 @@ in
       default = false;
       description = "Niri Configuration";
     };
-    ppd = {
-      enable = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Allow ppd";
-      };
-    };
     VariantKB = lib.mkOption {
       type = lib.types.str;
       default = "";
@@ -87,5 +80,6 @@ in
           [ cfg.importDMS cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB ]
           (builtins.readFile ./config.kdl);
     };
+
   };
 }

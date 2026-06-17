@@ -42,7 +42,7 @@ in
         group = "media";
         enable = !(config.features.graphicalPkgs.enable);
         settings = {
-          port = 3000; # Just to make sure.
+          port = 3000;
           host = "0.0.0.0";
         };
       };

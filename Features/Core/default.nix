@@ -1,149 +1,86 @@
 {
-  config,
   lib,
-  pkgs,
   ...
 }:
+
 let
-  cfg = config.features.core;
-  user = config.core.user;
-  gpu = config.core.gpu;
-  cpu = config.core.cpu;
-  isLaptop = config.core.isLaptop;
+  contents = builtins.readDir ./.;
+  nixFiles = lib.filterAttrs (name: type:
+    type == "regular"
+    && lib.hasSuffix ".nix" name
+    && name != "default.nix"
+  ) contents;
+  modulePaths = lib.mapAttrsToList (name: _: ./${name}) nixFiles;
 in
 {
-  imports = [ ./gpu.nix ];
+  imports = modulePaths;
+
+  options.core = {
+    user = lib.mkOption {
+      type = lib.types.str;
+      description = "The primary user";
+    };
+    ip = lib.mkOption {
+      type = lib.types.str;
+      description = "IP";
+      default = "";
+    };
+    gpu = {
+      amd = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "AMD GPU (RADV/amdgpu)";
+      };
+      nvidia = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Nvidia GPU (nvidia/nouveau)";
+      };
+      intel = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Intel GPU (i915/Xe)";
+      };
+    };
+    cpu = {
+      amd = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "AMD CPU (amd_pstate)";
+      };
+      intel = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Intel CPU (intel_pstate)";
+      };
+    };
+    isLaptop = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Whether this host is a laptop (enables battery-aware features)";
+    };
+    git = {
+      email = lib.mkOption {
+        type = lib.types.str;
+        description = "git cfg email";
+        default = "";
+      };
+      user = lib.mkOption {
+        type = lib.types.str;
+        description = "git cfg user";
+        default = "";
+      };
+    };
+    domain = lib.mkOption {
+      type = lib.types.str;
+      description = "Domain";
+      default = "";
+    };
+  };
+
   options.features.core.enable = lib.mkOption {
     type = lib.types.bool;
     default = true;
     description = "General Attributes that are default implemented across multiple hosts -- like hardware, services and others.";
-  };
-  config = lib.mkIf cfg.enable {
-    security.sudo-rs.enable = true;
-    environment.systemPackages =
-      with pkgs;
-      [
-        ripgrep
-        cifs-utils
-        p7zip
-        zip
-        neovim
-        yazi
-        wget
-        age
-        sops
-        fzf
-        git
-        unzip
-        dust
-        jq
-        fd
-        man-pages-posix
-        man-pages
-      ]
-      ++ lib.optionals (!gpu.nvidia) [ btop-rocm ]
-      ++ lib.optionals gpu.nvidia [ btop-cuda ];
-    fonts.packages = with pkgs; [
-      nerd-fonts.caskaydia-cove
-      montserrat
-      arkpandora_ttf
-    ];
-    networking.networkmanager.enable = true;
-    programs = {
-      fish = {
-        enable = true;
-        generateCompletions = true;
-      };
-      zoxide = {
-        enable = true;
-        enableFishIntegration = true;
-      };
-    };
-    services = {
-      tuned = lib.mkIf isLaptop {
-        enable = true;
-        ppdSupport = true;
-
-        profiles.pwsave = {
-          main.include = "powersave";
-          video = {
-            radeon_powersave = "dpm-battery, auto";
-            # IneedColors
-          };
-        };
-
-        ppdSettings = {
-          main = {
-            default = "balanced";
-            battery_detection = true;
-          };
-          profiles = {
-            power-saver = "pwsave";
-            balanced = "balanced";
-            performance = "throughput-performance";
-          };
-          battery.balanced = "balanced-battery";
-        };
-      };
-
-      ananicy = {
-        enable = true;
-        package = pkgs.ananicy-cpp;
-        rulesProvider = pkgs.ananicy-rules-cachyos;
-      };
-      upower.enable = isLaptop;
-      bpftune.enable = true;
-      devmon.enable = true;
-      udisks2.enable = true;
-      resolved.enable = true;
-      gvfs.enable = true;
-      fwupd.enable = true;
-      pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-      };
-      tailscale = {
-        enable = true;
-        openFirewall = true;
-      };
-      openssh = {
-        enable = true;
-        settings = {
-          PasswordAuthentication = true;
-          PermitRootLogin = "no";
-        };
-      };
-    };
-
-    boot.kernelParams = lib.mkIf isLaptop (
-      if cpu.amd then
-        [ "amd_pstate=active" ]
-      else if cpu.intel then
-        [ "intel_pstate=active" ]
-      else
-        [ ]
-    );
-
-    features.preservation.system.directories = [
-      "/var/lib/fwupd"
-    ];
-    documentation = {
-      dev.enable = true;
-      man.enable = true;
-    };
-    hardware = {
-      enableAllFirmware = true;
-      enableRedistributableFirmware = true;
-    };
-    hjem.users.${user} = {
-      enable = true;
-      xdg.config.files = {
-        "fish/config.fish".source = ./config.fish;
-        "yazi/yazi.toml".source = ./yazi.toml;
-        "yazi/keymap.toml".source = ./keymap.toml;
-      };
-    };
   };
 }

@@ -21,23 +21,10 @@
     ];
 
     kernelParams = [
-      "amd_pstate=active"
       "mem_sleep_default=deep"
-      "pcie_aspm.policy=powersupersave"
+      "pcie_aspm.policy=powersupersaver"
     ];
 
-    blacklistedKernelModules = [
-      "snd_acp_pci"
-      "snd_pci_acp3x"
-      "snd_pci_acp5x"
-      "snd_pci_acp6x"
-    ];
-
-    extraModprobeConfig = ''
-      options snd-hda-intel dmic_detect=0
-      options rtw89_pci disable_clkreq=Y disable_aspm_l1=Y disable_aspm_l1ss=Y
-      options rtw89_core disable_ps_mode=Y
-    '';
     kernelModules = [ "kvm-amd" ];
   };
 

@@ -29,6 +29,10 @@ in
     user = "rplakama";
     ip = "192.168.0.160";
     domain = "moontier.online";
+    git = {
+      email = "rPlakama@proton.me";
+      user = "rPlakama";
+    };
     gpu.intel = true;
   };
 
@@ -52,6 +56,7 @@ in
   features = {
     unifiedDNS = {
       enable = true;
+      email = "rPlakama@proton.me";
       gateway = "192.168.0.1";
     };
 

@@ -35,7 +35,6 @@ let
           oil-nvim
           zoxide-vim
           render-markdown-nvim
-
         ]
         ++ lib.optionals (cfgF.dankMaterialShell.enable) [ base46Plugin ]
         ++ lib.optionals (cfgF.noctalia.enable) [ base16-nvim ];

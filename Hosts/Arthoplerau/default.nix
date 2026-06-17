@@ -36,7 +36,6 @@
     niri = {
       enable = true;
       NoctaliaEnabled = true;
-      ppd.enable = false;
     };
 
     gaming.enable = true;

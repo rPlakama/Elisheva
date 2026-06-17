@@ -5,9 +5,7 @@
 }:
 
 let
-
   cfg = config.features.iperf3;
-
 in
 {
   options.features.iperf3.enable = lib.mkEnableOption "iperf3 network testing";

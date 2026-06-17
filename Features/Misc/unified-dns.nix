@@ -10,6 +10,12 @@ in
   options.features.unifiedDNS = {
     enable = lib.mkEnableOption "Unified DNS and Reverse Proxy (Pi-hole + Nginx)";
 
+    email = lib.mkOption {
+      type = lib.types.str;
+      description = "Email for ACME/Let's Encrypt notifications";
+      default = "";
+    };
+
     proxyServices = lib.mkOption {
       type = lib.types.attrsOf lib.types.port;
       default = { };
@@ -158,7 +164,7 @@ in
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = "rPlakama@proton.me";
+      defaults.email = cfg.email;
       certs."${domain}" = {
         inherit domain;
         extraDomainNames = [ "*.${domain}" ];

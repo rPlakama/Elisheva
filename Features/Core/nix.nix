@@ -4,18 +4,10 @@
   pkgs,
   ...
 }:
-
 let
-  cfg = config.features.nix;
+  cfg = config.features.core;
 in
-
 {
-  options.features.nix.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-    description = "Nix package manager configuration";
-  };
-
   config = lib.mkIf cfg.enable {
     nixpkgs.config.allowUnfree = true;
     programs.nix-ld.enable = true;

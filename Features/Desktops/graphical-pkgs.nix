@@ -28,7 +28,7 @@ in
     features.preservation = {
       home.directories = [
         ".config/vesktop"
-        ".config/foot" # <- Themes aren't implemented by hjem.
+        ".config/foot"
         ".config/mozilla"
         ".config/Nextcloud"
       ];
@@ -50,7 +50,6 @@ in
       ripdrag
       obsidian
       kdePackages.okular
-
     ];
 
     hjem.users.${user} = {
