@@ -22,7 +22,7 @@
 
     kernelParams = [
       "mem_sleep_default=deep"
-      "pcie_aspm.policy=powersupersaver"
+      "libata.noacpi=1"
     ];
 
     kernelModules = [ "kvm-amd" ];
