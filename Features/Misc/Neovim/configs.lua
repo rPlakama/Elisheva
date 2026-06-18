@@ -11,6 +11,7 @@ opt.relativenumber = true
 opt.termguicolors = true
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
+vim.opt.mouse = ""
 
 -- Plugin Configs
 vim.api.nvim_create_autocmd("BufWritePre", {
