@@ -1,0 +1,5346 @@
+commit 16628a35a94cf724c8fc7e8bfa771fe209466404
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 18 19:57:54 2026 -0300
+
+    Removed mouse from nvim
+
+commit 9e6a1d5f17f0f251b5e149d22d9a9c0815b425a5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 18 14:18:44 2026 -0300
+
+    Correction and Fixes
+
+commit fa2cb33d5f6c3b6ccb6a2d3fbd999d988cc1c7fc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jun 16 22:01:42 2026 -0300
+
+    Chore(Overhal): General tree structural change of modules
+
+commit 1d5f70af5504a71f39fb6ae4f707a3c62d84e07a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jun 15 22:10:13 2026 -0300
+
+    Features/Core, Features/User: More defined tuned/pw options
+
+commit 8d22640fa1fd915962604a0856c6495579b97a15
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jun 15 21:19:40 2026 -0300
+
+    Hosts/Arthoplerau: Messing with hardware
+
+commit 867717a469b034532268584bb865475f30c047da
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jun 15 21:16:22 2026 -0300
+
+    Features/Core: Tuned as core service for all hosts.
+
+commit 1f989d072219bb2bcab98ba8768c128e81be4a54
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 14 14:50:29 2026 -0300
+
+    Hosts/Arthoplerau: Additional params to make sure mic is not used by other drivers
+    
+            modified:   Features/Core/default.nix
+            modified:   Hosts/Arthoplerau/hardware.nix
+
+commit 0eb51384a2c09e6e0bda5b3dc1dba31c3c9cd631
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 14 14:33:01 2026 -0300
+
+    Hosts/Arthoplerau: Added kernelParam for suspend
+
+commit e855d5a5552b9d0274ed6f0e8828ab399a26219c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 14 11:44:45 2026 -0300
+
+    Features/Library/gallery-dl: Remove dirs after cbz
+
+commit 5127b265a506d2024cae402345e0a609a7dbf27e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 14 10:54:27 2026 -0300
+
+    Features/Kavita + Features/Gallery-dl -> (new) suwayomi --> Features/Library
+
+commit 9010971ab299ce94b7523b5a96c9e365b71d7af5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 14 10:32:12 2026 -0300
+
+    Features/Core/gpu.nix: corectl
+
+commit 2c4661a894b7e044bb2ba6504d4202c663917d45
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 14 08:45:00 2026 -0300
+
+    Features/Noctalia: updt input
+
+commit ffaf158c612b14a114ad20cf755f6389e2bd187c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 13 20:18:21 2026 -0300
+
+    Features/Niri; Features/Noctalia/ Features/DMS --> Desktop/*
+    
+            new file:   Features/Desktops/Kde/default.nix
+            renamed:    Features/Niri/config.kdl -> Features/Desktops/Niri/config.kdl
+            renamed:    Features/Niri/default.nix -> Features/Desktops/Niri/default.nix
+            renamed:    Features/Noctalia/NoctaliaBinds.kdl -> Features/Desktops/Noctalia/NoctaliaBinds.kdl
+            renamed:    Features/Noctalia/default.nix -> Features/Desktops/Noctalia/default.nix
+            renamed:    Features/dankMaterialShell/DMS.kdl -> Features/Desktops/dankMaterialShell/DMS.kdl
+            renamed:    Features/dankMaterialShell/default.nix -> Features/Desktops/dankMaterialShell/default.nix
+            new file:   Features/Desktops/default.nix
+            modified:   Hosts/Arthoplerau/default.nix
+            modified:   flake.lock
+    
+            new file:   Features/Desktops/Kde/default.nix
+            renamed:    Features/Niri/config.kdl -> Features/Desktops/Niri/config.kdl
+            renamed:    Features/Niri/default.nix -> Features/Desktops/Niri/default.nix
+            renamed:    Features/Noctalia/NoctaliaBinds.kdl -> Features/Desktops/Noctalia/NoctaliaBinds.kdl
+            renamed:    Features/Noctalia/default.nix -> Features/Desktops/Noctalia/default.nix
+            renamed:    Features/dankMaterialShell/DMS.kdl -> Features/Desktops/dankMaterialShell/DMS.kdl
+            renamed:    Features/dankMaterialShell/default.nix -> Features/Desktops/dankMaterialShell/default.nix
+            new file:   Features/Desktops/default.nix
+            modified:   Hosts/Arthoplerau/default.nix
+            modified:   flake.lock
+    
+            renamed:    Features/Niri/config.kdl -> Features/Desktops/Niri/config.kdl
+            renamed:    Features/Niri/default.nix -> Features/Desktops/Niri/default.nix
+            renamed:    Features/Noctalia/NoctaliaBinds.kdl -> Features/Desktops/Noctalia/NoctaliaBinds.kdl
+            renamed:    Features/Noctalia/default.nix -> Features/Desktops/Noctalia/default.nix
+            renamed:    Features/dankMaterialShell/DMS.kdl -> Features/Desktops/dankMaterialShell/DMS.kdl
+            renamed:    Features/dankMaterialShell/default.nix -> Features/Desktops/dankMaterialShell/default.nix
+            new file:   Features/Desktops/default.nix
+            modified:   Hosts/Arthoplerau/default.nix
+            modified:   flake.lock
+    
+            renamed:    Features/Niri/config.kdl -> Features/Desktops/Niri/config.kdl
+            renamed:    Features/Niri/default.nix -> Features/Desktops/Niri/default.nix
+            renamed:    Features/Noctalia/NoctaliaBinds.kdl -> Features/Desktops/Noctalia/NoctaliaBinds.kdl
+            renamed:    Features/Noctalia/default.nix -> Features/Desktops/Noctalia/default.nix
+            renamed:    Features/dankMaterialShell/DMS.kdl -> Features/Desktops/dankMaterialShell/DMS.kdl
+            renamed:    Features/dankMaterialShell/default.nix -> Features/Desktops/dankMaterialShell/default.nix
+            new file:   Features/Desktops/default.nix
+            modified:   Hosts/Arthoplerau/default.nix
+            modified:   Hosts/Centuria/default.nix
+            modified:   flake.lock
+
+commit b117c96a0db8551fa478a1c2580b36609e4cb14f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 13 11:49:41 2026 -0300
+
+    Hosts/Arthoplerau: Added qbit
+    
+            modified:   Features/Gaming/default.nix
+            modified:   Hosts/Arthoplerau/default.nix
+            modified:   Hosts/Centuria/default.nix
+    
+            modified:   Features/Gaming/default.nix
+            modified:   Hosts/Arthoplerau/default.nix
+            modified:   Hosts/Centuria/default.nix
+
+commit facd10995efc43ff682abba12e60448873805d2a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 13 11:47:07 2026 -0300
+
+    Chore(Overhal): Squash gsr-ui into steam -> Feature/Gaming:
+
+commit e292799c87117608d7998988cc98be2434b30c0f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 13 11:30:06 2026 -0300
+
+    Chore(Overhal): Qbit provides a graphical Package if graphicalPkgs is enabled
+
+commit 95710ef987f6d512038e82a2b99ef727952b1d0e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 13 11:16:04 2026 -0300
+
+    Chore(Overhal): Squash nvidia into core, more elegant options for GPUS
+    
+            modified:   Features/Core/default.nix
+            new file:   Features/Core/gpu.nix
+            renamed:    Features/Steam/default.nix -> Features/Gaming/default.nix
+            deleted:    Features/Nvidia/default.nix
+            modified:   Features/User/default.nix
+            modified:   Features/Virtualization/default.nix
+            modified:   Hosts/Arthoplerau/default.nix
+            modified:   Hosts/Centuria/default.nix
+            modified:   Hosts/Moontier/default.nix
+
+commit 78d551d049bc2ba6c3a22098579d68ae50309824
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 12 22:54:00 2026 -0300
+
+    Syntax change, less boiler plate
+
+commit 995f84b1d26af6d8640e05ab6d9c601e1676001d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 12 22:35:42 2026 -0300
+
+    Actually save information from Okular
+
+commit fe88c1d0deb596fd8ec1efa4b682b2df024dea60
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 12 22:25:46 2026 -0300
+
+    Hosts/Arthoplerau: Cool, but useless
+
+commit 1a290379e99368e9a35202956f56e613c3161b23
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 12 22:12:28 2026 -0300
+
+    Hosts/Arthoplerau: General AI Tools
+
+commit b7fef8b337330f17b0af8016c8d91cfb4686d9e2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 12 20:36:44 2026 -0300
+
+    Features/GraphicalPkgs: Add note-taking software
+
+commit 453d86a840515546c1e87659d6220064e1d5b632
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 12 18:16:36 2026 -0300
+
+    Chore(Fix): Update syntax on Moontier for the new bot structure
+
+commit 84f28746a7d2846d37aba6cc453d546ccec72f6f
+Merge: 0385907 cc36316
+Author: Joaquim S. <rPlakama@proton.me>
+Date:   Fri Jun 12 18:14:21 2026 -0300
+
+    Merge pull request #3 from TheMatheusDev/master
+    
+    Features/Bots: Restructure as sub-options and add Discord bot
+
+commit cc363162d79b875c163ab7f15e5942656ee6ccca
+Author: TheMatheusDev <apenasmatheus1@gmail.com>
+Date:   Fri Jun 12 18:02:57 2026 -0300
+
+    Features/Bots: Restructure as sub-options and add Discord bot
+
+commit 0385907a359a9cf2fed7ff9a8831ea555cde72c7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 12 17:50:35 2026 -0300
+
+    Chore(Clean): Delete file
+
+commit 1b40e0ef64607af6b54b5ad203a54c72a9915e73
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 12 17:50:07 2026 -0300
+
+    Features/Navidrome: Adjust on Navidrome permissions
+
+commit fa657dc56cec71f55f925862f6baa71f612d3298
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 11 12:02:26 2026 -0300
+
+    Chore(Maintance): Point input of Kavita to git instead of path
+
+commit 871831757abd4c30499b3f356f49233f082ec4e1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 11 11:48:39 2026 -0300
+
+    Features/Kavita: Package from input
+
+commit c75a49e011a93b9f3d430b10227955067b5b139e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 10 00:12:55 2026 -0300
+
+    Features/Neovim: Markdown render plugin
+
+commit 2b5bbac6c8f15b1162451d1fc336f0860af1751c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jun 9 18:31:11 2026 -0300
+
+    Chore(General Maintance): Drop on useless modules.
+
+commit 12ea7b9c93c7c851be3ac14a64802d4ed997fbd0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jun 9 10:20:30 2026 -0300
+
+    Features/Noctalia: kcolorscheme declaration
+
+commit 4b67c4f81d881bd521931ffc109c1474db8033ca
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jun 9 09:25:56 2026 -0300
+
+    Features/Noctalia: Create qt6CFG
+    
+    Features/Noctalia: Remove legacy niri-flake reference
+    
+    Features/Noctalia: Remove kde references
+    
+            modified:   Features/Noctalia/default.nix
+    
+            modified:   Features/Noctalia/default.nix
+            modified:   flake.lock
+
+commit 6c1c0cb2a6ea5fe71b00b8e909624b456e4a7058
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jun 9 09:03:27 2026 -0300
+
+    Features/Niri: Remove papers in preference of Okular
+
+commit 92d33a2e4fd22d5a86e65104e025dc59b4c38ac0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jun 9 00:17:56 2026 -0300
+
+    Feature/Steam: Gamemode enable
+
+commit f74975473615699ac30cb5f73836d610a8c2387c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jun 8 23:15:29 2026 -0300
+
+    Kavita updated merged in nixpkgs, no need for special input
+
+commit ab4e985591094fc5af3e98629cda54c4a2f07f1c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jun 8 14:07:28 2026 -0300
+
+    Added lidarr to stack
+
+commit 500ed89c3f0a26a601c0537c42355e72f29fb1ba
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jun 8 13:59:52 2026 -0300
+
+    Noctalia update syntax of shortcuts crtl
+
+commit 6439c8ed8251f83f467f59f194e80c887580b542
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jun 8 12:50:22 2026 -0300
+
+    Navidrome with Apple Metadata or something
+
+commit 52b7a0d7a590edbc4073adc5e2c3629049979042
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jun 8 12:28:00 2026 -0300
+
+    Navidrome once again testing
+
+commit d128b347174a97efe95dce498f2abb18236e9dbf
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jun 8 12:25:52 2026 -0300
+
+    v5 -> main, Noctalia now follows this procedure, v5 branch is DROPPED!
+
+commit b7767fb80760f1da67375f5a490145a901d81108
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jun 8 11:58:33 2026 -0300
+
+    Rm clip
+
+commit 90e149c6345a8c8dc779469338bbc49373b2abac
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jun 8 00:05:20 2026 -0300
+
+    Mb caching
+
+commit 16f6e94f93582dc86c953fc2a2534432b8fe34f6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 7 23:39:12 2026 -0300
+
+    New entrace for gateway IP
+
+commit 38e91dbaaf5fe4ea241e51904ceefcacc899f26b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 7 23:21:34 2026 -0300
+
+    1.106 -> 0.106
+
+commit ee7ef492ebcb55829c7c555187700add5fe00a12
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 7 20:22:49 2026 -0300
+
+    Reduce repetitionm on user, and core eval for btop
+    
+            modified:   Features/Core/default.nix
+            modified:   Features/User/default.nix
+
+commit 7375fc1caa62c45cc66941f3ae160b751b43e0ff
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 7 20:06:57 2026 -0300
+
+    Local hardware configuration instead of depending on external inputs
+
+commit 4366e16d6ad2dedaec0b4e22259b12c9aab6991b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 7 19:58:58 2026 -0300
+
+    Show label even in charger
+
+commit 20813ce74f45f699d77259e1c8544df3e2510e2f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 7 15:06:09 2026 -0300
+
+    Created opt for Hostname explicity
+    
+    Auto Noctalia Lockscreen label naming
+    
+    Small fix in wrapping on flake.nix
+    
+            modified:   Features/Noctalia/default.nix
+            modified:   flake.nix
+    
+            modified:   Features/Noctalia/default.nix
+            modified:   flake.nix
+
+commit b8df3c8cedc8494bb48b0702c7f2a9285c25e0eb
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 7 13:07:23 2026 -0300
+
+    Tests are valid, keeping input
+
+commit a6a5a2ecabb0f3597713b8361f82114004b1eecd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 7 12:46:33 2026 -0300
+
+    Test of nixos-hardware module
+
+commit 22112035d02fb86d4c1b3841e4c854dd867479a3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 7 12:09:08 2026 -0300
+
+    Zoxide plugin
+
+commit 96266f2c8ac36b72180be03e8d262a3b1b1f67b4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 7 11:58:15 2026 -0300
+
+    Oil nvim plugin
+
+commit d034d7c62af8052e874dbe74b065dcc77b725a07
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jun 7 10:13:51 2026 -0300
+
+    Updated gsr-ui, the latest version fixed issues on Niri
+
+commit e217a0cb60b39d3b44b24471c1d42f3769603c0b
+Merge: 8acc0ff a3f9da8
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 6 21:31:35 2026 -0300
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 8acc0ff160c2614c29c1d85bce484d6b700beced
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 6 21:29:44 2026 -0300
+
+    Noctalia: Launcher in behind of workspaces
+    
+            modified:   Features/Neovim/default.nix
+            modified:   Features/Noctalia/default.nix
+
+commit a3f9da8640786b1b58efe1af2c063d9b31555486
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 6 21:29:44 2026 -0300
+
+    Noctalia: Launcher in behind of workspaces
+
+commit e98858425417d02584203083aaa2b4f09e4c0408
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 6 21:28:11 2026 -0300
+
+    nvim declares preservation for itself for the folder as a whole
+
+commit 0ce52692ba41dcb8f5e13f54870f99fc729846dd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 6 17:08:14 2026 -0300
+
+    Removed gpu power saving colors
+
+commit 9ee14bdbe7f9ad7cd6c092a5440d27caf9a17f62
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 6 16:59:04 2026 -0300
+
+    Documentation man pages
+
+commit 57d50f608ed22b3bbe871a2d821535a18a015345
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 6 14:18:04 2026 -0300
+
+    MicFix
+
+commit d81cb0c3f4736736a6f22725593dfa38900f1af4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 6 11:24:21 2026 -0300
+
+    As niri default instead
+
+commit dc966814cc87abbe1c952055bea16536a8558862
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jun 6 11:03:53 2026 -0300
+
+    Added vi moves for noctalia
+
+commit 574d07bebd998e532da4c6ff9688d5fee5e27568
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 23:48:24 2026 -0300
+
+    Thats unatural
+
+commit b0ba3a0c68de7eace2261f59f5c7ba9e56687df0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 22:32:19 2026 -0300
+
+    DMS -> Noctalia; Updt .inputs
+
+commit 4e417f1e732fc318220b2f8c9376dad3f34caba5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 21:16:48 2026 -0300
+
+    Solid bar instead.
+
+commit 99be44e5b6f3ac527e63ce21a4997cabdcc0376d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 21:00:23 2026 -0300
+
+    Var injection to reduce repetition
+
+commit 9a9a80d25a0a9d67262fef934b54b6258f8e68e1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 20:49:07 2026 -0300
+
+    Specific file of matugen for neovim. + New options on .nix
+
+commit 467945b1b439f78095e2801f620a8c5cdb4aadcd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 20:37:23 2026 -0300
+
+    1.4 -> 0.8 Noc animation speed
+
+commit 6def647a921e3102a4af2bd2e018a8fb7f4720ca
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 20:31:26 2026 -0300
+
+    Rollback to dms. specific path of colors for DMS persist
+
+commit 1d93bd418a89a6671ffcd32aecb930cd10345fc1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 19:14:31 2026 -0300
+
+    Updt on noctalia input, enable on Arthoplerau
+
+commit a74aeec0257c962bdd571430784ff88135955bf7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 16:47:46 2026 -0300
+
+    Keep TLP. More healty for the hardware
+
+commit 56018f8905e8f9ba538f17c7ec12930ed1a16cf4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 10:35:53 2026 -0300
+
+    Disabled ppd.
+
+commit 00721e983c4e18321a0d08013bcfed9997afe541
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 10:19:48 2026 -0300
+
+    ELegant ppd option
+
+commit 0aab8a1236d471b9d2fe2dae3ba0a5459971399f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 10:06:25 2026 -0300
+
+    bmq for Mootier
+
+commit 1b530e2e7c4515d3fa534b354f9cf4e2d87e6751
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jun 5 10:03:04 2026 -0300
+
+    bore-lto non specific for Centuria
+
+commit d9b95dfc19dcc96a689b92e9dc557e76db7eaddb
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 22:27:16 2026 -0300
+
+    Dropped niri-flake for niripkgs instead, no reason to use such.
+
+commit cc7af64b76fce594f9c3da67cab3b7cebab1b8ed
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 22:14:29 2026 -0300
+
+    It shall also be called if shell is enabled
+
+commit 644af851680c4032f07463fba71b828e5d21d824
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 22:08:31 2026 -0300
+
+    Update on dms input
+
+commit 1a0846409eca14597c5367be872074b5a1363ac7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 22:02:56 2026 -0300
+
+    Proper colorscheme calling
+
+commit 4eb72a6e8887f56edb1df8269ab78bfd84381948
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 21:27:48 2026 -0300
+
+    Couple fixes in DMS
+
+commit 5323144af2e1dd08518c533a78f5fcb66f0c2822
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 17:17:16 2026 -0300
+
+    0.0 opacity for widgets capsules noctalia
+
+commit f9a98b17f22957e3f5f71e2401792dd64fd190fc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 17:14:10 2026 -0300
+
+    Zen4 is closer to my CPU than V4
+
+commit bbd77ff22e16a53f4584ac78c87fcd011d9efc79
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 17:02:04 2026 -0300
+
+    Other Kernel cuz why not -> zen4 to v4 bore lto
+    
+            modified:   Hosts/Arthoplerau/default.nix
+    
+            modified:   Hosts/Arthoplerau/default.nix
+            modified:   README.md
+
+commit 4c333feb199ab7b1d908da59fc6450194d81581f
+Merge: d6380c5 6ee5539
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 12:55:21 2026 -0300
+
+    Merge remote-tracking branch 'origin/master'
+
+commit d6380c5cf60e7141b58a1707ed0f65a60f1efb21
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 12:54:11 2026 -0300
+
+    Preservation on PacketTracer cfg
+
+commit 6ee55391340a39a097bd542718b5e9ee0918897d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 10:20:10 2026 -0300
+
+    Adj on Centuria
+
+commit 83c4ed820b13fe3dbee5b69727498f998c5a2594
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 10:15:43 2026 -0300
+
+    Noctalia: Capsules on widgets, lower opacity in their, and hide when full on bat
+
+commit e8c04f014ce5203d8c67737cb66dc07d6b1dae48
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jun 4 09:53:18 2026 -0300
+
+    Update on Noctalia input
+
+commit ef18ad63034b85c87e25ecfeb286eb10885966d5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 23:15:18 2026 -0300
+
+    The fucking program that I hate
+
+commit 1c23591b71c2a24670472491a2639583105aff1c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 22:54:46 2026 -0300
+
+    Correct declaration of nvim
+
+commit 6512dfec53d6986d023a9c7ac2681b904a647750
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 22:50:07 2026 -0300
+
+    It shall call setup instead
+
+commit 125c8d50c3dcd16ddc62943ba178b01d86e2503c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 22:41:34 2026 -0300
+
+    Added lip-close action for Noctalia
+
+commit 1084d7e0d1a59835621cb57e39b290c7c164a56b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 22:34:39 2026 -0300
+
+    Declared additional templates for Noctalia
+
+commit 3b6a79868e9301c70048690ec04ff8d8975b919f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 22:30:09 2026 -0300
+
+    Declared Elisheva as builtin theme
+
+commit 86c53a78f38436a2424c0b5b4056ce57d50a7483
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 22:23:57 2026 -0300
+
+    Moved foot themes out of graphicalPkgs
+    
+            modified:   Features/GraphicalPkgs/default.nix
+            modified:   Features/Noctalia/default.nix
+            modified:   Features/dankMaterialShell/default.nix
+
+commit 09ffe0c978c6ded96a5859b53d70b7f334f127cf
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 22:04:15 2026 -0300
+
+    base16-nvim
+
+commit 0532d77f121a3c106fe6d5d1199dae94417c10fd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 21:53:46 2026 -0300
+
+    Re:add nvimpkg
+
+commit adee431a8b74b3bb6a9426abaafa0d4599459ccd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 21:47:47 2026 -0300
+
+    Finalized Noctalia Implementation
+
+commit d9aed3824d722fff9a669bdd0cce651e21c4680f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 21:42:08 2026 -0300
+
+    Noctalia as Systemd
+
+commit 5cf4555a31e7be868e92ba2e65c1840e57bc1d52
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 21:26:06 2026 -0300
+
+    Updt on .lock inputs, adjust on Arthoplerau host
+
+commit 97054a9facb96182dc5d9ca9e2aac610a9c0a7dc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 21:22:03 2026 -0300
+
+    Moved DMS settings out of config.kdl, separated, hjem for config generation.
+
+commit 0e01925c0d68331aafe9d3f394e6d223110b1cf4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 20:51:01 2026 -0300
+
+    Added assertions, incremental changes in Niri infrestucture
+
+commit ead3df8abce33889258475537ae80955af955317
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 17:25:23 2026 -0300
+
+    Initial transition for Noctalia shell, hardcoded -> variable
+
+commit 3e48e2ea35bd83740eea8c1a8e6463c12479dfe9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 13:23:55 2026 -0300
+
+    LY instead of DMS login manager
+
+commit 54eebadae1ddae5afbba29bc6777a5546eea29bc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 11:06:22 2026 -0300
+
+    Test of ly
+
+commit eb10e6d7c516b2fc42bde758d16b38fcc8ad64cb
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 11:02:08 2026 -0300
+
+    Revert on DMS
+
+commit 4eae2577b8bd7b04ed948f7218c246c3ec50d9ef
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 10:51:16 2026 -0300
+
+    Moved fwp to core feature
+    
+            modified:   Features/Core/default.nix
+
+commit c0eb2674e6183259b38d2906e083c6d41254f9ad
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 10:47:59 2026 -0300
+
+    Declared fwp in persist
+
+commit f0da98d153b0423884ab2768f1ac1c1a3825840d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 10:44:15 2026 -0300
+
+    Updated .lock
+
+commit c08843ae965502502e520b9b8de1df9c5d62c4e2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 10:09:03 2026 -0300
+
+    Added extra motions -> C-W | ALT-DIR(rection) on Neovim | Reason: Fish terminal on vi mode
+
+commit c5ad94fe379297f60ab3d27dcd88757992daa9c6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 09:20:25 2026 -0300
+
+    Icon save dconf preservation
+
+commit bf3a59980a998d18bd24f68ff665159c52bded20
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 09:08:55 2026 -0300
+
+    Nextcloud shall be nested inside of documents instead.
+
+commit 94798fc1a670c2a63abe29845706254e30b6db14
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 08:50:07 2026 -0300
+
+    Preservation on the icons
+
+commit befa3b93c8427b5f63796a0738a8ed01c8c13432
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jun 3 00:24:02 2026 -0300
+
+    More preservation + git config by hjem
+
+commit 7f78d153c936414418366012e0cef6b41fdefffe
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jun 2 23:22:41 2026 -0300
+
+    Removed old host, moved tmp
+
+commit 7a654f4654c2bac01e7ae22ff8ab0216b77a100c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jun 2 22:36:30 2026 -0300
+
+    Goodbye, Elisheva. I hope I can find a new task for you, you did exceptionally until it ended, Thank you.
+
+commit 10b0e12ae9409718c6b1b66ffaf049b832f11c36
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jun 2 19:18:47 2026 -0300
+
+    Better docs
+
+commit 38d8f3bdaec4b4fc82097ae61631d5217a10224c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jun 2 19:03:38 2026 -0300
+
+    Tug tug sahur install disko
+
+commit 3719eaa6f048806fe8bfa95612f7b3233af8ee84
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jun 2 17:04:24 2026 -0300
+
+    Update GSR-UI to latest commit (Hehe I did it myself)
+
+commit 743763e5205e9e9161b4cf1f19d8a6679c2bc577
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 30 23:25:50 2026 -0300
+
+    calibre-web service
+
+commit f1356d8a86b3a4c420fadd4af30c949d17c310aa
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 30 12:00:58 2026 -0300
+
+    Clean up on Elisheva
+
+commit 45b74a69a6dd465653c33ba3ad87c49fb544a7e6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 29 15:33:20 2026 -0300
+
+    Docker as userExtraGroups
+
+commit 9f89e6533c89802d07753dc79ef1cda0e946b396
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 29 14:19:35 2026 -0300
+
+    TLP as off explicity
+    
+    Explicity in tlp off, the nixos-hardware module for Slim 5 auto enables it if ppd is off, which is the case.
+
+commit ee29a4da747ba93a7189182f0ac736d693560b8f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 29 14:18:15 2026 -0300
+
+    Full removal of SCX
+
+commit 7008785e1c65754326de982217e2bab642362903
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 29 14:09:03 2026 -0300
+
+    PowerOnBoot for bluetooth.
+
+commit bf99b7a7ab648b20f10e394037cc07f43887883d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 29 14:06:55 2026 -0300
+
+    Firefox, but beta
+
+commit 49daea1f54361e851054983f0fd1559d1f7914f5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 29 14:05:30 2026 -0300
+
+    Cleanup on test
+
+commit a699247ec2805e21a1513a8704371c79c367c082
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 29 14:00:23 2026 -0300
+
+    Removed unecessary segments of Arthoplerau -- Since esting are required to see if such are truly necessary.
+
+commit b57e99bc772a7e563c3c233536510747ae8cd44e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 29 13:44:19 2026 -0300
+
+    Maintance Chores
+    
+    Update .sops, update .lock, removed lutris pkg, sync secrets
+
+commit 045292f26e91a631ec3bc38a196ca37c6d360c03
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 28 14:05:02 2026 -0300
+
+    Added lutris for Elisheva
+
+commit 974c7ec720c861c41bf9bdd38a6b300ded41a5fc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 28 13:59:43 2026 -0300
+
+    Enabled whatsbot
+
+commit 8caf84b8f72cd59a5fb9fe8b89970c50aaf0cf65
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 27 16:39:54 2026 -0300
+
+    To now cause issues
+
+commit 3c838f60c3a726eaddb3ef894ba3c055cfd2b1a8
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 27 16:34:38 2026 -0300
+
+    Fix kavita
+
+commit e8d469399e1960cae6e4d8a164ce389c60d10dfa
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 27 12:43:19 2026 -0300
+
+    nixos-init as optional
+
+commit 6fa9cd0b49e10a31612faca0583e5365cea8a7c4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 27 10:51:09 2026 -0300
+
+    Disabled whatsBot for now...
+
+commit ac9c490d1f107d87ca03a4c67b5486363b2f4ec4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 27 10:49:53 2026 -0300
+
+    Update dms input
+
+commit 5f1fe7d444c12385ff5aa10f874b164b49558a16
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 23:07:06 2026 -0300
+
+    Removed todo
+
+commit 56d6f276c6fc17b27dbd72063a9e44a16b68df14
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 22:58:38 2026 -0300
+
+    Added missed <CR>
+
+commit 3cbf3f5785d6c4289920bed680b0263e6e730b7f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 22:53:19 2026 -0300
+
+    Modifcations into neovim plugin
+    
+    Dropped indent-blank, added todo
+
+commit b2f3a91730d6f7a0936301ac1d52304e7fae5744
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 20:13:04 2026 -0300
+
+    Firefox package itself
+
+commit 3df6355538424e7e0e9d701b83b661758c3be289
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 20:10:44 2026 -0300
+
+    Removed vesktop modified removed helium added firefox
+
+commit 894cb32ad4a30673a26e4b2fa482118961f5bda2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 19:53:57 2026 -0300
+
+    zstd3 instead
+
+commit 0908f437db1d42527e0742e03d24d232cc6ff901
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 16:11:01 2026 -0300
+
+    Specified zstd to level 1
+
+commit 1d30d34990266778f2b1311822211e84d0569838
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 16:10:25 2026 -0300
+
+    Rules for ananicy provided by CachyOS
+
+commit 31ecd26b672689af15a010255c4217ec0ffd5b04
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 16:08:09 2026 -0300
+
+    If dual drive is enabled, auto-optmise-store
+
+commit b0de305d4e3b16e94311ca30a4d4b838fb34b5bc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 15:50:41 2026 -0300
+
+    Updated key for Elisheva
+
+commit 1641e13f34ee2aeeeb415399d6e58f25921da804
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 15:47:29 2026 -0300
+
+    Added ananicy: It seems benefitial for all my hosts.
+
+commit 32853745efa8830f8417b63c0c3d8e8fb4504de2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 15:11:31 2026 -0300
+
+    nixos-init as core feature
+
+commit 3d76965beac4f9c6f5b32bda46c2117cedbae917
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 13:02:26 2026 -0300
+
+    Keep /tmp also in /preservation -- Fixed steam scope of prsv
+
+commit 17c1eb9066af29e138f7d860e64de49e6f3595d3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 12:41:08 2026 -0300
+
+    /tmp is not neededforBoot
+
+commit 2ff7d0c4aab40d1c8d82a8cf4f3dd8071eb4e9fe
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 12:26:33 2026 -0300
+
+    .steam as preservation
+
+commit 0ba4d0a4f8a75916d819e469d19212b7f132a098
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 26 12:17:57 2026 -0300
+
+    Implemented nixos-hardware for Arthoplerau host
+
+commit 6dede0d2d59198a3ec6c29135daf0152786ea89f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 25 21:55:08 2026 -0300
+
+    dms added preservation ++ dms is not generated by hjem
+
+commit fd4a5f6c31796551205ce920123cc26375faff22
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 25 21:33:03 2026 -0300
+
+    Updated dms input
+
+commit e690cec2b51b3d92e5f7b66acabb0e4394756a4e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 25 19:03:21 2026 -0300
+
+    General Disko/Preservation changes
+    
+    Increased tmpfs size, split on isSSD (both as true defualt), security assertions, removed ssdOpts - all into subvolOpts + removed /etc/nixos, I keep my config inside of ~/Projects/{cfg}
+
+commit 09ee439df927c20bbe99ce9564c30c664c3a5d21
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 24 23:03:10 2026 -0300
+
+    Removed navidrome again
+
+commit bb51b4a1619dc80d37988abaed7b3cfec7a03854
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 24 20:42:10 2026 -0300
+
+    Testing Navidrome + fix antipartten syntax
+
+commit 7f811d0915812c9111db1ed868a8eaee18d989fa
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 24 21:00:10 2026 -0300
+
+    Removed navidrome
+
+commit 6f21f36f94e930c662c0d9646fdb94fac6fe5f8e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 24 20:42:10 2026 -0300
+
+    Testing Navidrome + fix antipartten syntax
+
+commit be9a76b876ec78dffa0ddbf56dd765040e854b1f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 24 20:27:34 2026 -0300
+
+    Removed redundancies, moved 'tmp neededForboot' to the disko itself
+    
+    Making the module depedend on disko also makes it reduced in tasks
+
+commit 6e4a24e57ff41c500b911cece638c50f141398ce
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 24 20:23:03 2026 -0300
+
+    Defined root partition mount point as tmpfs in disko
+
+commit f904507e53d4e8eaea67a2a45f993e45d866cc3d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 24 20:06:53 2026 -0300
+
+    Pass zstd compression even in nonSSDS
+
+commit e3ef8f31dc71ea90b55a90fb1cf6475cd3bc4561
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 24 10:22:49 2026 -0300
+
+    Populated preservation to individual features
+
+commit 9f13b5e3d4ebb4dc9ad5edff1b9c6aa84762f086
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 24 09:27:45 2026 -0300
+
+    Reduce in boiler plate of Preservation module
+
+commit 575a2a70a6d3c9dc4594cfdaea9bd7a03fd7facd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 23 21:51:48 2026 -0300
+
+    Reduce in boiler plate, centralization of preservation options.
+
+commit 038ffaeb87945be8a4d3406b45e93f098a14fb2b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 23 21:14:26 2026 -0300
+
+    Improve reability and maintability of Both Disko and Preservation
+
+commit cffd6197352f8fb39be76fba479b9a9039b88d9d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 23 00:05:15 2026 -0300
+
+    Split disko and preservation for better handling and readeability
+
+commit 662bd5d490c5af95debe8f9cb139f4245aeeb840
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 21:15:26 2026 -0300
+
+    added nextcloud to the list of persist segment folders
+
+commit 30c60c7e84dcf438cab23197d589ef7f08376d05
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 19:04:35 2026 -0300
+
+    Populated and improved preservation
+
+commit 88b6ebe69498a722f4cdb43bc6f20291b68a91d9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 18:38:27 2026 -0300
+
+    Small change on nasting to reduce repetition
+
+commit b1d830f0656d9907f34e7e808fa4a07d7b257776
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 17:40:36 2026 -0300
+
+    tmp
+
+commit e7d6e0c01aad0d68101184a0c94b90e20c07b778
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 17:32:12 2026 -0300
+
+    Removed unecessary options
+
+commit 469dca7cea71391cbf256b6b9c019c927f9e0240
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 17:30:34 2026 -0300
+
+    Removed home from disko
+
+commit aabb80edb47802ef35195ea61541aa211b9184f6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 17:25:35 2026 -0300
+
+    fmt on preservation
+
+commit 15c0023a7c4eae521a54bfad37059547996ed784
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 17:24:35 2026 -0300
+
+    Added nixos itself as persist
+
+commit a5e997477645a2cf5651dd58297cb77feda6ebde
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 15:36:04 2026 -0300
+
+    Autoenable DMS if Niri is enabled
+
+commit fafa30d6afab191871dcf0dc047e39b501732c7a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 15:30:33 2026 -0300
+
+    Updated hash also on deps
+
+commit 6df932c5ac7ff0a10bfe23163ac5ac150b38b322
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 15:27:53 2026 -0300
+
+    Updt on hash
+
+commit e86e97b13f8c33fb9bd806849f5838db16a559e9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 14:41:06 2026 -0300
+
+    Defined power
+
+commit e870decc0b7386664a114e9f824b7a43cdd0d6f3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 14:32:01 2026 -0300
+
+    Non ppd
+
+commit c72a4fb6fcaf6bd65550374c459cf55358eedc3e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 14:30:55 2026 -0300
+
+    Camelcase correction, niri opt in ppd -- bootloader as default enabled
+
+commit 9dc2098c6fcfc2fcc0c56124818d75752b85993a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 14:06:46 2026 -0300
+
+    Better management for Preservation
+
+commit 3aa567c926797d1a874d840c63e8f937f6b39567
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 13:36:57 2026 -0300
+
+    Better placeholder example
+
+commit 9d320f023e1686933a2746187cf6a2692a99b32f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 13:26:55 2026 -0300
+
+    Fix if dualDrive is false
+
+commit 64a79251fc07838e21a8c82f09c44348cd908675
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 13:10:46 2026 -0300
+
+    Scx configuration for Arthoplerau
+
+commit 9f2d616d4b330a25c2cb0c5e1c14bd3a297504d1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 22 13:05:21 2026 -0300
+
+    Preservation + Disko Feature -- Preparaments for Arthoplerau arrival
+
+commit d32c8d57a2bc0b3ab4039fb67152327bcbf4e321
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 21 23:13:35 2026 -0300
+
+    Updated on nvidia
+
+commit bc9f92601dcdf9c3c43ef9d3a04d17f096bba4d1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 21 23:02:50 2026 -0300
+
+    Conform: Make all Features similar in structure
+
+commit cb656f95e9d5792f2aed591f597c44ae45c59691
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 21 18:40:07 2026 -0300
+
+    Dropped implicit
+
+commit 80ee6fe8b8a33c1dcf326830d7a99b9fd32420b3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 19 13:23:03 2026 -0300
+
+    Updated flake.lock
+
+commit 909ebfc1e02b932b5774278366c40ef18f93ec91
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 19 10:23:24 2026 -0300
+
+    Added boot animation
+
+commit 177933987f4d65b476057b84028a623e16255baf
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 19 09:46:07 2026 -0300
+
+    Set open in boot as false.
+
+commit 2a9d0ddd6581b6df2af1f0a31730b7e456ed31dd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 19 09:43:24 2026 -0300
+
+    Made NTSYNC part of Steam segmnent.
+
+commit 031f896864e3e1a0898c4a076f468c43f3efc1b0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 18 11:55:06 2026 -0300
+
+    Brah
+
+commit 3b216077dc250eda46f68b19ceb93970ba0f21e0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 18 11:32:26 2026 -0300
+
+    Dropped Papers -- Gnome PDF reader, added Okular -- Kde Document Reader
+
+commit 7dce6fdc159b9058cd09fdb72265fa1d292e055b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 18 11:30:43 2026 -0300
+
+    Clangd LSP
+
+commit f959c6dc0a09daaa67a4d8e8de17e4f078413a31
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 17 19:34:27 2026 -0300
+
+    fd instead of find
+
+commit ae1f9d23418b312d78e7f1fcf80fc382c65bb7a4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 17 19:26:31 2026 -0300
+
+    Removed unecessary inputs, + Adjusted path for fanfic download -- kavita service doesnt support root path directly
+
+commit 00d8076f9542899f06606b8e274356138ce7f15b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 17 19:14:34 2026 -0300
+
+    Instead of gallery-dl, other fetcher...
+
+commit 01c589af4fd574f58454e9106fb53875e045c14d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 17 18:02:10 2026 -0300
+
+    Corrected and implemented ao3 donwloader
+
+commit 5a771aa607f89504f67ceefc310c5931e7101ae1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 17 16:20:22 2026 -0300
+
+    Correct ownship of secrets
+
+commit cae3b3da5c8d2d502f028cb4261c515628b2d453
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 17 16:17:15 2026 -0300
+
+    Sorry typo
+
+commit d571e470f6742894b07e7297e90709533b009e39
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 17 16:15:32 2026 -0300
+
+    Removed old syntax of gallery-dl secrets
+
+commit 71b5839ffd38bb088904f3aacc74aa4a45572068
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 17 16:10:01 2026 -0300
+
+    Split download paths for each download
+
+commit 02c56b24b1a943ad51cd91f05251fbb6693ec422
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 17 16:02:11 2026 -0300
+
+    As secrets -- gallerydl
+
+commit cf0a8cef64206ccc8deb294d87b49ef56df36312
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 17 15:40:00 2026 -0300
+
+    Secrets as list for my STUFF
+
+commit 38f5a195d02717c8ff3c558cff3058014b02188b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 16 17:12:37 2026 -0300
+
+    Necessary for ADL or something Jelly
+
+commit feba3de23e5d45bd6fa91d863b6b2dac422995e3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 16 16:34:49 2026 -0300
+
+    Smartctl tools for Moontier host
+
+commit c108167d733ad516c72784893d6752c1f0a0b496
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 16 16:24:08 2026 -0300
+
+    Fix typo
+
+commit 33b0fdaed2638f04efd02dc24fbf5574e9a7acc1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 16 16:23:42 2026 -0300
+
+    Bluetooth for ELisheva
+
+commit 7e10cbecef8f0616208e92d48d2d69f151968444
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 16 14:22:50 2026 -0300
+
+    More description into the README
+
+commit e451d788d0af840373bd7ac5b3730f37a50fc26e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 15 23:02:39 2026 -0300
+
+    Declaration of jellyfin for Moontier
+
+commit 55f07d856b480c70acb3557082879dee3ccf735b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 15 23:00:31 2026 -0300
+
+    Removed Jellyfin from --rr stack group, made own module
+
+commit 7cf90d159047af92f9dd77f24ce9ff4779a6db09
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 15 22:52:31 2026 -0300
+
+    -- iperf3 for speed measurement, removed unecessary firewall openings -- point to localhost instead of ip in Pi-hole
+
+commit 8ecea945462ce1a16c28147047d906335b74b0fd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 14 23:40:37 2026 -0300
+
+    Virtualization tools for Elisheva
+
+commit 00f089caad01e40355ff0c53bd42df4d8ecbcbb9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 14 23:40:07 2026 -0300
+
+    Fixed Kavita nixpks warming
+
+commit 721ce93b081ba7faa6813129462d15f9b0641375
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 14 11:31:38 2026 -0300
+
+    Ergonimic Adjusts for Niri
+
+commit 68b77635226c6160c2d4be7f9788599674702ebf
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 13 16:04:18 2026 -0300
+
+    I/O Scheduler for -- Moontier
+
+commit 0c8dda66d38b8d657e94f13f1cf7ea7e7fb060a5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 13 15:21:35 2026 -0300
+
+    Clean up in neovim config  ++ declaration of tinymist pkg ++ moved lsps to neovim
+
+commit 63e2180d13ecc2f8295c215c1154d671fc40bd82
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 13 14:42:23 2026 -0300
+
+    .lock
+
+commit de1b7144cff2864e6a872e45846c1c01ba27ada2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 12 16:03:27 2026 -0300
+
+    Origin pointer instead of local
+
+commit 8e941b1fb62ec6b520d0c06aaf61666deda98b1b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 12 15:22:00 2026 -0300
+
+    Removed unecessary string injection (gsr-ui) from Niri -- window-rule & binds.
+
+commit bd3c65af8379233821d1c28fcdb7c8d65a7948c3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 11 19:52:15 2026 -0300
+
+    Removed GSR from Elisheva
+
+commit fcd2bb6e96ab70765b02f347bd89e07a548d4561
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 11 19:49:30 2026 -0300
+
+    Update on gsr injection segment Hjem, update on .lock
+
+commit 32bbfbda5b1f3d0866f0f4aa50528d842c9665a8
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 11 18:55:41 2026 -0300
+
+    Flake.lock update: Only in DMS
+
+commit ca78dd5d66a09f4ce66e4173ab81b08bee7662ca
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 11 10:57:37 2026 -0300
+
+    Additional Wine Features
+
+commit 1d11e4f7a75d79ee33f53ab8caadd10dd445a4c6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 23:20:35 2026 -0300
+
+    Ntsync declaration
+
+commit 65cd62f8a5de4612a93eeef22ea293153439912a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 23:09:58 2026 -0300
+
+    Less hardcode on scx
+
+commit 124e1b5ba9e6645a213d7672ccc8bfa08f8a7766
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 19:38:59 2026 -0300
+
+    Removed GSR
+
+commit 2763c521983429d6be2bbcc29f6f87e4fc33edda
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 19:35:15 2026 -0300
+
+    Split on dms module
+
+commit 5434fefa4c36db0fbf4b40a9bddbad91c5c68297
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 18:58:17 2026 -0300
+
+    dont really work
+
+commit d943e1c97bd104a306da057df8d12174d95d5a1a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 18:50:47 2026 -0300
+
+    Xwayland patch special (Special sauce) for Niri xwayland
+
+commit 618d95a0d436f3724c129d8091a028e96a4c6d17
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 18:34:20 2026 -0300
+
+    Niri config for gsr ui inject
+
+commit e376e84dc75c72346a1f85d8494b593eb901e9cc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 17:57:41 2026 -0300
+
+    Cli cuz wayland
+
+commit f9ad91c808a736334bf0aafbf0b3099c5b02de45
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 17:13:27 2026 -0300
+
+    Removed gsr-ui-nix from Elisheva, non-necessary, test finished.
+
+commit 965cfeefef563e764a835af7793ad4c3e9751ab1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 17:10:34 2026 -0300
+
+    Syntax fix: gsr-ui-nix (Now mainted by... me.)
+
+commit ff1140264ae37f8ea4c8626110aee85436f9343e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 17:08:24 2026 -0300
+
+    Point to origin instead
+
+commit df74d07ea6ec7d67d06e6f2efde22cae56862cd4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 16:24:53 2026 -0300
+
+    Removed unecessary header segment on gsr-ui
+
+commit 63bccfdb7e57c5cab234a324a55a89028d326f7f
+Merge: 74658ed fba99f2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 16:24:03 2026 -0300
+
+    Finished merge
+
+commit 74658ed3496cf8a4ac96027fe3c33a09f908b531
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 16:20:47 2026 -0300
+
+    I should stop doing guess work
+
+commit 4e6c200d907b61faf4d4143fd7fff6815eb65b7c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 16:17:44 2026 -0300
+
+    Oops
+
+commit b908b8753fed78ffc57c3c7229ebfb1ffd1d0000
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 16:15:29 2026 -0300
+
+    Test gsr-ui
+
+commit 76518d9cd584890f0593edaa1ebc17898806f253
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 16:10:29 2026 -0300
+
+    Gpu input ++ flake in alphabetical order
+
+commit fba99f2353796d796c200a638b0c865c5679f515
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 12:45:47 2026 -0300
+
+    Audio flag for GSR
+
+commit 05728c4dd593050c1531461ee6f97b0be8f3b2d7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 12:43:10 2026 -0300
+
+    Added mpv as graphical pkg
+
+commit 3f18e76215b7458cb584cc4e7bf0d80f60cb49e5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 12:14:24 2026 -0300
+
+    Small bind for clips
+
+commit 17fe9b0b4e63bfd54b82f6a64c1559ca7c398154
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 10 00:07:36 2026 -0300
+
+    Helium fix for Picture in picture: Glued to left coner
+
+commit 5def7aed1c4339c443cb00765a9bc1a512d69d8b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 9 23:53:16 2026 -0300
+
+    Picture in picture ++ discord mute bind
+
+commit a0990bfe3211d4b2afca848529bbae200a90305f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 9 17:39:38 2026 -0300
+
+    Gpu screen recorder service
+
+commit 7054f358f6464911406786e94e5cb24e8eda2db2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 9 16:10:48 2026 -0300
+
+    Steam float notification fix
+
+commit 3951e6deb01d11f7a972974b577e9718723c5c8a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 9 16:01:29 2026 -0300
+
+    Heroic Games launcher pkg for Centuria ++ Update on syntax .nix on Niri module for Keyboard string substitution variant
+
+commit 6ad62854b0bcd6489ab29e5dd35aabde1d1aedc7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 9 15:39:09 2026 -0300
+
+    Keyboard variant option
+
+commit 900acf99b469f3d35128212826dafa409f9b0f19
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 9 15:12:15 2026 -0300
+
+    Firefox: DROPPED! We (My hosts) ball with HELIUM
+
+commit 67f2e4aca31574da2bb93746b784ba2258165e0f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 9 15:08:30 2026 -0300
+
+    Helium browser test
+
+commit 99e8f7ca1e15adf37f71c695bf44e85fc2cc3ecb
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 9 14:17:42 2026 -0300
+
+    Vesktop with keybinds pull request overrided pkg
+
+commit 6d04517fd5d12ed6fc14ca0cebf9a9a51e60cc2c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 9 13:51:50 2026 -0300
+
+    Testing pkgs
+
+commit 01a1cac3c5dc0d81c0a61e3ca44b55a783759ecc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 8 19:41:19 2026 -0300
+
+    Nextcloud as graphicalPkg
+
+commit b599df7996b887475622025abdc1b1a569f9d30f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 8 19:37:45 2026 -0300
+
+    Nextcloud module
+
+commit 627974ad10585700fa94e067635167c36518473e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 8 16:02:20 2026 -0300
+
+    Nextcloud module
+
+commit 37c6e4927cbbc2a55dd419b71fe4b2b510c8f978
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 7 22:44:46 2026 -0300
+
+    Dropped Readaarr: Dead project
+
+commit 1368ebb6102a5c74a66839c01ee06124776fa40f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 7 22:35:05 2026 -0300
+
+    In reference of commit 0d3eb774e24927a9313691da1d24b901170f1459 for dms
+
+commit 97994bb26b80eeb39b2ad2ab4f7ac0b505624da8
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 7 15:12:19 2026 -0300
+
+    Dropped trash
+
+commit 40cdef6c874ac3908e2767611e40515d6d511b93
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 7 15:04:01 2026 -0300
+
+    Added new dl
+
+commit dac84d86d7c91043dd069ba6f2b56a9389f19bd7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu May 7 14:46:16 2026 -0300
+
+    updated .lock
+
+commit 8de673fc5a73c0f5584b7146756f48ddd06f561c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 22:45:28 2026 -0300
+
+    Cachy: Kernel for Elisheva host
+
+commit 12b8be40ff1c00016abde0244dc358d19bb25417
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 22:44:50 2026 -0300
+
+    GraphicalPkgs: Removed Jellyfin
+
+commit 87386dbe670737f6fd69c0cdab62dcd699f5e057
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 22:40:38 2026 -0300
+
+    Fix on sufix name home-page
+
+commit 3507e253a0c1b5a3b7d0211be0dc6ee99fb36a17
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 22:05:28 2026 -0300
+
+    Fixed UnifiedDNS
+
+commit f29f33ec8eca8bb82c604b930556f6f335d3d5bc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 21:48:59 2026 -0300
+
+    Missed segment of unbound in Pi-hole
+    
+            modified:   Features/UnifiedDNS/default.nix
+    
+            modified:   Features/UnifiedDNS/default.nix
+
+commit 8982e038e7ca513fdacd004bdd0fd7479b4db3c0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 21:40:08 2026 -0300
+
+    Simple fix + syntax adjusts
+
+commit 4419752af676325851a3335618cc70a7ddd94d39
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 21:33:40 2026 -0300
+
+    Pi-hole + ACME + Nginx + Unbound DNS = 'UnifiedDNS'
+    
+    Sistematic Single Modular Domain Certificator passer, sufix generator, and DNS register
+
+commit ae52ce71ecce507cdb8b18f0de476338f7e23429
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 18:31:21 2026 -0300
+
+    That's probably really important I am sorry I am sorry I am sorry pi-hole I didn't mean it, pardon me for my sins please I am sorry man c'mon brah
+
+commit 6c35ad9debf0949541d26d8aee8b120c8e0bb74e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 14:11:57 2026 -0300
+
+    Adjust for systemized DNS entries generator for Pi-hole
+
+commit a8fe6fe277195f8b7dd4304d3a72dbc59add459c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 14:01:54 2026 -0300
+
+    Direct host aprooch
+
+commit cc5f99031e7a23f6c8ae700c566a5e135c0d1e00
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 13:57:09 2026 -0300
+
+    Simplified pi-hole!
+
+commit abb53df303f05f72b76604da9969cb730c7ed61d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 13:45:07 2026 -0300
+
+    Link instead of local file
+
+commit f9e2bb246bc39383bafc711138506b059ba79cd7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 13:38:12 2026 -0300
+
+    More systemized providers for IP/DOMAIN
+
+commit cffcffb896daa557d52db15e0b9750de5f913a68
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 12:49:57 2026 -0300
+
+    For all hosts
+
+commit 639f8ae10bf1eeaa0fb369d2eedfef2fc260062b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 12:34:17 2026 -0300
+
+    Simplified ST module
+
+commit bc79bfffe38d57bd7a9cccaa967b02e15740fd82
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 12:29:52 2026 -0300
+
+    Removed unecessary segments
+
+commit 11c4cdd17dc0c0c6bb83b6681b8e1b0a6ccfe8f4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 11:35:13 2026 -0300
+
+    Updated kavita for new *. sufix format nginx
+
+commit 5df1898da5803286edc55b540a838f78c38c6174
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 11:33:52 2026 -0300
+
+    Dropped bazarr
+
+commit 60295b72fa37360de52fc96637aa56702c98815c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed May 6 09:46:29 2026 -0300
+
+    Extra-domains generated instead
+
+commit 7bd62d737c053d9aaa783d6197431097eed313d5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 5 23:55:40 2026 -0300
+
+    Rm unecessary
+
+commit 738e9239382146e2b6ef7126e98377e52ecf3e2e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 5 23:55:12 2026 -0300
+
+    Nginx adjusts
+
+commit 388b9600bbac3b772f7625f7153049efc8a4c7aa
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 5 23:32:08 2026 -0300
+
+    Non baseURL config for qbit
+
+commit acf5de5af630d2710ed83e73c25001dddddf337d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue May 5 10:10:18 2026 -0300
+
+    Added flareresolver
+
+commit b2b6613833297e60c9669ed215c8f40391754629
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 4 22:14:32 2026 -0300
+
+    ST for localnetwork.
+
+commit b9759b51b5d27b7a8378abec7845d181cfd16364
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 4 21:19:00 2026 -0300
+
+    Finished on gallery-dl
+
+commit ae65f296f341c078740b35bf49588c5a05de2a04
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 4 20:51:51 2026 -0300
+
+    Updated on Gallery-dl, removed tor and more sleeps; update on ST: Open ports
+
+commit e8d9c83650243332546d243c3811d49d91021457
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 4 19:33:50 2026 -0300
+
+    Comments: Gallery-dl
+
+commit fd9def0f72634c4abceda31f2cf550fc091f1202
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 4 19:32:35 2026 -0300
+
+    Two times a day instead: Gallery-dl
+
+commit 7e5ed837d5f30b025e1c84109a20838ed1ef7b1a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 4 19:15:14 2026 -0300
+
+    More fingerprint as browser like headless
+
+commit aab460e421261a6bcfba95dc1f5de3144d168592
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 4 19:12:05 2026 -0300
+
+    Less fingerprint on Gallery-dl
+
+commit 138f6896ddc44f5c645a1f5e1c809625805600ad
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 4 19:08:57 2026 -0300
+
+    Randomize sleep time for Gallery-dl
+
+commit 7312752611d2d4d3dcde97e3438116d09b9d8a48
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 4 19:06:34 2026 -0300
+
+    Trying to reduce blocks
+
+commit e9dd25a5997b8f4e09026e658499e779dc4d3c0d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon May 4 16:54:10 2026 -0300
+
+    Comma + removed nvidia
+
+commit 164097c2d2819766e767a043ad5c72cfd3f6f427
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 3 22:01:49 2026 -0300
+
+    Kavita: Update on package for direct update -- 'I want it now.
+
+commit 8ce0f82ddaf838bd446ec980120609b5fcc7ddaa
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 3 14:11:07 2026 -0300
+
+    Flake.lock update
+
+commit 051e4fcbe89ff7266aca917069a1293737ade2fc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 3 14:00:20 2026 -0300
+
+    Adjusts on Gallery download, new manga on track
+
+commit 0ec5ffc5b6519f8a07bb8f593fd20ff2c64df511
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 3 11:48:05 2026 -0300
+
+    Removed ununsed modules, updated enables for Moontier host.
+
+commit 93df625a8e553628957afb4de2826c42a1aec420
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 3 11:30:09 2026 -0300
+
+    Gallery-dl
+
+commit 7126c1f9ea9bdce955f2e5f37877593bce2b790a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun May 3 08:44:46 2026 -0300
+
+    Fixed Kavita nginx
+
+commit 7ea9231fbd47946a8c3626062f3385ed4a7d1bcb
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 2 23:11:01 2026 -0300
+
+    Adjusts for Kavita, new folder for Permissions
+
+commit 44c3d8a8f115ab516a601bb0f247ab9dabda81f9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 2 19:19:07 2026 -0300
+
+    ReadingStack -- Merge Reading Tools (Not used yet.) ++ Samba, SMB file-sharing protocol for Moontier
+
+commit b562b84660403e2ff10bd34e02295df93e548e16
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat May 2 09:39:53 2026 -0300
+
+    Added AIO threads for Kavita
+
+commit 8bca8f2d80561463dc86ad61fd7814ce6b0fe09e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 1 03:20:32 2026 -0300
+
+    Kavita for Moontier (again)
+
+commit a3a149de3b1619371905323b64612adeb32f932d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri May 1 01:02:59 2026 -0300
+
+    nginx and additional blocklists for pi-hole
+
+commit 878b82363c7d5eb94d2ab5b3541d1c66766994ea
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 29 19:00:53 2026 -0300
+
+    Android studio development for Elisheva
+
+commit 05e2033d6c0afd9a7b38e887d70c58d496aeaf36
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Apr 28 12:48:22 2026 -0300
+
+    Dropped IA tools cuz I fucking hate it
+
+commit 4213dda0053ae77e7e8f2120a316c91d3c30d241
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 27 23:05:39 2026 -0300
+
+    Flake.lock update
+
+commit e6c3d93c2853b5648cb95c8ddd7d80f0f640d1d1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 27 23:04:47 2026 -0300
+
+    Adjusts for QUI, Qbit webUI client
+
+commit 04749f4dcbc803dd1f9e84813e9270104ae59b46
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 25 23:36:13 2026 -0300
+
+    Qui -- WebUI client for QBIT. A
+    --> Fixed Queing configurations (Qbit)
+
+commit 36434e340eea5212d5914cf6d8da2236e05064b1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 25 22:00:41 2026 -0300
+
+    Enabling non-free firmware
+
+commit e25a96b1ec7a062a870434dcef3755836dacd8ef
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 25 12:22:15 2026 -0300
+
+    Fixes on neovim custom plugin
+
+commit da71524fa9781d2c7f81432afe84903901eb1000
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 25 12:04:59 2026 -0300
+
+    Re-added missing configurations for Yazi
+
+commit 8f756dc327b3b162e132b6c36a154b0bc41006d0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 25 12:01:19 2026 -0300
+
+    Merged Shell with Core
+
+commit 89337beeddc0c3409f50ed83172b87e04ee881fa
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Apr 24 18:43:30 2026 -0300
+
+    Removed package: Fuzzel
+
+commit f505d93fffa7cc1c61c1389bebcb912c4410270a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Apr 24 10:31:10 2026 -0300
+
+    Better handling of sharing: Slskd
+
+commit caf9a8c58f8142a7bdadec801987cec7149655a6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Apr 24 09:57:17 2026 -0300
+
+    Temporary adjusts on media permissions: Slskd testing
+
+commit bc4c3d417100a3632d61eb9f687acace3ac152d4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 23 19:30:48 2026 -0300
+
+    Btop cuz I like it
+
+commit 859d84bc0abff8c6d3ea85cc653d00c581f5746e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 23 18:30:46 2026 -0300
+
+    Removed unecessary modules
+
+commit 4f445219709da489fb84cd62909494ebac317978
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 23 17:11:54 2026 -0300
+
+    Kernel for hosts
+
+commit 903f6bb47733dab99facbe156414ce791d556c19
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 23 15:13:58 2026 -0300
+
+    Kernel test
+
+commit 119152a464d620ecf659daa8ffadc3d5b9238b7e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 23 14:12:29 2026 -0300
+
+    Fixed tailscale acess for Ngix
+
+commit 63dee8ebf7bcd855f72ed53505f901db8fe7669f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 22 20:56:09 2026 -0300
+
+    Reapply "Adjusts on blur, aiming for 'Acrylic' effect"
+    
+    This reverts commit 8e28beb9b1b9082b49338ee5a2b9a528194e993c.
+    
+            modified:   Features/Core/default.nix
+            modified:   Features/Niri/config.kdl
+            modified:   Features/Slskd/default.nix
+            modified:   secrets.yaml
+
+commit 8e28beb9b1b9082b49338ee5a2b9a528194e993c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 22 20:54:29 2026 -0300
+
+    Revert "Adjusts on blur, aiming for 'Acrylic' effect"
+    
+    This reverts commit 89b24600192561f3c7af766ab564ac8264f7f401.
+
+commit 89b24600192561f3c7af766ab564ac8264f7f401
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 22 20:51:16 2026 -0300
+
+    Adjusts on blur, aiming for 'Acrylic' effect
+
+commit 91c1efda8f6b417bd590666441bcd900b43926b0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 20 19:30:42 2026 -0300
+
+    Adjust on Niri: Opacity
+
+commit 03903f38c57ae74cfd7a9266504d4fd4d1eba55d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 20 18:59:53 2026 -0300
+
+    Blur! On Niri!
+
+commit f6b9c924051b4514e1dcad81ca82481963b2cbc2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 20 15:39:46 2026 -0300
+
+    Removed nixcats
+
+commit ea6e72e2c4f80b248003dcd8b3e6ffa0cc0ce2fb
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 20 15:31:45 2026 -0300
+
+    Fixed nvim
+
+commit cd360b2e00a6f1a242a7a03d7cb938fb7f4eabcb
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 20 14:27:01 2026 -0300
+
+    Clean up on kdl
+
+commit b1d628dadd60f54c866cdc1ed45f1d4d675f4889
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 20 13:58:44 2026 -0300
+
+    Finished hm to hjem transition
+
+commit 314670b7c001ed2341481af407cf2bc108dc520f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 19 22:33:33 2026 -0300
+
+    Begin transition to Hjem isntead of home-manager
+
+commit d1f1baf263a574b2b99eeb41c4687a2ff1258542
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 18 22:43:03 2026 -0300
+
+    Meh
+
+commit b5d470a185e17c1df65139015c92634a75bf6966
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 18 22:37:40 2026 -0300
+
+    Removed blur
+
+commit 0a4dd43c2ff8703dc35b0061f47c4bb98a28e75c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 18 15:41:56 2026 -0300
+
+    Multi-implementation of /base urls for media service
+    - Slskd
+    - RR-Stack
+    - Jellyfin
+    - Komga
+
+commit e5b4b394b99aae8364d15d5d085e0ffe411c70ee
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 18 13:13:59 2026 -0300
+
+    Spin
+
+commit 6be8990072e3c1bd731e20345e22baf98cc69be6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 18 13:13:34 2026 -0300
+
+    Test
+
+commit 3dbf61d62c8d6b09c333384cf4ebfc30c9d67a66
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 18 09:32:19 2026 -0300
+
+    rg as core pkg
+
+commit 24559e27d4af7e4120db8700cac872ef44bb4640
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 18 08:49:11 2026 -0300
+
+    Testing of nginx
+
+commit 86aa1b34aab5a961c85a2fba7a13b43416ac8910
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 18 08:47:21 2026 -0300
+
+    Initial impl of nginx
+
+commit 5a8d353458d41c76dd074ae16735c583c9aa6ca1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 18 06:10:30 2026 -0300
+
+    Removed Pi-hole in favor of Adguard
+
+commit dd029ea86a4078bf1475e67dcfa48af7a734066f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Apr 17 15:48:58 2026 -0300
+
+    Nvidia update, new packages, adjusts
+
+commit 770e33d2d77c38c6d4a5de054f9ebe31eb29aa78
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Apr 17 13:08:26 2026 -0300
+
+    Adjusts for MediaPermissions, adjusts for Suwayomi.
+
+commit a15c2238ea8f932c03b19f17cf6412f21523f0b1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Apr 17 12:36:26 2026 -0300
+
+    Suwayomi enabled as scraper
+
+commit e4c031ff09b6e1f917ef0c37bd2e06c65e55e1dd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Apr 17 12:04:39 2026 -0300
+
+    Enabled SLSKD for Moontier
+
+commit 0d4243e3845c8c7712a2112b8d50eaf89e330f19
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Apr 17 11:58:21 2026 -0300
+
+    Komga testing, more elegant permissions
+
+commit ba35ef9aa088f7cb70aa7d02824fbf75c24b2233
+Author: Joaquim S. <rPlakama@proton.me>
+Date:   Fri Apr 17 09:16:56 2026 -0300
+
+    no queuing Qbit default.nix
+
+commit 2ba50f4a2f6032734a59639c53d7308a0e849322
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 16 23:46:40 2026 -0300
+
+    Suwayomi default as false instead
+
+commit cf7bb95df4fd10351472f9fa576fd7c936cbebd3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 16 23:45:44 2026 -0300
+
+    Suwayomi service
+
+commit 2fea3b2accbfcebe4a1d8ba2554796a33ea0a217
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 16 18:29:53 2026 -0300
+
+    Sudo-rs, cisco packet tracker for Elisheva.
+
+commit 6f7230506f623cabf82bf3c098c78f9bbbecd0d7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 16 16:01:18 2026 -0300
+
+    Reapply "Centuria SOPS keys"
+    
+    This reverts commit 0a6d136563be1eefabf3dbc0082ca0f09269b6e0.
+    
+            modified:   .sops.yaml
+            modified:   secrets.yaml
+
+commit 0a6d136563be1eefabf3dbc0082ca0f09269b6e0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 16 12:38:44 2026 -0300
+
+    Revert "Centuria SOPS keys"
+    
+    This reverts commit 58afdcdf90f057b814f00623f395e302dc5879c9.
+    
+            modified:   .sops.yaml
+            modified:   secrets.yaml
+
+commit 58afdcdf90f057b814f00623f395e302dc5879c9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 16 10:17:24 2026 -0300
+
+    Centuria SOPS keys
+
+commit c98495ad8575dbe29da854178d25976e5fd11649
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 16 10:14:14 2026 -0300
+
+    Added Elisheva Public Key to .sops
+
+commit 6a95125f2d59ff66f20540aac3ee66b82e6162ab
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 16 09:53:59 2026 -0300
+
+    Update on flake.lock
+
+commit 4cba21b642e19ac74767ccd23232d2e2973eeff9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 15 21:38:29 2026 -0300
+
+    Cleaned SOPS use
+
+commit 033ffbc9fe99e089b041c6f91ffe01452f0a54ec
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 15 20:24:00 2026 -0300
+
+    Default whatsapp bot to false instead
+
+commit 3e77ea7253c7d3efc936fa2c9b3cf346e8d71444
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 15 20:20:15 2026 -0300
+
+    Labels instead of UUID. Running unique OS. -- Note: If I get fresh hardware with two nvmes//two nixos// it should be changed...
+
+commit 60c4d7e65971882532f8c95b92cf9437a563ef1f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 15 23:16:03 2026 +0000
+
+    Fixed missmatched Elisheva hardware
+
+commit 4a5da7897c0bfc9b3c44b7d8487a33e2ebdc8196
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 15 23:08:59 2026 +0000
+
+    More hz for Elisheva
+
+commit 1976475183a254f0b26d0620a36dcbbf0bd5378c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 15 18:23:55 2026 +0000
+
+    FIX: Fixed missing 'services' prefix, scx feature
+
+commit a1051bafe011f607e4e195fd2141db09058e9074
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 15 18:22:34 2026 +0000
+
+    Scx scht as a feature instead, non default. Issues on moontier -- resulting into crash -- reboot.
+
+commit e69e63cd183cb18576e1ee0ca42783f29a045e87
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 15 11:50:21 2026 +0000
+
+    We are spacing programing noww
+
+commit d271202d93e0b87cb08f3a119bd50ed672e594a5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 15 00:10:27 2026 +0000
+
+    Just for timezone
+
+commit f6933892aac2be576b3843d0a45ac511d7351e2b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 15 00:05:15 2026 +0000
+
+    Locale configurations
+
+commit 99ca0f8c9bfc17da74c764cde98e022d29328909
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Apr 14 19:07:16 2026 +0000
+
+    Fresh hardware
+
+commit b8a807e9545198b2d57af7f8186a1ea108b595fc
+Merge: c293ed6 d7aaffd
+Author: Joaquim S. <rPlakama@proton.me>
+Date:   Tue Apr 14 15:59:31 2026 -0300
+
+    Merge pull request #2 from rPlakama/merge
+    
+    Sorry. -- I don't have all that pacience.
+
+commit d7aaffdb4ba8ab97dcaa9d3ad3ca018665f59bfc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Apr 14 18:58:57 2026 +0000
+
+    Sorry.
+
+commit c293ed64f425e2f70e89e8ddec192dff5dd241a6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 16:34:22 2026 -0300
+
+    Oops, again
+
+commit 033e7b12dfeeb7045c44053103dc50f0b347e2c9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 16:31:54 2026 -0300
+
+    Cosmic clean
+
+commit 8ce28d6a225c094bb62be557b3f2b408444c1ded
+Merge: f1c7373 5ced626
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 15:30:32 2026 -0300
+
+    Merge branch 'master' of github.com:rPlakama/Elisheva
+    Thats the thing
+
+commit f1c7373e5825dcd1e50ebd9e45bbb8f818a1ac56
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 15:29:32 2026 -0300
+
+    Cosmic test
+
+commit 674b13cc8896837d34edd28bf471f3044e6f193e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 15:17:14 2026 -0300
+
+    Tryout on cosmic
+
+commit 5ced626b5f6ab70ab980bc6e4a025614bc8e9c8d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 14:16:31 2026 -0300
+
+    Update on Hardware
+
+commit 23fac4dde305d340f6d9ff9f01724575c57011e0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 13:09:52 2026 -0300
+
+    Gamescope
+
+commit 7226fbed4f223ad38036cc0fa69406f96ba59bd1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 12:11:51 2026 -0300
+
+    Kde test
+
+commit a117f830a33b71b0d19a41e1b22665ea72da9f1b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 11:54:48 2026 -0300
+
+    Fix scope in executable service gnome on Centuria host
+
+commit 78e7cd7212baa29dcacd462b1cb9975717fd9b4b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 11:52:52 2026 -0300
+
+    Production instead of beta
+
+commit a6c6908beb57102dbe5e4b5b5c550254bffa6a52
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 09:15:51 2026 -0300
+
+    Slower animations for Niri
+
+commit 81cc2bb68f428e0a284ca8b7db5e18ea69877d95
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 08:36:36 2026 -0300
+
+    Choosed on GNOME
+
+commit 5104d9b04863a6aa4b4f59b0cbb2f17aadccbbca
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 08:26:49 2026 -0300
+
+    Workaround for plasma
+
+commit 23cf40f04a08ce43aa5e10612077663f63e7e1a3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 00:31:33 2026 -0300
+
+    I need to start testing before commit!
+
+commit 5ef6ff76544e1e0a219e5daff4d714875530b0ba
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 00:29:42 2026 -0300
+
+    Small confusion on gnome enables
+
+commit fbddd2dc285b3e52254d26e7d97378cbb5c036b3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 00:25:38 2026 -0300
+
+    Fix gnome
+
+commit 058cb8a2c73d09d20f488de97924076b319db626
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 00:02:47 2026 -0300
+
+    small fix on syntax
+
+commit 66bb527c8827cd9c045ceeb5b761e45919afce88
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 12 00:00:20 2026 -0300
+
+    Niri config _as_ Elisheva only.
+
+commit 5566f519e276a87cf7874daafdd0d48155cddb2f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 11 23:50:57 2026 -0300
+
+    New install on Centuria
+
+commit 8143b2675f9e86f56788984844c730e84ffe1313
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 11 23:27:34 2026 -0300
+
+    Exclude certain gnome packages
+
+commit f0bdb53c7d7925fc397578329155bd6e5dbf3ba7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 11 23:08:42 2026 -0300
+
+    Gnome instead
+
+commit c27c4a53954b169c5f7b2043e1c900947154a94f
+Merge: 64a0ec8 56382d4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 11 23:05:15 2026 -0300
+
+    Merge branch 'master' of github.com:rPlakama/Elisheva
+    Cuz I want.
+
+commit 64a0ec820a658994524d004e16f2ac717f6dbc80
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 11 22:58:14 2026 -0300
+
+    Fixed on neovim
+
+commit 69695ed7e4955ff9f7a05e975e995a598e4053f4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Apr 11 22:52:35 2026 -0300
+
+    Initial simple impl of KDE, moved systems around.
+
+commit 56382d4e8382f991c3cd7fc1b47f4df02dcef3ae
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Apr 10 14:07:29 2026 -0300
+
+    Passthought nvidia GPU on Docker interface
+
+commit 03bf29ed1f3626621404a641912ecad5c5abf88a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Apr 10 12:07:40 2026 -0300
+
+    Sync permissions to declared services -- Removed Lidarr
+
+commit 9808ada2b826f8eaadca37f7143f9205ab67af56
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Apr 10 11:55:31 2026 -0300
+
+    Mix Squash Evil Lander on media-stack-chan kawaii--desu. Using GenAttrs to reduce file since and passs it as a list of service instead of manual declaration for each one, as a DRY principle.
+
+commit 3d6ca389f115a6e6347c4240d1cbbaad25c6ce4d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 9 22:45:31 2026 -0300
+
+    Mix Squash quash mix mix, moved steam to desktop, removed unecessary default
+
+commit 03a7a826c6104d85db63e459748f5e659054c501
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 9 17:24:49 2026 -0300
+
+    Jackett for Moontier
+
+commit 63d69a8639445a67f7dbe6449ca43f4c4281f9df
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 9 00:21:29 2026 -0300
+
+    Removed Deluge service
+    
+    Removed from 'Media' extra group, removed service declaration.
+    - Why: In Favor of Qbit instead.
+
+commit f8b883c701b4a1c9204101b2e4c632c90ea0687e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 8 10:52:05 2026 -0300
+
+    Jellyfin desktop client for Desktop hosts
+
+commit 29d9230e6d143c839e01eb5e3c40c11223800fb5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 8 10:09:33 2026 -0300
+
+    Plex service removal
+
+commit 40f8746802ef015640e70208642bf866ad60f481
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 8 10:09:14 2026 -0300
+
+    Removed Plex in Favor of Jellyfin
+
+commit 45f4681d951093cc7c62ad2cd8de71337ea3ddbc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Apr 7 18:00:50 2026 -0300
+
+    Removed Jellyfin in favor of Plex.
+
+commit 93d9c0818564a205e36bbebf10e297f0d6da7d16
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 6 23:29:53 2026 -0300
+
+    Now its realiable. -DNS additions!
+
+commit c371d5271037aba82297a8a301787589d04e0fa7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 6 23:10:06 2026 -0300
+
+    Fixed sops
+
+commit 1a4b14129e25177c2567586b298716712f7620b0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 6 23:08:27 2026 -0300
+
+    fah git, dont mess with sops
+
+commit ee6f10a61fa0c9d8bf916bdcb7fd318cf34d583b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 6 23:06:14 2026 -0300
+
+    newt
+
+commit f7c8de616e528c923b40f344fab8c790b8b8869f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 6 23:04:42 2026 -0300
+
+    Docker
+
+commit 87383eaf027f87b27847c3d72017f0b8692713fd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 6 22:42:44 2026 -0300
+
+    Pangolin Sops
+
+commit 4c884bd7dc852f735a8907f709ee83792e1dadfe
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 6 13:45:20 2026 -0300
+
+    format
+
+commit 75945737861a1f3733e3392c00fcde5d8ea60a82
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 6 13:44:57 2026 -0300
+
+    readme
+
+commit 06057468cd95f0263ede0f6a86dc0b1e1f7f710b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Apr 6 10:57:30 2026 -0300
+
+    Non noveau non open NVIDIA driver configuration
+
+commit 44ff8e6c43136beda69f8abdf9c8d6b234d8b113
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 5 18:33:43 2026 -0300
+
+    Jellyfin desktop client for Desktop hosts
+
+commit eb073730e962152a7e8089da0d482585548a9bef
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Apr 5 18:31:50 2026 -0300
+
+    Specific Hardware configurations for Moontier
+    
+     + Added Hardware Acceleration for Jellyfin
+    + Permissions for Acceleraton for Jellyfin
+    + Moved pkgs to env_packages -> hardware extra packages for Driver
+
+commit 6cd089f7389b00026e144affeb2fe1d15087a5da
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Apr 3 23:21:58 2026 -0300
+
+    ALL so tailscale is inclued too. Ik Ik 'Its unsafe' indeed it is, but I don't even have 53 open nor my ROUTER and behing a CGNAT... Anything to be lazy.
+
+commit 992e81825f5f33246e79d56161770d00b0debd2c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 2 23:06:48 2026 -0300
+
+    Disabled 'bater-ponto' sleep cycle, now my network depends on it!
+
+commit 889d3f8d4d33fd3c6c90de446c54f4fe9d081aeb
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Apr 2 13:50:07 2026 -0300
+
+    Pi-hole + soulseek changes!
+
+commit b193ef54a671e3ef436829367eac6c7c443ffb3f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Apr 1 19:30:54 2026 -0300
+
+    We are so back to matugen theming in my neovim thingy configuration owah amazin woah woah woah!
+
+commit b790d44b5bc35b98938038ca5c48a41f1326ffde
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Mar 31 19:04:59 2026 -0300
+
+    Fixes related to Moontier host.
+    
+    Syntax issues, systemctl wrong scopes, etc.
+
+commit b5046eb9b36e0a35d58e1a1b20c530309c4e40d1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Mar 29 22:56:01 2026 -0300
+
+    Update on follows
+
+commit 04ae0d0d9cc5a3cd6a4e09d506cf157a79e188df
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Mar 29 22:05:19 2026 -0300
+
+    More things things
+
+commit ccdb2372f94ef43ceef53b7231132889ac610352
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Mar 29 12:48:34 2026 -0300
+
+    faaaah
+
+commit a9a94f3fb681eac6d33b75db597659154f3a0c9c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Mar 29 10:39:08 2026 -0300
+
+    I keep forgetting.
+
+commit 5961d4039fdf7eefd90c1c2ad5afdb1dc0037a65
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Mar 29 09:56:57 2026 -0300
+
+    PDF reader.
+
+commit e7c3c9e6cf992483cc0eac2b721632b2932a2743
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 28 14:42:51 2026 -0300
+
+    fd
+
+commit 7f0926665bcca0aa04b76813bbc4a3600ad1268a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 28 14:34:55 2026 -0300
+
+    XDG issues fix
+
+commit a241786e14e388026dbb117f9b9d3a35f1af383d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 28 14:26:35 2026 -0300
+
+    Godanmed
+
+commit ca4265cab3456ac498cbce2b98f4bd62f8891644
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 28 14:25:06 2026 -0300
+
+    Fix typos
+
+commit 7bbec2e5b6ad003467f408fe2c6ab00f353cc7df
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 28 10:47:57 2026 -0300
+
+    Over
+
+commit f6252b274ce6cbb84a692900d650a792852fa4d7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 28 10:42:58 2026 -0300
+
+    Thigns that i Forgotted.
+
+commit e3497a9ea1d0ed7f6a8bb40fc3f6f3fc09049214
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 28 10:13:37 2026 -0300
+
+    Oops.
+
+commit b177fe03086c1adaccefad5268bba98000c5bade
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 28 09:56:32 2026 -0300
+
+    Refactor, usr time:  17.77 secs to 14.00 secs.
+
+commit c5c9175fdb8524f1ad5c1d4d478ffacdb729d1a5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Mar 27 20:02:52 2026 -0300
+
+    Small eval time optimization
+    
+    Reduce boolean evaluations by defining lib.optionals instead. -2s total to 4s total, depending on Hostname.
+
+commit c68e4800d04a392b4d9cc859e85328cd663f833e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Mar 25 19:14:14 2026 -0300
+
+    General optmization, merged files, new special args
+    
+    - using IsHostname istead of config.networking...
+    - Merged unecessary files
+    - Removed dropped packages
+    - Moved duplicates
+
+commit 77d89e57ea47d4d00ad65c2840f87351394064e9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Mar 24 19:19:56 2026 -0300
+
+    more info on README
+
+commit 10ee07a05bedbb8775296c5339002a8cf1f15aa6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 23 23:59:08 2026 -0300
+
+    Why elisheva doesnt deserve that too?
+
+commit 2961379507e44120cb72dc85078a73db26d51404
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 23 16:09:34 2026 -0300
+
+    Jell
+
+commit 85ce54958646e0aa11b6630de94ec56c9c53d544
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 23 10:21:57 2026 -0300
+
+    Update on niri
+
+commit 75f9ea039c65319a651be936161f4e01d68c94ad
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Mar 22 15:11:39 2026 -0300
+
+    Small changes
+
+commit caacb195f9067249e9017573e5877ca44880d6f8
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 21 18:24:16 2026 -0300
+
+    extras
+
+commit 8ca24383808e515694871be7c4ea9662a24baf0d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 21 10:18:22 2026 -0300
+
+    General fixes
+
+commit e67362ded02aa3c5ca03cbc251cc94280d6350db
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Mar 20 21:36:27 2026 -0300
+
+    bah.
+
+commit 73a2d85c3615403d5581462514bdc0cefd70fef0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Mar 20 21:29:30 2026 -0300
+
+    Deve ser o suficente Asceding da silva
+
+commit 750487fee991cf01eb37b75d73cdd22977fd5ce5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Mar 20 19:58:57 2026 -0300
+
+    Unecessary files
+
+commit bb23237a95ffd34e8f69e81b26f2afea707590c3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Mar 19 21:03:28 2026 -0300
+
+    Stable now.
+
+commit 63e3f1cef2b2b051e517899161130610ffbc26a8
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Mar 19 15:25:22 2026 -0300
+
+    update on download!
+
+commit 5ab0327293bdcf4f7fcb1e77ea66ad803a993429
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Mar 19 14:41:38 2026 -0300
+
+    Maintance and cleaness
+
+commit fc85654187c69be5c71c29c18ef19d433701bfc0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Mar 18 23:31:22 2026 -0300
+
+    Sleep...
+
+commit 02a04a727d843e2fbe2dc04f603387daa48cefa6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Mar 18 18:36:48 2026 -0300
+
+    I am tired, therefore thats just it.
+
+commit 303b34600372fb6a96e746bb7635e765b9283c10
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Mar 18 10:26:14 2026 -0300
+
+    Typo
+
+commit c681f27b54f298aae0806aece327f843e6e9c8bb
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Mar 18 10:23:19 2026 -0300
+
+    Fresh HDD.
+
+commit b4d1f7d8500cded972dba826a0009f22e0be79d7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Mar 17 17:06:14 2026 -0300
+
+    updated on hardware
+
+commit 006aca37b5e2617829ceb9d40f8963c3a7c8dcc3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 16 22:02:52 2026 -0300
+
+    Finished.
+
+commit 6e1f3131fc7563e5d491d76dcb50e0c8a79cd1b9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 16 21:17:47 2026 -0300
+
+    flake.lock: Update
+    
+    Flake lock file updates:
+    
+    • Updated input 'dms':
+        'github:AvengeMedia/DankMaterialShell/bb08e1233a2a57fc64ee024523cb7010aabb97ce' (2026-03-13)
+      → 'github:AvengeMedia/DankMaterialShell/f0be36062e8e4679cec79651ddace96f73c8bff2' (2026-03-16)
+    • Updated input 'home-manager':
+        'github:nix-community/home-manager/ef12a9a2b0f77c8fa3dda1e7e494fca668909056' (2026-03-13)
+      → 'github:nix-community/home-manager/57d5560ee92a424fb71fde800acd6ed2c725dfce' (2026-03-16)
+    • Updated input 'neovim-nightly-overlay':
+        'github:nix-community/neovim-nightly-overlay/b550599eedc54514f5b71cee8e480e337d104d84' (2026-03-13)
+      → 'github:nix-community/neovim-nightly-overlay/3c143994a616ebc45c69dfa0487e171b7b5c0da6' (2026-03-17)
+    • Updated input 'neovim-nightly-overlay/neovim-src':
+        'github:neovim/neovim/957eb1fde04496b4a2c07fd8427a8d78844d1bf7' (2026-03-12)
+      → 'github:neovim/neovim/6edae880528b7a1494a7610b07e4415d68c463ff' (2026-03-16)
+    • Updated input 'neovim-nightly-overlay/nixpkgs':
+        'github:NixOS/nixpkgs/b6067cc0127d4db9c26c79e4de0513e58d0c40c9' (2026-03-11)
+      → 'github:NixOS/nixpkgs/a07d4ce6bee67d7c838a8a5796e75dff9caa21ef' (2026-03-15)
+    • Updated input 'niri':
+        'github:sodiboo/niri-flake/20f866c7416799ebf5b88b07c9d32c6a440e825d' (2026-03-13)
+      → 'github:sodiboo/niri-flake/9061fa226d41fceec5bcec72e0e7ee2282b5645e' (2026-03-16)
+    • Updated input 'niri/nixpkgs':
+        'github:NixOS/nixpkgs/fe416aaedd397cacb33a610b33d60ff2b431b127' (2026-03-12)
+      → 'github:NixOS/nixpkgs/5b2c2d84341b2afb5647081c1386a80d7a8d8605' (2026-03-16)
+    • Updated input 'niri/nixpkgs-stable':
+        'github:NixOS/nixpkgs/3e20095fe3c6cbb1ddcef89b26969a69a1570776' (2026-03-13)
+      → 'github:NixOS/nixpkgs/9fe1300f4360e13f39d6d1d006e54fd5093e9ad5' (2026-03-15)
+    • Updated input 'niri/xwayland-satellite-unstable':
+        'github:Supreeeme/xwayland-satellite/10f985b84cdbcc3bbf35b3e7e43d1b2a84fa9ce2' (2026-03-02)
+      → 'github:Supreeeme/xwayland-satellite/a879e5e0896a326adc79c474bf457b8b99011027' (2026-03-16)
+    • Removed input 'nixarr'
+    • Removed input 'nixarr/nixpkgs'
+    • Removed input 'nixarr/vpnconfinement'
+    • Removed input 'nixarr/website-builder'
+    • Removed input 'nixarr/website-builder/nixpkgs'
+    • Updated input 'nixpkgs':
+        'github:NixOS/nixpkgs/fe416aaedd397cacb33a610b33d60ff2b431b127' (2026-03-12)
+      → 'github:NixOS/nixpkgs/5b2c2d84341b2afb5647081c1386a80d7a8d8605' (2026-03-16)
+    • Updated input 'sops-nix':
+        'github:Mic92/sops-nix/d1ff3b1034d5bab5d7d8086a7803c5a5968cd784' (2026-03-09)
+      → 'github:Mic92/sops-nix/8237de83e8200d16fe0c4467b02a1c608ff28044' (2026-03-16)
+
+commit 6d9c1c9b29e39e8ba8ca3d2f18a17c3b81d1929a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 16 20:25:04 2026 -0300
+
+    Please just work
+
+commit 142ab7c80ad1471fb9fad5338f663d3b199cf80a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 16 19:48:25 2026 -0300
+
+    Update on sops
+
+commit 026b2c41eed959c0b4b19bd22cd871375d436ce5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 16 19:28:51 2026 -0300
+
+    Cleanup
+
+commit c01115e2824507c13aead9b93e30284f5bacbc0f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 16 16:12:02 2026 -0300
+
+    Thats for everyone..
+
+commit abf62ec731b219600d3d36b6f8f1b1e1e3fee09f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 16 16:11:44 2026 -0300
+
+    Also that..
+
+commit 03cddfc3686bbd9b409813b965f242ef4bcdbed8
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 16 16:11:20 2026 -0300
+
+    Fixed.
+
+commit f8bc511ad37addfc3823e27955515e2e143052e1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 16 14:23:33 2026 -0300
+
+    Update on Moontier
+
+commit ca2c3125d63e3a7113d855d12a62625c629f9cbf
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 14 19:53:06 2026 -0300
+
+    For elegancy...? Probaly.
+
+commit 01c9dd7f6888ae9af0c897647911ad2e9b0ad51f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 14 19:28:41 2026 -0300
+
+    Uuuuuuuhhhh player.
+
+commit 42282d56f37dd49cd37baf097daf3835534ee210
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Mar 13 20:30:11 2026 -0300
+
+    General Maintance
+
+commit 1691548a8139e1b7b330eaf81ca6ba5c5d513fd7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Mar 11 19:39:39 2026 -0300
+
+    Cleaner prompt
+
+commit 45c5fe0de375bb5ed8eba0f7acd8def891c9f279
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Mar 10 13:55:39 2026 -0300
+
+    For IDE
+
+commit 5a84a9a88e2210cc8a37d7842aab65eaa9ef4297
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Mar 10 13:31:00 2026 -0300
+
+    Missing bind
+
+commit 01e0d8a6816e177237a1b7ec1bb6de00e90ca0d4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Mar 10 09:44:55 2026 -0300
+
+    Elegant
+
+commit 6c41ae688d1085484e679f12694094ef8074e076
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Mar 9 10:18:27 2026 -0300
+
+    More improvements on Neovim
+
+commit cdd33a7a5c8b6917c245be717bcfbefc19902c89
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Mar 8 23:21:41 2026 -0300
+
+    Lets be safe.
+
+commit 0b031666bd08d8d66bf028d983a7ca3ae4ce0060
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Mar 8 23:18:51 2026 -0300
+
+    General improvement
+
+commit e7c892c5cdb48c6ec8b003e080da126b2b276f64
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Mar 8 22:56:19 2026 -0300
+
+    Updt flake syntax
+
+commit d7e65f5b73ef003ba6aa8468678237a0b4eabc2a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Mar 8 22:28:41 2026 -0300
+
+    simple neovim configuration.
+
+commit 55085cf426fd27b86cd502e9e8fd0bd6ecd05353
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 7 23:13:19 2026 -0300
+
+    General Maintance
+
+commit d0e8a6f09540e58fd8fb57e756b41e15941c1770
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 7 18:11:37 2026 -0300
+
+    qbit
+
+commit be30f74e4599eefe833fc50c0d743c618eb68c7d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 7 14:27:13 2026 -0300
+
+    OpenSSH for EVERYOOOONE!
+
+commit a3e58e54c372e0ffa460ff946cc38548cbeb6516
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 7 14:05:12 2026 -0300
+
+    Removed unecessary import
+
+commit 257d50b3a8abe3bcbae62d5507297940b24d94be
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Mar 7 13:19:04 2026 -0300
+
+    Apollo...
+
+commit fd34da688ca455903ef3e3033b02f611f1b0ee5e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Mar 5 21:29:11 2026 -0300
+
+    Not so lazy
+
+commit ff1b8a63ef2de940ce31cca760a45b8701c60155
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Mar 5 17:13:30 2026 -0300
+
+    Zero Cortisol
+
+commit 85c7276730a5700deea57899296213041fe59a15
+Merge: 45f0dde f5e20ba
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Mar 5 15:38:03 2026 -0300
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 45f0ddebeec921354c71e541ecb32dd432990634
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Mar 5 15:30:07 2026 -0300
+
+    Not something that I will use anyways.
+
+commit 0ef053589f08b2b0a7fffdd9c872e7fce17d18ea
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Mar 5 15:29:49 2026 -0300
+
+    Lazy-lsp do it for me
+
+commit e9e6b466d952e1dda9cb51c171c186f3b4f25cbf
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Mar 5 15:28:38 2026 -0300
+
+    I am lazy.
+
+commit 597921a61d7479df22e4f3c754f81968af8245e3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Mar 5 15:27:12 2026 -0300
+
+    Test
+
+commit f5e20ba0864c3244fd584a76f97aa38843f5208d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Feb 26 17:16:50 2026 -0300
+
+    Maybe aff
+
+commit 910aae4adaff23f0870937a8839e3943e8407900
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Feb 26 16:30:36 2026 -0300
+
+    Lutris
+
+commit c62be81feea33f4122557baf09303ab86b9edae0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Feb 26 13:09:54 2026 -0300
+
+    home sync
+
+commit 4c0f8de268c033f3a7c708c56de561a87948e31b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Feb 26 12:59:30 2026 -0300
+
+    Thingy
+
+commit aa3bd4de8ebe43c96e1d682baf827c26a52ab62f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Feb 26 12:47:53 2026 -0300
+
+    Sync
+
+commit bd82b97da7b9a1f7b626c5d5a255ae8471a40354
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Feb 26 11:40:11 2026 -0300
+
+    KVM - Additionals.
+
+commit 31b38c8c2b5acd3940ee114b3cde6753f37c3ca7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Feb 25 23:45:32 2026 -0300
+
+    We don't need that.
+
+commit 457afdfe4878267415f463aec2fdbf0765aad037
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Feb 25 22:15:35 2026 -0300
+
+    KVM.
+
+commit e7024462654c7f3874715013141b1eecb121f3f9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Feb 25 22:09:32 2026 -0300
+
+    Correction: Uhm... Its better
+    
+    Impl..
+
+commit d323846f0f2cdbf1fc446bf78c569f90da5f1881
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Feb 25 22:06:15 2026 -0300
+
+    Android....
+
+commit b3512371ed29af3bd91b4cb2f47d2e74426ecbcd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Feb 25 17:22:07 2026 -0300
+
+    Maybe fresh
+
+commit 19c072f7fbc7af5da8d744e72ab019da2229532c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Feb 25 16:55:59 2026 -0300
+
+    Fresh stuff. RBB.
+
+commit 517956715fad925ab899db7d1a87ef572349e76e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Feb 25 10:40:27 2026 -0300
+
+    The yellow is ugly
+
+commit 5c818570dab409d4c33b152d34b1fea244ed63b7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Feb 24 10:15:28 2026 -0300
+
+    Hello, Centuria.
+
+commit b1804dfe2fcfd3c7a25c2efa9db064006cfed700
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Feb 20 16:36:13 2026 -0300
+
+    Fish prompt instead.
+
+commit 54b98bca6076ccc963ffb76403f05544183604c6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Feb 20 16:03:42 2026 -0300
+
+    Removed aliases.
+
+commit aac8fad2753721a4c53bbfcacd2166216760db62
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Feb 20 16:00:46 2026 -0300
+
+    I missed my dear starship + squash on config for reduced evaluation time.
+
+commit 7bd6971ba113f3981681da1884295290fb3b5f55
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Feb 18 09:36:46 2026 -0300
+
+    Squash on -rr stack
+
+commit 03fb42b5777b953c492d2a02ab2dc5776c021231
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Feb 9 21:53:23 2026 -0300
+
+    After testing, it was defined that rustlandis better for Elisheva host
+
+commit 164ce4f442dda99b6efa1bb9da831ec788887a06
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Feb 7 15:14:05 2026 -0300
+
+    Adjust on animations
+
+commit f1486b3816b99e67d015ac2b8422fc1d351dfb1a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Feb 6 09:58:09 2026 -0300
+
+    Split, update
+    
+    Various alterations on the configurations for better ergonomics and maintance.
+    
+    - Niri is now niri-flake.
+    - DankMaterialShell now have a home-module for more elegant necessary imports.
+
+commit c02343a9d32833cccbc4a36ed401fe030f1ed41b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Feb 1 18:47:39 2026 -0300
+
+    Evaluation time optmizaation.
+
+commit 6651ae98ed8f66c3c11c7e4882e7903706ebc640
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Feb 1 12:13:09 2026 -0300
+
+    Improvement on server
+
+commit caf6c40a8a91c052996fe5ee9f15baa53f7a181a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jan 30 11:09:21 2026 -0300
+
+    Too much movement make me nauseus.
+    
+    changing behavior on niri focus
+
+commit 23125b192f6d3d41036f07486a026c909f1087a3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jan 28 20:44:13 2026 -0300
+
+    Improvement on animations
+
+commit 1199fe40c66a22e7c52b5fa2ba056cffb0a18927
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jan 27 19:21:25 2026 -0300
+
+    To reinstall
+
+commit e5ae9026b7b19cc05b3a083606a90f5796bce442
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jan 26 20:06:22 2026 -0300
+
+    Cpu-autofreq for Elisheva
+
+commit 57755caaaf9992dfafed0caaec9393b3aab14a49
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jan 24 17:48:50 2026 -0300
+
+    Update on slskd, update on Centuria (flatpak), removed starship
+
+commit a8e565e35de53cf8570d0ff26509d75491111a63
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jan 24 14:54:32 2026 -0300
+
+    First same of finished homelab (for now)
+
+commit 629f11027d1bbd2fdffddf44e6eeaa837cf712ba
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jan 24 13:14:25 2026 -0300
+
+    That was complicated, second update on SOPS
+
+commit 324eee3149843c42e8c6569248e9b0e1b25466ea
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jan 24 12:36:11 2026 -0300
+
+    Initial SOPS-NIX implementation.
+
+commit a0c90788807efac09b4873a66372fa9d81a36198
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jan 24 12:35:33 2026 -0300
+
+    Initial SOPS-NIX implementation.
+
+commit 1187dfe6192ba676e50a6746d3b7da7d32089ff1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jan 23 21:27:08 2026 -0300
+
+    More improvements on Moontier
+
+commit 15d48ed7db38167110726698a258b8ef36caacce
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jan 23 20:35:48 2026 -0300
+
+    General improvement for services
+
+commit a29ae96d0ebd0c42eabc7f60d0b2f19b8ed03f68
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jan 23 17:25:21 2026 -0300
+
+    Glances
+
+commit 99cc27e0ec29a85c7327f41f975872305e67aea2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jan 23 16:30:53 2026 -0300
+
+    Something on the side of elegancy, Ugh.
+
+commit e5e032e15d952ee5b02d170af30045e5c5c2df63
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jan 20 09:47:04 2026 -0300
+
+    bleh
+
+commit c08a7f1bfa53846953527f0395d6d11f9777011d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jan 19 10:28:56 2026 -0300
+
+    It's all local anyways.
+
+commit e54ecff9c0359973d4d7906081e1ec751c594fad
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jan 18 15:43:24 2026 -0300
+
+    Breakdown
+
+commit 8d89e836dd4980b8d7e42d5c7aa2c64368552747
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jan 18 10:33:28 2026 -0300
+
+    Avahi
+
+commit 9d13cb341da9b3e8f778013e493b8decd92c98d2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jan 18 08:17:46 2026 -0300
+
+    imports
+
+commit 98599c9536363829a9e7daa9cd1fcc683d48551d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jan 17 22:39:52 2026 -0300
+
+    In preference of elegance
+    
+    Breakdown of files, implemented flake instead of direct mention of suspend fix for Centuria-host
+
+commit 5c7580d4e74cd2155fa13797e85c1e31922aa3cd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Jan 17 22:26:53 2026 -0300
+
+    In preference of cleaness
+    
+    Removed unecessary files
+
+commit e654a825f06dec2c88b28aed974e517d07393f2d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jan 16 15:00:49 2026 -0300
+
+    Revert on deluge
+
+commit f9902cc505b11013c40c4fcdd66309bb4a5be54f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jan 16 14:25:32 2026 -0300
+
+    Preparing
+
+commit 4ae3f3bc177181dd27e4e3e7d6a6bce9d7b09b95
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jan 16 14:06:01 2026 -0300
+
+    rr stack
+
+commit b6675bb94fad05b6b25dff23d61a79918f6612ac
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jan 16 12:51:58 2026 -0300
+
+    Removed incomplete dir
+
+commit c35f881328445cebfe16f82c9776441c0e5dd8d9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 15 20:09:49 2026 -0300
+
+    Fix on intel
+
+commit 446e515fa1f046f42580810fd7b406ea90dad434
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 15 16:02:23 2026 -0300
+
+    This might sound more elegant
+
+commit faa57f095419a435e5d3bcc7f6e6acab074d775e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 15 13:41:26 2026 -0300
+
+    Fix syntax
+
+commit ebb876069eae72190374efbf254f31d0e8634f79
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 15 13:30:31 2026 -0300
+
+    Removed unecessary packages for Moontier
+
+commit 1addf0a7c02c912cc9973684a62e26eff86a1065
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 15 11:57:25 2026 -0300
+
+    Chill
+
+commit 113d8420d4f2389a4ad4c853d529c95a253e1379
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 15 11:25:38 2026 -0300
+
+    Removed login manager, in preference of tty
+
+commit 50dc67f4ba4fc2540930d7378335b860c000c8c7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 15 11:06:54 2026 -0300
+
+    Ssh
+
+commit b86fcf81313a7cb8dcb144eed3fb7e32cc92ee7b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 15 10:21:27 2026 -0300
+
+    Testing tail
+
+commit 0fa92d8c2fcd11d6a4f691f4db60f35497c6b916
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 15 09:04:28 2026 -0300
+
+    General impl of host
+
+commit a9cdd509721d7b1c7e5d89dc818dc502da1d6c77
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 15 00:40:47 2026 -0300
+
+    adjusts
+
+commit 006790af33f2caa7b688d8ed2daae363e149bbde
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 15 00:37:30 2026 -0300
+
+    Thats important
+
+commit e6c298e017985e69f67909345cf4794fb89ac908
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jan 14 22:44:26 2026 -0300
+
+    Preparing for initial implementation
+
+commit 3b2e0f0e4ae27eefbbf2e229540f658ec33bd18c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jan 14 19:32:14 2026 -0300
+
+    Initial third host configuration (Home-lab)
+
+commit 4498aa96092d575fc9f17902b96f8a93c8cb835b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jan 13 22:08:23 2026 -0300
+
+    Prefer that
+
+commit 141b4e5fe8efac622d11a071a74f32f64b52f70d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jan 13 19:25:19 2026 -0300
+
+    Discordo
+
+commit 7196446b975dc78efe85954a1b69a4df2d6cfcaf
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jan 13 19:16:47 2026 -0300
+
+    Eq
+
+commit 74b6f7d315c17475bf7e60db4a5441b1d2e8dcd6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jan 13 13:22:48 2026 -0300
+
+    I fogort to write enable brah
+
+commit a9e9a069086ff37533d6d31d5f7f96cc73b6d4fc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jan 13 13:19:11 2026 -0300
+
+    Clean...
+
+commit 12ca30bb8fac8d9fd7eced5964fa4cbd7d51861c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jan 13 13:10:07 2026 -0300
+
+    NixOS module instead of Home-manager
+    
+    And updates on the flake.
+
+commit 3c0acd5e654f612a281a51015fbeb64535e44493
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jan 13 12:45:34 2026 -0300
+
+    ...
+
+commit cfad91e375aef80693cd419904af11fee4f9792a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jan 7 07:53:59 2026 -0300
+
+    Didnt liked
+
+commit ad00a13289ecfa9dfc064ac84b59dbe656fa9f22
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Jan 7 07:48:14 2026 -0300
+
+    such a FRESH update
+    
+    Fresh editor + adb new style... (sfb for this one)
+
+commit 64c111cff953a647a1763ae37744697016fc5b94
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Jan 6 22:20:22 2026 -0300
+
+    Adjusts for power (Hi Elisheva!)
+
+commit d333ab7a686e65470c0749ab5eeced027ee6ebe9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jan 5 19:00:13 2026 -0300
+
+    Flatpak for Centuria
+
+commit c1184ea4aed0a55b0152c58ed6b976374f98c39b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jan 5 10:02:30 2026 -0300
+
+    adj on hz
+
+commit 106e4ac02402f867ffd042dfef4b8e6ab3389308
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Jan 5 09:58:20 2026 -0300
+
+    Adj on niri
+
+commit 80ce04375c637531c26f610b984c527ca13888cc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jan 4 20:17:03 2026 -0300
+
+    Hopping on Canary
+
+commit 85b4a5a02878cdf34ec69eb4abf625c7c4ed4ef7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jan 4 19:09:38 2026 -0300
+
+    Clean
+    
+            modified:   Config/default.nix
+            deleted:    Config/hjem/default.nix
+            deleted:    Config/hjem/head.nix
+            modified:   flake.lock
+            modified:   flake.nix
+    
+            modified:   flake.lock
+
+commit 7010890e61ff899352ec3c58a68771e67f3827b7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Jan 4 18:58:59 2026 -0300
+
+    Corrections and smoothness
+
+commit 6b05f3f836bd9a843a0e886210a2afe10eb3a7bc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jan 2 16:38:49 2026 -0300
+
+    Small adjusts
+
+commit 44b616cea424431895a7d90eb61059da74b89c55
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Jan 2 14:07:32 2026 -0300
+
+    adjs
+
+commit 3e88cf2833b699fc34d409f9c36169f773c142ec
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 1 22:36:32 2026 -0300
+
+    Path fixes
+
+commit 7155b843f8753e1068bf13eca987793285c72ef0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Jan 1 22:27:59 2026 -0300
+
+    Music I guess.
+
+commit 846d13c0dd79eea8d678f5ab3e11ea065fb02507
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 30 19:47:08 2025 -0300
+
+    Small animation adjust
+
+commit 4e4b1dce4c3257a2b2e2e6dfa3003e4738ee0767
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 30 13:41:29 2025 -0300
+
+    Elegancy...?
+
+commit 880570d163b0681977ccf19fa88a1eab34546567
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 29 09:26:07 2025 -0300
+
+    f1
+
+commit 413311c346e2b8a045f631bd8ed93db985e3a787
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 29 00:04:16 2025 -0300
+
+    Updt
+
+commit b755c17bc395e3b47563e491efa54d37364d5124
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 28 15:17:51 2025 -0300
+
+    small adjusts
+
+commit 23d2a6d6fde855689356c995d10ce027285ca36d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 28 13:02:49 2025 -0300
+
+    Clean.
+
+commit 9dce81ead41539e5b5c2a41a6ef30c1fbc9230b8
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 28 12:21:02 2025 -0300
+
+    Xwayland
+
+commit 5cf4f5925d67fc78218b525a8140be6a1a40465c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 28 12:18:46 2025 -0300
+
+    small fix
+
+commit a9cdf84f409e240df6d4ed3c49ac4098b2f7b7d7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 28 10:38:40 2025 -0300
+
+    in preference of static behavior
+
+commit 4bd1d0367fb111bec30b993d9787c8059aba26b2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 28 10:16:56 2025 -0300
+
+    In preference of kdl.
+
+commit b8d92cf0ed10abcd9102b9b8330b24d172c165a2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 28 09:35:20 2025 -0300
+
+    kdl test
+
+commit 714c61e7a1dc82115b5d51454da053eb670c26b0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Dec 27 23:09:42 2025 -0300
+
+    update
+
+commit 038fa67376ba119f6cf5eb3b8d8b6118911642fe
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Dec 27 23:06:14 2025 -0300
+
+    ..
+
+commit f011175b6507759be1ab14f895fcc0f1fe8cb1cf
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Dec 27 23:05:39 2025 -0300
+
+    Revert "Explicit papirus"
+    
+    This reverts commit 742905f004cb43f5b391efa58669c833bcd5c813.
+    
+            modified:   Config/home-manager/home.nix
+            modified:   Config/packages/system_packages.nix
+            modified:   flake.lock
+
+commit 742905f004cb43f5b391efa58669c833bcd5c813
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Dec 27 22:23:54 2025 -0300
+
+    Explicit papirus
+
+commit 902f9c5becdb21a28e56aff6b23cc1839f5de117
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 26 11:34:02 2025 -0300
+
+    Removed unecessary stuff
+    
+    In preference of dms
+
+commit 23341b3ae74e4674f427db01496a0130520a3d08
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 24 18:32:06 2025 -0300
+
+    What, hypr.. Hyprhwat? Hyprmid!
+
+commit 4b0e386859174165475b3f38bfe7455d7ae51399
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 24 18:31:15 2025 -0300
+
+    Fixed nvidia
+
+commit 8d7a3b8f6cbdeb95ef3bcac98f85066da27edfdb
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 24 18:04:37 2025 -0300
+
+    changes nvidia
+
+commit a7477c09fe19dfab0e4037db09ac634e4713a2bd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 24 17:46:00 2025 -0300
+
+    Hypr test
+
+commit 1f75dd6741ca96d1ae1a476b6cb3f85aca25cc60
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 24 17:44:49 2025 -0300
+
+    Incr
+
+commit 24722593eeac2f9b9191aaeb62147d6b29d3024e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 24 17:35:26 2025 -0300
+
+    Test
+
+commit 0763c98e9cffba716ab46f1c7f4cf33999ef6740
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 24 13:22:33 2025 -0300
+
+    Proton-ge
+
+commit 92d07b7f0061e5673bf4cd4a942aec2e4cc6f13a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 24 10:08:00 2025 -0300
+
+    Steam for all hosts
+
+commit 99bc0c2c4eea9daa7e83f6cdc373996adb304a14
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 22 11:38:01 2025 -0300
+
+    Update on syntax
+    
+    General Maintance
+
+commit a8ca7d43c16b7b05c860fa3349cb4b22923b3c13
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 19 16:21:08 2025 -0300
+
+    Update on .lock
+
+commit b16bca9395e445ed1753a1768cfdd0887581c903
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 19 16:20:54 2025 -0300
+
+    Removed matugen in preference of DMS
+
+commit 75b458be41fbdd04a0eba62450101ac1976f20ab
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 19 09:48:04 2025 -0300
+
+    Upgrades
+
+commit eb0299377c650f32e3c48fe96617de68f465c391
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 19 09:40:25 2025 -0300
+
+    better theming for matugen
+
+commit 425f054b45823a9488e72d4a421155a6d8e56a5e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 19 08:33:25 2025 -0300
+
+    Adjusts on nvim
+
+commit c23e1ff713559126f6481a46f3dbe6154d24c15b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Dec 18 22:55:35 2025 -0300
+
+    Matugen configuration for Neovim
+    
+    Requires: DankMaterialShell, Lazy nvim package manager (spec structure, aka, lua/plugins
+
+commit b533c1b6d4530b8266218db23d63226a3378061a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Dec 18 11:21:14 2025 -0300
+
+    Removed stylix.
+
+commit 20f188c2bf97b8733b7cecd408a6c400097eef81
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 17 10:31:58 2025 -0300
+
+    Mesa for elisheva
+
+commit 19523bf2620cebe0038852b58bd19407d3572c1c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 16 21:35:44 2025 -0300
+
+    When I need it, i'll enable it.
+
+commit 19ca5c074fc1aeb6c105fb8405a3234291ff7532
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 16 11:05:17 2025 -0300
+
+    Ajusts
+
+commit df8918d9bb3a24f24ffd35fa2f024e8309193cb4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 16 10:10:31 2025 -0300
+
+    Gamescope
+
+commit df36866ebc83ddf0a42a90a61c675555f9cc4547
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 15 19:16:00 2025 -0300
+
+    Cool thingy for Centuria
+
+commit b5bc1888476f4327c8f40386b11eab617f2c3852
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 15 11:56:15 2025 -0300
+
+    Clean-up, incrementions for Elisheva
+    
+    rustland seems to be the best fit for my current setup: Where it lays-down as:
+    
+    - amd-pstate (enabled)
+    - tuneD (dyn)
+    - memoryOC (20cl)
+    - some-bat-shit-bios-config
+    - Annnnnd that's it.
+
+commit 05688346ec5363fed56dd10173370691de41fd1e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 15 10:11:08 2025 -0300
+
+    New candidate for scx
+
+commit f52590da3e282efedc03bc5f3241394032b42f9e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 14 11:32:37 2025 -0300
+
+    Perfomance testing
+
+commit 675244774fe4dbdebec3839b6b28cc89a7e6a974
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 14 10:04:30 2025 -0300
+
+    General changes
+
+commit 9a5fb2a20a7390aec082c28e219784fc83d97493
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Dec 13 18:37:30 2025 -0300
+
+    Removed unecessary package
+
+commit ee69226f2252ccd0f96ef6edfff9b6b1812b1e0a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Dec 13 18:24:57 2025 -0300
+
+    Added my F1 PRO EQ!
+
+commit c35aa19ceb9f7fb2f99e29075b61f7b5f3c76f94
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 23:36:40 2025 -0300
+
+    I actl use it a lot
+
+commit a8bd16b9b449371e2015d65396c090320a8dfcf4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 21:34:41 2025 -0300
+
+    Brah I aint compilling...
+
+commit 8366b44aa421e148b0b64a8b842ca9f0543d17b4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 21:16:00 2025 -0300
+
+    Finnally something that is fast
+
+commit 83ff922c291e2a8fed6c056daf119f85ac89a2bc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 13:37:14 2025 -0300
+
+    Fah
+
+commit 03bda3a0154deefa6b9314dcb46b1024d463e715
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 13:35:27 2025 -0300
+
+    Too much work for me.
+
+commit 523e528f97781c233c7c51ca1bf69ad4dedc8e5e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 12:58:15 2025 -0300
+
+    I guess that's it...
+
+commit a2ce32a66d7a1574ef95ad4728739dca4b073f88
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 12:25:52 2025 -0300
+
+    I know I am prob nuking my own system with this configuration...
+
+commit 888a0af52ff15729d98ac150b84bb76f46fd7e16
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 12:02:12 2025 -0300
+
+    Test
+
+commit 1fe9bf20911936322c8f2984623b1ee68685191a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 11:01:51 2025 -0300
+
+    Brah should have done it before.
+    
+    I can't do anything right
+    
+            modified:   Config/home-manager/starship.nix
+
+commit 28336282a1c31720717070f6e03e27a0baf5e97d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 08:54:00 2025 -0300
+
+    General incrementation for shell
+    
+    Aliases and starship
+
+commit c81695a54632b1b49fef389f88737bbc3f78482b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 08:38:16 2025 -0300
+
+    Removed whitespace for starship nix-shell...
+
+commit 0c735574943509f7b0a906c51b85a4e83c1d751c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 07:44:29 2025 -0300
+
+    Fixed small typo
+
+commit fea658eafc9dd618c85f2d64c44ffb69407460c5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 07:40:43 2025 -0300
+
+    Removed NH, using aliases instead
+
+commit dcaf549182210fe79b90a44e9e812f30b38d5a03
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 12 00:10:19 2025 -0300
+
+    Updated starship
+    
+    Better handling on nix_shell. Also FMT on starship.
+
+commit 6cb604689d3f4cd7d3cbcaed005494b836ee3614
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Dec 11 21:16:07 2025 -0300
+
+    Removed ugly comment
+
+commit 7d2ac84b1ff2a10773803e638d35e0bdbe5fe334
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Dec 11 20:56:12 2025 -0300
+
+    This should work...
+
+commit 4e6d4e2ad0d97f8a551ab4e5dff3e99cb63f2e11
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Dec 11 16:21:59 2025 -0300
+
+    Smoother shadows
+
+commit 3c513d65baa4544b244089531e3f21c21c3a2d01
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Dec 11 14:03:46 2025 -0300
+
+    Maybe great cuz I like music.
+
+commit dffba052414652589077c42b7751264e70c0262c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Dec 11 13:57:31 2025 -0300
+
+    Dynamic seems to have issues...
+
+commit 13d7cbadc5bae1bbfbe155fa439091e58a426f56
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Dec 11 13:27:42 2025 -0300
+
+    Small fixes
+    
+    added an better scx_lavd for my user case. Also, fixed missing argument for aliases
+
+commit 55c258242b289ad7f5175d105fce7d4eb733a576
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Dec 11 13:13:37 2025 -0300
+
+    Some aliases for my confort.
+    
+    Added nvim aliase, added rebuild alises with HOTNAME argument to make it easier alr
+
+commit 3019cadc594ad234a8cc9977755d5aa3d1dc8e2b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Dec 11 13:00:04 2025 -0300
+
+    But aint it so pretty? Our dear plymouth
+
+commit e3e5df9d98358728c4932a7deba4c957741693ec
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 10 23:04:08 2025 -0300
+
+    Small update on torrenting
+
+commit 25a8d87cf99c9a98ec626b0b1cb1790bd0facb14
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 10 19:40:30 2025 -0300
+
+    Drop depreceated option
+
+commit b3c62b085d8a6804c5e694a2a6d80834263a6aee
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 10 19:37:04 2025 -0300
+
+    Updates, fmt.
+
+commit d42395331dd6cca327b97ea85abbbf1366cee7b8
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 10 17:35:31 2025 -0300
+
+    More space
+
+commit a37ce3dcac319cdc6b3a253f8b7bb15891583ab0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 10 17:27:29 2025 -0300
+
+    We are fully fishing
+
+commit 487d334c7fccfc561c226e234300ffed1f12e107
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 10 17:11:24 2025 -0300
+
+    We are fish now
+    
+            modified:   Config/home-manager/default.nix
+            new file:   Config/home-manager/fish.nix
+            modified:   Config/nix/users.nix
+            modified:   Config/programs/terminal.nix
+    
+            modified:   Config/home-manager/fish.nix
+            modified:   Config/home-manager/starship.nix
+
+commit 8bdb7eccd458b88276ea28393bca13586fff9a37
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 10 16:13:10 2025 -0300
+
+    star
+
+commit a096bd40a5516df12f8494b9041ca1aef47bc68c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 10 15:49:05 2025 -0300
+
+    new border radius
+
+commit 9d8faa561b513300262b26e6affe36fd87f42679
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 10 10:13:38 2025 -0300
+
+    Removed fff
+
+commit 83a6b36f6077aa1fb8f4f2e730bf06db31c04470
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 10 08:39:53 2025 -0300
+
+    We zsh now
+
+commit 80da67048aef3be54c358e73ad8632af4cad64a6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 9 12:22:46 2025 -0300
+
+    Alr
+
+commit 305affb4b4e4ff068016663dd9832b818bfeb309
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 9 11:07:53 2025 -0300
+
+    Incremental changes for bfland (Tuned auto-adjust)
+    
+            modified:   Config/programs/adb.nix
+            modified:   Config/services/perfomance.nix
+
+commit 545e992a2e850938d4e6c2706a0d64d3b704fb4f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 9 10:15:42 2025 -0300
+
+    Maybe dynamic is better
+
+commit d226a4f3a0a582b21d5bbce347f9abceca31fd27
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 9 09:36:39 2025 -0300
+
+    Maybe its an conflict
+
+commit b4ba74c467401d6aa7c2069b43449cd9e3d8d883
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 9 09:30:37 2025 -0300
+
+    Fix, now true, bpdfland expected per argument array
+
+commit 2558f4bbbcd560900060f3f606984082cf791806
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 9 09:26:57 2025 -0300
+
+    Fix: Altered flag structure
+
+commit 59f286e1fa4832abf923d23e6dd4cceef1d499f2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 9 09:24:48 2025 -0300
+
+    Updating general
+    
+    Altered scheduler for Elisheva-host (bfland) and with the death of CachoticNix, set the kernel (Centuria) to be also default.
+
+commit 25ac687ebe8769383325727e53ecde328c8d9021
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 8 19:27:11 2025 -0300
+
+    adb shell
+
+commit 6b8c303bda1ae58a9d1b63ae435284f49a4f915f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 8 19:07:42 2025 -0300
+
+    Music como resultado do download
+
+commit ad12742d57ae38b9264db37ae02c3d1a638098f6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 8 14:45:06 2025 -0300
+
+    Fixed file sharing issues!
+
+commit 8ac7929dfa937ab7b65e680839e6c07473c3bac7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 8 08:58:54 2025 -0300
+
+    FMT
+
+commit 61c024aaa5dfc2c65e0902aef9445c00f71b03ad
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 7 23:46:41 2025 -0300
+
+    Im sorry
+
+commit 880b28927391a9028b50f0670653b804acd63c7b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 7 23:32:17 2025 -0300
+
+    small fix on systemd
+
+commit 230483957f822b8ebd738283d704c13c7eac93db
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 7 23:27:01 2025 -0300
+
+    And... Thats that!
+
+commit 69282fa7974b6d45b52419871ba70bbd61c0aca7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 7 23:03:33 2025 -0300
+
+    Just filtering my script
+
+commit 52a0d8fea8be6686b09e0f70cda3a9ca1a502cbd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 7 22:23:45 2025 -0300
+
+    Hopefully fully configured now
+
+commit b5f891dc458d02be2550de09f6488cb8bdafc1d4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 7 21:51:08 2025 -0300
+
+    things.
+
+commit de86c4e8058c6b705e32c2f5d333d7fa0bf1afd9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 7 20:55:34 2025 -0300
+
+    Fah spotify brah!
+
+commit b8d123662f560937eeb498e75590ec0485af747a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 7 18:32:01 2025 -0300
+
+    Testing delta tool
+
+commit 6929b844729f06b2386a0d98e4f656207c18d9ef
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Dec 7 15:27:23 2025 -0300
+
+    Flake update
+
+commit 55a6b5fd36bb65d6933187aa9e8285c6b04450c5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Dec 6 19:57:17 2025 -0300
+
+    fff
+
+commit b7e1490ab3b4bb4668efe2dd3702a281853435ad
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Dec 6 18:25:45 2025 -0300
+
+    fmt for perfomance
+
+commit 186a4da4fb697d4c0ec149efb799de1687e9f5c5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 5 10:21:19 2025 -0300
+
+    KdeOKular for both hosts
+
+commit f745cfe237c12f5db82181479927aaae0bba52d5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Dec 5 09:18:51 2025 -0300
+
+    Removed QT from Stylix + Okular application
+
+commit f4dbdf4bd63563665b3e529ec8dde1177a1c0657
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Dec 4 09:21:13 2025 -0300
+
+    Perfomance changes for Elisheva host
+
+commit 17c62725e9df6fb001400489f153dc3af3f9b013
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 3 20:28:31 2025 -0300
+
+    Removed mysql, finalmente!
+
+commit 760051e4529dd73d4bc34dfe34527fca9e6ac845
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 3 18:27:58 2025 -0300
+
+    Last change on perfomance
+
+commit 6cd09c6b6e1b1bd39b686eb26cf766257a7089b3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 3 16:34:48 2025 -0300
+
+    I may have some mental issue
+
+commit 05bed53d0328c6edc0ae3be725def7304320fe05
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 3 16:33:02 2025 -0300
+
+    Shell aliais
+    
+    Shell aliases for development.
+
+commit 2ac5180309942a643c3eb8bd635d8d387426c8de
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 3 12:26:00 2025 -0300
+
+    Added additional kernel params
+    
+    For Elisheva host:
+    ryzen-lazy, power save.
+    screen-oc, more fluid.
+    and general fmt(alejandra).
+
+commit aea00297ecbae49272166bf180b03ac6735b9df5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 3 12:25:49 2025 -0300
+
+    Added additional kernel params
+    
+    For Elisheva host:
+    ryzen-lazy, power save.
+    screen-oc, more fluid.
+    and general fmt(alejandra).
+
+commit 69d83dcf10c1e1d11a73a95e0848134db733873f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 3 09:06:12 2025 -0300
+
+    This one better for my system
+
+commit 668b01f416b463af2c1a33178b13394cc89d1007
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Dec 3 09:04:28 2025 -0300
+
+    Testing other scheduler
+
+commit 234f130ee3b408c25a0aebaf29e12ddd22255554
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 2 19:45:13 2025 -0300
+
+    fixed suspend-fix string
+
+commit 7187fb7dd1e0cc8e5a5966e0494a8aad22f1667c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 2 14:08:26 2025 -0300
+
+    Can I really do anything without typos?
+    
+    The response is NO!
+
+commit b61060f2abd4bd59896da27d2157e733d1486b45
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 2 14:05:43 2025 -0300
+
+    Maybe this is better for my cpu
+
+commit 21652c14895566560ad18ceaa8437c2ebe7db2a2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 2 14:02:02 2025 -0300
+
+    Fixed flag typos
+
+commit ba4045ad83b0a560adb1037743d9d45fe4d3c340
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 2 13:57:50 2025 -0300
+
+    Fixed small typo
+
+commit 67395bebfd287963bae8fae51fa66fc2cba6963a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 2 13:51:14 2025 -0300
+
+    Removed neovim metion on configuration
+
+commit ae163b85a44e30d74f1ee9bdca7178448bf820a3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 2 13:01:25 2025 -0300
+
+    Incremented changes
+
+commit cdf5de047d7d118f8111c1aadfe48d9e8957ce22
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 2 13:00:57 2025 -0300
+
+    Small changes
+
+commit ab2cb27b23db0814941c7c87b51d834f68be89f4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Dec 2 08:24:13 2025 -0300
+
+    added flags
+
+commit 07445f5593422ef69ac804ea70019ab62fc1b947
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 23:28:54 2025 -0300
+
+    Now all corrected, i am sorry for those stupid commits, sorry rplakama
+
+commit 2382f15a46071900bdacfbf30b83a3adf554da84
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 23:26:14 2025 -0300
+
+    Removing system76 from default
+
+commit bba20cd165ba902f3a8d50a7c844140022a1449c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 23:25:33 2025 -0300
+
+    Forgot to add the files to the commit brah
+
+commit e7c5a6a6139eca738aa7b4f6c2137fa8bc9da986
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 23:25:08 2025 -0300
+
+    Multi-host style
+
+commit 0759611545fe9aa270a46cb1a52b79e9a194683f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 22:11:34 2025 -0300
+
+    Finished final touchs on flood + tranmission
+
+commit 14467d54264b2c7aef2709f95b123e57df1eb4f1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 21:31:52 2025 -0300
+
+    qbittorent to rtorrent + flood
+
+commit 637a7a6e9acd645424bec86157feb3720bbcbaf2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 17:24:09 2025 -0300
+
+    fmt..
+
+commit 84893848739fc52160502e87c2a8d1722c2c3958
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 17:17:58 2025 -0300
+
+    Fmt + updt and tuned thingy
+
+commit 00b59bf59681371f5473c266ef7d502a778ab86b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 17:07:40 2025 -0300
+
+    Removed unecessary output for Elisheva-host
+
+commit d69959b9eeedf33746135f4cedf513c5016531b3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 17:02:04 2025 -0300
+
+    Testing tuned instead of ppd
+
+commit df70408f4830ba0b38ce8a59165af0dc63220aa4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 14:15:54 2025 -0300
+
+    Added wl-mirror bind
+
+commit e9c0444ad475792804f7bdc402f4559fec97c0a1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 14:13:03 2025 -0300
+
+    Added wl-mirror package
+
+commit 4e897a2c3366b1bd7a2edbf72039b4fea45564f6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 13:15:12 2025 -0300
+
+    Testing system76 Scheduler instead
+
+commit 557531048d08898599b0ae1e643e4af91945448e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 11:52:53 2025 -0300
+
+    Added NH
+    
+    And some FMT.
+
+commit 6b785ab3f388eba4a39b0383e31b5fe40c6b43d1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 08:43:21 2025 -0300
+
+    Finnaly a clean way for bash
+
+commit 2ebd3aba7bd92619f4799d4d437b3d83622926d0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Dec 1 08:37:33 2025 -0300
+
+    Zoxide for both shells
+
+commit bb57faa0e04da42d22f6382da50a11b01347efbb
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 22:33:47 2025 -0300
+
+    Synthing service for both-hosts
+
+commit dcd474ead2bccd0bda1b62be48de040b20299be6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 19:42:13 2025 -0300
+
+    Fmt + updt
+
+commit 4b4b6d2ab8bd3fef40cc29fc50f6559eb7cad936
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 18:47:04 2025 -0300
+
+    Why even plymouth
+
+commit fe07bf296cd6ebc346fa7389f02776cdc2451eb3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 18:43:48 2025 -0300
+
+    Small fixes
+
+commit 80152f52192b3369449954b448ece946c7b1714a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 18:40:26 2025 -0300
+
+    brah so much work for nothin
+
+commit 825f4fd3a14320491f2fecfdc92765186d793bab
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 18:32:07 2025 -0300
+
+    So what
+
+commit 0083e042b4bb4b6b5368bad556faae964cb4e9ec
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 18:28:02 2025 -0300
+
+    Fuck docker
+
+commit 961b4773b817ab7aa60b27bad355c7b40bb61061
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 18:24:33 2025 -0300
+
+    Fire up ts!
+
+commit 2a4706c5024239e3e18c2e3fe6f29632033d8d25
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 18:23:11 2025 -0300
+
+    Man idgf
+
+commit 67d889b72f5dc936f7aaf59daaf82d35414d8537
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 17:54:22 2025 -0300
+
+    Changed typo
+
+commit fe79b238c00a7ee72a15ccf13915bd671d2a2459
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 17:45:43 2025 -0300
+
+    Simplier setup instead
+
+commit 5a365aad0e77eaa442f2ad8129cfe2976d19b8af
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 16:33:52 2025 -0300
+
+    Tools for sops
+
+commit fd009deb6f74b16704c2fbcfc4b1a2e010eaddd2
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 16:21:10 2025 -0300
+
+    Trying out sops-nix
+
+commit f1eca68697828f38e4a0cbc3e7c2faf28ce6c8ad
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 16:03:44 2025 -0300
+
+    Maybe now?
+
+commit 924f35f30e673ba71e7a33f16e1f4457d9217f18
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 15:57:16 2025 -0300
+
+    Now correct.
+
+commit 4e9095279b8dac58bcdcb3d03b5d8d44e670dd0e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 15:55:13 2025 -0300
+
+    All the things necessary for nixos-init, I guess.
+
+commit 558b13ef7ef05f0c4bf22c813b2a4ae7d5fd6e4e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 30 15:50:03 2025 -0300
+
+    We all love new shiny stuff!
+
+commit 86e99133b055dbd546a708a54e64727d5505cda7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 29 20:07:25 2025 -0300
+
+    Corrected script
+
+commit 0f36b1ca783c4fb5b2283bfd04f440d2aea026b3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 29 19:58:55 2025 -0300
+
+    Correct place for script + fmt
+
+commit 7992e285913240e443e346f939da890f32760329
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 29 19:48:30 2025 -0300
+
+    Cava support for MPV
+
+commit dbf2faa3b023715c8dc462a7a9e45ec284a16f0c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 29 16:47:01 2025 -0300
+
+    Update on lock
+
+commit 79f4f4c79fce80072f003489ef536172d19d0962
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 29 15:24:20 2025 -0300
+
+    Update
+
+commit e38cb9e9d2fc99d5635f3fe75e360f3ae0bc7542
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 29 08:42:17 2025 -0300
+
+    added docker
+    
+    Trying out musily
+
+commit 9d7b6a3295462330ef6a9318415d02fb68f53216
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 23:15:23 2025 -0300
+
+    Split on overview
+
+commit d05b4cfe2d58cb8865314e201e395942b5570aea
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 23:12:03 2025 -0300
+
+    Full import to test
+
+commit ca6e6dfae7d1ba5f57db3501c99c00802b51282f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 22:57:52 2025 -0300
+
+    Added necessary arguments
+
+commit eb648c28aecaedfab070c3b477ec445340be43cf
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 22:55:27 2025 -0300
+
+    Niri as import in home-manager
+
+commit dd19b443b36b2508992cefcae7426ddf7b250178
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 22:52:02 2025 -0300
+
+    Removed unecessary imports
+
+commit d21338a3b0f5032d374c0096bc541981e74b3c2b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 22:51:14 2025 -0300
+
+    Niri as a package for both hosts
+
+commit 49de88e9084fc284912aa75dd527ee3c8667adea
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 22:42:37 2025 -0300
+
+    Moved greetd to shared for both hosts
+
+commit b9ec7f6a22faa46b61c162f14e008382af6d7939
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 22:33:50 2025 -0300
+
+    OpenRGB for RGB operation in machine with RGB so i can RGB in my Centuria HOST and RGB thingy
+
+commit f55e3954af88eb4f88dd14c546192a14645b4b16
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 22:18:22 2025 -0300
+
+    Different keybind for... Twehhh.. The thing
+
+commit bf09c3074d07d8181b9ef65781fd9d39caf1344e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 22:12:37 2025 -0300
+
+    Removed flakpak cuz why not
+
+commit 40948978b97bf8e03b1e51d3553d641980281639
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 22:11:16 2025 -0300
+
+    Hell nah
+
+commit 8dbeaaf4b6911ee277540204830050486ae5fff7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 22:09:04 2025 -0300
+
+    Initial move for niri in Centuria
+
+commit e3c5a5e4b9784a5f424849050fd4f8bb110e633d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 14:08:48 2025 -0300
+
+    Normal kernel for Elisheva
+
+commit 4d65027c2970189389934caec40bc2cc674eb577
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 27 10:43:14 2025 -0300
+
+    Temperature test
+
+commit 073c8efbf577f784dc21fcae97e9a41560dfa58b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 26 19:41:15 2025 -0300
+
+    Fallowing 25.11 Instead, Let be stable for sometime
+
+commit d32fdf3eddf514efab8b59b89e52fc2dc9fa5828
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 26 19:35:07 2025 -0300
+
+    Cachy to Centuria normal to Elisheva
+
+commit b1c78eadde1d49a65ee8ef5550ae412a437f51e0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 26 07:09:47 2025 -0300
+
+    I forgot about the boot. prefix
+
+commit 902f129a116fdac29ad70f18fd58eb7139a2dd27
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 26 07:08:52 2025 -0300
+
+    CachyOS kernel, small paramenters for battery(laptop)
+
+commit d60e4766164a5a06085fe4915a97a45b35f7fdc0
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Nov 25 23:42:53 2025 -0300
+
+    ChaoticNix, maybe will be great for my system.
+
+commit 00e131806cfb62299db39a86ae9fa2bacd35e8ed
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Nov 25 21:24:06 2025 -0300
+
+    Small fmt
+
+commit c4648daf72b817e1d52a805274d433196feccc81
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Nov 25 20:58:23 2025 -0300
+
+    JQ as Dev tool
+
+commit d3247513756fa2da02633e2f02dfb3ab2c715f91
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Nov 25 16:28:37 2025 -0300
+
+    OnlyOffice is the goat.
+
+commit de21fa5a4783b659ecd072a3e7c06d70cd387ee7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Nov 25 16:13:25 2025 -0300
+
+    Choosing officer applications
+
+commit 683983658caca4cf7a7e1dfce9845e4bbf510ccc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Nov 25 09:21:00 2025 -0300
+
+    ..
+
+commit 3dc59a0ab768425dcb20f229b8737488f781fefd
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 20:33:13 2025 -0300
+
+    Removing unecessary width options. Making cleaner for general usage
+
+commit 604d3903a92806b776dbc07ee8e14f83fca1e3ab
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 20:29:59 2025 -0300
+
+    More width options
+
+commit 174d6360bb1fd62e1d874dbb6703c95a0d91adfc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 20:23:26 2025 -0300
+
+    Rollback on binds
+
+commit f1b16c84e1d91c0cc8e27c5caae677745bb2005a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 19:50:10 2025 -0300
+
+    Niri as unstable
+
+commit 310998e64a60f0b66ecccf184791d8a8fd5df062
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 19:11:08 2025 -0300
+
+    uhm
+
+commit e27d157c32e3bfbf7a89bbf778ccd76233652f71
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 18:53:11 2025 -0300
+
+    Hell nah
+
+commit 424f8945fc8fe41ecbf08f65f386476616fb14aa
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 18:49:31 2025 -0300
+
+    Declarative configurations.
+
+commit 71564f60d13b4a3a551834fafe4ce62d1c3278e7
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 18:42:37 2025 -0300
+
+    Small typo
+
+commit 4a0eb86af775f11da967cb3221f87963584578a8
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 18:41:13 2025 -0300
+
+    Checking-out-hyprlando
+
+commit ff8de1d0acf6a86625cf7274c8044da95022dae4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 16:12:29 2025 -0300
+
+    bloat
+
+commit 75403c8dedeb86fccab2e081a155d5bfc3fa3a05
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 16:08:18 2025 -0300
+
+    Dolphin for Elisheva-host
+
+commit 9dbc2a6f82164fa24791878508ae3d918992cc8f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 16:06:22 2025 -0300
+
+    Steam as Centuria-host-only
+
+commit 8e9a7299676cbf8e17edca38f4f24141a38194ec
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 09:33:57 2025 -0300
+
+    Small typo on the bind
+
+commit b6485b509ff3c5099a73d315415ae92788155f2f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 24 09:32:43 2025 -0300
+
+    Changed width logic bind to more confort
+
+commit 1b8691f90144d27dc74dce5cbca529c0d9383e18
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 23 21:55:59 2025 -0300
+
+    From 535, its default now
+
+commit f995e63bb75e334e125b3227e89f295453e71c5b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 23 21:48:38 2025 -0300
+
+    Update widths
+
+commit 03ec9c6facad521340064e5180a85293d58a5258
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 23 21:46:12 2025 -0300
+
+    Updated default columm width
+
+commit 60a57b14e6bea578d0a8de1a112e510e9bfb4b9d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 23 13:45:48 2025 -0300
+
+    General formattation.
+
+commit 1d242646fbbdccd110d053fddced27e9e09f2bc4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 22 06:34:47 2025 -0300
+
+    Squares... Just as God(I) Intended...
+
+commit 24bb48dbc2bd6ab4e5f5d7b5f8385f43952b6f5b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Nov 21 19:24:16 2025 -0300
+
+    added arial font
+
+commit 9ce370e4e7a957932b05c7a413ad3d89c97a3390
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Nov 21 12:29:26 2025 -0300
+
+    Reduced struct
+
+commit e81113b3069980ac68b6122aad41488f7154f277
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Nov 21 11:00:31 2025 -0300
+
+    Little reduction on font size
+
+commit 70f3e8763f561c194a0d98d8e664b4f9e7306e30
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 20 22:19:34 2025 -0300
+
+    alr
+
+commit 2f1f087625fe196a391bbe7859c76aaa1f244854
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 20 22:13:09 2025 -0300
+
+    Check
+
+commit 97d9f3cb2a964848614b291d8e36ea70c51323f4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 20 22:11:30 2025 -0300
+
+    Check
+
+commit c823c52d983502be0abea492898e25251fff1ed8
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 20 21:57:51 2025 -0300
+
+    Path for DMS config
+
+commit 5d1a4c074a995ec5621e2353e3179a65e0c5704c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 20 21:29:53 2025 -0300
+
+    Fixed a few typos
+
+commit 5c2145c8f3249f15e16c2951d4733e69b2ff1de5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 20 21:28:27 2025 -0300
+
+    Fixed
+
+commit afe9e9a43d2f434ad5484283d415c5c5694afd4a
+Merge: 74a3cf0 d30acb9
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 20 21:25:17 2025 -0300
+
+    Fucked up
+
+commit 74a3cf0b44a7e31e023149648e8a48d657e0c5ff
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 20 21:23:18 2025 -0300
+
+    Esqueci a porra do import
+
+commit d30acb9ca9a935d7c913f8afb53d7227abbe3473
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 17:06:03 2025 -0300
+
+    Portals as Elisheva only
+
+commit 82fdea26d9e11681d8343f736dae7efe1b635dba
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 16:51:53 2025 -0300
+
+    DNS pro pai
+
+commit 865fa57f8a72d20fd9c33519170dc3773a78f97d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 14:52:59 2025 -0300
+
+    As therefore lacked something truly devine omg shark girls
+
+commit 4572fbb2bfb3e2690aab35494f3d217499b0e9b6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 14:44:36 2025 -0300
+
+    Fixed!
+
+commit 361472c15eb081961d7fb83b18f8339d8dfce2fb
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 14:39:42 2025 -0300
+
+    fuck
+
+commit 161d8df94e807cb08adbceb0b399baa35cab4434
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 14:37:40 2025 -0300
+
+    Krita as Centuria specific
+
+commit 6a688f5b5a16d4cd2c3544ec27ee539c0f6b254d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 14:35:51 2025 -0300
+
+    qigmv package as Elisheva-only
+
+commit 3b515d27698144c2e740e847c80360fb687309cc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 14:17:48 2025 -0300
+
+    dms-greeterd as a Elisheva-only
+
+commit 90b0caa8327e82cc230a73e0cfbf9f2672734c40
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 14:12:00 2025 -0300
+
+    fixed typo
+
+commit 62b10c30b1bb51e377b8f990800b7bdaaaec65da
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 14:10:35 2025 -0300
+
+    Removed niri mention on shared config import
+
+commit f0704655abb10f8fb6db4e89d4a8fcc77db3b8fa
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 14:09:48 2025 -0300
+
+    Niri as Elisheva-only host
+
+commit a02c9ad48646abc49a6913321ec1fd4b2a1a977a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 14:06:34 2025 -0300
+
+    Initial plasma setup on Centuria
+
+commit a707f1a03b6fcefee8d27ea8c45246c25ca59d5e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 19 14:02:01 2025 -0300
+
+    Update on Elisheva, lacking Centuria.
+
+commit d8cb83e01aa6f00ca938322e781d40fc621601b4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 17 15:47:02 2025 -0300
+
+    US layout typo fix
+
+commit 268c1462ca0f5d27e44a82df84dd398e4968c3dc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 17 15:44:41 2025 -0300
+
+    US as layout in Centuria
+
+commit c8bc803241366a3e7af0ce4cbc46926e5f2c1219
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 15 21:08:27 2025 -0300
+
+    General formattation.
+
+commit ef1a8f1c79b8cad9dcda1d92904a2239496e7496
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 15 20:56:53 2025 -0300
+
+    testing portals...
+
+commit f7396328e7990cfb9965e9a341df90d89d1f5931
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 15 20:51:46 2025 -0300
+
+    forgot to enable
+
+commit 945674c55d262805f78e213ac0ae178788f438da
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 15 20:49:36 2025 -0300
+
+    Dms back to systemd
+
+commit 707cbe83809ad14da63a367523312a69bc559684
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 15 20:48:36 2025 -0300
+
+    added import
+
+commit d3e71b7b3eb88b26086d18bee8279dec78305c5b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 15 20:47:50 2025 -0300
+
+    small typo in default.nix
+
+commit b7effeff9b499092426aedf82dde333b31ab9857
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 15 20:47:25 2025 -0300
+
+    GreedDMS 8f5a9d6 commit fix.
+
+commit 6556b15f4c1c40cfbfe2d6099ace3efb50ae9123
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 15 20:22:25 2025 -0300
+
+    Debugging...
+
+commit 5f54d92ec7adf57450d55a661650962050aa04aa
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 15 20:10:41 2025 -0300
+
+    Finding out...
+
+commit 2865b6bc7526473696f0067cc8e2c3e9977e8a81
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 15 19:52:25 2025 -0300
+
+    In preference of dsmsgreeter
+
+commit d15ce36ba1fa1058113c9344b39fb25bc0491f76
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 15 19:29:10 2025 -0300
+
+    changed displayManager ly to gdm
+
+commit 6437dc5079c85a39924f11ab6d5d98172d414760
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Nov 14 22:29:32 2025 -0300
+
+    fixed typo
+
+commit 910c466bba7529c248cb13eadb4cc0522f45c06d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Fri Nov 14 22:25:49 2025 -0300
+
+    Removed dmsgreeter in preference of ly.
+
+commit 72fcda8ababd35828b076f2e4e8b98dbab7ca5c3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 13 22:51:32 2025 -0300
+
+    Updated struts
+
+commit f339860e6f8a73b079edf38d1e909255339d9821
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 13 22:30:31 2025 -0300
+
+    removed gnomekeyring in preference of dms.
+
+commit dc66ff9e7fef115f6475ef1ad2fb54afdeaa2984
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 13 22:19:19 2025 -0300
+
+    Cleaned up a few things, removed ununsed stuff. I like Shark Girls <3
+
+commit 47582661e38200635a0fa89a2e8af41547fb733c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 13 22:14:11 2025 -0300
+
+    ..
+
+commit 01efc3051897dcd6689350bfe7a83c81e0cb6b4e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 13 22:06:35 2025 -0300
+
+    Updated portals
+
+commit dc57e66057dc9f6930dc9c8908ed7d6b7fbaac83
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 13 21:59:10 2025 -0300
+
+    update da estrutura do flake para suportar o DMS
+
+commit f4d49e199578a0ed0544e90ea1464856b73d1a52
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 13 20:50:29 2025 -0300
+
+    Update.
+
+commit 8c3700ba6dfbde898c715f8b8f2b78bef77f2e5b
+Author: rPlakama <rPlakama@proton.me>
+Date:   Thu Nov 13 18:55:44 2025 -0300
+
+    Removed unecessary packages
+
+commit 64cc2b068349a4e94daf0134c9f257160175c6e3
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 12 21:12:30 2025 -0300
+
+    300ms
+
+commit a79d8ccce0544f405d91fdc93484d76726d25099
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 12 21:06:30 2025 -0300
+
+    500ms
+
+commit 0909c1d5cd4be06ebf18bdef1211ad4a02315315
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 12 21:04:10 2025 -0300
+
+    update
+
+commit 829782d0a45b3e1ee54129e4cee2f5369e765c8c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Wed Nov 12 18:06:20 2025 -0300
+
+    Steam for both hosts. We ball.
+
+commit db515d8654cb59f977a92db505fa016e514edb2d
+Author: rPlakama <rPlakama@proton.me>
+Date:   Tue Nov 11 11:21:55 2025 -0300
+
+            modified:   ../config/niri/niri-binds.nix
+            modified:   ../config/niri/niri-outputs.nix
+
+commit d48610eec4068de31261ccb5c6f6f112d04fb06f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 10 21:48:44 2025 -0300
+
+    Removed cooler
+
+commit 8ef2c449bc56101d9058f2adff37566847000f76
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 10 17:04:09 2025 -0300
+
+    Positivo e seus ACPI calls, vsf.
+
+commit 0667f71f011af1c9a24c64bd3f1c496e591caed4
+Author: rPlakama <rPlakama@proton.me>
+Date:   Mon Nov 10 16:45:46 2025 -0300
+
+    A attempt to control my laptop fans...
+
+commit b28ff87a48179005482ba2f32366b4ecc8a9297e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 9 11:02:03 2025 -0300
+
+    Corrected syntax
+
+commit 337807e82f6da50d1b00e35fc3a445d8e0312413
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 9 11:01:27 2025 -0300
+
+    added flatpak for Centuria-host
+
+commit dd459fa917cde6074f6c670975fb1a500e6483e8
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 9 10:25:18 2025 -0300
+
+    prismlauncher
+
+commit 624bce24c339e32cc94ff0c03708a34f0a80b3e5
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 9 10:19:56 2025 -0300
+
+    Badlion client
+
+commit bcb46a6a9b1d8c78e4278d8f227ead25be95621f
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 9 10:16:33 2025 -0300
+
+    Finished specific.nix
+
+commit 564dab13ec6be3bf971d6b286b26fd542d379fcc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 9 10:15:42 2025 -0300
+
+    Finished rebase
+
+commit 3a6a4a6bde2dbebd451e58dd3e32146ea6a4b38e
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 9 10:13:53 2025 -0300
+
+    Lunarclient for Centuria-host
+
+commit 09e53dcce140a18bfe99375514046d664a40211a
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sun Nov 9 09:09:45 2025 -0300
+
+    Small increment in special-chalk-theme for DankMaterialShell
+
+commit 9c14d0650067b68e685c92e93432f79c86f412bc
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 8 18:44:23 2025 -0300
+
+    How forgot about the damn niri import? I DID!
+
+commit 0f19d56b66ecdab7830d7405709b0601b9261a65
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 8 18:38:56 2025 -0300
+
+    Finished refactor, readding Montserrat font.
+
+commit aae37e0e035795f29d64262e3c49a283528f9461
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 8 18:27:55 2025 -0300
+
+    removed unecessary alt
+
+commit f19557443ce7cffb7bf3ae8fcdc75347c8acb8c6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 8 18:23:33 2025 -0300
+
+    General fixes
+
+commit 5f4c25c91f42ad3dd8632aa59d0c8d9ff04dbf81
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 8 18:18:20 2025 -0300
+
+    General Changes
+
+commit 512e7a44752b4e4ad8509d7f7f55062c5973ac51
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 8 17:55:22 2025 -0300
+
+    ajustada no flake
+
+commit 12ccdef3bfc2d4207a904fc709159a8b04b6def6
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 8 17:54:37 2025 -0300
+
+    Limpada
+
+commit 8d4f0dfcc07487e19b7e1563a0cef55ff1b61fe1
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 8 17:49:34 2025 -0300
+
+    Initiating home-manager move
+
+commit 57fd0c782776edcb0a0d7ffe9578f918adcbd94c
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 8 17:46:46 2025 -0300
+
+    Formatted
+
+commit a4664b6c4e3eaffa5a8ce523a6d7b863db7fcf47
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 8 17:45:27 2025 -0300
+
+    Tá, voltando ao esquema... transferência de packages para o Shared. Criação de specific.nix para o nosso Centuria
+
+commit a038bf44ca3c4439463749d167a17812bcbdea30
+Author: rPlakama <rPlakama@proton.me>
+Date:   Sat Nov 8 17:40:01 2025 -0300
+
+    agora sim

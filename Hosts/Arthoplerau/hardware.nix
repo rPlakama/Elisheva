@@ -5,7 +5,6 @@
   pkgs,
   ...
 }:
-
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -19,6 +18,17 @@
       "sd_mod"
       "sdhci_pci"
     ];
+
+    blacklistedKernelModules = [
+      "snd_acp_pci"
+      "snd_pci_acp3x"
+      "snd_pci_acp5x"
+      "snd_pci_acp6x"
+    ];
+
+    extraModprobeConfig = ''
+      options snd-hda-intel dmic_detect=0
+    '';
 
     kernelParams = [
       "mem_sleep_default=deep"
@@ -37,5 +47,4 @@
       pkgs.sof-firmware
     ];
   };
-
 }
