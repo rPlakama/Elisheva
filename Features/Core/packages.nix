@@ -15,7 +15,6 @@ in
       [
         ripgrep
         cifs-utils
-        p7zip
         zip
         neovim
         yazi
@@ -25,11 +24,13 @@ in
         fzf
         git
         unzip
+        p7zip-rar
         dust
         jq
         fd
         man-pages-posix
         man-pages
+
       ]
       ++ lib.optionals (!gpu.nvidia) [ btop-rocm ]
       ++ lib.optionals gpu.nvidia [ btop-cuda ];
