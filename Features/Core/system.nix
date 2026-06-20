@@ -10,6 +10,8 @@ in
   config = lib.mkIf cfg.enable {
     security.sudo-rs.enable = true;
     networking.networkmanager.enable = true;
+    networking.wireless.enable = true;
+
     programs = {
       fish = {
         enable = true;

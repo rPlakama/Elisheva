@@ -25,6 +25,7 @@ in
         git
         unzip
         p7zip-rar
+        unrar
         dust
         jq
         fd
