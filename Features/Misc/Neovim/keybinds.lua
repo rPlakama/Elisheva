@@ -1,46 +1,87 @@
 local map = vim.keymap.set
 
--- Leader as space
-vim.g.mapleader = " "
-
--- Fzf-lua search pickers
-local fzf = require('fzf-lua')
-fzf.setup({})
-fzf.register_ui_select()
-
 -- Keymaps / fzf
+local fzf = require('fzf-lua')
 map('n', '<leader>f', fzf.files, { desc = "Search files" })
 map('n', '<leader>g', fzf.live_grep, { desc = "Grep search" })
 map('n', '<leader>a', fzf.buffers, { desc = "Buffer search" })
 map('n', '<leader>s', fzf.spell_suggest, { desc = "Spell suggestions" })
--- Zodide
-map('n', '<leader>d', '<cmd>Zi<CR>', { desc = "Zoxide jump (fzf)" })
+-- Zoxide
+map('n', '<leader>z', '<cmd>Zi<CR>', { desc = "Zoxide jump (fzf)" })
 
--- Keymaps extras
-map('n', '<leader>lf', vim.lsp.buf.format, { desc = "LSP Format buffer" })
+-- Oil
+map('n', '<C-n>', '<cmd>Oil<CR>', { desc = "Open Oil file explorer" })
 
+-- Window navigation
 map({ 'n', 't' }, '<A-h>', '<cmd>wincmd h<CR>', { desc = 'Move to left window' })
 map({ 'n', 't' }, '<A-l>', '<cmd>wincmd l<CR>', { desc = 'Move to right window' })
 map({ 'n', 't' }, '<A-j>', '<cmd>wincmd j<CR>', { desc = 'Move to lower window' })
 map({ 'n', 't' }, '<A-k>', '<cmd>wincmd k<CR>', { desc = 'Move to upper window' })
 
--- Oil
-map('n', '<C-n>', '<cmd>Oil<CR>', { desc = "Open Oil file explorer" })
-
 -- Spell settings
 map('n', '<C-M-1>', function()
-  vim.opt.spell = true
-  vim.opt.spelllang = 'en_us'
-  print("Spell: English (US)")
+	opt.spell = true
+	opt.spelllang = 'en_us'
+	print("Spell: English (US)")
 end, { desc = "English spell check on" })
-
 map('n', '<C-M-2>', function()
-  vim.opt.spell = true
-  vim.opt.spelllang = 'pt_br'
-  print("Spell: Portuguese (BR)")
+	opt.spell = true
+	opt.spelllang = 'pt_br'
+	print("Spell: Portuguese (BR)")
 end, { desc = "Portuguese BR spell check on" })
-
 map('n', '<C-M-3>', function()
-  vim.opt.spell = false
-  print("Spell: Off")
+	opt.spell = false
+	print("Spell: Off")
 end, { desc = "Spell check off" })
+
+-- LSP
+map('n', '<leader>lf', vim.lsp.buf.format, { desc = "LSP Format buffer" })
+map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { desc = "Go to definition" })
+map('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Diagnostics float" })
+
+-- Buffer
+map('n', '<leader>bd', function()
+	vim.cmd("bd")
+	vim.cmd("echo 'Buffer deleted'")
+end, { desc = "Delete buffer" })
+
+-- Remove accidental command window
+map('n', 'q:', ':')
+
+-- Smart i/a/A on blank lines
+for _, bind in ipairs({ "i", "a", "A" }) do
+	map("n", bind, function()
+		if vim.fn.getline("."):match("^%s*$") then
+			return [["_cc]]
+		else
+			return bind
+		end
+	end, { expr = true, noremap = true, silent = true })
+end
+
+-- C-Backspace deletes whole word in insert mode
+map('i', '<C-BS>', '<C-W>', { desc = "Delete word" })
+
+-- Flash
+map('n', 'ss', function() require("flash").jump() end, { desc = "Flash jump" })
+map('n', 'S', function() require("flash").treesitter() end, { desc = "Flash treesitter" })
+map('n', '<leader>r', function() require("flash").remote() end, { desc = "Flash remote" })
+map('n', '<leader>R', function() require("flash").treesitter_search() end, { desc = "Flash treesitter search" })
+
+-- Mini.sessions
+map('n', '<leader>qj', function()
+	require("mini.sessions").write(".session")
+	vim.cmd("wqa")
+end, { desc = "Save session and quit" })
+map('n', '<leader>qd', function()
+	require("mini.sessions").delete(".session")
+	vim.cmd("wqa")
+end, { desc = "Delete session and quit" })
+map('n', '<space>fs', function() MiniSessions.select() end, { desc = "Select session" })
+map('n', '<space>fd', function() MiniSessions.select("delete") end, { desc = "Delete session" })
+
+-- Tabs
+map('n', '<C-T>l', function() vim.cmd("tabnext") end, { desc = "Next tab" })
+map('n', '<C-T>h', function() vim.cmd("tabprevious") end, { desc = "Prev tab" })
+map('n', '<C-T>j', function() vim.cmd("tabnew") end, { desc = "New tab" })
+map('n', '<C-T>q', function() vim.cmd("tabclose") end, { desc = "Close tab" })

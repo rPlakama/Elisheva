@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 let
   cfg = config.features.neovim;
   cfgF = config.features;
@@ -35,6 +34,8 @@ let
           oil-nvim
           zoxide-vim
           render-markdown-nvim
+          flash-nvim
+          mini-nvim
         ]
         ++ lib.optionals (cfgF.dankMaterialShell.enable) [ base46Plugin ]
         ++ lib.optionals (cfgF.noctalia.enable) [ base16-nvim ];
@@ -62,13 +63,13 @@ in
       VISUAL = "nvim";
       MANPAGER = "nvim +Man!";
     };
+
     features.preservation.home.directories = [
       ".config/nvim"
     ];
 
     environment.systemPackages = with pkgs; [
       myNvim
-
       tinymist
       lua-language-server
       fish-lsp

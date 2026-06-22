@@ -1,8 +1,13 @@
 local opt = vim.opt
+local o = vim.o
+
+-- Leaders
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 -- Base settings
 opt.shortmess:append("I")
-opt.expandtab = true
+opt.expandtab = false
 opt.shiftwidth = 2
 opt.softtabstop = 2
 opt.tabstop = 2
@@ -11,9 +16,28 @@ opt.relativenumber = true
 opt.termguicolors = true
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
-vim.opt.mouse = ""
+opt.mouse = ""
+opt.wrap = false
+opt.hlsearch = false
+opt.incsearch = true
+opt.autoindent = true
+opt.swapfile = false
+opt.backup = false
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+opt.undofile = true
+opt.splitbelow = true
+opt.splitright = true
+o.winborder = "rounded"
+o.exrc = true
 
--- Plugin Configs
+-- Scrolloff dinâmico
+opt.scrolloff = math.floor(o.lines / 2) - 3
+
+-- Line number colors (catppuccin-mocha)
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#6c7086" })
+vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#cba6f7", bold = true })
+
+-- Autocmds
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
     vim.cmd([[%s/\s\+$//e]])
@@ -34,10 +58,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 -- Oil
 require("oil").setup({
   default_file_explorer = true,
-  columns = {
-    "icon",
-    "mtime",
-  },
+  columns = { "icon", "mtime" },
   buf_options = {
     buflisted = false,
     bufhidden = "hide",
@@ -85,8 +106,7 @@ require("oil").setup({
   view_options = {
     show_hidden = false,
     is_hidden_file = function(name, bufnr)
-      local m = name:match("^%.")
-      return m ~= nil
+      return name:match("^%.") ~= nil
     end,
     is_always_hidden = function(name, bufnr)
       return false

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 
@@ -40,6 +41,12 @@ in
           description = "WhatsApp Bot";
           wantedBy = [ "multi-user.target" ];
           after = [ "network.target" ];
+
+          path = with pkgs; [
+            ffmpeg
+            imagemagick
+            libwebp
+          ];
 
           serviceConfig = {
             ExecStart = "/home/${config.core.user}/ascending-bots/whatsapp-bot/whatsapp-summarizer-linux-amd64";
