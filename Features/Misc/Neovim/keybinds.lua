@@ -68,18 +68,6 @@ map('n', 'S', function() require("flash").treesitter() end, { desc = "Flash tree
 map('n', '<leader>r', function() require("flash").remote() end, { desc = "Flash remote" })
 map('n', '<leader>R', function() require("flash").treesitter_search() end, { desc = "Flash treesitter search" })
 
--- Mini.sessions
-map('n', '<leader>qj', function()
-	require("mini.sessions").write(".session")
-	vim.cmd("wqa")
-end, { desc = "Save session and quit" })
-map('n', '<leader>qd', function()
-	require("mini.sessions").delete(".session")
-	vim.cmd("wqa")
-end, { desc = "Delete session and quit" })
-map('n', '<space>fs', function() MiniSessions.select() end, { desc = "Select session" })
-map('n', '<space>fd', function() MiniSessions.select("delete") end, { desc = "Delete session" })
-
 -- Tabs
 map('n', '<C-T>l', function() vim.cmd("tabnext") end, { desc = "Next tab" })
 map('n', '<C-T>h', function() vim.cmd("tabprevious") end, { desc = "Prev tab" })

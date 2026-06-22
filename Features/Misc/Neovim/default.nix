@@ -35,7 +35,6 @@ let
           zoxide-vim
           render-markdown-nvim
           flash-nvim
-          mini-nvim
         ]
         ++ lib.optionals (cfgF.dankMaterialShell.enable) [ base46Plugin ]
         ++ lib.optionals (cfgF.noctalia.enable) [ base16-nvim ];
