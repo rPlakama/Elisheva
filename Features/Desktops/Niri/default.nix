@@ -7,6 +7,14 @@
 let
   cfg = config.features.niri;
   user = config.core.user;
+
+  isLaptop = config.core.isLaptop;
+
+  powerProfileBind = lib.optionalString isLaptop ''
+    "Ctrl+Alt+Q" {
+        spawn "sh" "-c" "current=$(powerprofilesctl get); case $current in performance) next=balanced ;; balanced) next=power-saver ;; power-saver) next=performance ;; esac; powerprofilesctl set $next;"
+    }
+  '';
 in
 {
 
@@ -70,14 +78,11 @@ in
 
     ];
 
-    # XDG_CURRENT_DESKTOP=GNOME gnome-control-center online-accounts --> Might be useful.
-    services.gnome.gnome-online-accounts.enable = true;
-
     hjem.users.${user} = {
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
-          [ "@ImportDMS@" "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" ]
-          [ cfg.importDMS cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB ]
+          [ "@ImportDMS@" "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" "@powerProfileBind@" ]
+          [ cfg.importDMS cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB powerProfileBind ]
           (builtins.readFile ./config.kdl);
     };
 

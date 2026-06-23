@@ -183,4 +183,5 @@ binds {
 
     Ctrl+Alt+M            { spawn-sh "echo run-shortcut:toggleMute | nc -U -w1 $XDG_RUNTIME_DIR/vesktop.sock"; }
     Ctrl+Alt+K            { switch-layout "next"; }
+		@powerProfileBind@
 }
