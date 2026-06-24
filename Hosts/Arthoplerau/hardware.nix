@@ -11,13 +11,18 @@
   ];
 
   boot = {
-    initrd.availableKernelModules = [
-      "nvme"
-      "xhci_pci"
-      "usb_storage"
-      "sd_mod"
-      "sdhci_pci"
-    ];
+    initrd = {
+      kernelModules = [
+        "amdgpu"
+      ];
+      availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "usb_storage"
+        "sd_mod"
+        "sdhci_pci"
+      ];
+    };
 
     blacklistedKernelModules = [
       "snd_acp_pci"
