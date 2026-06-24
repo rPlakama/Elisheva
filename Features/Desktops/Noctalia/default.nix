@@ -209,6 +209,7 @@ in
             };
             brightness.enable_ddcutil = true;
             bar.default = {
+              margin_edge = 7;
               background_opacity = 1.0;
               font_family = "Montserrat Medium";
               position = "left";
