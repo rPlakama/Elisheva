@@ -25,14 +25,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    features.preservation = {
-      home.directories = [
-        ".config/vesktop"
-        ".config/foot"
-        ".config/mozilla"
-        ".config/Nextcloud"
-      ];
-    };
 
     environment.systemPackages = with pkgs; [
       vesktop

@@ -45,14 +45,6 @@ in
       ];
 
       niri.importDMS = ''include "DMS.kdl"'';
-      preservation.home.directories = [
-        ".config/DankMaterialShell"
-        ".config/niri"
-        ".config/gtk-4.0"
-        ".config/gtk-3.0"
-        ".config/dconf"
-        ".config/colors"
-      ];
     };
 
     programs.dank-material-shell = {

@@ -332,12 +332,6 @@ in
       neovim.extraInit = [
         "require('matugen').setup()"
       ];
-      preservation.home.directories = [
-        ".config/niri"
-        ".config/gtk-4.0"
-        ".config/gtk-3.0"
-        ".config/dconf"
-      ];
     };
   };
 }

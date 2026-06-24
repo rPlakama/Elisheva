@@ -63,10 +63,6 @@ in
       MANPAGER = "nvim +Man!";
     };
 
-    features.preservation.home.directories = [
-      ".config/nvim"
-    ];
-
     environment.systemPackages = with pkgs; [
       myNvim
       tinymist

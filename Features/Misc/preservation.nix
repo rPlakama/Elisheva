@@ -34,10 +34,9 @@ let
     "Pictures"
     "Documents"
     "Videos"
-    ".local/share"
-    ".local/state"
+    ".local"
+    ".config"
     ".ssh"
-    ".config/sops"
   ];
 in
 {
