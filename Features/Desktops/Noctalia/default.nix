@@ -261,7 +261,6 @@ in
                   id = "g6";
                   members = [
                     "clock"
-                    "media"
                   ];
                   opacity = widgetsGroupOpacity;
                   padding = widgetsGroupSpacing;
