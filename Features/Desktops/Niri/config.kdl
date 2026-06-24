@@ -69,6 +69,10 @@ layout {
         draw-behind-window false
         color "#00000070"
     }
+    tab-indicator {
+        hide-when-single-tab
+        place-within-column
+    }
     default-column-width { proportion 0.333333; }
     preset-column-widths {
         proportion 0.333333
@@ -125,7 +129,8 @@ window-rule {
 binds {
     Mod+Return { spawn "foot"; }
     Mod+Y      { spawn-sh "foot -e yazi"; }
-    Mod+W      { close-window; }
+    Mod+Shift+W      { toggle-column-tabbed-display; }
+    Mod+W { close-window; }
     Mod+P      { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
     Print      { screenshot; }
 

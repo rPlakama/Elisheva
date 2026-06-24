@@ -17,6 +17,7 @@ in
         rulesProvider = pkgs.ananicy-rules-cachyos;
       };
       upower.enable = isLaptop;
+      power-profiles-daemon.enable = isLaptop;
       bpftune.enable = true;
       devmon.enable = true;
       udisks2.enable = true;
