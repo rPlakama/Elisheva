@@ -32,11 +32,6 @@ in
         ".config/mozilla"
         ".config/Nextcloud"
       ];
-      home.files = [
-        ".config/okularpartrc"
-        ".config/okularrc"
-        ".config/QtProject.conf"
-      ];
     };
 
     environment.systemPackages = with pkgs; [
