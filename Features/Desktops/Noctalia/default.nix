@@ -11,6 +11,7 @@ let
   widgetsGroupSpacing = 6.0;
   widgetsGroupRadius = 3.0;
   host = config.core.host;
+  widgetPlacement = "centered";
 
 in
 {
@@ -71,6 +72,10 @@ in
               screen_corners.size = 13;
               panel = {
                 launcher_categories = true;
+                session_placement = widgetPlacement;
+                transparency_mode = "soft";
+                wallpaper_placement = widgetPlacement;
+
               };
             };
             keybinds = {
