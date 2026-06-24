@@ -68,6 +68,7 @@ in
               password_style = "random";
               polkit_agent = true;
               animation.speed = 0.8;
+              screen_corners.size = 13;
               panel = {
                 launcher_categories = true;
               };
@@ -80,22 +81,43 @@ in
             };
             theme = {
               source = "community";
-              community_palette = "Flexoki";
+              community_palette = "Cream Autumn";
+              mode = "dark";
               templates = {
-                community_ids = [ "neovim" ];
                 builtin_ids = [
-                  "kcolorscheme"
                   "foot"
                   "gtk3"
                   "gtk4"
+                  "kcolorscheme"
                   "qt"
                 ];
               };
-              wallpaper_scheme = "m3-tonal-spot";
             };
             wallpaper = {
               enabled = true;
               transition_on_startup = true;
+              directory = "/home/rplakama/Documents/Nextcloud/wallpapers";
+              default = {
+                path = "/home/rplakama/Documents/Nextcloud/wallpapers/cloudorange.jpg";
+              };
+              last = {
+                path = "/home/rplakama/Documents/Nextcloud/wallpapers/cloudorange.jpg";
+              };
+              monitors = {
+                "eDP-1" = {
+                  path = "/home/rplakama/Documents/Nextcloud/wallpapers/cloudorange.jpg";
+                };
+              };
+              favorite = [
+                {
+                  path = "/home/rplakama/Documents/Nextcloud/wallpapers/darkroad.jpg";
+                  theme_mode = "auto";
+                }
+                {
+                  path = "/home/rplakama/Documents/Nextcloud/wallpapers/cloudorange.jpg";
+                  theme_mode = "auto";
+                }
+              ];
             };
             location.auto_locate = true;
             lockscreen = {
@@ -118,13 +140,19 @@ in
               };
               widget = {
                 "lockscreen-login-box@eDP-1" = {
-                  box_height = 0.0;
-                  box_width = 0.0;
+                  box_height = 96.0;
+                  box_width = 512.0;
                   cx = 768.0;
                   cy = 480.0;
                   output = "eDP-1";
                   rotation = 0.0;
                   type = "login_box";
+                  settings = {
+                    background_color = "surface";
+                    background_opacity = 0.92;
+                    input_opacity = 1.0;
+                    show_login_button = false;
+                  };
                 };
                 "lockscreen-widget-0000000000000001" = {
                   box_height = 64.0;
@@ -177,6 +205,8 @@ in
             brightness.enable_ddcutil = true;
             bar.default = {
               background_opacity = 1.0;
+              font_family = "Montserrat Medium";
+              position = "left";
               radius = 3;
               margin_ends = 105;
               capsule = false;
@@ -186,8 +216,6 @@ in
               center = [ "group:g6" ];
               end = [
                 "group:g4"
-                "group:g3"
-                "group:g2"
                 "group:g1"
               ];
               capsule_group = [
@@ -195,6 +223,9 @@ in
                   fill = "surface_variant";
                   id = "g1";
                   members = [
+                    "bluetooth"
+                    "battery"
+                    "notifications"
                     "volume"
                     "network"
                   ];
@@ -205,46 +236,21 @@ in
                 }
                 {
                   fill = "surface_variant";
-                  id = "g2";
-                  members = [
-                    "bluetooth"
-                    "notifications"
-                  ];
-                  opacity = widgetsGroupOpacity;
-                  padding = widgetsGroupSpacing;
-                  radius = widgetsGroupRadius;
-                }
-                {
-                  fill = "surface_variant";
-                  id = "g3";
-                  members = [
-                    "cpu"
-                    "battery"
-                  ];
-
-                  opacity = widgetsGroupOpacity;
-                  padding = widgetsGroupSpacing;
-                  radius = widgetsGroupRadius;
-
-                }
-                {
-                  fill = "surface_variant";
                   id = "g4";
                   members = [
                     "tray"
-                    "control-center"
                   ];
                   opacity = widgetsGroupOpacity;
                   padding = widgetsGroupSpacing;
                   radius = widgetsGroupRadius;
                 }
                 {
-                  fill = "surface_variant";
+                  fill = "on_secondary";
+                  foreground = "on_surface";
                   id = "g5";
                   members = [
-                    "launcher"
-                    "keyboard_layout"
                     "workspaces"
+                    "keyboard_layout"
                   ];
                   opacity = widgetsGroupOpacity;
                   padding = widgetsGroupSpacing;
@@ -254,8 +260,8 @@ in
                   fill = "surface_variant";
                   id = "g6";
                   members = [
-                    "weather"
                     "clock"
+                    "media"
                   ];
                   opacity = widgetsGroupOpacity;
                   padding = widgetsGroupSpacing;
@@ -275,7 +281,9 @@ in
             widget = {
               launcher.glyph = "snowflake";
               workspaces.display = "none";
-              clock = { };
+              clock = {
+                vertical_format = "{:%H\\n%M}";
+              };
               weather.show_condition = false;
               notifications.show_label = false;
               network = {
@@ -288,7 +296,7 @@ in
                 capsule_radius = 3;
                 scale = 0.69999999999999996;
                 show_label = false;
-                hide_when_full = true;
+                hide_when_full = false;
               };
               bluetooth = { };
               control-center = {
@@ -299,6 +307,12 @@ in
               };
               keyboard_layout = {
                 hide_when_single_layout = true;
+              };
+              media = {
+                art_size = 96.0;
+                hide_when_no_media = true;
+                max_length = 800;
+                title_scroll = "on_hover";
               };
             };
           };
