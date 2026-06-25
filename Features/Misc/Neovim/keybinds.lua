@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local opt = vim.opt
 
 -- Keymaps / fzf
 local fzf = require('fzf-lua')
@@ -35,7 +36,7 @@ map('n', '<C-M-3>', function()
 end, { desc = "Spell check off" })
 
 -- LSP
-map('n', '<leader>lf', vim.lsp.buf.format, { desc = "LSP Format buffer" })
+map('n', '<leader>lf', function() vim.lsp.buf.format({ async = true }) end, { desc = "LSP Format buffer" })
 map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { desc = "Go to definition" })
 map('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Diagnostics float" })
 
