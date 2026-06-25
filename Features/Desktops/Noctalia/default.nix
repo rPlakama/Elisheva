@@ -20,7 +20,6 @@ let
   widgetsGroupOpacity = 0.0;
   widgetsGroupSpacing = 6.0;
   widgetsGroupRadius = 3.0;
-  widgetPlacement = "centered";
 
 in
 {
@@ -90,10 +89,11 @@ in
               screen_corners.size = 13;
               panel = {
                 launcher_categories = true;
-                session_placement = widgetPlacement;
+                session_placement = "floating";
+                session_position = "center";
                 transparency_mode = "soft";
-                wallpaper_placement = widgetPlacement;
-
+                wallpaper_placement = "floating";
+                wallpaper_position = "center";
               };
             };
             keybinds = {
@@ -257,6 +257,7 @@ in
                   members = [
                     "workspaces"
                     "keyboard_layout"
+                    "privacy"
                   ];
                   opacity = widgetsGroupOpacity;
                   padding = widgetsGroupSpacing;
@@ -266,7 +267,9 @@ in
                   fill = "surface_variant";
                   id = "g6";
                   members = [
+                    "brightness"
                     "clock"
+                    "taskbar"
                   ];
                   opacity = widgetsGroupOpacity;
                   padding = widgetsGroupSpacing;
@@ -285,7 +288,11 @@ in
             ];
             widget = {
               launcher.glyph = "snowflake";
-              workspaces.display = "none";
+              workspaces = {
+                hide_when_empty = true;
+                display = "none";
+                pill_scale = 0.85;
+              };
               clock = {
                 vertical_format = "{:%H\\n%M}";
               };
@@ -299,13 +306,14 @@ in
               battery = {
                 display_mode = "graphic";
                 capsule_radius = barRadius;
-                scale = 0.69999999999999996;
+                scale = 0.70;
                 show_label = false;
                 hide_when_full = false;
               };
               bluetooth = { };
               control-center = {
                 glyph = "topology-star-3";
+                scale = 0.9;
               };
               cpu = {
                 show_label = false;
@@ -318,6 +326,13 @@ in
                 hide_when_no_media = true;
                 max_length = 800;
                 title_scroll = "on_hover";
+              };
+              brightness.show_label = false;
+              privacy.hide_inactive = true;
+              spacer_2.type = "spacer";
+              taskbar = {
+                inactive_opacity = 0.74;
+                show_active_indicator = false;
               };
             };
           };

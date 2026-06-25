@@ -205,11 +205,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1781190017,
-        "narHash": "sha256-XoVqfe6DVxNEtM86By7H25p8GutzGxmFvL4KPr+PgRU=",
+        "lastModified": 1782404623,
+        "narHash": "sha256-+3jKswdbWNSx3YT+8DVfgXtvMD9KBeiMZtHjfoP8wO0=",
         "owner": "rPlakama",
         "repo": "Kavita-flake",
-        "rev": "7355ffb5e9766d6945e0e328eb43178a4782ecdf",
+        "rev": "71fc6b169e5a73c5ca768c65fd5fa635c267bbde",
         "type": "github"
       },
       "original": {
@@ -295,11 +295,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1780749050,
-        "narHash": "sha256-3av0pIjlOWQ6rDbNOmpUSvbNnJkGORQKKjb4LtCZsIY=",
+        "lastModified": 1781577229,
+        "narHash": "sha256-lrp67w8AulE9Ks53n27I45ADSzbOCn4H+CNW1Ck8B+8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+        "rev": "567a49d1913ce81ac6e9582e3553dd90a955875f",
         "type": "github"
       },
       "original": {
