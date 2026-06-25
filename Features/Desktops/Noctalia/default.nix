@@ -29,6 +29,7 @@ in
     default = config.features.niri.NoctaliaEnabled;
     description = "Enable Noctalia window manager environment.";
   };
+
   config = lib.mkIf config.features.noctalia.enable {
     assertions = [
       {
@@ -41,21 +42,29 @@ in
         message = "noctalia requires niri";
       }
     ];
+
     nix.settings = {
       extra-substituters = [ "https://noctalia.cachix.org" ];
       extra-trusted-public-keys = [
         "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       ];
     };
-    boot.consoleLogLevel = 0;
     environment.systemPackages = [
       inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
       pkgs.ddcutil
     ];
-
     services.ddccontrol.enable = true;
-    environment.sessionVariables.QT_QPA_PLATFORMTHEME = "qt6ct";
 
+    features = {
+      niri.ImportNoctalia = ''include "noctaliaBinds.kdl"'';
+      graphicalPkgs.foot.theme = [
+        "include=/home/${user}/.config/foot/themes/noctalia"
+      ];
+      neovim.extraInit = [
+        "require('matugen').setup()"
+      ];
+    };
+    # Hjem block starts --
     hjem = {
       extraModules = [
         inputs.noctalia.hjemModules.default
@@ -315,14 +324,6 @@ in
         };
       };
     };
-    features = {
-      niri.ImportNoctalia = ''include "noctaliaBinds.kdl"'';
-      graphicalPkgs.foot.theme = [
-        "include=/home/${user}/.config/foot/themes/noctalia"
-      ];
-      neovim.extraInit = [
-        "require('matugen').setup()"
-      ];
-    };
+    # Hjem block ends
   };
 }
