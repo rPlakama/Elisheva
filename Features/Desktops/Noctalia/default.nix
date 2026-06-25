@@ -7,10 +7,19 @@
 }:
 let
   user = config.core.user;
+  host = config.core.host;
+
+  # display
+  primaryMonitor = "eDP-1";
+
+  # styling
+  fontFamily = "Montserrat Medium";
+  barRadius = 3;
+
+  # widget groups
   widgetsGroupOpacity = 0.0;
   widgetsGroupSpacing = 6.0;
   widgetsGroupRadius = 3.0;
-  host = config.core.host;
   widgetPlacement = "centered";
 
 in
@@ -64,7 +73,7 @@ in
             shell = {
               launch_apps_as_systemd_services = true;
               corner_radius_scale = 0.25;
-              font_family = "Montserrat Medium";
+              font_family = fontFamily;
               niri_overview_type_to_launch_enabled = true;
               password_style = "random";
               polkit_agent = true;
@@ -105,28 +114,6 @@ in
             wallpaper = {
               enabled = true;
               transition_on_startup = true;
-              directory = "/home/rplakama/Documents/Nextcloud/wallpapers";
-              default = {
-                path = "/home/rplakama/Documents/Nextcloud/wallpapers/cloudorange.jpg";
-              };
-              last = {
-                path = "/home/rplakama/Documents/Nextcloud/wallpapers/cloudorange.jpg";
-              };
-              monitors = {
-                "eDP-1" = {
-                  path = "/home/rplakama/Documents/Nextcloud/wallpapers/cloudorange.jpg";
-                };
-              };
-              favorite = [
-                {
-                  path = "/home/rplakama/Documents/Nextcloud/wallpapers/darkroad.jpg";
-                  theme_mode = "auto";
-                }
-                {
-                  path = "/home/rplakama/Documents/Nextcloud/wallpapers/cloudorange.jpg";
-                  theme_mode = "auto";
-                }
-              ];
             };
             location.auto_locate = true;
             lockscreen = {
@@ -138,7 +125,7 @@ in
               enabled = true;
               schema_version = 1;
               widget_order = [
-                "lockscreen-login-box@eDP-1"
+                "lockscreen-login-box@${primaryMonitor}"
                 "lockscreen-widget-0000000000000001"
                 "lockscreen-widget-0000000000000002"
               ];
@@ -148,12 +135,12 @@ in
                 visible = true;
               };
               widget = {
-                "lockscreen-login-box@eDP-1" = {
+                "lockscreen-login-box@${primaryMonitor}" = {
                   box_height = 96.0;
                   box_width = 512.0;
                   cx = 768.0;
                   cy = 480.0;
-                  output = "eDP-1";
+                  output = primaryMonitor;
                   rotation = 0.0;
                   type = "login_box";
                   settings = {
@@ -168,7 +155,7 @@ in
                   box_width = 512.0;
                   cx = 768.0;
                   cy = 400.0;
-                  output = "eDP-1";
+                  output = primaryMonitor;
                   rotation = 0.0;
                   type = "clock";
                   settings = {
@@ -181,7 +168,7 @@ in
                   box_width = 512.0;
                   cx = 768.0;
                   cy = 560.0;
-                  output = "eDP-1";
+                  output = primaryMonitor;
                   rotation = 0.0;
                   type = "label";
                   settings = {
@@ -215,12 +202,12 @@ in
             bar.default = {
               margin_edge = 7;
               background_opacity = 1.0;
-              font_family = "Montserrat Medium";
+              font_family = fontFamily;
               position = "left";
-              radius = 3;
+              radius = barRadius;
               margin_ends = 105;
               capsule = false;
-              capsule_radius = 3;
+              capsule_radius = barRadius;
               capsule_opacity = 0.0;
               start = [ "group:g5" ];
               center = [ "group:g6" ];
@@ -302,7 +289,7 @@ in
               volume.show_label = false;
               battery = {
                 display_mode = "graphic";
-                capsule_radius = 3;
+                capsule_radius = barRadius;
                 scale = 0.69999999999999996;
                 show_label = false;
                 hide_when_full = false;
