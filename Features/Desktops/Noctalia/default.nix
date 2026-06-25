@@ -85,8 +85,9 @@ in
               up = [ "Ctrl+p" ];
             };
             theme = {
-              source = "community";
+              source = "wallpaper";
               community_palette = "Cream Autumn";
+              wallpaper_scheme = "m3-rainbow";
               mode = "dark";
               templates = {
                 builtin_ids = [
@@ -95,6 +96,9 @@ in
                   "gtk4"
                   "kcolorscheme"
                   "qt"
+                ];
+                community_ids = [
+                  "neovim"
                 ];
               };
             };
