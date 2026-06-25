@@ -37,6 +37,7 @@ in
       ripdrag
       obsidian
       kdePackages.okular
+      gnome-disk-utility
     ];
 
     hjem.users.${user} = {
