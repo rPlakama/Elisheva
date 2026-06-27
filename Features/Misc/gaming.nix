@@ -34,7 +34,10 @@ in
 
     boot.kernelModules = [ "ntsync" ];
 
-    environment.systemPackages = [ pkgs.bottles ];
+    environment.systemPackages = with pkgs; [
+      mangohud
+      bottles
+    ];
 
     programs = {
       gamemode.enable = cfg.gamemode.enable;

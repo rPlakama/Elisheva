@@ -15,6 +15,8 @@ let
         spawn "sh" "-c" "current=$(powerprofilesctl get); case $current in performance) next=balanced ;; balanced) next=power-saver ;; power-saver) next=performance ;; esac; powerprofilesctl set $next;"
     }
   '';
+
+  vrrLine = if cfg.output.vrr.enable then "variable-refresh-rate" else "";
 in
 {
 
@@ -59,6 +61,12 @@ in
       default = "br";
       description = "Keyboard layout";
     };
+
+    output.vrr.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable Variable Refresh Rate (Adaptive Sync) on monitors that support it";
+    };
   };
   config = lib.mkIf cfg.enable {
 
@@ -81,8 +89,8 @@ in
     hjem.users.${user} = {
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
-          [ "@ImportDMS@" "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" "@powerProfileBind@" ]
-          [ cfg.importDMS cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB powerProfileBind ]
+          [ "@ImportDMS@" "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" "@powerProfileBind@" "@vrr@" ]
+          [ cfg.importDMS cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB powerProfileBind vrrLine ]
           (builtins.readFile ./config.kdl);
     };
 

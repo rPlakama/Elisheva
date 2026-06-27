@@ -17,11 +17,13 @@ in
           extraPackages = with pkgs; [
             mesa
             libva
+            rocmPackages.clr.icd
           ];
         };
         amdgpu.opencl.enable = true;
+        amdgpu.overdrive.enable = true;
       };
-      programs.corectrl.enable = true;
+      services.lact.enable = true;
       environment.systemPackages = with pkgs; [ radeontop ];
     })
 
@@ -29,18 +31,22 @@ in
       services.xserver.videoDrivers = [ "nvidia" ];
       boot = {
         blacklistedKernelModules = [ "nouveau" ];
-        kernelParams = [ "modprobe.blacklist=nouveau" ];
+        kernelParams = [
+          "modprobe.blacklist=nouveau"
+          "nvidia_drm.fbdev=1"
+        ];
       };
       hardware = {
         graphics.enable = true;
         nvidia-container-toolkit.enable = true;
         nvidia = {
           modesetting.enable = true;
-          powerManagement.enable = false;
+          powerManagement.enable = true;
           open = false;
           package = config.boot.kernelPackages.nvidiaPackages.stable;
         };
       };
+      hardware.graphics.extraPackages = with pkgs; [ nvidia-vaapi-driver ];
       environment.systemPackages = with pkgs; [ nvtopPackages.full ];
     })
 

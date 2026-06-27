@@ -23,7 +23,7 @@ in
     ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
   '';
 
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bmq-lto;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
 
   core = {
     user = "rplakama";
@@ -34,6 +34,7 @@ in
       user = "rPlakama";
     };
     gpu.intel = true;
+    cpu.intel = true;
   };
 
   features.graphicalPkgs.enable = false;

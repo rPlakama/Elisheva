@@ -81,6 +81,9 @@ layout {
     center-focused-column "never"
 }
 
+// Output
+@vrr@
+
 animations {
     slowdown 0.800000
     config-notification-open-close { duration-ms 452; curve "cubic-bezier" 0.2 1.0 0.2 1.0; }

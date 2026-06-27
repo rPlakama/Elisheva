@@ -36,11 +36,14 @@
     '';
 
     kernelParams = [
-      "mem_sleep_default=deep"
+      "mem_sleep_default=s2idle"
       "libata.noacpi=1"
+      "amdgpu.vrr_support=1"
     ];
 
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [
+      "kvm-amd"
+    ];
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
