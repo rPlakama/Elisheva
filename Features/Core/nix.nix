@@ -13,6 +13,11 @@ in
     programs.nix-ld.enable = true;
     nix = {
       package = pkgs.lix;
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than +5d";
+      };
       settings = {
         show-trace = true;
         experimental-features = [
