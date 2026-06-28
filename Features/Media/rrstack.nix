@@ -1,6 +1,8 @@
-{ config, lib, ... }:
-
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.features.rrstack;
 
   mediaServicesWithPermissions = {
@@ -14,8 +16,7 @@ let
     prowlarr = 9696;
     flaresolverr = 8191;
   };
-in
-{
+in {
   options.features.rrstack.enable = lib.mkEnableOption "*-rr stack (Sonarr, Radarr, Jackett, Prowlarr)";
 
   config = lib.mkIf cfg.enable {
@@ -31,11 +32,13 @@ in
     };
     services =
       (lib.mapAttrs (name: port: {
-        enable = true;
-        group = "media";
-      }) mediaServicesWithPermissions)
+          enable = true;
+          group = "media";
+        })
+        mediaServicesWithPermissions)
       // (lib.mapAttrs (name: port: {
-        enable = true;
-      }) mediaNonPermissions);
+          enable = true;
+        })
+        mediaNonPermissions);
   };
 }

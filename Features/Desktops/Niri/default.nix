@@ -3,8 +3,7 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.features.niri;
   user = config.core.user;
 
@@ -16,10 +15,11 @@ let
     }
   '';
 
-  vrrLine = if cfg.output.vrr.enable then "variable-refresh-rate" else "";
-in
-{
-
+  vrrLine =
+    if cfg.output.vrr.enable
+    then "variable-refresh-rate"
+    else "";
+in {
   options.features.niri = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -69,11 +69,9 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-
     programs.niri.enable = true;
 
     environment.systemPackages = with pkgs; [
-
       nautilus
       loupe
       xwayland-satellite
@@ -83,16 +81,14 @@ in
       volantes-cursors
       wl-clipboard
       pulseaudio
-
     ];
 
     hjem.users.${user} = {
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
-          [ "@ImportDMS@" "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" "@powerProfileBind@" "@vrr@" ]
-          [ cfg.importDMS cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB powerProfileBind vrrLine ]
-          (builtins.readFile ./config.kdl);
+        ["@ImportDMS@" "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" "@powerProfileBind@" "@vrr@"]
+        [cfg.importDMS cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB powerProfileBind vrrLine]
+        (builtins.readFile ./config.kdl);
     };
-
   };
 }

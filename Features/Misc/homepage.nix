@@ -2,24 +2,23 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.features.homepage;
   currentIP = config.core.ip;
   gen = config.features.unifiedDNS;
   domain = config.core.domain;
-in
-{
+in {
   options.features.homepage = {
     enable = lib.mkEnableOption "Homepage dashboard";
   };
 
   config = lib.mkIf cfg.enable {
-
-    assertions = [{
-      assertion = config.features.unifiedDNS.enable;
-      message = "Homepage requires unifiedDNS";
-    }];
+    assertions = [
+      {
+        assertion = config.features.unifiedDNS.enable;
+        message = "Homepage requires unifiedDNS";
+      }
+    ];
 
     features.unifiedDNS.proxyServices.dashboard = 8082;
 
@@ -36,13 +35,15 @@ in
 
       services = [
         {
-          "General" = lib.mapAttrsToList (name: port: {
-            "${name}" = {
-              icon = "si-${name}";
-              href = "https://${name}.${domain}";
-              description = "Auto-generated link for ${name}";
-            };
-          }) gen.proxyServices;
+          "General" =
+            lib.mapAttrsToList (name: port: {
+              "${name}" = {
+                icon = "si-${name}";
+                href = "https://${name}.${domain}";
+                description = "Auto-generated link for ${name}";
+              };
+            })
+            gen.proxyServices;
         }
       ];
     };

@@ -4,8 +4,7 @@
   inputs,
   pkgs,
   ...
-}:
-let
+}: let
   user = config.core.user;
   host = config.core.host;
 
@@ -20,9 +19,7 @@ let
   widgetsGroupOpacity = 0.0;
   widgetsGroupSpacing = 6.0;
   widgetsGroupRadius = 3.0;
-
-in
-{
+in {
   options.features.noctalia.enable = lib.mkOption {
     type = lib.types.bool;
     default = config.features.niri.NoctaliaEnabled;
@@ -43,7 +40,7 @@ in
     ];
 
     nix.settings = {
-      extra-substituters = [ "https://noctalia.cachix.org" ];
+      extra-substituters = ["https://noctalia.cachix.org"];
       extra-trusted-public-keys = [
         "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       ];
@@ -70,14 +67,12 @@ in
       ];
 
       users.${user} = {
-
         files.".config/niri/noctaliaBinds.kdl".source = ./NoctaliaBinds.kdl;
 
         programs.noctalia = {
           enable = true;
           systemd.enable = true;
           settings = {
-
             shell = {
               launch_apps_as_systemd_services = true;
               corner_radius_scale = 0.25;
@@ -97,10 +92,10 @@ in
               };
             };
             keybinds = {
-              down = [ "Ctrl+n" ];
-              left = [ "Ctrl+h" ];
-              right = [ "Ctrl+l" ];
-              up = [ "Ctrl+p" ];
+              down = ["Ctrl+n"];
+              left = ["Ctrl+h"];
+              right = ["Ctrl+l"];
+              up = ["Ctrl+p"];
             };
             theme = {
               source = "wallpaper";
@@ -218,8 +213,8 @@ in
               capsule = false;
               capsule_radius = barRadius;
               capsule_opacity = 0.0;
-              start = [ "group:g5" ];
-              center = [ "group:g6" ];
+              start = ["group:g5"];
+              center = ["group:g6"];
               end = [
                 "group:g4"
                 "group:g1"
@@ -238,7 +233,6 @@ in
                   opacity = widgetsGroupOpacity;
                   padding = widgetsGroupSpacing;
                   radius = widgetsGroupRadius;
-
                 }
                 {
                   fill = "surface_variant";
@@ -274,17 +268,16 @@ in
                   opacity = widgetsGroupOpacity;
                   padding = widgetsGroupSpacing;
                   radius = widgetsGroupRadius;
-
                 }
               ];
             };
             control_center.shortcuts = [
-              { type = "wifi"; }
-              { type = "bluetooth"; }
-              { type = "caffeine"; }
-              { type = "notification"; }
-              { type = "mic_mute"; }
-              { type = "system"; }
+              {type = "wifi";}
+              {type = "bluetooth";}
+              {type = "caffeine";}
+              {type = "notification";}
+              {type = "mic_mute";}
+              {type = "system";}
             ];
             widget = {
               launcher.glyph = "snowflake";
@@ -310,7 +303,7 @@ in
                 show_label = false;
                 hide_when_full = false;
               };
-              bluetooth = { };
+              bluetooth = {};
               control-center = {
                 glyph = "topology-star-3";
                 scale = 0.9;

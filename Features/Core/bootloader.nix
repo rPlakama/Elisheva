@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.features.bootloader;
   nixosInit = config.features.bootloader.nixos-init.enable;
-in
-{
+in {
   options.features.bootloader = {
     enable = lib.mkOption {
       type = lib.types.bool;

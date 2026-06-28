@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.features.core;
   user = config.core.user;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     hjem.users.${user} = {
       enable = true;

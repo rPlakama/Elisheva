@@ -3,9 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-
-let
+}: let
   cfg = config.features.st;
   configSrc = toString (
     pkgs.writeText "sillytavern-config.yaml" ''
@@ -22,12 +20,11 @@ let
       dataRoot: ./data
     ''
   );
-in
-{
+in {
   options.features.st.enable = lib.mkEnableOption "SillyTavern AI RPG";
 
   config = lib.mkIf cfg.enable {
-    features.preservation.system.directories = [ "/var/lib/SillyTavern" ];
+    features.preservation.system.directories = ["/var/lib/SillyTavern"];
 
     services.sillytavern = {
       enable = true;
@@ -35,8 +32,7 @@ in
       configFile = configSrc;
     };
 
-    systemd.services.sillytavern.serviceConfig.ExecStartPre =
-      "${pkgs.bash}/bin/bash -c 'cp --remove-destination ${configSrc} /var/lib/SillyTavern/config.yaml && chmod 600 /var/lib/SillyTavern/config.yaml'";
+    systemd.services.sillytavern.serviceConfig.ExecStartPre = "${pkgs.bash}/bin/bash -c 'cp --remove-destination ${configSrc} /var/lib/SillyTavern/config.yaml && chmod 600 /var/lib/SillyTavern/config.yaml'";
     features.unifiedDNS.proxyServices.st = 6720;
   };
 }

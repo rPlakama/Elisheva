@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
-
-let
-  cfgSops = config.sops.secrets;
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  cfgSops = config.sops.secrets;
+in {
   imports = [
     ./hardware.nix
     ../../Features
@@ -92,7 +93,6 @@ in
     nextcloud.enable = true;
     iperf3.enable = true;
     jellyfin.enable = true;
-    navidrome.enable = true;
 
     bots = {
       enable = true;

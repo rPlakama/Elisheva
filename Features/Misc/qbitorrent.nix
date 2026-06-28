@@ -3,17 +3,12 @@
   pkgs,
   lib,
   ...
-}:
-
-let
+}: let
   cfg = config.features.qbit;
   user = config.core.user;
-in
-
-{
+in {
   options.features.qbit.enable = lib.mkEnableOption "qBittorrent + Qui";
   config = lib.mkIf cfg.enable {
-
     features.mediaPermissions.enable = true;
     sops.secrets."qui/secret" = {
       group = "media";
@@ -31,8 +26,7 @@ in
     };
 
     environment.systemPackages = lib.optionals config.features.graphicalPkgs.enable (
-      with pkgs;
-      [
+      with pkgs; [
         qbittorrent
       ]
     );

@@ -2,11 +2,9 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.features.core;
-in
-{
+in {
   config = lib.mkIf cfg.enable {
     security.sudo-rs.enable = true;
     networking.networkmanager.enable = true;

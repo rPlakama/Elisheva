@@ -3,13 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-
-let
+}: let
   cfg = config.features.graphicalPkgs;
   user = config.core.user;
-in
-{
+in {
   options.features.graphicalPkgs = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -18,14 +15,13 @@ in
     };
     foot.theme = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ ];
+      default = [];
       description = "Import themes for Foot";
       example = "include=path";
     };
   };
 
   config = lib.mkIf cfg.enable {
-
     environment.systemPackages = with pkgs; [
       vesktop
       materialgram
@@ -41,13 +37,14 @@ in
     ];
 
     hjem.users.${user} = {
-      files.".config/foot/foot.ini".text = ''
-        [main]
-        dpi-aware=false
-        font=CaskaydiaCove Nerd Font Mono:size=9
-      ''
-      + "\n"
-      + (lib.concatStringsSep "\n" cfg.foot.theme);
+      files.".config/foot/foot.ini".text =
+        ''
+          [main]
+          dpi-aware=false
+          font=CaskaydiaCove Nerd Font Mono:size=9
+        ''
+        + "\n"
+        + (lib.concatStringsSep "\n" cfg.foot.theme);
     };
   };
 }

@@ -2,12 +2,9 @@
   lib,
   config,
   ...
-}:
-
-let
+}: let
   cfg = config.features.iperf3;
-in
-{
+in {
   options.features.iperf3.enable = lib.mkEnableOption "iperf3 network testing";
   config = lib.mkIf cfg.enable {
     services.iperf3 = {

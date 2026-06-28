@@ -1,12 +1,14 @@
-{ config, lib, ... }:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.features.unifiedDNS;
   domain = config.core.domain;
   currentIP = config.core.ip;
 
   mkDnsRecords = ip: lib.mapAttrsToList (name: port: "${ip} ${name}.${domain}") cfg.proxyServices;
-in
-{
+in {
   options.features.unifiedDNS = {
     enable = lib.mkEnableOption "Unified DNS and Reverse Proxy (Pi-hole + Nginx)";
 
@@ -18,7 +20,7 @@ in
 
     proxyServices = lib.mkOption {
       type = lib.types.attrsOf lib.types.port;
-      default = { };
+      default = {};
       description = "Services to be proxied by Nginx and registered in Pi-hole";
     };
 
@@ -43,7 +45,7 @@ in
     };
 
     networking.firewall = {
-      trustedInterfaces = [ "tailscale0" ];
+      trustedInterfaces = ["tailscale0"];
       allowedTCPPorts = [
         80
         443
@@ -95,7 +97,7 @@ in
           dhcp = {
             active = false;
             end = "192.168.0.254";
-            hosts = [ ];
+            hosts = [];
             ipv6 = false;
             leaseTime = "24h";
             start = "192.168.0.61";
@@ -104,21 +106,22 @@ in
             router = cfg.gateway;
           };
           dns = {
-            cnameRecords = [ ];
+            cnameRecords = [];
             domain = domain;
             domainNeeded = true;
             listeningMode = "ALL";
             expandHosts = true;
             interface = "all";
-            hosts = [
-              "${cfg.gateway} gateway"
-              "${currentIP} pi-hole"
-              "${currentIP} ${domain}"
-              "${cfg.tailscaleIP} ${domain}"
-            ]
-            ++ (mkDnsRecords currentIP)
-            ++ (mkDnsRecords cfg.tailscaleIP);
-            upstreams = [ "127.0.0.1#5335" ];
+            hosts =
+              [
+                "${cfg.gateway} gateway"
+                "${currentIP} pi-hole"
+                "${currentIP} ${domain}"
+                "${cfg.tailscaleIP} ${domain}"
+              ]
+              ++ (mkDnsRecords currentIP)
+              ++ (mkDnsRecords cfg.tailscaleIP);
+            upstreams = ["127.0.0.1#5335"];
           };
           ntp = {
             ipv4.active = false;
@@ -132,7 +135,7 @@ in
 
       pihole-web = {
         enable = true;
-        ports = [ 8081 ];
+        ports = [8081];
       };
 
       nginx = {
@@ -141,24 +144,26 @@ in
         recommendedOptimisation = true;
         recommendedProxySettings = true;
         recommendedTlsSettings = true;
-        virtualHosts = lib.mapAttrs' (
-          name: port:
-          lib.nameValuePair "${name}.${domain}" {
-            useACMEHost = domain;
-            forceSSL = true;
-            extraConfig = ''
-              allow 192.168.1.0/24;
-              allow 192.168.0.0/24;
-              allow 100.64.0.0/10;
-              allow 127.0.0.1;
-              deny all;
-            '';
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:${toString port}";
-              proxyWebsockets = true;
-            };
-          }
-        ) cfg.proxyServices;
+        virtualHosts =
+          lib.mapAttrs' (
+            name: port:
+              lib.nameValuePair "${name}.${domain}" {
+                useACMEHost = domain;
+                forceSSL = true;
+                extraConfig = ''
+                  allow 192.168.1.0/24;
+                  allow 192.168.0.0/24;
+                  allow 100.64.0.0/10;
+                  allow 127.0.0.1;
+                  deny all;
+                '';
+                locations."/" = {
+                  proxyPass = "http://127.0.0.1:${toString port}";
+                  proxyWebsockets = true;
+                };
+              }
+          )
+          cfg.proxyServices;
       };
     };
 
@@ -167,7 +172,7 @@ in
       defaults.email = cfg.email;
       certs."${domain}" = {
         inherit domain;
-        extraDomainNames = [ "*.${domain}" ];
+        extraDomainNames = ["*.${domain}"];
         dnsProvider = "hetzner";
         environmentFile = config.sops.secrets."hetzner/api".path;
         dnsResolver = "1.1.1.1:53";
@@ -177,7 +182,7 @@ in
       };
     };
 
-    features.preservation.system.directories = [ "/etc/pihole" ];
+    features.preservation.system.directories = ["/etc/pihole"];
 
     features.unifiedDNS.proxyServices.pi-hole = 8081;
   };

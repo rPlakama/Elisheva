@@ -1,16 +1,12 @@
-{
-  lib,
-  ...
-}:
-
-let
+{lib, ...}: let
   contents = builtins.readDir ./.;
-  nixFiles = lib.filterAttrs (
-    name: type: type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix"
-  ) contents;
+  nixFiles =
+    lib.filterAttrs (
+      name: type: type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix"
+    )
+    contents;
   modulePaths = lib.mapAttrsToList (name: _: ./${name}) nixFiles;
-in
-{
+in {
   imports = modulePaths;
 
   options.core = {

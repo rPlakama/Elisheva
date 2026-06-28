@@ -3,15 +3,11 @@
   lib,
   inputs,
   ...
-}:
-
-let
+}: let
   cfg = config.features.dankMaterialShell;
   user = config.core.user;
-in
-
-{
-  imports = [ inputs.dms.nixosModules.dank-material-shell ];
+in {
+  imports = [inputs.dms.nixosModules.dank-material-shell];
 
   options.features.dankMaterialShell.enable = lib.mkOption {
     type = lib.types.bool;
@@ -20,7 +16,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-
     assertions = [
       {
         assertion = !config.features.niri.NoctaliaEnabled;

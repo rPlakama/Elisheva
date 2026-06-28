@@ -3,11 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   gpu = config.core.gpu;
-in
-{
+in {
   config = lib.mkMerge [
     (lib.mkIf gpu.amd {
       hardware = {
@@ -22,13 +20,13 @@ in
         };
         amdgpu.opencl.enable = true;
       };
-      environment.systemPackages = with pkgs; [ radeontop ];
+      environment.systemPackages = with pkgs; [radeontop];
     })
 
     (lib.mkIf gpu.nvidia {
-      services.xserver.videoDrivers = [ "nvidia" ];
+      services.xserver.videoDrivers = ["nvidia"];
       boot = {
-        blacklistedKernelModules = [ "nouveau" ];
+        blacklistedKernelModules = ["nouveau"];
         kernelParams = [
           "modprobe.blacklist=nouveau"
           "nvidia_drm.fbdev=1"
@@ -44,8 +42,8 @@ in
           package = config.boot.kernelPackages.nvidiaPackages.stable;
         };
       };
-      hardware.graphics.extraPackages = with pkgs; [ nvidia-vaapi-driver ];
-      environment.systemPackages = with pkgs; [ nvtopPackages.full ];
+      hardware.graphics.extraPackages = with pkgs; [nvidia-vaapi-driver];
+      environment.systemPackages = with pkgs; [nvtopPackages.full];
     })
 
     (lib.mkIf gpu.intel {
@@ -56,11 +54,11 @@ in
           intel-media-driver
           vpl-gpu-rt
         ];
-        extraPackages32 = with pkgs; [ intel-vaapi-driver ];
+        extraPackages32 = with pkgs; [intel-vaapi-driver];
       };
       environment = {
         sessionVariables.LIBVA_DRIVER_NAME = "iHD";
-        systemPackages = with pkgs; [ intel-gpu-tools ];
+        systemPackages = with pkgs; [intel-gpu-tools];
       };
     })
   ];

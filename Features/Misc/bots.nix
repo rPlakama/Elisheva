@@ -3,13 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-
-let
+}: let
   cfg = config.features.bots;
-in
-
-{
+in {
   options.features.bots = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -33,14 +29,14 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    features.preservation.home.directories = [ "ascending-bots" ];
+    features.preservation.home.directories = ["ascending-bots"];
 
     systemd.services = lib.mkMerge [
       (lib.mkIf cfg.whatsapp-bot.enable {
         whatsapp-bot = {
           description = "WhatsApp Bot";
-          wantedBy = [ "multi-user.target" ];
-          after = [ "network.target" ];
+          wantedBy = ["multi-user.target"];
+          after = ["network.target"];
 
           path = with pkgs; [
             ffmpeg
@@ -61,8 +57,8 @@ in
       (lib.mkIf cfg.discord-bot.enable {
         discord-bot = {
           description = "Discord Bot";
-          wantedBy = [ "multi-user.target" ];
-          after = [ "network.target" ];
+          wantedBy = ["multi-user.target"];
+          after = ["network.target"];
 
           serviceConfig = {
             ExecStart = "/home/${config.core.user}/ascending-bots/discord-bot/discord-bot-linux-amd64";

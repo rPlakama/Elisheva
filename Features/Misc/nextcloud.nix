@@ -2,18 +2,15 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   cfg = config.features.nextcloud;
   domain = config.core.domain;
   ncHost = "nextcloud.${domain}";
-in
-{
+in {
   options.features.nextcloud.enable = lib.mkEnableOption "Nextcloud";
 
   config = lib.mkIf cfg.enable {
-
-    features.preservation.system.directories = [ "/var/lib/nextcloud" ];
+    features.preservation.system.directories = ["/var/lib/nextcloud"];
 
     sops.secrets."nextcloud/admin" = {
       owner = "nextcloud";
