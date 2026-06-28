@@ -36,9 +36,7 @@
     '';
 
     kernelParams = [
-      "mem_sleep_default=s2idle"
       "libata.noacpi=1"
-      "amdgpu.vrr_support=1"
     ];
 
     kernelModules = [

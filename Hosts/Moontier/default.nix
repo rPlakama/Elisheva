@@ -49,6 +49,9 @@ in
     "gallery-dl/mangas-urls" = {
       owner = config.core.user;
     };
+    "gallery-dl/mangadex-urls" = {
+      owner = config.core.user;
+    };
     "gallery-dl/literature-urls" = {
       owner = config.core.user;
     };
@@ -64,6 +67,11 @@ in
     library = {
       enable = true;
       gallery-dl = {
+        mangadex = {
+          downloadPath = "/media/mangas/download";
+          secretFile = cfgSops."gallery-dl/mangadex-urls".path;
+        };
+
         mangas = {
           downloadPath = "/media/mangas/download";
           secretFile = cfgSops."gallery-dl/mangas-urls".path;

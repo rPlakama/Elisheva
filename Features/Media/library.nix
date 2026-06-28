@@ -24,6 +24,14 @@ let
         lang = "pt-br";
         flaresolverr = "http://127.0.0.1:8191/v1";
       };
+      mangadex = {
+        lang = "pt-br";
+        ratings = [
+          "safe"
+          "suggestive"
+          "erotica"
+        ];
+      };
     };
     downloader = {
       retries = 5;
@@ -51,6 +59,19 @@ let
 
   # Mangas get zipped into cbz archives
   mangasConfig = mkGalleryDlConfig cfg.gallery-dl.mangas.downloadPath [
+    {
+      name = "zip";
+      extension = "cbz";
+      mode = "after";
+    }
+    {
+      name = "exec";
+      command = "rm -rf \"{_directory}\"";
+      mode = "after";
+    }
+  ];
+
+  mangadexConfig = mkGalleryDlConfig cfg.gallery-dl.mangadex.downloadPath [
     {
       name = "zip";
       extension = "cbz";
@@ -91,6 +112,16 @@ in
         downloadPath = lib.mkOption {
           type = lib.types.str;
           description = "Directory to download manga into";
+        };
+      };
+      mangadex = {
+        secretFile = lib.mkOption {
+          type = lib.types.path;
+          description = "Path to the SOPS-decrypted file containing MangaDex URLs (one per line)";
+        };
+        downloadPath = lib.mkOption {
+          type = lib.types.str;
+          description = "Directory to download MangaDex manga into";
         };
       };
       literature = {
@@ -176,6 +207,7 @@ in
           "gallery-dl/ao3-username" = { };
           "gallery-dl/ao3-password" = { };
           "gallery-dl/mangas-urls" = { };
+          "gallery-dl/mangadex-urls" = { };
           "gallery-dl/literature-urls" = { };
         };
 
@@ -191,6 +223,7 @@ in
 
         hjem.users.${user}.files = {
           ".config/gallery-dl/mangas.json".text = builtins.toJSON mangasConfig;
+          ".config/gallery-dl/mangadex.json".text = builtins.toJSON mangadexConfig;
         };
 
         # --- Mangas (gallery-dl) Services ---
@@ -224,6 +257,37 @@ in
           wantedBy = [ "timers.target" ];
           timerConfig = {
             OnCalendar = "00:00";
+            Persistent = true;
+          };
+        };
+
+        # --- MangaDex (gallery-dl) Services ---
+        systemd.services.gallery-dl-mangadex = {
+          description = "gallery-dl MangaDex Downloader";
+          after = [ "network.target" ];
+          path = with pkgs; [
+            coreutils
+            p7zip
+            zip
+          ];
+          serviceConfig = {
+            Type = "oneshot";
+            User = user;
+            ExecStart = pkgs.writeShellScript "gallery-dl-mangadex-run" ''
+              ${pkgs.gallery-dl}/bin/gallery-dl \
+                --config /home/${user}/.config/gallery-dl/mangadex.json \
+                --input-file "${cfg.gallery-dl.mangadex.secretFile}"
+            '';
+            StandardOutput = "journal";
+            StandardError = "journal";
+          };
+        };
+
+        systemd.timers.gallery-dl-mangadex = {
+          description = "gallery-dl MangaDex — once a day";
+          wantedBy = [ "timers.target" ];
+          timerConfig = {
+            OnCalendar = "02:00";
             Persistent = true;
           };
         };

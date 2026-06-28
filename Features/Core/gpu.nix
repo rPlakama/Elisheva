@@ -21,9 +21,7 @@ in
           ];
         };
         amdgpu.opencl.enable = true;
-        amdgpu.overdrive.enable = true;
       };
-      services.lact.enable = true;
       environment.systemPackages = with pkgs; [ radeontop ];
     })
 
