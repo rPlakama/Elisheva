@@ -11,7 +11,7 @@ vim.lsp.enable({
 	"tinymist",
 	"ts_ls",
 	"fish_lsp",
-	"nixd",
+	"nil_ls",
 	"lua_ls",
 	"clangd",
 	"kotlin_language_server"
@@ -29,19 +29,6 @@ vim.lsp.enable("ts_ls", {
 		javascript = {
 			format = {
 				enable = true,
-			},
-		},
-	},
-})
-vim.lsp.enable("nixd", {
-	capabilities = capabilities,
-	settings = {
-		nixd = {
-			nixpkgs = {
-				expr = "import <nixpkgs> { }",
-			},
-			formatting = {
-				command = { "alejandra" },
 			},
 		},
 	},

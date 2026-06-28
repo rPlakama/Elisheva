@@ -93,6 +93,7 @@ in {
     nextcloud.enable = true;
     iperf3.enable = true;
     jellyfin.enable = true;
+		open-webui.enable = true;
 
     bots = {
       enable = true;

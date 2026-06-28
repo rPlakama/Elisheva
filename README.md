@@ -60,3 +60,9 @@ nix run github:nix-community/nixos-anywhere -- --flake .#<host> root@<ip>
 # For hosts without disko, pre-partition the target then:
 nix run github:nix-community/nixos-anywhere -- --flake .#<host> root@<ip>
 ```
+
+## Tasks:
+
+[] -- Find a better solution for Neovim
+[] -- Improve homepage service integration, add options that can be called by other features, such as 'icon'
+

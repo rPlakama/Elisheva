@@ -16,7 +16,7 @@ in {
     services.open-webui = {
       enable = true;
       openFirewall = true;
-				port = Port;
+			port = Port;
     };
   };
 }
