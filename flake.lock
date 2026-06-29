@@ -165,11 +165,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1780837912,
-        "narHash": "sha256-peCtrvjFVS/RfwlqFNWmCBNJ/kuakDIaJ2krbXxyZ2w=",
+        "lastModified": 1782676128,
+        "narHash": "sha256-McskMMUxm55nBw9Gua8pylztxjvTeA6ZnUBviieewPE=",
         "owner": "rPlakama",
         "repo": "gsr-ui-nix",
-        "rev": "41594a6213f61460fd3d95a52bba7e43af650657",
+        "rev": "05c22d1ea6376423de9ae00b3d83eeba1a3bc339",
         "type": "github"
       },
       "original": {

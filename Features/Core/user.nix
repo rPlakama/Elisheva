@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.features.core;
   user = config.core.user;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     time.timeZone = "America/Recife";
     i18n = {
@@ -24,11 +26,11 @@ in {
       };
     };
     users = {
-      groups.${user} = {};
+      groups.${user} = { };
       users.${user} = {
         isNormalUser = true;
         hashedPassword = "$y$j9T$qE7EkQbvME02UxqkVVJa91$qLOUcUnfU6IAaP17gkeQiAF2xVh6nPcnyp6K3b6yrK/";
-        shell = pkgs.fish;
+        shell = pkgs.nushell;
         group = user;
         extraGroups = [
           "wheel"

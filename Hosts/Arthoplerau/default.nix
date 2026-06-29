@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   imports = [
     ./hardware.nix
     ../../Features
@@ -34,7 +34,11 @@
       output.vrr.enable = false;
     };
 
-    gaming.enable = true;
+    gaming = {
+      enable = true;
+      gsr.enable = true;
+    };
+
     qbit.enable = true;
     virtualization.enable = true;
 
