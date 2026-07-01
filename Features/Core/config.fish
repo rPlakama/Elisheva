@@ -2,8 +2,9 @@ function fish_greeting
 end
 fish_vi_key_bindings
 function fish_prompt
-    set -l nix_indicator ""
 
+    # General Nix-Functions
+    set -l nix_indicator ""
     if set -q IN_NIX_SHELL
         if test "$IN_NIX_SHELL" = pure
             set nix_indicator (set_color cyan)" pure "(set_color normal)
@@ -16,6 +17,7 @@ function fish_prompt
 
     echo -s (set_color normal) (hostname) " " (set_color blue) (prompt_pwd) (set_color normal) (fish_git_prompt) " " $nix_indicator
     echo -n " > "
+    # End of Nix Stuff
 end
 
 # Yazi fish
@@ -27,3 +29,5 @@ function y
     end
     rm -f -- "$tmp"
 end
+
+# abreviations
