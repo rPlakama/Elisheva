@@ -11,7 +11,7 @@ vim.lsp.enable({
 	"tinymist",
 	"ts_ls",
 	"fish_lsp",
-	"nil_ls",
+	"nixd",
 	"nu",
 	"lua_ls",
 	"clangd",

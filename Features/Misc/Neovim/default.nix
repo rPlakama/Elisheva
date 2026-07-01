@@ -69,7 +69,7 @@ in
       lua-language-server
       fish-lsp
       luaformatter
-      nil
+      nixd
       nixfmt
     ];
 
