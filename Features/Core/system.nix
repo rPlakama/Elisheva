@@ -2,13 +2,25 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.features.core;
-in {
+  user = config.core.user;
+
+in
+{
   config = lib.mkIf cfg.enable {
     security.sudo-rs.enable = true;
-    networking.networkmanager.enable = true;
-    networking.wireless.enable = true;
+
+    networking = {
+      networkmanager.enable = true;
+      wireless.enable = true;
+    };
+
+    users.users.${user} = {
+      group = user;
+      extraGroups = [ "networkmanager" ];
+    };
 
     programs = {
       fish = {
