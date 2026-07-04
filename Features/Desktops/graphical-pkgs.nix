@@ -36,6 +36,7 @@ in
       obsidian
       kdePackages.okular
       gnome-disk-utility
+      motrix-next
     ];
 
     hjem.users.${user} = {
