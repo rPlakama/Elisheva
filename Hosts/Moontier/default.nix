@@ -2,9 +2,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfgSops = config.sops.secrets;
-in {
+in
+{
   imports = [
     ./hardware.nix
     ../../Features
@@ -34,8 +36,8 @@ in {
       email = "rPlakama@proton.me";
       user = "rPlakama";
     };
-    gpu.intel = true;
-    cpu.intel = true;
+    gpu.amd = true;
+    cpu.amd = true;
   };
 
   features.graphicalPkgs.enable = false;
@@ -93,7 +95,7 @@ in {
     nextcloud.enable = true;
     iperf3.enable = true;
     jellyfin.enable = true;
-		open-webui.enable = true;
+    open-webui.enable = true;
 
     bots = {
       enable = true;
