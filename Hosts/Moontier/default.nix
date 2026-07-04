@@ -12,6 +12,12 @@ in
     ../../Features
   ];
 
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+  };
+
   networking.hostName = "Moontier";
 
   environment.systemPackages = with pkgs; [
