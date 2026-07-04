@@ -33,7 +33,6 @@ let
           blink-cmp
           oil-nvim
           zoxide-vim
-          render-markdown-nvim
           flash-nvim
         ]
         ++ lib.optionals (cfgF.dankMaterialShell.enable) [ base46Plugin ]
@@ -66,11 +65,13 @@ in
     environment.systemPackages = with pkgs; [
       myNvim
       tinymist
+      typst
       lua-language-server
       fish-lsp
       luaformatter
       nixd
       nixfmt
+      markdown-oxide
     ];
 
     hjem.users.${user}.files = {

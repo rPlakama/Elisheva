@@ -15,7 +15,8 @@ vim.lsp.enable({
 	"nu",
 	"lua_ls",
 	"clangd",
-	"kotlin_language_server"
+	"kotlin_language_server",
+	"markdown-oxide"
 })
 
 vim.lsp.enable("ts_ls", {
