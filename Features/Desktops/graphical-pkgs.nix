@@ -37,6 +37,7 @@ in
       kdePackages.okular
       gnome-disk-utility
       motrix-next
+      easyeffects
     ];
 
     hjem.users.${user} = {
