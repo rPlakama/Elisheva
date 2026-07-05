@@ -63,6 +63,8 @@ nix run github:nix-community/nixos-anywhere -- --flake .#<host> root@<ip>
 
 ## Tasks:
 
-[] -- Find a better solution for Neovim
-[] -- Improve homepage service integration, add options that can be called by other features, such as 'icon'
+[] -- Find a better solution for Neovim \
+[] -- Improve homepage service integration, add options that can be called by other features, such as 'icon' \
+[] -- Use labels instead of UUIDS for an better system handling, in case of non disko systems. (Aka, fixing) \
+
 

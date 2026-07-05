@@ -36,7 +36,7 @@ in
 
   core = {
     user = "rplakama";
-    ip = "192.168.0.160";
+    ip = "192.168.0.196";
     domain = "moontier.online";
     git = {
       email = "rPlakama@proton.me";
