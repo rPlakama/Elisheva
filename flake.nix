@@ -16,6 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    twatch.url = "github:rPlakama/twatch";
     kavita-pkg.url = "github:rPlakama/Kavita-flake";
     gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
 
