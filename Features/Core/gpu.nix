@@ -9,6 +9,8 @@ let
 in
 {
   config = lib.mkMerge [
+    { services.lact.enable = true; }
+
     (lib.mkIf gpu.amd {
       hardware = {
         graphics = {
@@ -37,17 +39,19 @@ in
         ];
       };
       hardware = {
-        graphics.enable = true;
+        graphics = {
+          enable = true;
+          extraPackages = with pkgs; [ nvidia-vaapi-driver ];
+        };
         nvidia-container-toolkit.enable = true;
         nvidia = {
           modesetting.enable = true;
           powerManagement.enable = true;
           open = false;
           package = config.boot.kernelPackages.nvidiaPackages.stable;
+          nvidiaSettings = true;
         };
       };
-      hardware.graphics.extraPackages = with pkgs; [ nvidia-vaapi-driver ];
-      environment.systemPackages = with pkgs; [ nvtopPackages.full ];
     })
 
     (lib.mkIf gpu.intel {
