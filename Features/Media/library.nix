@@ -4,7 +4,8 @@
   inputs,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.features.library;
   user = config.core.user;
   kavitaPort = 3034;
@@ -45,16 +46,15 @@
     };
   };
 
-  mkGalleryDlConfig = path: postprocessors:
+  mkGalleryDlConfig =
+    path: postprocessors:
     baseConfig
     // {
-      extractor =
-        baseConfig.extractor
-        // {
-          base-directory = path;
-          archive = "${path}.archive.sqlite3";
-          postprocessors = postprocessors;
-        };
+      extractor = baseConfig.extractor // {
+        base-directory = path;
+        archive = "${path}.archive.sqlite3";
+        postprocessors = postprocessors;
+      };
     };
 
   # Mangas get zipped into cbz archives
@@ -83,7 +83,8 @@
       mode = "after";
     }
   ];
-in {
+in
+{
   # --- Options ---
   options.features.library = {
     enable = lib.mkEnableOption "Library Master Switch";
@@ -155,17 +156,17 @@ in {
 
         features = {
           mediaPermissions.enable = true;
-          preservation.system.directories = ["/var/lib/kavita"];
+          preservation.system.directories = [ "/var/lib/kavita" ];
           unifiedDNS.proxyServices = {
             kavita = kavitaPort;
           };
         };
 
-        networking.firewall.allowedTCPPorts = [kavitaPort];
-        systemd.services.kavita.serviceConfig.SupplementaryGroups = ["media"];
+        networking.firewall.allowedTCPPorts = [ kavitaPort ];
+        systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
 
         services.kavita = {
-          package = inputs.kavita-pkg.packages.${pkgs.stdenv.hostPlatform.system}.kavita;
+          # package = inputs.kavita-pkg.packages.${pkgs.stdenv.hostPlatform.system}.kavita;
           enable = true;
           tokenKeyFile = config.sops.secrets."kavita/token".path;
           settings.Port = kavitaPort;
@@ -176,14 +177,14 @@ in {
       (lib.mkIf cfg.suwayomi.enable {
         features = {
           mediaPermissions.enable = true;
-          preservation.system.directories = ["/var/lib/suwayomi-server"];
+          preservation.system.directories = [ "/var/lib/suwayomi-server" ];
           unifiedDNS.proxyServices = {
             suwayomi = suwayomiPort;
           };
         };
 
-        networking.firewall.allowedTCPPorts = [suwayomiPort];
-        systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = ["media"];
+        networking.firewall.allowedTCPPorts = [ suwayomiPort ];
+        systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = [ "media" ];
 
         services.suwayomi-server = {
           enable = true;
@@ -201,11 +202,11 @@ in {
         ];
 
         sops.secrets = {
-          "gallery-dl/ao3-username" = {};
-          "gallery-dl/ao3-password" = {};
-          "gallery-dl/mangas-urls" = {};
-          "gallery-dl/mangadex-urls" = {};
-          "gallery-dl/literature-urls" = {};
+          "gallery-dl/ao3-username" = { };
+          "gallery-dl/ao3-password" = { };
+          "gallery-dl/mangas-urls" = { };
+          "gallery-dl/mangadex-urls" = { };
+          "gallery-dl/literature-urls" = { };
         };
 
         sops.templates."fanficfare-personal.ini" = {
@@ -230,7 +231,7 @@ in {
             "network.target"
             "flaresolverr.service"
           ];
-          wants = ["flaresolverr.service"];
+          wants = [ "flaresolverr.service" ];
           path = with pkgs; [
             coreutils
             p7zip
@@ -251,7 +252,7 @@ in {
 
         systemd.timers.gallery-dl-mangas = {
           description = "gallery-dl mangas — once a day";
-          wantedBy = ["timers.target"];
+          wantedBy = [ "timers.target" ];
           timerConfig = {
             OnCalendar = "00:00";
             Persistent = true;
@@ -261,7 +262,7 @@ in {
         # --- MangaDex (gallery-dl) Services ---
         systemd.services.gallery-dl-mangadex = {
           description = "gallery-dl MangaDex Downloader";
-          after = ["network.target"];
+          after = [ "network.target" ];
           path = with pkgs; [
             coreutils
             p7zip
@@ -282,7 +283,7 @@ in {
 
         systemd.timers.gallery-dl-mangadex = {
           description = "gallery-dl MangaDex — once a day";
-          wantedBy = ["timers.target"];
+          wantedBy = [ "timers.target" ];
           timerConfig = {
             OnCalendar = "02:00";
             Persistent = true;
@@ -292,7 +293,7 @@ in {
         # --- Literature (FanFicFare) Services ---
         systemd.services.fanficfare-literature = {
           description = "FanFicFare AO3 Literature Updater";
-          after = ["network.target"];
+          after = [ "network.target" ];
           path = with pkgs; [
             fanficfare
             gnugrep
@@ -335,7 +336,7 @@ in {
 
         systemd.timers.fanficfare-literature = {
           description = "FanFicFare literature — once a day";
-          wantedBy = ["timers.target"];
+          wantedBy = [ "timers.target" ];
           timerConfig = {
             OnCalendar = "01:00";
             Persistent = true;

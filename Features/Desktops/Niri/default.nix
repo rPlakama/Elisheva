@@ -3,7 +3,8 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.features.niri;
   user = config.core.user;
 
@@ -15,11 +16,9 @@
     }
   '';
 
-  vrrLine =
-    if cfg.output.vrr.enable
-    then "variable-refresh-rate"
-    else "";
-in {
+  vrrLine = if cfg.output.vrr.enable then "variable-refresh-rate" else "";
+in
+{
   options.features.niri = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -32,12 +31,6 @@ in {
       description = "Keyboard Variant";
     };
 
-    importDMS = lib.mkOption {
-      type = lib.types.str;
-      default = "";
-      description = "Additional KDL for DMS is added";
-    };
-
     ImportNoctalia = lib.mkOption {
       type = lib.types.str;
       default = "";
@@ -48,12 +41,6 @@ in {
       type = lib.types.bool;
       default = false;
       description = "If Noctalia is enabled";
-    };
-
-    DMSEnabled = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "If DMS is enabled";
     };
 
     keyboardLayout = lib.mkOption {
@@ -86,9 +73,9 @@ in {
     hjem.users.${user} = {
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
-        ["@ImportDMS@" "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" "@powerProfileBind@" "@vrr@"]
-        [cfg.importDMS cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB powerProfileBind vrrLine]
-        (builtins.readFile ./config.kdl);
+          [ "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" "@powerProfileBind@" "@vrr@" ]
+          [ cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB powerProfileBind vrrLine ]
+          (builtins.readFile ./config.kdl);
     };
   };
 }

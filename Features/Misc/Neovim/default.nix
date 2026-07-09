@@ -9,18 +9,6 @@ let
   cfgF = config.features;
   user = config.core.user;
 
-  base46Plugin = pkgs.vimUtils.buildVimPlugin {
-    pname = "base46";
-    version = "unstable-2025-04-25";
-    doCheck = false;
-    src = pkgs.fetchFromGitHub {
-      owner = "AvengeMedia";
-      repo = "base46";
-      rev = "master";
-      hash = "sha256-LwBDnxMjZRFkRa7cEMuwC6y9p71AdFexYk68fN/Sj9Y=";
-    };
-  };
-
   myNvim = pkgs.neovim.override {
     configure = {
       customRC = "luafile /home/${user}/.config/nvim/init.lua";
@@ -35,7 +23,6 @@ let
           zoxide-vim
           flash-nvim
         ]
-        ++ lib.optionals (cfgF.dankMaterialShell.enable) [ base46Plugin ]
         ++ lib.optionals (cfgF.noctalia.enable) [ base16-nvim ];
     };
   };
