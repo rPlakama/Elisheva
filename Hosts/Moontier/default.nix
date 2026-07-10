@@ -48,24 +48,6 @@ in
 
   features.graphicalPkgs.enable = false;
 
-  sops.secrets = {
-    "gallery-dl/ao3-username" = {
-      owner = config.core.user;
-    };
-    "gallery-dl/ao3-password" = {
-      owner = config.core.user;
-    };
-    "gallery-dl/mangas-urls" = {
-      owner = config.core.user;
-    };
-    "gallery-dl/mangadex-urls" = {
-      owner = config.core.user;
-    };
-    "gallery-dl/literature-urls" = {
-      owner = config.core.user;
-    };
-  };
-
   features = {
     unifiedDNS = {
       enable = true;
@@ -73,26 +55,7 @@ in
       gateway = "192.168.0.1";
     };
 
-    library = {
-      enable = true;
-      gallery-dl = {
-        mangadex = {
-          downloadPath = "/media/mangas/download";
-          secretFile = cfgSops."gallery-dl/mangadex-urls".path;
-        };
-
-        mangas = {
-          downloadPath = "/media/mangas/download";
-          secretFile = cfgSops."gallery-dl/mangas-urls".path;
-        };
-        literature = {
-          downloadPath = "/media/fanfics/download";
-          secretFile = cfgSops."gallery-dl/literature-urls".path;
-        };
-      };
-    };
-    # -------------------------------------
-
+    library.enable = true;
     rrstack.enable = true;
     qbit.enable = true;
     slskd.enable = true;
