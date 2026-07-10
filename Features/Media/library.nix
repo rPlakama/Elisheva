@@ -13,6 +13,12 @@ in
   options.features.library = {
     enable = lib.mkEnableOption "Library Master Switch";
 
+    downloadPath = lib.mkOption {
+      type = lib.types.str;
+      default = "/media/literature/mangas";
+      description = "Download path for library downloads";
+    };
+
     kavita = {
       enable = lib.mkEnableOption "Kavita self-hosted digital library";
     };
@@ -25,6 +31,10 @@ in
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
       {
+        features = {
+          preservation.system.directories = [ cfg.downloadPath ];
+        };
+
         features.library = {
           kavita.enable = lib.mkDefault true;
           suwayomi.enable = lib.mkDefault true;
@@ -70,6 +80,8 @@ in
           enable = true;
           settings = {
             server.port = suwayomiPort;
+            server.downloadAsCbz = true;
+            server.downloadsPath = cfg.downloadPath;
           };
         };
       })

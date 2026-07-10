@@ -14,16 +14,6 @@ let
     "music/library"
     "music/downloads"
 
-    "mangas"
-    "mangas/local"
-    "mangas/download"
-
-    "fanfics"
-    "fanfics/download"
-
-    "novels"
-    "books"
-
     "literature"
     "literature/novels"
     "literature/books"
