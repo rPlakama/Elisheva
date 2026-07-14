@@ -1,13 +1,10 @@
-{ lib, ... }:
-let
-  contents = builtins.readDir ./.;
-  nixFiles = lib.filterAttrs (
-    name: type: type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix"
-  ) contents;
-  modulePaths = lib.mapAttrsToList (name: _: ./${name}) nixFiles;
-in
-{
-  imports = modulePaths;
+{lib, ...}: {
+  imports = lib.mapAttrsToList (name: _: ./${name}) (
+    lib.filterAttrs (
+      name: type:
+        type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix"
+    ) (builtins.readDir ./.)
+  );
 
   options.core = {
     user = lib.mkOption {
@@ -19,45 +16,17 @@ in
       description = "IP";
       default = "";
     };
-    headless = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Is the host a headless device?";
-    };
+    headless = lib.mkEnableOption "Is the host a headless device?";
     gpu = {
-      amd = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "AMD GPU (RADV/amdgpu)";
-      };
-      nvidia = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Nvidia GPU (nvidia/nouveau)";
-      };
-      intel = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Intel GPU (i915/Xe)";
-      };
+      amd = lib.mkEnableOption "AMD GPU (RADV/amdgpu)";
+      nvidia = lib.mkEnableOption "Nvidia GPU (nvidia/nouveau)";
+      intel = lib.mkEnableOption "Intel GPU (i915/Xe)";
     };
     cpu = {
-      amd = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "AMD CPU (amd_pstate)";
-      };
-      intel = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
-        description = "Intel CPU (intel_pstate)";
-      };
+      amd = lib.mkEnableOption "AMD CPU (amd_pstate)";
+      intel = lib.mkEnableOption "Intel CPU (intel_pstate)";
     };
-    isLaptop = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Whether this host is a laptop (enables battery-aware features)";
-    };
+    isLaptop = lib.mkEnableOption "Whether this host is a laptop (enables battery-aware features)";
     git = {
       email = lib.mkOption {
         type = lib.types.str;

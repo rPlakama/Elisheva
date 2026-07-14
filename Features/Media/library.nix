@@ -3,8 +3,7 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.features.library;
   kavitaPort = 3034;
   suwayomiPort = 4567;
@@ -21,7 +20,7 @@ let
       hash = "sha256-reVCSNj4FlKILXSRuRw/m7uv/SjTXS0Ch1snrNWJBNE=";
     };
 
-    nativeBuildInputs = [ pkgs.makeWrapper ];
+    nativeBuildInputs = [pkgs.makeWrapper];
 
     dontUnpack = true;
 
@@ -40,8 +39,7 @@ let
       mainProgram = "komf";
     };
   };
-in
-{
+in {
   options.features.library = {
     enable = lib.mkEnableOption "Library Master Switch";
     downloadPath = lib.mkOption {
@@ -57,7 +55,7 @@ in
     lib.mkMerge [
       {
         features = {
-          preservation.system.directories = [ cfg.downloadPath ];
+          preservation.system.directories = [cfg.downloadPath];
         };
         features.library = {
           kavita.enable = lib.mkDefault true;
@@ -71,11 +69,11 @@ in
         };
         features = {
           mediaPermissions.enable = true;
-          preservation.system.directories = [ "/var/lib/kavita" ];
+          preservation.system.directories = ["/var/lib/kavita"];
           unifiedDNS.proxyServices.kavita = kavitaPort;
         };
-        networking.firewall.allowedTCPPorts = [ kavitaPort ];
-        systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
+        networking.firewall.allowedTCPPorts = [kavitaPort];
+        systemd.services.kavita.serviceConfig.SupplementaryGroups = ["media"];
         services.kavita = {
           enable = true;
           tokenKeyFile = config.sops.secrets."kavita/token".path;
@@ -85,11 +83,11 @@ in
       (lib.mkIf cfg.suwayomi.enable {
         features = {
           mediaPermissions.enable = true;
-          preservation.system.directories = [ "/var/lib/suwayomi-server" ];
+          preservation.system.directories = ["/var/lib/suwayomi-server"];
           unifiedDNS.proxyServices.suwayomi = suwayomiPort;
         };
-        networking.firewall.allowedTCPPorts = [ suwayomiPort ];
-        systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = [ "media" ];
+        networking.firewall.allowedTCPPorts = [suwayomiPort];
+        systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = ["media"];
         services.suwayomi-server = {
           enable = true;
           settings = {
@@ -122,8 +120,8 @@ in
           komfPort
         ];
         systemd.services.komga = {
-          path = [ pkgs.p7zip ];
-          serviceConfig.SupplementaryGroups = [ "media" ];
+          path = [pkgs.p7zip];
+          serviceConfig.SupplementaryGroups = ["media"];
         };
         # pkgs.komga comes from nixpkgs-master overlay (Komga 1.25+)
         services.komga = {
@@ -137,7 +135,7 @@ in
         };
         systemd.services.komf = {
           description = "Komf metadata resolver";
-          wantedBy = [ "multi-user.target" ];
+          wantedBy = ["multi-user.target"];
           serviceConfig = {
             User = "komf";
             Group = "media";
@@ -146,7 +144,7 @@ in
             ExecStart = "${komf}/bin/komf";
             StateDirectory = "komf";
             WorkingDirectory = "/var/lib/komf";
-            RestrictAddressFamilies = [ "AF_INET" "AF_INET6" ];
+            RestrictAddressFamilies = ["AF_INET" "AF_INET6"];
           };
         };
         users.users.komf = {

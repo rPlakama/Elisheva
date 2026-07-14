@@ -3,13 +3,11 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   gpu = config.core.gpu;
-in
-{
+in {
   config = lib.mkMerge [
-    { services.lact.enable = true; }
+    {services.lact.enable = true;}
 
     (lib.mkIf gpu.amd {
       hardware = {
@@ -30,9 +28,9 @@ in
     })
 
     (lib.mkIf gpu.nvidia {
-      services.xserver.videoDrivers = [ "nvidia" ];
+      services.xserver.videoDrivers = ["nvidia"];
       boot = {
-        blacklistedKernelModules = [ "nouveau" ];
+        blacklistedKernelModules = ["nouveau"];
         kernelParams = [
           "modprobe.blacklist=nouveau"
           "nvidia_drm.fbdev=1"
@@ -41,7 +39,7 @@ in
       hardware = {
         graphics = {
           enable = true;
-          extraPackages = with pkgs; [ nvidia-vaapi-driver ];
+          extraPackages = with pkgs; [nvidia-vaapi-driver];
         };
         nvidia-container-toolkit.enable = true;
         nvidia = {
@@ -62,11 +60,11 @@ in
           intel-media-driver
           vpl-gpu-rt
         ];
-        extraPackages32 = with pkgs; [ intel-vaapi-driver ];
+        extraPackages32 = with pkgs; [intel-vaapi-driver];
       };
       environment = {
         sessionVariables.LIBVA_DRIVER_NAME = "iHD";
-        systemPackages = with pkgs; [ intel-gpu-tools ];
+        systemPackages = with pkgs; [intel-gpu-tools];
       };
     })
   ];

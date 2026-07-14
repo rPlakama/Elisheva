@@ -2,7 +2,6 @@
   description = "Declarating... Imperative machines...";
 
   inputs = {
-
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,27 +31,24 @@
     };
   };
 
-  outputs =
-    inputs@{
-      nix-cachyos-kernel,
-      nixpkgs,
-      sops-nix,
-      disko,
-      preservation,
-      ...
-    }:
-    let
-      stVersion = "26.05";
-      hostNames = builtins.attrNames (
-        nixpkgs.lib.filterAttrs (name: type: type == "directory") (builtins.readDir ./Hosts)
-      );
-    in
-    {
-      nixosConfigurations = nixpkgs.lib.genAttrs hostNames (
-        hostname:
+  outputs = inputs @ {
+    nix-cachyos-kernel,
+    nixpkgs,
+    sops-nix,
+    disko,
+    preservation,
+    ...
+  }: let
+    stVersion = "26.05";
+    hostNames = builtins.attrNames (
+      nixpkgs.lib.filterAttrs (name: type: type == "directory") (builtins.readDir ./Hosts)
+    );
+  in {
+    nixosConfigurations = nixpkgs.lib.genAttrs hostNames (
+      hostname:
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
+          specialArgs = {inherit inputs;};
           modules = [
             inputs.hjem.nixosModules.default
             sops-nix.nixosModules.sops
@@ -64,11 +60,9 @@
                 lib,
                 config,
                 ...
-              }:
-              let
+              }: let
                 user = config.core.user;
-              in
-              {
+              in {
                 options.core = {
                   host = lib.mkOption {
                     type = lib.types.str;
@@ -95,8 +89,8 @@
                   ];
 
                   nix.settings = {
-                    substituters = [ "https://attic.xuyh0120.win/lantian" ];
-                    trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+                    substituters = ["https://attic.xuyh0120.win/lantian"];
+                    trusted-public-keys = ["lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="];
                   };
 
                   networking.hostName = hostname;
@@ -111,6 +105,6 @@
             )
           ];
         }
-      );
-    };
+    );
+  };
 }

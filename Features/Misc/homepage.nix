@@ -5,7 +5,7 @@
 }: let
   cfg = config.features.homepage;
   currentIP = config.core.ip;
-  gen = config.features.unifiedDNS;
+  dnsCfg = config.features.unifiedDNS;
   domain = config.core.domain;
 in {
   options.features.homepage = {
@@ -43,7 +43,7 @@ in {
                 description = "Auto-generated link for ${name}";
               };
             })
-            gen.proxyServices;
+            dnsCfg.proxyServices;
         }
       ];
     };

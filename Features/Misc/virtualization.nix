@@ -2,13 +2,11 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   cfg = config.features.virtualization;
   user = config.core.user;
   isNvidia = config.core.gpu.nvidia;
-in
-{
+in {
   options.features.virtualization.enable = lib.mkEnableOption "Virtualization (libvirtd + Docker)";
 
   config = lib.mkIf cfg.enable {

@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.features.neovim;
   cfgF = config.features;
   user = config.core.user;
@@ -12,8 +11,7 @@ let
   myNvim = pkgs.neovim.override {
     configure = {
       customRC = "luafile /home/${user}/.config/nvim/init.lua";
-      packages.myPlugins.start =
-        with pkgs.vimPlugins;
+      packages.myPlugins.start = with pkgs.vimPlugins;
         [
           nvim-lspconfig
           fzf-lua
@@ -23,11 +21,10 @@ let
           zoxide-vim
           flash-nvim
         ]
-        ++ lib.optionals (cfgF.noctalia.enable) [ base16-nvim ];
+        ++ lib.optionals (cfgF.noctalia.enable) [base16-nvim];
     };
   };
-in
-{
+in {
   options.features.neovim = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -36,9 +33,9 @@ in
     };
     extraInit = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ ];
+      default = [];
       description = "Additional Lua lines to append to init.lua, declared by other features";
-      example = [ "vim.opt.relativenumber = true" ];
+      example = ["vim.opt.relativenumber = true"];
     };
   };
 
@@ -65,13 +62,14 @@ in
       ".config/nvim/lua/configs.lua".source = ./configs.lua;
       ".config/nvim/lua/lsp.lua".source = ./lsp.lua;
       ".config/nvim/lua/keybinds.lua".source = ./keybinds.lua;
-      ".config/nvim/init.lua".text = ''
-        require('configs')
-        require('keybinds')
-        require('lsp')
-      ''
-      + "\n"
-      + (lib.concatStringsSep "\n" cfg.extraInit);
+      ".config/nvim/init.lua".text =
+        ''
+          require('configs')
+          require('keybinds')
+          require('lsp')
+        ''
+        + "\n"
+        + (lib.concatStringsSep "\n" cfg.extraInit);
     };
   };
 }

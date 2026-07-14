@@ -3,8 +3,7 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.features.niri;
   user = config.core.user;
 
@@ -16,9 +15,11 @@ let
     }
   '';
 
-  vrrLine = if cfg.output.vrr.enable then "variable-refresh-rate" else "";
-in
-{
+  vrrLine =
+    if cfg.output.vrr.enable
+    then "variable-refresh-rate"
+    else "";
+in {
   options.features.niri = {
     enable = lib.mkOption {
       type = lib.types.bool;
@@ -73,9 +74,9 @@ in
     hjem.users.${user} = {
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
-          [ "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" "@powerProfileBind@" "@vrr@" ]
-          [ cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB powerProfileBind vrrLine ]
-          (builtins.readFile ./config.kdl);
+        ["@ImportNoctalia@" "@keyboardLayout@" "@Variant@" "@powerProfileBind@" "@vrr@"]
+        [cfg.ImportNoctalia cfg.keyboardLayout cfg.VariantKB powerProfileBind vrrLine]
+        (builtins.readFile ./config.kdl);
     };
   };
 }
