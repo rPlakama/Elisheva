@@ -8,12 +8,13 @@
 let
   cfg = config.features.graphicalPkgs;
   user = config.core.user;
+  headless = config.core.headless;
 in
 {
   options.features.graphicalPkgs = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = !headless;
       description = "Graphical Packages";
     };
     foot.theme = lib.mkOption {

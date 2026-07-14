@@ -81,6 +81,17 @@
                 config = {
                   nixpkgs.overlays = [
                     nix-cachyos-kernel.overlays.pinned
+                    (final: prev: {
+                      # Pin Komga to 1.24.3 — versions ≥1.24.4 omit ageRestriction
+                      # from UserDto which breaks Komf 1.7.1 (see Komf issue #303)
+                      komga = prev.komga.overrideAttrs (old: rec {
+                        version = "1.24.3";
+                        src = prev.fetchurl {
+                          url = "https://github.com/gotson/komga/releases/download/${version}/komga-${version}.jar";
+                          hash = "sha256-+MZ2Rr/QYJuKBZdQtuQaq1crRRqBPo3LGRHjkl1Gupo=";
+                        };
+                      });
+                    })
                   ];
 
                   nix.settings = {

@@ -2,34 +2,26 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.features.bootloader;
-  nixosInit = config.features.bootloader.nixos-init.enable;
-in {
+  headless = config.core.headless;
+in
+{
   options.features.bootloader = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = true;
       description = "Bootloader Configuration";
     };
-    nixos-init.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "nixos-init";
-    };
     plymouth.enable = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = !headless;
       description = "Plymouth boot splash";
     };
   };
 
   config = lib.mkIf cfg.enable {
-    services.userborn.enable = nixosInit;
-    system = {
-      etc.overlay.enable = nixosInit;
-      nixos-init.enable = nixosInit;
-    };
     systemd.services.NetworkManager-wait-online.enable = false;
     boot = {
       loader = {

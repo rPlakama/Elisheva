@@ -4,10 +4,6 @@
     ../../Features
   ];
 
-  environment.systemPackages = with pkgs; [
-    ciscoPacketTracer9
-  ];
-
   networking.hostName = "Arthoplerau";
   boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-zen4;
 

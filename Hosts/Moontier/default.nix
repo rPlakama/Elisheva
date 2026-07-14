@@ -1,11 +1,7 @@
 {
-  config,
   pkgs,
   ...
 }:
-let
-  cfgSops = config.sops.secrets;
-in
 {
   imports = [
     ./hardware.nix
@@ -44,9 +40,8 @@ in
     };
     gpu.amd = true;
     cpu.amd = true;
+    headless = true;
   };
-
-  features.graphicalPkgs.enable = false;
 
   features = {
     unifiedDNS = {

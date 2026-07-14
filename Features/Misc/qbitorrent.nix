@@ -3,10 +3,12 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.features.qbit;
   user = config.core.user;
-in {
+in
+{
   options.features.qbit.enable = lib.mkEnableOption "qBittorrent + Qui";
   config = lib.mkIf cfg.enable {
     features.mediaPermissions.enable = true;
@@ -17,8 +19,11 @@ in {
     features = {
       preservation.system.directories = [
         "/var/lib/qbittorrent"
+      ]
+      ++ lib.optionals (!config.features.graphicalPkgs.enable) [
         "/var/lib/qui"
       ];
+
       unifiedDNS.proxyServices = {
         qui = 3000;
         qbit = 8080;
@@ -26,7 +31,8 @@ in {
     };
 
     environment.systemPackages = lib.optionals config.features.graphicalPkgs.enable (
-      with pkgs; [
+      with pkgs;
+      [
         qbittorrent
       ]
     );

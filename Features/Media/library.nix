@@ -10,6 +10,7 @@ let
   suwayomiPort = 4567;
   komgaPort = 3035;
   komfPort = 8085;
+  domain = config.core.domain;
 
   komf = pkgs.stdenv.mkDerivation rec {
     pname = "komf";
@@ -124,12 +125,13 @@ in
           path = [ pkgs.p7zip ];
           serviceConfig.SupplementaryGroups = [ "media" ];
         };
+        # pkgs.komga comes from nixpkgs-master overlay (Komga 1.25+)
         services.komga = {
           enable = true;
           settings = {
             server.port = komgaPort;
-            komga.cors-allowed-origins = [
-              "https://komf.${config.core.domain}"
+            komga.cors.allowed-origins = [
+              "https://komf.${domain}"
             ];
           };
         };
