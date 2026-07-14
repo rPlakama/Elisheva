@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -25,6 +26,7 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      inputs.helium-browser.packages.x86_64-linux.default
       vesktop
       materialgram
       nextcloud-client

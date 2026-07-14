@@ -15,6 +15,7 @@
     twatch.url = "github:rPlakama/twatch";
     kavita-pkg.url = "github:rPlakama/Kavita-flake";
     gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
+    helium-browser.url = "github:schembriaiden/helium-browser-nix-flake";
 
     hjem = {
       url = "github:feel-co/hjem";
