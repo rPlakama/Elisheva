@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.features.core;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     nixpkgs.config.allowUnfree = true;
     programs.nix-ld.enable = true;
@@ -17,6 +19,7 @@ in {
         options = "--delete-older-than +5d";
       };
       settings = {
+        auto-optimise-store = true;
         show-trace = true;
         experimental-features = [
           "nix-command"

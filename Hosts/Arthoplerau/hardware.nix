@@ -34,10 +34,6 @@
       options snd-hda-intel dmic_detect=0
     '';
 
-    kernelParams = [
-      "libata.noacpi=1"
-    ];
-
     kernelModules = [
       "kvm-amd"
     ];

@@ -9,10 +9,7 @@ in {
   config = lib.mkIf cfg.enable {
     security.sudo-rs.enable = true;
 
-    networking = {
-      networkmanager.enable = true;
-      wireless.enable = true;
-    };
+    networking.networkmanager.enable = true;
 
     users.users.${user} = {
       group = user;

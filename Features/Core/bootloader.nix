@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.features.bootloader;
   headless = config.core.headless;
-in {
+in
+{
   options.features.bootloader = {
     enable = lib.mkOption {
       type = lib.types.bool;
