@@ -1,15 +1,20 @@
-{lib, ...}: let
+{ config, lib, ... }:
+let
   contents = builtins.readDir ./.;
-  isImportable = name: type:
+  isImportable =
+    name: type:
     (type == "directory") || (type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix");
   importable = lib.filterAttrs (name: type: isImportable name type) contents;
   modulePaths = lib.mapAttrsToList (name: _: ./${name}) importable;
-in {
+
+  headless = config.core.headless;
+in
+{
   imports = modulePaths;
 
   boot.consoleLogLevel = 0;
   services.displayManager.ly = {
-    enable = true;
+    enable = !headless;
     settings = {
       default_input = "password";
       bigclock = true;
