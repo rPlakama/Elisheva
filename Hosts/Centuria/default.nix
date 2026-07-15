@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   imports = [
     ./hardware.nix
     ../../Features
@@ -27,7 +27,6 @@
       gsr.enable = true;
     };
     qbit.enable = true;
-    bootloader.nixos-init.enable = true;
     niri = {
       keyboardLayout = "br,us";
       enable = true;
