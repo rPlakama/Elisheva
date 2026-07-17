@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   diskoCfg = config.features.disko;
 
-  subvolOpts = subvol: isSSD:
+  subvolOpts =
+    subvol: isSSD:
     [
       "subvol=${subvol}"
       "noatime"
@@ -55,7 +57,7 @@
     size = "100%";
     content = {
       type = "btrfs";
-      extraArgs = ["-f"];
+      extraArgs = [ "-f" ];
       subvolumes = lib.mkMerge [
         rootSubvolumes
         (lib.mkIf (!diskoCfg.dualDrive) {
@@ -101,7 +103,7 @@
           size = "100%";
           content = {
             type = "btrfs";
-            extraArgs = ["-f"];
+            extraArgs = [ "-f" ];
             subvolumes = {
               "/persistent" = {
                 mountOptions = subvolOpts "persistent" diskoCfg.isSSD.secondary;
@@ -113,7 +115,8 @@
       };
     };
   };
-in {
+in
+{
   options.features.disko = {
     enable = lib.mkOption {
       type = lib.types.bool;

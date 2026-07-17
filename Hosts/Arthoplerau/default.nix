@@ -43,7 +43,10 @@
       dualDrive = true;
       primaryDrive = "/dev/nvme1n1";
       secondaryDrive = "/dev/nvme0n1";
-      swap.enable = true;
+      swap = {
+        enable = true;
+        size = "4GB";
+      };
     };
     preservation = {
       enable = true;

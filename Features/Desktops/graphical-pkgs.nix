@@ -28,6 +28,9 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       inputs.helium-browser.packages.x86_64-linux.default
+      # This need to be solved: x86_64-linux is a >problem< if other hosts arent in such platform, \
+      # Causing rebuild errors; For the future, \
+      # there's shall be a inherence based on Host (core option) to choose which type; \
       vesktop
       materialgram
       nextcloud-client
@@ -39,7 +42,6 @@ in
       kdePackages.okular
       gnome-disk-utility
       motrix-next
-      easyeffects
     ];
 
     hjem.users.${user} = {
