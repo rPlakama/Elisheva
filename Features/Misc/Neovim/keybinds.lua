@@ -1,7 +1,12 @@
 local map = vim.keymap.set
 local opt = vim.opt
 
--- Keymaps / fzf
+-- Keymaps
+-- Terminal
+map('n', '<leader>t', '<cmd>sp term://fish') -- We use fish here, but that should be a line substitution like in Niri;
+
+
+-- / fzf
 local fzf = require('fzf-lua')
 map('n', '<leader>f', fzf.files, { desc = "Search files" })
 map('n', '<leader>g', fzf.live_grep, { desc = "Grep search" })
