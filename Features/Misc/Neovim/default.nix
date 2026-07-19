@@ -20,6 +20,7 @@ let
         zoxide-vim
         flash-nvim
         base16-nvim
+        gitsigns-nvim
       ];
     };
   };
