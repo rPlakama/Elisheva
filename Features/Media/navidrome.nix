@@ -89,8 +89,9 @@ in {
     systemd.services.navidrome-metadata-fetcher = lib.mkIf cfg.metadataFetcher.enable {
       after = ["network.target"];
       path = [pkgs.beets];
+      restartIfChanged = false;
       serviceConfig = {
-        Type = "oneshot";
+        Type = "simple";
         ExecStart = beetExec;
         User = "navidrome";
         Group = musicGroup;
