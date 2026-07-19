@@ -7,14 +7,14 @@
   cfg = config.features.navidrome;
   port = 4533;
 
+  pythonEnv = pkgs.python3.withPackages (ps: with ps; [
+    syncedlyrics
+    mutagen
+  ]);
+
   # Lyrics fetcher script using syncedlyrics + mutagen
-  lyricsFetcherScript = pkgs.writers.writePython3Bin "navidrome-lyrics-fetcher" {
-    libraries = with pkgs.python3Packages; [
-      syncedlyrics
-      mutagen
-    ];
-    flake8Check = false;
-  } ''
+  lyricsFetcherScript = pkgs.writeScriptBin "navidrome-lyrics-fetcher" ''
+    #!${pythonEnv}/bin/python3
     import os
     import sys
     import logging
