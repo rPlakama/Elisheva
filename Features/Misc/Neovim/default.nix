@@ -17,7 +17,6 @@ let
         nvim-treesitter.withAllGrammars
         blink-cmp
         oil-nvim
-        zoxide-vim
         flash-nvim
         base16-nvim
         gitsigns-nvim

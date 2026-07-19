@@ -7,8 +7,10 @@ map('n', '<leader>f', fzf.files, { desc = "Search files" })
 map('n', '<leader>g', fzf.live_grep, { desc = "Grep search" })
 map('n', '<leader>a', fzf.buffers, { desc = "Buffer search" })
 map('n', '<leader>s', fzf.spell_suggest, { desc = "Spell suggestions" })
--- Zoxide
-map('n', '<leader>z', '<cmd>Zi<CR>', { desc = "Zoxide jump (fzf)" })
+
+-- Git Sings
+map('n', '<C>k', '<cmd>Gitsings toggle_current_line_blame<CR>', { desc = 'Blame toggle' })
+map('n', '<S-C>j', '<cmd>Gitsings blame<CR>', { desc = 'Blame toggle' })
 
 -- Oil
 map('n', '<C-n>', '<cmd>Oil<CR>', { desc = "Open Oil file explorer" })
