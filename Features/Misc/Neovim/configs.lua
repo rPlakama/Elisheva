@@ -4,6 +4,7 @@ local o = vim.o
 -- Leaders
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
+vim.cmd.colorscheme("base16-chalk") -- I love this theme.
 
 -- Base settings
 opt.shortmess:append("I")
@@ -32,10 +33,6 @@ o.exrc = true
 
 -- Scrolloff dinâmico
 opt.scrolloff = math.floor(o.lines / 2) - 3
-
--- Line number colors (catppuccin-mocha)
-vim.api.nvim_set_hl(0, "LineNr", { fg = "#6c7086" })
-vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#cba6f7", bold = true })
 
 -- Autocmds
 vim.api.nvim_create_autocmd("BufWritePre", {

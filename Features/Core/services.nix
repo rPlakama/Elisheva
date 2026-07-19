@@ -23,10 +23,10 @@ in {
       gvfs.enable = true;
       fwupd.enable = true;
       pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
+        enable = !config.core.headless;
+        alsa.enable = !config.core.headless;
+        alsa.support32Bit = !config.core.headless;
+        pulse.enable = !config.core.headless;
       };
       tailscale = {
         enable = true;

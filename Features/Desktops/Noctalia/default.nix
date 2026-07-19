@@ -4,7 +4,8 @@
   inputs,
   pkgs,
   ...
-}: let
+}:
+let
   user = config.core.user;
   host = config.core.host;
 
@@ -19,7 +20,8 @@
   widgetsGroupOpacity = 0.0;
   widgetsGroupSpacing = 6.0;
   widgetsGroupRadius = 3.0;
-in {
+in
+{
   options.features.noctalia.enable = lib.mkOption {
     type = lib.types.bool;
     default = config.features.niri.NoctaliaEnabled;
@@ -35,7 +37,7 @@ in {
     ];
 
     nix.settings = {
-      extra-substituters = ["https://noctalia.cachix.org"];
+      extra-substituters = [ "https://noctalia.cachix.org" ];
       extra-trusted-public-keys = [
         "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       ];
@@ -50,9 +52,6 @@ in {
       niri.ImportNoctalia = ''include "noctaliaBinds.kdl"'';
       graphicalPkgs.foot.theme = [
         "include=/home/${user}/.config/foot/themes/noctalia"
-      ];
-      neovim.extraInit = [
-        "require('matugen').setup()"
       ];
     };
     # Hjem block starts --
@@ -87,10 +86,10 @@ in {
               };
             };
             keybinds = {
-              down = ["Ctrl+n"];
-              left = ["Ctrl+h"];
-              right = ["Ctrl+l"];
-              up = ["Ctrl+p"];
+              down = [ "Ctrl+n" ];
+              left = [ "Ctrl+h" ];
+              right = [ "Ctrl+l" ];
+              up = [ "Ctrl+p" ];
             };
             theme = {
               source = "wallpaper";
@@ -104,9 +103,6 @@ in {
                   "gtk4"
                   "kcolorscheme"
                   "qt"
-                ];
-                community_ids = [
-                  "neovim"
                 ];
               };
             };
@@ -208,8 +204,8 @@ in {
               capsule = false;
               capsule_radius = barRadius;
               capsule_opacity = 0.0;
-              start = ["group:g5"];
-              center = ["group:g6"];
+              start = [ "group:g5" ];
+              center = [ "group:g6" ];
               end = [
                 "group:g4"
                 "group:g1"
@@ -267,12 +263,12 @@ in {
               ];
             };
             control_center.shortcuts = [
-              {type = "wifi";}
-              {type = "bluetooth";}
-              {type = "caffeine";}
-              {type = "notification";}
-              {type = "mic_mute";}
-              {type = "system";}
+              { type = "wifi"; }
+              { type = "bluetooth"; }
+              { type = "caffeine"; }
+              { type = "notification"; }
+              { type = "mic_mute"; }
+              { type = "system"; }
             ];
             widget = {
               launcher.glyph = "snowflake";
@@ -298,7 +294,7 @@ in {
                 show_label = false;
                 hide_when_full = false;
               };
-              bluetooth = {};
+              bluetooth = { };
               control-center = {
                 glyph = "topology-star-3";
                 scale = 0.9;
