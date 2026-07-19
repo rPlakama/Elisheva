@@ -50,6 +50,9 @@ in {
           auto: yes
           minwidth: 500
           maxwidth: 1400
+          enforce_ratio: yes
+          cautious: yes
+          cover_names: [cover, front, art, album, folder]
           sources: [filesystem, id3, coverart, itunes, amazon, albumart, wikipedia, google]
 
         embedart:
