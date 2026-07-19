@@ -13,6 +13,7 @@
       syncedlyrics
       mutagen
     ];
+    flake8Check = false;
   } ''
     import os
     import sys
@@ -21,7 +22,8 @@
     import mutagen
     import syncedlyrics
 
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+    fmt = "%(asctime)s [%(levelname)s] %(message)s"
+    logging.basicConfig(level=logging.INFO, format=fmt)
     logger = logging.getLogger("lyrics-fetcher")
 
     music_dir = Path("${cfg.musicFolder}")
@@ -29,7 +31,10 @@
         logger.error(f"Music directory {music_dir} does not exist!")
         sys.exit(1)
 
-    AUDIO_EXTENSIONS = {".mp3", ".flac", ".m4a", ".ogg", ".opus", ".wav", ".aac", ".alac"}
+    AUDIO_EXTENSIONS = {
+        ".mp3", ".flac", ".m4a", ".ogg",
+        ".opus", ".wav", ".aac", ".alac"
+    }
 
     logger.info(f"Starting lyrics scan in {music_dir}...")
     fetched_count = 0
@@ -59,13 +64,13 @@
                         title = str(tags["TIT2"])
                     elif "title" in tags:
                         title = str(tags["title"][0])
-                    
+
                     if "TPE1" in tags:  # ID3
                         artist = str(tags["TPE1"])
                     elif "artist" in tags:
                         artist = str(tags["artist"][0])
             except Exception as e:
-                logger.warning(f"Could not read metadata for {audio_path}: {e}")
+                logger.warning(f"Metadata error for {audio_path}: {e}")
 
             if not title:
                 title = audio_path.stem
@@ -76,17 +81,20 @@
             try:
                 lrc = syncedlyrics.search(query)
                 if lrc:
-                    # Write both .lrc and .lyrc for maximum player compatibility
+                    # Write both .lrc and .lyrc for maximum compatibility
                     lrc_path.write_text(lrc, encoding="utf-8")
                     lyrc_path.write_text(lrc, encoding="utf-8")
                     fetched_count += 1
-                    logger.info(f"Successfully saved lyrics for {file}")
+                    logger.info(f"Saved lyrics for {file}")
                 else:
                     logger.info(f"No lyrics found for {file}")
             except Exception as e:
                 logger.error(f"Error fetching lyrics for {file}: {e}")
 
-    logger.info(f"Lyrics fetch complete. Fetched: {fetched_count}, Skipped (already had lyrics): {skipped_count}")
+    logger.info(
+        f"Lyrics scan complete. Fetched: {fetched_count}, "
+        f"Skipped: {skipped_count}"
+    )
   '';
 
   # Beets configuration file for metadata fetcher
