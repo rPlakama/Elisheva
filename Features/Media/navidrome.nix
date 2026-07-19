@@ -40,6 +40,7 @@ let
     lyrics:
       auto: yes
       fallback: ""
+      sources: [google, musixmatch, tekstowo]
   '';
 in
 {
