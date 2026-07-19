@@ -6,25 +6,17 @@
 }:
 let
   cfg = config.features.navidrome;
-  port = 4533;
-  dataDir = "/var/lib/navidrome";
-  musicGroup = "media";
-
-  appleMusicPlugin = pkgs.fetchurl {
-    name = "apple-music.ndp";
-    url = "https://github.com/navidrome/apple-music-plugin/releases/download/v0.2.0/apple-music.ndp";
-    hash = "sha256-NoJ1HnLKpcxGs/ercN5w6gJvCjikf3gLLStJIu0K0VQ=";
-  };
 
   audioMusePlugin = pkgs.fetchurl {
-    name = "audiomuseai.ndp";
     url = "https://github.com/NeptuneHub/AudioMuse-AI-NV-plugin/releases/download/v9/audiomuseai.ndp";
     hash = "sha256-vKC4SrKTWfNkpkX7qWjEV0ubyB71jG8z0DlXrjO1DPw=";
   };
-
-  ndLyricsPlugin = pkgs.fetchurl {
-    name = "nd-lyrics.ndp";
-    url = "https://github.com/J0R6IT0/navidrome-lyrics-plugin/releases/download/v7.1.0/nd-lyrics.ndp";
+  appleMusicPlugin = pkgs.fetchurl {
+    url = "https://github.com/navidrome/apple-music-plugin/releases/download/v0.2.0/apple-music.ndp";
+    hash = "sha256-NoJ1HnLKpcxGs/ercN5w6gJvCjikf3gLLStJIu0K0VQ=";
+  };
+  lyricsPlugin = pkgs.fetchurl {
+    url = "https://github.com/J0R6IT0/navidrome-lyrics-plugin/releases/latest/download/nd-lyrics.ndp";
     hash = "sha256-N0OJ0GuTWISvCjooxttRDl6O5GYDOomcPH6yClSFLOc=";
   };
 in
@@ -34,40 +26,39 @@ in
     musicFolder = lib.mkOption {
       type = lib.types.str;
       default = "/media/music/library";
+      description = "Path to the music library";
     };
   };
 
   config = lib.mkIf cfg.enable {
     features = {
+      preservation.system.directories = [ "/var/lib/navidrome" ];
       mediaPermissions = {
         enable = true;
+        writableServices = [ "navidrome" ];
       };
-      preservation.system.directories = [ dataDir ];
-      unifiedDNS.proxyServices.navidrome = port;
+      unifiedDNS.proxyServices.navidrome = 4533;
     };
+
+    systemd.tmpfiles.rules = [
+      "d /var/lib/navidrome/plugins 0750 navidrome media -"
+      "L+ /var/lib/navidrome/plugins/apple-music.ndp - - - - ${appleMusicPlugin}"
+      "L+ /var/lib/navidrome/plugins/audiomuseai.ndp - - - - ${audioMusePlugin}"
+      "L+ /var/lib/navidrome/plugins/nd-lyrics.ndp - - - - ${lyricsPlugin}"
+    ];
 
     services.navidrome = {
       enable = true;
-      group = musicGroup;
+      group = "media";
       settings = {
-        Address = "127.0.0.1";
-        Port = port;
+        "PID.Album" = "folder";
         MusicFolder = cfg.musicFolder;
-        DataFolder = dataDir;
-        ScanSchedule = "@every 1h";
-        EnableLyrics = true;
-        EnableExternalServices = true;
-        EnableGravatar = true;
         "Plugins.Enabled" = true;
-        "Plugins.Folder" = "${dataDir}/plugins";
+        "Plugins.Folder" = "/var/lib/navidrome/plugins";
+        Agents = "nd-lyrics,apple-music,audiomuseai,deezer,listenbrainz";
+        LyricsPriority = ".lrc,nd-lyrics,embedded";
+        SaveLyrics = true;
       };
     };
-
-    systemd.services.navidrome.preStart = ''
-      mkdir -p ${dataDir}/plugins
-      cp -f ${appleMusicPlugin} ${dataDir}/plugins/apple-music.ndp
-      cp -f ${audioMusePlugin} ${dataDir}/plugins/audiomuseai.ndp
-      cp -f ${ndLyricsPlugin} ${dataDir}/plugins/nd-lyrics.ndp
-    '';
   };
 }
