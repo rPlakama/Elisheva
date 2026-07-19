@@ -3,7 +3,7 @@ local opt = vim.opt
 
 -- Keymaps
 -- Terminal
-map('n', '<leader>t', '<cmd>sp term://fish') -- We use fish here, but that should be a line substitution like in Niri;
+map('n', '<leader>t', '<cmd>sp term://fish<CR>') -- We use fish here, but that should be a line substitution like in Niri;
 
 
 -- / fzf
