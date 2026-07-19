@@ -15,7 +15,7 @@ map('n', '<leader>s', fzf.spell_suggest, { desc = "Spell suggestions" })
 
 -- Git Sings
 map('n', '<C>k', '<cmd>Gitsings toggle_current_line_blame<CR>', { desc = 'Blame toggle' })
-map('n', '<S-C>j', '<cmd>Gitsings blame<CR>', { desc = 'Blame toggle' })
+map('n', '<S-C>k', '<cmd>Gitsings blame<CR>', { desc = 'Blame toggle' })
 
 -- Oil
 map('n', '<C-n>', '<cmd>Oil<CR>', { desc = "Open Oil file explorer" })

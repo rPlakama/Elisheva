@@ -106,6 +106,7 @@ in {
         User = "navidrome";
         Group = musicGroup;
         Environment = "HOME=${dataDir}";
+        UMask = "0002";
       };
     };
 
