@@ -73,9 +73,8 @@ in {
     services.navidrome = {
       enable = true;
       group = musicGroup;
-      openFirewall = true;
       settings = {
-        Address = "0.0.0.0";
+        Address = "127.0.0.1";
         Port = port;
         MusicFolder = cfg.musicFolder;
         DataFolder = dataDir;
