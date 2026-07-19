@@ -3,14 +3,17 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.features.navidrome;
   port = 4533;
 
-  pythonEnv = pkgs.python3.withPackages (ps: with ps; [
-    syncedlyrics
-    mutagen
-  ]);
+  pythonEnv = pkgs.python3.withPackages (
+    ps: with ps; [
+      syncedlyrics
+      mutagen
+    ]
+  );
 
   # Lyrics fetcher script using syncedlyrics + mutagen
   lyricsFetcherScript = pkgs.writeScriptBin "navidrome-lyrics-fetcher" ''
@@ -126,12 +129,13 @@
       auto: yes
       source: album
   '';
-in {
+in
+{
   options.features.navidrome = {
     enable = lib.mkEnableOption "Navidrome music server";
     musicFolder = lib.mkOption {
       type = lib.types.str;
-      default = "/media/music";
+      default = "/media/music/library";
       description = "Music folder path for Navidrome library";
     };
     lyricsFetcher = {
