@@ -50,7 +50,7 @@ in {
           auto: yes
           minwidth: 500
           maxwidth: 1400
-          sources: [filesystem, coverart, amazon, albumart]
+          sources: [filesystem, id3, coverart, itunes, amazon, albumart, wikipedia, google]
 
         embedart:
           auto: yes
@@ -63,7 +63,7 @@ in {
         lyrics:
           auto: yes
           fallback: ""
-          sources: [google, musixmatch, tekstowo]
+          sources: [google, lrclib, musixmatch, genius, tekstowo]
           google_API_key: ${config.sops.placeholder."beets/google_api_key"}
           google_engine_ID: ${config.sops.placeholder."beets/google_engine_id"}
       '';

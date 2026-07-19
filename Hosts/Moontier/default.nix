@@ -14,30 +14,11 @@
 
   environment.systemPackages = with pkgs; [
     btop
-    exiftool
     smartmontools
     calibre
     zip
   ];
 
-  # Block device & I/O Queue IOPS Maxxing Rules
-  services.udev.extraRules = ''
-    # NVMe / SSD (non-rotational): zero-overhead 'none' scheduler, disable entropy overhead, cpu core affinity pinning
-    ACTION=="add|change", KERNEL=="nvme[0-9]*n[0-9]*|sd[a-z]", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="none", ATTR{queue/add_random}="0", ATTR{queue/rq_affinity}="2", ATTR{queue/nomerges}="0"
-    # HDD (rotational): 'bfq' scheduler with expanded request queue (nr_requests=256)
-    ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq", ATTR{queue/nr_requests}="256", ATTR{queue/add_random}="0", ATTR{queue/rq_affinity}="2"
-  '';
-
-  # High IOPS & Filesystem Cache Memory Tuning
-  boot.kernel.sysctl = {
-    "vm.dirty_background_ratio" = 5;
-    "vm.dirty_ratio" = 10;
-    "vm.dirty_writeback_centisecs" = 1500;
-    "vm.dirty_expire_centisecs" = 3000;
-    "vm.vfs_cache_pressure" = 50;
-    "fs.file-max" = 2097152;
-    "fs.aio-max-nr" = 1048576;
-  };
 
   services.earlyoom = {
     enable = true;
