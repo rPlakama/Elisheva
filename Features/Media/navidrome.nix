@@ -3,15 +3,15 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.features.navidrome;
   port = 4533;
+  dataDir = "/var/lib/navidrome";
+  musicGroup = "media";
 
-  # Beets configuration file for metadata and lyrics fetcher
-  beetsConfigFile = pkgs.writeText "beets-navidrome.yaml" ''
+  beetsConfig = ''
     directory: ${cfg.musicFolder}
-    library: /var/lib/navidrome/beets.db
+    library: ${dataDir}/beets.db
 
     plugins: musicbrainz fetchart embedart lastgenre scrub lyrics
 
@@ -42,20 +42,20 @@ let
       fallback: ""
       sources: [google, musixmatch, tekstowo]
   '';
-in
-{
+
+  beetsConfigFile = pkgs.writeText "beets-navidrome.yaml" beetsConfig;
+  beetExec = "${pkgs.beets}/bin/beet -c ${beetsConfigFile} import -q -A ${cfg.musicFolder}";
+in {
   options.features.navidrome = {
     enable = lib.mkEnableOption "Navidrome music server";
     musicFolder = lib.mkOption {
       type = lib.types.str;
       default = "/media/music/library";
-      description = "Music folder path for Navidrome library";
     };
     metadataFetcher = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
-        description = "Enable automatic metadata & lyrics fetcher service (Beets plugins)";
       };
     };
   };
@@ -64,23 +64,21 @@ in
     features = {
       mediaPermissions = {
         enable = true;
-        writableServices = [
-          "navidrome-metadata-fetcher"
-        ];
+        writableServices = ["navidrome-metadata-fetcher"];
       };
-      preservation.system.directories = [ "/var/lib/navidrome" ];
+      preservation.system.directories = [dataDir];
       unifiedDNS.proxyServices.navidrome = port;
     };
 
     services.navidrome = {
       enable = true;
-      group = "media";
+      group = musicGroup;
       openFirewall = true;
       settings = {
         Address = "0.0.0.0";
         Port = port;
         MusicFolder = cfg.musicFolder;
-        DataFolder = "/var/lib/navidrome";
+        DataFolder = dataDir;
         ScanSchedule = "@every 1h";
         EnableLyrics = true;
         EnableExternalServices = true;
@@ -88,23 +86,20 @@ in
       };
     };
 
-    # Systemd service + timer for Metadata & Lyrics Fetcher (Beets)
     systemd.services.navidrome-metadata-fetcher = lib.mkIf cfg.metadataFetcher.enable {
-      description = "Navidrome Beets Metadata & Lyrics Fetcher Service";
-      after = [ "network.target" ];
-      path = [ pkgs.beets ];
+      after = ["network.target"];
+      path = [pkgs.beets];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "${pkgs.beets}/bin/beet -c ${beetsConfigFile} import -q -A ${cfg.musicFolder}";
+        ExecStart = beetExec;
         User = "navidrome";
-        Group = "media";
-        Environment = "HOME=/var/lib/navidrome";
+        Group = musicGroup;
+        Environment = "HOME=${dataDir}";
       };
     };
 
     systemd.timers.navidrome-metadata-fetcher = lib.mkIf cfg.metadataFetcher.enable {
-      description = "Timer for Navidrome Metadata Fetcher";
-      wantedBy = [ "timers.target" ];
+      wantedBy = ["timers.target"];
       timerConfig = {
         OnBootSec = "10m";
         OnUnitActiveSec = "6h";
