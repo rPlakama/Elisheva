@@ -9,42 +9,7 @@
   dataDir = "/var/lib/navidrome";
   musicGroup = "media";
 
-  beetsConfig = ''
-    directory: ${cfg.musicFolder}
-    library: ${dataDir}/beets.db
-
-    plugins: musicbrainz fetchart embedart lastgenre scrub lyrics
-
-    import:
-      write: yes
-      copy: no
-      move: no
-      autotag: yes
-      quiet: yes
-      resume: yes
-
-    fetchart:
-      auto: yes
-      minwidth: 500
-      maxwidth: 1400
-      sources: [filesystem, coverart, amazon, albumart]
-
-    embedart:
-      auto: yes
-      remove_art_file: no
-
-    lastgenre:
-      auto: yes
-      source: album
-
-    lyrics:
-      auto: yes
-      fallback: ""
-      sources: [google, musixmatch, tekstowo]
-  '';
-
-  beetsConfigFile = pkgs.writeText "beets-navidrome.yaml" beetsConfig;
-  beetExec = "${pkgs.beets}/bin/beet -c ${beetsConfigFile} import -q -A ${cfg.musicFolder}";
+  beetExec = "${pkgs.beets}/bin/beet -c ${config.sops.templates."beets-navidrome.yaml".path} import -q -A ${cfg.musicFolder}";
 in {
   options.features.navidrome = {
     enable = lib.mkEnableOption "Navidrome music server";
@@ -61,6 +26,49 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    sops.secrets."beets/google_api_key" = {};
+    sops.secrets."beets/google_engine_id" = {};
+
+    sops.templates."beets-navidrome.yaml" = {
+      owner = "navidrome";
+      content = ''
+        directory: ${cfg.musicFolder}
+        library: ${dataDir}/beets.db
+
+        plugins: musicbrainz fetchart embedart lastgenre scrub lyrics
+
+        import:
+          write: yes
+          copy: no
+          move: no
+          autotag: yes
+          quiet: yes
+          resume: yes
+          incremental: yes
+
+        fetchart:
+          auto: yes
+          minwidth: 500
+          maxwidth: 1400
+          sources: [filesystem, coverart, amazon, albumart]
+
+        embedart:
+          auto: yes
+          remove_art_file: no
+
+        lastgenre:
+          auto: yes
+          source: album
+
+        lyrics:
+          auto: yes
+          fallback: ""
+          sources: [google, musixmatch, tekstowo]
+          google_API_key: ${config.sops.placeholder."beets/google_api_key"}
+          google_engine_ID: ${config.sops.placeholder."beets/google_engine_id"}
+      '';
+    };
+
     features = {
       mediaPermissions = {
         enable = true;
