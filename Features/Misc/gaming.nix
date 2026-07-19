@@ -4,29 +4,25 @@
   inputs,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.features.gaming;
   gsrPkg = inputs.gsr-ui-nix.packages.${pkgs.system}.gpu-screen-recorder;
-in {
-  imports = [inputs.gsr-ui-nix.nixosModules.default];
+in
+{
+  imports = [ inputs.gsr-ui-nix.nixosModules.default ];
 
   options.features.gaming = {
     enable = lib.mkEnableOption "Enable gaming bundle";
-    steam.enable =
-      lib.mkEnableOption "Steam + Proton GE"
-      // {
-        default = true;
-      };
-    gamescope.enable =
-      lib.mkEnableOption "Gamescope"
-      // {
-        default = true;
-      };
-    gamemode.enable =
-      lib.mkEnableOption "Gamemode"
-      // {
-        default = true;
-      };
+    steam.enable = lib.mkEnableOption "Steam + Proton GE" // {
+      default = true;
+    };
+    gamescope.enable = lib.mkEnableOption "Gamescope" // {
+      default = true;
+    };
+    gamemode.enable = lib.mkEnableOption "Gamemode" // {
+      default = true;
+    };
     gsr.enable = lib.mkEnableOption "GSR-UI overlay";
   };
 
@@ -36,7 +32,7 @@ in {
       "Games"
     ];
 
-    boot.kernelModules = ["ntsync"];
+    boot.kernelModules = [ "ntsync" ];
 
     environment.systemPackages = with pkgs; [
       mangohud
@@ -52,7 +48,7 @@ in {
       };
       steam = {
         enable = cfg.steam.enable;
-        extraCompatPackages = [pkgs.proton-ge-bin];
+        extraCompatPackages = [ pkgs.proton-ge-bin ];
       };
     };
   };
