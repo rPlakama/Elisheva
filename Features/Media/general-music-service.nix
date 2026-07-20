@@ -12,7 +12,7 @@ let
   transcodeScript = pkgs.writeScriptBin "elisheva-transcode" (builtins.readFile ./transcode.sh);
 
   pythonPath = [ pkgs.python3 pkgs.ffmpeg pkgs.flac ];
-  transcodePath = with pkgs; [ bash coreutils findutils ffmpeg ];
+  transcodePath = with pkgs; [ bash coreutils fd findutils ffmpeg ];
 in
 {
   options.features.generalMusicService = {
