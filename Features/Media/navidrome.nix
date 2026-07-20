@@ -38,7 +38,7 @@ in
         writableServices = [ "navidrome" ];
       };
       unifiedDNS.proxyServices.navidrome = 4533;
-      coverDaemon = {
+      generalMusicService = {
         enable = lib.mkDefault true;
         musicFolder = lib.mkDefault cfg.musicFolder;
       };
