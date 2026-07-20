@@ -2,8 +2,10 @@
 set -euo pipefail
 
 MUSIC_DIR="${1:-/media/music/library}"
+JOBS=$(( $(nproc) / 2 ))
+[ "$JOBS" -lt 1 ] && JOBS=1
 
-find "$MUSIC_DIR" -name '*.flac' -print0 | xargs -0 -P "$(nproc)" -I{} sh -c '
+find "$MUSIC_DIR" -name '*.flac' -print0 | xargs -0 -P "$JOBS" -I{} sh -c '
   flac="$1"
   opus="${flac%.flac}.opus"
   if [ -f "$opus" ]; then
