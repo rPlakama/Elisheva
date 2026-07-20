@@ -38,6 +38,10 @@ in
         writableServices = [ "navidrome" ];
       };
       unifiedDNS.proxyServices.navidrome = 4533;
+      coverDaemon = {
+        enable = lib.mkDefault true;
+        musicFolder = lib.mkDefault cfg.musicFolder;
+      };
     };
 
     systemd.tmpfiles.rules = [
