@@ -66,6 +66,7 @@ in
               extensionRepos = [
                 "https://raw.githubusercontent.com/keiyoushi/extensions/repo/index.min.json"
                 "https://raw.githubusercontent.com/yuzono/manga-repo/repo/index.min.json"
+                "https://raw.githubusercontent.com/LittleSurvival/copymanga-copy20/repo/index.min.json"
               ];
             };
           };
