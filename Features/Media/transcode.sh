@@ -5,7 +5,7 @@ MUSIC_DIR="${1:-/media/music/library}"
 JOBS=$(( $(nproc) / 2 ))
 [ "$JOBS" -lt 1 ] && JOBS=1
 
-fd -0 -e flac . "$MUSIC_DIR" | xargs -0 -P "$JOBS" -I{} sh -c '
+fd -0 -e flac --full-path "$MUSIC_DIR" | xargs -0 -P "$JOBS" -I{} sh -c '
   flac="$1"
   opus="${flac%.flac}.opus"
   if [ -f "$opus" ]; then

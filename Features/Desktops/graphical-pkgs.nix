@@ -35,6 +35,7 @@ in
       materialgram
       nextcloud-client
       jellyfin-desktop
+      feishin
       foot
       mpv
       ripdrag
