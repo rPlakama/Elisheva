@@ -28,6 +28,11 @@ in
       default = "/media/music/library";
       description = "Path to the music library";
     };
+    feishin = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable Feishin alongside Navidrome";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -42,6 +47,7 @@ in
         enable = lib.mkDefault true;
         musicFolder = lib.mkDefault cfg.musicFolder;
       };
+      feishin.enable = lib.mkIf cfg.feishin (lib.mkDefault true);
     };
 
     systemd.tmpfiles.rules = [
