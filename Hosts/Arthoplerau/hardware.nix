@@ -37,6 +37,10 @@
     kernelModules = [
       "kvm-amd"
     ];
+
+    kernelParams = [
+      "amdgpu.ppfeaturemask=0xffffffff"
+    ];
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

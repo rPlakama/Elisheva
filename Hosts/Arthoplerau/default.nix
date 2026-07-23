@@ -23,11 +23,16 @@
     };
   };
 
+  boot.kernel.sysctl = {
+    "vm.max_map_count" = 2147483642;
+    "vm.compaction_proactiveness" = 20;
+  };
+
   features = {
     niri = {
       enable = true;
       NoctaliaEnabled = true;
-      output.vrr.enable = false;
+      output.vrr.enable = true;
     };
 
     gaming = {
@@ -43,6 +48,7 @@
       dualDrive = true;
       primaryDrive = "/dev/nvme1n1";
       secondaryDrive = "/dev/nvme0n1";
+      compression = "zstd:1";
       swap = {
         enable = true;
         size = "4GB";

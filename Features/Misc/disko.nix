@@ -11,7 +11,7 @@ let
     [
       "subvol=${subvol}"
       "noatime"
-      "compress=zstd:3"
+      "compress=${diskoCfg.compression}"
     ]
     ++ lib.optionals isSSD [
       "discard=async"
@@ -151,6 +151,11 @@ in
       default = "";
       description = "Secondary drive for /persistent (dual-drive mode)";
       example = "/dev/nvme1n1";
+    };
+    compression = lib.mkOption {
+      type = lib.types.str;
+      default = "zstd:3";
+      description = "Btrfs compression algorithm and level";
     };
     swap = {
       enable = lib.mkOption {
