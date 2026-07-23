@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.features.preservation;
   diskoCfg = config.features.disko;
   user = config.core.user;
@@ -41,44 +42,45 @@
     ".config"
     ".ssh"
   ];
-in {
+in
+{
   options.features.preservation = {
     enable = lib.mkEnableOption "impermanence with persistent state";
 
     system = {
       directories = lib.mkOption {
         type = lib.types.listOf lib.types.anything;
-        default = [];
+        default = [ ];
         description = "System directories to persist.";
-        example = ["/var/lib/qbittorrent"];
+        example = [ "/var/lib/qbittorrent" ];
       };
       files = lib.mkOption {
         type = lib.types.listOf lib.types.anything;
-        default = [];
+        default = [ ];
         description = "System files to persist.";
-        example = ["/etc/adjtime"];
+        example = [ "/etc/adjtime" ];
       };
     };
 
     home = {
       directories = lib.mkOption {
         type = lib.types.listOf lib.types.anything;
-        default = [];
+        default = [ ];
         description = "Home directories to persist.";
-        example = [".config/vesktop"];
+        example = [ ".config/vesktop" ];
       };
       files = lib.mkOption {
         type = lib.types.listOf lib.types.anything;
-        default = [];
+        default = [ ];
         description = "Home files to persist.";
-        example = [".gitconfig"];
+        example = [ ".gitconfig" ];
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.services."systemd-machine-id-commit".enable = false;
-    sops.age.sshKeyPaths = ["/persistent/etc/ssh/ssh_host_ed25519_key"];
+    nix.channel.enable = false;
+    sops.age.sshKeyPaths = [ "/persistent/etc/ssh/ssh_host_ed25519_key" ];
 
     assertions = [
       {
