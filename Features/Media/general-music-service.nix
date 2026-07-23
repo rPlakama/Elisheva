@@ -7,7 +7,12 @@
 let
   cfg = config.features.generalMusicService;
 
-  maintainerScript = pkgs.writeScriptBin "elisheva-music-maintainer" (builtins.readFile ./GeneralMusicMaintainer.py);
+  maintainerScript = pkgs.writeScriptBin "elisheva-music-maintainer" (
+    builtins.replaceStrings
+    ["@MUSIC_DIR@"]
+    [cfg.musicFolder]
+    (builtins.readFile ./GeneralMusicMaintainer.py)
+  );
 
   runtimePath = with pkgs; [ python3 ffmpeg flac coreutils ];
 in

@@ -19,16 +19,20 @@ from multiprocessing import Pool, cpu_count
 from pathlib import Path
 
 # ── Configuration ────────────────────────────────────────────────────────────
+# @MUSIC_DIR@ is substituted by Nix at build time (builtins.replaceStrings)
 
+MUSIC_DIR_DEFAULT = "@MUSIC_DIR@"
 MB_API = "https://musicbrainz.org/ws/2"
 LRCLIB_API = "https://lrclib.net/api"
 USER_AGENT = "ElishevaMusicMaintainer/3.0 (https://github.com/elisheva)"
 REQUEST_DELAY = 1.1
 LRCLIB_DELAY = 0.6
+DIARY_NAME = ".maintainer-diary.md"
 
 AUDIO_EXTS = {".flac", ".opus"}
 COVER_NAMES = {"cover.jpg", "cover.png", "folder.jpg", "folder.png",
                "front.jpg", "front.png"}
+MIN_COVER_RES = 500  # px — minimum width/height for Navidrome
 YEAR_SUFFIX_RE = re.compile(r"\s*[\(\[\-\.]\s*\d{4}\s*[\)\]\.]?\s*$")
 YEAR_PREFIX_RE = re.compile(r"^\d{4}\s*[\-\.]\s*")
 DIRTY_TITLE_RE = re.compile(
@@ -98,8 +102,41 @@ def clean_title(title):
     title = YEAR_SUFFIX_RE.sub("", title)
     return title.strip()
 
+
+def get_image_dimensions(filepath):
+    """Return (width, height) of an image using ffprobe, or (0, 0) on failure."""
+    try:
+        result = subprocess.run(
+            ["ffprobe", "-v", "quiet", "-print_format", "json",
+             "-show_entries", "stream=width,height", str(filepath)],
+            capture_output=True, text=True, timeout=10,
+            stdin=subprocess.DEVNULL,
+        )
+        data = json.loads(result.stdout)
+        for stream in data.get("streams", []):
+            w = stream.get("width", 0)
+            h = stream.get("height", 0)
+            if w and h:
+                return (w, h)
+    except Exception:
+        pass
+    return (0, 0)
+
+
+def cover_meets_resolution(filepath):
+    """Check if a cover image meets the minimum resolution for Navidrome."""
+    w, h = get_image_dimensions(filepath)
+    return w >= MIN_COVER_RES and h >= MIN_COVER_RES
+
+
 def has_cover(album_dir):
-    return any((album_dir / name).exists() for name in COVER_NAMES)
+    """True if album has a cover file that meets the minimum resolution."""
+    for name in COVER_NAMES:
+        path = album_dir / name
+        if path.exists():
+            if cover_meets_resolution(str(path)):
+                return True
+    return False
 
 def get_audio_files(album_dir):
     files = []
@@ -256,7 +293,8 @@ def search_mb_release(artist, album):
 
 
 def download_cover(mbid, rgid, output_path):
-    """Try CAA release, then release-group, then generic endpoints."""
+    """Try CAA release, then release-group, then generic endpoints.
+    Only keeps the image if it meets MIN_COVER_RES."""
     endpoints = []
     # Release-specific covers first (most precise)
     if mbid:
@@ -277,13 +315,18 @@ def download_cover(mbid, rgid, output_path):
                     with open(output_path, "wb") as f:
                         f.write(raw)
                     os.chmod(output_path, 0o664)
-                    return True
+                    if cover_meets_resolution(output_path):
+                        return True
+                    # Too small — delete and try next endpoint
+                    log(f"    Undersized from CAA, trying next...")
+                    Path(output_path).unlink(missing_ok=True)
         except Exception:
             continue
     return False
 
 
 def extract_embedded_cover(filepath, output_path):
+    """Extract embedded cover art; only keep if it meets MIN_COVER_RES."""
     ext = Path(filepath).suffix.lower()
     try:
         if ext == ".flac":
@@ -292,15 +335,19 @@ def extract_embedded_cover(filepath, output_path):
                 capture_output=True, timeout=30, stdin=subprocess.DEVNULL,
             )
             if result.returncode == 0 and Path(output_path).exists():
-                if Path(output_path).stat().st_size > 1024:
+                if (Path(output_path).stat().st_size > 1024
+                        and cover_meets_resolution(output_path)):
                     return True
+                Path(output_path).unlink(missing_ok=True)
         result = subprocess.run(
             ["ffmpeg", "-y", "-i", str(filepath), "-map", "0:v:0",
              "-c:v", "copy", "-f", "image2", str(output_path)],
             capture_output=True, timeout=30, stdin=subprocess.DEVNULL,
         )
         if Path(output_path).exists() and Path(output_path).stat().st_size > 1024:
-            return True
+            if cover_meets_resolution(output_path):
+                return True
+            Path(output_path).unlink(missing_ok=True)
     except Exception:
         pass
     return False
@@ -371,8 +418,32 @@ def process_album_cover(album_dir, music_dir):
     return "not_found"
 
 
+def _purge_undersized_covers(music_dir):
+    """Delete existing cover images that are below MIN_COVER_RES so they
+    get re-fetched at proper resolution."""
+    purged = 0
+    for dirpath, _, filenames in os.walk(music_dir):
+        dirpath = Path(dirpath)
+        for name in filenames:
+            if name.lower() in {n.lower() for n in COVER_NAMES}:
+                path = dirpath / name
+                if not cover_meets_resolution(str(path)):
+                    w, h = get_image_dimensions(str(path))
+                    log(f"  Purging undersized cover ({w}×{h}): "
+                        f"{path.relative_to(music_dir)}")
+                    path.unlink()
+                    purged += 1
+    return purged
+
+
 def run_cover_fetch(music_dir):
     log("═══ Phase 3: Cover Art Fetching ═══")
+
+    # First pass: purge any existing undersized covers
+    purged = _purge_undersized_covers(music_dir)
+    if purged:
+        log(f"  Purged {purged} undersized cover(s) (below {MIN_COVER_RES}×{MIN_COVER_RES})")
+
     album_dirs = walk_album_dirs(music_dir)
     log(f"  Found {len(album_dirs)} album directories")
     stats = {"skip": 0, "success": 0, "success_embedded": 0,
@@ -387,10 +458,22 @@ def run_cover_fetch(music_dir):
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def generate_album_nfo(album_dir, music_dir):
-    """Create album.nfo with metadata from audio tags + MusicBrainz."""
+    """Create or patch album.nfo with metadata from audio tags.
+
+    If the NFO already exists but has an empty <artistdesc>, resolve the
+    artist from the audio files themselves and rewrite the NFO.
+    """
     nfo_path = album_dir / "album.nfo"
+    needs_write = False
+
+    # If NFO exists, check whether artist is populated
     if nfo_path.exists():
-        return False
+        existing_artist, existing_title = _parse_album_nfo(nfo_path)
+        if existing_artist:
+            return False  # Already complete, nothing to do
+        # NFO exists but artist is missing — we'll patch it
+        needs_write = True
+        log(f"  album.nfo missing artist, resolving: {album_dir.name}")
 
     audio_files = get_audio_files(album_dir)
     if not audio_files:
@@ -402,12 +485,24 @@ def generate_album_nfo(album_dir, music_dir):
     date = tags.get("date", "")
     genre = tags.get("genre", "")
 
+    # If tags didn't provide an artist, try consensus from multiple tracks
+    if not artist and len(audio_files) > 1:
+        for af in audio_files[1:5]:
+            t = get_tags(str(af))
+            artist = t.get("album_artist") or t.get("artist", "")
+            if artist:
+                break
+
     if not artist:
         folder_artist, _ = identify_from_folder(album_dir.name)
         artist = folder_artist or album_dir.parent.name
     if not album:
         _, folder_album = identify_from_folder(album_dir.name)
         album = folder_album or album_dir.name
+
+    # If we were patching and still can't find an artist, don't rewrite
+    if needs_write and not artist:
+        return False
 
     # Extract year from date
     year = ""
@@ -500,7 +595,13 @@ def run_nfo_generation(music_dir):
 # PHASE 5: Lyrics Fetching (carried over from lyrics-daemon)
 # ═══════════════════════════════════════════════════════════════════════════════
 
+class _NetworkError(Exception):
+    """Raised when a lyrics request fails due to connectivity, not content."""
+
+
 def fetch_lrc(artist, title, album=""):
+    """Fetch lyrics from LRCLIB /get endpoint.
+    Returns lyrics string, None if not found, or raises _NetworkError."""
     params = {"artist_name": artist, "track_name": title}
     if album:
         params["album_name"] = album
@@ -512,12 +613,20 @@ def fetch_lrc(artist, title, album=""):
         synced = data.get("syncedLyrics")
         if synced and len(synced) > 20:
             return synced.strip()
+        return None  # API responded but no synced lyrics — genuinely not found
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            return None  # not found on LRCLIB
+        raise _NetworkError(str(e))
+    except (urllib.error.URLError, TimeoutError, OSError) as e:
+        raise _NetworkError(str(e))
     except Exception:
-        pass
-    return None
+        return None
 
 
 def search_lrc(artist, title, album=""):
+    """Search LRCLIB for lyrics.
+    Returns lyrics string, None if not found, or raises _NetworkError."""
     params = {"artist_name": artist, "track_name": title}
     if album:
         params["album_name"] = album
@@ -530,15 +639,19 @@ def search_lrc(artist, title, album=""):
             synced = r.get("syncedLyrics")
             if synced and len(synced) > 20:
                 return synced.strip()
+        return None  # nothing matched
+    except (urllib.error.URLError, TimeoutError, OSError) as e:
+        raise _NetworkError(str(e))
     except Exception:
-        pass
-    return None
+        return None
 
 
 def process_lyrics(audio_path):
+    """Returns (status, info_dict_or_None).
+    status is one of: skip, success, no_tags, not_found, network_error."""
     lrc_path = audio_path.with_suffix(".lrc")
     if lrc_path.exists() and lrc_path.stat().st_size > 0:
-        return "skip"
+        return "skip", None
 
     tags = get_tags(str(audio_path))
     artist = tags.get("album_artist") or tags.get("artist", "")
@@ -546,31 +659,38 @@ def process_lyrics(audio_path):
     album = tags.get("album", "")
 
     if not artist or not title:
-        return "no_tags"
+        return "no_tags", None
 
     log(f"  Lyrics: {artist} — {title}")
-    time.sleep(LRCLIB_DELAY)
+    info = {"artist": artist, "title": title, "album": album,
+            "path": str(audio_path)}
 
-    lrc = fetch_lrc(artist, title, album)
-    if lrc:
-        _save_lrc(lrc_path, lrc)
-        return "success"
-
-    clean_t = clean_title(title)
-    if clean_t and clean_t != title:
+    try:
         time.sleep(LRCLIB_DELAY)
-        lrc = fetch_lrc(artist, clean_t, album)
+        lrc = fetch_lrc(artist, title, album)
         if lrc:
             _save_lrc(lrc_path, lrc)
-            return "success"
+            return "success", None
 
-    time.sleep(LRCLIB_DELAY)
-    lrc = search_lrc(artist, title, album)
-    if lrc:
-        _save_lrc(lrc_path, lrc)
-        return "success"
+        clean_t = clean_title(title)
+        if clean_t and clean_t != title:
+            time.sleep(LRCLIB_DELAY)
+            lrc = fetch_lrc(artist, clean_t, album)
+            if lrc:
+                _save_lrc(lrc_path, lrc)
+                return "success", None
 
-    return "not_found"
+        time.sleep(LRCLIB_DELAY)
+        lrc = search_lrc(artist, title, album)
+        if lrc:
+            _save_lrc(lrc_path, lrc)
+            return "success", None
+
+        return "not_found", info
+
+    except _NetworkError as e:
+        log(f"    Network issue, skipping: {e}")
+        return "network_error", None
 
 
 def _save_lrc(lrc_path, text):
@@ -580,6 +700,7 @@ def _save_lrc(lrc_path, text):
 
 
 def run_lyrics_fetch(music_dir):
+    """Fetch lyrics and return a list of not-found entries for the diary."""
     log("═══ Phase 5: Lyrics Fetching ═══")
     files = []
     for dirpath, _, filenames in os.walk(music_dir):
@@ -588,11 +709,18 @@ def run_lyrics_fetch(music_dir):
                 files.append(Path(dirpath) / f)
 
     log(f"  Found {len(files)} audio files")
-    stats = {"skip": 0, "success": 0, "no_tags": 0, "not_found": 0}
+    stats = {"skip": 0, "success": 0, "no_tags": 0,
+             "not_found": 0, "network_error": 0}
+    not_found_entries = []
+
     for fp in files:
-        result = process_lyrics(fp)
+        result, info = process_lyrics(fp)
         stats[result] = stats.get(result, 0) + 1
+        if result == "not_found" and info:
+            not_found_entries.append(info)
+
     log(f"  Lyrics done: {json.dumps(stats)}")
+    return not_found_entries
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # PHASE 6: Library Structuring (Artist / Album / Songs) + Dedup
@@ -819,11 +947,56 @@ def run_structure_library(music_dir):
         f"{cleaned} empty dirs removed")
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# Diary
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def write_diary(music_dir, lyrics_not_found):
+    """Write a maintenance diary to the library root."""
+    diary_path = music_dir / DIARY_NAME
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    lines = [
+        f"# 🎵 Elisheva Music Maintainer — Diary",
+        f"",
+        f"_Last run: {now}_",
+        f"",
+    ]
+
+    if lyrics_not_found:
+        lines.append(f"## Lyrics — Don't waste your time here ({len(lyrics_not_found)} tracks)")
+        lines.append("")
+        lines.append("These tracks were searched on LRCLIB and came up empty. ")
+        lines.append("No synced lyrics exist for them (yet).")
+        lines.append("")
+        lines.append("| Artist | Title | Album |")
+        lines.append("|--------|-------|-------|")
+        for entry in sorted(lyrics_not_found, key=lambda e: (e["artist"], e["title"])):
+            a = entry["artist"].replace("|", "\\|")
+            t = entry["title"].replace("|", "\\|")
+            al = entry["album"].replace("|", "\\|") if entry["album"] else "—"
+            lines.append(f"| {a} | {t} | {al} |")
+        lines.append("")
+    else:
+        lines.append("## Lyrics")
+        lines.append("")
+        lines.append("All tracks have synced lyrics or were skipped. Nothing to report. ✓")
+        lines.append("")
+
+    content = "\n".join(lines) + "\n"
+
+    with open(diary_path, "w", encoding="utf-8") as f:
+        f.write(content)
+    os.chmod(diary_path, 0o664)
+    log(f"Diary written to {diary_path}")
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Main
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def main():
-    music_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("/media/music/library")
+    default_dir = MUSIC_DIR_DEFAULT if "@" not in MUSIC_DIR_DEFAULT else "/media/music/library"
+    music_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(default_dir)
     if not music_dir.exists():
         log(f"Music directory does not exist: {music_dir}")
         sys.exit(1)
@@ -835,7 +1008,9 @@ def main():
     run_cover_fetch(music_dir)
     run_nfo_generation(music_dir)
     run_structure_library(music_dir)
-    run_lyrics_fetch(music_dir)
+    lyrics_not_found = run_lyrics_fetch(music_dir)
+
+    write_diary(music_dir, lyrics_not_found)
 
     log("All phases complete.")
 
