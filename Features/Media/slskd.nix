@@ -2,26 +2,31 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.features.slskd;
-in {
+in
+{
   options.features.slskd.enable = lib.mkEnableOption "Soulseek client";
 
   config = lib.mkMerge [
     {
-      sops.secrets."slskd/username" = {};
-      sops.secrets."slskd/password" = {};
-
-      sops.templates."slskd.env".content = ''
-        SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
-        SLSKD_SLSK_PASSWORD=${config.sops.placeholder."slskd/password"}
-      '';
+      sops = {
+        secrets = {
+          "slskd/username" = { };
+          "slskd/password" = { };
+        };
+        templates."slskd.env".content = ''
+          SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
+          SLSKD_SLSK_PASSWORD=${config.sops.placeholder."slskd/password"}
+        '';
+      };
     }
 
     (lib.mkIf cfg.enable {
       features = {
         mediaPermissions.enable = true;
-        preservation.system.directories = ["/var/lib/slskd"];
+        preservation.system.directories = [ "/var/lib/slskd" ];
         unifiedDNS.proxyServices.slskd = 5030;
       };
       services.slskd = {
