@@ -7,7 +7,6 @@ import unicodedata
 import os
 import re
 import shutil
-import stat
 import subprocess
 import sys
 import textwrap
@@ -104,15 +103,6 @@ def clean_title(title):
     return title.strip()
 
 
-def _ensure_parent_group_writable(path):
-    parent = Path(path).parent
-    if parent.is_dir():
-        mode = parent.stat().st_mode
-        if not (mode & stat.S_IWGRP):
-            log(f"  Fixing permissions on {parent}")
-            parent.chmod(mode | stat.S_IWGRP | stat.S_ISGID)
-
-
 def get_image_dimensions(filepath):
     """Return (width, height) of an image using ffprobe, or (0, 0) on failure."""
     try:
@@ -200,7 +190,6 @@ def transcode_single(flac_path_str):
     opus_path = flac_path.with_suffix(".opus")
     if opus_path.exists():
         return (flac_path_str, "skip")
-    _ensure_parent_group_writable(opus_path)
     try:
         result = subprocess.run(
             ["ffmpeg", "-y", "-i", str(flac_path),
@@ -323,7 +312,6 @@ def download_cover(mbid, rgid, output_path):
             with urllib.request.urlopen(req, timeout=30) as resp:
                 raw = resp.read()
                 if len(raw) > 1024:
-                    _ensure_parent_group_writable(output_path)
                     with open(output_path, "wb") as f:
                         f.write(raw)
                     os.chmod(output_path, 0o664)
@@ -340,7 +328,6 @@ def download_cover(mbid, rgid, output_path):
 def extract_embedded_cover(filepath, output_path):
     """Extract embedded cover art; only keep if it meets MIN_COVER_RES."""
     ext = Path(filepath).suffix.lower()
-    _ensure_parent_group_writable(output_path)
     try:
         if ext == ".flac":
             result = subprocess.run(
@@ -373,7 +360,6 @@ def _download_image_to(url, output_path):
         with urllib.request.urlopen(req, timeout=30) as resp:
             raw = resp.read()
             if len(raw) > 1024:
-                _ensure_parent_group_writable(output_path)
                 with open(output_path, "wb") as f:
                     f.write(raw)
                 os.chmod(output_path, 0o664)
@@ -630,7 +616,6 @@ def generate_album_nfo(album_dir, music_dir):
         </album>
     """)
 
-    _ensure_parent_group_writable(nfo_path)
     with open(nfo_path, "w", encoding="utf-8") as f:
         f.write(content)
     os.chmod(nfo_path, 0o664)
@@ -663,7 +648,6 @@ def generate_artist_nfo(artist_dir):
         </artist>
     """)
 
-    _ensure_parent_group_writable(nfo_path)
     with open(nfo_path, "w", encoding="utf-8") as f:
         f.write(content)
     os.chmod(nfo_path, 0o664)
@@ -802,7 +786,6 @@ def process_lyrics(audio_path):
 
 
 def _save_lrc(lrc_path, text):
-    _ensure_parent_group_writable(lrc_path)
     with open(lrc_path, "w", encoding="utf-8") as f:
         f.write(text + "\n")
     os.chmod(lrc_path, 0o664)
@@ -1093,7 +1076,6 @@ def write_diary(music_dir, lyrics_not_found):
 
     content = "\n".join(lines) + "\n"
 
-    _ensure_parent_group_writable(diary_path)
     with open(diary_path, "w", encoding="utf-8") as f:
         f.write(content)
     os.chmod(diary_path, 0o664)
