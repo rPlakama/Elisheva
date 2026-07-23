@@ -103,6 +103,13 @@ def clean_title(title):
     return title.strip()
 
 
+def _safe_chmod(path, mode):
+    try:
+        os.chmod(path, mode)
+    except PermissionError:
+        pass
+
+
 def get_image_dimensions(filepath):
     """Return (width, height) of an image using ffprobe, or (0, 0) on failure."""
     try:
@@ -201,7 +208,7 @@ def transcode_single(flac_path_str):
         if result.returncode != 0:
             opus_path.unlink(missing_ok=True)
             return (flac_path_str, "error")
-        os.chmod(opus_path, 0o664)
+        _safe_chmod(opus_path, 0o664)
         return (flac_path_str, "ok")
     except Exception as e:
         opus_path.unlink(missing_ok=True)
@@ -314,11 +321,9 @@ def download_cover(mbid, rgid, output_path):
                 if len(raw) > 1024:
                     with open(output_path, "wb") as f:
                         f.write(raw)
-                    os.chmod(output_path, 0o664)
+                    _safe_chmod(output_path, 0o664)
                     if cover_meets_resolution(output_path):
                         return True
-                    # Too small — delete and try next endpoint
-                    log(f"    Undersized from CAA, trying next...")
                     Path(output_path).unlink(missing_ok=True)
         except Exception:
             continue
@@ -362,7 +367,7 @@ def _download_image_to(url, output_path):
             if len(raw) > 1024:
                 with open(output_path, "wb") as f:
                     f.write(raw)
-                os.chmod(output_path, 0o664)
+                _safe_chmod(output_path, 0o664)
                 if cover_meets_resolution(output_path):
                     return True
                 Path(output_path).unlink(missing_ok=True)
@@ -618,7 +623,7 @@ def generate_album_nfo(album_dir, music_dir):
 
     with open(nfo_path, "w", encoding="utf-8") as f:
         f.write(content)
-    os.chmod(nfo_path, 0o664)
+    _safe_chmod(nfo_path, 0o664)
     return True
 
 
@@ -650,7 +655,7 @@ def generate_artist_nfo(artist_dir):
 
     with open(nfo_path, "w", encoding="utf-8") as f:
         f.write(content)
-    os.chmod(nfo_path, 0o664)
+    _safe_chmod(nfo_path, 0o664)
     return True
 
 
@@ -788,7 +793,7 @@ def process_lyrics(audio_path):
 def _save_lrc(lrc_path, text):
     with open(lrc_path, "w", encoding="utf-8") as f:
         f.write(text + "\n")
-    os.chmod(lrc_path, 0o664)
+    _safe_chmod(lrc_path, 0o664)
 
 
 def run_lyrics_fetch(music_dir):
@@ -1078,7 +1083,7 @@ def write_diary(music_dir, lyrics_not_found):
 
     with open(diary_path, "w", encoding="utf-8") as f:
         f.write(content)
-    os.chmod(diary_path, 0o664)
+    _safe_chmod(diary_path, 0o664)
     log(f"Diary written to {diary_path}")
 
 
