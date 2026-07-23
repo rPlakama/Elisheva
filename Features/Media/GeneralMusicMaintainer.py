@@ -353,6 +353,87 @@ def extract_embedded_cover(filepath, output_path):
     return False
 
 
+def _download_image_to(url, output_path):
+    """Download an image URL to disk; keep only if it meets MIN_COVER_RES."""
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            raw = resp.read()
+            if len(raw) > 1024:
+                with open(output_path, "wb") as f:
+                    f.write(raw)
+                os.chmod(output_path, 0o664)
+                if cover_meets_resolution(output_path):
+                    return True
+                Path(output_path).unlink(missing_ok=True)
+    except Exception:
+        pass
+    return False
+
+
+def fetch_cover_itunes(artist, album, output_path):
+    """Search iTunes/Apple Music for album art (free, no API key).
+    Returns True if a hi-res cover was saved."""
+    query = f"{artist} {album}".strip()
+    if not query:
+        return False
+    url = (f"https://itunes.apple.com/search?"
+           f"{urllib.parse.urlencode({'term': query, 'entity': 'album', 'limit': '5'})}")
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read())
+        target = album.lower().replace("-", " ").strip()
+        results = data.get("results", [])
+        # Try exact match first, then fall back to first result
+        art_url = None
+        for r in results:
+            coll = r.get("collectionName", "").lower().replace("-", " ").strip()
+            if coll == target:
+                art_url = r.get("artworkUrl100", "")
+                break
+        if not art_url and results:
+            art_url = results[0].get("artworkUrl100", "")
+        if not art_url:
+            return False
+        # iTunes gives 100×100 by default; upscale the URL to 1200×1200
+        art_url = art_url.replace("100x100bb", "1200x1200bb")
+        return _download_image_to(art_url, output_path)
+    except Exception:
+        return False
+
+
+def fetch_cover_deezer(artist, album, output_path):
+    """Search Deezer for album art (free, no API key).
+    Returns True if a hi-res cover was saved."""
+    query = f"{artist} {album}".strip()
+    if not query:
+        return False
+    url = (f"https://api.deezer.com/search/album?"
+           f"{urllib.parse.urlencode({'q': query, 'limit': '5'})}")
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read())
+        target = album.lower().replace("-", " ").strip()
+        results = data.get("data", [])
+        art_url = None
+        for r in results:
+            dtitle = r.get("title", "").lower().replace("-", " ").strip()
+            if dtitle == target:
+                # cover_xl is 1000×1000
+                art_url = r.get("cover_xl") or r.get("cover_big") or r.get("cover", "")
+                break
+        if not art_url and results:
+            art_url = (results[0].get("cover_xl") or results[0].get("cover_big")
+                       or results[0].get("cover", ""))
+        if not art_url:
+            return False
+        return _download_image_to(art_url, output_path)
+    except Exception:
+        return False
+
+
 def process_album_cover(album_dir, music_dir):
     if has_cover(album_dir):
         return "skip"
@@ -386,9 +467,10 @@ def process_album_cover(album_dir, music_dir):
 
     lbl = label(artist, album)
     log(f"  Cover: {lbl}")
+    cover_path = str(album_dir / "cover.jpg")
     time.sleep(REQUEST_DELAY)
 
-    # Search with retries
+    # ── Source 1: MusicBrainz / Cover Art Archive ─────────────────────────
     mbid, rgid = search_mb_release(artist, album)
     if not mbid:
         clean = clean_name(album)
@@ -401,16 +483,26 @@ def process_album_cover(album_dir, music_dir):
 
     if mbid:
         time.sleep(REQUEST_DELAY)
-        cover_path = album_dir / "cover.jpg"
-        if download_cover(mbid, rgid, str(cover_path)):
-            log(f"  ✓ Cover: {lbl}")
+        if download_cover(mbid, rgid, cover_path):
+            log(f"  ✓ Cover (CAA): {lbl}")
             return "success"
-        log(f"  No cover on CAA: {lbl}")
+        log(f"  CAA miss: {lbl}")
 
-    # Fallback: extract embedded
-    cover_path = album_dir / "cover.jpg"
+    # ── Source 2: iTunes / Apple Music ────────────────────────────────────
+    time.sleep(REQUEST_DELAY)
+    if fetch_cover_itunes(artist, album, cover_path):
+        log(f"  ✓ Cover (iTunes): {lbl}")
+        return "success"
+
+    # ── Source 3: Deezer ──────────────────────────────────────────────────
+    time.sleep(REQUEST_DELAY)
+    if fetch_cover_deezer(artist, album, cover_path):
+        log(f"  ✓ Cover (Deezer): {lbl}")
+        return "success"
+
+    # ── Source 4: Embedded cover extraction ───────────────────────────────
     for f in audio_files[:5]:
-        if extract_embedded_cover(str(f), str(cover_path)):
+        if extract_embedded_cover(str(f), cover_path):
             log(f"  ✓ Cover (embedded): {lbl}")
             return "success_embedded"
 
