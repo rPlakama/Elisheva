@@ -8,13 +8,17 @@ let
   cfg = config.features.generalMusicService;
 
   maintainerScript = pkgs.writeScriptBin "elisheva-music-maintainer" (
-    builtins.replaceStrings
-    ["@MUSIC_DIR@"]
-    [cfg.musicFolder]
-    (builtins.readFile ./GeneralMusicMaintainer.py)
+    builtins.replaceStrings [ "@MUSIC_DIR@" ] [ cfg.musicFolder ] (
+      builtins.readFile ./general-music-service.py
+    )
   );
 
-  runtimePath = with pkgs; [ python3 ffmpeg flac coreutils ];
+  runtimePath = with pkgs; [
+    python3
+    ffmpeg
+    flac
+    coreutils
+  ];
 in
 {
   options.features.generalMusicService = {
@@ -34,7 +38,10 @@ in
   config = lib.mkIf cfg.enable {
     systemd.services.elisheva-music-maintainer = {
       description = "Elisheva General Music Maintainer";
-      after = [ "network-online.target" "media-music-library.mount" ];
+      after = [
+        "network-online.target"
+        "media-music-library.mount"
+      ];
       wants = [ "network-online.target" ];
       path = runtimePath;
 
