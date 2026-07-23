@@ -24,8 +24,6 @@ in {
         preservation.system.directories = ["/var/lib/slskd"];
         unifiedDNS.proxyServices.slskd = 5030;
       };
-      systemd.services.slskd.serviceConfig.UMask = "0002";
-
       services.slskd = {
         enable = true;
         group = "media";

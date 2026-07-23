@@ -41,14 +41,15 @@ in
       serviceConfig = {
         Type = "simple";
         ExecStart = "${maintainerScript}/bin/elisheva-music-maintainer ${cfg.musicFolder}";
-        DynamicUser = true;
+        User = "nobody";
         Group = "media";
-        UMask = "0002";
         Nice = 19;
         IOSchedulingClass = "idle";
         StandardOutput = "journal";
         StandardError = "journal";
         SyslogIdentifier = "elisheva-music-maintainer";
+        PrivateTmp = true;
+        NoNewPrivileges = true;
       };
     };
 
