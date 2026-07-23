@@ -476,15 +476,18 @@ def process_album_cover(album_dir, music_dir):
     time.sleep(REQUEST_DELAY)
 
     # ── Source 1: MusicBrainz / Cover Art Archive ─────────────────────────
-    mbid, rgid = search_mb_release(artist, album)
+    mbid, rgid = search_mb_release("", album)
+    if not mbid and artist:
+        time.sleep(REQUEST_DELAY)
+        mbid, rgid = search_mb_release(artist, album)
     if not mbid:
         clean = clean_name(album)
         if clean and clean != album:
             time.sleep(REQUEST_DELAY)
-            mbid, rgid = search_mb_release(artist, clean)
-    if not mbid and artist:
-        time.sleep(REQUEST_DELAY)
-        mbid, rgid = search_mb_release("", album)
+            mbid, rgid = search_mb_release("", clean)
+            if not mbid and artist:
+                time.sleep(REQUEST_DELAY)
+                mbid, rgid = search_mb_release(artist, clean)
 
     if mbid:
         time.sleep(REQUEST_DELAY)
