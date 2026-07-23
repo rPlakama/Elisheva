@@ -3,6 +3,7 @@
 cleanup, cover art fetching, lyrics fetching, and NFO generation."""
 
 import json
+import unicodedata
 import os
 import re
 import shutil
@@ -594,6 +595,230 @@ def run_lyrics_fetch(music_dir):
     log(f"  Lyrics done: {json.dumps(stats)}")
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 6: Library Structuring (Artist / Album / Songs) + Dedup
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def _normalize_name(name):
+    """Lowercase, strip accents, collapse whitespace for comparison."""
+    name = unicodedata.normalize("NFKD", name)
+    name = "".join(c for c in name if not unicodedata.combining(c))
+    name = re.sub(r"[\s_\-]+", " ", name).strip().lower()
+    return name
+
+
+def _parse_album_nfo(nfo_path):
+    """Extract artist and album title from an album.nfo XML file."""
+    try:
+        text = nfo_path.read_text(encoding="utf-8", errors="replace")
+        artist_m = re.search(r"<artistdesc>(.+?)</artistdesc>", text)
+        title_m = re.search(r"<title>(.+?)</title>", text)
+        artist = artist_m.group(1).strip() if artist_m else ""
+        title = title_m.group(1).strip() if title_m else ""
+        # Unescape basic XML entities
+        for ent, ch in [("&amp;", "&"), ("&lt;", "<"), ("&gt;", ">"),
+                        ("&quot;", '"'), ("&apos;", "'")]:
+            artist = artist.replace(ent, ch)
+            title = title.replace(ent, ch)
+        return artist, title
+    except Exception:
+        return "", ""
+
+
+def _resolve_artist_for_album(album_dir):
+    """Determine the artist name for an album directory.
+
+    Priority: album.nfo → audio tags → folder heuristics.
+    """
+    nfo_path = album_dir / "album.nfo"
+    if nfo_path.exists():
+        artist, _ = _parse_album_nfo(nfo_path)
+        if artist:
+            return artist
+
+    audio = get_audio_files(album_dir)
+    if audio:
+        tags = get_tags(str(audio[0]))
+        artist = tags.get("album_artist") or tags.get("artist", "")
+        if artist:
+            return artist
+
+    folder_artist, _ = identify_from_folder(album_dir.name)
+    return folder_artist
+
+
+def _resolve_album_title(album_dir):
+    """Determine the canonical album title for a directory."""
+    nfo_path = album_dir / "album.nfo"
+    if nfo_path.exists():
+        _, title = _parse_album_nfo(nfo_path)
+        if title:
+            return title
+
+    audio = get_audio_files(album_dir)
+    if audio:
+        tags = get_tags(str(audio[0]))
+        album = tags.get("album", "")
+        if album:
+            return album
+
+    _, folder_album = identify_from_folder(album_dir.name)
+    return folder_album or album_dir.name
+
+
+def _safe_dir_name(name):
+    """Sanitise a name for use as a directory on disk."""
+    name = re.sub(r'[<>:"/\\|?*]', "_", name)
+    name = name.strip(". ")
+    return name or "Unknown"
+
+
+def _move_contents(src, dst):
+    """Move all children of *src* into *dst*, merging if dst exists."""
+    dst.mkdir(parents=True, exist_ok=True)
+    for item in list(src.iterdir()):
+        target = dst / item.name
+        if item.is_dir() and target.is_dir():
+            # Recursive merge for sub-directories
+            _move_contents(item, target)
+            if not any(item.iterdir()):
+                item.rmdir()
+        else:
+            if target.exists():
+                # Keep the larger file on conflict
+                if item.is_file() and target.is_file():
+                    if item.stat().st_size <= target.stat().st_size:
+                        item.unlink()
+                        continue
+                    else:
+                        target.unlink()
+            shutil.move(str(item), str(target))
+
+
+def run_structure_library(music_dir):
+    """Reorganise the library into Artist / Album / Songs and merge duplicates."""
+    log("═══ Phase 6: Library Structuring (Artist / Album / Songs) ═══")
+
+    # ── Step 1: Scan all album directories ────────────────────────────────
+    album_dirs = walk_album_dirs(music_dir)
+    log(f"  Scanned {len(album_dirs)} album directories")
+
+    # Build a registry: each entry is (album_dir, artist, album_title)
+    registry = []
+    for d in album_dirs:
+        artist = _resolve_artist_for_album(d)
+        title = _resolve_album_title(d)
+        if not artist:
+            # Cannot structure without an artist — leave it alone
+            log(f"  ⚠ No artist for: {d.relative_to(music_dir)}")
+            continue
+        registry.append((d, artist, title))
+
+    # ── Step 2: Move albums into Artist/Album structure ───────────────────
+    moved = 0
+    already_ok = 0
+
+    for album_path, artist, title in registry:
+        artist_dir_name = _safe_dir_name(artist)
+        album_dir_name = _safe_dir_name(title) if title else album_path.name
+        expected_artist_dir = music_dir / artist_dir_name
+        expected_album_dir = expected_artist_dir / album_dir_name
+
+        # Already in the right place?
+        if album_path == expected_album_dir:
+            already_ok += 1
+            continue
+
+        # Already nested under the correct artist (maybe different album name)?
+        if album_path.parent == expected_artist_dir:
+            already_ok += 1
+            continue
+
+        # Check if parent is already the correct artist (case-insensitive)
+        if _normalize_name(album_path.parent.name) == _normalize_name(artist):
+            already_ok += 1
+            continue
+
+        # Need to move — create artist dir and relocate
+        if expected_album_dir.exists():
+            # Merge into existing album directory
+            log(f"  Merging → {expected_album_dir.relative_to(music_dir)}")
+            _move_contents(album_path, expected_album_dir)
+            # Clean up empty source
+            if album_path.exists() and not any(album_path.iterdir()):
+                album_path.rmdir()
+        else:
+            expected_artist_dir.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(album_path), str(expected_album_dir))
+
+        log(f"  ✓ Moved: {album_path.relative_to(music_dir)} → "
+            f"{expected_album_dir.relative_to(music_dir)}")
+        moved += 1
+
+    log(f"  Structure: {moved} moved, {already_ok} already correct")
+
+    # ── Step 3: Merge duplicate artist folders ────────────────────────────
+    # Group top-level dirs by normalised name
+    artist_groups = {}  # normalised → [Path, ...]
+    try:
+        for entry in sorted(music_dir.iterdir()):
+            if entry.is_dir():
+                key = _normalize_name(entry.name)
+                artist_groups.setdefault(key, []).append(entry)
+    except PermissionError:
+        pass
+
+    merged_artists = 0
+    for key, dirs in artist_groups.items():
+        if len(dirs) < 2:
+            continue
+        # Keep the first one as the canonical directory
+        canonical = dirs[0]
+        for dup in dirs[1:]:
+            log(f"  Merging artist: {dup.name} → {canonical.name}")
+            _move_contents(dup, canonical)
+            if dup.exists() and not any(dup.iterdir()):
+                dup.rmdir()
+            merged_artists += 1
+
+    # ── Step 4: Merge duplicate albums within each artist ─────────────────
+    merged_albums = 0
+    try:
+        for artist_entry in sorted(music_dir.iterdir()):
+            if not artist_entry.is_dir():
+                continue
+            album_groups = {}  # normalised → [Path, ...]
+            for album_entry in sorted(artist_entry.iterdir()):
+                if album_entry.is_dir():
+                    key = _normalize_name(album_entry.name)
+                    album_groups.setdefault(key, []).append(album_entry)
+            for key, adirs in album_groups.items():
+                if len(adirs) < 2:
+                    continue
+                canonical = adirs[0]
+                for dup in adirs[1:]:
+                    log(f"  Merging album: {dup.relative_to(music_dir)} → "
+                        f"{canonical.relative_to(music_dir)}")
+                    _move_contents(dup, canonical)
+                    if dup.exists() and not any(dup.iterdir()):
+                        dup.rmdir()
+                    merged_albums += 1
+    except PermissionError:
+        pass
+
+    # ── Step 5: Clean up empty directories ────────────────────────────────
+    cleaned = 0
+    for dirpath, dirnames, filenames in os.walk(music_dir, topdown=False):
+        dirpath = Path(dirpath)
+        if dirpath == music_dir:
+            continue
+        if not any(dirpath.iterdir()):
+            dirpath.rmdir()
+            cleaned += 1
+
+    log(f"  Dedup: {merged_artists} artist merges, {merged_albums} album merges, "
+        f"{cleaned} empty dirs removed")
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Main
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -609,6 +834,7 @@ def main():
     run_flac_cleanup(music_dir)
     run_cover_fetch(music_dir)
     run_nfo_generation(music_dir)
+    run_structure_library(music_dir)
     run_lyrics_fetch(music_dir)
 
     log("All phases complete.")
