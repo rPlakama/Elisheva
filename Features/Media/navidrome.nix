@@ -7,10 +7,6 @@
 let
   cfg = config.features.navidrome;
 
-  audioMusePlugin = pkgs.fetchurl {
-    url = "https://github.com/NeptuneHub/AudioMuse-AI-NV-plugin/releases/download/v9/audiomuseai.ndp";
-    hash = "sha256-vKC4SrKTWfNkpkX7qWjEV0ubyB71jG8z0DlXrjO1DPw=";
-  };
   appleMusicPlugin = pkgs.fetchurl {
     url = "https://github.com/navidrome/apple-music-plugin/releases/download/v0.2.0/apple-music.ndp";
     hash = "sha256-NoJ1HnLKpcxGs/ercN5w6gJvCjikf3gLLStJIu0K0VQ=";
@@ -53,7 +49,6 @@ in
     systemd.tmpfiles.rules = [
       "d /var/lib/navidrome/plugins 0750 navidrome media -"
       "L+ /var/lib/navidrome/plugins/apple-music.ndp - - - - ${appleMusicPlugin}"
-      "L+ /var/lib/navidrome/plugins/audiomuseai.ndp - - - - ${audioMusePlugin}"
       "L+ /var/lib/navidrome/plugins/nd-lyrics.ndp - - - - ${lyricsPlugin}"
     ];
 

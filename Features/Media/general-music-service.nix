@@ -7,16 +7,13 @@
 let
   cfg = config.features.generalMusicService;
 
-  coverScript = pkgs.writeScriptBin "elisheva-cover-fetcher" (builtins.readFile ./cover-daemon.py);
-  lyricsScript = pkgs.writeScriptBin "elisheva-lyrics-fetcher" (builtins.readFile ./lyrics-daemon.py);
-  transcodeScript = pkgs.writeScriptBin "elisheva-transcode" (builtins.readFile ./transcode.sh);
+  maintainerScript = pkgs.writeScriptBin "elisheva-music-maintainer" (builtins.readFile ./GeneralMusicMaintainer.py);
 
-  pythonPath = [ pkgs.python3 pkgs.ffmpeg pkgs.flac ];
-  transcodePath = with pkgs; [ bash coreutils fd findutils ffmpeg ];
+  runtimePath = with pkgs; [ python3 ffmpeg flac coreutils ];
 in
 {
   options.features.generalMusicService = {
-    enable = lib.mkEnableOption "General music metadata services (covers + lyrics + transcode)";
+    enable = lib.mkEnableOption "General music maintenance (transcode + cleanup + covers + NFOs + lyrics)";
     musicFolder = lib.mkOption {
       type = lib.types.str;
       default = "/media/music/library";
@@ -30,90 +27,29 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.services.elisheva-cover-daemon = {
-      description = "Elisheva Cover Art Fetcher";
+    systemd.services.elisheva-music-maintainer = {
+      description = "Elisheva General Music Maintainer";
       after = [ "network-online.target" "media-music-library.mount" ];
       wants = [ "network-online.target" ];
-      path = pythonPath;
+      path = runtimePath;
 
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${coverScript}/bin/elisheva-cover-fetcher ${cfg.musicFolder}";
+        ExecStart = "${maintainerScript}/bin/elisheva-music-maintainer ${cfg.musicFolder}";
         User = "nobody";
         Group = "media";
         Nice = 19;
         IOSchedulingClass = "idle";
         StandardOutput = "journal";
         StandardError = "journal";
-        SyslogIdentifier = "elisheva-cover-daemon";
+        SyslogIdentifier = "elisheva-music-maintainer";
         PrivateTmp = true;
         NoNewPrivileges = true;
       };
     };
 
-    systemd.services.elisheva-lyrics-daemon = {
-      description = "Elisheva Lyrics Fetcher";
-      after = [ "network-online.target" "media-music-library.mount" ];
-      wants = [ "network-online.target" ];
-      path = pythonPath;
-
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${lyricsScript}/bin/elisheva-lyrics-fetcher ${cfg.musicFolder}";
-        User = "nobody";
-        Group = "media";
-        Nice = 19;
-        IOSchedulingClass = "idle";
-        StandardOutput = "journal";
-        StandardError = "journal";
-        SyslogIdentifier = "elisheva-lyrics-daemon";
-        PrivateTmp = true;
-        NoNewPrivileges = true;
-      };
-    };
-
-    systemd.services.elisheva-transcode-daemon = {
-      description = "Elisheva FLAC-to-Opus Transcoder";
-      after = [ "media-music-library.mount" ];
-      path = transcodePath;
-
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${transcodeScript}/bin/elisheva-transcode ${cfg.musicFolder}";
-        User = "nobody";
-        Group = "media";
-        Nice = 19;
-        IOSchedulingClass = "idle";
-        StandardOutput = "journal";
-        StandardError = "journal";
-        SyslogIdentifier = "elisheva-transcode-daemon";
-        PrivateTmp = true;
-        NoNewPrivileges = true;
-      };
-    };
-
-    systemd.timers.elisheva-cover-daemon = {
-      description = "Periodic cover art fetch";
-      wantedBy = [ "timers.target" ];
-      timerConfig = {
-        OnCalendar = cfg.timerConfig;
-        RandomizedDelaySec = 300;
-        Persistent = true;
-      };
-    };
-
-    systemd.timers.elisheva-lyrics-daemon = {
-      description = "Periodic lyrics fetch";
-      wantedBy = [ "timers.target" ];
-      timerConfig = {
-        OnCalendar = cfg.timerConfig;
-        RandomizedDelaySec = 300;
-        Persistent = true;
-      };
-    };
-
-    systemd.timers.elisheva-transcode-daemon = {
-      description = "Periodic FLAC transcode";
+    systemd.timers.elisheva-music-maintainer = {
+      description = "Periodic music library maintenance";
       wantedBy = [ "timers.target" ];
       timerConfig = {
         OnCalendar = cfg.timerConfig;
