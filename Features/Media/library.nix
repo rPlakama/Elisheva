@@ -60,6 +60,12 @@ in
         services.suwayomi-server = {
           enable = true;
           package = pkgs.suwayomi-server.overrideAttrs (old: {
+            version = "2.3.2243";
+            name = "suwayomi-server-2.3.2243";
+            src = pkgs.fetchurl {
+              url = "https://github.com/Suwayomi/Suwayomi-Server/releases/download/v2.3.2243/Suwayomi-Server-v2.3.2243.jar";
+              hash = "sha256-ghFBsy4XDUoC08vf7Vd+2PB70iOD/19BMuu1rkDpjdU";
+            };
             postFixup = ''
               sed -i 's|-Dsuwayomi.tachidesk.config.server.initialOpenInBrowserEnabled=false|-noverify -Xverify:none &|' $out/bin/tachidesk-server
             '';
