@@ -1,29 +1,6 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.features.neovim;
-  user = config.core.user;
-
-  myNvim = pkgs.neovim.override {
-    configure = {
-      customRC = "luafile /home/${user}/.config/nvim/init.lua";
-      packages.myPlugins.start = with pkgs.vimPlugins; [
-        nvim-lspconfig
-        fzf-lua
-        nvim-treesitter.withAllGrammars
-        blink-cmp
-        oil-nvim
-        flash-nvim
-        base16-nvim
-        gitsigns-nvim
-        blink-indent
-      ];
-    };
-  };
 in
 {
   options.features.neovim = {
@@ -42,26 +19,19 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      myNvim
-      tinymist
       typst
-      lua-language-server
-      fish-lsp
       luaformatter
-      nixd
       nixfmt
-      markdown-oxide
     ];
 
-    hjem.users.${user}.files = {
-      ".config/nvim/lua/configs.lua".source = ./configs.lua;
-      ".config/nvim/lua/lsp.lua".source = ./lsp.lua;
-      ".config/nvim/lua/keybinds.lua".source = ./keybinds.lua;
-      ".config/nvim/init.lua".text = ''
-        require('configs')
-        require('keybinds')
-        require('lsp')
-      '';
+    programs.nixvim = {
+      enable = true;
+      imports = [
+        ./settings.nix
+        ./plugins.nix
+        ./lsp.nix
+        ./keymaps.nix
+      ];
     };
   };
 }

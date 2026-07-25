@@ -18,7 +18,6 @@ in
         ripgrep
         cifs-utils
         zip
-        neovim
         yazi
         wget
         age
