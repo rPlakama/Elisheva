@@ -7,154 +7,158 @@
 let
   cfg = config.features.beets;
 
-  beetsPackage = pkgs.beets;
-  beetsConfig = pkgs.writeText "beets-config.yaml" (
-    builtins.toJSON {
-      directory = cfg.musicFolder;
-      library = "${cfg.dataDir}/musiclibrary.db";
-      art_filename = "cover";
+  beetsConfigJSON = builtins.toJSON {
+    directory = cfg.musicFolder;
+    library = "${cfg.dataDir}/musiclibrary.db";
+    art_filename = "cover";
 
-      import = {
-        write = true;
-        move = true;
-        resume = false;
-        quiet = true;
-        quiet_fallback = "asis";
-        from_scratch = false;
-        log = "${cfg.dataDir}/import.log";
+    import = {
+      write = true;
+      move = true;
+      resume = false;
+      quiet = true;
+      quiet_fallback = "asis";
+      from_scratch = false;
+      log = "${cfg.dataDir}/import.log";
+    };
+
+    match = {
+      strong_rec_thresh = 0.1;
+      preferred = {
+        countries = [
+          "US"
+          "GB"
+          "XW"
+          "JP"
+        ];
+        media = [
+          "Digital Media|File"
+          "CD"
+          "Vinyl"
+          "Cassette"
+        ];
+        original_year = true;
       };
+    };
 
-      match = {
-        strong_rec_thresh = 0.1;
-        preferred = {
-          countries = [
-            "US"
-            "GB"
-            "XW"
-            "JP"
-          ];
-          media = [
-            "Digital Media|File"
-            "CD"
-          ];
-          original_year = true;
-        };
-      };
+    paths = {
+      default = "%the{$albumartist}/$album%aunique{}/$track - $title";
+      singleton = "Non-Album/%the{$artist}/$title";
+      "comp:" = "Compilations/$album%aunique{}/$track - $title";
+    };
 
-      paths = {
-        default = "%the{$albumartist}/$album%aunique{}/$track - $title";
-        singleton = "Non-Album/%the{$artist}/$title";
-        "comp:" = "Compilations/$album%aunique{}/$track - $title";
-      };
+    plugins = builtins.concatStringsSep " " [
+      "chroma"
+      "mbsync"
+      "edit"
+      "info"
+      "fetchart"
+      "embedart"
+      "replaygain"
+      "scrub"
+      "lyrics"
+      "duplicates"
+      "missing"
+      "unimported"
+      "the"
+      "ftintitle"
+      "lastgenre"
+      "parentwork"
+      "zero"
+    ];
 
-      plugins = builtins.concatStringsSep " " [
-        "chroma"
-        "mbsync"
-        "edit"
-        "info"
-        "fetchart"
-        "embedart"
-        "replaygain"
-        "scrub"
-        "lyrics"
-        "duplicates"
-        "missing"
-        "unimported"
-        "the"
-        "ftintitle"
-        "lastgenre"
-        "parentwork"
-        "zero"
+    fetchart = {
+      auto = true;
+      minwidth = 500;
+      maxwidth = 3000;
+      cautious = true;
+      enforce_ratio = true;
+      cover_names = "cover front art album folder";
+      sources = [
+        "filesystem"
+        "coverart"
+        "itunes"
+        "deezer"
+        "amazon"
+        "google"
+        "albumart"
+        "wikipedia"
+        "fanarttv"
+        "lastfm"
       ];
+      google_key = config.sops.placeholder."beets/google_api_key";
+      google_engine = config.sops.placeholder."beets/google_engine_id";
+      store_source = true;
+    };
 
-      fetchart = {
-        auto = true;
-        minwidth = 500;
-        maxwidth = 3000;
-        cautious = true;
-        cover_names = "cover front art album folder";
-        sources = [
-          "filesystem"
-          "coverart"
-          "itunes"
-          "deezer"
-          "amazon"
-          "albumart"
-          "wikipedia"
-          "fanarttv"
-        ];
-        store_source = true;
-      };
+    embedart = {
+      auto = true;
+      ifempty = true;
+      remove_art_file = false;
+    };
 
-      embedart = {
-        auto = true;
-        ifempty = true;
-        remove_art_file = false;
-      };
+    convert.auto = false;
 
-      convert.auto = false;
+    replaygain = {
+      auto = true;
+      backend = "ffmpeg";
+      targetlevel = 89;
+      r128 = [
+        "opus"
+        "flac"
+      ];
+    };
 
-      replaygain = {
-        auto = true;
-        backend = "ffmpeg";
-        targetlevel = 89;
-        r128 = [
-          "opus"
-          "flac"
-        ];
-      };
+    scrub.auto = true;
 
-      scrub.auto = true;
+    lyrics = {
+      auto = true;
+      synced = true;
+      sources = [
+        "lrclib"
+        "genius"
+        "musixmatch"
+        "tekstowo"
+      ];
+      fallback = "Instrumental";
+      force = false;
+    };
 
-      lyrics = {
-        auto = true;
-        synced = true;
-        sources = [
-          "lrclib"
-          "genius"
-          "musixmatch"
-          "tekstowo"
-        ];
-        fallback = "Instrumental";
-        force = false;
-      };
+    lastgenre = {
+      auto = true;
+      count = 3;
+      fallback = "";
+      canonical = true;
+      source = "album";
+    };
 
-      lastgenre = {
-        auto = true;
-        count = 3;
-        fallback = "";
-        canonical = true;
-        source = "album";
-      };
+    zero = {
+      fields = [
+        "comments"
+        "comment"
+      ];
+      update_database = true;
+    };
 
-      zero = {
-        fields = [
-          "comments"
-          "comment"
-        ];
-        update_database = true;
-      };
+    duplicates = {
+      album = true;
+      tiebreak.items = [ "bitrate" ];
+    };
 
-      duplicates = {
-        album = true;
-        tiebreak.items = [ "bitrate" ];
-      };
+    chroma.auto = true;
 
-      chroma.auto = true;
-
-      ftintitle = {
-        auto = true;
-        format = "(feat. {0})";
-      };
-    }
-  );
+    ftintitle = {
+      auto = true;
+      format = "(feat. {0})";
+    };
+  };
 
   maintenanceScript = pkgs.writeShellScript "elisheva-beets-maintainer" ''
     set -euo pipefail
 
     export BEETSDIR="${cfg.dataDir}"
     export HOME="${cfg.dataDir}"
-    BEET="${beetsPackage}/bin/beet -c ${beetsConfig}"
+    BEET="${pkgs.beets}/bin/beet -c ${cfg.dataDir}/config.yaml"
     MUSIC_DIR="${cfg.musicFolder}"
 
     log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"; }
@@ -189,7 +193,7 @@ let
   '';
 
   runtimePath = with pkgs; [
-    beetsPackage
+    beets
     ffmpeg
     flac
     chromaprint
@@ -227,19 +231,32 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    sops = {
+      secrets = {
+        "beets/google_api_key" = {};
+        "beets/google_engine_id" = {};
+      };
+      templates."beets-config.yaml" = {
+        content = beetsConfigJSON;
+        owner = "nobody";
+        group = "media";
+        mode = "0640";
+      };
+    };
+
     features = {
       mediaPermissions.enable = true;
       preservation.system.directories = [ cfg.dataDir ];
     };
 
     environment.systemPackages = [
-      beetsPackage
+      pkgs.beets
       pkgs.chromaprint
     ];
 
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0750 nobody media - -"
-      "L+ ${cfg.dataDir}/config.yaml - - - - ${beetsConfig}"
+      "L+ ${cfg.dataDir}/config.yaml - - - - ${config.sops.templates."beets-config.yaml".path}"
     ];
 
     systemd.services.elisheva-beets-maintainer = {
