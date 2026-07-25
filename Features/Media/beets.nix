@@ -83,7 +83,8 @@ let
         "albumart"
         "wikipedia"
         "fanarttv"
-        "lastfm"
+        "spotify"
+        "cover_art_url"
       ];
       google_key = config.sops.placeholder."beets/google_api_key";
       google_engine = config.sops.placeholder."beets/google_engine_id";
