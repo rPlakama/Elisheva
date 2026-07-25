@@ -114,27 +114,9 @@ require("oil").setup({
 	},
 	constrain_cursor = "editable",
 	watch_for_changes = false,
-	keymaps = {
-		["g?"] = { "actions.show_help", mode = "n" },
-		["<CR>"] = "actions.select",
-		["<C-s>"] = { "actions.select", opts = { vertical = true } },
-		["<C-h>"] = { "actions.select", opts = { horizontal = true } },
-		["<C-t>"] = { "actions.select", opts = { tab = true } },
-		["<C-p>"] = "actions.preview",
-		["<C-c>"] = { "actions.close", mode = "n" },
-		["<C-l>"] = "actions.refresh",
-		["-"] = { "actions.parent", mode = "n" },
-		["_"] = { "actions.open_cwd", mode = "n" },
-		["`"] = { "actions.cd", mode = "n" },
-		["g~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
-		["gs"] = { "actions.change_sort", mode = "n" },
-		["gx"] = "actions.open_external",
-		["g."] = { "actions.toggle_hidden", mode = "n" },
-		["g\\"] = { "actions.toggle_trash", mode = "n" },
-	},
 	use_default_keymaps = true,
 	view_options = {
-		show_hidden = false,
+		show_hidden = true,
 		is_hidden_file = function(name, bufnr)
 			return name:match("^%.") ~= nil
 		end,
@@ -150,5 +132,53 @@ require("oil").setup({
 		highlight_filename = function(entry, is_link_target, is_link_orphan)
 			return nil
 		end,
+	},
+})
+
+require('blink.indent').setup({
+	-- filetypes where scopes are closed by dedenting, such as python and yaml
+	-- set to true to treat all filetypes this way
+	dedent_scoped_filetypes = { include_defaults = true },
+	blocked = {
+		-- default: 'terminal', 'quickfix', 'nofile', 'prompt'
+		buftypes = { include_defaults = true },
+		-- default: 'lspinfo', 'packer', 'checkhealth', 'help', 'man', 'gitcommit', 'dashboard', ''
+		filetypes = { include_defaults = true },
+	},
+	mappings = {
+		-- which lines around the scope are included for 'ai': 'top', 'bottom', 'both', or 'none'
+		border = 'both',
+		-- set to '' to disable
+		-- textobjects (e.g. `y2ii` to yank current and outer scope)
+		object_scope = 'ii',
+		object_scope_with_border = 'ai',
+		-- motions
+		goto_top = '[i',
+		goto_bottom = ']i',
+	},
+	static = {
+		enabled = true,
+		char = '▎',
+		whitespace_char = nil, -- inherits from `vim.opt.listchars:get().space` when `nil` (see `:h listchars`)
+		priority = 1,
+		-- specify multiple highlights here for rainbow-style indent guides
+		-- highlights = { 'BlinkIndentRed', 'BlinkIndentOrange', 'BlinkIndentYellow', 'BlinkIndentGreen', 'BlinkIndentViolet', 'BlinkIndentCyan' },
+		highlights = { 'BlinkIndent' },
+	},
+	scope = {
+		enabled = true,         -- highlight highest level of indentation on the current line
+		indent_at_cursor = false, -- clamp to indent level of cursor
+		char = '▎',
+		priority = 1000,
+		-- set this to a single highlight, such as 'BlinkIndent' to disable rainbow-style indent guides
+		-- highlights = { 'BlinkIndentScope' },
+		-- optionally add: 'BlinkIndentRed', 'BlinkIndentCyan', 'BlinkIndentYellow', 'BlinkIndentGreen'
+		highlights = { 'BlinkIndentOrange', 'BlinkIndentViolet', 'BlinkIndentBlue' },
+		-- enable to show underlines on the line above the current scope
+		underline = {
+			enabled = false,
+			-- optionally add: 'BlinkIndentRedUnderline', 'BlinkIndentCyanUnderline', 'BlinkIndentYellowUnderline', 'BlinkIndentGreenUnderline'
+			highlights = { 'BlinkIndentOrangeUnderline', 'BlinkIndentVioletUnderline', 'BlinkIndentBlueUnderline' },
+		},
 	},
 })

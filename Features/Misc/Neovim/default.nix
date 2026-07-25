@@ -20,6 +20,7 @@ let
         flash-nvim
         base16-nvim
         gitsigns-nvim
+        blink-indent
       ];
     };
   };
