@@ -78,7 +78,6 @@ let
         "filesystem"
         "coverart"
         "itunes"
-        "deezer"
         "amazon"
         "google"
         "albumart"
@@ -132,13 +131,10 @@ let
       source = "album";
     };
 
-    zero = {
-      fields = [
-        "comments"
-        "comment"
-      ];
-      update_database = true;
-    };
+      zero = {
+        fields = [ "comments" ];
+        update_database = true;
+      };
 
     duplicates = {
       album = true;
