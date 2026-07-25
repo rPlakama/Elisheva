@@ -4,9 +4,16 @@
     blink-cmp = {
       enable = true;
       settings = {
-        keymap = { preset = "default"; };
+        keymap = {
+          preset = "default";
+        };
         sources = {
-          default = [ "lsp" "path" "snippets" "buffer" ];
+          default = [
+            "lsp"
+            "path"
+            "snippets"
+            "buffer"
+          ];
         };
       };
     };
@@ -14,15 +21,27 @@
     lsp = {
       enable = true;
       servers = {
-        rust_analyzer.enable = true;
+        rust_analyzer = {
+          enable = true;
+          installCargo = false;
+          installRustc = false;
+        };
         tinymist.enable = true;
         ts_ls = {
           enable = true;
           extraOptions = {
             root_dir = lib.nixvim.mkRaw ''vim.fs.root(0, { "tsconfig.json", "package.json", ".git" })'';
             settings = {
-              typescript = { format = { enable = true; }; };
-              javascript = { format = { enable = true; }; };
+              typescript = {
+                format = {
+                  enable = true;
+                };
+              };
+              javascript = {
+                format = {
+                  enable = true;
+                };
+              };
             };
           };
         };

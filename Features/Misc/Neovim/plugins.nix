@@ -74,7 +74,16 @@
         use_default_keymaps = true;
         view_options = {
           show_hidden = true;
-          is_always_hidden = false;
+          is_hidden_file.__raw = ''
+            function(name, bufnr)
+              return name:match("^%.") ~= nil
+            end
+          '';
+          is_always_hidden.__raw = ''
+            function(name, bufnr)
+              return false
+            end
+          '';
           natural_order = "fast";
           case_insensitive = false;
           sort = [
