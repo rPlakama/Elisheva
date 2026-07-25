@@ -8,6 +8,7 @@ let
   headless = config.core.headless;
 in
 {
+  # options.features.bootloader.lib.mkDefault;
   options.features.bootloader = {
     enable = lib.mkOption {
       type = lib.types.bool;

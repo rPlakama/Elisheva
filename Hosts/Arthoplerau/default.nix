@@ -32,7 +32,6 @@
     niri = {
       enable = true;
       NoctaliaEnabled = true;
-      output.vrr.enable = true;
     };
 
     gaming = {

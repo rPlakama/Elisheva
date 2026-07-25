@@ -43,6 +43,10 @@ in
         enable = lib.mkDefault true;
         musicFolder = lib.mkDefault cfg.musicFolder;
       };
+      beets = {
+        enable = lib.mkDefault true;
+        musicFolder = lib.mkDefault cfg.musicFolder;
+      };
       feishin.enable = lib.mkIf cfg.feishin (lib.mkDefault true);
     };
 

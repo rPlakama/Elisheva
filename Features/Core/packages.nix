@@ -4,13 +4,17 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.features.core;
   gpu = config.core.gpu;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs;
+    environment.systemPackages =
+      with pkgs;
       [
+        opencode
         ripgrep
         cifs-utils
         zip
@@ -31,8 +35,8 @@ in {
         man-pages
         inputs.twatch.packages.${pkgs.stdenv.hostPlatform.system}.default
       ]
-      ++ lib.optionals (!gpu.nvidia) [btop-rocm]
-      ++ lib.optionals gpu.nvidia [btop-cuda];
+      ++ lib.optionals (!gpu.nvidia) [ btop-rocm ]
+      ++ lib.optionals gpu.nvidia [ btop-cuda ];
     fonts.packages = with pkgs; [
       nerd-fonts.caskaydia-cove
       montserrat
