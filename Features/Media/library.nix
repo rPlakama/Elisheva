@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 let
@@ -58,6 +59,11 @@ in
         systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = [ "media" ];
         services.suwayomi-server = {
           enable = true;
+          package = pkgs.suwayomi-server.overrideAttrs (old: {
+            postFixup = ''
+              sed -i 's|-Dsuwayomi.tachidesk.config.server.initialOpenInBrowserEnabled=false|-noverify -Xverify:none &|' $out/bin/tachidesk-server
+            '';
+          });
           settings = {
             server = {
               port = suwayomiPort;
