@@ -13,6 +13,11 @@ from pathlib import Path
 
 MUSIC_DIR_DEFAULT = "@MUSIC_DIR@"
 
+LOSSLESS_EXTENSIONS = {
+    ".flac", ".wav", ".wave", ".aiff", ".aif", ".aifc",
+    ".ape", ".wv", ".m4a", ".alac", ".dsf", ".dff", ".tta",
+}
+
 # ── Logging ──────────────────────────────────────────────────────────────────
 
 def log(msg):
@@ -27,18 +32,17 @@ def _safe_chmod(path, mode):
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 1: FLAC → Opus Transcoding
+# PHASE 1: Lossless → Opus Transcoding
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def transcode_single(flac_path_str):
-    """Transcode one FLAC to Opus. Returns (path, status)."""
-    flac_path = Path(flac_path_str)
-    opus_path = flac_path.with_suffix(".opus")
+def transcode_single(source_path_str):
+    source_path = Path(source_path_str)
+    opus_path = source_path.with_suffix(".opus")
     if opus_path.exists():
-        return (flac_path_str, "skip")
+        return (source_path_str, "skip")
     try:
         result = subprocess.run(
-            ["ffmpeg", "-y", "-i", str(flac_path),
+            ["ffmpeg", "-y", "-i", str(source_path),
              "-c:a", "libopus", "-b:a", "512k", "-vbr", "on",
              "-compression_level", "10", "-application", "audio",
              str(opus_path)],
@@ -46,33 +50,32 @@ def transcode_single(flac_path_str):
         )
         if result.returncode != 0:
             opus_path.unlink(missing_ok=True)
-            return (flac_path_str, "error")
+            return (source_path_str, "error")
         _safe_chmod(opus_path, 0o664)
-        return (flac_path_str, "ok")
+        return (source_path_str, "ok")
     except Exception as e:
         opus_path.unlink(missing_ok=True)
-        return (flac_path_str, f"error: {e}")
+        return (source_path_str, f"error: {e}")
 
 
 def run_transcode(music_dir):
-    """Find all FLACs and transcode to Opus in parallel."""
-    log("═══ Phase 1: FLAC → Opus Transcoding ═══")
-    flacs = []
+    log("═══ Phase 1: Lossless → Opus Transcoding ═══")
+    sources = []
     for dirpath, _, filenames in os.walk(music_dir):
         for f in filenames:
-            if f.lower().endswith(".flac"):
-                flacs.append(os.path.join(dirpath, f))
+            if Path(f).suffix.lower() in LOSSLESS_EXTENSIONS:
+                sources.append(os.path.join(dirpath, f))
 
-    if not flacs:
-        log("  No FLAC files found.")
+    if not sources:
+        log("  No lossless files found.")
         return
 
-    log(f"  Found {len(flacs)} FLAC files")
+    log(f"  Found {len(sources)} lossless files")
     jobs = max(1, cpu_count() // 2)
     stats = {"skip": 0, "ok": 0, "error": 0}
 
     with Pool(processes=jobs) as pool:
-        for path, status in pool.imap_unordered(transcode_single, flacs):
+        for path, status in pool.imap_unordered(transcode_single, sources):
             key = status if status in stats else "error"
             stats[key] += 1
             if status == "ok":
@@ -83,23 +86,23 @@ def run_transcode(music_dir):
     log(f"  Transcode done: {json.dumps(stats)}")
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 2: Stale FLAC Cleanup
+# PHASE 2: Stale Lossless Cleanup
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def run_flac_cleanup(music_dir):
-    """Remove FLACs that have a corresponding .opus sibling."""
-    log("═══ Phase 2: Stale FLAC Cleanup ═══")
+def run_cleanup(music_dir):
+    log("═══ Phase 2: Stale Lossless Cleanup ═══")
     removed = 0
     kept = 0
     for dirpath, _, filenames in os.walk(music_dir):
         dirpath = Path(dirpath)
-        flacs = [f for f in filenames if f.lower().endswith(".flac")]
-        for flac_name in flacs:
-            flac_path = dirpath / flac_name
-            opus_path = flac_path.with_suffix(".opus")
+        for f in filenames:
+            path = dirpath / f
+            if path.suffix.lower() not in LOSSLESS_EXTENSIONS:
+                continue
+            opus_path = path.with_suffix(".opus")
             if opus_path.exists() and opus_path.stat().st_size > 1024:
-                flac_path.unlink()
-                log(f"  Removed: {flac_path.relative_to(music_dir)}")
+                path.unlink()
+                log(f"  Removed: {path.relative_to(music_dir)}")
                 removed += 1
             else:
                 kept += 1
@@ -116,10 +119,10 @@ def main():
         log(f"Music directory does not exist: {music_dir}")
         sys.exit(1)
 
-    log(f"FLAC→Opus Transcoder starting — {music_dir}")
+    log(f"Lossless→Opus Transcoder starting — {music_dir}")
 
     run_transcode(music_dir)
-    run_flac_cleanup(music_dir)
+    run_cleanup(music_dir)
 
     log("All phases complete.")
 
