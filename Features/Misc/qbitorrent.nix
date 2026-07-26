@@ -7,6 +7,7 @@
 let
   cfg = config.features.qbit;
   user = config.core.user;
+  headless = config.core.headless;
 in
 {
   options.features.qbit.enable = lib.mkEnableOption "qBittorrent + Qui";
@@ -30,7 +31,7 @@ in
       };
     };
 
-    environment.systemPackages = lib.optionals config.features.graphicalPkgs.enable (
+    environment.systemPackages = lib.optionals (!headless) (
       with pkgs;
       [
         qbittorrent
@@ -40,7 +41,7 @@ in
       qui = {
         secretFile = config.sops.secrets."qui/secret".path;
         group = "media";
-        enable = !(config.features.graphicalPkgs.enable);
+        enable = headless;
         settings = {
           port = 3000;
           host = "0.0.0.0";
