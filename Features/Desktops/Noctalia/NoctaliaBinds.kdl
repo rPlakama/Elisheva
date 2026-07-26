@@ -7,7 +7,7 @@ switch-events {
 window-rule {
     match app-id="^foot$" title="^btop-systemd-inhibit$"
     open-focused true
-		default-column-width { proportion 0.6 }
+		default-column-width { proportion 0.6; }
 }
 
 binds {
