@@ -28,11 +28,7 @@ in
       default = config.features.niri.noctalia.enabled;
       description = "Enable Noctalia window manager environment.";
     };
-    fontFamily = mkOption {
-      type = str;
-      default = "Montserrat Medium";
-      description = "Font family used by noctalia shell and bar";
-    };
+    fontFamily = mkOption { type = str; default = "CaskaydiaCove Nerd Font"; description = "Font family used by noctalia shell and bar"; };
     darkMode = mkOption {
       type = bool;
       default = true;
