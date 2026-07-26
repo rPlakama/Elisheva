@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -12,7 +11,6 @@ in
     nixpkgs.config.allowUnfree = true;
     programs.nix-ld.enable = true;
     nix = {
-      package = pkgs.lix;
       gc = {
         automatic = true;
         dates = "weekly";
