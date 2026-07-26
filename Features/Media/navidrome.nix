@@ -59,6 +59,7 @@ in
         "PID.Album" = "folder";
         MusicFolder = cfg.musicFolder;
         "Plugins.Enabled" = true;
+        "Scanner"."PurgeMissing" = "full";
         "Plugins.Folder" = "/var/lib/navidrome/plugins";
         Agents = "nd-lyrics,apple-music,audiomuseai,deezer,listenbrainz";
         LyricsPriority = ".lrc,nd-lyrics,embedded";
