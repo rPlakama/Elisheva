@@ -41,7 +41,7 @@ in
     };
     iconTheme = mkOption {
       type = str;
-      default = "papirus-dark";
+      default = "Papirus-Dark";
       description = "Icon theme name";
     };
     fontFamily = mkOption {
@@ -88,6 +88,8 @@ in
       papirus-icon-theme
       papirus-folders
     ];
+
+    environment.sessionVariables.GTK_ICON_THEME_NAME = cfg.iconTheme;
 
     hjem.users.${user} = {
       files.".config/gtk-3.0/settings.ini".text = gtkSettings;
