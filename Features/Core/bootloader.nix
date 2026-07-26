@@ -8,22 +8,20 @@ let
   headless = config.core.headless;
 in
 {
-  # options.features.bootloader.lib.mkDefault;
   options.features.bootloader = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Bootloader Configuration";
+
+    enable = lib.mkOption "We both know that we need that.";
+
+    plymouth = {
+      enable = lib.mkEnableOption "Plymouth cool boot";
     };
-    plymouth.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = !headless;
-      description = "Plymouth boot splash";
-    };
+
   };
 
   config = lib.mkIf cfg.enable {
+
     systemd.services.NetworkManager-wait-online.enable = false;
+
     boot = {
       loader = {
         efi.canTouchEfiVariables = true;
@@ -31,7 +29,7 @@ in
         timeout = 0;
       };
       plymouth = lib.mkIf cfg.plymouth.enable {
-        enable = true;
+        enable = !headless;
         theme = "bgrt";
       };
       kernelParams = lib.mkIf cfg.plymouth.enable [
