@@ -2,11 +2,12 @@
   config,
   lib,
   ...
-}: let
-  feat = config.features.core;
+}:
+let
   zram = config.core.zram;
-in {
-  config = lib.mkIf (feat.enable && zram.enable) {
+in
+{
+  config = lib.mkIf (zram.enable) {
     zramSwap = {
       enable = true;
       algorithm = zram.algorithm;
