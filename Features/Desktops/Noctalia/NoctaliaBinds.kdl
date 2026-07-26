@@ -4,6 +4,12 @@ switch-events {
   }
 }
 
+window-rule {
+    match app-id="^foot$" title="^btop-systemd-inhibit$"
+    open-focused true
+		default-column-width { proportion 0.6 }
+}
+
 binds {
 
 Ctrl+Alt+A { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
