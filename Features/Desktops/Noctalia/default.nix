@@ -236,7 +236,7 @@ in
                 glyph = "eye-star";
                 tooltip = "Calls a btop with systemd-inhibit";
                 type = "custom_button";
-                actions.left = "/home/${user}/.local/state/noctalia/noctalia-inhibit.fish";
+                command = "/home/${user}/.local/state/noctalia/noctalia-inhibit.fish";
               };
 
               launcher.glyph = "snowflake";
