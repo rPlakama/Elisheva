@@ -7,6 +7,7 @@
 let
   cfg = config.features.core;
   isLaptop = config.core.isLaptop;
+  headless = config.core.headless;
 in
 {
   config = lib.mkIf cfg.enable {
@@ -25,10 +26,10 @@ in
       gvfs.enable = true;
       fwupd.enable = true;
       pipewire = {
-        enable = !config.core.headless;
-        alsa.enable = !config.core.headless;
-        alsa.support32Bit = !config.core.headless;
-        pulse.enable = !config.core.headless;
+        enable = !headless;
+        alsa.enable = !headless;
+        alsa.support32Bit = !headless;
+        pulse.enable = !headless;
       };
       tailscale = {
         enable = true;
