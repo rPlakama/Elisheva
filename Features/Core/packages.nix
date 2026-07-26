@@ -36,10 +36,5 @@ in
       ]
       ++ lib.optionals (!gpu.nvidia) [ btop-rocm ]
       ++ lib.optionals gpu.nvidia [ btop-cuda ];
-    fonts.packages = with pkgs; [
-      nerd-fonts.caskaydia-cove
-      montserrat
-      arkpandora_ttf
-    ];
   };
 }

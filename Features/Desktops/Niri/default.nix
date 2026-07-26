@@ -5,52 +5,78 @@
   ...
 }:
 let
+  inherit (lib)
+    mkOption
+    mkEnableOption
+    mkIf
+    types
+    optionalString
+    ;
+  inherit (types) str int;
+
   cfg = config.features.niri;
 
-  powerProfileBind = lib.optionalString config.core.isLaptop ''
+  powerProfileBind = optionalString config.core.isLaptop ''
     "Ctrl+Alt+Q" {
         spawn "sh" "-c" "current=$(powerprofilesctl get); case $current in performance) next=balanced ;; balanced) next=power-saver ;; power-saver) next=performance ;; esac; powerprofilesctl set $next;"
     }
   '';
 
+  cursorBlock = ''
+    cursor {
+        xcursor-theme "${cfg.cursorTheme}"
+        xcursor-size ${toString cfg.cursorSize}
+    }
+  '';
+
   outputBlock = ''
             output "${cfg.output.monitor}" {
-            ${lib.optionalString cfg.output.vrr.enable "    variable-refresh-rate"}
+            ${optionalString cfg.output.vrr.enable "    variable-refresh-rate"}
     				}
         		'';
 in
 {
   options.features.niri = {
-    enable = lib.mkEnableOption "Niri Configuration";
-    VariantKB = lib.mkOption {
-      type = lib.types.str;
+    enable = mkEnableOption "Niri Configuration";
+    cursorTheme = mkOption {
+      type = str;
+      default = "volantes_light_cursors";
+      description = "Cursor theme name";
+    };
+    cursorSize = mkOption {
+      type = int;
+      default = 24;
+      description = "Cursor size";
+    };
+    VariantKB = mkOption {
+      type = str;
       default = "";
       description = "Keyboard Variant";
     };
     noctalia = {
-      import = lib.mkOption {
-        type = lib.types.str;
+      import = mkOption {
+        type = str;
         default = "";
         description = "Additional KDL if Noctalia is added";
       };
-      enabled = lib.mkEnableOption "Noctalia integration";
+      enabled = mkEnableOption "Noctalia integration";
     };
-    keyboardLayout = lib.mkOption {
-      type = lib.types.str;
+    keyboardLayout = mkOption {
+      type = str;
       default = "br";
       description = "Keyboard layout";
     };
     output = {
-      monitor = lib.mkOption {
-        type = lib.types.str;
+      monitor = mkOption {
+        type = str;
         default = "eDP-1";
         description = "Monitor output name";
       };
-      vrr.enable = lib.mkEnableOption "Variable Refresh Rate (Adaptive Sync) on monitors that support it";
+      vrr.enable = mkEnableOption "Variable Refresh Rate (Adaptive Sync) on monitors that support it";
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     programs.niri.enable = true;
 
     environment.systemPackages = with pkgs; [
@@ -58,17 +84,14 @@ in
       loupe
       xwayland-satellite
       libnotify
-      papirus-folders
-      papirus-icon-theme
-      volantes-cursors
       wl-clipboard
       pulseaudio
     ];
 
     hjem.users.${config.core.user}.files.".config/niri/config.kdl".text =
       builtins.replaceStrings
-        [ "@ImportNoctalia@" "@keyboardLayout@" "@Variant@" "@powerProfileBind@" "@output@" ]
-        [ cfg.noctalia.import cfg.keyboardLayout cfg.VariantKB powerProfileBind outputBlock ]
+        [ "@ImportNoctalia@" "@cursor@" "@keyboardLayout@" "@Variant@" "@powerProfileBind@" "@output@" ]
+        [ cfg.noctalia.import cursorBlock cfg.keyboardLayout cfg.VariantKB powerProfileBind outputBlock ]
         (builtins.readFile ./config.kdl);
   };
 }

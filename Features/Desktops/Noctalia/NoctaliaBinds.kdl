@@ -4,11 +4,6 @@ switch-events {
   }
 }
 
-cursor {
-    xcursor-theme "volantes_light_cursors"
-    xcursor-size 24
-}
-
 binds {
 
 Ctrl+Alt+A { spawn "noctalia" "msg" "panel-toggle" "control-center"; }

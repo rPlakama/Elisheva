@@ -2,10 +2,12 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.features.core;
   user = config.core.user;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     security.sudo-rs.enable = true;
 
@@ -13,7 +15,7 @@ in {
 
     users.users.${user} = {
       group = user;
-      extraGroups = ["networkmanager"];
+      extraGroups = [ "networkmanager" ];
     };
 
     programs = {

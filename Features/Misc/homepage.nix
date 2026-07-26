@@ -2,12 +2,14 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.features.homepage;
   currentIP = config.core.ip;
   dnsCfg = config.features.unifiedDNS;
   domain = config.core.domain;
-in {
+in
+{
   options.features.homepage = {
     enable = lib.mkEnableOption "Homepage dashboard";
   };
@@ -35,15 +37,13 @@ in {
 
       services = [
         {
-          "General" =
-            lib.mapAttrsToList (name: port: {
-              "${name}" = {
-                icon = "si-${name}";
-                href = "https://${name}.${domain}";
-                description = "Auto-generated link for ${name}";
-              };
-            })
-            dnsCfg.proxyServices;
+          "General" = lib.mapAttrsToList (name: port: {
+            "${name}" = {
+              icon = "si-${name}";
+              href = "https://${name}.${domain}";
+              description = "Auto-generated link for ${name}";
+            };
+          }) dnsCfg.proxyServices;
         }
       ];
     };

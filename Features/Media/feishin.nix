@@ -6,7 +6,8 @@
 }:
 let
   cfg = config.features.feishin;
-in {
+in
+{
   options.features.feishin = {
     enable = lib.mkEnableOption "Feishin selfhosted web music player";
 

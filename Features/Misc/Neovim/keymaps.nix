@@ -49,25 +49,37 @@
       options.desc = "Open Oil file explorer";
     }
     {
-      mode = [ "n" "t" ];
+      mode = [
+        "n"
+        "t"
+      ];
       key = "<A-h>";
       action = "<cmd>wincmd h<CR>";
       options.desc = "Move to left window";
     }
     {
-      mode = [ "n" "t" ];
+      mode = [
+        "n"
+        "t"
+      ];
       key = "<A-l>";
       action = "<cmd>wincmd l<CR>";
       options.desc = "Move to right window";
     }
     {
-      mode = [ "n" "t" ];
+      mode = [
+        "n"
+        "t"
+      ];
       key = "<A-j>";
       action = "<cmd>wincmd j<CR>";
       options.desc = "Move to lower window";
     }
     {
-      mode = [ "n" "t" ];
+      mode = [
+        "n"
+        "t"
+      ];
       key = "<A-k>";
       action = "<cmd>wincmd k<CR>";
       options.desc = "Move to upper window";

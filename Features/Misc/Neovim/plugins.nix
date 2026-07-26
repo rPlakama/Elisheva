@@ -45,7 +45,10 @@
       enable = true;
       settings = {
         default_file_explorer = true;
-        columns = [ "icon" "mtime" ];
+        columns = [
+          "icon"
+          "mtime"
+        ];
         buf_options = {
           buflisted = false;
           bufhidden = "hide";
@@ -104,8 +107,12 @@
           include_defaults = true;
         };
         blocked = {
-          buftypes = { include_defaults = true; };
-          filetypes = { include_defaults = true; };
+          buftypes = {
+            include_defaults = true;
+          };
+          filetypes = {
+            include_defaults = true;
+          };
         };
         mappings = {
           border = "both";
@@ -125,10 +132,18 @@
           indent_at_cursor = false;
           char = "▎";
           priority = 1000;
-          highlights = [ "BlinkIndentOrange" "BlinkIndentViolet" "BlinkIndentBlue" ];
+          highlights = [
+            "BlinkIndentOrange"
+            "BlinkIndentViolet"
+            "BlinkIndentBlue"
+          ];
           underline = {
             enabled = false;
-            highlights = [ "BlinkIndentOrangeUnderline" "BlinkIndentVioletUnderline" "BlinkIndentBlueUnderline" ];
+            highlights = [
+              "BlinkIndentOrangeUnderline"
+              "BlinkIndentVioletUnderline"
+              "BlinkIndentBlueUnderline"
+            ];
           };
         };
       };

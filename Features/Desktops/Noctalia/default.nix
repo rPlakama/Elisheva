@@ -6,29 +6,41 @@
   ...
 }:
 let
+  inherit (lib) mkOption mkIf types;
+  inherit (types) str bool;
+
   user = config.core.user;
   host = config.core.host;
+  cfg = config.features.noctalia;
 
-  # display
   primaryMonitor = "eDP-1";
-
-  # styling
-  fontFamily = "Montserrat Medium";
+  fontFamily = cfg.fontFamily;
   barRadius = 3;
 
-  # widget groups
   widgetsGroupOpacity = 0.0;
   widgetsGroupSpacing = 6.0;
   widgetsGroupRadius = 3.0;
 in
 {
-  options.features.noctalia.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = config.features.niri.noctalia.enabled;
-    description = "Enable Noctalia window manager environment.";
+  options.features.noctalia = {
+    enable = mkOption {
+      type = bool;
+      default = config.features.niri.noctalia.enabled;
+      description = "Enable Noctalia window manager environment.";
+    };
+    fontFamily = mkOption {
+      type = str;
+      default = "Montserrat Medium";
+      description = "Font family used by noctalia shell and bar";
+    };
+    darkMode = mkOption {
+      type = bool;
+      default = true;
+      description = "Dark mode for noctalia theme templates (GTK, etc.)";
+    };
   };
 
-  config = lib.mkIf config.features.noctalia.enable {
+  config = mkIf cfg.enable {
     assertions = [
       {
         assertion = config.features.niri.enable;
@@ -95,7 +107,7 @@ in
               source = "wallpaper";
               community_palette = "Cream Autumn";
               wallpaper_scheme = "m3-rainbow";
-              mode = "dark";
+              mode = if cfg.darkMode then "dark" else "light";
               templates = {
                 builtin_ids = [
                   "foot"

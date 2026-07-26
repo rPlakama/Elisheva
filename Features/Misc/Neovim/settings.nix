@@ -6,7 +6,6 @@
 
   colorschemes.base16 = {
     enable = true;
-    colorscheme = "chalk";
   };
 
   opts = {

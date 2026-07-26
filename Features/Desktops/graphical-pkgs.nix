@@ -6,26 +6,39 @@
   ...
 }:
 let
+  inherit (lib)
+    mkOption
+    mkIf
+    types
+    concatStringsSep
+    ;
+  inherit (types) bool str listOf;
+
   cfg = config.features.graphicalPkgs;
   user = config.core.user;
   headless = config.core.headless;
 in
 {
   options.features.graphicalPkgs = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
+    enable = mkOption {
+      type = bool;
       default = !headless;
       description = "Graphical Packages";
     };
-    foot.theme = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
+    foot.theme = mkOption {
+      type = listOf str;
       default = [ ];
       description = "Import themes for Foot";
       example = "include=path";
     };
+    foot.font = mkOption {
+      type = str;
+      default = "CaskaydiaCove Nerd Font Mono:size=9";
+      description = "Foot terminal font (family:size=pts)";
+    };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       inputs.helium-browser.packages.x86_64-linux.default
       # This need to be solved: x86_64-linux is a >problem< if other hosts arent in such platform, \
@@ -48,10 +61,10 @@ in
       files.".config/foot/foot.ini".text = ''
         [main]
         dpi-aware=false
-        font=CaskaydiaCove Nerd Font Mono:size=9
+        font=${cfg.foot.font}
       ''
       + "\n"
-      + (lib.concatStringsSep "\n" cfg.foot.theme);
+      + (concatStringsSep "\n" cfg.foot.theme);
     };
   };
 }
