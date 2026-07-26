@@ -19,14 +19,11 @@
     zip
   ];
 
-
   services.earlyoom = {
     enable = true;
     freeMemThreshold = 5;
     freeSwapThreshold = 10;
   };
-
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
 
   core = {
     user = "rplakama";

@@ -18,7 +18,6 @@
       user = "rPlakama";
     };
   };
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
   features = {
     virtualization.enable = true;
     sunshine.enable = true;
