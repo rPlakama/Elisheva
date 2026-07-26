@@ -18,6 +18,7 @@ let
   widgetsGroupOpacity = 0.0;
   widgetsGroupSpacing = 6.0;
   widgetsGroupRadius = 3.0;
+
 in
 {
   options.features.noctalia = {
@@ -71,7 +72,13 @@ in
       ];
 
       users.${user} = {
-        files.".config/niri/noctaliaBinds.kdl".source = ./NoctaliaBinds.kdl;
+        files = {
+          ".config/niri/noctaliaBinds.kdl".source = ./NoctaliaBinds.kdl;
+          ".local/state/noctalia/noctalia-inhibit.fish" = {
+            source = ./noctalia-inhibit.fish;
+            executable = true;
+          };
+        };
 
         programs.noctalia = {
           enable = true;
@@ -193,6 +200,7 @@ in
                   id = "g5";
                   members = [
                     "weather"
+                    "systemd-inhibit"
                     "workspaces"
                     "keyboard_layout"
                     "privacy"
@@ -228,7 +236,7 @@ in
                 glyph = "eye-star";
                 tooltip = "Calls a btop with systemd-inhibit";
                 type = "custom_button";
-                actions.left = "noctalia msg caffeine-enable; exec foot -e systemd-inhibit --what=handle-lid-switch:sleep:idle --why=\"Noctalia asked\" btop;";
+                actions.left = "/home/${user}/.local/state/noctalia/noctalia-inhibit.fish";
               };
 
               launcher.glyph = "snowflake";
