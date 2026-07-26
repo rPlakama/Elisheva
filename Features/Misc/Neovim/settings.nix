@@ -4,10 +4,6 @@
     maplocalleader = ",";
   };
 
-  colorschemes.base16 = {
-    enable = true;
-  };
-
   opts = {
     expandtab = false;
     shiftwidth = 2;

@@ -28,7 +28,7 @@ in
       default = config.features.niri.noctalia.enabled;
       description = "Enable Noctalia window manager environment.";
     };
-    fontFamily = mkOption { type = str; default = "CaskaydiaCove Nerd Font"; description = "Font family used by noctalia shell and bar"; };
+    fontFamily = mkOption { type = str; default = "Montserrat Medium"; description = "Font family used by noctalia shell and bar"; };
     darkMode = mkOption {
       type = bool;
       default = true;
@@ -190,6 +190,7 @@ in
                   foreground = "on_surface";
                   id = "g5";
                   members = [
+                    "weather"
                     "workspaces"
                     "keyboard_layout"
                     "privacy"
@@ -230,7 +231,10 @@ in
               clock = {
                 vertical_format = "{:%H\\n%M}";
               };
-              weather.show_condition = false;
+              weather = {
+                show_condition = false;
+                show_temperature = false;
+              };
               notifications.show_label = false;
               network = {
                 scale = 1.05;
