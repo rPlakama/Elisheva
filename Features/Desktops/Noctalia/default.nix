@@ -24,7 +24,7 @@ in
 {
   options.features.noctalia.enable = lib.mkOption {
     type = lib.types.bool;
-    default = config.features.niri.NoctaliaEnabled;
+    default = config.features.niri.noctalia.enabled;
     description = "Enable Noctalia window manager environment.";
   };
 
@@ -49,7 +49,7 @@ in
     services.ddccontrol.enable = true;
 
     features = {
-      niri.ImportNoctalia = ''include "noctaliaBinds.kdl"'';
+      niri.noctalia.import = ''include "noctaliaBinds.kdl"'';
       graphicalPkgs.foot.theme = [
         "include=/home/${user}/.config/foot/themes/noctalia"
       ];

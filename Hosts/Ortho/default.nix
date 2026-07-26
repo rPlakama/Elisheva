@@ -26,7 +26,7 @@
   features = {
     niri = {
       enable = true;
-      NoctaliaEnabled = true;
+      noctalia.enabled = true;
       output.vrr.enable = false;
     };
 

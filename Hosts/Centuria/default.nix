@@ -29,7 +29,7 @@
     niri = {
       keyboardLayout = "br,us";
       enable = true;
-      NoctaliaEnabled = true;
+      noctalia.enabled = true;
       output.vrr.enable = false;
     };
   };

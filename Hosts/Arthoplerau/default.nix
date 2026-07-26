@@ -30,7 +30,8 @@
   features = {
     niri = {
       enable = true;
-      NoctaliaEnabled = true;
+      noctalia.enabled = true;
+      output.vrr.enable = true;
     };
 
     gaming = {

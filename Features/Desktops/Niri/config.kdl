@@ -81,7 +81,7 @@ layout {
 }
 
 // Output
-@vrr@
+@output@
 
 animations {
     slowdown 0.800000
