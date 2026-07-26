@@ -4,12 +4,14 @@
   ...
 }:
 let
+  inherit (lib) mkIf;
+
   cfg = config.features.core;
   user = config.core.user;
   git = config.core.git;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     hjem.users.${user} = {
       enable = true;
       xdg.config.files = {

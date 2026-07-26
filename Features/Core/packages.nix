@@ -6,11 +6,12 @@
   ...
 }:
 let
+  inherit (lib) mkIf optionals;
   cfg = config.features.core;
   gpu = config.core.gpu;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     environment.systemPackages =
       with pkgs;
       [
@@ -34,7 +35,7 @@ in
         man-pages
         inputs.twatch.packages.${pkgs.stdenv.hostPlatform.system}.default
       ]
-      ++ lib.optionals (!gpu.nvidia) [ btop-rocm ]
-      ++ lib.optionals gpu.nvidia [ btop-cuda ];
+      ++ optionals (!gpu.nvidia) [ btop-rocm ]
+      ++ optionals gpu.nvidia [ btop-cuda ];
   };
 }

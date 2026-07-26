@@ -4,10 +4,12 @@
   ...
 }:
 let
+  inherit (lib) mkIf;
+
   zram = config.core.zram;
 in
 {
-  config = lib.mkIf (zram.enable) {
+  config = mkIf (zram.enable) {
     zramSwap = {
       enable = true;
       algorithm = zram.algorithm;

@@ -5,12 +5,14 @@
   ...
 }:
 let
+  inherit (lib) mkIf;
+
   cfg = config.features.core;
   isLaptop = config.core.isLaptop;
   headless = config.core.headless;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     services = {
       ananicy = {
         enable = true;

@@ -4,11 +4,13 @@
   ...
 }:
 let
+  inherit (lib) mkIf;
+
   cfg = config.features.core;
   user = config.core.user;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     security.sudo-rs.enable = true;
 
     networking.networkmanager.enable = true;

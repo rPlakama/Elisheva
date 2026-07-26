@@ -5,12 +5,14 @@
   ...
 }:
 let
+  inherit (lib) mkIf;
+
   cfg = config.features.core;
   user = config.core.user;
   localeID = "pt_BR.UTF-8";
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     time.timeZone = "America/Recife";
     i18n = {
       defaultLocale = "en_US.UTF-8";

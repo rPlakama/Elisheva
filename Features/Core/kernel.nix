@@ -5,11 +5,13 @@
   ...
 }:
 let
+  inherit (lib) mkIf;
+
   cfg = config.features.core;
   cpu = config.core.cpu;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     boot = {
       kernelPackages = (
         if cpu.amd then

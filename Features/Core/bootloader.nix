@@ -4,6 +4,8 @@
   ...
 }:
 let
+  inherit (lib) mkIf;
+
   headless = config.core.headless;
 in
 {
@@ -19,7 +21,7 @@ in
       enable = !headless;
       theme = "bgrt";
     };
-    kernelParams = lib.mkIf (!headless) [
+    kernelParams = mkIf (!headless) [
       "quiet"
       "splash"
       "udev.log_level=3"

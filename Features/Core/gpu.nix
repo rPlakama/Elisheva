@@ -5,14 +5,15 @@
   ...
 }:
 let
+  inherit (lib) mkMerge mkIf;
   gpu = config.core.gpu;
   headless = config.core.headless;
 in
 {
-  config = lib.mkMerge [
+  config = mkMerge [
     { services.lact.enable = !headless; }
 
-    (lib.mkIf gpu.amd {
+    (mkIf gpu.amd {
       hardware = {
         graphics = {
           enable = true;
@@ -30,7 +31,7 @@ in
       ];
     })
 
-    (lib.mkIf gpu.nvidia {
+    (mkIf gpu.nvidia {
       services.xserver.videoDrivers = [ "nvidia" ];
       boot = {
         blacklistedKernelModules = [ "nouveau" ];
@@ -55,7 +56,7 @@ in
       };
     })
 
-    (lib.mkIf gpu.intel {
+    (mkIf gpu.intel {
       hardware.graphics = {
         enable = true;
         enable32Bit = true;

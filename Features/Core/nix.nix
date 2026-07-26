@@ -4,10 +4,12 @@
   ...
 }:
 let
+  inherit (lib) mkIf;
+
   cfg = config.features.core;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     nixpkgs.config.allowUnfree = true;
     programs.nix-ld.enable = true;
     nix = {
