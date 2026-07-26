@@ -89,6 +89,8 @@ in
       }
     ];
 
+    systemd.services.systemd-machine-id-commit.enable = false;
+
     preservation = {
       enable = true;
       preserveAt."/persistent" = {
