@@ -8,25 +8,23 @@
 let
   cfg = config.features.gaming;
   gsrPkg = inputs.gsr-ui-nix.packages.${pkgs.system}.gpu-screen-recorder;
+  gsrEnable = config.features.gaming.gsr.enable;
 in
 {
   imports = [ inputs.gsr-ui-nix.nixosModules.default ];
 
   options.features.gaming = {
     enable = lib.mkEnableOption "Enable gaming bundle";
-    steam.enable = lib.mkEnableOption "Steam + Proton GE" // {
-      default = true;
-    };
-    gamescope.enable = lib.mkEnableOption "Gamescope" // {
-      default = true;
-    };
-    gamemode.enable = lib.mkEnableOption "Gamemode" // {
-      default = true;
-    };
-    gsr.enable = lib.mkEnableOption "GSR-UI overlay";
+
+    steam.enable = lib.mkEnableOption "Enable Steam";
+    gamescope.enable = lib.mkEnableOption "Enable Gamescope";
+    gamemode.enable = lib.mkEnableOption "Enable Gamemode";
+    gsr.enable = lib.mkEnableOption "Enable GPU Screen Recorder";
+
   };
 
   config = lib.mkIf cfg.enable {
+
     features.preservation.home.directories = [
       ".steam"
       "Games"
@@ -39,15 +37,18 @@ in
     ];
 
     programs = {
-      gamemode.enable = cfg.gamemode.enable;
-      gamescope.enable = cfg.gamescope.enable;
+
+      gamemode.enable = true;
+      gamescope.enable = true;
+
       gpu-screen-recorder = {
         package = gsrPkg;
-        enable = cfg.gsr.enable;
-        ui.enable = cfg.gsr.enable;
+        enable = gsrEnable;
+        ui.enable = true;
       };
+
       steam = {
-        enable = cfg.steam.enable;
+        enable = true;
         extraCompatPackages = [ pkgs.proton-ge-bin ];
       };
     };

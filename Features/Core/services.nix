@@ -3,10 +3,12 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.features.core;
   isLaptop = config.core.isLaptop;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     services = {
       ananicy = {
