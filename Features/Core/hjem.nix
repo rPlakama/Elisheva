@@ -2,10 +2,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.features.core;
   user = config.core.user;
-in {
+  git = config.core.git;
+in
+{
   config = lib.mkIf cfg.enable {
     hjem.users.${user} = {
       enable = true;
@@ -16,8 +19,8 @@ in {
       };
       files.".gitconfig".text = ''
         [user]
-        name = ${config.core.git.user}
-        email = ${config.core.git.email}
+        name = ${git.user}
+        email = ${git.email}
       '';
     };
   };
