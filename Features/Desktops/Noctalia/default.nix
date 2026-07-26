@@ -10,10 +10,8 @@ let
   inherit (types) str bool;
 
   user = config.core.user;
-  host = config.core.host;
   cfg = config.features.noctalia;
 
-  primaryMonitor = "eDP-1";
   fontFamily = cfg.fontFamily;
   barRadius = 3;
 
@@ -28,7 +26,11 @@ in
       default = config.features.niri.noctalia.enabled;
       description = "Enable Noctalia window manager environment.";
     };
-    fontFamily = mkOption { type = str; default = "Montserrat Medium"; description = "Font family used by noctalia shell and bar"; };
+    fontFamily = mkOption {
+      type = str;
+      default = "Montserrat Medium";
+      description = "Font family used by noctalia shell and bar";
+    };
     darkMode = mkOption {
       type = bool;
       default = true;
@@ -222,6 +224,13 @@ in
               { type = "system"; }
             ];
             widget = {
+              systemd-inhibit = {
+                glyph = "eye-star";
+                tooltip = "Calls a btop with systemd-inhibit";
+                type = "custom_button";
+                actions.left = "noctalia msg caffeine-enable; exec foot -e systemd-inhibit --what=handle-lid-switch:sleep:idle --why=\"Noctalia asked\" btop;";
+              };
+
               launcher.glyph = "snowflake";
               workspaces = {
                 hide_when_empty = true;
