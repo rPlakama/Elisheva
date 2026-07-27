@@ -94,7 +94,6 @@ in
               animation.speed = 0.8;
               screen_corners.size = 13;
               panel = {
-                launcher_categories = true;
                 session_placement = "floating";
                 session_position = "center";
                 transparency_mode = "soft";
@@ -236,7 +235,7 @@ in
                 glyph = "eye-star";
                 tooltip = "Calls a btop with systemd-inhibit";
                 type = "custom_button";
-                gestures.left = "/home/${user}/.local/state/noctalia/noctalia-inhibit.fish";
+                actions.left = "exec /home/${user}/.local/state/noctalia/noctalia-inhibit.fish";
               };
 
               launcher.glyph = "snowflake";
@@ -252,7 +251,6 @@ in
                 show_condition = false;
                 show_temperature = false;
               };
-              notifications.show_label = false;
               network = {
                 scale = 1.05;
                 show_label = false;
