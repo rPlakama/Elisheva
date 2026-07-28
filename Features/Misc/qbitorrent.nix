@@ -21,7 +21,7 @@ in
       preservation.system.directories = [
         "/var/lib/qbittorrent"
       ]
-      ++ lib.optionals (!config.features.graphicalPkgs.enable) [
+      ++ lib.optionals (!headless) [
         "/var/lib/qui"
       ];
 
@@ -49,7 +49,7 @@ in
       };
       qbittorrent = {
         enable = true;
-        group = "media";
+        group = lib.mkIf headless "media";
         serverConfig = {
           LegalNotice.Accepted = true;
           Preferences = {
