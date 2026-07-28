@@ -38,7 +38,7 @@ in
       path = runtimePath;
 
       serviceConfig = {
-        Type = "oneshot";
+        Type = "simple";
         ExecStart = "${transcoderScript}/bin/elisheva-transcoder ${cfg.musicFolder}";
         User = "nobody";
         Group = "media";
