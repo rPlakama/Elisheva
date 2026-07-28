@@ -39,10 +39,6 @@ in
         writableServices = [ "navidrome" ];
       };
       unifiedDNS.proxyServices.navidrome = 4533;
-      transcode = {
-        enable = lib.mkDefault true;
-        musicFolder = lib.mkDefault cfg.musicFolder;
-      };
       feishin.enable = lib.mkIf cfg.feishin (lib.mkDefault true);
     };
 
