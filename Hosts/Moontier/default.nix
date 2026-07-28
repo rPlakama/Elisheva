@@ -55,6 +55,7 @@
     nextcloud.enable = true;
     jellyfin.enable = true;
     navidrome.enable = true;
+    mediaPermissions.enable = true;
 
     bots = {
       enable = true;

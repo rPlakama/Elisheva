@@ -48,12 +48,15 @@
       hostNames = builtins.attrNames (
         nixpkgs.lib.filterAttrs (name: type: type == "directory") (builtins.readDir ./Hosts)
       );
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+
     in
     {
+
       nixosConfigurations = nixpkgs.lib.genAttrs hostNames (
         hostname:
         nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
             inputs.hjem.nixosModules.default
@@ -82,10 +85,6 @@
                 };
 
                 config = {
-                  nixpkgs.overlays = [
-                    nix-cachyos-kernel.overlays.pinned
-                  ];
-
                   nix.settings = {
                     substituters = [ "https://attic.xuyh0120.win/lantian" ];
                     trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
@@ -104,5 +103,18 @@
           ];
         }
       );
+
+      # Devshell
+      devShells.${system} = {
+        default = pkgs.mkShell {
+          packages = with pkgs; [
+            python314
+            ruff
+          ];
+          shellHook = ''
+            fish
+          '';
+        };
+      };
     };
 }

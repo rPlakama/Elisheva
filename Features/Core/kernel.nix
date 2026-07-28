@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -12,6 +13,7 @@ let
 in
 {
   config = mkIf cfg.enable {
+    nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
     boot = {
       kernelPackages = (
         if cpu.amd then

@@ -122,29 +122,16 @@
           goto_bottom = "]i";
         };
         static = {
-          enabled = true;
+          enabled = false;
           char = "▎";
+          # whitespace_char = "·";
           priority = 1;
-          highlights = [ "BlinkIndent" ];
         };
         scope = {
           enabled = true;
-          indent_at_cursor = false;
+          indent_at_cursor = true;
           char = "▎";
-          priority = 1000;
-          highlights = [
-            "BlinkIndentOrange"
-            "BlinkIndentViolet"
-            "BlinkIndentBlue"
-          ];
-          underline = {
-            enabled = false;
-            highlights = [
-              "BlinkIndentOrangeUnderline"
-              "BlinkIndentVioletUnderline"
-              "BlinkIndentBlueUnderline"
-            ];
-          };
+          priority = 100;
         };
       };
     };

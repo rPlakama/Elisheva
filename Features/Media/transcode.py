@@ -31,9 +31,7 @@ def _safe_chmod(path, mode):
         pass
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 1: Lossless → Opus Transcoding
-# ═══════════════════════════════════════════════════════════════════════════════
+# --  Lossless → Opus Transcoding --
 
 def transcode_single(source_path_str):
     source_path = Path(source_path_str)
@@ -71,7 +69,7 @@ def run_transcode(music_dir):
         return
 
     log(f"  Found {len(sources)} lossless files")
-    jobs = max(1, cpu_count() // 2)
+    jobs = max(1, cpu_count() // 2) # To adjust the amount of processing...
     stats = {"skip": 0, "ok": 0, "error": 0}
 
     with Pool(processes=jobs) as pool:
@@ -85,9 +83,7 @@ def run_transcode(music_dir):
 
     log(f"  Transcode done: {json.dumps(stats)}")
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# PHASE 2: Stale Lossless Cleanup
-# ═══════════════════════════════════════════════════════════════════════════════
+#  -- Stale Lossless Cleanup --
 
 def run_cleanup(music_dir):
     log("═══ Phase 2: Stale Lossless Cleanup ═══")
@@ -108,9 +104,7 @@ def run_cleanup(music_dir):
                 kept += 1
     log(f"  Cleanup done: {removed} removed, {kept} kept (no opus sibling)")
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# Main
-# ═══════════════════════════════════════════════════════════════════════════════
+#  -- Main --
 
 def main():
     default_dir = MUSIC_DIR_DEFAULT if "@" not in MUSIC_DIR_DEFAULT else "/media/music/library"

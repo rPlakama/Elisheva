@@ -15,10 +15,13 @@ in
         secrets = {
           "slskd/username" = { };
           "slskd/password" = { };
+          "slskd/api-main" = { };
         };
         templates."slskd.env".content = ''
           SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
           SLSKD_SLSK_PASSWORD=${config.sops.placeholder."slskd/password"}
+          SLSKD_WEB_AUTHENTICATION_API_KEYS_TUBIFARRY_KEY=${config.sops.placeholder."slskd/api-main"}
+          SLSKD_WEB_AUTHENTICATION_API_KEYS_TUBIFARRY_ROLE=readwrite
         '';
       };
     }

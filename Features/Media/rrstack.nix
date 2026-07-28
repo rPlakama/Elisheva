@@ -28,6 +28,7 @@ in
         "/var/lib/jackett"
         "/var/lib/sonarr"
         "/var/lib/radarr"
+        "/var/lib/lidarr"
         "/var/lib/prowlarr"
       ];
       unifiedDNS.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
