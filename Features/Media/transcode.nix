@@ -66,7 +66,7 @@ in
       wantedBy = [ "paths.target" ];
       pathConfig = {
         PathChanged = cfg.musicFolder;
-        Unit = "elisheva-transcoder.service";
+        Unit = "elisheva-transcoder.timer";
       };
     };
   };

@@ -5,55 +5,66 @@
 }:
 let
   cfg = config.features.slskd;
+  slskdPort = 5030;
+  slskdListenPort = 50000;
 in
 {
-  options.features.slskd.enable = lib.mkEnableOption "Soulseek client";
+  options.features.slskd.enable = lib.mkEnableOption "Soulseek client (container)";
 
-  config = lib.mkMerge [
-    {
-      sops = {
-        secrets = {
-          "slskd/username" = { };
-          "slskd/password" = { };
-          "slskd/api-main" = { };
+  config = lib.mkIf cfg.enable {
+    sops = {
+      secrets = {
+        "slskd/username" = { };
+        "slskd/password" = { };
+        "slskd/api-main" = { };
+      };
+      templates."slskd.env".content = ''
+        SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
+        SLSKD_SLSK_PASSWORD=${config.sops.placeholder."slskd/password"}
+        SLSKD_WEB__AUTHENTICATION__API_KEYS__TUBIFARRY__KEY=${config.sops.placeholder."slskd/api-main"}
+        SLSKD_WEB__AUTHENTICATION__API_KEYS__TUBIFARRY__ROLE=ReadWrite
+      '';
+    };
+
+    features = {
+      mediaPermissions.enable = true;
+      preservation.system.directories = [ "/var/lib/slskd" ];
+      unifiedDNS.proxyServices.slskd = slskdPort;
+    };
+
+    networking.firewall.allowedTCPPorts = [ slskdListenPort ];
+
+    # slskd writes as UID 1000, needs group write access to /var/lib/slskd
+    systemd.tmpfiles.rules = [
+      "d /var/lib/slskd 0775 1000 1000 - -"
+    ];
+
+    virtualisation.oci-containers = {
+      backend = "podman";
+      containers.slskd = {
+        image = "docker.io/slskd/slskd:latest";
+        ports = [
+          "${toString slskdPort}:5030"
+          "${toString slskdListenPort}:${toString slskdListenPort}"
+        ];
+        volumes = [
+          "/var/lib/slskd:/app"
+          "/media:/media"
+        ];
+        environment = {
+          PUID = toString config.users.users.${config.core.user}.uid;
+          PGID = toString config.users.users.${config.core.user}.uid;
+          SLSKD_REMOTE_CONFIGURATION = "true";
+          SLSKD_URL_BASE = "/slskd";
+          SLSKD_SHARED_DIR = "-/media/music/downloads;/media/music";
+          SLSKD_DOWNLOADS_DIR = "/media/music/library";
+          SLSKD_SLSK_LISTEN_PORT = toString slskdListenPort;
         };
-        templates."slskd.env".content = ''
-          SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
-          SLSKD_SLSK_PASSWORD=${config.sops.placeholder."slskd/password"}
-          SLSKD_WEB_AUTHENTICATION_API_KEYS_TUBIFARRY_KEY=${config.sops.placeholder."slskd/api-main"}
-          SLSKD_WEB_AUTHENTICATION_API_KEYS_TUBIFARRY_ROLE=readwrite
-        '';
+        environmentFiles = [
+          config.sops.templates."slskd.env".path
+        ];
+        autoStart = true;
       };
-    }
-
-    (lib.mkIf cfg.enable {
-      features = {
-        mediaPermissions.enable = true;
-        preservation.system.directories = [ "/var/lib/slskd" ];
-        unifiedDNS.proxyServices.slskd = 5030;
-      };
-      services.slskd = {
-        enable = true;
-        group = "media";
-        environmentFile = config.sops.templates."slskd.env".path;
-
-        settings = {
-          soulseek = {
-            listen_port = 50000;
-            upnp = true;
-          };
-          shares.directories = [
-            "-/media/music/downloads"
-            "/media/music"
-          ];
-          directories.downloads = "/media/music/library";
-          web = {
-            address = "0.0.0.0";
-            port = 5030;
-            url_base = "/slskd";
-          };
-        };
-      };
-    })
-  ];
+    };
+  };
 }

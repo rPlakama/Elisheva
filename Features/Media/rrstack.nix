@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -41,5 +42,7 @@ in
       // (lib.mapAttrs (name: port: {
         enable = true;
       }) mediaNonPermissions);
+
+    systemd.services.lidarr.path = [ pkgs.ffmpeg-full ];
   };
 }
