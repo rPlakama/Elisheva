@@ -2,6 +2,8 @@
   lib,
   config,
   pkgs,
+  pkgsM,
+  inputs,
   ...
 }:
 let
@@ -12,6 +14,7 @@ let
 in
 {
   options.features.library = {
+
     enable = lib.mkEnableOption "Library Master Switch";
     downloadPath = lib.mkOption {
       type = lib.types.str;
@@ -50,6 +53,11 @@ in
         };
       })
       (lib.mkIf cfg.suwayomi.enable {
+        _module.args.pkgsM = import inputs.nixpkgs-master {
+          inherit (pkgs.stdenv.hostPlatform) system;
+          inherit (config.nixpkgs) config;
+        };
+
         features = {
           mediaPermissions.enable = true;
           preservation.system.directories = [ "/var/lib/suwayomi-server" ];
@@ -59,17 +67,7 @@ in
         systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = [ "media" ];
         services.suwayomi-server = {
           enable = true;
-          package = pkgs.suwayomi-server.overrideAttrs (old: {
-            version = "2.3.2243";
-            name = "suwayomi-server-2.3.2243";
-            src = pkgs.fetchurl {
-              url = "https://github.com/Suwayomi/Suwayomi-Server/releases/download/v2.3.2243/Suwayomi-Server-v2.3.2243.jar";
-              hash = "sha256-ghFBsy4XDUoC08vf7Vd+2PB70iOD/19BMuu1rkDpjdU";
-            };
-            postFixup = ''
-              sed -i 's|-Dsuwayomi.tachidesk.config.server.initialOpenInBrowserEnabled=false|-noverify -Xverify:none &|' $out/bin/tachidesk-server
-            '';
-          });
+          package = pkgsM.suwayomi;
           settings = {
             server = {
               port = suwayomiPort;
