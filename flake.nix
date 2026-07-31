@@ -41,7 +41,6 @@
 
   outputs =
     inputs@{
-      nix-cachyos-kernel,
       nixpkgs,
       sops-nix,
       disko,
