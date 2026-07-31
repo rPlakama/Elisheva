@@ -115,6 +115,7 @@ in
           settings = {
             shell = {
               launch_apps_as_systemd_services = true;
+              auto_sync = true;
               corner_radius_scale = 0.25;
               font_family = fontFamily;
               niri_overview_type_to_launch_enabled = true;
