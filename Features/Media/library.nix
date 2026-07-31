@@ -1,9 +1,7 @@
 {
   lib,
   config,
-  pkgs,
   pkgsM,
-  inputs,
   ...
 }:
 let
@@ -53,10 +51,6 @@ in
         };
       })
       (lib.mkIf cfg.suwayomi.enable {
-        _module.args.pkgsM = import inputs.nixpkgs-master {
-          inherit (pkgs.stdenv.hostPlatform) system;
-          inherit (config.nixpkgs) config;
-        };
 
         features = {
           mediaPermissions.enable = true;
@@ -67,7 +61,7 @@ in
         systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = [ "media" ];
         services.suwayomi-server = {
           enable = true;
-          package = pkgsM.suwayomi;
+          package = pkgsM.suwayomi-server;
           settings = {
             server = {
               port = suwayomiPort;

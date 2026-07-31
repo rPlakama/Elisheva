@@ -2,23 +2,18 @@
   lib,
   config,
   pkgsM,
-  pkgs,
-  inputs,
   ...
 }:
 let
   cfg = config.features.slskd;
   slskdPort = 5030;
   slskdListenPort = 50000;
+  headless = config.core.headless;
 in
 {
   options.features.slskd.enable = lib.mkEnableOption "Soulseek client";
 
   config = lib.mkIf cfg.enable {
-    _module.args.pkgsM = import inputs.nixpkgs-master {
-      inherit (pkgs.stdenv.hostPlatform) system;
-      inherit (config.nixpkgs) config;
-    };
 
     sops = {
       secrets = {
@@ -38,10 +33,7 @@ in
     };
 
     features = {
-      mediaPermissions = {
-        enable = true;
-        writableServices = [ "slskd" ];
-      };
+      mediaPermissions.enable = headless;
       preservation.system.directories = [ "/var/lib/slskd" ];
       unifiedDNS.proxyServices.slskd = slskdPort;
     };

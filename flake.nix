@@ -51,6 +51,10 @@
       );
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      pkgsM = import inputs.nixpkgs-master {
+        inherit system;
+        config.allowUnfree = true;
+      };
 
     in
     {
@@ -58,7 +62,7 @@
       nixosConfigurations = nixpkgs.lib.genAttrs hostNames (
         hostname:
         nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs pkgsM; };
           modules = [
             inputs.hjem.nixosModules.default
             inputs.nixvim.nixosModules.nixvim
@@ -76,6 +80,7 @@
                 user = config.core.user;
               in
               {
+
                 options.core = {
                   host = lib.mkOption {
                     type = lib.types.str;

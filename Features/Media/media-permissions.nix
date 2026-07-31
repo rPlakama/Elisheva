@@ -42,7 +42,8 @@ in
     systemd.tmpfiles.rules = builtins.concatMap (folder: [
       "d ${base_path}/${folder} 2775 nobody media - -"
       "Z ${base_path}/${folder} 2775 nobody media - -"
-      "A ${base_path}/${folder} - - - - d:g:media:rwx"
+      "A ${base_path}/${folder} - - - - g:media:rwx"
+      "A+ ${base_path}/${folder} - - - - d:g:media:rwx"
     ]) mediaFolders;
     systemd.services = lib.mkMerge (
       map (svc: {
