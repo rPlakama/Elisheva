@@ -6,7 +6,12 @@
   ...
 }:
 let
-  inherit (lib) mkOption mkIf types;
+  inherit (lib)
+    mkOption
+    mkIf
+    mkForce
+    types
+    ;
   inherit (types) str bool;
 
   user = config.core.user;
@@ -21,6 +26,10 @@ let
 
 in
 {
+  imports = [
+    inputs.noctalia-greeter.nixosModules.default
+  ];
+
   options.features.noctalia = {
     enable = mkOption {
       type = bool;
@@ -36,6 +45,11 @@ in
       type = bool;
       default = true;
       description = "Dark mode for noctalia theme templates (GTK, etc.)";
+    };
+    greeter.enable = mkOption {
+      type = bool;
+      default = true;
+      description = "Enable the Noctalia Greeter login screen (greetd) instead of ly.";
     };
   };
 
@@ -58,6 +72,21 @@ in
       pkgs.ddcutil
     ];
     services.ddccontrol.enable = true;
+
+    programs.noctalia-greeter = {
+      enable = cfg.greeter.enable;
+      settings = {
+        session.default = "niri";
+        keyboard.layout = config.features.niri.keyboardLayout;
+        cursor = {
+          theme = config.features.niri.cursorTheme;
+          size = config.features.niri.cursorSize;
+          path = "${pkgs.volantes-cursors}/share/icons";
+        };
+      };
+    };
+
+    services.displayManager.ly.enable = mkIf cfg.greeter.enable (mkForce false);
 
     features = {
       niri.noctalia.import = ''include "noctaliaBinds.kdl"'';
@@ -102,10 +131,17 @@ in
               };
             };
             keybinds = {
-              down = [ "Ctrl+n" ];
               left = [ "Ctrl+h" ];
               right = [ "Ctrl+l" ];
-              up = [ "Ctrl+p" ];
+              up = [
+                "Ctrl+k"
+                "Ctrl+p"
+              ];
+              down = [
+                "Ctrl+j"
+                "Ctrl+n"
+              ];
+
             };
             theme = {
               source = "wallpaper";

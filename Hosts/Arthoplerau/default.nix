@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ./hardware.nix
     ../../Features
@@ -41,6 +41,7 @@
 
     qbit.enable = true;
     virtualization.enable = true;
+    ia-tools.enable = true;
 
     disko = {
       enable = true;
@@ -53,10 +54,12 @@
         size = "4GB";
       };
     };
+
     preservation = {
       enable = true;
       home.directories = [
         "pt"
+        ".ollama" # Might be interessing to test stuff
       ];
     };
   };

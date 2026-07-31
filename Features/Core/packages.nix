@@ -15,7 +15,6 @@ in
     environment.systemPackages =
       with pkgs;
       [
-        opencode
         ripgrep
         cifs-utils
         zip

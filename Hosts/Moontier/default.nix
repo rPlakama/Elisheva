@@ -13,7 +13,6 @@
   networking.hostName = "Moontier";
 
   environment.systemPackages = with pkgs; [
-    btop
     smartmontools
     calibre
     zip
