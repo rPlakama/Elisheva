@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  pkgsM,
   lib,
   ...
 }:
@@ -52,15 +53,18 @@ in
         group = lib.mkIf headless "media";
         serverConfig = {
           LegalNotice.Accepted = true;
+          BitTorrent.Session = {
+            QueueingSystemEnabled = true;
+            MaxActiveDownloads = 3;
+            MaxActiveUploads = 3;
+            MaxActiveTorrents = 5;
+            MaxActiveCheckingTorrents = 1;
+          };
           Preferences = {
-            Queueing = {
-              QueueingEnabled = false;
-            };
             WebUI = {
               Username = "${user}";
               Password_PBKDF2 = "@ByteArray(ttJDfjqsdk8ccksmlOI15A==:/WoWQEN+/ObzbkNCDVVZ4/3yfxkTXz58jXYvxYmHXWayB0VHghFapn+RFJZOFZyNcpcsaOUWW2+QtgAkwzJwFQ==)";
             };
-            "General.Locale" = "en";
           };
         };
       };
