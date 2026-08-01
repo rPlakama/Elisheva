@@ -1,8 +1,13 @@
 {
   config,
+  lib,
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.hostPlatform = lib.mkIf (config.core.cpu."micro-arch" != null) (lib.mkForce {
+    system = "x86_64-linux";
+    gcc.cpu = config.core.cpu."micro-arch";
+  });
   programs.nix-ld.enable = true;
   nix = {
     gc = {

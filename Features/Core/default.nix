@@ -15,6 +15,7 @@ let
     bool
     int
     enum
+    nullOr
     ;
 
   strOpt =
@@ -45,6 +46,11 @@ in
     core.gpu.intel = mkEnableOption "Intel GPU (i915/Xe)";
     core.cpu.amd = mkEnableOption "AMD CPU (amd_pstate)";
     core.cpu.intel = mkEnableOption "Intel CPU (intel_pstate)";
+    core.cpu.micro-arch = mkOption {
+      type = nullOr str;
+      default = null;
+      description = "GCC microarchitecture/cpu to target for this host (e.g. znver5, znver4, alderlake). Null = generic";
+    };
 
     core.isLaptop = mkEnableOption "Whether this host is a laptop (enables battery-aware features)";
 
