@@ -17,10 +17,8 @@ let
   cfg = config.features.niri;
   theming = config.features.theming;
 
-  powerProfileBind = optionalString (config.core.isLaptop.usesPPD || config.core.isLaptop.usesTLP) ''
-    "Ctrl+Alt+Q" {
-        spawn "sh" "-c" "current=$(powerprofilesctl get); case $current in performance) next=balanced ;; balanced) next=power-saver ;; power-saver) next=performance ;; esac; powerprofilesctl set $next;"
-    }
+  power-cycle = optionalString (config.core.isLaptop.usesPPD || config.core.isLaptop.usesTLP) ''
+    "Ctrl+Alt+Q" { spawn-sh "noctalia msg power-cycle"; }
   '';
 
   cursorBlock = ''
@@ -81,8 +79,8 @@ in
 
     hjem.users.${config.core.user}.files.".config/niri/config.kdl".text =
       builtins.replaceStrings
-        [ "@ImportNoctalia@" "@cursor@" "@keyboardLayout@" "@Variant@" "@powerProfileBind@" "@output@" ]
-        [ cfg.noctalia.import cursorBlock cfg.keyboardLayout cfg.VariantKB powerProfileBind outputBlock ]
+        [ "@ImportNoctalia@" "@cursor@" "@keyboardLayout@" "@Variant@" "@power-cycle@" "@output@" ]
+        [ cfg.noctalia.import cursorBlock cfg.keyboardLayout cfg.VariantKB power-cycle outputBlock ]
         (builtins.readFile ./config.kdl);
   };
 }
