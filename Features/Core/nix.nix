@@ -1,11 +1,13 @@
 {
   config,
+  pkgs,
   ...
 }:
 {
   nixpkgs.config.allowUnfree = true;
   programs.nix-ld.enable = true;
   nix = {
+    package = pkgs.lix;
     gc = {
       automatic = true;
       dates = "weekly";

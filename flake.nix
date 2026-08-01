@@ -11,6 +11,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    auto-cpufreq = {
+      url = "github:AdnanHodzic/auto-cpufreq";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     twatch.url = "github:rPlakama/twatch";
     kavita-pkg.url = "github:rPlakama/Kavita-flake";
     gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
@@ -41,6 +46,7 @@
       sops-nix,
       disko,
       preservation,
+      auto-cpufreq,
       ...
     }:
     let
@@ -68,6 +74,7 @@
             sops-nix.nixosModules.sops
             disko.nixosModules.disko
             preservation.nixosModules.default
+            auto-cpufreq.nixosModules.default
             ./Hosts/${hostname}
             (
               {

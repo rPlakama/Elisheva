@@ -15,7 +15,10 @@
     user = "rplakama";
     gpu.amd = true;
     cpu.amd = true;
-    isLaptop = true;
+    isLaptop = {
+      enable = true;
+      usesAuto-cpufreq = true;
+    };
     git = {
       email = "rPlakama@proton.me";
       user = "rPlakama";

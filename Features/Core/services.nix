@@ -7,6 +7,7 @@ let
   headless = config.core.headless;
   usesAuto-cpufreq = config.core.isLaptop.usesAuto-cpufreq;
   usesPPD = config.core.isLaptop.usesPPD;
+  isLaptop = config.core.isLaptop.enable;
 in
 {
   programs.auto-cpufreq = {
@@ -18,7 +19,7 @@ in
       };
 
       battery = {
-        governor = "balanced";
+        governor = "powersave";
         turbo = "auto";
       };
     };
@@ -29,7 +30,7 @@ in
       package = pkgs.ananicy-cpp;
       rulesProvider = pkgs.ananicy-rules-cachyos;
     };
-    upower.enable = usesPPD;
+    upower.enable = isLaptop;
     power-profiles-daemon.enable = usesPPD;
     bpftune.enable = true;
     devmon.enable = true;
