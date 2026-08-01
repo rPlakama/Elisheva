@@ -4,18 +4,33 @@
   ...
 }:
 let
-  isLaptop = config.core.isLaptop;
   headless = config.core.headless;
+  usesAuto-cpufreq = config.core.isLaptop.usesAuto-cpufreq;
+  usesPPD = config.core.isLaptop.usesPPD;
 in
 {
+  programs.auto-cpufreq = {
+    enable = usesAuto-cpufreq;
+    settings = {
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+
+      battery = {
+        governor = "balanced";
+        turbo = "auto";
+      };
+    };
+  };
   services = {
     ananicy = {
       enable = true;
       package = pkgs.ananicy-cpp;
       rulesProvider = pkgs.ananicy-rules-cachyos;
     };
-    upower.enable = isLaptop;
-    power-profiles-daemon.enable = isLaptop;
+    upower.enable = usesPPD;
+    power-profiles-daemon.enable = usesPPD;
     bpftune.enable = true;
     devmon.enable = true;
     udisks2.enable = true;

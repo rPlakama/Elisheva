@@ -1,5 +1,6 @@
 {
   lib,
+  config,
   ...
 }:
 let
@@ -15,7 +16,6 @@ let
     bool
     int
     enum
-    nullOr
     ;
 
   strOpt =
@@ -31,6 +31,7 @@ let
       builtins.readDir ./.
     )
   );
+
 in
 {
   imports = map (n: ./${n}) importFiles;
@@ -41,7 +42,25 @@ in
       user = strOpt "The primary user";
       ip = strOpt "IP";
       headless = mkEnableOption "Is the host a headless device?";
-      isLaptop = mkEnableOption "Whether this host is a laptop (enables battery-aware features)";
+
+      # Laptop stuff
+
+      assertions = [
+        {
+          assertion = config.core.laptop.usesPPD.enable && config.core.laptop.usesAuto-cpufreq.enable;
+          message = "PPD and auto-cpufreq are enabled at the same time -- which is not permitted.";
+        }
+
+      ];
+      isLaptop = {
+        enable = mkOption {
+          type = bool;
+          default = false;
+          description = "Whether this host is a laptop (enables battery-aware features)";
+        };
+        usesPPD = mkEnableOption "PPD daemon";
+        usesAuto-cpufreq = mkEnableOption "uses auto-cpufreq";
+      };
 
       # gpu
       gpu = {

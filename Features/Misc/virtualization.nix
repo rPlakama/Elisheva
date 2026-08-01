@@ -6,7 +6,7 @@
 let
   cfg = config.features.virtualization;
   user = config.core.user;
-  isLaptop = config.core.isLaptop;
+  isLaptop = config.core.isLaptop.enable;
 
 in
 {

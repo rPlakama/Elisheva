@@ -18,7 +18,7 @@ in
     settings = {
       default_input = "password";
       bigclock = true;
-      animate = true;
+      animation = "matrix";
       hide_borders = true;
     };
   };
