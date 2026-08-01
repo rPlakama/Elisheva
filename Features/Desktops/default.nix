@@ -18,8 +18,9 @@ in
     settings = {
       default_input = "password";
       bigclock = true;
-      animation = "matrix";
+      animation = "doom";
       hide_borders = true;
+      animation_frame_delay = 40;
     };
   };
 }
