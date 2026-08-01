@@ -112,7 +112,7 @@ in
             theme = {
               source = "wallpaper";
               community_palette = "Cream Autumn";
-              wallpaper_scheme = "m3-rainbow";
+              wallpaper_scheme = "muted";
               mode = if theming.darkTheme then "dark" else "light";
               templates = {
                 builtin_ids = [
