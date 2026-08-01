@@ -61,10 +61,4 @@ nix run github:nix-community/nixos-anywhere -- --flake .#<host> root@<ip>
 nix run github:nix-community/nixos-anywhere -- --flake .#<host> root@<ip>
 ```
 
-## Tasks:
-
-[] -- Find a better solution for Neovim \
-[] -- Improve homepage service integration, add options that can be called by other features, such as 'icon' \
-[X] -- Use labels instead of UUIDS for an better system handling, in case of non disko systems. (Aka, fixing) \
-[] -- media-permissions create folders utilized by other services, it should be a way to instead, the services create the folders theyselfs. \
-
+<img src="images/modules-cross-talk.png" alt="Just refence, doesnt get update constantly" width="500">
