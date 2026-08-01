@@ -26,20 +26,11 @@ let
 
 in
 {
-  imports = [
-    inputs.noctalia-greeter.nixosModules.default
-  ];
-
   options.features.noctalia = {
     enable = mkOption {
       type = bool;
       default = config.features.niri.noctalia.enabled;
       description = "Enable Noctalia window manager environment.";
-    };
-    greeter.enable = mkOption {
-      type = bool;
-      default = true;
-      description = "Enable the Noctalia Greeter login screen (greetd) instead of ly.";
     };
   };
 
@@ -63,21 +54,7 @@ in
     ];
     services.ddccontrol.enable = true;
 
-    programs.noctalia-greeter = {
-      enable = cfg.greeter.enable;
-      settings = {
-        session.default = "niri";
-        keyboard.layout = config.features.niri.keyboardLayout;
-        cursor = {
-          theme = theming.cursorTheme;
-          size = theming.cursorSize;
-          path = "${pkgs.volantes-cursors}/share/icons";
-        };
-      };
-    };
-
     features = {
-      preservation.system.directories = [ "/var/lib/noctalia-greeter" ];
       niri.noctalia.import = ''include "noctaliaBinds.kdl"'';
       graphicalPkgs.foot.theme = [
         "include=/home/${user}/.config/foot/themes/noctalia"
@@ -104,7 +81,6 @@ in
           settings = {
             shell = {
               launch_apps_as_systemd_services = true;
-              auto_sync = true;
               corner_radius_scale = 0.25;
               font_family = fontFamily;
               niri_overview_type_to_launch_enabled = true;
