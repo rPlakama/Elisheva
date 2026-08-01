@@ -14,7 +14,7 @@ in
   config = lib.mkIf cfg.enable {
     features.mediaPermissions.enable = headless;
     sops.secrets."qui/secret" = {
-      group = "media";
+      group = lib.mkIf headless "media";
     };
 
     features = {
