@@ -54,11 +54,6 @@ in
       cpu = {
         amd = mkEnableOption "AMD CPU (amd_pstate)";
         intel = mkEnableOption "Intel CPU (intel_pstate)";
-        micro-arch = mkOption {
-          type = nullOr str;
-          default = null;
-          description = "GCC microarchitecture/cpu to target for this host (e.g. znver5, znver4, alderlake). Null = generic";
-        };
       };
 
       # Git

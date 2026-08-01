@@ -13,7 +13,6 @@
     user = "rplakama";
     gpu.nvidia = true;
     cpu.amd = true;
-    cpu.micro-arch = "znver3";
     git = {
       email = "rPlakama@proton.me";
       user = "rPlakama";

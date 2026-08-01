@@ -34,7 +34,6 @@
     };
     gpu.amd = true;
     cpu.amd = true;
-    cpu.micro-arch = "znver3";
     headless = true;
   };
 
