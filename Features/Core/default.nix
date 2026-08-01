@@ -85,10 +85,5 @@ in
       default = 180;
       description = "vm.swappiness value (180 aggressively prefers zram over page cache eviction)";
     };
-    features.core.enable = mkOption {
-      type = bool;
-      default = true;
-      description = "General Attributes that are default implemented across multiple hosts -- like hardware, services and others.";
-    };
   };
 }

@@ -1,4 +1,10 @@
-{ pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   imports = lib.mapAttrsToList (name: _: ./${name}) (
     lib.filterAttrs (
       name: type:
@@ -6,12 +12,15 @@
     ) (builtins.readDir ./.)
   );
 
-  environment.systemPackages = with pkgs; [
-    exiftool
-    ffmpeg-full
-    opustags
-    opus-tools
-    opustags
-    flac2all
-  ];
+  # Music-library tooling only makes sense on hosts actually running media services.
+  environment.systemPackages = lib.mkIf config.features.mediaPermissions.enable (
+    with pkgs;
+    [
+      exiftool
+      ffmpeg-full
+      opustags
+      opus-tools
+      flac2all
+    ]
+  );
 }

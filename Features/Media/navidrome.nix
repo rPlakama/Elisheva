@@ -38,7 +38,10 @@ in
         enable = true;
         writableServices = [ "navidrome" ];
       };
-      unifiedDNS.proxyServices.navidrome = 4533;
+      unifiedDNS.proxyServices.navidrome = {
+        port = 4533;
+        icon = "si-navidrome";
+      };
       feishin.enable = lib.mkIf cfg.feishin (lib.mkDefault true);
     };
 

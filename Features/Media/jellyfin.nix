@@ -13,12 +13,14 @@ in
     features = {
       mediaPermissions.enable = true;
       preservation.system.directories = [ "/var/lib/jellyfin" ];
-      unifiedDNS.proxyServices.jellyfin = 8096;
+      unifiedDNS.proxyServices.jellyfin = {
+        port = 8096;
+        icon = "si-jellyfin";
+      };
     };
     services.jellyfin = {
       enable = true;
       group = "media";
-      openFirewall = true;
     };
     users.users.jellyfin.extraGroups = [
       "video"

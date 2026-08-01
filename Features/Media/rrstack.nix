@@ -8,15 +8,30 @@ let
   cfg = config.features.rrstack;
 
   mediaServicesWithPermissions = {
-    jackett = 9117;
-    sonarr = 8989;
-    radarr = 7878;
-    lidarr = 8686;
+    jackett = {
+      port = 9117;
+      icon = "si-jackett";
+    };
+    sonarr = {
+      port = 8989;
+      icon = "si-sonarr";
+    };
+    radarr = {
+      port = 7878;
+      icon = "si-radarr";
+    };
+    lidarr = {
+      port = 8686;
+      icon = "si-lidarr";
+    };
   };
 
   mediaNonPermissions = {
-    prowlarr = 9696;
-    flaresolverr = 8191;
+    prowlarr = {
+      port = 9696;
+      icon = "si-prowlarr";
+    };
+    flaresolverr = { port = 8191; };
   };
 in
 {
@@ -35,11 +50,11 @@ in
       unifiedDNS.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
     };
     services =
-      (lib.mapAttrs (name: port: {
+      (lib.mapAttrs (name: svc: {
         enable = true;
         group = "media";
       }) mediaServicesWithPermissions)
-      // (lib.mapAttrs (name: port: {
+      // (lib.mapAttrs (name: svc: {
         enable = true;
       }) mediaNonPermissions);
 

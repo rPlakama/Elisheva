@@ -14,7 +14,7 @@ in
 
   boot.consoleLogLevel = 0;
   services.displayManager.ly = {
-    enable = !headless;
+    enable = !headless && !(config.features.noctalia.enable && config.features.noctalia.greeter.enable);
     settings = {
       default_input = "password";
       bigclock = true;

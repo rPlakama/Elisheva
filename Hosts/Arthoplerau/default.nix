@@ -28,6 +28,8 @@
   };
 
   features = {
+    neovim.enable = true;
+
     niri = {
       enable = true;
       noctalia.enabled = true;

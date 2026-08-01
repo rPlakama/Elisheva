@@ -12,9 +12,10 @@ let
     types
     optionalString
     ;
-  inherit (types) str int;
+  inherit (types) str;
 
   cfg = config.features.niri;
+  theming = config.features.theming;
 
   powerProfileBind = optionalString config.core.isLaptop ''
     "Ctrl+Alt+Q" {
@@ -24,8 +25,8 @@ let
 
   cursorBlock = ''
     cursor {
-        xcursor-theme "${cfg.cursorTheme}"
-        xcursor-size ${toString cfg.cursorSize}
+        xcursor-theme "${theming.cursorTheme}"
+        xcursor-size ${toString theming.cursorSize}
     }
   '';
 
@@ -38,16 +39,6 @@ in
 {
   options.features.niri = {
     enable = mkEnableOption "Niri Configuration";
-    cursorTheme = mkOption {
-      type = str;
-      default = "volantes_light_cursors";
-      description = "Cursor theme name";
-    };
-    cursorSize = mkOption {
-      type = int;
-      default = 24;
-      description = "Cursor size";
-    };
     VariantKB = mkOption {
       type = str;
       default = "";

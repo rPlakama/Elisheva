@@ -31,19 +31,11 @@ in
       description = "Import themes for Foot";
       example = "include=path";
     };
-    foot.font = mkOption {
-      type = str;
-      default = "CaskaydiaCove Nerd Font Mono:size=9";
-      description = "Foot terminal font (family:size=pts)";
-    };
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      inputs.helium-browser.packages.x86_64-linux.default
-      # This need to be solved: x86_64-linux is a >problem< if other hosts arent in such platform, \
-      # Causing rebuild errors; For the future, \
-      # there's shall be a inherence based on Host (core option) to choose which type; \
+      inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
       vesktop
       materialgram
       nextcloud-client
@@ -61,7 +53,7 @@ in
       files.".config/foot/foot.ini".text = ''
         [main]
         dpi-aware=false
-        font=${cfg.foot.font}
+        font=${config.features.theming.monoFont}:size=${toString config.features.theming.monoFontSize}
       ''
       + "\n"
       + (concatStringsSep "\n" cfg.foot.theme);

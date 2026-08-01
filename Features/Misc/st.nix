@@ -21,6 +21,11 @@ let
       dataRoot: ./data
     ''
   );
+  # The nixos sillytavern module symlinks /var/lib/SillyTavern/config.yaml to
+  # configFile. Point it at a writable, persisted path and materialise it once
+  # via tmpfiles, so the app can write back to its config instead of a read-only
+  # store path (no more ExecStartPre cp hack).
+  dataConfig = "/var/lib/SillyTavern/config-store.yaml";
 in
 {
   options.features.st.enable = lib.mkEnableOption "SillyTavern AI RPG";
@@ -31,11 +36,14 @@ in
     services.sillytavern = {
       enable = true;
       port = 6720;
-      configFile = configSrc;
+      configFile = dataConfig;
     };
 
-    systemd.services.sillytavern.serviceConfig.ExecStartPre =
-      "${pkgs.bash}/bin/bash -c 'cp --remove-destination ${configSrc} /var/lib/SillyTavern/config.yaml && chmod 600 /var/lib/SillyTavern/config.yaml'";
+    systemd.tmpfiles.rules = [
+      "d /var/lib/SillyTavern 0700 sillytavern sillytavern - -"
+      "f ${dataConfig} 0600 sillytavern sillytavern - ${configSrc}"
+    ];
+
     features.unifiedDNS.proxyServices.st = 6720;
   };
 }

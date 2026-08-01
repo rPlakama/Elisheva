@@ -42,7 +42,6 @@ in
           preservation.system.directories = [ "/var/lib/kavita" ];
           unifiedDNS.proxyServices.kavita = kavitaPort;
         };
-        networking.firewall.allowedTCPPorts = [ kavitaPort ];
         systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
         services.kavita = {
           enable = true;
@@ -57,7 +56,6 @@ in
           preservation.system.directories = [ "/var/lib/suwayomi-server" ];
           unifiedDNS.proxyServices.suwayomi = suwayomiPort;
         };
-        networking.firewall.allowedTCPPorts = [ suwayomiPort ];
         systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = [ "media" ];
         services.suwayomi-server = {
           enable = true;

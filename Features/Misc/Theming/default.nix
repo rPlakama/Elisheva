@@ -96,13 +96,6 @@ in
       files.".config/gtk-4.0/settings.ini".text = gtkSettings;
     };
 
-    features = {
-      graphicalPkgs.foot.font = "${cfg.monoFont}:size=${toString (cfg.monoFontSize)}";
-      niri.cursorTheme = cfg.cursorTheme;
-      niri.cursorSize = cfg.cursorSize;
-      noctalia.fontFamily = cfg.fontFamily;
-      noctalia.darkMode = cfg.darkTheme;
-    };
     programs.nixvim.colorschemes.base16 = {
       enable = true;
       colorscheme = cfg.base16Theme;

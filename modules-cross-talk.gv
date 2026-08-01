@@ -1,0 +1,178 @@
+digraph cross_talk {
+  rankdir = LR;
+  splines = spline;
+  bgcolor = "#0f1117";
+  pad = 0.6;
+  fontname = "sans-serif";
+  fontcolor = "#e9ecef";
+  labelloc = "t";
+  label = <<B>Elisheva — Feature Module Cross-Talk</B><br/><font point-size="10">(who reads/writes another feature's <i>features.*</i> namespace)</font>>;
+
+  node [fontname = "sans-serif", fontsize = 11, color = "#4dabf7", fontcolor = "#e9ecef", shape = box, style = "rounded,filled", fillcolor = "#1c2430"];
+
+  edge [fontname = "sans-serif", fontsize = 9, fontcolor = "#adb5bd", arrowsize = 0.7];
+
+  subgraph cluster_core {
+    label = "Core";
+    fontcolor = "#e9ecef";
+    style = "dashed,rounded";
+    color = "#5f3dc4";
+    core [label = "Core\nbootloader · gpu · hjem\nkernel · nix · packages\nservices · system · user · zram", fillcolor = "#2b1f4e"];
+  }
+
+  subgraph cluster_desktop {
+    label = "Desktops";
+    fontcolor = "#e9ecef";
+    style = "dashed,rounded";
+    color = "#0b7285";
+    graphicalPkgs [label = "graphical-pkgs"];
+    niri [label = "niri"];
+    noctalia [label = "noctalia"];
+    theming [label = "theming"];
+    neovim [label = "neovim\n(nixvim)"];
+  }
+
+  subgraph cluster_media {
+    label = "Media";
+    fontcolor = "#e9ecef";
+    style = "dashed,rounded";
+    color = "#e8590c";
+    feishin [label = "feishin"];
+    jellyfin [label = "jellyfin"];
+    library [label = "library\n(kavita/suwayomi)"];
+    lidarr_overlay [label = "lidarr-overlay"];
+    navidrome [label = "navidrome"];
+    rrstack [label = "rrstack"];
+    slskd [label = "slskd"];
+  }
+
+  subgraph cluster_misc {
+    label = "Misc";
+    fontcolor = "#e9ecef";
+    style = "dashed,rounded";
+    color = "#2f9e44";
+    bots [label = "bots"];
+    disko [label = "disko"];
+    gaming [label = "gaming"];
+    homepage [label = "homepage"];
+    ia_tools [label = "ia-tools"];
+    nextcloud [label = "nextcloud"];
+    qbit [label = "qbit\n(qBittorrent)"];
+    st [label = "st\n(SillyTavern)"];
+    sunshine [label = "sunshine"];
+    virtualization [label = "virtualization"];
+  }
+
+  subgraph cluster_hubs {
+    label = "Shared accumulators (hubs)";
+    fontcolor = "#ffe066";
+    style = "dashed,rounded";
+    color = "#f08c00";
+    preservation [label = "preservation", shape = component, fillcolor = "#5c3d0e", color = "#f08c00"];
+    mediaPermissions [label = "mediaPermissions", shape = component, fillcolor = "#5c3d0e", color = "#f08c00"];
+    unifiedDNS [label = "unifiedDNS", shape = component, fillcolor = "#5c3d0e", color = "#f08c00"];
+  }
+
+  subgraph cluster_hosts {
+    label = "Hosts (enable features)";
+    fontcolor = "#99e9f2";
+    style = "dashed,rounded";
+    color = "#1098ad";
+    moontier [label = "Moontier\n(server, headless)", fillcolor = "#0b3d4d"];
+    centuria [label = "Centuria\n(desktop, nvidia)", fillcolor = "#0b3d4d"];
+    arthoplerau [label = "Arthoplerau\n(laptop)", fillcolor = "#0b3d4d"];
+  }
+
+  /* ---- Core -> others ---- */
+  core -> preservation [label = "fwupd dir", color = "#1971c2"];
+
+  /* ---- Desktops cross-talk ---- */
+  niri -> theming [label = "reads cursorTheme/size", color = "#868e96", style = "dashed"];
+  noctalia -> theming [label = "reads fontFamily/darkTheme", color = "#868e96", style = "dashed"];
+  graphicalPkgs -> theming [label = "reads monoFont/monoFontSize", color = "#868e96", style = "dashed"];
+  theming -> neovim [label = "base16 colorscheme", color = "#7048e8"];
+  noctalia -> niri [label = "noctalia.import\n+ asserts niri.enable\n+ reads keyboardLayout", color = "#c92a2a", style = "dashed"];
+  noctalia -> graphicalPkgs [label = "foot.theme", color = "#7048e8"];
+
+  /* ---- Media -> hubs ---- */
+  feishin -> unifiedDNS [label = "feishin:9183", color = "#2f9e44"];
+  feishin -> preservation [label = "/var/lib/feishin", color = "#1971c2"];
+  jellyfin -> mediaPermissions [label = "enable", color = "#e8590c"];
+  jellyfin -> preservation [label = "/var/lib/jellyfin", color = "#1971c2"];
+  jellyfin -> unifiedDNS [label = "jellyfin:8096", color = "#2f9e44"];
+  library -> mediaPermissions [label = "enable", color = "#e8590c"];
+  library -> preservation [label = "downloadPath,\n/var/lib/kavita,\n/var/lib/suwayomi", color = "#1971c2"];
+  library -> unifiedDNS [label = "kavita:3034,\nsuwayomi:4567", color = "#2f9e44"];
+  navidrome -> feishin [label = "feishin.enable = true", color = "#b197fc"];
+  navidrome -> mediaPermissions [label = "enable + writableServices", color = "#e8590c"];
+  navidrome -> preservation [label = "/var/lib/navidrome", color = "#1971c2"];
+  navidrome -> unifiedDNS [label = "navidrome:4533", color = "#2f9e44"];
+  rrstack -> mediaPermissions [label = "enable", color = "#e8590c"];
+  rrstack -> preservation [label = "5x /var/lib/*rr", color = "#1971c2"];
+  rrstack -> unifiedDNS [label = "jackett/sonarr/radarr/\nlidarr/prowlarr/flaresolverr", color = "#2f9e44"];
+  slskd -> mediaPermissions [label = "enable", color = "#e8590c"];
+  slskd -> preservation [label = "/var/lib/slskd", color = "#1971c2"];
+  slskd -> unifiedDNS [label = "slskd:5030", color = "#2f9e44"];
+
+  /* ---- Misc -> hubs ---- */
+  bots -> preservation [label = "home: ascending-bots", color = "#1971c2"];
+  gaming -> preservation [label = "home: .steam, Games", color = "#1971c2"];
+  homepage -> unifiedDNS [label = "dashboard:8082\n+ reads proxyServices", color = "#2f9e44"];
+  homepage -> unifiedDNS [label = "assert: needs unifiedDNS", color = "#c92a2a", style = "dashed"];
+  ia_tools -> preservation [label = "home: .ollama", color = "#1971c2"];
+  nextcloud -> preservation [label = "/var/lib/nextcloud", color = "#1971c2"];
+  nextcloud -> unifiedDNS [label = "reads tailscaleIP,\naccessControl", color = "#868e96", style = "dashed"];
+  qbit -> mediaPermissions [label = "enable (headless)", color = "#e8590c"];
+  qbit -> preservation [label = "/var/lib/qbittorrent\n/var/lib/qui", color = "#1971c2"];
+  qbit -> unifiedDNS [label = "qui:3000, qbit:8080", color = "#2f9e44"];
+  st -> preservation [label = "/var/lib/SillyTavern", color = "#1971c2"];
+  st -> unifiedDNS [label = "st:6720", color = "#2f9e44"];
+  sunshine -> preservation [label = "/var/lib/sunshine", color = "#1971c2"];
+  virtualization -> preservation [label = "/var/lib/docker\n/var/lib/libvirt", color = "#1971c2"];
+  unifiedDNS -> preservation [label = "/etc/pihole", color = "#1971c2"];
+  unifiedDNS -> unifiedDNS [label = "pi-hole:8081 (self-proxy)", color = "#2f9e44", style = "dashed"];
+  preservation -> disko [label = "assert: requires disko", color = "#c92a2a", style = "dashed"];
+
+  /* ---- Hosts -> features ---- */
+  moontier -> unifiedDNS [label = "gateway/email", color = "#5c7cfa", style = "dotted"];
+  moontier -> library [label = "", color = "#5c7cfa", style = "dotted"];
+  moontier -> rrstack [label = "", color = "#5c7cfa", style = "dotted"];
+  moontier -> qbit [label = "", color = "#5c7cfa", style = "dotted"];
+  moontier -> slskd [label = "", color = "#5c7cfa", style = "dotted"];
+  moontier -> homepage [label = "", color = "#5c7cfa", style = "dotted"];
+  moontier -> st [label = "", color = "#5c7cfa", style = "dotted"];
+  moontier -> nextcloud [label = "", color = "#5c7cfa", style = "dotted"];
+  moontier -> jellyfin [label = "", color = "#5c7cfa", style = "dotted"];
+  moontier -> navidrome [label = "", color = "#5c7cfa", style = "dotted"];
+  moontier -> bots [label = "", color = "#5c7cfa", style = "dotted"];
+
+  centuria -> niri [label = "", color = "#5c7cfa", style = "dotted"];
+  centuria -> noctalia [label = "", color = "#5c7cfa", style = "dotted"];
+  centuria -> gaming [label = "", color = "#5c7cfa", style = "dotted"];
+  centuria -> sunshine [label = "", color = "#5c7cfa", style = "dotted"];
+  centuria -> qbit [label = "", color = "#5c7cfa", style = "dotted"];
+  centuria -> virtualization [label = "", color = "#5c7cfa", style = "dotted"];
+
+  arthoplerau -> niri [label = "", color = "#5c7cfa", style = "dotted"];
+  arthoplerau -> noctalia [label = "", color = "#5c7cfa", style = "dotted"];
+  arthoplerau -> gaming [label = "", color = "#5c7cfa", style = "dotted"];
+  arthoplerau -> qbit [label = "", color = "#5c7cfa", style = "dotted"];
+  arthoplerau -> virtualization [label = "", color = "#5c7cfa", style = "dotted"];
+  arthoplerau -> ia_tools [label = "", color = "#5c7cfa", style = "dotted"];
+  arthoplerau -> disko [label = "", color = "#5c7cfa", style = "dotted"];
+  arthoplerau -> preservation [label = "", color = "#5c7cfa", style = "dotted"];
+  arthoplerau -> neovim [label = "", color = "#5c7cfa", style = "dotted"];
+
+  /* ---- Legend ---- */
+  subgraph cluster_legend {
+    label = "Legend";
+    fontcolor = "#e9ecef";
+    style = "dashed,rounded";
+    color = "#868e96";
+    node [shape = plaintext, fillcolor = "transparent", color = "transparent", fontsize = 10];
+    l1 [label = "solid → writes option into target module"];
+    l2 [label = "dashed red → hard dependency / assertion"];
+    l3 [label = "dashed gray → reads value from target"];
+    l4 [label = "dotted → host enables the feature"];
+  }
+}

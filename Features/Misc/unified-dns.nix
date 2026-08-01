@@ -8,7 +8,9 @@ let
   domain = config.core.domain;
   currentIP = config.core.ip;
 
-  mkDnsRecords = ip: lib.mapAttrsToList (name: port: "${ip} ${name}.${domain}") cfg.proxyServices;
+  portOf = svc: if builtins.isInt svc then svc else svc.port;
+
+  mkDnsRecords = ip: lib.mapAttrsToList (name: svc: "${ip} ${name}.${domain}") cfg.proxyServices;
 in
 {
   options.features.unifiedDNS = {
@@ -21,25 +23,74 @@ in
     };
 
     proxyServices = lib.mkOption {
-      type = lib.types.attrsOf lib.types.port;
+      type = lib.types.attrsOf (
+        lib.types.oneOf [
+          lib.types.port
+          (lib.types.submodule {
+            options = {
+              port = lib.mkOption {
+                type = lib.types.port;
+                description = "Service port";
+              };
+              icon = lib.mkOption {
+                type = lib.types.nullOr lib.types.str;
+                default = null;
+                description = "simple-icons slug shown on the homepage dashboard";
+              };
+              description = lib.mkOption {
+                type = lib.types.nullOr lib.types.str;
+                default = null;
+                description = "Description shown on the homepage dashboard";
+              };
+            };
+          })
+        ]
+      );
       default = { };
-      description = "Services to be proxied by Nginx and registered in Pi-hole";
+      description = "Services to be proxied by Nginx and registered in Pi-hole (a port or an attrset with port/icon/description)";
     };
 
     gateway = lib.mkOption {
       type = lib.types.str;
-      default = "192.168.1.1";
+      default = "";
       description = "LAN gateway/router IP for Pi-hole DHCP";
     };
 
     tailscaleIP = lib.mkOption {
       type = lib.types.str;
-      default = "100.119.129.77";
+      default = "";
       description = "Tailscale IP of this machine for DNS records";
+    };
+
+    accessControl = lib.mkOption {
+      type = lib.types.str;
+      default = ''
+        allow 192.168.1.0/24;
+        allow 192.168.0.0/24;
+        allow 100.64.0.0/10;
+        allow 127.0.0.1;
+        deny all;
+      '';
+      description = "Nginx access-control block applied to every proxied virtual host";
     };
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = cfg.email != "";
+        message = "features.unifiedDNS.email must be set";
+      }
+      {
+        assertion = cfg.gateway != "";
+        message = "features.unifiedDNS.gateway must be set";
+      }
+      {
+        assertion = cfg.tailscaleIP != "";
+        message = "features.unifiedDNS.tailscaleIP must be set";
+      }
+    ];
+
     sops.secrets."hetzner/api" = {
       owner = "acme";
       group = "acme";
@@ -146,19 +197,13 @@ in
         recommendedProxySettings = true;
         recommendedTlsSettings = true;
         virtualHosts = lib.mapAttrs' (
-          name: port:
+          name: svc:
           lib.nameValuePair "${name}.${domain}" {
             useACMEHost = domain;
             forceSSL = true;
-            extraConfig = ''
-              allow 192.168.1.0/24;
-              allow 192.168.0.0/24;
-              allow 100.64.0.0/10;
-              allow 127.0.0.1;
-              deny all;
-            '';
+            extraConfig = cfg.accessControl;
             locations."/" = {
-              proxyPass = "http://127.0.0.1:${toString port}";
+              proxyPass = "http://127.0.0.1:${toString (portOf svc)}";
               proxyWebsockets = true;
             };
           }

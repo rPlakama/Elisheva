@@ -6,7 +6,6 @@
 let
   cfg = config.features.virtualization;
   user = config.core.user;
-  isNvidia = config.core.gpu.nvidia;
   isLaptop = config.core.isLaptop;
 
 in
@@ -30,7 +29,6 @@ in
       libvirtd.enable = true;
       docker = {
         enable = true;
-        enableNvidia = isNvidia;
         enableOnBoot = !isLaptop;
         autoPrune.enable = true;
       };

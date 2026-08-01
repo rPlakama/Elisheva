@@ -43,6 +43,7 @@
       enable = true;
       email = "rPlakama@proton.me";
       gateway = "192.168.0.1";
+      tailscaleIP = "100.119.129.77";
     };
 
     library.enable = true;

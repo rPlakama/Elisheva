@@ -1,42 +1,36 @@
 {
   config,
-  lib,
   ...
 }:
 let
-  inherit (lib) mkIf;
-
-  cfg = config.features.core;
   user = config.core.user;
 in
 {
-  config = mkIf cfg.enable {
-    security.sudo-rs.enable = true;
+  security.sudo-rs.enable = true;
 
-    networking.networkmanager.enable = true;
+  networking.networkmanager.enable = true;
 
-    users.users.${user} = {
-      group = user;
-      extraGroups = [ "networkmanager" ];
-    };
+  users.users.${user} = {
+    group = user;
+    extraGroups = [ "networkmanager" ];
+  };
 
-    programs = {
-      fish = {
-        enable = true;
-        generateCompletions = true;
-      };
-      zoxide = {
-        enable = true;
-        enableFishIntegration = true;
-      };
+  programs = {
+    fish = {
+      enable = true;
+      generateCompletions = true;
     };
-    documentation = {
-      dev.enable = true;
-      man.enable = true;
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
     };
-    hardware = {
-      enableAllFirmware = true;
-      enableRedistributableFirmware = true;
-    };
+  };
+  documentation = {
+    dev.enable = true;
+    man.enable = true;
+  };
+  hardware = {
+    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
   };
 }

@@ -120,9 +120,6 @@
             python314
             ruff
           ];
-          shellHook = ''
-            fish
-          '';
         };
       };
     };

@@ -7,7 +7,7 @@
 }:
 let
   cfg = config.features.gaming;
-  gsrPkg = inputs.gsr-ui-nix.packages.${pkgs.system}.gpu-screen-recorder;
+  gsrPkg = inputs.gsr-ui-nix.packages.${pkgs.stdenv.hostPlatform.system}.gpu-screen-recorder;
   gsrEnable = config.features.gaming.gsr.enable;
 in
 {
@@ -16,11 +16,22 @@ in
   options.features.gaming = {
     enable = lib.mkEnableOption "Enable gaming bundle";
 
-    steam.enable = lib.mkEnableOption "Enable Steam";
-    gamescope.enable = lib.mkEnableOption "Enable Gamescope";
-    gamemode.enable = lib.mkEnableOption "Enable Gamemode";
+    steam = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable Steam (part of the bundle, can be opted out)";
+    };
+    gamescope = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable Gamescope (part of the bundle, can be opted out)";
+    };
+    gamemode = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable Gamemode (part of the bundle, can be opted out)";
+    };
     gsr.enable = lib.mkEnableOption "Enable GPU Screen Recorder";
-
   };
 
   config = lib.mkIf cfg.enable {
@@ -38,8 +49,8 @@ in
 
     programs = {
 
-      gamemode.enable = true;
-      gamescope.enable = true;
+      gamemode.enable = cfg.gamemode;
+      gamescope.enable = cfg.gamescope;
 
       gpu-screen-recorder = {
         package = gsrPkg;
@@ -47,7 +58,7 @@ in
         ui.enable = true;
       };
 
-      steam = {
+      steam = lib.mkIf cfg.steam {
         enable = true;
         extraCompatPackages = [ pkgs.proton-ge-bin ];
       };

@@ -8,7 +8,6 @@ let
   cfg = config.features.slskd;
   slskdPort = 5030;
   slskdListenPort = 50000;
-  headless = config.core.headless;
 in
 {
   options.features.slskd.enable = lib.mkEnableOption "Soulseek client";
@@ -33,7 +32,7 @@ in
     };
 
     features = {
-      mediaPermissions.enable = headless;
+      mediaPermissions.enable = true;
       preservation.system.directories = [ "/var/lib/slskd" ];
       unifiedDNS.proxyServices.slskd = slskdPort;
     };

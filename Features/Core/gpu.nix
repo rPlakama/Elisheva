@@ -11,7 +11,7 @@ let
 in
 {
   config = mkMerge [
-    { services.lact.enable = !headless; }
+    { services.lact.enable = gpu.amd && !headless; }
 
     (mkIf gpu.amd {
       hardware = {

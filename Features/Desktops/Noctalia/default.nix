@@ -9,15 +9,15 @@ let
   inherit (lib)
     mkOption
     mkIf
-    mkForce
     types
     ;
-  inherit (types) str bool;
+  inherit (types) bool;
 
   user = config.core.user;
   cfg = config.features.noctalia;
+  theming = config.features.theming;
 
-  fontFamily = cfg.fontFamily;
+  fontFamily = theming.fontFamily;
   barRadius = 3;
 
   widgetsGroupOpacity = 0.0;
@@ -35,16 +35,6 @@ in
       type = bool;
       default = config.features.niri.noctalia.enabled;
       description = "Enable Noctalia window manager environment.";
-    };
-    fontFamily = mkOption {
-      type = str;
-      default = "Montserrat Medium";
-      description = "Font family used by noctalia shell and bar";
-    };
-    darkMode = mkOption {
-      type = bool;
-      default = true;
-      description = "Dark mode for noctalia theme templates (GTK, etc.)";
     };
     greeter.enable = mkOption {
       type = bool;
@@ -79,14 +69,12 @@ in
         session.default = "niri";
         keyboard.layout = config.features.niri.keyboardLayout;
         cursor = {
-          theme = config.features.niri.cursorTheme;
-          size = config.features.niri.cursorSize;
+          theme = theming.cursorTheme;
+          size = theming.cursorSize;
           path = "${pkgs.volantes-cursors}/share/icons";
         };
       };
     };
-
-    services.displayManager.ly.enable = mkIf cfg.greeter.enable (mkForce false);
 
     features = {
       niri.noctalia.import = ''include "noctaliaBinds.kdl"'';
@@ -148,7 +136,7 @@ in
               source = "wallpaper";
               community_palette = "Cream Autumn";
               wallpaper_scheme = "m3-rainbow";
-              mode = if cfg.darkMode then "dark" else "light";
+              mode = if theming.darkTheme then "dark" else "light";
               templates = {
                 builtin_ids = [
                   "foot"

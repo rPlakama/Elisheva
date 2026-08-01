@@ -26,8 +26,11 @@ in
       ];
 
       unifiedDNS.proxyServices = {
-        qui = 3000;
-        qbit = 8080;
+        qui = { port = 3000; };
+        qbit = {
+          port = 8080;
+          icon = "si-qbittorrent";
+        };
       };
     };
 

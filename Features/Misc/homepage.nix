@@ -8,6 +8,8 @@ let
   currentIP = config.core.ip;
   dnsCfg = config.features.unifiedDNS;
   domain = config.core.domain;
+  host = config.core.host;
+  meta = svc: if builtins.isInt svc then { } else svc;
 in
 {
   options.features.homepage = {
@@ -27,21 +29,27 @@ in
     services.homepage-dashboard = {
       enable = true;
       listenPort = 8082;
-      allowedHosts = "dashboard.${domain},${currentIP},${currentIP}:8082";
+      allowedHosts = lib.concatStringsSep "," (
+        [ "dashboard.${domain}" ]
+        ++ lib.optionals (currentIP != "") [
+          currentIP
+          "${currentIP}:8082"
+        ]
+      );
 
       settings = {
-        title = "Moontier Dashboard";
+        title = "${host} Dashboard";
         background = "https://w.wallhaven.cc/full/8g/wallhaven-8gdpgo.png";
         cardBlur = "md";
       };
 
       services = [
         {
-          "General" = lib.mapAttrsToList (name: port: {
+          "General" = lib.mapAttrsToList (name: svc: {
             "${name}" = {
-              icon = "si-${name}";
+              icon = (meta svc).icon or "si-${name}";
               href = "https://${name}.${domain}";
-              description = "Auto-generated link for ${name}";
+              description = (meta svc).description or "Auto-generated link for ${name}";
             };
           }) dnsCfg.proxyServices;
         }
