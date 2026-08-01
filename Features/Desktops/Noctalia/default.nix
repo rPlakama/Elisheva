@@ -77,6 +77,7 @@ in
     };
 
     features = {
+      preservation.system.directories = [ "/var/lib/noctalia-greeter" ];
       niri.noctalia.import = ''include "noctaliaBinds.kdl"'';
       graphicalPkgs.foot.theme = [
         "include=/home/${user}/.config/foot/themes/noctalia"
