@@ -21,6 +21,7 @@ in
       age
       sops
       fzf
+      fishPlugins.fzf-fish
       git
       unzip
       p7zip-rar
