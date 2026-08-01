@@ -17,7 +17,7 @@
     cpu.amd = true;
     isLaptop = {
       enable = true;
-      usesTunedPPD = true;
+      usesPPD = true;
     };
     git = {
       email = "rPlakama@proton.me";
