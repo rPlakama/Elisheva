@@ -17,7 +17,7 @@ let
   cfg = config.features.niri;
   theming = config.features.theming;
 
-  powerProfileBind = optionalString config.core.isLaptop.usesPPD ''
+  powerProfileBind = optionalString (config.core.isLaptop.usesPPD || config.core.isLaptop.usesTLP) ''
     "Ctrl+Alt+Q" {
         spawn "sh" "-c" "current=$(powerprofilesctl get); case $current in performance) next=balanced ;; balanced) next=power-saver ;; power-saver) next=performance ;; esac; powerprofilesctl set $next;"
     }

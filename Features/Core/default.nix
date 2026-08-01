@@ -11,6 +11,10 @@ let
     filterAttrs
     hasSuffix
     ;
+  inherit (lib.lists)
+    count
+    all
+    ;
   inherit (types)
     str
     bool
@@ -45,13 +49,6 @@ in
 
       # Laptop stuff
 
-      assertions = [
-        {
-          assertion = config.core.laptop.usesPPD.enable && config.core.laptop.usesAuto-cpufreq.enable;
-          message = "PPD and auto-cpufreq are enabled at the same time -- which is not permitted.";
-        }
-
-      ];
       isLaptop = {
         enable = mkOption {
           type = bool;
@@ -60,6 +57,7 @@ in
         };
         usesPPD = mkEnableOption "PPD daemon";
         usesAuto-cpufreq = mkEnableOption "uses auto-cpufreq";
+        usesTLP = mkEnableOption "TLP daemon";
       };
 
       # gpu
@@ -111,6 +109,7 @@ in
           default = 100;
           description = "Priority of zram swap devices (higher = used first, ensures zram is preferred over disk swap)";
         };
+
         swappiness = mkOption {
           type = int;
           default = 180;
@@ -118,5 +117,27 @@ in
         };
       };
     };
+  };
+
+  config = let
+    isLaptop = config.core.isLaptop;
+    powerManagers = [ isLaptop.usesPPD isLaptop.usesAuto-cpufreq isLaptop.usesTLP ];
+  in {
+    assertions = [
+      {
+        assertion = isLaptop.enable -> count (x: x) powerManagers == 1;
+        message = ''
+          core.isLaptop requires exactly one power manager to be enabled:
+          core.isLaptop.usesPPD, core.isLaptop.usesAuto-cpufreq or core.isLaptop.usesTLP.
+        '';
+      }
+      {
+        assertion = !isLaptop.enable -> all (x: !x) powerManagers;
+        message = ''
+          A power manager (PPD, auto-cpufreq or TLP) is enabled while core.isLaptop.enable is off.
+          Either enable core.isLaptop.enable or disable the power manager.
+        '';
+      }
+    ];
   };
 }

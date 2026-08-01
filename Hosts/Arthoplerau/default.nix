@@ -17,7 +17,7 @@
     cpu.amd = true;
     isLaptop = {
       enable = true;
-      usesAuto-cpufreq = true;
+      usesTLP = true;
     };
     git = {
       email = "rPlakama@proton.me";
