@@ -17,7 +17,7 @@ let
   cfg = config.features.niri;
   theming = config.features.theming;
 
-  power-cycle = optionalString (config.core.isLaptop.usesPPD || config.core.isLaptop.usesTLP) ''
+  power-cycle = optionalString (config.core.isLaptop.usesPPD || config.core.isLaptop.usesTunedPPD) ''
     "Ctrl+Alt+Q" { spawn-sh "noctalia msg power-cycle"; }
   '';
 

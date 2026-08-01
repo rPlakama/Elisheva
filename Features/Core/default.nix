@@ -57,7 +57,7 @@ in
         };
         usesPPD = mkEnableOption "PPD daemon";
         usesAuto-cpufreq = mkEnableOption "uses auto-cpufreq";
-        usesTLP = mkEnableOption "TLP daemon";
+        usesTunedPPD = mkEnableOption "TuneD PPD daemon (power-profiles-daemon compatible)";
       };
 
       # gpu
@@ -121,20 +121,20 @@ in
 
   config = let
     isLaptop = config.core.isLaptop;
-    powerManagers = [ isLaptop.usesPPD isLaptop.usesAuto-cpufreq isLaptop.usesTLP ];
+    powerManagers = [ isLaptop.usesPPD isLaptop.usesAuto-cpufreq isLaptop.usesTunedPPD ];
   in {
     assertions = [
       {
         assertion = isLaptop.enable -> count (x: x) powerManagers == 1;
         message = ''
           core.isLaptop requires exactly one power manager to be enabled:
-          core.isLaptop.usesPPD, core.isLaptop.usesAuto-cpufreq or core.isLaptop.usesTLP.
+          core.isLaptop.usesPPD, core.isLaptop.usesAuto-cpufreq or core.isLaptop.usesTunedPPD.
         '';
       }
       {
         assertion = !isLaptop.enable -> all (x: !x) powerManagers;
         message = ''
-          A power manager (PPD, auto-cpufreq or TLP) is enabled while core.isLaptop.enable is off.
+          A power manager (PPD, auto-cpufreq or TuneD PPD) is enabled while core.isLaptop.enable is off.
           Either enable core.isLaptop.enable or disable the power manager.
         '';
       }

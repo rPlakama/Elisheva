@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
   imports = [
     ./hardware.nix
     ../../Features
@@ -17,7 +17,7 @@
     cpu.amd = true;
     isLaptop = {
       enable = true;
-      usesTLP = true;
+      usesTunedPPD = true;
     };
     git = {
       email = "rPlakama@proton.me";
@@ -64,7 +64,7 @@
       enable = true;
       home.directories = [
         "pt"
-        ".ollama" # Might be interessing to test stuff
+        ".ollama"
       ];
     };
   };
