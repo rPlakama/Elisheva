@@ -61,4 +61,4 @@ nix run github:nix-community/nixos-anywhere -- --flake .#<host> root@<ip>
 nix run github:nix-community/nixos-anywhere -- --flake .#<host> root@<ip>
 ```
 
-<img src="images/modules-cross-talk.png" alt="Just refence, doesnt get update constantly" width="500">
+<img src="images/modules-cross-talk.png" alt="Just refence, doesnt get update constantly" width="1000">
