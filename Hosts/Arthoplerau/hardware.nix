@@ -26,21 +26,13 @@
 
     blacklistedKernelModules = [
       "snd_acp_pci"
-      "snd_pci_acp3x"
-      "snd_pci_acp5x"
-      "snd_pci_acp6x"
     ];
 
     extraModprobeConfig = ''
-      options snd-hda-intel dmic_detect=0
-    '';
-
+      		 options rtw89_pci disable_aspm_l1ss=Y disable_aspm_l1=Y
+           options snd-hda-intel dmic_detect=0 '';
     kernelModules = [
       "kvm-amd"
-    ];
-
-    kernelParams = [
-      "amdgpu.ppfeaturemask=0xffffffff"
     ];
   };
 

@@ -7,12 +7,9 @@
 let
   inherit (lib) mkMerge mkIf;
   gpu = config.core.gpu;
-  headless = config.core.headless;
 in
 {
   config = mkMerge [
-    { services.lact.enable = gpu.amd && !headless; }
-
     (mkIf gpu.amd {
       hardware = {
         graphics = {

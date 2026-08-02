@@ -38,7 +38,6 @@
   };
 
   features = {
-    neovim.enable = false;
     unifiedDNS = {
       enable = true;
       email = "rPlakama@proton.me";
