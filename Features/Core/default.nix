@@ -99,10 +99,10 @@ in
           description = "Compression algorithm for zram";
         };
 
-        memoryPercent = mkOption {
+        size = mkOption {
           type = int;
-          default = 150;
-          description = "Percentage of RAM to use for zram";
+          default = 2048;
+          description = "Fixed zram size in MiB (2048 = 2GiB)";
         };
         priority = mkOption {
           type = int;

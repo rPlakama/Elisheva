@@ -13,7 +13,7 @@ in
     zramSwap = {
       enable = true;
       algorithm = zram.algorithm;
-      memoryPercent = zram.memoryPercent;
+      memoryMax = zram.size * 1024 * 1024;
       priority = zram.priority;
     };
 
