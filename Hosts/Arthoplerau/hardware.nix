@@ -26,6 +26,9 @@
 
     blacklistedKernelModules = [
       "snd_acp_pci"
+      "snd_pci_acp3x"
+      "snd_pci_acp5x"
+      "snd_pci_acp6x"
     ];
 
     extraModprobeConfig = ''
