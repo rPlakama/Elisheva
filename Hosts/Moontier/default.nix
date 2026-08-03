@@ -50,7 +50,6 @@
     qbit.enable = true;
     slskd.enable = true;
     homepage.enable = true;
-    st.enable = true;
     nextcloud.enable = true;
     jellyfin.enable = true;
     navidrome.enable = true;
