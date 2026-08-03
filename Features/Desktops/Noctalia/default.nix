@@ -270,9 +270,6 @@ in
                 glyph = "topology-star-3";
                 scale = 0.9;
               };
-              cpu = {
-                show_label = false;
-              };
               keyboard_layout = {
                 hide_when_single_layout = true;
               };
