@@ -40,7 +40,11 @@ in
         features = {
           mediaPermissions.enable = true;
           preservation.system.directories = [ "/var/lib/kavita" ];
-          unifiedDNS.proxyServices.kavita = kavitaPort;
+          unifiedDNS.proxyServices.kavita = {
+            port = kavitaPort;
+            icon = "sh-kavita";
+            description = "Ebook and manga library";
+          };
         };
         systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
         services.kavita = {
@@ -54,7 +58,11 @@ in
         features = {
           mediaPermissions.enable = true;
           preservation.system.directories = [ "/var/lib/suwayomi-server" ];
-          unifiedDNS.proxyServices.suwayomi = suwayomiPort;
+          unifiedDNS.proxyServices.suwayomi = {
+            port = suwayomiPort;
+            icon = "sh-suwayomi";
+            description = "Manga reader (Suwayomi-Server)";
+          };
         };
         systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = [ "media" ];
         services.suwayomi-server = {

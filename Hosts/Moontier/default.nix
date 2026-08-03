@@ -24,6 +24,8 @@
     freeSwapThreshold = 10;
   };
 
+  services.glances.enable = true;
+
   core = {
     user = "rplakama";
     ip = "192.168.0.196";
@@ -43,6 +45,11 @@
       email = "rPlakama@proton.me";
       gateway = "192.168.0.1";
       tailscaleIP = "100.119.129.77";
+      proxyServices.glances = {
+        port = 61208;
+        icon = "sh-glances";
+        description = "System monitoring";
+      };
     };
 
     library.enable = true;

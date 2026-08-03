@@ -17,7 +17,7 @@ digraph cross_talk {
     fontcolor = "#e9ecef";
     style = "dashed,rounded";
     color = "#5f3dc4";
-    core [label = "Core\nbootloader · gpu · hjem\nkernel · nix · packages\nservices · system · user · zram", fillcolor = "#2b1f4e"];
+    core [label = "Core\nbootloader · gpu · hjem\nkernel · nix · packages\nservices · system · tuned\nuser · zram", fillcolor = "#2b1f4e"];
   }
 
   subgraph cluster_desktop {
@@ -58,7 +58,6 @@ digraph cross_talk {
     ia_tools [label = "ia-tools"];
     nextcloud [label = "nextcloud"];
     qbit [label = "qbit\n(qBittorrent)"];
-    st [label = "st\n(SillyTavern)"];
     sunshine [label = "sunshine"];
     virtualization [label = "virtualization"];
   }
@@ -91,8 +90,9 @@ digraph cross_talk {
   noctalia -> theming [label = "reads fontFamily/darkTheme", color = "#868e96", style = "dashed"];
   graphicalPkgs -> theming [label = "reads monoFont/monoFontSize", color = "#868e96", style = "dashed"];
   theming -> neovim [label = "base16 colorscheme", color = "#7048e8"];
-  noctalia -> niri [label = "noctalia.import\n+ asserts niri.enable\n+ reads keyboardLayout", color = "#c92a2a", style = "dashed"];
+  noctalia -> niri [label = "writes noctalia.import\n+ asserts niri.enable\n+ reads noctalia.enabled", color = "#c92a2a", style = "dashed"];
   noctalia -> graphicalPkgs [label = "foot.theme", color = "#7048e8"];
+  niri -> core [label = "reads isLaptop power-manager\n→ power-cycle bind", color = "#868e96", style = "dashed"];
 
   /* ---- Media -> hubs ---- */
   feishin -> unifiedDNS [label = "feishin:9183", color = "#2f9e44"];
@@ -125,8 +125,6 @@ digraph cross_talk {
   qbit -> mediaPermissions [label = "enable (headless)", color = "#e8590c"];
   qbit -> preservation [label = "/var/lib/qbittorrent\n/var/lib/qui", color = "#1971c2"];
   qbit -> unifiedDNS [label = "qui:3000, qbit:8080", color = "#2f9e44"];
-  st -> preservation [label = "/var/lib/SillyTavern", color = "#1971c2"];
-  st -> unifiedDNS [label = "st:6720", color = "#2f9e44"];
   sunshine -> preservation [label = "/var/lib/sunshine", color = "#1971c2"];
   virtualization -> preservation [label = "/var/lib/docker\n/var/lib/libvirt", color = "#1971c2"];
   unifiedDNS -> preservation [label = "/etc/pihole", color = "#1971c2"];
@@ -140,7 +138,6 @@ digraph cross_talk {
   moontier -> qbit [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> slskd [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> homepage [label = "", color = "#5c7cfa", style = "dotted"];
-  moontier -> st [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> nextcloud [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> jellyfin [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> navidrome [label = "", color = "#5c7cfa", style = "dotted"];

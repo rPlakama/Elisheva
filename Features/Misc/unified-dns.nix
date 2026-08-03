@@ -228,6 +228,10 @@ in
 
     features.preservation.system.directories = [ "/etc/pihole" ];
 
-    features.unifiedDNS.proxyServices.pi-hole = 8081;
+    features.unifiedDNS.proxyServices.pi-hole = {
+      port = 8081;
+      icon = "si-pihole";
+      description = "DNS ad-blocker and DHCP server";
+    };
   };
 }

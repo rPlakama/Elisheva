@@ -34,7 +34,11 @@ in
     features = {
       mediaPermissions.enable = true;
       preservation.system.directories = [ "/var/lib/slskd" ];
-      unifiedDNS.proxyServices.slskd = slskdPort;
+      unifiedDNS.proxyServices.slskd = {
+        port = slskdPort;
+        icon = "sh-slskd";
+        description = "Soulseek music sharing client";
+      };
     };
 
     networking.firewall.allowedTCPPorts = [ slskdListenPort ];

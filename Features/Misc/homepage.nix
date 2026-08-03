@@ -24,7 +24,11 @@ in
       }
     ];
 
-    features.unifiedDNS.proxyServices.dashboard = 8082;
+    features.unifiedDNS.proxyServices.dashboard = {
+      port = 8082;
+      icon = "sh-homepage";
+      description = "Service dashboard";
+    };
 
     services.homepage-dashboard = {
       enable = true;

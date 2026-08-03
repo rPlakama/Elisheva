@@ -27,7 +27,11 @@ in
 
   config = lib.mkIf cfg.enable {
     features = {
-      unifiedDNS.proxyServices.feishin = cfg.port;
+      unifiedDNS.proxyServices.feishin = {
+        port = cfg.port;
+        icon = "sh-feishin";
+        description = "Self-hosted music player web UI";
+      };
       preservation.system.directories = [ "/var/lib/feishin" ];
     };
 

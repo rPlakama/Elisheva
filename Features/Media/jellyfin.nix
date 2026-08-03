@@ -16,6 +16,7 @@ in
       unifiedDNS.proxyServices.jellyfin = {
         port = 8096;
         icon = "si-jellyfin";
+        description = "Movies, shows and music";
       };
     };
     services.jellyfin = {

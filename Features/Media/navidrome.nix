@@ -40,7 +40,8 @@ in
       };
       unifiedDNS.proxyServices.navidrome = {
         port = 4533;
-        icon = "si-navidrome";
+        icon = "sh-navidrome";
+        description = "Music streaming server";
       };
       feishin.enable = lib.mkIf cfg.feishin (lib.mkDefault true);
     };
