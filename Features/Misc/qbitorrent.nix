@@ -31,7 +31,7 @@ in
           icon = "sh-qui";
           description = "qBittorrent web UI";
         };
-        qbit = {
+        qbittorrent = {
           port = 8080;
           icon = "si-qbittorrent";
           description = "BitTorrent client";

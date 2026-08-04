@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -20,6 +21,7 @@ in
       mode = "0400";
     };
     services.nextcloud = {
+      package = pkgs.nextcloud34;
       enable = true;
       hostName = ncHost;
       https = true;
