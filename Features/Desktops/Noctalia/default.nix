@@ -243,7 +243,7 @@ in
               launcher.glyph = "snowflake";
               workspaces = {
                 hide_when_empty = true;
-                display = "none";
+                label_source = "none";
                 pill_scale = 0.85;
               };
               clock = {

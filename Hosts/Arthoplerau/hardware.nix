@@ -31,9 +31,7 @@
       "snd_pci_acp6x"
     ];
 
-    extraModprobeConfig = ''
-      		 options rtw89_pci disable_aspm_l1ss=Y disable_aspm_l1=Y
-           options snd-hda-intel dmic_detect=0 '';
+    extraModprobeConfig = "options snd-hda-intel dmic_detect=0 ";
     kernelModules = [
       "kvm-amd"
     ];
@@ -43,9 +41,8 @@
 
   hardware = {
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    firmware = [
-      pkgs.alsa-firmware
-      pkgs.sof-firmware
+    firmware = with pkgs; [
+      sof-firmware
     ];
   };
 }
