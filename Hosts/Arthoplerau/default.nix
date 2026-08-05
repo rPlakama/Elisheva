@@ -37,6 +37,7 @@
     gaming = {
       enable = true;
       gsr.enable = true;
+      emulation = true;
     };
 
     qbit.enable = true;

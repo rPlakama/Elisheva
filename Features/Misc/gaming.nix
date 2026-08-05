@@ -26,6 +26,12 @@ in
       default = true;
       description = "Enable Gamescope (part of the bundle, can be opted out)";
     };
+    emulation = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Whatever enable game-emulation";
+    };
+
     gamemode = lib.mkOption {
       type = lib.types.bool;
       default = true;
@@ -43,9 +49,14 @@ in
 
     boot.kernelModules = [ "ntsync" ];
 
-    environment.systemPackages = with pkgs; [
-      mangohud
-    ];
+    environment.systemPackages =
+      with pkgs;
+      [
+        mangohud
+      ]
+      ++ lib.optionals (cfg.emulation) [
+        rpcs3
+      ];
 
     programs = {
 

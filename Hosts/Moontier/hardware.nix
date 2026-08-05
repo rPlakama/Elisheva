@@ -5,9 +5,6 @@
   ...
 }:
 let
-  # BFQ cgroup v2 IO weights (latency-first stack): cap background hogs so
-  # Jellyfin / Nextcloud / Navidrome reads win while qBittorrent + arr are busy.
-  # Keyed on the unifiedDNS proxyServices inventory (single source of truth);
   # services without an entry keep the default weight (100).
   ioWeights = {
     qbittorrent = "10";
@@ -65,12 +62,7 @@ in
 
   # Block device & I/O Queue IOPS Maxxing Rules
   services.udev.extraRules = ''
-    # NVMe / SSD (non-rotational): zero-overhead 'none' scheduler, disable entropy overhead, cpu core affinity pinning
-    ACTION=="add|change", KERNEL=="nvme[0-9]*n[0-9]*|sd[a-z]", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="none", ATTR{queue/add_random}="0", ATTR{queue/rq_affinity}="2", ATTR{queue/nomerges}="0"
     # HDD (rotational): 'bfq' scheduler tuned for Skyhawk AI 256MB cache surveillance drive
-    # low_latency=1: BFQ privileges interactive/soft real-time streams (Jellyfin/ffmpeg) over background load
-    # read_ahead_kb=4096: deep read-ahead for sequential media streaming
-    # -- USB-attached variant (active): SkyHawk currently lives in a USB enclosure
     ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTRS{transport}=="usb", ATTR{queue/scheduler}="bfq", ATTR{queue/nr_requests}="512", ATTR{queue/read_ahead_kb}="4096", ATTR{queue/add_random}="0", ATTR{queue/rq_affinity}="2", ATTR{queue/nomerges}="0", ATTR{queue/iosched/low_latency}="1"
     # -- Native SATA variant (commented): enable when the drive is moved onto a SATA port
     # ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTRS{transport}=="spi", ATTR{queue/scheduler}="bfq", ATTR{queue/nr_requests}="512", ATTR{queue/read_ahead_kb}="4096", ATTR{queue/add_random}="0", ATTR{queue/rq_affinity}="2", ATTR{queue/nomerges}="0", ATTR{queue/iosched/low_latency}="1"
@@ -89,7 +81,6 @@ in
   };
 
   # Derive per-service IO weights from the unifiedDNS service inventory
-  # (proxy service names now match systemd unit names 1:1)
   systemd.services = lib.mapAttrs' (
     name: _:
     lib.nameValuePair name {
