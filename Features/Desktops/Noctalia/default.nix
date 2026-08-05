@@ -214,8 +214,11 @@ in
                   fill = "surface_variant";
                   id = "g6";
                   members = [
-                    "brightness"
+                    "cpu"
+                    "ram"
+                    "spacer_3"
                     "clock"
+                    "spacer_4"
                     "taskbar"
                   ];
                   opacity = widgetsGroupOpacity;
@@ -233,6 +236,10 @@ in
               { type = "system"; }
             ];
             widget = {
+              cpu.show_value = false;
+              ram.show_value = false;
+              spacer_3.type = "spacer";
+              spacer_4.type = "spacer";
               systemd-inhibit = {
                 glyph = "eye-star";
                 tooltip = "Calls a btop with systemd-inhibit";
@@ -243,7 +250,7 @@ in
               launcher.glyph = "snowflake";
               workspaces = {
                 hide_when_empty = true;
-                label_source = "none";
+                show_labels = false;
                 pill_scale = 0.85;
               };
               clock = {
