@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.features.neovim;
+  headless = config.core.headless;
 in
 {
   options.features.neovim = {
@@ -34,7 +35,7 @@ in
       imports = [
         ./settings.nix
         ./plugins.nix
-        ./lsp.nix
+        (import ./lsp.nix { inherit headless; })
         ./keymaps.nix
       ];
     };

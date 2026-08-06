@@ -1,7 +1,5 @@
-{ config, lib, ... }:
-let
-  headless = config.core.headless;
-in
+{ headless }:
+{ lib, ... }:
 {
   plugins = {
     blink-cmp = {
