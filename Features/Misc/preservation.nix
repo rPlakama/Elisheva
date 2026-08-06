@@ -4,7 +4,16 @@
   ...
 }:
 let
-  inherit (lib) mkOption mkIf types foldl' elem subtractLists optionalAttrs mkEnableOption;
+  inherit (lib)
+    mkOption
+    mkIf
+    types
+    foldl'
+    elem
+    subtractLists
+    optionalAttrs
+    mkEnableOption
+    ;
   inherit (types) listOf anything;
 
   cfg = config.features.preservation;
@@ -23,12 +32,21 @@ let
     "/etc/NetworkManager/system-connections"
     "/etc/ssh"
     "/var/lib/sops-nix"
-    { directory = "/tmp"; mode = "1777"; }
-    { directory = "/var/lib/nixos"; inInitrd = true; }
+    {
+      directory = "/tmp";
+      mode = "1777";
+    }
+    {
+      directory = "/var/lib/nixos";
+      inInitrd = true;
+    }
   ];
 
   defaultSystemFiles = [
-    { file = "/etc/machine-id"; inInitrd = true; }
+    {
+      file = "/etc/machine-id";
+      inInitrd = true;
+    }
   ];
 
   defaultHomeDirs = [
@@ -66,7 +84,8 @@ let
         "/fast" = {
           directories = systemDirs;
           files = systemFiles;
-        } // userHome fastHomeDirs fastHomeFiles;
+        }
+        // userHome fastHomeDirs fastHomeFiles;
         "/persistent" = userHome persistentHomeDirs persistentHomeFiles;
       }
     else
@@ -74,12 +93,17 @@ let
         "/persistent" = {
           directories = systemDirs;
           files = systemFiles;
-        } // userHome homeDirs homeFiles;
+        }
+        // userHome homeDirs homeFiles;
       };
 in
 {
   options.features.preservation = {
-    enable = mkOption { type = types.bool; default = false; description = "Enable impermanence with persistent state"; };
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable impermanence with persistent state";
+    };
 
     system = {
       directories = mkOption {
