@@ -11,6 +11,7 @@ let
     mkMerge
     optionalAttrs
     optional
+    optionals
     genAttrs
     ;
   inherit (lib.types)
@@ -31,7 +32,7 @@ let
       "noatime"
       "compress=${diskoCfg.compression}"
     ]
-    ++ optional isSSD [
+    ++ optionals isSSD [
       "discard=async"
       "ssd"
     ];
