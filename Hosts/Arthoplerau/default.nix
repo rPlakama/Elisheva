@@ -49,7 +49,7 @@
       dualDrive = true;
       primaryDrive = "/dev/nvme1n1";
       secondaryDrive = "/dev/nvme0n1";
-      compression = "zstd:1";
+      compression = "zstd:6";
       swap.enable = true;
     };
 

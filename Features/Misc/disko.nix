@@ -165,7 +165,7 @@ in
       };
       size = lib.mkOption {
         type = lib.types.str;
-        default = "16G";
+        default = "8G";
         description = "Swap partition size";
       };
     };

@@ -40,6 +40,7 @@ let
     "Videos"
     ".local"
     ".config"
+    ".cache"
     ".ssh"
   ];
 in
