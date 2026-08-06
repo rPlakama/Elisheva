@@ -13,7 +13,6 @@
     user = "rplakama";
     gpu.nvidia = true;
     cpu.amd = true;
-    zram.size = 8192;
     git = {
       email = "rPlakama@proton.me";
       user = "rPlakama";
@@ -23,16 +22,6 @@
     neovim.enable = true;
     virtualization.enable = true;
     sunshine.enable = true;
-
-    disko = {
-      enable = true;
-      primaryDrive = "/dev/nvme1n1";
-      compression = "zstd:6"; # Amazing
-      swap.enable = true;
-    };
-
-    preservation.enable = true;
-
     gaming = {
       enable = true;
       gsr.enable = true;

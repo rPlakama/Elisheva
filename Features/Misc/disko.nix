@@ -5,8 +5,6 @@
 }:
 let
   diskoCfg = config.features.disko;
-  dual = diskoCfg.dualDrive;
-  fastEnabled = dual.enable && dual.splitFast;
 
   subvolOpts =
     subvol: isSSD:
@@ -47,27 +45,12 @@ let
     };
   };
 
-  fastSubvol = "/fast";
-
-  rootSubvolumes =
-    {
-      "/nix" = {
-        mountOptions = subvolOpts "nix" diskoCfg.isSSD.primary;
-        mountpoint = "/nix";
-      };
-    }
-    // lib.optionalAttrs (!dual.enable) {
-      "/persistent" = {
-        mountOptions = subvolOpts "persistent" diskoCfg.isSSD.primary;
-        mountpoint = "/persistent";
-      };
-    }
-    // lib.optionalAttrs fastEnabled {
-      "${fastSubvol}" = {
-        mountOptions = subvolOpts "fast" diskoCfg.isSSD.primary;
-        mountpoint = fastSubvol;
-      };
+  rootSubvolumes = {
+    "/nix" = {
+      mountOptions = subvolOpts "nix" diskoCfg.isSSD.primary;
+      mountpoint = "/nix";
     };
+  };
 
   rootPartition = {
     name = "root";
@@ -75,7 +58,15 @@ let
     content = {
       type = "btrfs";
       extraArgs = [ "-f" ];
-      subvolumes = rootSubvolumes;
+      subvolumes = lib.mkMerge [
+        rootSubvolumes
+        (lib.mkIf (!diskoCfg.dualDrive) {
+          "/persistent" = {
+            mountOptions = subvolOpts "persistent" diskoCfg.isSSD.primary;
+            mountpoint = "/persistent";
+          };
+        })
+      ];
     };
   };
 
@@ -124,18 +115,6 @@ let
       };
     };
   };
-
-  diskDevices = lib.mkMerge [
-    primaryDisk
-    (lib.mkIf dual.enable secondaryDisk)
-  ];
-
-  neededForBootFs = {
-    "/nix".neededForBoot = true;
-    "/persistent".neededForBoot = true;
-  } // lib.optionalAttrs fastEnabled {
-    ${fastSubvol}.neededForBoot = true;
-  };
 in
 {
   options.features.disko = {
@@ -157,32 +136,8 @@ in
       };
     };
     dualDrive = lib.mkOption {
-      type =
-        lib.types.coercedTo lib.types.bool
-          (v: {
-            enable = v;
-            splitFast = false;
-          })
-          (
-            lib.types.submodule {
-              options = {
-                enable = lib.mkOption {
-                  type = lib.types.bool;
-                  default = false;
-                  description = "Spread /nix and /persistent across separate drives";
-                };
-                splitFast = lib.mkOption {
-                  type = lib.types.bool;
-                  default = false;
-                  description = "Split a /${fastSubvol} persistent tier off the primary (fast) drive";
-                };
-              };
-            }
-          );
-      default = {
-        enable = false;
-        splitFast = false;
-      };
+      type = lib.types.bool;
+      default = false;
       description = "Spread /nix and /persistent across separate drives";
     };
     primaryDrive = lib.mkOption {
@@ -210,7 +165,7 @@ in
       };
       size = lib.mkOption {
         type = lib.types.str;
-        default = "8G";
+        default = "16G";
         description = "Swap partition size";
       };
     };
@@ -223,7 +178,7 @@ in
         message = "features.disko.primaryDrive must be set when disko is enabled";
       }
       {
-        assertion = !dual.enable || diskoCfg.secondaryDrive != "";
+        assertion = !diskoCfg.dualDrive || diskoCfg.secondaryDrive != "";
         message = "features.disko.secondaryDrive must be set when dualDrive is enabled";
       }
     ];
@@ -235,9 +190,15 @@ in
           "mode=755"
         ];
       };
-      disk = diskDevices;
+      disk = lib.mkMerge [
+        primaryDisk
+        (lib.mkIf diskoCfg.dualDrive secondaryDisk)
+      ];
     };
 
-    fileSystems = neededForBootFs;
+    fileSystems = {
+      "/nix".neededForBoot = true;
+      "/persistent".neededForBoot = true;
+    };
   };
 }
