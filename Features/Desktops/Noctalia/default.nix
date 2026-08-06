@@ -18,7 +18,8 @@ let
   theming = config.features.theming;
 
   fontFamily = theming.fontFamily;
-  barRadius = 3;
+  barRadius = 0;
+  barOpacity = 0.75;
 
   widgetsGroupOpacity = 0.0;
   widgetsGroupSpacing = 6.0;
@@ -156,7 +157,7 @@ in
             brightness.enable_ddcutil = true;
             bar.default = {
               margin_edge = 7;
-              background_opacity = 1.0;
+              background_opacity = barOpacity;
               font_family = fontFamily;
               position = "left";
               radius = barRadius;

@@ -1,6 +1,5 @@
 {
   lib,
-  config,
   ...
 }:
 let
@@ -10,10 +9,6 @@ let
     types
     filterAttrs
     hasSuffix
-    ;
-  inherit (lib.lists)
-    count
-    all
     ;
   inherit (types)
     str
@@ -117,27 +112,5 @@ in
         };
       };
     };
-  };
-
-  config = let
-    isLaptop = config.core.isLaptop;
-    powerManagers = [ isLaptop.usesPPD isLaptop.usesAuto-cpufreq isLaptop.usesTunedPPD ];
-  in {
-    assertions = [
-      {
-        assertion = isLaptop.enable -> count (x: x) powerManagers == 1;
-        message = ''
-          core.isLaptop requires exactly one power manager to be enabled:
-          core.isLaptop.usesPPD, core.isLaptop.usesAuto-cpufreq or core.isLaptop.usesTunedPPD.
-        '';
-      }
-      {
-        assertion = !isLaptop.enable -> all (x: !x) powerManagers;
-        message = ''
-          A power manager (PPD, auto-cpufreq or TuneD PPD) is enabled while core.isLaptop.enable is off.
-          Either enable core.isLaptop.enable or disable the power manager.
-        '';
-      }
-    ];
   };
 }

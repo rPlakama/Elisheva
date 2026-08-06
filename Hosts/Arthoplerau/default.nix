@@ -53,12 +53,6 @@
       swap.enable = true;
     };
 
-    preservation = {
-      enable = true;
-      home.directories = [
-        "pt"
-        ".ollama"
-      ];
-    };
+    preservation.enable = true;
   };
 }
