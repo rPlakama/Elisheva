@@ -37,6 +37,8 @@
     gpu.amd = true;
     cpu.amd = true;
     headless = true;
+    zram.size = 8096;
+
   };
 
   features = {
