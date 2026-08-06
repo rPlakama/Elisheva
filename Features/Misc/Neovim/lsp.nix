@@ -1,4 +1,7 @@
-{ lib, ... }:
+{ config, lib, ... }:
+let
+  headless = config.core.headless;
+in
 {
   plugins = {
     blink-cmp = {
@@ -22,9 +25,9 @@
       enable = true;
       servers = {
         rust_analyzer = {
-          enable = true;
-          installCargo = false;
-          installRustc = false;
+          enable = !headless;
+          installCargo = true;
+          installRustc = true;
         };
         tinymist.enable = true;
         ts_ls = {
