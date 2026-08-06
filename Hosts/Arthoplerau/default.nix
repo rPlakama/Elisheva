@@ -57,17 +57,6 @@
       swap.enable = true;
     };
 
-    preservation = {
-      enable = true;
-      fast = {
-        home.directories = [
-          "Projects"
-          ".config"
-        ];
-        system.directories = [
-          "/var/lib/libvirt"
-        ];
-      };
-    };
+    preservation.enable = true;
   };
 }

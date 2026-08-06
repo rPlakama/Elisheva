@@ -130,7 +130,7 @@ in
       system = {
         directories = lib.mkOption {
           type = lib.types.listOf lib.types.anything;
-          default = [ ];
+          default = [ "/var/lib/libvirt" ];
           description = "System directories to persist on the fast drive tier (${fastMountpoint}). Falls back to /persistent on hosts without the fast tier.";
           example = [ "/var/lib/some-sqlite-db" ];
         };
@@ -144,7 +144,10 @@ in
       home = {
         directories = lib.mkOption {
           type = lib.types.listOf lib.types.anything;
-          default = [ ];
+          default = [
+            "Projects"
+            ".config"
+          ];
           description = "Home directories to persist on the fast drive tier (${fastMountpoint}). Falls back to /persistent on hosts without the fast tier.";
           example = [ "Projects" ];
         };
