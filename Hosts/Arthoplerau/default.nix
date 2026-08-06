@@ -49,7 +49,7 @@
       enable = true;
       dualDrive = {
         enable = true;
-        splitFast = true;
+        fastDirs = true;
       };
       primaryDrive = "/dev/nvme1n1";
       secondaryDrive = "/dev/nvme0n1";

@@ -33,7 +33,7 @@ Placement is decided by the mount point:
 - **Secondary drive** → `/persistent` with the rest of home (`features.preservation.home.*`).
 - **One-drive hosts** — no fast tier; everything falls back to `/persistent`.
 
-`/fast` exists only when `features.disko.dualDrive.enable` + `.splitFast`.
+`/fast` exists only when `features.disko.dualDrive.enable` + `.fastDirs`.
 
 ## Modules cross-talk
 

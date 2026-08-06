@@ -11,7 +11,7 @@ let
   diskoCfg = config.features.disko;
   user = config.core.user;
 
-  fastTier = diskoCfg.dualDrive.enable && diskoCfg.dualDrive.splitFast;
+  fastTier = diskoCfg.dualDrive.enable && diskoCfg.dualDrive.fastDirs;
 
   # De-duplicate the persistence lists (defaults + any overrides).
   uniq = foldl' (acc: x: if elem x acc then acc else acc ++ [ x ]) [ ];
