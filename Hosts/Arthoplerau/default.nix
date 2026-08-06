@@ -15,6 +15,7 @@
     user = "rplakama";
     gpu.amd = true;
     cpu.amd = true;
+    zram.size = 8192;
     isLaptop = {
       enable = true;
       usesPPD = true;
@@ -46,13 +47,27 @@
 
     disko = {
       enable = true;
-      dualDrive = true;
+      dualDrive = {
+        enable = true;
+        splitFast = true;
+      };
       primaryDrive = "/dev/nvme1n1";
       secondaryDrive = "/dev/nvme0n1";
-      compression = "zstd:1";
+      compression = "zstd:6"; # Gotta reinstall
       swap.enable = true;
     };
 
-    preservation.enable = true;
+    preservation = {
+      enable = true;
+      fast = {
+        home.directories = [
+          "Projects"
+          ".config"
+        ];
+        system.directories = [
+          "/var/lib/libvirt"
+        ];
+      };
+    };
   };
 }

@@ -8,6 +8,9 @@ let
   diskoCfg = config.features.disko;
   user = config.core.user;
 
+  fastTier = diskoCfg.dualDrive.enable && diskoCfg.dualDrive.splitFast;
+  fastMountpoint = "/fast";
+
   defaultSystemDirs = [
     "/var/lib/tailscale"
     "/var/lib/bluetooth"
@@ -40,8 +43,54 @@ let
     "Videos"
     ".local"
     ".config"
+    ".cache"
     ".ssh"
   ];
+
+  persistentHomeDirs =
+    if fastTier then
+      lib.subtractLists cfg.fast.home.directories (defaultHomeDirs ++ cfg.home.directories)
+    else
+      defaultHomeDirs ++ cfg.home.directories ++ cfg.fast.home.directories;
+  persistentHomeFiles =
+    if fastTier then
+      lib.subtractLists cfg.fast.home.files (cfg.home.files)
+    else
+      cfg.home.files ++ cfg.fast.home.files;
+  persistentSystemDirs =
+    if fastTier then
+      defaultSystemDirs ++ lib.subtractLists cfg.fast.system.directories cfg.system.directories
+    else
+      defaultSystemDirs ++ cfg.system.directories ++ cfg.fast.system.directories;
+  persistentSystemFiles =
+    if fastTier then
+      defaultSystemFiles ++ lib.subtractLists cfg.fast.system.files cfg.system.files
+    else
+      defaultSystemFiles ++ cfg.system.files ++ cfg.fast.system.files;
+
+  persistentRoot = {
+    "/persistent" = {
+      directories = persistentSystemDirs;
+      files = persistentSystemFiles;
+      users.${user} = {
+        directories = persistentHomeDirs;
+        files = persistentHomeFiles;
+      };
+    };
+  };
+
+  fastRoot = lib.optionalAttrs fastTier {
+    ${fastMountpoint} = {
+      directories = cfg.fast.system.directories;
+      files = cfg.fast.system.files;
+      users.${user} = {
+        directories = cfg.fast.home.directories;
+        files = cfg.fast.home.files;
+      };
+    };
+  };
+
+  preserveAt = persistentRoot // fastRoot;
 in
 {
   options.features.preservation = {
@@ -76,6 +125,37 @@ in
         example = [ ".gitconfig" ];
       };
     };
+
+    fast = {
+      system = {
+        directories = lib.mkOption {
+          type = lib.types.listOf lib.types.anything;
+          default = [ ];
+          description = "System directories to persist on the fast drive tier (${fastMountpoint}). Falls back to /persistent on hosts without the fast tier.";
+          example = [ "/var/lib/some-sqlite-db" ];
+        };
+        files = lib.mkOption {
+          type = lib.types.listOf lib.types.anything;
+          default = [ ];
+          description = "System files to persist on the fast drive tier (${fastMountpoint}). Falls back to /persistent on hosts without the fast tier.";
+          example = [ "/var/lib/some-state.db" ];
+        };
+      };
+      home = {
+        directories = lib.mkOption {
+          type = lib.types.listOf lib.types.anything;
+          default = [ ];
+          description = "Home directories to persist on the fast drive tier (${fastMountpoint}). Falls back to /persistent on hosts without the fast tier.";
+          example = [ "Projects" ];
+        };
+        files = lib.mkOption {
+          type = lib.types.listOf lib.types.anything;
+          default = [ ];
+          description = "Home files to persist on the fast drive tier (${fastMountpoint}). Falls back to /persistent on hosts without the fast tier.";
+          example = [ ".gitconfig" ];
+        };
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -93,14 +173,7 @@ in
 
     preservation = {
       enable = true;
-      preserveAt."/persistent" = {
-        directories = defaultSystemDirs ++ cfg.system.directories;
-        files = defaultSystemFiles ++ cfg.system.files;
-        users.${user} = {
-          directories = defaultHomeDirs ++ cfg.home.directories;
-          files = cfg.home.files;
-        };
-      };
+      inherit preserveAt;
     };
   };
 }
