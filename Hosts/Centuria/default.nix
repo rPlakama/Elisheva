@@ -27,7 +27,7 @@
     disko = {
       enable = true;
       primaryDrive = "/dev/nvme1n1";
-      compression = "zstd:6"; # Amazing
+      compression = "zstd:6";
       swap.enable = true;
     };
 
