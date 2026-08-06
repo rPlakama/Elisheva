@@ -29,7 +29,7 @@ With `features.preservation`, `/` is tmpfs and **only what's declared survives a
 
 Placement is decided by the mount point:
 
-- **Primary (fast) drive** → `/nix`, plus `/fast` holding *all system state* (`features.preservation.system.*`) and an *optional fast home* subset (`features.preservation.fast.home.directories`, default `Projects`, `.config`, `.cache`).
+- **Primary (fast) drive** → `/nix`, plus `/fast` holding *all system state* (`features.preservation.system.*`) and an *optional fast home* subset (`features.preservation.fast.home.directories`, default `Projects`, `.cache`).
 - **Secondary drive** → `/persistent` with the rest of home (`features.preservation.home.*`).
 - **One-drive hosts** — no fast tier; everything falls back to `/persistent`.
 
