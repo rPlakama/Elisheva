@@ -1,64 +1,40 @@
 # Elisheva
 
-Personal NixOS flake managing multiple machines via a modular feature-based architecture within the porpuse of reducing hardcode;
+Personal NixOS flake managing multiple machines with a modular, feature-based architecture (each feature is opt-in via an `enable` flag to avoid hardcoding).
 
 ## Hosts
 
-| Host | Type | CPU | GPU | RAM | Storage | FS |
-|---|---|---|---|---|---|---|
-| **Centuria** | Desktop | Ryzen 7 5700X | RTX 3060 12GB | 32GB DDR4 | 512GB NVMe | XFS |
-| **Moontier** | Server | Ryzen 7 5700U | AMD Radeon| 16GB DDR4 | 6TB | XFS |
-| **Arthoplerau** | Laptop | Ryzen AI 350 | AMD Radeon | 16GB DDR5 | 512GB + 1TB NVMe | tmpfs + BTRFS |
+| Host | Type | GPU | Storage |
+|---|---|---|---|
+| **Centuria** | Desktop | RTX 3060 12GB | 512GB NVMe |
+| **Moontier** | Server | AMD Radeon | 6TB |
+| **Arthoplerau** | Laptop | AMD Radeon | 512GB + 1TB NVMe (dual) |
 
 ## Structure
 
 ```
-Hosts/           ← per-machine entry points (imports hardware.nix + Features)
+Hosts/           per-machine entry point (imports hardware.nix + Features)
 Features/
-├── Core/        ← always enabled: Central features -- being hardwre or services that are shared though multiple hosts.
-├── Desktops/    ← graphical session: Everthing releated to a graphical environment.
-├── Media/       ← self-hosted media, such as: Jellyfin...
-└── Misc/        ← Non Specifc;
+├── Core/        always enabled: hardware & services shared across hosts
+├── Desktops/    graphical sessions
+├── Media/       self-hosted media (Jellyfin, etc.)
+└── Misc/        everything else
 ```
 
-Each feature follows a simple pattern:
+Feature dirs are **auto-imported** — drop any `.nix` file into a folder and it's picked up. Hosts enable features in `Hosts/<name>/default.nix`; each feature exposes `options.features.<name>.enable` gated by `config = mkIf cfg.enable`.
 
-```nix
-options.features.<name>.enable = lib.mkEnableOption "...";
-config = lib.mkIf cfg.enable { ... };
-```
+## Impermanence & the fast tier
 
-Hosts enable features in their `default.nix`. Feature directories are auto-discovered — drop a `.nix` file into the right folder and it's automatically imported.
+With `features.preservation`, `/` is tmpfs and **only what's declared survives a reboot**. Persistent mounts: `/nix`, `/fast`, `/persistent`, `/boot`.
 
-## Disko Installation
+Placement is decided by the mount point:
 
-For hosts with `features.disko.enable = true`:
+- **Primary (fast) drive** → `/nix`, plus `/fast` holding *all system state* (`features.preservation.system.*`) and an *optional fast home* subset (`features.preservation.fast.home.directories`, default `Projects`, `.config`, `.cache`).
+- **Secondary drive** → `/persistent` with the rest of home (`features.preservation.home.*`).
+- **One-drive hosts** — no fast tier; everything falls back to `/persistent`.
 
-```bash
-# From NixOS live ISO
-mkdir nixos
-git clone https://github.com/rPlakama/Elisheva.git ./nixos
+`/fast` exists only when `features.disko.dualDrive.enable` + `.splitFast`.
 
-# Partition the disk
-sudo nix --extra-experimental-features "nix-command flakes" \
-  run 'github:nix-community/disko/latest#disko-install' -- \
-  --flake .#<host> \
-  --disk main /dev/nvme1n1 \
-  --disk secondary /dev/nvme0n1  # for dual-drive hosts
+## Modules cross-talk
 
-nixos-install --flake .#<hostname>
-```
-
-For Centuria and Moontier (no disko), partition manually then run `nixos-install --flake .#<hostname>`.
-
-## nixos-anywhere (remote install) (From Another NixOS Host) -- Preferably -- an more powerfull one.
-
-```bash
-# For hosts with disko, partitioning is handled automatically:
-nix run github:nix-community/nixos-anywhere -- --flake .#<host> root@<ip>
-
-# For hosts without disko, pre-partition the target then:
-nix run github:nix-community/nixos-anywhere -- --flake .#<host> root@<ip>
-```
-
-<img src="images/modules-cross-talk.png" alt="Just refence, doesnt get update constantly" width="1000">
+<img src="images/modules-cross-talk.png" alt="Just a reference, not kept up-to-date" width="1000">

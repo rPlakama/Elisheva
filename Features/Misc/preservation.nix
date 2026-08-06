@@ -4,12 +4,17 @@
   ...
 }:
 let
+  inherit (lib) mkOption mkIf types foldl' elem subtractLists optionalAttrs mkEnableOption;
+  inherit (types) listOf anything;
+
   cfg = config.features.preservation;
   diskoCfg = config.features.disko;
   user = config.core.user;
 
   fastTier = diskoCfg.dualDrive.enable && diskoCfg.dualDrive.splitFast;
-  fastMountpoint = "/fast";
+
+  # De-duplicate the persistence lists (defaults + any overrides).
+  uniq = foldl' (acc: x: if elem x acc then acc else acc ++ [ x ]) [ ];
 
   defaultSystemDirs = [
     "/var/lib/tailscale"
@@ -18,21 +23,12 @@ let
     "/etc/NetworkManager/system-connections"
     "/etc/ssh"
     "/var/lib/sops-nix"
-    {
-      directory = "/tmp";
-      mode = "1777";
-    }
-    {
-      directory = "/var/lib/nixos";
-      inInitrd = true;
-    }
+    { directory = "/tmp"; mode = "1777"; }
+    { directory = "/var/lib/nixos"; inInitrd = true; }
   ];
 
   defaultSystemFiles = [
-    {
-      file = "/etc/machine-id";
-      inInitrd = true;
-    }
+    { file = "/etc/machine-id"; inInitrd = true; }
   ];
 
   defaultHomeDirs = [
@@ -47,64 +43,53 @@ let
     ".ssh"
   ];
 
-  persistentHomeDirs =
-    if fastTier then
-      lib.subtractLists cfg.fast.home.directories (defaultHomeDirs ++ cfg.home.directories)
-    else
-      defaultHomeDirs ++ cfg.home.directories ++ cfg.fast.home.directories;
-  persistentHomeFiles =
-    if fastTier then
-      lib.subtractLists cfg.fast.home.files (cfg.home.files)
-    else
-      cfg.home.files ++ cfg.fast.home.files;
-  persistentSystemDirs =
-    if fastTier then
-      defaultSystemDirs ++ lib.subtractLists cfg.fast.system.directories cfg.system.directories
-    else
-      defaultSystemDirs ++ cfg.system.directories ++ cfg.fast.system.directories;
-  persistentSystemFiles =
-    if fastTier then
-      defaultSystemFiles ++ lib.subtractLists cfg.fast.system.files cfg.system.files
-    else
-      defaultSystemFiles ++ cfg.system.files ++ cfg.fast.system.files;
+  # System state always goes to the fast tier (falls back to /persistent).
+  systemDirs = uniq (defaultSystemDirs ++ cfg.system.directories);
+  systemFiles = uniq (defaultSystemFiles ++ cfg.system.files);
 
-  persistentRoot = {
-    "/persistent" = {
-      directories = persistentSystemDirs;
-      files = persistentSystemFiles;
-      users.${user} = {
-        directories = persistentHomeDirs;
-        files = persistentHomeFiles;
+  # Home is split: a small "fast" subset (defaults Projects/.config/.cache) on
+  # the fast tier, the rest stays on /persistent.
+  fastHomeDirs = cfg.fast.home.directories;
+  fastHomeFiles = cfg.fast.home.files;
+  persistentHomeDirs = uniq (subtractLists fastHomeDirs (defaultHomeDirs ++ cfg.home.directories));
+  persistentHomeFiles = subtractLists fastHomeFiles cfg.home.files;
+
+  # Everything merged, used when there is no fast tier.
+  homeDirs = uniq (defaultHomeDirs ++ cfg.home.directories ++ fastHomeDirs);
+  homeFiles = uniq (cfg.home.files ++ fastHomeFiles);
+
+  userHome = directories: files: { users.${user} = { inherit directories files; }; };
+
+  preserveAt =
+    if fastTier then
+      {
+        "/fast" = {
+          directories = systemDirs;
+          files = systemFiles;
+        } // userHome fastHomeDirs fastHomeFiles;
+        "/persistent" = userHome persistentHomeDirs persistentHomeFiles;
+      }
+    else
+      {
+        "/persistent" = {
+          directories = systemDirs;
+          files = systemFiles;
+        } // userHome homeDirs homeFiles;
       };
-    };
-  };
-
-  fastRoot = lib.optionalAttrs fastTier {
-    ${fastMountpoint} = {
-      directories = cfg.fast.system.directories;
-      files = cfg.fast.system.files;
-      users.${user} = {
-        directories = cfg.fast.home.directories;
-        files = cfg.fast.home.files;
-      };
-    };
-  };
-
-  preserveAt = persistentRoot // fastRoot;
 in
 {
   options.features.preservation = {
-    enable = lib.mkEnableOption "impermanence with persistent state";
+    enable = mkOption { type = types.bool; default = false; description = "Enable impermanence with persistent state"; };
 
     system = {
-      directories = lib.mkOption {
-        type = lib.types.listOf lib.types.anything;
+      directories = mkOption {
+        type = listOf anything;
         default = [ ];
         description = "System directories to persist.";
         example = [ "/var/lib/qbittorrent" ];
       };
-      files = lib.mkOption {
-        type = lib.types.listOf lib.types.anything;
+      files = mkOption {
+        type = listOf anything;
         default = [ ];
         description = "System files to persist.";
         example = [ "/etc/adjtime" ];
@@ -112,51 +97,35 @@ in
     };
 
     home = {
-      directories = lib.mkOption {
-        type = lib.types.listOf lib.types.anything;
+      directories = mkOption {
+        type = listOf anything;
         default = [ ];
         description = "Home directories to persist.";
         example = [ ".config/vesktop" ];
       };
-      files = lib.mkOption {
-        type = lib.types.listOf lib.types.anything;
+      files = mkOption {
+        type = listOf anything;
         default = [ ];
         description = "Home files to persist.";
         example = [ ".gitconfig" ];
       };
     };
 
-    fast = {
-      system = {
-        directories = lib.mkOption {
-          type = lib.types.listOf lib.types.anything;
-          default = [ "/var/lib/libvirt" ];
-          description = "System directories to persist on the fast drive tier (${fastMountpoint}). Falls back to /persistent on hosts without the fast tier.";
-          example = [ "/var/lib/some-sqlite-db" ];
-        };
-        files = lib.mkOption {
-          type = lib.types.listOf lib.types.anything;
-          default = [ ];
-          description = "System files to persist on the fast drive tier (${fastMountpoint}). Falls back to /persistent on hosts without the fast tier.";
-          example = [ "/var/lib/some-state.db" ];
-        };
+    fast.home = {
+      directories = mkOption {
+        type = listOf anything;
+        default = [
+          "Projects"
+          ".cache"
+        ];
+        description = "Home directories to persist on the fast drive tier. Falls back to /persistent on hosts without the fast tier.";
+        example = [ "Projects" ];
       };
-      home = {
-        directories = lib.mkOption {
-          type = lib.types.listOf lib.types.anything;
-          default = [
-            "Projects"
-            ".config"
-          ];
-          description = "Home directories to persist on the fast drive tier (${fastMountpoint}). Falls back to /persistent on hosts without the fast tier.";
-          example = [ "Projects" ];
-        };
-        files = lib.mkOption {
-          type = lib.types.listOf lib.types.anything;
-          default = [ ];
-          description = "Home files to persist on the fast drive tier (${fastMountpoint}). Falls back to /persistent on hosts without the fast tier.";
-          example = [ ".gitconfig" ];
-        };
+      files = mkOption {
+        type = listOf anything;
+        default = [ ];
+        description = "Home files to persist on the fast drive tier. Falls back to /persistent on hosts without the fast tier.";
+        example = [ ".gitconfig" ];
       };
     };
   };
