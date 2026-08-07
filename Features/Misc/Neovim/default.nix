@@ -19,13 +19,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    hjem.users.${user} = {
-      environment.sessionVariables = {
-        EDITOR = "nvim";
-        VISUAL = "nvim";
-        MANPAGER = "nvim +Man!";
-      };
+    environment.sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      MANPAGER = "nvim +Man!";
+    };
 
+    hjem.users.${user} = {
       packages = with pkgs; [
         typst
         luaformatter
