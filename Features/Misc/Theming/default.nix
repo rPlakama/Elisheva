@@ -5,7 +5,12 @@
   ...
 }:
 let
-  inherit (lib) mkOption mkIf types concatStrings;
+  inherit (lib)
+    mkOption
+    mkIf
+    types
+    concatStrings
+    ;
   inherit (types) str bool int;
 
   cfg = config.features.theming;
@@ -13,16 +18,6 @@ let
   headless = config.core.headless;
 
   # base16-chalk palette.
-  #
-  # `colors` mirrors what base16.nix / Stylix expose:
-  #   colors.base0D            -> "#6fc2ef"  (with #)
-  #   colors.base0D-hex        -> "6fc2ef"   (without #)
-  #   colors.base0D-dec-r/g/b  -> 111/194/239 (0-255)
-  #
-  # The `withHashtag`/`hex`/`dec` sub-attrsets let consumers pick a flavour:
-  #   colors.withHashtag.base0D  == colors.base0D
-  #   colors.hex.base0D          == "6fc2ef"
-  #   colors.dec.base0D          == { r = 111; g = 194; b = 239; }
   palette = {
     base00 = "#151515";
     base01 = "#202020";
@@ -42,47 +37,60 @@ let
     base0F = "#deaf8f";
   };
 
-  colors = let
-    stripHash = v: builtins.substring 1 6 v;
-    parse = v: {
-      r = lib.fromHexString (builtins.substring 1 2 v);
-      g = lib.fromHexString (builtins.substring 3 2 v);
-      b = lib.fromHexString (builtins.substring 5 2 v);
-    };
+  colors =
+    let
+      stripHash = v: builtins.substring 1 6 v;
+      parse = v: {
+        r = lib.fromHexString (builtins.substring 1 2 v);
+        g = lib.fromHexString (builtins.substring 3 2 v);
+        b = lib.fromHexString (builtins.substring 5 2 v);
+      };
 
-    # convenience keys: colors.base0D-hex, colors.base0D-dec-r, ...
-    variants = builtins.concatMap (name: [
-      { name = "${name}-hex"; value = stripHash palette.${name}; }
-      { name = "${name}-dec-r"; value = (parse palette.${name}).r; }
-      { name = "${name}-dec-g"; value = (parse palette.${name}).g; }
-      { name = "${name}-dec-b"; value = (parse palette.${name}).b; }
-    ]) (builtins.attrNames palette);
-  in
-  palette
-  // builtins.listToAttrs variants
-  // {
-    withHashtag = palette;
-    hex = builtins.mapAttrs (_: v: stripHash v) palette;
-    dec = builtins.mapAttrs (_: v: parse v) palette;
-  };
+      # convenience keys: colors.base0D-hex, colors.base0D-dec-r, ...
+      variants = builtins.concatMap (name: [
+        {
+          name = "${name}-hex";
+          value = stripHash palette.${name};
+        }
+        {
+          name = "${name}-dec-r";
+          value = (parse palette.${name}).r;
+        }
+        {
+          name = "${name}-dec-g";
+          value = (parse palette.${name}).g;
+        }
+        {
+          name = "${name}-dec-b";
+          value = (parse palette.${name}).b;
+        }
+      ]) (builtins.attrNames palette);
+    in
+    palette
+    // builtins.listToAttrs variants
+    // {
+      withHashtag = palette;
+      hex = builtins.mapAttrs (_: v: stripHash v) palette;
+      dec = builtins.mapAttrs (_: v: parse v) palette;
+    };
 
   # GTK CSS from the palette (what Stylix's gtk.css.mustache produced).
   # `accents` = { name = base-color; } rendered as define-color vars.
-  gtkCss = let
-    accent = name: base: ''
-      @define-color ${name}_color #${colors."${base}-hex"};
-      @define-color ${name}_bg_color #${colors."${base}-hex"};
-      @define-color ${name}_fg_color #${colors.base00-hex};
-    '';
+  gtkCss =
+    let
+      accent = name: base: ''
+        @define-color ${name}_color #${colors."${base}-hex"};
+        @define-color ${name}_bg_color #${colors."${base}-hex"};
+        @define-color ${name}_fg_color #${colors.base00-hex};
+      '';
 
-    surface = name: base: ''
-      @define-color ${name}_bg_color #${colors."${base}-hex"};
-      @define-color ${name}_fg_color #${colors.base05-hex};
-      @define-color ${name}_shade_color rgba(0, 0, 0, 0.07);
-    '';
-  in
-  concatStrings
-    [
+      surface = name: base: ''
+        @define-color ${name}_bg_color #${colors."${base}-hex"};
+        @define-color ${name}_fg_color #${colors.base05-hex};
+        @define-color ${name}_shade_color rgba(0, 0, 0, 0.07);
+      '';
+    in
+    concatStrings [
       (accent "accent" "base0D")
       (accent "destructive" "base08")
       (accent "success" "base0B")
@@ -212,25 +220,6 @@ in
       nerd-fonts.caskaydia-cove
       montserrat
       arkpandora_ttf
-    ];
-
-    console.colors = with colors; [
-      base00-hex
-      base08-hex
-      base0B-hex
-      base0A-hex
-      base0D-hex
-      base0E-hex
-      base0C-hex
-      base05-hex
-      base03-hex
-      base08-hex
-      base0B-hex
-      base0A-hex
-      base0D-hex
-      base0E-hex
-      base0C-hex
-      base07-hex
     ];
 
     hjem.users.${user} = {
