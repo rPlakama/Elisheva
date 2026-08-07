@@ -19,7 +19,7 @@ let
 
   fontFamily = theming.fontFamily;
   barRadius = 0;
-  barOpacity = 0.75;
+  barOpacity = 0.95;
 
   widgetsGroupOpacity = 0.0;
   widgetsGroupSpacing = 6.0;
