@@ -6,13 +6,10 @@
 let
   inherit (lib)
     mkOption
-    mkIf
     types
     foldl'
     elem
     subtractLists
-    optionalAttrs
-    mkEnableOption
     ;
   inherit (types) listOf anything;
 
@@ -156,8 +153,11 @@ in
 
   config = lib.mkIf cfg.enable {
     nix.channel.enable = false;
-    sops.age.sshKeyPaths = [ "/persistent/etc/ssh/ssh_host_ed25519_key" ];
-
+    sops.age.sshKeyPaths =
+      if (cfg.fastTier) then
+        [ "/fast/etc/ssh/ssh_host_ed25519_key" ]
+      else
+        [ "/persistent/etc/ssh/ssh_host_ed25519_key" ];
     assertions = [
       {
         assertion = diskoCfg.enable;
