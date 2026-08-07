@@ -39,7 +39,7 @@ in
       };
     };
 
-    hjem.users.${config.core.user}.packages = lib.optionals (!headless) (
+    hjem.users.${user}.packages = lib.optionals (!headless) (
       with pkgs;
       [
         qbittorrent

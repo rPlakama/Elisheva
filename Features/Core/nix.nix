@@ -3,6 +3,9 @@
   pkgs,
   ...
 }:
+let
+  user = config.core.user;
+in
 {
   nixpkgs.config.allowUnfree = true;
   programs.nix-ld.enable = true;
@@ -21,7 +24,7 @@
         "flakes"
       ];
       trusted-users = [
-        "${config.core.user}"
+        "${user}"
         "networkmanager"
         "root"
         "@wheel"

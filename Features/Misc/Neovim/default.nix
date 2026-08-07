@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.features.neovim;
+  user = config.core.user;
   headless = config.core.headless;
 in
 {
@@ -18,7 +19,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    hjem.users.${config.core.user} = {
+    hjem.users.${user} = {
       environment.sessionVariables = {
         EDITOR = "nvim";
         VISUAL = "nvim";

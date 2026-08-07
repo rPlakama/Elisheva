@@ -7,6 +7,7 @@
 }:
 let
   cfg = config.features.gaming;
+  user = config.core.user;
   gsrPkg = inputs.gsr-ui-nix.packages.${pkgs.stdenv.hostPlatform.system}.gpu-screen-recorder;
   gsrEnable = config.features.gaming.gsr.enable;
 in
@@ -49,7 +50,7 @@ in
 
     boot.kernelModules = [ "ntsync" ];
 
-    hjem.users.${config.core.user}.packages =
+    hjem.users.${user}.packages =
       with pkgs;
       [
         mangohud

@@ -8,6 +8,7 @@
 let
   inherit (lib) optionals;
   cfg = config.features.ia-tools;
+  user = config.core.user;
   gpu = config.core.gpu;
 in
 {
@@ -20,7 +21,7 @@ in
         ".ollama"
       ];
     };
-    hjem.users.${config.core.user}.packages =
+    hjem.users.${user}.packages =
       with pkgs;
       [ opencode ] ++ optionals gpu.nvidia [ ollama-cuda ] ++ optionals gpu.amd [ ollama-rocm ];
   };

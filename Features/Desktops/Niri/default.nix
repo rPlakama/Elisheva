@@ -15,6 +15,7 @@ let
   inherit (types) str;
 
   cfg = config.features.niri;
+  user = config.core.user;
   theming = config.features.theming;
 
   power-cycle = optionalString (config.core.isLaptop.usesPPD || config.core.isLaptop.usesTunedPPD) ''
@@ -68,7 +69,7 @@ in
   config = mkIf cfg.enable {
     programs.niri.enable = true;
 
-    hjem.users.${config.core.user} = {
+    hjem.users.${user} = {
       packages = with pkgs; [
         nautilus
         loupe
