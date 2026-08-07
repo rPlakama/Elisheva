@@ -49,7 +49,7 @@ in
 
     boot.kernelModules = [ "ntsync" ];
 
-    environment.systemPackages =
+    hjem.users.${config.core.user}.packages =
       with pkgs;
       [
         mangohud

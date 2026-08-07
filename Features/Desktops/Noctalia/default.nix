@@ -49,10 +49,6 @@ in
         "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       ];
     };
-    environment.systemPackages = [
-      inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-      pkgs.ddcutil
-    ];
     services.ddccontrol.enable = true;
 
     features = {
@@ -68,6 +64,11 @@ in
       ];
 
       users.${user} = {
+        packages = [
+          inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+          pkgs.ddcutil
+        ];
+
         files = {
           ".config/niri/noctaliaBinds.kdl".source = ./NoctaliaBinds.kdl;
           ".local/state/noctalia/noctalia-inhibit.fish" = {

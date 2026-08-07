@@ -18,17 +18,19 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.variables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-      MANPAGER = "nvim +Man!";
-    };
+    hjem.users.${config.core.user} = {
+      environment.sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+        MANPAGER = "nvim +Man!";
+      };
 
-    environment.systemPackages = with pkgs; [
-      typst
-      luaformatter
-      nixfmt
-    ];
+      packages = with pkgs; [
+        typst
+        luaformatter
+        nixfmt
+      ];
+    };
 
     programs.nixvim = {
       enable = true;

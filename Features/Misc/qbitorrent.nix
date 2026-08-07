@@ -39,7 +39,7 @@ in
       };
     };
 
-    environment.systemPackages = lib.optionals (!headless) (
+    hjem.users.${config.core.user}.packages = lib.optionals (!headless) (
       with pkgs;
       [
         qbittorrent

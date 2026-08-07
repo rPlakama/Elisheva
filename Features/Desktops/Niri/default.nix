@@ -68,19 +68,21 @@ in
   config = mkIf cfg.enable {
     programs.niri.enable = true;
 
-    environment.systemPackages = with pkgs; [
-      nautilus
-      loupe
-      xwayland-satellite
-      libnotify
-      wl-clipboard
-      pulseaudio
-    ];
+    hjem.users.${config.core.user} = {
+      packages = with pkgs; [
+        nautilus
+        loupe
+        xwayland-satellite
+        libnotify
+        wl-clipboard
+        pulseaudio
+      ];
 
-    hjem.users.${config.core.user}.files.".config/niri/config.kdl".text =
-      builtins.replaceStrings
-        [ "@ImportNoctalia@" "@cursor@" "@keyboardLayout@" "@Variant@" "@power-cycle@" "@output@" ]
-        [ cfg.noctalia.import cursorBlock cfg.keyboardLayout cfg.VariantKB power-cycle outputBlock ]
-        (builtins.readFile ./config.kdl);
+      files.".config/niri/config.kdl".text =
+        builtins.replaceStrings
+          [ "@ImportNoctalia@" "@cursor@" "@keyboardLayout@" "@Variant@" "@power-cycle@" "@output@" ]
+          [ cfg.noctalia.import cursorBlock cfg.keyboardLayout cfg.VariantKB power-cycle outputBlock ]
+          (builtins.readFile ./config.kdl);
+    };
   };
 }

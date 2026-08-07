@@ -20,7 +20,7 @@ in
         ".ollama"
       ];
     };
-    environment.systemPackages =
+    hjem.users.${config.core.user}.packages =
       with pkgs;
       [ opencode ] ++ optionals gpu.nvidia [ ollama-cuda ] ++ optionals gpu.amd [ ollama-rocm ];
   };

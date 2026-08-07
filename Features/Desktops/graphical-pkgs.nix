@@ -34,27 +34,27 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages =
-      with pkgs;
-      [
-        inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-        vesktop
-        materialgram
-        nextcloud-client
-        jellyfin-desktop
-        foot
-        mpv
-        ripdrag
-        obsidian
-        kdePackages.okular
-        gnome-disk-utility
-        motrix-next
-      ]
-      ++ lib.optionals (config.core.isLaptop.enable) [
-        moonlight-qt
-      ];
-
     hjem.users.${user} = {
+      packages =
+        with pkgs;
+        [
+          inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+          vesktop
+          materialgram
+          nextcloud-client
+          jellyfin-desktop
+          foot
+          mpv
+          ripdrag
+          obsidian
+          kdePackages.okular
+          gnome-disk-utility
+          motrix-next
+        ]
+        ++ lib.optionals (config.core.isLaptop.enable) [
+          moonlight-qt
+        ];
+
       files.".config/foot/foot.ini".text = ''
         [main]
         dpi-aware=false
