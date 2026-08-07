@@ -9,15 +9,12 @@ let
     types
     foldl'
     elem
-    subtractLists
     ;
   inherit (types) listOf anything;
 
   cfg = config.features.preservation;
   diskoCfg = config.features.disko;
   user = config.core.user;
-
-  fastTier = diskoCfg.dualDrive.enable && diskoCfg.dualDrive.fastDirs;
 
   # De-duplicate the persistence lists (defaults + any overrides).
   uniq = foldl' (acc: x: if elem x acc then acc else acc ++ [ x ]) [ ];
@@ -58,41 +55,20 @@ let
     ".ssh"
   ];
 
-  # System state always goes to the fast tier (falls back to /persistent).
   systemDirs = uniq (defaultSystemDirs ++ cfg.system.directories);
   systemFiles = uniq (defaultSystemFiles ++ cfg.system.files);
-
-  # Home is split: a small "fast" subset (defaults Projects/.config/.cache) on
-  # the fast tier, the rest stays on /persistent.
-  fastHomeDirs = cfg.fast.home.directories;
-  fastHomeFiles = cfg.fast.home.files;
-  persistentHomeDirs = uniq (subtractLists fastHomeDirs (defaultHomeDirs ++ cfg.home.directories));
-  persistentHomeFiles = subtractLists fastHomeFiles cfg.home.files;
-
-  # Everything merged, used when there is no fast tier.
-  homeDirs = uniq (defaultHomeDirs ++ cfg.home.directories ++ fastHomeDirs);
-  homeFiles = uniq (cfg.home.files ++ fastHomeFiles);
+  homeDirs = uniq (defaultHomeDirs ++ cfg.home.directories);
+  homeFiles = uniq (cfg.home.files);
 
   userHome = directories: files: { users.${user} = { inherit directories files; }; };
 
-  preserveAt =
-    if fastTier then
-      {
-        "/fast" = {
-          directories = systemDirs;
-          files = systemFiles;
-        }
-        // userHome fastHomeDirs fastHomeFiles;
-        "/persistent" = userHome persistentHomeDirs persistentHomeFiles;
-      }
-    else
-      {
-        "/persistent" = {
-          directories = systemDirs;
-          files = systemFiles;
-        }
-        // userHome homeDirs homeFiles;
-      };
+  preserveAt = {
+    "/persistent" = {
+      directories = systemDirs;
+      files = systemFiles;
+    }
+    // userHome homeDirs homeFiles;
+  };
 in
 {
   options.features.preservation = {
@@ -131,33 +107,11 @@ in
         example = [ ".gitconfig" ];
       };
     };
-
-    fast.home = {
-      directories = mkOption {
-        type = listOf anything;
-        default = [
-          "Projects"
-          ".cache"
-        ];
-        description = "Home directories to persist on the fast drive tier. Falls back to /persistent on hosts without the fast tier.";
-        example = [ "Projects" ];
-      };
-      files = mkOption {
-        type = listOf anything;
-        default = [ ];
-        description = "Home files to persist on the fast drive tier. Falls back to /persistent on hosts without the fast tier.";
-        example = [ ".gitconfig" ];
-      };
-    };
   };
 
   config = lib.mkIf cfg.enable {
     nix.channel.enable = false;
-    sops.age.sshKeyPaths =
-      if (cfg.fastTier) then
-        [ "/fast/etc/ssh/ssh_host_ed25519_key" ]
-      else
-        [ "/persistent/etc/ssh/ssh_host_ed25519_key" ];
+    sops.age.sshKeyPaths = [ "/persistent/etc/ssh/ssh_host_ed25519_key" ];
     assertions = [
       {
         assertion = diskoCfg.enable;

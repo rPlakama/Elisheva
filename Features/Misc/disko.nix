@@ -10,50 +10,50 @@ let
     mkEnableOption
     mkMerge
     optionalAttrs
-    optional
     optionals
     genAttrs
     ;
   inherit (lib.types)
     bool
     str
-    coercedTo
-    submodule
     ;
 
   diskoCfg = config.features.disko;
-  dual = diskoCfg.dualDrive;
-  fastEnabled = dual.enable && dual.fastDirs;
 
-  # Mount options for a btrfs subvolume; disko appends the subvol mountpoint.
-  subvolOpts =
-    isSSD:
-    [
-      "noatime"
-      "compress=${diskoCfg.compression}"
-    ]
-    ++ optionals isSSD [
-      "discard=async"
-      "ssd"
+  # Partition 1 of the secondary drive, e.g. /dev/nvme0n1 -> /dev/nvme0n1p1.
+  secondaryPart =
+    let
+      dev = diskoCfg.secondaryDrive;
+    in
+    if builtins.match ".*[0-9]$" dev != null then "${dev}p1" else "${dev}1";
+
+  # One btrfs pool spans both drives: data single (files land on one device,
+  # so a drive failure only costs its own files) + metadata raid1.
+  poolExtraArgs =
+    [ "-f" ]
+    ++ optionals diskoCfg.dualDrive [
+      "-d"
+      "single"
+      "-m"
+      "raid1"
+      secondaryPart
     ];
 
-  # A subvolume entry keyed by its mountpoint.
-  subvol = mount: isSSD: {
-    mountOptions = subvolOpts isSSD;
+  btrfsOpts = [
+    "noatime"
+    "compress=${diskoCfg.compression}"
+    "ssd"
+    "discard=async"
+  ];
+
+  subvol = mount: {
+    mountOptions = btrfsOpts;
     mountpoint = mount;
   };
 
-  # Subvolumes on the primary (fast) drive: /nix always, plus /persistent
-  # unless it belongs on the secondary drive, plus /fast when split is on.
-  primarySubvols = {
-    "/nix" = subvol "/nix" diskoCfg.isSSD.primary;
-  }
-  // optionalAttrs (!dual.enable) { "/persistent" = subvol "/persistent" diskoCfg.isSSD.primary; }
-  // optionalAttrs fastEnabled { "/fast" = subvol "/fast" diskoCfg.isSSD.primary; };
-
-  btrfsPartition = {
-    extraArgs = [ "-f" ];
-    type = "btrfs";
+  poolSubvols = {
+    "/nix" = subvol "/nix";
+    "/persistent" = subvol "/persistent";
   };
 
   primaryDisk = {
@@ -81,7 +81,11 @@ let
           root = {
             name = "root";
             size = "100%";
-            content = (btrfsPartition // { subvolumes = primarySubvols; });
+            content = {
+              type = "btrfs";
+              extraArgs = poolExtraArgs;
+              subvolumes = poolSubvols;
+            };
           };
         }
         // optionalAttrs diskoCfg.swap.enable {
@@ -97,8 +101,11 @@ let
     };
   };
 
+  # The secondary drive contributes an unformatted partition to the pool.
+  # Named "0-secondary" so it sorts before "main": disko processes disks in
+  # alphabetical order, and mkfs.btrfs needs this partition to already exist.
   secondaryDisk = {
-    secondary = {
+    "0-secondary" = {
       device = diskoCfg.secondaryDrive;
       type = "disk";
       content = {
@@ -106,76 +113,27 @@ let
         partitions.data = {
           name = "data";
           size = "100%";
-          content = btrfsPartition // {
-            subvolumes = {
-              "/persistent" = subvol "/persistent" diskoCfg.isSSD.secondary;
-            };
-          };
         };
       };
     };
   };
-
-  neededForBoot = [
-    "/nix"
-    "/persistent"
-  ]
-  ++ optional fastEnabled "/fast";
 in
 {
   options.features.disko = {
     enable = mkEnableOption "declarative disk layout (disko)";
-    isSSD = {
-      primary = mkOption {
-        type = bool;
-        default = true;
-        description = "Whether the primary drive is an SSD (enables discard=async and ssd mount options)";
-      };
-      secondary = mkOption {
-        type = bool;
-        default = true;
-        description = "Whether the secondary drive is an SSD (enables discard=async and ssd mount options)";
-      };
-    };
-    dualDrive = mkOption {
-      description = "Spread /nix and /persistent across separate drives";
-      default = {
-        enable = false;
-        fastDirs = false;
-      };
-      type =
-        coercedTo bool
-          (enable: {
-            inherit enable;
-            fastDirs = false;
-          })
-          (submodule {
-            options = {
-              enable = mkOption {
-                type = bool;
-                default = false;
-                description = "Spread /nix and /persistent across separate drives";
-              };
-              fastDirs = mkOption {
-                type = bool;
-                default = false;
-                description = "Give /fast its own subvolume on the primary drive";
-              };
-            };
-          });
-    };
     primaryDrive = mkOption {
       type = str;
       default = "";
-      description = "Primary/fastest drive";
+      description = "Primary drive hosting the btrfs pool";
       example = "/dev/nvme0n1";
     };
     secondaryDrive = mkOption {
       type = str;
       default = "";
-      description = "Secondary drive for /persistent (dual-drive mode)";
+      description = "Second drive joined into the btrfs pool (dual-drive mode)";
       example = "/dev/nvme1n1";
     };
+    dualDrive = mkEnableOption "join a second drive into the btrfs pool (data single, metadata raid1)";
     compression = mkOption {
       type = str;
       default = "zstd:3";
@@ -202,7 +160,7 @@ in
         message = "features.disko.primaryDrive must be set when disko is enabled";
       }
       {
-        assertion = !dual.enable || diskoCfg.secondaryDrive != "";
+        assertion = !diskoCfg.dualDrive || diskoCfg.secondaryDrive != "";
         message = "features.disko.secondaryDrive must be set when dualDrive is enabled";
       }
     ];
@@ -216,10 +174,13 @@ in
       };
       disk = mkMerge [
         primaryDisk
-        (mkIf dual.enable secondaryDisk)
+        (mkIf diskoCfg.dualDrive secondaryDisk)
       ];
     };
-    fileSystems = genAttrs neededForBoot (m: {
+    fileSystems = genAttrs [
+      "/nix"
+      "/persistent"
+    ] (m: {
       neededForBoot = true;
     });
   };

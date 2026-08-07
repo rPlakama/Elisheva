@@ -47,10 +47,7 @@
 
     disko = {
       enable = true;
-      dualDrive = {
-        enable = true;
-        fastDirs = true;
-      };
+      dualDrive = true;
       primaryDrive = "/dev/nvme1n1";
       secondaryDrive = "/dev/nvme0n1";
       compression = "zstd:6";
