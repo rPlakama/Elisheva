@@ -117,11 +117,13 @@ in
               wallpaper_scheme = "m3-rainbow";
               mode = if theming.darkTheme then "dark" else "light";
               templates = {
+                community_ids = [
+                  "yazi"
+                ];
                 builtin_ids = [
                   "foot"
                   "gtk3"
                   "gtk4"
-                  "kcolorscheme"
                   "qt"
                 ];
               };

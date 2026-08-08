@@ -29,9 +29,6 @@
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
-    nixvim = {
-      url = "github:nix-community/nixvim";
-    };
     preservation.url = "github:nix-community/preservation";
 
     sops-nix = {
@@ -70,7 +67,6 @@
           specialArgs = { inherit inputs pkgsM; };
           modules = [
             inputs.hjem.nixosModules.default
-            inputs.nixvim.nixosModules.nixvim
             sops-nix.nixosModules.sops
             disko.nixosModules.disko
             preservation.nixosModules.default

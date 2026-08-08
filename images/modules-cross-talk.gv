@@ -29,7 +29,7 @@ digraph cross_talk {
     niri [label = "niri"];
     noctalia [label = "noctalia"];
     theming [label = "theming"];
-    neovim [label = "neovim\n(nixvim)"];
+    neovim [label = "neovim\n(hjem)"];
   }
 
   subgraph cluster_media {

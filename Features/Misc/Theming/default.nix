@@ -237,10 +237,5 @@ in
         ".config/gtk-4.0/gtk.css".text = gtkCss;
       };
     };
-
-    programs.nixvim.colorschemes.base16 = {
-      enable = true;
-      colorscheme = cfg.base16Theme;
-    };
   };
 }

@@ -8,6 +8,137 @@ let
   cfg = config.features.neovim;
   user = config.core.user;
   headless = config.core.headless;
+  theming = config.features.theming;
+  inherit (lib) optionals;
+
+  theme = if theming.enable then theming.base16Theme else "chalk";
+
+  myNvim = pkgs.neovim.override {
+    configure = {
+      customRC = "luafile ~/.config/nvim/init.lua";
+      packages.myPlugins.start = with pkgs.vimPlugins; [
+        nvim-lspconfig
+        fzf-lua
+        (nvim-treesitter.withPlugins (p: [
+          p.nix
+          p.lua
+          p.typst
+          p.rust
+          p.typescript
+          p.tsx
+          p.kotlin
+          p.fish
+          p.markdown
+          p.markdown_inline
+          p.bash
+          p.python
+          p.c
+          p.cpp
+          p.json
+          p.yaml
+          p.toml
+          p.cmake
+          p.dockerfile
+          p.comment
+          p.gitcommit
+          p.gitignore
+          p.diff
+          p.vim
+          p.vimdoc
+          p.html
+          p.css
+          p.sql
+        ]))
+        blink-cmp
+        oil-nvim
+        flash-nvim
+        base16-nvim
+        gitsigns-nvim
+        blink-indent
+        mini-icons
+        mini-clue
+        mini-comment
+        mini-surround
+        mini-pairs
+        mini-trailspace
+        mini-hipatterns
+        undotree
+      ];
+    };
+  };
+
+  baseServers = [
+    "tinymist"
+    "fish_lsp"
+    "nixd"
+    "nushell"
+    "lua_ls"
+  ];
+
+  heavyServers = [
+    "rust_analyzer"
+    "ts_ls"
+    "clangd"
+    "kotlin_language_server"
+    "markdown_oxide"
+  ];
+
+  lspServers = baseServers ++ lib.optionals (!headless) heavyServers;
+
+  lspList =
+    lib.concatMapStringsSep
+      ",\n    "
+      (s: ''"${s}"'')
+      lspServers;
+
+  lspLua = ''
+    require("blink.cmp").setup({
+      keymap = { preset = "default" },
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
+    })
+
+    vim.lsp.enable({
+      ${lspList},
+    })
+
+    vim.lsp.enable("lua_ls", {
+      settings = {
+        Lua = {
+          format = {
+            enable = true,
+            defaultConfig = {
+              indent_style = "space",
+              indent_size = "2",
+            },
+          },
+        },
+      },
+    })
+
+    ${lib.optionalString (!headless) ''
+      vim.lsp.enable("ts_ls", {
+        root_dir = vim.fs.root(0, { "tsconfig.json", "package.json", ".git" }),
+        settings = {
+          typescript = {
+            format = {
+              enable = true,
+            },
+          },
+          javascript = {
+            format = {
+              enable = true,
+            },
+          },
+        },
+      })
+
+      vim.lsp.enable("kotlin_language_server", {
+        root_dir = vim.fs.root(0, { "build.gradle", "build.gradle.kts", ".git" }),
+      })
+    ''}
+  '';
 in
 {
   options.features.neovim = {
@@ -25,22 +156,42 @@ in
       MANPAGER = "nvim +Man!";
     };
 
+    environment.systemPackages =
+      with pkgs;
+      [
+        myNvim
+        tinymist
+        lua-language-server
+        fish-lsp
+        nixd
+        nushell
+      ]
+      ++ optionals (!headless) [
+        markdown-oxide
+        typescript-language-server
+        clang-tools
+        kotlin-language-server
+      ];
+
     hjem.users.${user} = {
       packages = with pkgs; [
         typst
-        luaformatter
         nixfmt
       ];
-    };
 
-    programs.nixvim = {
-      enable = true;
-      imports = [
-        ./settings.nix
-        ./plugins.nix
-        (import ./lsp.nix { inherit headless; })
-        ./keymaps.nix
-      ];
+      xdg.config.files = {
+        "nvim/init.lua".text = ''
+          require('configs')
+          require('keybinds')
+          require('lsp')
+          require('plugins')
+          vim.cmd.colorscheme("base16-${theme}")
+        '';
+        "nvim/lua/configs.lua".source = ./configs.lua;
+        "nvim/lua/keybinds.lua".source = ./keybinds.lua;
+        "nvim/lua/lsp.lua".text = lspLua;
+        "nvim/lua/plugins.lua".source = ./plugins.lua;
+      };
     };
   };
 }

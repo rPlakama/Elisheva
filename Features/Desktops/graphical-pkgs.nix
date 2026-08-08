@@ -48,7 +48,7 @@ in
           ripdrag
           obsidian
           kdePackages.okular
-          gnome-disk-utility
+          kdePackages.partitionmanager
           motrix-next
         ]
         ++ lib.optionals (config.core.isLaptop.enable) [

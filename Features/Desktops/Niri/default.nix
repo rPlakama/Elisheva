@@ -17,6 +17,7 @@ let
   cfg = config.features.niri;
   user = config.core.user;
   theming = config.features.theming;
+  noctalia = config.features.noctalia;
 
   power-cycle = optionalString (config.core.isLaptop.usesPPD || config.core.isLaptop.usesTunedPPD) ''
     "Ctrl+Alt+Q" { spawn-sh "noctalia msg power-cycle"; }
@@ -69,15 +70,25 @@ in
   config = mkIf cfg.enable {
     programs.niri.enable = true;
 
+    xdg.portal = {
+      enable = true;
+      config.common.default = "kde";
+      extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+    };
+
     hjem.users.${user} = {
       packages = with pkgs; [
-        nautilus
-        loupe
+        kdePackages.dolphin
+        kdePackages.gwenview
+        kdePackages.qtwayland
+        kdePackages.plasma-integration
         xwayland-satellite
         libnotify
         wl-clipboard
         pulseaudio
       ];
+
+      environment.sessionVariables.QT_QPA_PLATFORM = "wayland";
 
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
