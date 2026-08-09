@@ -2,7 +2,7 @@ keys:
   - &Main age1nahmfd6uh5f8ugmayz2q5vr7d2j2w8ev30cm2c6ug7lm3acx8u7q3z0q88
   - &Arthoplerau age1ca48ea0hvnu85snctspp0c6mdq4wllszhtyvwry86jhe7p2kkemsd6hz7c
   - &Moontier age1fhad5cu8sw0rcyejcq9gwgjp92dghe068yjn75euk3a26wwkug9q596f0h
-  - &Centuria age1lllfj087p5fw0zevy8ljqsfu79ttr44az00lpagd2xsgzdn5a4rqfyuey8
+  - &Centuria age19gu973zhrsvp57jkc3qzejjd5zya5h0xv8r6j50xywpevzeyrgdslc7g9f
 creation_rules:
   - path_regex: secrets.yaml
     key_groups:
