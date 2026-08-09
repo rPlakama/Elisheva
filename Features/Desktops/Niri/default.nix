@@ -70,25 +70,13 @@ in
   config = mkIf cfg.enable {
     programs.niri.enable = true;
 
-    xdg.portal = {
-      enable = true;
-      config.common.default = "kde";
-      extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
-    };
-
     hjem.users.${user} = {
       packages = with pkgs; [
-        kdePackages.dolphin
-        kdePackages.gwenview
-        kdePackages.qtwayland
-        kdePackages.plasma-integration
         xwayland-satellite
         libnotify
         wl-clipboard
-        pulseaudio
+        nautilus
       ];
-
-      environment.sessionVariables.QT_QPA_PLATFORM = "wayland";
 
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
