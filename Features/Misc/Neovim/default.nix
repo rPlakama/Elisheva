@@ -18,37 +18,8 @@ let
       customRC = "luafile ~/.config/nvim/init.lua";
       packages.myPlugins.start = with pkgs.vimPlugins; [
         nvim-lspconfig
+        nvim-treesitter.withAllGrammars
         fzf-lua
-        (nvim-treesitter.withPlugins (p: [
-          p.nix
-          p.lua
-          p.typst
-          p.rust
-          p.typescript
-          p.tsx
-          p.kotlin
-          p.fish
-          p.markdown
-          p.markdown_inline
-          p.bash
-          p.python
-          p.c
-          p.cpp
-          p.json
-          p.yaml
-          p.toml
-          p.cmake
-          p.dockerfile
-          p.comment
-          p.gitcommit
-          p.gitignore
-          p.diff
-          p.vim
-          p.vimdoc
-          p.html
-          p.css
-          p.sql
-        ]))
         blink-cmp
         oil-nvim
         flash-nvim
@@ -85,11 +56,7 @@ let
 
   lspServers = baseServers ++ lib.optionals (!headless) heavyServers;
 
-  lspList =
-    lib.concatMapStringsSep
-      ",\n    "
-      (s: ''"${s}"'')
-      lspServers;
+  lspList = lib.concatMapStringsSep ",\n    " (s: ''"${s}"'') lspServers;
 
   lspLua = ''
     require("blink.cmp").setup({
@@ -171,6 +138,9 @@ in
         typescript-language-server
         clang-tools
         kotlin-language-server
+        rust-analyzer
+        rustc
+        cargo
       ];
 
     hjem.users.${user} = {

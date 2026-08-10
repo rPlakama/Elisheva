@@ -45,6 +45,7 @@ let
 
   defaultHomeDirs = [
     "Downloads"
+    "Media"
     "Projects"
     "Pictures"
     "Documents"

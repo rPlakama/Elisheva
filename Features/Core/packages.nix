@@ -29,6 +29,7 @@ in
         sops
         fzf
         fishPlugins.fzf-fish
+        helix
         git
         unzip
         p7zip-rar

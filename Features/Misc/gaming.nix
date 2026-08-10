@@ -46,6 +46,7 @@ in
 
     hjem.users.${user}.packages = with pkgs; [
       mangohud
+      lutris
     ];
 
     programs = {

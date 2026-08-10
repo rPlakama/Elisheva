@@ -28,14 +28,14 @@
 
   core = {
     user = "rplakama";
-    ip = "192.168.0.196";
+    ip = "192.168.0.160";
     domain = "moontier.online";
     git = {
       email = "rPlakama@proton.me";
       user = "rPlakama";
     };
-    gpu.amd = true;
-    cpu.amd = true;
+    gpu.intel= true;
+    cpu.intel= true;
     headless = true;
     zram.size = 8096;
 
