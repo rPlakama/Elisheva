@@ -29,7 +29,7 @@ in
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
@@ -43,7 +43,6 @@ in
       "logbsize=256k"
       "allocsize=64m"
       "inode64"
-      "largeio"
     ];
   };
 
@@ -58,17 +57,17 @@ in
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # Block device & I/O Queue IOPS Maxxing Rules
   services.udev.extraRules = ''
-    ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", SUBSYSTEMS=="scsi", ATTR{queue/scheduler}="bfq", ATTR{queue/nr_requests}="512", ATTR{queue/read_ahead_kb}="4096", ATTR{queue/add_random}="0", ATTR{queue/rq_affinity}="2", ATTR{queue/nomerges}="0", ATTR{queue/iosched/low_latency}="1"
+    ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", SUBSYSTEMS=="scsi", ATTR{queue/scheduler}="bfq", ATTR{queue/nr_requests}="512", ATTR{queue/read_ahead_kb}="8192", ATTR{queue/max_sectors_kb}="4096", ATTR{queue/add_random}="0", ATTR{queue/rq_affinity}="2", ATTR{queue/nomerges}="0", ATTR{queue/iosched/low_latency}="1"
   '';
 
   # High IOPS & Filesystem Cache Memory Tuning
   boot.kernel.sysctl = {
-    "vm.dirty_background_ratio" = 3;
-    "vm.dirty_ratio" = 5;
+    "vm.dirty_background_ratio" = 5;
+    "vm.dirty_ratio" = 10;
     "vm.dirty_writeback_centisecs" = 500;
     "vm.dirty_expire_centisecs" = 1000;
     "vm.dirtytime_expire_seconds" = 43200;
