@@ -11,10 +11,6 @@ let
     url = "https://github.com/navidrome/apple-music-plugin/releases/download/v0.2.0/apple-music.ndp";
     hash = "sha256-NoJ1HnLKpcxGs/ercN5w6gJvCjikf3gLLStJIu0K0VQ=";
   };
-  lyricsPlugin = pkgs.fetchurl {
-    url = "https://github.com/J0R6IT0/navidrome-lyrics-plugin/releases/latest/download/nd-lyrics.ndp";
-    hash = "sha256-N0OJ0GuTWISvCjooxttRDl6O5GYDOomcPH6yClSFLOc=";
-  };
 in
 {
   options.features.navidrome = {
@@ -49,7 +45,6 @@ in
     systemd.tmpfiles.rules = [
       "d /var/lib/navidrome/plugins 0750 navidrome media -"
       "L+ /var/lib/navidrome/plugins/apple-music.ndp - - - - ${appleMusicPlugin}"
-      "L+ /var/lib/navidrome/plugins/nd-lyrics.ndp - - - - ${lyricsPlugin}"
     ];
 
     services.navidrome = {
