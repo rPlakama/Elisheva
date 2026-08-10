@@ -61,7 +61,8 @@ in
         serverConfig = {
           LegalNotice.Accepted = true;
           BitTorrent.Session = {
-            QueueingSystemEnabled = true;
+            QueueingSystemEnabled = false;
+            # in case if I enable it later.
             MaxActiveDownloads = 3;
             MaxActiveUploads = 3;
             MaxActiveTorrents = 5;

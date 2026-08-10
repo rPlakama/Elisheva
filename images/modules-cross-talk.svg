@@ -156,19 +156,6 @@
 <polygon fill="#7048e8" stroke="#7048e8" points="1126.93,-52.84 1133.6,-49.61 1126.37,-47.97 1126.93,-52.84"/>
 <text xml:space="preserve" text-anchor="middle" x="1070.75" y="-64.62" font-family="sans-serif" font-size="9.00" fill="#adb5bd">base16 colorscheme</text>
 </g>
-<!-- feishin -->
-<g id="node7" class="node">
-<title>feishin</title>
-<path fill="#1c2430" stroke="#4dabf7" d="M625.38,-1147C625.38,-1147 595.38,-1147 595.38,-1147 589.38,-1147 583.38,-1141 583.38,-1135 583.38,-1135 583.38,-1123 583.38,-1123 583.38,-1117 589.38,-1111 595.38,-1111 595.38,-1111 625.38,-1111 625.38,-1111 631.38,-1111 637.38,-1117 637.38,-1123 637.38,-1123 637.38,-1135 637.38,-1135 637.38,-1141 631.38,-1147 625.38,-1147"/>
-<text xml:space="preserve" text-anchor="middle" x="610.38" y="-1125.3" font-family="sans-serif" font-size="11.00" fill="#e9ecef">feishin</text>
-</g>
-<!-- feishin&#45;&gt;preservation -->
-<g id="edge10" class="edge">
-<title>feishin&#45;&gt;preservation</title>
-<path fill="none" stroke="#1971c2" d="M625.15,-1110.55C675.73,-1042.79 851.3,-807.58 908.76,-730.6"/>
-<polygon fill="#1971c2" stroke="#1971c2" points="910.51,-732.36 912.73,-725.28 906.58,-729.43 910.51,-732.36"/>
-<text xml:space="preserve" text-anchor="middle" x="762.25" y="-1018.25" font-family="sans-serif" font-size="9.00" fill="#adb5bd">/var/lib/feishin</text>
-</g>
 <!-- unifiedDNS -->
 <g id="node25" class="node">
 <title>unifiedDNS</title>
@@ -176,13 +163,6 @@
 <polyline fill="none" stroke="#f08c00" points="572.38,-720 576.38,-720 576.38,-716 572.38,-716"/>
 <polyline fill="none" stroke="#f08c00" points="572.38,-696 576.38,-696 576.38,-692 572.38,-692"/>
 <text xml:space="preserve" text-anchor="middle" x="610.38" y="-702.3" font-family="sans-serif" font-size="11.00" fill="#e9ecef">unifiedDNS</text>
-</g>
-<!-- feishin&#45;&gt;unifiedDNS -->
-<g id="edge9" class="edge">
-<title>feishin&#45;&gt;unifiedDNS</title>
-<path fill="none" stroke="#2f9e44" d="M582.93,-1131.19C549.14,-1132.18 492.85,-1127.94 465.29,-1092.62 418.8,-1033.04 505.13,-826.27 544.88,-762 552.57,-749.55 563.95,-738.44 575.07,-729.47"/>
-<polygon fill="#2f9e44" stroke="#2f9e44" points="576.33,-731.59 580.36,-725.36 573.33,-727.72 576.33,-731.59"/>
-<text xml:space="preserve" text-anchor="middle" x="469.75" y="-1084.08" font-family="sans-serif" font-size="9.00" fill="#adb5bd">feishin:9183</text>
 </g>
 <!-- jellyfin -->
 <g id="node8" class="node">
@@ -261,13 +241,6 @@
 <title>navidrome</title>
 <path fill="#1c2430" stroke="#4dabf7" d="M359.5,-946C359.5,-946 309,-946 309,-946 303,-946 297,-940 297,-934 297,-934 297,-922 297,-922 297,-916 303,-910 309,-910 309,-910 359.5,-910 359.5,-910 365.5,-910 371.5,-916 371.5,-922 371.5,-922 371.5,-934 371.5,-934 371.5,-940 365.5,-946 359.5,-946"/>
 <text xml:space="preserve" text-anchor="middle" x="334.25" y="-924.3" font-family="sans-serif" font-size="11.00" fill="#e9ecef">navidrome</text>
-</g>
-<!-- navidrome&#45;&gt;feishin -->
-<g id="edge17" class="edge">
-<title>navidrome&#45;&gt;feishin</title>
-<path fill="none" stroke="#b197fc" d="M371.88,-938.19C380.11,-942.15 387.96,-947.58 393.25,-955 415.69,-986.47 382.6,-1102.05 411.25,-1128 455.55,-1168.14 531.02,-1154.24 574.91,-1141.17"/>
-<polygon fill="#b197fc" stroke="#b197fc" points="575.58,-1143.53 581.55,-1139.12 574.13,-1138.85 575.58,-1143.53"/>
-<text xml:space="preserve" text-anchor="middle" x="469.75" y="-1157.24" font-family="sans-serif" font-size="9.00" fill="#adb5bd">feishin.enable = true</text>
 </g>
 <!-- navidrome&#45;&gt;preservation -->
 <g id="edge19" class="edge">

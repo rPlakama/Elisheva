@@ -37,7 +37,6 @@ digraph cross_talk {
     fontcolor = "#e9ecef";
     style = "dashed,rounded";
     color = "#e8590c";
-    feishin [label = "feishin"];
     jellyfin [label = "jellyfin"];
     library [label = "library\n(kavita/suwayomi)"];
     lidarr_overlay [label = "lidarr-overlay"];
@@ -95,15 +94,12 @@ digraph cross_talk {
   niri -> core [label = "reads isLaptop power-manager\n→ power-cycle bind", color = "#868e96", style = "dashed"];
 
   /* ---- Media -> hubs ---- */
-  feishin -> unifiedDNS [label = "feishin:9183", color = "#2f9e44"];
-  feishin -> preservation [label = "/var/lib/feishin", color = "#1971c2"];
   jellyfin -> mediaPermissions [label = "enable", color = "#e8590c"];
   jellyfin -> preservation [label = "/var/lib/jellyfin", color = "#1971c2"];
   jellyfin -> unifiedDNS [label = "jellyfin:8096", color = "#2f9e44"];
   library -> mediaPermissions [label = "enable", color = "#e8590c"];
   library -> preservation [label = "downloadPath,\n/var/lib/kavita,\n/var/lib/suwayomi", color = "#1971c2"];
   library -> unifiedDNS [label = "kavita:3034,\nsuwayomi:4567", color = "#2f9e44"];
-  navidrome -> feishin [label = "feishin.enable = true", color = "#b197fc"];
   navidrome -> mediaPermissions [label = "enable + writableServices", color = "#e8590c"];
   navidrome -> preservation [label = "/var/lib/navidrome", color = "#1971c2"];
   navidrome -> unifiedDNS [label = "navidrome:4533", color = "#2f9e44"];
