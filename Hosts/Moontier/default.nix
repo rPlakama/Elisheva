@@ -34,8 +34,8 @@
       email = "rPlakama@proton.me";
       user = "rPlakama";
     };
-    gpu.intel= true;
-    cpu.intel= true;
+    gpu.intel = true;
+    cpu.intel = true;
     headless = true;
     zram.size = 8096;
 
@@ -54,6 +54,7 @@
       };
     };
 
+    neovim.enable = true;
     library.enable = true;
     rrstack.enable = true;
     qbit.enable = true;

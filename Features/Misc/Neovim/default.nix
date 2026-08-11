@@ -9,7 +9,6 @@ let
   user = config.core.user;
   headless = config.core.headless;
   theming = config.features.theming;
-  inherit (lib) optionals;
 
   theme = if theming.enable then theming.base16Theme else "chalk";
 
@@ -123,25 +122,14 @@ in
       MANPAGER = "nvim +Man!";
     };
 
-    environment.systemPackages =
-      with pkgs;
-      [
-        myNvim
-        tinymist
-        lua-language-server
-        fish-lsp
-        nixd
-        nushell
-      ]
-      ++ optionals (!headless) [
-        markdown-oxide
-        typescript-language-server
-        clang-tools
-        kotlin-language-server
-        rust-analyzer
-        rustc
-        cargo
-      ];
+    environment.systemPackages = with pkgs; [
+      myNvim
+      tinymist
+      lua-language-server
+      fish-lsp
+      nixd
+      nushell
+    ];
 
     hjem.users.${user} = {
       packages = with pkgs; [
