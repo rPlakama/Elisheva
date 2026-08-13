@@ -7,7 +7,6 @@
 let
   cfg = config.features.neovim;
   user = config.core.user;
-  headless = config.core.headless;
   theming = config.features.theming;
 
   theme = if theming.enable then theming.base16Theme else "chalk";
@@ -18,7 +17,7 @@ let
       packages.myPlugins.start = with pkgs.vimPlugins; [
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
-        fzf-lua
+        telescope-nvim
         blink-cmp
         oil-nvim
         flash-nvim
@@ -37,74 +36,6 @@ let
     };
   };
 
-  baseServers = [
-    "tinymist"
-    "fish_lsp"
-    "nixd"
-    "nushell"
-    "lua_ls"
-  ];
-
-  heavyServers = [
-    "rust_analyzer"
-    "ts_ls"
-    "clangd"
-    "kotlin_language_server"
-    "markdown_oxide"
-  ];
-
-  lspServers = baseServers ++ lib.optionals (!headless) heavyServers;
-
-  lspList = lib.concatMapStringsSep ",\n    " (s: ''"${s}"'') lspServers;
-
-  lspLua = ''
-    require("blink.cmp").setup({
-      keymap = { preset = "default" },
-      sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
-      },
-    })
-
-    vim.lsp.enable({
-      ${lspList},
-    })
-
-    vim.lsp.enable("lua_ls", {
-      settings = {
-        Lua = {
-          format = {
-            enable = true,
-            defaultConfig = {
-              indent_style = "space",
-              indent_size = "2",
-            },
-          },
-        },
-      },
-    })
-
-    ${lib.optionalString (!headless) ''
-      vim.lsp.enable("ts_ls", {
-        root_dir = vim.fs.root(0, { "tsconfig.json", "package.json", ".git" }),
-        settings = {
-          typescript = {
-            format = {
-              enable = true,
-            },
-          },
-          javascript = {
-            format = {
-              enable = true,
-            },
-          },
-        },
-      })
-
-      vim.lsp.enable("kotlin_language_server", {
-        root_dir = vim.fs.root(0, { "build.gradle", "build.gradle.kts", ".git" }),
-      })
-    ''}
-  '';
 in
 {
   options.features.neovim = {
@@ -129,6 +60,7 @@ in
       fish-lsp
       nixd
       nushell
+      silver-searcher-ng
     ];
 
     hjem.users.${user} = {
@@ -147,7 +79,7 @@ in
         '';
         "nvim/lua/configs.lua".source = ./configs.lua;
         "nvim/lua/keybinds.lua".source = ./keybinds.lua;
-        "nvim/lua/lsp.lua".text = lspLua;
+        "nvim/lua/lsp.lua".source = ./lsp.lua;
         "nvim/lua/plugins.lua".source = ./plugins.lua;
       };
     };

@@ -3,6 +3,13 @@ MiniIcons.mock_nvim_web_devicons()
 require('mini.comment').setup()
 require('mini.trailspace').setup()
 
+require('blink.cmp').setup({
+	keymap = { preset = 'default' },
+	sources = {
+		default = { 'lsp', 'path', 'snippets', 'buffer' },
+	},
+})
+
 require('mini.hipatterns').setup({
 	highlighters = {
 		fixme = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },

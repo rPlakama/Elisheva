@@ -46,7 +46,7 @@
       enable = true;
       email = "rPlakama@proton.me";
       gateway = "192.168.0.1";
-      tailscaleIP = "100.119.129.77";
+      tailscaleIP = "100.67.254.80";
       proxyServices.glances = {
         port = 61208;
         icon = "sh-glances";

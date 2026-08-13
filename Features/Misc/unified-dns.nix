@@ -97,6 +97,8 @@ in
       mode = "0400";
     };
 
+    services.tailscale.extraSetFlags = [ "--accept-dns=false" ];
+
     networking.firewall = {
       trustedInterfaces = [ "tailscale0" ];
       allowedTCPPorts = [
@@ -113,31 +115,31 @@ in
     services = {
       resolved.settings.Resolve = {
         DNSStubListener = "no";
-        MulticastDNS = "no";
+        MulticastDNS = "yes";
       };
-      unbound = {
-        enable = true;
-        settings.server = {
-          tcp-idle-timeout = 1000;
-          interface = [
-            "127.0.0.1"
-            "::1"
-          ];
-          port = 5335;
-          access-control = [
-            "127.0.0.0/8 allow"
-            "::1/128 allow"
-          ];
-          harden-glue = true;
-          harden-dnssec-stripped = true;
-          use-caps-for-id = false;
-          edns-buffer-size = 1232;
-          prefetch = true;
-          num-threads = 1;
-          qname-minimisation = true;
-          do-not-query-localhost = false;
-        };
-      };
+      # unbound = {
+      #   enable = true;
+      #   settings.server = {
+      #     tcp-idle-timeout = 1000;
+      #     interface = [
+      #       "127.0.0.1"
+      #       "::1"
+      #     ];
+      #     port = 5335;
+      #     access-control = [
+      #       "127.0.0.0/8 allow"
+      #       "::1/128 allow"
+      #     ];
+      #     harden-glue = true;
+      #     harden-dnssec-stripped = true;
+      #     use-caps-for-id = false;
+      #     edns-buffer-size = 1232;
+      #     prefetch = true;
+      #     num-threads = 1;
+      #     qname-minimisation = true;
+      #     do-not-query-localhost = false;
+      #   };
+      # };
 
       pihole-ftl = {
         enable = true;
@@ -146,17 +148,107 @@ in
         openFirewallWebserver = true;
         queryLogDeleter.enable = true;
         useDnsmasqConfig = true;
+        lists = [
+          {
+            url = "https://big.oisd.nl/";
+            description = "OISD Full - ads, trackers, malware";
+          }
+          {
+            url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
+            description = "StevenBlack Unified hosts - ads, malware";
+          }
+          {
+            url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling/hosts";
+            description = "StevenBlack Gambling - betting & gambling sites";
+          }
+          {
+            url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts";
+            description = "StevenBlack Fakenews + Gambling - fake news & betting";
+          }
+          {
+            url = "https://adaway.org/hosts.txt";
+            description = "AdAway - mobile ads";
+          }
+          {
+            url = "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext";
+            description = "Peter Lowe's Adservers";
+          }
+          {
+            url = "https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt";
+            description = "AnudeepND Adservers";
+          }
+          {
+            url = "https://v.firebog.net/hosts/AdguardDNS.txt";
+            description = "AdGuard DNS filter";
+          }
+          {
+            url = "https://v.firebog.net/hosts/Easylist.txt";
+            description = "EasyList - ads";
+          }
+          {
+            url = "https://v.firebog.net/hosts/Easyprivacy.txt";
+            description = "EasyPrivacy - trackers";
+          }
+          {
+            url = "https://v.firebog.net/hosts/Prigent-Ads.txt";
+            description = "Prigent Ads";
+          }
+          {
+            url = "https://v.firebog.net/hosts/Prigent-Malware.txt";
+            description = "Prigent Malware";
+          }
+          {
+            url = "https://v.firebog.net/hosts/Prigent-Crypto.txt";
+            description = "Prigent Cryptojacking";
+          }
+          {
+            url = "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt";
+            description = "DandelionSprout Anti-Malware";
+          }
+          {
+            url = "https://urlhaus.abuse.ch/downloads/hostfile/";
+            description = "URLhaus Malware domains";
+          }
+          {
+            url = "https://phishing.army/download/phishing_army_blocklist_extended.txt";
+            description = "Phishing Army Extended";
+          }
+          {
+            url = "https://raw.githubusercontent.com/Spam404/lists/master/main-blacklist.txt";
+            description = "Spam404 blacklist";
+          }
+          {
+            url = "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt";
+            description = "KADhosts - ad/telemetry/spam";
+          }
+          {
+            url = "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts";
+            description = "FadeMind Spam";
+          }
+          {
+            url = "https://raw.githubusercontent.com/matomo-org/referrer-spam-blacklist/master/spammers.txt";
+            description = "Matomo Referrer Spam";
+          }
+          {
+            url = "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt";
+            description = "WindowsSpyBlocker telemetry";
+          }
+          {
+            url = "https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt";
+            description = "Frogeye First-party trackers";
+          }
+        ];
         settings = {
           dhcp = {
             active = false;
-            end = "192.168.0.254";
-            hosts = [ ];
-            ipv6 = false;
-            leaseTime = "24h";
-            start = "192.168.0.61";
-            rapidCommit = true;
-            resolver.resolveIPv6 = false;
-            router = cfg.gateway;
+            #end = "192.168.0.254";
+            #hosts = [ ];
+            #ipv6 = false;
+            #leaseTime = "24h";
+            #start = "192.168.0.61";
+            #rapidCommit = true;
+            #resolver.resolveIPv6 = false;
+            #router = cfg.gateway;
           };
           dns = {
             cnameRecords = [ ];
@@ -173,13 +265,18 @@ in
             ]
             ++ (mkDnsRecords currentIP)
             ++ (mkDnsRecords cfg.tailscaleIP);
-            upstreams = [ "127.0.0.1#5335" ];
+            upstreams = [
+              "94.140.14.14"
+              "1.1.1.1"
+              # "127.0.0.1#5335"
+            ];
           };
           ntp = {
             ipv4.active = false;
             ipv6.active = false;
             sync.active = false;
           };
+          webserver.api.cli_pw = true;
           webserver.api.pwhash = "";
           session.timeout = 43200;
         };
