@@ -1,9 +1,3 @@
-switch-events {
-  lid-close {
-    spawn "noctalia" "msg" "session" "lock"
-  }
-}
-
 window-rule {
     match app-id="^foot$" title="^btop-systemd-inhibit$"
     open-focused true
