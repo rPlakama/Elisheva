@@ -1,23 +1,18 @@
 local map = vim.keymap.set
-local telescope = require('telescope')
-local builtin = require('telescope.builtin')
+local fff = require('fff')
+local fzf_lua = require('fzf-lua')
 
 -- Terminal
 map('n', '<leader>t', '<cmd>sp term://fish<CR>', { desc = "Terminal" })
 
--- Telescope
-telescope.setup({
-	pickers = {
-		find_files = {
-			find_command = { "ag", "--silent", "--nocolor", "--follow", "--hidden", "--ignore", ".git", "-g", "" },
-		},
-	},
-})
+-- FFF
+map('n', '<leader>f', function() fff.find_files() end, { desc = 'Search files' })
+map('n', '<leader>g', function() fff.live_grep() end, { desc = 'Grep search' })
+map('n', '<leader>w', function() fff.live_grep_under_cursor() end, { desc = 'Grep word under cursor' })
 
-map('n', '<leader>f', builtin.find_files, { desc = 'Search files' })
-map('n', '<leader>g', builtin.live_grep, { desc = 'Grep search' })
-map('n', '<leader>a', builtin.buffers, { desc = 'Buffer search' })
-map('n', '<leader>s', builtin.spell_suggest, { desc = 'Spell suggestions' })
+-- FZF-Lua
+map('n', '<leader>a', function() fzf_lua.buffers() end, { desc = 'Buffer search' })
+map('n', '<leader>s', function() fzf_lua.spell_suggest() end, { desc = 'Spell suggestions' })
 
 -- Git signs
 map('n', '<C-k>', '<cmd>Gitsigns toggle_current_line_blame<CR>', { desc = "Blame toggle" })

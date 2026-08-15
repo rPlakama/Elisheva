@@ -17,7 +17,8 @@ let
       packages.myPlugins.start = with pkgs.vimPlugins; [
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
-        telescope-nvim
+        fff-nvim
+        fzf-lua
         blink-cmp
         oil-nvim
         flash-nvim
