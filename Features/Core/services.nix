@@ -40,9 +40,21 @@ in
     fwupd.enable = true;
     pipewire = {
       enable = !headless;
-      alsa.enable = !headless;
-      alsa.support32Bit = !headless;
+      alsa = {
+        enable = !headless;
+        support32Bit = !headless;
+      };
       pulse.enable = !headless;
+      wireplumber.extraConfig = {
+        "51-follow-newest" = {
+          "wireplumber.settings" = {
+            "device.restore-profile" = true;
+            "default.node.restore" = false;
+            "default.policy.follow" = true;
+            "default.policy.move" = true;
+          };
+        };
+      };
     };
     tailscale = {
       enable = true;
