@@ -62,7 +62,10 @@ in
 
       steam = lib.mkIf cfg.steam {
         enable = true;
-        extraCompatPackages = [ pkgs.proton-ge-bin ];
+        extraCompatPackages = with pkgs; [
+          proton-cachyos
+          proton-ge-bin
+        ];
       };
     };
   };

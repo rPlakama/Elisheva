@@ -10,33 +10,9 @@ let
 in
 {
   config = mkMerge [
-    (mkIf gpu.amd {
-      hardware = {
-        graphics = {
-          enable = true;
-          enable32Bit = true;
-          extraPackages = with pkgs; [
-            rocmPackages.clr.icd
-            libvdpau-va-gl
-          ];
-        };
-        amdgpu.opencl.enable = true;
-      };
-      environment.systemPackages = with pkgs; [
-        libva-utils
-        radeontop
-      ];
-    })
 
     (mkIf gpu.nvidia {
       services.xserver.videoDrivers = [ "nvidia" ];
-      boot = {
-        blacklistedKernelModules = [ "nouveau" ];
-        kernelParams = [
-          "modprobe.blacklist=nouveau"
-          "nvidia_drm.fbdev=1"
-        ];
-      };
       hardware = {
         graphics = {
           enable = true;
@@ -47,22 +23,26 @@ in
           modesetting.enable = true;
           powerManagement.enable = true;
           open = true;
-          # package = config.boot.kernelPackages.nvidiaPackages.stable;
           package = pkgs.nvidia_cachyos;
           nvidiaSettings = true;
         };
       };
     })
 
-    (mkIf gpu.intel {
+    (mkIf (gpu.intel || gpu.amd) {
+      chaotic.mesa-git.enable = true;
       hardware.graphics = {
         enable = true;
-        enable32Bit = true;
+      };
+    })
+
+    (mkIf gpu.intel {
+      hardware.graphics = {
         extraPackages = with pkgs; [
           intel-media-driver
           vpl-gpu-rt
+          intel-vaapi-driver
         ];
-        extraPackages32 = with pkgs; [ intel-vaapi-driver ];
       };
       environment = {
         sessionVariables.LIBVA_DRIVER_NAME = "iHD";
