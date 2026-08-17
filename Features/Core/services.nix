@@ -25,11 +25,6 @@ in
     };
   };
   services = {
-    ananicy = {
-      enable = true;
-      package = pkgs.ananicy-cpp;
-      rulesProvider = pkgs.ananicy-rules-cachyos;
-    };
     upower.enable = isLaptop;
     scx.enable = true;
     power-profiles-daemon.enable = usesPPD;
