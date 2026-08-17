@@ -46,8 +46,9 @@ in
         nvidia = {
           modesetting.enable = true;
           powerManagement.enable = true;
-          open = false;
-          package = config.boot.kernelPackages.nvidiaPackages.stable;
+          open = true;
+          # package = config.boot.kernelPackages.nvidiaPackages.stable;
+          package = pkgs.nvidia_cachyos;
           nvidiaSettings = true;
         };
       };

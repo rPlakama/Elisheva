@@ -26,8 +26,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     preservation.url = "github:nix-community/preservation";
 
@@ -44,6 +44,7 @@
       disko,
       preservation,
       auto-cpufreq,
+      chaotic,
       ...
     }:
     let
@@ -68,6 +69,7 @@
           modules = [
             inputs.hjem.nixosModules.default
             sops-nix.nixosModules.sops
+            chaotic.nixosModules.default
             disko.nixosModules.disko
             preservation.nixosModules.default
             auto-cpufreq.nixosModules.default

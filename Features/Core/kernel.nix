@@ -1,21 +1,15 @@
 {
   config,
-  lib,
   pkgs,
-  inputs,
   ...
 }:
 let
   cpu = config.core.cpu;
 in
 {
-  nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
   boot = {
     kernelPackages = (
-      if cpu.amd then
-        pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-zen4
-      else
-        pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3
+      if cpu.amd then pkgs.linuxPackages_cachyos-lto-znver4 else pkgs.linuxPackages_cachyos
     );
     kernelParams =
       if cpu.amd then
