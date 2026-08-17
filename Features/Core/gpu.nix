@@ -23,7 +23,7 @@ in
           modesetting.enable = true;
           powerManagement.enable = true;
           open = true;
-          package = pkgs.nvidia_cachyos;
+          package = with pkgs; nvidia_cachyos-lto;
           nvidiaSettings = true;
         };
       };
