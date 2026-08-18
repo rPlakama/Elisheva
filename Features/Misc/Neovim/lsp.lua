@@ -27,17 +27,21 @@ vim.lsp.config("ts_ls", {
 	},
 })
 
-vim.lsp.enable({
-	"tinymist",
-	"fish_lsp",
-	"nixd",
-	"nushell",
-	"lua_ls",
-	"rust_analyzer",
-	"ts_ls",
-	"clangd",
-	"kotlin_language_server",
-	"markdown_oxide",
-	"clangd",
-	"cmake-language-server"
-})
+local function available_lsp_configs()
+	local configs = {}
+	for _, path in ipairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
+		local name = vim.fn.fnamemodify(path, ":t:r")
+		if not configs[name] then
+			local ok, cfg = pcall(vim.lsp.config[name])
+			local cmd = ok and cfg and cfg.cmd
+			local bin = type(cmd) == "table" and cmd[1] or nil
+
+			if bin == nil or vim.fn.executable(bin) == 1 then
+				configs[name] = true
+			end
+		end
+	end
+	return vim.tbl_keys(configs)
+end
+
+vim.lsp.enable(available_lsp_configs())
