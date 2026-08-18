@@ -3,7 +3,8 @@
   lib,
   modulesPath,
   ...
-}: let
+}:
+let
   featureCall = config.features;
 
   # services without an entry keep the default weight (100).
@@ -17,7 +18,8 @@
     prowlarr = "25";
     slskd = "50";
   };
-in {
+in
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -28,9 +30,9 @@ in {
     "usb_storage"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     # device = "/dev/disk/by-uuid/3d02f997-4ef4-4d04-a40a-734742b53660";
@@ -64,14 +66,18 @@ in {
     ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", SUBSYSTEMS=="scsi", ATTR{queue/scheduler}="bfq", ATTR{queue/nr_requests}="512", ATTR{queue/read_ahead_kb}="8192", ATTR{queue/max_sectors_kb}="4096", ATTR{queue/add_random}="0", ATTR{queue/rq_affinity}="2", ATTR{queue/nomerges}="0", ATTR{queue/iosched/low_latency}="1"
   '';
 
-  # High IOPS & Filesystem Cache Memory Tuning
+  # IOPSmaxxing
   boot.kernel.sysctl = {
-    "vm.dirty_background_ratio" = 5;
-    "vm.dirty_ratio" = 10;
-    "vm.dirty_writeback_centisecs" = 500;
-    "vm.dirty_expire_centisecs" = 1000;
-    "vm.dirtytime_expire_seconds" = 43200;
-    "vm.vfs_cache_pressure" = 100;
+    # Increase write-back caching limits to use more RAM for smooth writes
+    "vm.dirty_background_ratio" = 10;
+    "vm.dirty_ratio" = 30; # 30% of ram for dirty pages
+
+    "vm.dirty_background_bytes" = 0;
+    "vm.dirty_bytes" = 0;
+    "vm.dirty_writeback_centisecs" = 1500; # Less frequency in flush, 15s
+    "vm.dirty_expire_centisecs" = 3000; # Longer livid Dirty Pages (30s)
+
+    "vm.vfs_cache_pressure" = 50;
     "fs.file-max" = 2097152;
     "fs.aio-max-nr" = 1048576;
   };
@@ -79,8 +85,8 @@ in {
   # Derive per-service IO weights from the unifiedDNS service inventory
   systemd.services = lib.mapAttrs' (
     name: _:
-      lib.nameValuePair name {
-        serviceConfig.IOWeight = ioWeights.${name};
-      }
+    lib.nameValuePair name {
+      serviceConfig.IOWeight = ioWeights.${name};
+    }
   ) (lib.filterAttrs (name: _: ioWeights ? ${name}) featureCall.unifiedDNS.proxyServices);
 }
