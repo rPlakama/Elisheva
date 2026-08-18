@@ -5,13 +5,13 @@
   ...
 }:
 let
-  cfg = config.features.qbit;
+  featureCall = config.features;
   user = config.core.user;
   headless = config.core.headless;
 in
 {
   options.features.qbit.enable = lib.mkEnableOption "qBittorrent + Qui";
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.qbit.enable {
     features.mediaPermissions.enable = headless;
     sops.secrets."qui/secret" = {
       group = lib.mkIf headless "media";

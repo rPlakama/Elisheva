@@ -14,8 +14,8 @@ let
   inherit (types) bool;
 
   user = config.core.user;
-  cfg = config.features.noctalia;
-  theming = config.features.theming;
+  featureCall = config.features;
+  theming = featureCall.theming;
 
   fontFamily = theming.fontFamily;
   barRadius = 0;
@@ -30,15 +30,15 @@ in
   options.features.noctalia = {
     enable = mkOption {
       type = bool;
-      default = config.features.niri.noctalia.enabled;
+      default = featureCall.niri.noctalia.enabled;
       description = "Enable Noctalia window manager environment.";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf featureCall.noctalia.enable {
     assertions = [
       {
-        assertion = config.features.niri.enable;
+        assertion = featureCall.niri.enable;
         message = "noctalia requires niri";
       }
     ];

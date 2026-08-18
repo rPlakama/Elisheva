@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.features.bots;
+  featureCall = config.features;
   user = config.core.user;
 in
 {
@@ -31,11 +31,11 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.bots.enable {
     features.preservation.home.directories = [ "ascending-bots" ];
 
     systemd.services = lib.mkMerge [
-      (lib.mkIf cfg.whatsapp-bot.enable {
+      (lib.mkIf featureCall.bots.whatsapp-bot.enable {
         whatsapp-bot = {
           description = "WhatsApp Bot";
           wantedBy = [ "multi-user.target" ];
@@ -57,7 +57,7 @@ in
         };
       })
 
-      (lib.mkIf cfg.discord-bot.enable {
+      (lib.mkIf featureCall.bots.discord-bot.enable {
         discord-bot = {
           description = "Discord Bot";
           wantedBy = [ "multi-user.target" ];

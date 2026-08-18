@@ -4,9 +4,9 @@
   ...
 }:
 let
-  cfg = config.features.homepage;
+  featureCall = config.features;
   currentIP = config.core.ip;
-  dnsCfg = config.features.unifiedDNS;
+  dnsCfg = featureCall.unifiedDNS;
   domain = config.core.domain;
   host = config.core.host;
   meta = svc: if builtins.isInt svc then { } else svc;
@@ -16,10 +16,10 @@ in
     enable = lib.mkEnableOption "Homepage dashboard";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.homepage.enable {
     assertions = [
       {
-        assertion = config.features.unifiedDNS.enable;
+        assertion = featureCall.unifiedDNS.enable;
         message = "Homepage requires unifiedDNS";
       }
     ];

@@ -4,13 +4,13 @@
   ...
 }:
 let
-  cfg = config.features.unifiedDNS;
+  featureCall = config.features;
   domain = config.core.domain;
   currentIP = config.core.ip;
 
   portOf = svc: if builtins.isInt svc then svc else svc.port;
 
-  mkDnsRecords = ip: lib.mapAttrsToList (name: svc: "${ip} ${name}.${domain}") cfg.proxyServices;
+  mkDnsRecords = ip: lib.mapAttrsToList (name: svc: "${ip} ${name}.${domain}") featureCall.unifiedDNS.proxyServices;
 in
 {
   options.features.unifiedDNS = {
@@ -75,18 +75,18 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.unifiedDNS.enable {
     assertions = [
       {
-        assertion = cfg.email != "";
+        assertion = featureCall.unifiedDNS.email != "";
         message = "features.unifiedDNS.email must be set";
       }
       {
-        assertion = cfg.gateway != "";
+        assertion = featureCall.unifiedDNS.gateway != "";
         message = "features.unifiedDNS.gateway must be set";
       }
       {
-        assertion = cfg.tailscaleIP != "";
+        assertion = featureCall.unifiedDNS.tailscaleIP != "";
         message = "features.unifiedDNS.tailscaleIP must be set";
       }
     ];
@@ -248,7 +248,7 @@ in
             #start = "192.168.0.61";
             #rapidCommit = true;
             #resolver.resolveIPv6 = false;
-            #router = cfg.gateway;
+            #router = featureCall.unifiedDNS.gateway;
           };
           dns = {
             cnameRecords = [ ];
@@ -258,13 +258,13 @@ in
             expandHosts = true;
             interface = "all";
             hosts = [
-              "${cfg.gateway} gateway"
+              "${featureCall.unifiedDNS.gateway} gateway"
               "${currentIP} pi-hole"
               "${currentIP} ${domain}"
-              "${cfg.tailscaleIP} ${domain}"
+              "${featureCall.unifiedDNS.tailscaleIP} ${domain}"
             ]
             ++ (mkDnsRecords currentIP)
-            ++ (mkDnsRecords cfg.tailscaleIP);
+            ++ (mkDnsRecords featureCall.unifiedDNS.tailscaleIP);
             upstreams = [
               "94.140.14.14"
               "1.1.1.1"
@@ -298,19 +298,19 @@ in
           lib.nameValuePair "${name}.${domain}" {
             useACMEHost = domain;
             forceSSL = true;
-            extraConfig = cfg.accessControl;
+            extraConfig = featureCall.unifiedDNS.accessControl;
             locations."/" = {
               proxyPass = "http://127.0.0.1:${toString (portOf svc)}";
               proxyWebsockets = true;
             };
           }
-        ) cfg.proxyServices;
+        ) featureCall.unifiedDNS.proxyServices;
       };
     };
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = cfg.email;
+      defaults.email = featureCall.unifiedDNS.email;
       certs."${domain}" = {
         inherit domain;
         extraDomainNames = [ "*.${domain}" ];

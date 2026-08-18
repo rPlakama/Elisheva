@@ -14,10 +14,10 @@ let
     ;
   inherit (types) str;
 
-  cfg = config.features.niri;
+  featureCall = config.features;
   user = config.core.user;
-  theming = config.features.theming;
-  noctalia = config.features.noctalia;
+  theming = featureCall.theming;
+  noctalia = featureCall.noctalia;
 
   power-cycle = optionalString (config.core.isLaptop.usesPPD || config.core.isLaptop.usesTunedPPD) ''
     "Ctrl+Alt+Q" { spawn-sh "noctalia msg power-cycle"; }
@@ -31,8 +31,8 @@ let
   '';
 
   outputBlock = ''
-            output "${cfg.output.monitor}" {
-            ${optionalString cfg.output.vrr.enable "    variable-refresh-rate"}
+            output "${featureCall.niri.output.monitor}" {
+            ${optionalString featureCall.niri.output.vrr.enable "    variable-refresh-rate"}
     				}
         		'';
 in
@@ -67,7 +67,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf featureCall.niri.enable {
     programs.niri.enable = true;
 
     hjem.users.${user} = {
@@ -81,7 +81,7 @@ in
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
           [ "@ImportNoctalia@" "@cursor@" "@keyboardLayout@" "@Variant@" "@power-cycle@" "@output@" ]
-          [ cfg.noctalia.import cursorBlock cfg.keyboardLayout cfg.VariantKB power-cycle outputBlock ]
+          [ featureCall.niri.noctalia.import cursorBlock featureCall.niri.keyboardLayout featureCall.niri.VariantKB power-cycle outputBlock ]
           (builtins.readFile ./config.kdl);
     };
   };

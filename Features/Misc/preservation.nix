@@ -12,8 +12,7 @@ let
     ;
   inherit (types) listOf anything;
 
-  cfg = config.features.preservation;
-  diskoCfg = config.features.disko;
+  featureCall = config.features;
   user = config.core.user;
 
   # De-duplicate the persistence lists (defaults + any overrides).
@@ -56,10 +55,10 @@ let
     ".ssh"
   ];
 
-  systemDirs = uniq (defaultSystemDirs ++ cfg.system.directories);
-  systemFiles = uniq (defaultSystemFiles ++ cfg.system.files);
-  homeDirs = uniq (defaultHomeDirs ++ cfg.home.directories);
-  homeFiles = uniq (cfg.home.files);
+  systemDirs = uniq (defaultSystemDirs ++ featureCall.preservation.system.directories);
+  systemFiles = uniq (defaultSystemFiles ++ featureCall.preservation.system.files);
+  homeDirs = uniq (defaultHomeDirs ++ featureCall.preservation.home.directories);
+  homeFiles = uniq (featureCall.preservation.home.files);
 
   userHome = directories: files: { users.${user} = { inherit directories files; }; };
 
@@ -110,12 +109,12 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.preservation.enable {
     nix.channel.enable = false;
     sops.age.sshKeyPaths = [ "/persistent/etc/ssh/ssh_host_ed25519_key" ];
     assertions = [
       {
-        assertion = diskoCfg.enable;
+        assertion = featureCall.disko.enable;
         message = "features.preservation requires Disko to be enabled.";
       }
     ];

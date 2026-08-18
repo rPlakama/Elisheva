@@ -8,7 +8,7 @@ let
   inherit (lib) mkOption mkIf types;
   inherit (types) str bool int;
 
-  cfg = config.features.theming;
+  featureCall = config.features;
   user = config.core.user;
 
   strOpt =
@@ -26,13 +26,13 @@ let
       description = desc;
     };
 
-  inherit (cfg)
+  inherit (featureCall.theming)
     iconTheme
     cursorTheme
     cursorSize
     darkTheme
     ;
-  fontStr = "${cfg.fontFamily} ${toString cfg.fontSize}";
+  fontStr = "${featureCall.theming.fontFamily} ${toString featureCall.theming.fontSize}";
 
   # settings.ini —-
   gtkSettings = lib.generators.toINI { } {
@@ -61,7 +61,7 @@ in
   options.features.theming = {
     enable = mkOption {
       type = bool;
-      default = config.features.niri.enable;
+      default = featureCall.niri.enable;
       description = "Enable theme";
     };
 
@@ -81,7 +81,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf featureCall.theming.enable {
     programs.dconf.enable = true;
 
     system.activationScripts.dconfTheme.text = ''

@@ -18,12 +18,12 @@ let
     str
     ;
 
-  diskoCfg = config.features.disko;
+  featureCall = config.features;
 
   # Partition 1 of the secondary drive, e.g. /dev/nvme0n1 -> /dev/nvme0n1p1.
   secondaryPart =
     let
-      dev = diskoCfg.secondaryDrive;
+      dev = featureCall.disko.secondaryDrive;
     in
     if builtins.match ".*[0-9]$" dev != null then "${dev}p1" else "${dev}1";
 
@@ -31,7 +31,7 @@ let
   # so a drive failure only costs its own files) + metadata raid1.
   poolExtraArgs =
     [ "-f" ]
-    ++ optionals diskoCfg.dualDrive [
+    ++ optionals featureCall.disko.dualDrive [
       "-d"
       "single"
       "-m"
@@ -41,7 +41,7 @@ let
 
   btrfsOpts = [
     "noatime"
-    "compress=${diskoCfg.compression}"
+    "compress=${featureCall.disko.compression}"
     "ssd"
     "discard=async"
   ];
@@ -58,7 +58,7 @@ let
 
   primaryDisk = {
     main = {
-      device = diskoCfg.primaryDrive;
+      device = featureCall.disko.primaryDrive;
       type = "disk";
       content = {
         type = "gpt";
@@ -88,9 +88,9 @@ let
             };
           };
         }
-        // optionalAttrs diskoCfg.swap.enable {
+        // optionalAttrs featureCall.disko.swap.enable {
           swap = {
-            size = diskoCfg.swap.size;
+            size = featureCall.disko.swap.size;
             content = {
               type = "swap";
               resumeDevice = true;
@@ -106,7 +106,7 @@ let
   # alphabetical order, and mkfs.btrfs needs this partition to already exist.
   secondaryDisk = {
     "0-secondary" = {
-      device = diskoCfg.secondaryDrive;
+      device = featureCall.disko.secondaryDrive;
       type = "disk";
       content = {
         type = "gpt";
@@ -153,14 +153,14 @@ in
     };
   };
 
-  config = mkIf diskoCfg.enable {
+  config = mkIf featureCall.disko.enable {
     assertions = [
       {
-        assertion = diskoCfg.primaryDrive != "";
+        assertion = featureCall.disko.primaryDrive != "";
         message = "features.disko.primaryDrive must be set when disko is enabled";
       }
       {
-        assertion = !diskoCfg.dualDrive || diskoCfg.secondaryDrive != "";
+        assertion = !featureCall.disko.dualDrive || featureCall.disko.secondaryDrive != "";
         message = "features.disko.secondaryDrive must be set when dualDrive is enabled";
       }
     ];
@@ -174,7 +174,7 @@ in
       };
       disk = mkMerge [
         primaryDisk
-        (mkIf diskoCfg.dualDrive secondaryDisk)
+        (mkIf featureCall.disko.dualDrive secondaryDisk)
       ];
     };
     fileSystems = genAttrs [

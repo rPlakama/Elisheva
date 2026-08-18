@@ -5,14 +5,14 @@
   ...
 }:
 let
-  cfg = config.features.nextcloud;
+  featureCall = config.features;
   domain = config.core.domain;
   ncHost = "nextcloud.${domain}";
 in
 {
   options.features.nextcloud.enable = lib.mkEnableOption "Nextcloud";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.nextcloud.enable {
     features.preservation.system.directories = [ "/var/lib/nextcloud" ];
 
     sops.secrets."nextcloud/admin" = {
@@ -42,12 +42,12 @@ in
     services.nginx.virtualHosts."${ncHost}" = {
       forceSSL = true;
       useACMEHost = domain;
-      extraConfig = config.features.unifiedDNS.accessControl;
+      extraConfig = featureCall.unifiedDNS.accessControl;
     };
 
     services.pihole-ftl.settings.dns.hosts = [
       "${config.core.ip} ${ncHost}"
-      "${config.features.unifiedDNS.tailscaleIP} ${ncHost}"
+      "${featureCall.unifiedDNS.tailscaleIP} ${ncHost}"
     ];
   };
 }

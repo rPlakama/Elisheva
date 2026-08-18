@@ -4,7 +4,7 @@
   ...
 }:
 let
-  cfg = config.features.virtualization;
+  featureCall = config.features;
   user = config.core.user;
   isLaptop = config.core.isLaptop.enable;
 
@@ -12,7 +12,7 @@ in
 {
   options.features.virtualization.enable = lib.mkEnableOption "Virtualization (libvirtd + Docker)";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.virtualization.enable {
     features.preservation.system.directories = [
       "/var/lib/docker"
       "/var/lib/libvirt"

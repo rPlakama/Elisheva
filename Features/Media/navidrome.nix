@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.features.navidrome;
+  featureCall = config.features;
 
   appleMusicPlugin = pkgs.fetchurl {
     url = "https://github.com/navidrome/apple-music-plugin/releases/download/v0.2.0/apple-music.ndp";
@@ -22,7 +22,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.navidrome.enable {
     features = {
       preservation.system.directories = [ "/var/lib/navidrome" ];
       mediaPermissions = {
@@ -46,7 +46,7 @@ in
       group = "media";
       settings = {
         "PID.Album" = "folder";
-        MusicFolder = cfg.musicFolder;
+        MusicFolder = featureCall.navidrome.musicFolder;
         "Plugins.Enabled" = true;
         "Scanner"."PurgeMissing" = "full";
         "Plugins.Folder" = "/var/lib/navidrome/plugins";

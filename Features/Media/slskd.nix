@@ -5,14 +5,14 @@
   ...
 }:
 let
-  cfg = config.features.slskd;
+  featureCall = config.features;
   slskdPort = 5030;
   slskdListenPort = 50000;
 in
 {
   options.features.slskd.enable = lib.mkEnableOption "Soulseek client";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.slskd.enable {
 
     sops = {
       secrets = {

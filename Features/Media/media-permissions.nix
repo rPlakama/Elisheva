@@ -4,7 +4,7 @@
   ...
 }:
 let
-  cfg = config.features.mediaPermissions;
+  featureCall = config.features;
   user = config.core.user;
   base_path = "/media";
   mediaFolders = [
@@ -36,7 +36,7 @@ in
       description = "Systemd services that need ReadWritePaths on all media folders";
     };
   };
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.mediaPermissions.enable {
     users.groups.media = { };
     users.users.${user}.extraGroups = [ "media" ];
     systemd.tmpfiles.rules = builtins.concatMap (folder: [
@@ -48,7 +48,7 @@ in
     systemd.services = lib.mkMerge (
       map (svc: {
         ${svc}.serviceConfig.ReadWritePaths = allMediaPaths;
-      }) cfg.writableServices
+      }) featureCall.mediaPermissions.writableServices
     );
   };
 }

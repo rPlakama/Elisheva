@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.features.rrstack;
+  featureCall = config.features;
 
   mediaServicesWithPermissions = {
     jackett = {
@@ -46,7 +46,7 @@ in
 {
   options.features.rrstack.enable = lib.mkEnableOption "*-rr stack (Sonarr, Radarr, Jackett, Prowlarr)";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.rrstack.enable {
     features = {
       mediaPermissions.enable = true;
       preservation.system.directories = [

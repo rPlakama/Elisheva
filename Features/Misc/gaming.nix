@@ -6,10 +6,10 @@
   ...
 }:
 let
-  cfg = config.features.gaming;
+  featureCall = config.features;
   user = config.core.user;
   gsrPkg = inputs.gsr-ui-nix.packages.${pkgs.stdenv.hostPlatform.system}.gpu-screen-recorder;
-  gsrEnable = config.features.gaming.gsr.enable;
+  gsrEnable = featureCall.gaming.gsr.enable;
 in
 {
   imports = [ inputs.gsr-ui-nix.nixosModules.default ];
@@ -35,7 +35,7 @@ in
     gsr.enable = lib.mkEnableOption "Enable GPU Screen Recorder";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.gaming.enable {
 
     features.preservation.home.directories = [
       ".steam"
@@ -51,8 +51,8 @@ in
 
     programs = {
 
-      gamemode.enable = cfg.gamemode;
-      gamescope.enable = cfg.gamescope;
+      gamemode.enable = featureCall.gaming.gamemode;
+      gamescope.enable = featureCall.gaming.gamescope;
 
       gpu-screen-recorder = {
         package = gsrPkg;
@@ -60,7 +60,7 @@ in
         ui.enable = true;
       };
 
-      steam = lib.mkIf cfg.steam {
+      steam = lib.mkIf featureCall.gaming.steam {
         enable = true;
         extraCompatPackages = with pkgs; [
           proton-cachyos

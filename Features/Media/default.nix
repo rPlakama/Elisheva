@@ -4,6 +4,9 @@
   lib,
   ...
 }:
+let
+  featureCall = config.features;
+in
 {
   imports = lib.mapAttrsToList (name: _: ./${name}) (
     lib.filterAttrs (
@@ -13,7 +16,7 @@
   );
 
   # Music-library tooling only makes sense on hosts actually running media services.
-  environment.systemPackages = lib.mkIf config.features.mediaPermissions.enable (
+  environment.systemPackages = lib.mkIf featureCall.mediaPermissions.enable (
     with pkgs;
     [
       exiftool

@@ -5,9 +5,9 @@
   ...
 }:
 let
-  cfg = config.features.neovim;
+  featureCall = config.features;
   user = config.core.user;
-  theming = config.features.theming;
+  theming = featureCall.theming;
 
   theme = if theming.enable then theming.base16Theme else "chalk";
 
@@ -47,7 +47,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.neovim.enable {
     environment.sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";

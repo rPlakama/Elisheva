@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.features.library;
+  featureCall = config.features;
   kavitaPort = 3034;
   suwayomiPort = 4567;
 
@@ -22,18 +22,18 @@ in
     kavita.enable = lib.mkEnableOption "Kavita self-hosted digital library";
     suwayomi.enable = lib.mkEnableOption "Suwayomi-Server (Tachidesk) manga reader";
   };
-  config = lib.mkIf cfg.enable (
+  config = lib.mkIf featureCall.library.enable (
     lib.mkMerge [
       {
         features = {
-          preservation.system.directories = [ cfg.downloadPath ];
+          preservation.system.directories = [ featureCall.library.downloadPath ];
         };
         features.library = {
           kavita.enable = lib.mkDefault true;
           suwayomi.enable = lib.mkDefault true;
         };
       }
-      (lib.mkIf cfg.kavita.enable {
+      (lib.mkIf featureCall.library.kavita.enable {
         sops.secrets."kavita/token" = {
           owner = "kavita";
         };
@@ -53,7 +53,7 @@ in
           settings.Port = kavitaPort;
         };
       })
-      (lib.mkIf cfg.suwayomi.enable {
+      (lib.mkIf featureCall.library.suwayomi.enable {
 
         features = {
           mediaPermissions.enable = true;
@@ -72,7 +72,7 @@ in
             server = {
               port = suwayomiPort;
               downloadAsCbz = true;
-              downloadsPath = cfg.downloadPath;
+              downloadsPath = featureCall.library.downloadPath;
               extensionRepos = [
                 "https://raw.githubusercontent.com/keiyoushi/extensions/repo/index.min.json"
                 "https://raw.githubusercontent.com/yuzono/manga-repo/repo/index.min.json"

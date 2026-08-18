@@ -5,6 +5,8 @@
   ...
 }:
 let
+  featureCall = config.features;
+
   # services without an entry keep the default weight (100).
   ioWeights = {
     qbittorrent = "10";
@@ -82,5 +84,5 @@ in
     lib.nameValuePair name {
       serviceConfig.IOWeight = ioWeights.${name};
     }
-  ) (lib.filterAttrs (name: _: ioWeights ? ${name}) config.features.unifiedDNS.proxyServices);
+  ) (lib.filterAttrs (name: _: ioWeights ? ${name}) featureCall.unifiedDNS.proxyServices);
 }

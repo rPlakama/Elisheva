@@ -4,12 +4,12 @@
   ...
 }:
 let
-  cfg = config.features.jellyfin;
+  featureCall = config.features;
 in
 {
   options.features.jellyfin.enable = lib.mkEnableOption "Jellyfin media server";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.jellyfin.enable {
     features = {
       mediaPermissions.enable = true;
       preservation.system.directories = [ "/var/lib/jellyfin" ];

@@ -7,7 +7,7 @@
 
 let
   inherit (lib) optionals;
-  cfg = config.features.ia-tools;
+  featureCall = config.features;
   user = config.core.user;
   gpu = config.core.gpu;
 in
@@ -15,7 +15,7 @@ in
 
   options.features.ia-tools.enable = lib.mkEnableOption "General IA Tools";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf featureCall.ia-tools.enable {
     features = {
       preservation.home.directories = [
         ".ollama"
