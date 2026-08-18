@@ -2,17 +2,18 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   featureCall = config.features;
   domain = config.core.domain;
   currentIP = config.core.ip;
 
-  portOf = svc: if builtins.isInt svc then svc else svc.port;
+  portOf = svc:
+    if builtins.isInt svc
+    then svc
+    else svc.port;
 
   mkDnsRecords = ip: lib.mapAttrsToList (name: svc: "${ip} ${name}.${domain}") featureCall.unifiedDNS.proxyServices;
-in
-{
+in {
   options.features.unifiedDNS = {
     enable = lib.mkEnableOption "Unified DNS and Reverse Proxy (Pi-hole + Nginx)";
 
@@ -46,7 +47,7 @@ in
           })
         ]
       );
-      default = { };
+      default = {};
       description = "Services to be proxied by Nginx and registered in Pi-hole (a port or an attrset with port/icon/description)";
     };
 
@@ -97,10 +98,10 @@ in
       mode = "0400";
     };
 
-    services.tailscale.extraSetFlags = [ "--accept-dns=false" ];
+    services.tailscale.extraSetFlags = ["--accept-dns=false"];
 
     networking.firewall = {
-      trustedInterfaces = [ "tailscale0" ];
+      trustedInterfaces = ["tailscale0"];
       allowedTCPPorts = [
         80
         443
@@ -251,20 +252,21 @@ in
             #router = featureCall.unifiedDNS.gateway;
           };
           dns = {
-            cnameRecords = [ ];
+            cnameRecords = [];
             domain = domain;
             domainNeeded = true;
             listeningMode = "ALL";
             expandHosts = true;
             interface = "all";
-            hosts = [
-              "${featureCall.unifiedDNS.gateway} gateway"
-              "${currentIP} pi-hole"
-              "${currentIP} ${domain}"
-              "${featureCall.unifiedDNS.tailscaleIP} ${domain}"
-            ]
-            ++ (mkDnsRecords currentIP)
-            ++ (mkDnsRecords featureCall.unifiedDNS.tailscaleIP);
+            hosts =
+              [
+                "${featureCall.unifiedDNS.gateway} gateway"
+                "${currentIP} pi-hole"
+                "${currentIP} ${domain}"
+                "${featureCall.unifiedDNS.tailscaleIP} ${domain}"
+              ]
+              ++ (mkDnsRecords currentIP)
+              ++ (mkDnsRecords featureCall.unifiedDNS.tailscaleIP);
             upstreams = [
               "94.140.14.14"
               "1.1.1.1"
@@ -284,7 +286,7 @@ in
 
       pihole-web = {
         enable = true;
-        ports = [ 8081 ];
+        ports = [8081];
       };
 
       nginx = {
@@ -293,18 +295,20 @@ in
         recommendedOptimisation = true;
         recommendedProxySettings = true;
         recommendedTlsSettings = true;
-        virtualHosts = lib.mapAttrs' (
-          name: svc:
-          lib.nameValuePair "${name}.${domain}" {
-            useACMEHost = domain;
-            forceSSL = true;
-            extraConfig = featureCall.unifiedDNS.accessControl;
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:${toString (portOf svc)}";
-              proxyWebsockets = true;
-            };
-          }
-        ) featureCall.unifiedDNS.proxyServices;
+        virtualHosts =
+          lib.mapAttrs' (
+            name: svc:
+              lib.nameValuePair "${name}.${domain}" {
+                useACMEHost = domain;
+                forceSSL = true;
+                extraConfig = featureCall.unifiedDNS.accessControl;
+                locations."/" = {
+                  proxyPass = "http://127.0.0.1:${toString (portOf svc)}";
+                  proxyWebsockets = true;
+                };
+              }
+          )
+          featureCall.unifiedDNS.proxyServices;
       };
     };
 
@@ -313,7 +317,7 @@ in
       defaults.email = featureCall.unifiedDNS.email;
       certs."${domain}" = {
         inherit domain;
-        extraDomainNames = [ "*.${domain}" ];
+        extraDomainNames = ["*.${domain}"];
         dnsProvider = "hetzner";
         environmentFile = config.sops.secrets."hetzner/api".path;
         dnsResolver = "1.1.1.1:53";
@@ -323,7 +327,7 @@ in
       };
     };
 
-    features.preservation.system.directories = [ "/etc/pihole" ];
+    features.preservation.system.directories = ["/etc/pihole"];
 
     features.unifiedDNS.proxyServices.pi-hole = {
       port = 8081;

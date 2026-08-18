@@ -2,16 +2,17 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   featureCall = config.features;
   currentIP = config.core.ip;
   dnsCfg = featureCall.unifiedDNS;
   domain = config.core.domain;
   host = config.core.host;
-  meta = svc: if builtins.isInt svc then { } else svc;
-in
-{
+  meta = svc:
+    if builtins.isInt svc
+    then {}
+    else svc;
+in {
   options.features.homepage = {
     enable = lib.mkEnableOption "Homepage dashboard";
   };
@@ -34,7 +35,7 @@ in
       enable = true;
       listenPort = 8082;
       allowedHosts = lib.concatStringsSep "," (
-        [ "dashboard.${domain}" ]
+        ["dashboard.${domain}"]
         ++ lib.optionals (currentIP != "") [
           currentIP
           "${currentIP}:8082"
@@ -49,13 +50,15 @@ in
 
       services = [
         {
-          "General" = lib.mapAttrsToList (name: svc: {
-            "${name}" = {
-              icon = (meta svc).icon or "si-${name}";
-              href = "https://${name}.${domain}";
-              description = (meta svc).description or "Auto-generated link for ${name}";
-            };
-          }) dnsCfg.proxyServices;
+          "General" =
+            lib.mapAttrsToList (name: svc: {
+              "${name}" = {
+                icon = (meta svc).icon or "si-${name}";
+                href = "https://${name}.${domain}";
+                description = (meta svc).description or "Auto-generated link for ${name}";
+              };
+            })
+            dnsCfg.proxyServices;
         }
       ];
     };

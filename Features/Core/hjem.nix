@@ -2,12 +2,10 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   user = config.core.user;
   git = config.core.git;
-in
-{
+in {
   hjem.users.${user} = {
     enable = true;
     xdg.config.files = {

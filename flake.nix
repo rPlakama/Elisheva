@@ -38,35 +38,32 @@
     };
   };
 
-  outputs =
-    inputs@{
-      nixpkgs,
-      sops-nix,
-      disko,
-      preservation,
-      auto-cpufreq,
-      chaotic,
-      ...
-    }:
-    let
-      stVersion = "26.05";
-      hostNames = builtins.attrNames (
-        nixpkgs.lib.filterAttrs (name: type: type == "directory") (builtins.readDir ./Hosts)
-      );
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      pkgsM = import inputs.nixpkgs-master {
-        inherit system;
-        config.allowUnfree = true;
-      };
+  outputs = inputs @ {
+    nixpkgs,
+    sops-nix,
+    disko,
+    preservation,
+    auto-cpufreq,
+    chaotic,
+    ...
+  }: let
+    stVersion = "26.05";
+    hostNames = builtins.attrNames (
+      nixpkgs.lib.filterAttrs (name: type: type == "directory") (builtins.readDir ./Hosts)
+    );
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+    pkgsM = import inputs.nixpkgs-master {
+      inherit system;
+      config.allowUnfree = true;
+    };
+  in {
+    formatter.${system} = pkgs.alejandra;
 
-    in
-    {
-
-      nixosConfigurations = nixpkgs.lib.genAttrs hostNames (
-        hostname:
+    nixosConfigurations = nixpkgs.lib.genAttrs hostNames (
+      hostname:
         nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs pkgsM; };
+          specialArgs = {inherit inputs pkgsM;};
           modules = [
             inputs.hjem.nixosModules.default
             sops-nix.nixosModules.sops
@@ -80,12 +77,9 @@
                 lib,
                 config,
                 ...
-              }:
-              let
+              }: let
                 user = config.core.user;
-              in
-              {
-
+              in {
                 options.core = {
                   host = lib.mkOption {
                     type = lib.types.str;
@@ -97,8 +91,8 @@
 
                 config = {
                   nix.settings = {
-                    substituters = [ "https://attic.xuyh0120.win/lantian" ];
-                    trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+                    substituters = ["https://attic.xuyh0120.win/lantian"];
+                    trusted-public-keys = ["lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="];
                   };
 
                   networking.hostName = hostname;
@@ -113,16 +107,6 @@
             )
           ];
         }
-      );
-
-      # Devshell
-      devShells.${system} = {
-        default = pkgs.mkShell {
-          packages = with pkgs; [
-            python314
-            ruff
-          ];
-        };
-      };
-    };
+    );
+  };
 }

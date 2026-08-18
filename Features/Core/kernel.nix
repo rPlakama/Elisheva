@@ -3,27 +3,23 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   cpu = config.core.cpu;
-in
-{
-  nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
+in {
+  nixpkgs.overlays = [inputs.nix-cachyos-kernel.overlays.pinned];
 
   boot = {
     kernelPackages = (
-      if cpu.amd then
-        pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-zen4
-      else
-        pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3
+      if cpu.amd
+      then pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-zen4
+      else pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3
     );
     kernelParams =
-      if cpu.amd then
-        [ "amd_pstate=active" ]
-      else if cpu.intel then
-        [ "intel_pstate=active" ]
-      else
-        [ ];
+      if cpu.amd
+      then ["amd_pstate=active"]
+      else if cpu.intel
+      then ["intel_pstate=active"]
+      else [];
   };
   assertions = [
     {

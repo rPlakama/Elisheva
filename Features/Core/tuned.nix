@@ -2,11 +2,9 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf;
   usesTunedPPD = config.core.isLaptop.usesTunedPPD;
-
   # --- Hardware context: Lenovo IdeaPad Slim 5 14AKP10 (MTM 83NJ) ---
   # CPU:    AMD Ryzen AI 7 350 -- Krackan Point (Zen 5): 4x 5.0 GHz + 4x Zen 5c 3.5 GHz, 8c/16t
   #         driven by amd-pstate in active mode (EPP), see core.kernel amd_pstate=active
@@ -18,8 +16,7 @@ let
   # The ideapad_laptop EC exposes /sys/firmware/acpi/platform_profile on this
   # model, so the [acpi] platform_profile keys below drive the real firmware
   # thermal/fan behaviour through tuned-ppd's sysfs monitor.
-in
-{
+in {
   services.tuned = mkIf usesTunedPPD {
     enable = true;
     ppdSupport = true;

@@ -3,8 +3,7 @@
   lib,
   modulesPath,
   ...
-}:
-let
+}: let
   featureCall = config.features;
 
   # services without an entry keep the default weight (100).
@@ -18,8 +17,7 @@ let
     prowlarr = "25";
     slskd = "50";
   };
-in
-{
+in {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -30,9 +28,9 @@ in
     "usb_storage"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-intel"];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     # device = "/dev/disk/by-uuid/3d02f997-4ef4-4d04-a40a-734742b53660";
@@ -81,8 +79,8 @@ in
   # Derive per-service IO weights from the unifiedDNS service inventory
   systemd.services = lib.mapAttrs' (
     name: _:
-    lib.nameValuePair name {
-      serviceConfig.IOWeight = ioWeights.${name};
-    }
+      lib.nameValuePair name {
+        serviceConfig.IOWeight = ioWeights.${name};
+      }
   ) (lib.filterAttrs (name: _: ioWeights ? ${name}) featureCall.unifiedDNS.proxyServices);
 }

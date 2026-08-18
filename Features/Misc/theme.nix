@@ -3,30 +3,28 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkOption mkIf types;
   inherit (types) str bool int;
 
   featureCall = config.features;
   user = config.core.user;
 
-  strOpt =
-    default: desc:
+  strOpt = default: desc:
     mkOption {
       type = str;
       inherit default;
       description = desc;
     };
-  intOpt =
-    default: desc:
+  intOpt = default: desc:
     mkOption {
       type = int;
       inherit default;
       description = desc;
     };
 
-  inherit (featureCall.theming)
+  inherit
+    (featureCall.theming)
     iconTheme
     cursorTheme
     cursorSize
@@ -35,7 +33,7 @@ let
   fontStr = "${featureCall.theming.fontFamily} ${toString featureCall.theming.fontSize}";
 
   # settings.ini —-
-  gtkSettings = lib.generators.toINI { } {
+  gtkSettings = lib.generators.toINI {} {
     Settings = {
       gtk-theme-name = "Adwaita";
       gtk-icon-theme-name = iconTheme;
@@ -54,10 +52,13 @@ let
     cursor-theme='${cursorTheme}'
     cursor-size=${toString cursorSize}
     font-name='${fontStr}'
-    color-scheme='${if darkTheme then "prefer-dark" else "default"}'
+    color-scheme='${
+      if darkTheme
+      then "prefer-dark"
+      else "default"
+    }'
   '';
-in
-{
+in {
   options.features.theming = {
     enable = mkOption {
       type = bool;

@@ -2,8 +2,7 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   featureCall = config.features;
   user = config.core.user;
   base_path = "/media";
@@ -26,29 +25,31 @@ let
     "torrents"
   ];
   allMediaPaths = map (f: "${base_path}/${f}") mediaFolders;
-in
-{
+in {
   options.features.mediaPermissions = {
     enable = lib.mkEnableOption "Shared media folders and group permissions";
     writableServices = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ ];
+      default = [];
       description = "Systemd services that need ReadWritePaths on all media folders";
     };
   };
   config = lib.mkIf featureCall.mediaPermissions.enable {
-    users.groups.media = { };
-    users.users.${user}.extraGroups = [ "media" ];
-    systemd.tmpfiles.rules = builtins.concatMap (folder: [
-      "d ${base_path}/${folder} 2775 nobody media - -"
-      "Z ${base_path}/${folder} 2775 nobody media - -"
-      "A ${base_path}/${folder} - - - - g:media:rwx"
-      "A+ ${base_path}/${folder} - - - - d:g:media:rwx"
-    ]) mediaFolders;
+    users.groups.media = {};
+    users.users.${user}.extraGroups = ["media"];
+    systemd.tmpfiles.rules =
+      builtins.concatMap (folder: [
+        "d ${base_path}/${folder} 2775 nobody media - -"
+        "Z ${base_path}/${folder} 2775 nobody media - -"
+        "A ${base_path}/${folder} - - - - g:media:rwx"
+        "A+ ${base_path}/${folder} - - - - d:g:media:rwx"
+      ])
+      mediaFolders;
     systemd.services = lib.mkMerge (
       map (svc: {
         ${svc}.serviceConfig.ReadWritePaths = allMediaPaths;
-      }) featureCall.mediaPermissions.writableServices
+      })
+      featureCall.mediaPermissions.writableServices
     );
   };
 }

@@ -3,20 +3,17 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) mkMerge mkIf;
   gpu = config.core.gpu;
-in
-{
+in {
   config = mkMerge [
-
     (mkIf gpu.nvidia {
-      services.xserver.videoDrivers = [ "nvidia" ];
+      services.xserver.videoDrivers = ["nvidia"];
       hardware = {
         graphics = {
           enable = true;
-          extraPackages = with pkgs; [ nvidia-vaapi-driver ];
+          extraPackages = with pkgs; [nvidia-vaapi-driver];
         };
         nvidia-container-toolkit.enable = true;
         nvidia = {
@@ -46,7 +43,7 @@ in
       };
       environment = {
         sessionVariables.LIBVA_DRIVER_NAME = "iHD";
-        systemPackages = with pkgs; [ intel-gpu-tools ];
+        systemPackages = with pkgs; [intel-gpu-tools];
       };
     })
   ];

@@ -4,9 +4,9 @@
   inputs,
   pkgs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkOption
     mkIf
     types
@@ -24,9 +24,7 @@ let
   widgetsGroupOpacity = 0.0;
   widgetsGroupSpacing = 6.0;
   widgetsGroupRadius = 3.0;
-
-in
-{
+in {
   options.features.noctalia = {
     enable = mkOption {
       type = bool;
@@ -44,7 +42,7 @@ in
     ];
 
     nix.settings = {
-      extra-substituters = [ "https://noctalia.cachix.org" ];
+      extra-substituters = ["https://noctalia.cachix.org"];
       extra-trusted-public-keys = [
         "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       ];
@@ -99,8 +97,8 @@ in
               };
             };
             keybinds = {
-              left = [ "Ctrl+h" ];
-              right = [ "Ctrl+l" ];
+              left = ["Ctrl+h"];
+              right = ["Ctrl+l"];
               up = [
                 "Ctrl+k"
                 "Ctrl+p"
@@ -109,13 +107,15 @@ in
                 "Ctrl+j"
                 "Ctrl+n"
               ];
-
             };
             theme = {
               source = "wallpaper";
               community_palette = "Cream Autumn";
               wallpaper_scheme = "m3-rainbow";
-              mode = if theming.darkTheme then "dark" else "light";
+              mode =
+                if theming.darkTheme
+                then "dark"
+                else "light";
               templates = {
                 community_ids = [
                   "yazi"
@@ -168,8 +168,8 @@ in
               capsule = false;
               capsule_radius = barRadius;
               capsule_opacity = 0.0;
-              start = [ "group:g5" ];
-              center = [ "group:g6" ];
+              start = ["group:g5"];
+              center = ["group:g6"];
               end = [
                 "group:g4"
                 "group:g1"
@@ -232,12 +232,12 @@ in
               ];
             };
             control_center.shortcuts = [
-              { type = "wifi"; }
-              { type = "bluetooth"; }
-              { type = "caffeine"; }
-              { type = "notification"; }
-              { type = "mic_mute"; }
-              { type = "system"; }
+              {type = "wifi";}
+              {type = "bluetooth";}
+              {type = "caffeine";}
+              {type = "notification";}
+              {type = "mic_mute";}
+              {type = "system";}
             ];
             widget = {
               cpu.show_value = false;
@@ -276,7 +276,7 @@ in
                 show_label = false;
                 hide_when_full = false;
               };
-              bluetooth = { };
+              bluetooth = {};
               control-center = {
                 glyph = "topology-star-3";
                 scale = 0.9;

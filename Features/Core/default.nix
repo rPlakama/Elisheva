@@ -1,24 +1,21 @@
-{
-  lib,
-  ...
-}:
-let
-  inherit (lib)
+{lib, ...}: let
+  inherit
+    (lib)
     mkOption
     mkEnableOption
     types
     filterAttrs
     hasSuffix
     ;
-  inherit (types)
+  inherit
+    (types)
     str
     bool
     int
     enum
     ;
 
-  strOpt =
-    desc:
+  strOpt = desc:
     mkOption {
       type = str;
       description = desc;
@@ -30,9 +27,7 @@ let
       builtins.readDir ./.
     )
   );
-
-in
-{
+in {
   imports = map (n: ./${n}) importFiles;
 
   options = {
@@ -60,7 +55,6 @@ in
         amd = mkEnableOption "AMD GPU (RADV/amdgpu)";
         nvidia = mkEnableOption "Nvidia GPU (nvidia/nouveau)";
         intel = mkEnableOption "Intel GPU (i915/Xe)";
-
       };
       # Cpu
       cpu = {

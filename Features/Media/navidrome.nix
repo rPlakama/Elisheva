@@ -3,16 +3,14 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   featureCall = config.features;
 
   appleMusicPlugin = pkgs.fetchurl {
     url = "https://github.com/navidrome/apple-music-plugin/releases/download/v0.2.0/apple-music.ndp";
     hash = "sha256-NoJ1HnLKpcxGs/ercN5w6gJvCjikf3gLLStJIu0K0VQ=";
   };
-in
-{
+in {
   options.features.navidrome = {
     enable = lib.mkEnableOption "Navidrome music server";
     musicFolder = lib.mkOption {
@@ -24,10 +22,10 @@ in
 
   config = lib.mkIf featureCall.navidrome.enable {
     features = {
-      preservation.system.directories = [ "/var/lib/navidrome" ];
+      preservation.system.directories = ["/var/lib/navidrome"];
       mediaPermissions = {
         enable = true;
-        writableServices = [ "navidrome" ];
+        writableServices = ["navidrome"];
       };
       unifiedDNS.proxyServices.navidrome = {
         port = 4533;

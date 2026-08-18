@@ -2,11 +2,9 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   user = config.core.user;
-in
-{
+in {
   nixpkgs.config.allowUnfree = true;
   programs.nix-ld.enable = true;
   nix = {

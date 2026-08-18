@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   nixpkgs.overlays = [
     (final: prev: {
       lidarr = prev.stdenv.mkDerivation rec {
@@ -11,8 +10,8 @@
           hash = "sha256-5ScoNmV91YCQIXW3Cwi6Y/onpk1YXE4EbandXFPf5BM=";
         };
 
-        nativeBuildInputs = with prev; [ patchelf ];
-        buildInputs = with prev; [ sqlite stdenv.cc.cc.lib icu openssl zlib ];
+        nativeBuildInputs = with prev; [patchelf];
+        buildInputs = with prev; [sqlite stdenv.cc.cc.lib icu openssl zlib];
 
         dontAutoPatchelf = true;
         dontFixup = true;
@@ -21,7 +20,7 @@
           mkdir -p $out/bin $out/lib/lidarr
           cp -r . $out/lib/lidarr/
 
-          rpath="${prev.lib.makeLibraryPath [ prev.sqlite prev.stdenv.cc.cc.lib prev.icu prev.openssl prev.zlib ]}"
+          rpath="${prev.lib.makeLibraryPath [prev.sqlite prev.stdenv.cc.cc.lib prev.icu prev.openssl prev.zlib]}"
           interpreter="$(cat $NIX_CC/nix-support/dynamic-linker)"
 
           patchelf --set-interpreter "$interpreter" --set-rpath "$rpath" $out/lib/lidarr/Lidarr
@@ -32,10 +31,12 @@
           ln -s $out/lib/lidarr/Lidarr $out/bin/Lidarr
         '';
 
-        meta = prev.lidarr.meta // {
-          version = version;
-          changelog = "https://github.com/Lidarr/Lidarr/releases/tag/v${version}";
-        };
+        meta =
+          prev.lidarr.meta
+          // {
+            version = version;
+            changelog = "https://github.com/Lidarr/Lidarr/releases/tag/v${version}";
+          };
       };
     })
   ];

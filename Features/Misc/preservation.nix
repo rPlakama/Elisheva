@@ -2,9 +2,9 @@
   config,
   lib,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkOption
     types
     foldl'
@@ -16,7 +16,10 @@ let
   user = config.core.user;
 
   # De-duplicate the persistence lists (defaults + any overrides).
-  uniq = foldl' (acc: x: if elem x acc then acc else acc ++ [ x ]) [ ];
+  uniq = foldl' (acc: x:
+    if elem x acc
+    then acc
+    else acc ++ [x]) [];
 
   defaultSystemDirs = [
     "/var/lib/tailscale"
@@ -60,17 +63,17 @@ let
   homeDirs = uniq (defaultHomeDirs ++ featureCall.preservation.home.directories);
   homeFiles = uniq (featureCall.preservation.home.files);
 
-  userHome = directories: files: { users.${user} = { inherit directories files; }; };
+  userHome = directories: files: {users.${user} = {inherit directories files;};};
 
   preserveAt = {
-    "/persistent" = {
-      directories = systemDirs;
-      files = systemFiles;
-    }
-    // userHome homeDirs homeFiles;
+    "/persistent" =
+      {
+        directories = systemDirs;
+        files = systemFiles;
+      }
+      // userHome homeDirs homeFiles;
   };
-in
-{
+in {
   options.features.preservation = {
     enable = mkOption {
       type = types.bool;
@@ -81,37 +84,37 @@ in
     system = {
       directories = mkOption {
         type = listOf anything;
-        default = [ ];
+        default = [];
         description = "System directories to persist.";
-        example = [ "/var/lib/qbittorrent" ];
+        example = ["/var/lib/qbittorrent"];
       };
       files = mkOption {
         type = listOf anything;
-        default = [ ];
+        default = [];
         description = "System files to persist.";
-        example = [ "/etc/adjtime" ];
+        example = ["/etc/adjtime"];
       };
     };
 
     home = {
       directories = mkOption {
         type = listOf anything;
-        default = [ ];
+        default = [];
         description = "Home directories to persist.";
-        example = [ ".config/vesktop" ];
+        example = [".config/vesktop"];
       };
       files = mkOption {
         type = listOf anything;
-        default = [ ];
+        default = [];
         description = "Home files to persist.";
-        example = [ ".gitconfig" ];
+        example = [".gitconfig"];
       };
     };
   };
 
   config = lib.mkIf featureCall.preservation.enable {
     nix.channel.enable = false;
-    sops.age.sshKeyPaths = [ "/persistent/etc/ssh/ssh_host_ed25519_key" ];
+    sops.age.sshKeyPaths = ["/persistent/etc/ssh/ssh_host_ed25519_key"];
     assertions = [
       {
         assertion = featureCall.disko.enable;

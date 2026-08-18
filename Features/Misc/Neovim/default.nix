@@ -3,13 +3,15 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   featureCall = config.features;
   user = config.core.user;
   theming = featureCall.theming;
 
-  theme = if theming.enable then theming.base16Theme else "chalk";
+  theme =
+    if theming.enable
+    then theming.base16Theme
+    else "chalk";
 
   myNvim = pkgs.neovim.override {
     configure = {
@@ -36,9 +38,7 @@ let
       ];
     };
   };
-
-in
-{
+in {
   options.features.neovim = {
     enable = lib.mkOption {
       type = lib.types.bool;

@@ -2,13 +2,11 @@
   config,
   lib,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf;
 
   zram = config.core.zram;
-in
-{
+in {
   config = mkIf (zram.enable) {
     zramSwap = {
       enable = true;

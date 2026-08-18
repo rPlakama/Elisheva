@@ -3,24 +3,21 @@
   config,
   pkgsM,
   ...
-}:
-let
+}: let
   featureCall = config.features;
   slskdPort = 5030;
   slskdListenPort = 50000;
-in
-{
+in {
   options.features.slskd.enable = lib.mkEnableOption "Soulseek client";
 
   config = lib.mkIf featureCall.slskd.enable {
-
     sops = {
       secrets = {
-        "slskd/username" = { };
-        "slskd/password" = { };
-        "slskd/web-username" = { };
-        "slskd/web-password" = { };
-        "slskd/api-main" = { };
+        "slskd/username" = {};
+        "slskd/password" = {};
+        "slskd/web-username" = {};
+        "slskd/web-password" = {};
+        "slskd/api-main" = {};
       };
       templates."slskd.env".content = ''
         SLSKD_SLSK_USERNAME=${config.sops.placeholder."slskd/username"}
@@ -33,7 +30,7 @@ in
 
     features = {
       mediaPermissions.enable = true;
-      preservation.system.directories = [ "/var/lib/slskd" ];
+      preservation.system.directories = ["/var/lib/slskd"];
       unifiedDNS.proxyServices.slskd = {
         port = slskdPort;
         icon = "sh-slskd";
@@ -41,7 +38,7 @@ in
       };
     };
 
-    networking.firewall.allowedTCPPorts = [ slskdListenPort ];
+    networking.firewall.allowedTCPPorts = [slskdListenPort];
 
     services.slskd = {
       enable = true;

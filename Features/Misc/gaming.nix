@@ -4,15 +4,13 @@
   inputs,
   pkgs,
   ...
-}:
-let
+}: let
   featureCall = config.features;
   user = config.core.user;
   gsrPkg = inputs.gsr-ui-nix.packages.${pkgs.stdenv.hostPlatform.system}.gpu-screen-recorder;
   gsrEnable = featureCall.gaming.gsr.enable;
-in
-{
-  imports = [ inputs.gsr-ui-nix.nixosModules.default ];
+in {
+  imports = [inputs.gsr-ui-nix.nixosModules.default];
 
   options.features.gaming = {
     enable = lib.mkEnableOption "Enable gaming bundle";
@@ -36,13 +34,12 @@ in
   };
 
   config = lib.mkIf featureCall.gaming.enable {
-
     features.preservation.home.directories = [
       ".steam"
       "Games"
     ];
 
-    boot.kernelModules = [ "ntsync" ];
+    boot.kernelModules = ["ntsync"];
 
     hjem.users.${user}.packages = with pkgs; [
       mangohud
@@ -50,7 +47,6 @@ in
     ];
 
     programs = {
-
       gamemode.enable = featureCall.gaming.gamemode;
       gamescope.enable = featureCall.gaming.gamescope;
 

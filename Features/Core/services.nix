@@ -2,14 +2,12 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   headless = config.core.headless;
   usesAuto-cpufreq = config.core.isLaptop.usesAuto-cpufreq;
   usesPPD = config.core.isLaptop.usesPPD;
   isLaptop = config.core.isLaptop.enable;
-in
-{
+in {
   programs.auto-cpufreq = {
     enable = usesAuto-cpufreq;
     settings = {

@@ -2,14 +2,11 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   featureCall = config.features;
   user = config.core.user;
   isLaptop = config.core.isLaptop.enable;
-
-in
-{
+in {
   options.features.virtualization.enable = lib.mkEnableOption "Virtualization (libvirtd + Docker)";
 
   config = lib.mkIf featureCall.virtualization.enable {

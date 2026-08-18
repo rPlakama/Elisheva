@@ -1,15 +1,16 @@
-{ config, lib, ... }:
-let
+{
+  config,
+  lib,
+  ...
+}: let
   contents = builtins.readDir ./.;
-  isImportable =
-    name: type:
+  isImportable = name: type:
     (type == "directory") || (type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix");
   importable = lib.filterAttrs (name: type: isImportable name type) contents;
   modulePaths = lib.mapAttrsToList (name: _: ./${name}) importable;
 
   headless = config.core.headless;
-in
-{
+in {
   imports = modulePaths;
 
   boot.consoleLogLevel = 0;

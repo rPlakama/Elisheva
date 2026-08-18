@@ -4,9 +4,9 @@
   pkgs,
   inputs,
   ...
-}:
-let
-  inherit (lib)
+}: let
+  inherit
+    (lib)
     mkOption
     mkIf
     types
@@ -18,9 +18,7 @@ let
   user = config.core.user;
   headless = config.core.headless;
   featureCall = config.features;
-
-in
-{
+in {
   options.features.graphicalPkgs = {
     enable = mkOption {
       type = bool;
@@ -29,7 +27,7 @@ in
     };
     foot.theme = mkOption {
       type = listOf str;
-      default = [ ];
+      default = [];
       description = "Import themes for Foot";
       example = "include=path";
     };
@@ -37,8 +35,7 @@ in
 
   config = mkIf featureCall.graphicalPkgs.enable {
     hjem.users.${user} = {
-      packages =
-        with pkgs;
+      packages = with pkgs;
         [
           inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
           vesktop
@@ -55,13 +52,14 @@ in
           moonlight-qt
         ];
 
-      files.".config/foot/foot.ini".text = ''
-        [main]
-        dpi-aware=false
-        font=${featureCall.theming.monoFont}:size=${toString featureCall.theming.monoFontSize}
-      ''
-      + "\n"
-      + (concatStringsSep "\n" featureCall.graphicalPkgs.foot.theme);
+      files.".config/foot/foot.ini".text =
+        ''
+          [main]
+          dpi-aware=false
+          font=${featureCall.theming.monoFont}:size=${toString featureCall.theming.monoFontSize}
+        ''
+        + "\n"
+        + (concatStringsSep "\n" featureCall.graphicalPkgs.foot.theme);
     };
   };
 }

@@ -3,16 +3,12 @@
   config,
   pkgs,
   ...
-}:
-
-let
+}: let
   inherit (lib) optionals;
   featureCall = config.features;
   user = config.core.user;
   gpu = config.core.gpu;
-in
-{
-
+in {
   options.features.ia-tools.enable = lib.mkEnableOption "General IA Tools";
 
   config = lib.mkIf featureCall.ia-tools.enable {
@@ -21,8 +17,7 @@ in
         ".ollama"
       ];
     };
-    hjem.users.${user}.packages =
-      with pkgs;
-      [ opencode ] ++ optionals gpu.nvidia [ ollama-cuda ] ++ optionals gpu.amd [ ollama-rocm ];
+    hjem.users.${user}.packages = with pkgs;
+      [opencode] ++ optionals gpu.nvidia [ollama-cuda] ++ optionals gpu.amd [ollama-rocm];
   };
 }

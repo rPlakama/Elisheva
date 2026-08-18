@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   featureCall = config.features;
 
   mediaServicesWithPermissions = {
@@ -42,8 +41,7 @@ let
       description = "Cloudflare-bypass proxy for indexers";
     };
   };
-in
-{
+in {
   options.features.rrstack.enable = lib.mkEnableOption "*-rr stack (Sonarr, Radarr, Jackett, Prowlarr)";
 
   config = lib.mkIf featureCall.rrstack.enable {
@@ -60,13 +58,15 @@ in
     };
     services =
       (lib.mapAttrs (name: svc: {
-        enable = true;
-        group = "media";
-      }) mediaServicesWithPermissions)
+          enable = true;
+          group = "media";
+        })
+        mediaServicesWithPermissions)
       // (lib.mapAttrs (name: svc: {
-        enable = true;
-      }) mediaNonPermissions);
+          enable = true;
+        })
+        mediaNonPermissions);
 
-    systemd.services.lidarr.path = [ pkgs.ffmpeg-full ];
+    systemd.services.lidarr.path = [pkgs.ffmpeg-full];
   };
 }

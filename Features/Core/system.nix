@@ -1,18 +1,13 @@
-{
-  config,
-  ...
-}:
-let
+{config, ...}: let
   user = config.core.user;
-in
-{
+in {
   security.sudo-rs.enable = true;
 
   networking.networkmanager.enable = true;
 
   users.users.${user} = {
     group = user;
-    extraGroups = [ "networkmanager" ];
+    extraGroups = ["networkmanager"];
   };
 
   programs = {

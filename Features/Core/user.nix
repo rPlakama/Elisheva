@@ -2,12 +2,10 @@
   config,
   pkgs,
   ...
-}:
-let
+}: let
   user = config.core.user;
   localeID = "pt_BR.UTF-8";
-in
-{
+in {
   time.timeZone = "America/Recife";
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -25,7 +23,7 @@ in
   };
 
   users = {
-    groups.${user} = { };
+    groups.${user} = {};
     users.${user} = {
       isNormalUser = true;
       hashedPassword = "$y$j9T$qE7EkQbvME02UxqkVVJa91$qLOUcUnfU6IAaP17gkeQiAF2xVh6nPcnyp6K3b6yrK/";

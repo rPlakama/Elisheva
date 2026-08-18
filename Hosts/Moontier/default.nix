@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./hardware.nix
     ../../Features
@@ -38,7 +38,6 @@
     cpu.intel = true;
     headless = true;
     zram.size = 8096;
-
   };
 
   features = {
