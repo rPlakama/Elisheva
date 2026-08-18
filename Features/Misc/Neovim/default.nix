@@ -61,7 +61,7 @@ in
       fish-lsp
       nixd
       nushell
-      silver-searcher-ng
+      marksman
     ];
 
     hjem.users.${user} = {
