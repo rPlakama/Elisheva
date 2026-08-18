@@ -21,6 +21,7 @@
       opustags
       opus-tools
       flac2all
+      imagemagick
     ]
   );
 }
