@@ -11,12 +11,14 @@ let
     mkIf
     types
     concatStringsSep
+    optionals
     ;
   inherit (types) bool str listOf;
 
-  cfg = config.features.graphicalPkgs;
   user = config.core.user;
   headless = config.core.headless;
+  featureCall = config.features;
+
 in
 {
   options.features.graphicalPkgs = {
@@ -33,7 +35,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf featureCall.graphicalPkgs.enable {
     hjem.users.${user} = {
       packages =
         with pkgs;
@@ -42,26 +44,24 @@ in
           vesktop
           materialgram
           nextcloud-client
-          jellyfin-desktop
           foot
           mpv
           ripdrag
           obsidian
           kdePackages.okular
-          kdePackages.partitionmanager
           motrix-next
         ]
-        ++ lib.optionals (config.core.isLaptop.enable) [
+        ++ optionals (config.core.isLaptop.enable) [
           moonlight-qt
         ];
 
       files.".config/foot/foot.ini".text = ''
         [main]
         dpi-aware=false
-        font=${config.features.theming.monoFont}:size=${toString config.features.theming.monoFontSize}
+        font=${featureCall.theming.monoFont}:size=${toString featureCall.theming.monoFontSize}
       ''
       + "\n"
-      + (concatStringsSep "\n" cfg.foot.theme);
+      + (concatStringsSep "\n" featureCall.graphicalPkgs.foot.theme);
     };
   };
 }
