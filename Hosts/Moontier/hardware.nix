@@ -6,6 +6,7 @@
 }:
 let
   featureCall = config.features;
+  cpu = config.core.cpu;
 
   # services without an entry keep the default weight (100).
   ioWeights = {
@@ -18,21 +19,24 @@ let
     prowlarr = "25";
     slskd = "50";
   };
+
 in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "uas"
-    "usb_storage"
-    "sd_mod"
-  ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ]; # Should be a core.cpu var instead
-  boot.extraModulePackages = [ ];
+  boot = {
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "uas"
+      "usb_storage"
+      "sd_mod"
+    ];
+    initrd.kernelModules = [ ];
+    kernelModules = if cpu.intel then [ "kvm-intel" ] else [ "kvm-amd" ];
+    extraModulePackages = [ ];
+  };
 
   fileSystems."/" = {
     # device = "/dev/disk/by-uuid/3d02f997-4ef4-4d04-a40a-734742b53660";
