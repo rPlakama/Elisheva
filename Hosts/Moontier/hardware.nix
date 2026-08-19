@@ -68,7 +68,7 @@ in
 
   # IOPSmaxxing
   boot.kernel.sysctl = {
-    # Increase write-back caching limits to use more RAM for smooth writes
+    # Increase write-back
     "vm.dirty_background_ratio" = 10;
     "vm.dirty_ratio" = 30; # 30% of ram for dirty pages
 

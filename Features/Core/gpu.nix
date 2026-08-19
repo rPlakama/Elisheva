@@ -3,17 +3,19 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkMerge mkIf;
   gpu = config.core.gpu;
-in {
+in
+{
   config = mkMerge [
     (mkIf gpu.nvidia {
-      services.xserver.videoDrivers = ["nvidia"];
+      services.xserver.videoDrivers = [ "nvidia" ];
       hardware = {
         graphics = {
           enable = true;
-          extraPackages = with pkgs; [nvidia-vaapi-driver];
+          extraPackages = with pkgs; [ nvidia-vaapi-driver ];
         };
         nvidia-container-toolkit.enable = true;
         nvidia = {
@@ -36,14 +38,25 @@ in {
     (mkIf gpu.intel {
       hardware.graphics = {
         extraPackages = with pkgs; [
+          intel-media-driver # iHD - modern Intel GPUs (Broadwell+)
+          vpl-gpu-rt # oneVPL runtime
+          intel-vaapi-driver # legacy i965 - fallback
+          libvdpau-va-gl # VDPAU via VA-API,
+          intel-compute-runtime # Jellyfin tone-mapping
+        ];
+        extraPackages32 = with pkgs.pkgsi686Linux; [
           intel-media-driver
-          vpl-gpu-rt
           intel-vaapi-driver
         ];
       };
+
       environment = {
         sessionVariables.LIBVA_DRIVER_NAME = "iHD";
-        systemPackages = with pkgs; [intel-gpu-tools];
+        systemPackages = with pkgs; [
+          intel-gpu-tools # intel_gpu_top for monitoring transcode
+          libva-utils # vainfo - verify VA-API profiles expose
+          clinfo # verify OpenCL
+        ];
       };
     })
   ];
