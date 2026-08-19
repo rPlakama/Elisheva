@@ -6,9 +6,9 @@ Personal NixOS flake managing multiple machines with a modular, feature-based ar
 
 | Host | Type | GPU | Storage |
 |---|---|---|---|
-| **Centuria** | Desktop | RTX 3060 12GB | 512GB NVMe |
-| **Moontier** | Server | Intel GPU | 7TB |
-| **Arthoplerau** | Laptop | AMD Radeon | 512GB + 1TB NVMe (dual) |
+| **Centuria** | Ryzen 7 5700X | RTX 3060 12GB | 512GB NVME |
+| **Moontier** | Intel Core i3-6100 | Intel HD Graphics 530 | 6TB XFS + 1 TB |
+| **Arthoplerau** | Ryzen AI 7 350 | AMD Radeon | 512GBGen4 + 1TBGen3  (dual nvme pool) |
 
 ## Structure
 
