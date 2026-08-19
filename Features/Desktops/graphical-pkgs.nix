@@ -49,7 +49,6 @@ in
           obsidian
           kdePackages.okular
           motrix-next
-          easyeffects
         ]
         ++ optionals (config.core.isLaptop.enable) [
           moonlight-qt
