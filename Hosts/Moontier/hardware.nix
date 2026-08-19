@@ -74,7 +74,7 @@ in
   boot.kernel.sysctl = {
     # Increase write-back
     "vm.dirty_background_ratio" = 10;
-    "vm.dirty_ratio" = 30; # 30% of ram for dirty pages
+    "vm.dirty_ratio" = 40; # Percetage of ram for Dirty Pages
 
     "vm.dirty_background_bytes" = 0;
     "vm.dirty_bytes" = 0;

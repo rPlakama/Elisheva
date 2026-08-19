@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   imports = [
     ./hardware.nix
     ../../Features
@@ -20,7 +20,7 @@
 
   services.earlyoom = {
     enable = true;
-    freeMemThreshold = 5;
+    freeMemThreshold = 2;
     freeSwapThreshold = 10;
   };
 
@@ -37,7 +37,7 @@
     gpu.intel = true;
     cpu.intel = true;
     headless = true;
-    zram.size = 8096;
+    zram.size = 4048;
   };
 
   features = {
