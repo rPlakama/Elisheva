@@ -28,6 +28,7 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     preservation.url = "github:nix-community/preservation";
 

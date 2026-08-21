@@ -60,7 +60,7 @@ in {
         enable = true;
         extraCompatPackages = with pkgs; [
           proton-cachyos
-          proton-ge-bin
+          proton-ge-custom
         ];
       };
     };

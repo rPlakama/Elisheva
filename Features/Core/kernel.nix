@@ -1,22 +1,21 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }:
 let
   cpu = config.core.cpu;
-  headless = config.core.headless;
 in
 {
+  nixpkgs.overlays = [ inputs.nix-cachyos-kernel.overlays.pinned ];
 
   boot = {
     kernelPackages = (
       if cpu.amd then
-        pkgs.linuxPackages_cachyos-lto-znver4
-      else if headless then
-        pkgs.linuxPackages_cachyos-server
+        pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-zen4
       else
-        pkgs.linuxPackages_cachyos
+        pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3
     );
     kernelParams =
       if cpu.amd then
