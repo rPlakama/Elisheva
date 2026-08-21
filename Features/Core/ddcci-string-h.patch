@@ -1,0 +1,57 @@
+diff --git a/ddcci/ddcci.c b/ddcci/ddcci.c
+index 30a59e7..1c60e8e 100644
+--- a/ddcci/ddcci.c
++++ b/ddcci/ddcci.c
+@@ -23,6 +23,7 @@
+ #include <linux/rwsem.h>
+ #include <linux/slab.h>
+ #include <linux/uaccess.h>
++#include <linux/string.h>
+ #include <linux/version.h>
+ 
+ #include <linux/ddcci.h>
+@@ -765,7 +766,7 @@
+ 
+ 	if (likely(device != NULL)) {
+ 		len = strnlen(device->prot, sizeof(device->prot));
+-		strncpy(buf, device->prot, PAGE_SIZE);
++		strscpy(buf, device->prot, PAGE_SIZE);
+ 		if (len == 0) {
+ 			ret = len;
+ 		} else if (likely(len < PAGE_SIZE)) {
+@@ -787,7 +788,7 @@
+ 
+ 	if (likely(device != NULL)) {
+ 		len = strnlen(device->type, sizeof(device->type));
+-		strncpy(buf, device->type, PAGE_SIZE);
++		strscpy(buf, device->type, PAGE_SIZE);
+ 		if (len == 0) {
+ 			ret = len;
+ 		} else if (likely(len < PAGE_SIZE)) {
+@@ -809,7 +810,7 @@
+ 
+ 	if (likely(device != NULL)) {
+ 		len = strnlen(device->model, sizeof(device->model));
+-		strncpy(buf, device->model, PAGE_SIZE);
++		strscpy(buf, device->model, PAGE_SIZE);
+ 		if (len == 0) {
+ 			ret = len;
+ 		} else if (likely(len < PAGE_SIZE)) {
+@@ -831,7 +832,7 @@
+ 
+ 	if (likely(device != NULL)) {
+ 		len = strnlen(device->vendor, sizeof(device->vendor));
+-		strncpy(buf, device->vendor, PAGE_SIZE);
++		strscpy(buf, device->vendor, PAGE_SIZE);
+ 		if (len == 0) {
+ 			ret = len;
+ 		} else if (likely(len < PAGE_SIZE)) {
+@@ -853,7 +854,7 @@
+ 
+ 	if (likely(device != NULL)) {
+ 		len = strnlen(device->module, sizeof(device->module));
+-		strncpy(buf, device->module, PAGE_SIZE);
++		strscpy(buf, device->module, PAGE_SIZE);
+ 		if (len == 0) {
+ 			ret = len;
+ 		} else if (likely(len < PAGE_SIZE)) {
