@@ -14,6 +14,7 @@ let
 
   keyboardLayout = config.core.keyboardLayout;
   featureCall = config.features;
+  theming = featureCall.theming;
   delayMs = 500;
   user = config.core.user;
   nCallPanel = "noctalia msg panel-toggle";
@@ -41,6 +42,7 @@ in
         enable = true;
 
         settings = {
+          include.files = [ "noctalia.toml" ];
           general = {
             xwayland = true;
             show_cheatsheet = true;
@@ -48,15 +50,14 @@ in
           };
 
           appearance = {
+            corner_radius = 0;
             prefer_no_csd = true;
             border_width = 2;
-            corner_radius = 10;
             animation_ms = 200;
 
             shadow = {
               enabled = true;
               softness = 15;
-              spread = 10;
             };
           };
 
@@ -87,10 +88,6 @@ in
               natural_scroll = true;
             };
 
-            mouse = {
-              accel_profile = "adaptive";
-            };
-
             keyboard = {
               layout = keyboardLayout;
               options = "caps:swapescape";
@@ -100,6 +97,11 @@ in
 
             focus = {
               follows_mouse = false;
+            };
+
+            cursor = {
+              theme = theming.cursorTheme;
+              size = theming.cursorSize;
             };
           };
 
@@ -114,6 +116,7 @@ in
           keybinds = {
             "Mod+Return" = "spawn:foot";
             "Mod+W" = "window-close";
+            "Mod+R" = "window-cycle-width";
 
             "Mod+H" = "window-focus-left";
             "Mod+J" = "window-focus-down";
@@ -128,8 +131,8 @@ in
             "Mod+Ctrl+H" = "window-consume-left";
             "Mod+Ctrl+L" = "window-expel-right";
 
-            "Mod+F" = "window-toggle-fullscreen";
-            "Mod+M" = "window-toggle-maximize";
+            "Mod+F" = "window-toggle-maximize";
+            "Mod+Shift+F" = "window-toggle-fullscreen";
             "Mod+T" = "window-toggle-floating";
 
             "Mod+1" = "workspace-switch:1";
@@ -162,13 +165,7 @@ in
             "Mod+Shift+WheelUp" = "column-move-left";
             "Mod+Shift+WheelDown" = "column-move-right";
 
-            "Mod+A" = "window-set-width:0.333";
-            "Mod+S" = "window-set-width:0.5";
-            "Mod+D" = "window-set-width:0.667";
-
-            "Mod+O" = "overview-toggle";
-            "Mod+I" = "layout-scroll-left";
-            "Mod+P" = "layout-scroll-right";
+            "Mod+Tab" = "overview-toggle";
 
             "XF86AudioRaiseVolume" = "spawn:wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
             "XF86AudioLowerVolume" = "spawn:wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
