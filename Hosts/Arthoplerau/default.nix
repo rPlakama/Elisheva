@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   imports = [
     ./hardware.nix
     ../../Features
@@ -28,6 +28,8 @@
 
   features = {
     neovim.enable = true;
+
+    umbriel.enable = true;
 
     niri = {
       enable = true;
