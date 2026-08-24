@@ -53,10 +53,7 @@ in
               background = "#10080808";
             };
 
-            general = {
-              autostart = [ "noctalia" ];
-              xwayland = true;
-            };
+            general.xwayland = true;
 
             layout = {
               gap = 5;
@@ -108,6 +105,13 @@ in
           "Mod+V" = "spawn:${nCallPanel} clipboard";
           "Ctrl+Alt+A" = "spawn:${nCallPanel} control-center";
         };
+
+        hot_corners.bottom_right = {
+          enabled = true;
+          delay_ms = 500;
+          action = "spawn:${nCallPanel} launcher";
+        };
+
       };
     })
   ];
