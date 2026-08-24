@@ -2,9 +2,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   user = config.core.user;
-in {
+in
+{
   nixpkgs.config.allowUnfree = true;
   programs.nix-ld.enable = true;
   nix = {
@@ -20,6 +22,7 @@ in {
       experimental-features = [
         "nix-command"
         "flakes"
+        "flake-self-attrs"
       ];
       trusted-users = [
         "${user}"

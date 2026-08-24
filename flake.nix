@@ -10,7 +10,6 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     auto-cpufreq = {
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -63,8 +62,6 @@
       };
     in
     {
-      formatter.${system} = pkgs.alejandra;
-
       nixosConfigurations = nixpkgs.lib.genAttrs hostNames (
         hostname:
         nixpkgs.lib.nixosSystem {

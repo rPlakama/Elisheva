@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }:
 let
@@ -23,12 +22,6 @@ in
       LC_TELEPHONE = "${localeID}";
       LC_TIME = "${localeID}";
     };
-  };
-
-  options.core.keyboardLayout = lib.mkOption {
-    type = lib.str;
-    default = "br";
-    description = "Keyboard layout";
   };
 
   users = {

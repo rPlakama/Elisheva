@@ -37,7 +37,7 @@ in
     ip = strOpt "IP";
     headless = mkEnableOption "Is the host a headless device?";
     keyboardLayout = lib.mkOption {
-      type = lib.str;
+      type = str;
       default = "br";
       description = "Keyboard layout";
     };
