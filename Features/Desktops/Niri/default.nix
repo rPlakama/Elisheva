@@ -3,9 +3,9 @@
   config,
   pkgs,
   ...
-}: let
-  inherit
-    (lib)
+}:
+let
+  inherit (lib)
     mkOption
     mkEnableOption
     mkIf
@@ -17,7 +17,7 @@
   featureCall = config.features;
   user = config.core.user;
   theming = featureCall.theming;
-  noctalia = featureCall.noctalia;
+  keyboardLayout = config.core.keyboardLayout;
 
   power-cycle = optionalString (config.core.isLaptop.usesPPD || config.core.isLaptop.usesTunedPPD) ''
     "Ctrl+Alt+Q" { spawn-sh "noctalia msg power-cycle"; }
@@ -35,14 +35,10 @@
         ${optionalString featureCall.niri.output.vrr.enable "    variable-refresh-rate"}
     }
   '';
-in {
+in
+{
   options.features.niri = {
     enable = mkEnableOption "Niri Configuration";
-    VariantKB = mkOption {
-      type = str;
-      default = "";
-      description = "Keyboard Variant";
-    };
     noctalia = {
       import = mkOption {
         type = str;
@@ -50,11 +46,6 @@ in {
         description = "Additional KDL if Noctalia is added";
       };
       enabled = mkEnableOption "Noctalia integration";
-    };
-    keyboardLayout = mkOption {
-      type = str;
-      default = "br";
-      description = "Keyboard layout";
     };
     output = {
       monitor = mkOption {
@@ -79,9 +70,15 @@ in {
 
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
-        ["@ImportNoctalia@" "@cursor@" "@keyboardLayout@" "@Variant@" "@power-cycle@" "@output@"]
-        [featureCall.niri.noctalia.import cursorBlock featureCall.niri.keyboardLayout featureCall.niri.VariantKB power-cycle outputBlock]
-        (builtins.readFile ./config.kdl);
+          [ "@ImportNoctalia@" "@cursor@" "@keyboardLayout@" "@power-cycle@" "@output@" ]
+          [
+            featureCall.niri.noctalia.import
+            cursorBlock
+            keyboardLayout
+            power-cycle
+            outputBlock
+          ]
+          (builtins.readFile ./config.kdl);
     };
   };
 }

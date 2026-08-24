@@ -20,6 +20,8 @@
     kavita-pkg.url = "github:rPlakama/Kavita-flake";
     gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
     helium-browser.url = "github:schembriaiden/helium-browser-nix-flake";
+    umbriel.url = "git+https://github.com/noctalia-dev/umbriel";
+    xdg-desktop-portal-umbriel.url = "github:noctalia-dev/xdg-desktop-portal-umbriel";
 
     hjem = {
       url = "github:feel-co/hjem";

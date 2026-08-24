@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   imports = [
     ./hardware.nix
     ../../Features
@@ -10,6 +10,8 @@
     ckan
   ];
   core = {
+
+    keyboardLayout = "br,us";
     user = "rplakama";
     gpu.nvidia = true;
     cpu.amd = true;
@@ -39,7 +41,6 @@
     };
     qbit.enable = true;
     niri = {
-      keyboardLayout = "br,us";
       enable = true;
       noctalia.enabled = true;
       output.vrr.enable = false;
