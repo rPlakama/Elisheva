@@ -16,6 +16,7 @@ let
   featureCall = config.features;
   delayMs = 500;
   user = config.core.user;
+  nCallPanel = "noctalia msg panel-toggle";
 
 in
 {
@@ -100,7 +101,14 @@ in
 
     (mkIf (featureCall.noctalia.enable) {
 
+      hjem.users.${user}.programs.umbriel.settings = {
+        general.autostart = [ "noctalia" ];
+        keybinds = {
+          "Mod+Space" = "spawn:${nCallPanel} launcher";
+          "Mod+V" = "spawn:${nCallPanel} clipboard";
+          "Ctrl+Alt+A" = "spawn:${nCallPanel} control-center";
+        };
+      };
     })
-
   ];
 }
