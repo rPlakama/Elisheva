@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -9,6 +10,7 @@ let
   gpu = config.core.gpu;
 in
 {
+  imports = [ inputs.chaotic.nixosModules.default ];
   config = mkMerge [
     (mkIf gpu.nvidia {
       services.xserver.videoDrivers = [ "nvidia" ];

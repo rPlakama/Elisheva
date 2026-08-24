@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: let
   headless = config.core.headless;
@@ -8,6 +9,8 @@
   usesPPD = config.core.isLaptop.usesPPD;
   isLaptop = config.core.isLaptop.enable;
 in {
+  imports = [ inputs.auto-cpufreq.nixosModules.default ];
+
   programs.auto-cpufreq = {
     enable = usesAuto-cpufreq;
     settings = {

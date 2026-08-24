@@ -68,10 +68,7 @@
           modules = [
             inputs.hjem.nixosModules.default
             sops-nix.nixosModules.sops
-            chaotic.nixosModules.default
-            disko.nixosModules.disko
             preservation.nixosModules.default
-            auto-cpufreq.nixosModules.default
             ./Hosts/${hostname}
             (
               {

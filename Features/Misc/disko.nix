@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  inputs,
   ...
 }: let
   inherit
@@ -121,6 +122,8 @@
     };
   };
 in {
+  imports = [ inputs.disko.nixosModules.disko ];
+
   options.features.disko = {
     enable = mkEnableOption "declarative disk layout (disko)";
     primaryDrive = mkOption {
