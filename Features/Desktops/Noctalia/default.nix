@@ -29,7 +29,7 @@ in
   options.features.noctalia = {
     enable = mkOption {
       type = bool;
-      default = featureCall.niri.noctalia.enabled || featureCall.umbriel.enabled; # Shoudl subclass this, creates inflexibility --- since might use other Desktop shell later;
+      default = featureCall.niri.noctalia.enabled || featureCall.umbriel.enable; # Shoudl subclass this, creates inflexibility --- since might use other Desktop shell later;
       description = "Enable Noctalia Desktop Shell.";
     };
   };
@@ -69,7 +69,26 @@ in
         ];
 
         files = {
-          ".config/niri/noctaliaBinds.kdl".source = ./NoctaliaBinds.kdl;
+          ".config/niri/noctaliaBinds.kdl".text = ''
+            window-rule {
+                match app-id="^foot$" title="^btop-systemd-inhibit$"
+                open-focused true
+                default-column-width { proportion 0.6; }
+            }
+
+            binds {
+                Ctrl+Alt+A { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
+                Ctrl+Alt+S { spawn "noctalia" "msg" "panel-toggle" "session"; }
+                Ctrl+Alt+W { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
+                Ctrl+Alt+D { spawn "noctalia" "msg" "wallpaper-random"; }
+
+                Mod+Space  { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+                Mod+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
+
+                XF86MonBrightnessUp   { spawn "noctalia" "msg" "brightness-up"; }
+                XF86MonBrightnessDown   { spawn "noctalia" "msg" "brightness-down"; }
+            }
+          '';
           ".local/state/noctalia/noctalia-inhibit.fish" = {
             source = ./noctalia-inhibit.fish;
             executable = true;

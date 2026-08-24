@@ -10,6 +10,7 @@ let
     mkEnableOption
     mkIf
     mkMerge
+    optionalAttrs
     ;
 
   keyboardLayout = config.core.keyboardLayout;
@@ -18,6 +19,12 @@ let
   delayMs = 500;
   user = config.core.user;
   nCallPanel = "noctalia msg panel-toggle";
+
+  power-cycle-bind =
+    optionalAttrs (config.core.isLaptop.usesPPD || config.core.isLaptop.usesTunedPPD)
+      {
+        "Ctrl+Alt+Q" = "spawn:noctalia msg power-cycle";
+      };
 
 in
 {
@@ -52,12 +59,26 @@ in
           appearance = {
             corner_radius = 0;
             prefer_no_csd = true;
-            border_width = 2;
-            animation_ms = 200;
+            border_width = 0;
+            animation_ms = 240;
+
+            blur = {
+              enabled = true;
+              passes = 5;
+              offset = 2.0;
+              noise = 0.03;
+              saturation = 1.6;
+            };
 
             shadow = {
               enabled = true;
-              softness = 15;
+              softness = 10;
+              spread = 1;
+              offset = [
+                0
+                5
+              ];
+              color = "#00000070";
             };
           };
 
@@ -74,9 +95,8 @@ in
             gap = 5;
             mode = "scrolling";
             width_presets = [
-              0.333
-              0.5
-              0.667
+              0.333333
+              0.666667
             ];
           };
 
@@ -85,7 +105,15 @@ in
 
             touchpad = {
               tap = true;
+              dwt = true;
               natural_scroll = true;
+              accel_speed = 0.1;
+              accel_profile = "adaptive";
+              scroll_method = "two-finger";
+            };
+
+            mouse = {
+              accel_speed = -0.5;
             };
 
             keyboard = {
@@ -115,22 +143,33 @@ in
 
           keybinds = {
             "Mod+Return" = "spawn:foot";
+            "Mod+Y" = "spawn:foot -e yazi";
             "Mod+W" = "window-close";
             "Mod+R" = "window-cycle-width";
+            "Mod+Shift+R" = "window-cycle-width";
+            "Mod+P" =
+              "spawn:sh -c 'wl-mirror $(umbriel outputs --json | jq -r .focused.name 2>/dev/null || true)'";
+            "Print" = "spawn:noctalia msg screenshot-fullscreen";
 
             "Mod+H" = "window-focus-left";
             "Mod+J" = "window-focus-down";
             "Mod+K" = "window-focus-up";
             "Mod+L" = "window-focus-right";
 
+            "Mod+BracketLeft" = "window-consume-left";
+            "Mod+BracketRight" = "window-expel-right";
+
+            "Mod+Ctrl+H" = "column-move-left";
+            "Mod+Ctrl+L" = "column-move-right";
+            "Mod+Ctrl+J" = "window-move-down";
+            "Mod+Ctrl+K" = "window-move-up";
+
             "Mod+Shift+H" = "column-move-left";
             "Mod+Shift+L" = "column-move-right";
-            "Mod+Shift+J" = "window-move-down";
-            "Mod+Shift+K" = "window-move-up";
+            "Mod+Shift+J" = "window-move-to-workspace-down";
+            "Mod+Shift+K" = "window-move-to-workspace-up";
 
-            "Mod+Ctrl+H" = "window-consume-left";
-            "Mod+Ctrl+L" = "window-expel-right";
-
+            "Mod+C" = "window-center";
             "Mod+F" = "window-toggle-maximize";
             "Mod+Shift+F" = "window-toggle-fullscreen";
             "Mod+T" = "window-toggle-floating";
@@ -167,18 +206,72 @@ in
 
             "Mod+Tab" = "overview-toggle";
 
-            "XF86AudioRaiseVolume" = "spawn:wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
-            "XF86AudioLowerVolume" = "spawn:wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+            "XF86AudioRaiseVolume" = "spawn:wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+";
+            "XF86AudioLowerVolume" = "spawn:wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%-";
             "XF86AudioMute" = "spawn:wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
             "XF86AudioPlay" = "spawn:playerctl play-pause";
             "XF86AudioNext" = "spawn:playerctl next";
             "XF86AudioPrev" = "spawn:playerctl previous";
-          };
+
+            "Ctrl+Alt+M" =
+              "spawn:sh -c 'echo run-shortcut:toggleMute | nc -U -w1 $XDG_RUNTIME_DIR/vesktop.sock'";
+            "Ctrl+Alt+K" = "keyboard-layout-next";
+          }
+          // power-cycle-bind;
+
+          window_rule = [
+            {
+              blur = true;
+            }
+            {
+              match.is_focused = false;
+              opacity = 0.92;
+            }
+            {
+              match.title = "^notificationtoasts_.+_desktop";
+              default_position = {
+                x = 10;
+                y = 10;
+                anchor = "bottom_right";
+              };
+              default_focused = false;
+              default_pinned = true;
+            }
+            {
+              match.title = "^Picture in picture$";
+              default_floating = true;
+              default_size = [
+                480
+                270
+              ];
+              default_position = {
+                x = 10;
+                y = 10;
+                anchor = "bottom_left";
+              };
+            }
+            {
+              match.app_id = "^helium$";
+              match.title = "^Picture-in-Picture";
+              default_floating = true;
+              default_position = {
+                x = 20;
+                y = 20;
+                anchor = "bottom_left";
+              };
+            }
+            {
+              match.app_id = "^foot$";
+              match.title = "^btop-systemd-inhibit$";
+              default_width = 0.6;
+              default_focused = true;
+            }
+          ];
         };
       };
     })
 
-    (mkIf (featureCall.noctalia.enable) {
+    (mkIf (featureCall.noctalia.enable && featureCall.umbriel.enable) {
 
       hjem.users.${user}.programs.umbriel.settings = {
         general.autostart = [ "noctalia" ];
