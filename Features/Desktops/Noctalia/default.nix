@@ -57,242 +57,244 @@ in
       ];
     };
     # Hjem block starts --
-    hjem.extraModules = [
-      inputs.noctalia.hjemModules.default
-    ];
-
-    users.${user} = {
-      packages = [
-        inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-        pkgs.ddcutil
+    hjem = {
+      extraModules = [
+        inputs.noctalia.hjemModules.default
       ];
 
-      files = {
-        ".config/niri/noctaliaBinds.kdl".source = ./NoctaliaBinds.kdl;
-        ".local/state/noctalia/noctalia-inhibit.fish" = {
-          source = ./noctalia-inhibit.fish;
-          executable = true;
+      users.${user} = {
+        packages = [
+          inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+          pkgs.ddcutil
+        ];
+
+        files = {
+          ".config/niri/noctaliaBinds.kdl".source = ./NoctaliaBinds.kdl;
+          ".local/state/noctalia/noctalia-inhibit.fish" = {
+            source = ./noctalia-inhibit.fish;
+            executable = true;
+          };
         };
-      };
 
-      programs.noctalia = {
-        enable = true;
-        systemd.enable = true;
-        settings = {
-          shell = {
-            launch_apps_as_systemd_services = true;
-            corner_radius_scale = 0.25;
-            font_family = fontFamily;
-            niri_overview_type_to_launch_enabled = true;
-            password_style = "random";
-            polkit_agent = true;
-            animation.speed = 0.8;
-            screen_corners.size = 13;
-            panel = {
-              session_placement = "floating";
-              session_position = "center";
-              transparency_mode = "soft";
-              wallpaper_placement = "floating";
-              wallpaper_position = "center";
+        programs.noctalia = {
+          enable = true;
+          systemd.enable = true;
+          settings = {
+            shell = {
+              launch_apps_as_systemd_services = true;
+              corner_radius_scale = 0.25;
+              font_family = fontFamily;
+              niri_overview_type_to_launch_enabled = true;
+              password_style = "random";
+              polkit_agent = true;
+              animation.speed = 0.8;
+              screen_corners.size = 13;
+              panel = {
+                session_placement = "floating";
+                session_position = "center";
+                transparency_mode = "soft";
+                wallpaper_placement = "floating";
+                wallpaper_position = "center";
+              };
             };
-          };
-          keybinds = {
-            left = [ "Ctrl+h" ];
-            right = [ "Ctrl+l" ];
-            up = [
-              "Ctrl+k"
-              "Ctrl+p"
-            ];
-            down = [
-              "Ctrl+j"
-              "Ctrl+n"
-            ];
-          };
-          theme = {
-            source = "wallpaper";
-            community_palette = "Cream Autumn";
-            wallpaper_scheme = "m3-rainbow";
-            mode = if theming.darkTheme then "dark" else "light";
-            templates = {
-              community_ids = [
-                "yazi"
+            keybinds = {
+              left = [ "Ctrl+h" ];
+              right = [ "Ctrl+l" ];
+              up = [
+                "Ctrl+k"
+                "Ctrl+p"
               ];
-              builtin_ids = [
-                "foot"
-                "gtk3"
-                "gtk4"
-                "qt"
+              down = [
+                "Ctrl+j"
+                "Ctrl+n"
               ];
             };
-          };
-          wallpaper = {
-            enabled = true;
-            transition_on_startup = true;
-          };
-          location.auto_locate = true;
-          lockscreen = {
-            blurred_desktop = false;
-            blur_intensity = 0.65;
-            tint_intensity = 0.0;
-          };
-          idle = {
-            behavior = {
-              lock = {
-                action = "lock";
-                enabled = true;
-                timeout = 600;
-              };
-              screen-off = {
-                action = "screen_off";
-                enabled = true;
-                timeout = 660;
-              };
-              lock-and-suspend = {
-                action = "lock_and_suspend";
-                enabled = true;
-                timeout = 900;
+            theme = {
+              source = "wallpaper";
+              community_palette = "Cream Autumn";
+              wallpaper_scheme = "m3-rainbow";
+              mode = if theming.darkTheme then "dark" else "light";
+              templates = {
+                community_ids = [
+                  "yazi"
+                ];
+                builtin_ids = [
+                  "foot"
+                  "gtk3"
+                  "gtk4"
+                  "qt"
+                ];
               };
             };
-          };
-          brightness.enable_ddcutil = true;
-          bar.default = {
-            margin_edge = 7;
-            background_opacity = barOpacity;
-            font_family = fontFamily;
-            position = "left";
-            radius = barRadius;
-            margin_ends = 30;
-            capsule = false;
-            capsule_radius = barRadius;
-            capsule_opacity = 0.0;
-            start = [ "group:g5" ];
-            center = [ "group:g6" ];
-            end = [
-              "group:g4"
-              "group:g1"
-            ];
-            capsule_group = [
-              {
-                fill = "surface_variant";
-                id = "g1";
-                members = [
-                  "bluetooth"
-                  "battery"
-                  "notifications"
-                  "volume"
-                  "network"
-                ];
-                opacity = widgetsGroupOpacity;
-                padding = widgetsGroupSpacing;
-                radius = widgetsGroupRadius;
-              }
-              {
-                fill = "surface_variant";
-                id = "g4";
-                members = [
-                  "tray"
-                ];
-                opacity = widgetsGroupOpacity;
-                padding = widgetsGroupSpacing;
-                radius = widgetsGroupRadius;
-              }
-              {
-                fill = "on_secondary";
-                foreground = "on_surface";
-                id = "g5";
-                members = [
-                  "weather"
-                  "systemd-inhibit"
-                  "workspaces"
-                  "keyboard_layout"
-                  "privacy"
-                ];
-                opacity = widgetsGroupOpacity;
-                padding = widgetsGroupSpacing;
-                radius = widgetsGroupRadius;
-              }
-              {
-                fill = "surface_variant";
-                id = "g6";
-                members = [
-                  "cpu"
-                  "ram"
-                  "spacer_3"
-                  "clock"
-                  "spacer_4"
-                  "taskbar"
-                ];
-                opacity = widgetsGroupOpacity;
-                padding = widgetsGroupSpacing;
-                radius = widgetsGroupRadius;
-              }
-            ];
-          };
-          control_center.shortcuts = [
-            { type = "wifi"; }
-            { type = "bluetooth"; }
-            { type = "caffeine"; }
-            { type = "notification"; }
-            { type = "mic_mute"; }
-            { type = "system"; }
-          ];
-          widget = {
-            cpu.show_value = false;
-            ram.show_value = false;
-            spacer_3.type = "spacer";
-            spacer_4.type = "spacer";
-            systemd-inhibit = {
-              glyph = "eye-star";
-              tooltip = "Calls a btop with systemd-inhibit";
-              type = "custom_button";
-              actions.left = "exec /home/${user}/.local/state/noctalia/noctalia-inhibit.fish";
+            wallpaper = {
+              enabled = true;
+              transition_on_startup = true;
             };
-
-            launcher.glyph = "snowflake";
-            workspaces = {
-              hide_when_empty = true;
-              show_labels = false;
-              pill_scale = 0.85;
+            location.auto_locate = true;
+            lockscreen = {
+              blurred_desktop = false;
+              blur_intensity = 0.65;
+              tint_intensity = 0.0;
             };
-            clock = {
-              vertical_format = "{:%H\\n%M}";
+            idle = {
+              behavior = {
+                lock = {
+                  action = "lock";
+                  enabled = true;
+                  timeout = 600;
+                };
+                screen-off = {
+                  action = "screen_off";
+                  enabled = true;
+                  timeout = 660;
+                };
+                lock-and-suspend = {
+                  action = "lock_and_suspend";
+                  enabled = true;
+                  timeout = 900;
+                };
+              };
             };
-            weather = {
-              show_condition = false;
-              show_temperature = false;
-            };
-            network = {
-              scale = 1.05;
-              show_label = false;
-            };
-            volume.show_label = false;
-            battery = {
-              display_mode = "graphic";
+            brightness.enable_ddcutil = true;
+            bar.default = {
+              margin_edge = 7;
+              background_opacity = barOpacity;
+              font_family = fontFamily;
+              position = "left";
+              radius = barRadius;
+              margin_ends = 30;
+              capsule = false;
               capsule_radius = barRadius;
-              scale = 0.70;
-              show_label = false;
-              hide_when_full = false;
+              capsule_opacity = 0.0;
+              start = [ "group:g5" ];
+              center = [ "group:g6" ];
+              end = [
+                "group:g4"
+                "group:g1"
+              ];
+              capsule_group = [
+                {
+                  fill = "surface_variant";
+                  id = "g1";
+                  members = [
+                    "bluetooth"
+                    "battery"
+                    "notifications"
+                    "volume"
+                    "network"
+                  ];
+                  opacity = widgetsGroupOpacity;
+                  padding = widgetsGroupSpacing;
+                  radius = widgetsGroupRadius;
+                }
+                {
+                  fill = "surface_variant";
+                  id = "g4";
+                  members = [
+                    "tray"
+                  ];
+                  opacity = widgetsGroupOpacity;
+                  padding = widgetsGroupSpacing;
+                  radius = widgetsGroupRadius;
+                }
+                {
+                  fill = "on_secondary";
+                  foreground = "on_surface";
+                  id = "g5";
+                  members = [
+                    "weather"
+                    "systemd-inhibit"
+                    "workspaces"
+                    "keyboard_layout"
+                    "privacy"
+                  ];
+                  opacity = widgetsGroupOpacity;
+                  padding = widgetsGroupSpacing;
+                  radius = widgetsGroupRadius;
+                }
+                {
+                  fill = "surface_variant";
+                  id = "g6";
+                  members = [
+                    "cpu"
+                    "ram"
+                    "spacer_3"
+                    "clock"
+                    "spacer_4"
+                    "taskbar"
+                  ];
+                  opacity = widgetsGroupOpacity;
+                  padding = widgetsGroupSpacing;
+                  radius = widgetsGroupRadius;
+                }
+              ];
             };
-            bluetooth = { };
-            control-center = {
-              glyph = "topology-star-3";
-              scale = 0.9;
-            };
-            keyboard_layout = {
-              hide_when_single_layout = true;
-            };
-            media = {
-              art_size = 96.0;
-              hide_when_no_media = true;
-              max_length = 800;
-              title_scroll = "on_hover";
-            };
-            brightness.show_label = false;
-            privacy.hide_inactive = true;
-            spacer_2.type = "spacer";
-            taskbar = {
-              inactive_opacity = 0.74;
-              show_active_indicator = false;
+            control_center.shortcuts = [
+              { type = "wifi"; }
+              { type = "bluetooth"; }
+              { type = "caffeine"; }
+              { type = "notification"; }
+              { type = "mic_mute"; }
+              { type = "system"; }
+            ];
+            widget = {
+              cpu.show_value = false;
+              ram.show_value = false;
+              spacer_3.type = "spacer";
+              spacer_4.type = "spacer";
+              systemd-inhibit = {
+                glyph = "eye-star";
+                tooltip = "Calls a btop with systemd-inhibit";
+                type = "custom_button";
+                actions.left = "exec /home/${user}/.local/state/noctalia/noctalia-inhibit.fish";
+              };
+
+              launcher.glyph = "snowflake";
+              workspaces = {
+                hide_when_empty = true;
+                show_labels = false;
+                pill_scale = 0.85;
+              };
+              clock = {
+                vertical_format = "{:%H\\n%M}";
+              };
+              weather = {
+                show_condition = false;
+                show_temperature = false;
+              };
+              network = {
+                scale = 1.05;
+                show_label = false;
+              };
+              volume.show_label = false;
+              battery = {
+                display_mode = "graphic";
+                capsule_radius = barRadius;
+                scale = 0.70;
+                show_label = false;
+                hide_when_full = false;
+              };
+              bluetooth = { };
+              control-center = {
+                glyph = "topology-star-3";
+                scale = 0.9;
+              };
+              keyboard_layout = {
+                hide_when_single_layout = true;
+              };
+              media = {
+                art_size = 96.0;
+                hide_when_no_media = true;
+                max_length = 800;
+                title_scroll = "on_hover";
+              };
+              brightness.show_label = false;
+              privacy.hide_inactive = true;
+              spacer_2.type = "spacer";
+              taskbar = {
+                inactive_opacity = 0.74;
+                show_active_indicator = false;
+              };
             };
           };
         };

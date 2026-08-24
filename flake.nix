@@ -55,7 +55,6 @@
         nixpkgs.lib.filterAttrs (name: type: type == "directory") (builtins.readDir ./Hosts)
       );
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
       pkgsM = import inputs.nixpkgs-master {
         inherit system;
         config.allowUnfree = true;
