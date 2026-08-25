@@ -118,29 +118,6 @@ in {
         DNSStubListener = "no";
         MulticastDNS = "yes";
       };
-      # unbound = {
-      #   enable = true;
-      #   settings.server = {
-      #     tcp-idle-timeout = 1000;
-      #     interface = [
-      #       "127.0.0.1"
-      #       "::1"
-      #     ];
-      #     port = 5335;
-      #     access-control = [
-      #       "127.0.0.0/8 allow"
-      #       "::1/128 allow"
-      #     ];
-      #     harden-glue = true;
-      #     harden-dnssec-stripped = true;
-      #     use-caps-for-id = false;
-      #     edns-buffer-size = 1232;
-      #     prefetch = true;
-      #     num-threads = 1;
-      #     qname-minimisation = true;
-      #     do-not-query-localhost = false;
-      #   };
-      # };
 
       pihole-ftl = {
         enable = true;
@@ -240,17 +217,7 @@ in {
           }
         ];
         settings = {
-          dhcp = {
-            active = false;
-            #end = "192.168.0.254";
-            #hosts = [ ];
-            #ipv6 = false;
-            #leaseTime = "24h";
-            #start = "192.168.0.61";
-            #rapidCommit = true;
-            #resolver.resolveIPv6 = false;
-            #router = featureCall.unifiedDNS.gateway;
-          };
+          dhcp.active = false;
           dns = {
             cnameRecords = [];
             domain = domain;
@@ -270,7 +237,6 @@ in {
             upstreams = [
               "94.140.14.14"
               "1.1.1.1"
-              # "127.0.0.1#5335"
             ];
           };
           ntp = {

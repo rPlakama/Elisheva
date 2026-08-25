@@ -66,6 +66,7 @@ in
         libnotify
         wl-clipboard
         nautilus
+        wl-mirror
       ];
 
       files.".config/niri/config.kdl".text = ''

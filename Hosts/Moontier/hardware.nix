@@ -39,7 +39,6 @@ in
   };
 
   fileSystems."/" = {
-    # device = "/dev/disk/by-uuid/3d02f997-4ef4-4d04-a40a-734742b53660";
     device = "/dev/disk/by-label/nixos";
     fsType = "xfs";
     options = [
@@ -53,7 +52,6 @@ in
   };
 
   fileSystems."/boot" = {
-    # device = "/dev/disk/by-uuid/6B54-471D";
     device = "/dev/disk/by-label/boot";
     fsType = "vfat";
     options = [

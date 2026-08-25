@@ -7,7 +7,6 @@
   git = config.core.git;
 in {
   hjem.users.${user} = {
-    enable = true;
     xdg.config.files = {
       "fish/config.fish".source = ./config.fish;
       "yazi/yazi.toml".source = ./yazi.toml;

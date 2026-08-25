@@ -20,7 +20,7 @@ in {
         [
           "/var/lib/qbittorrent"
         ]
-        ++ lib.optionals (!headless) [
+        ++ lib.optionals (headless) [
           "/var/lib/qui"
         ];
 

@@ -4,8 +4,6 @@
     ../../Features
   ];
 
-  networking.hostName = "Arthoplerau";
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;

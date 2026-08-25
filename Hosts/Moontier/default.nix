@@ -10,12 +10,9 @@
     HandleLidSwitchExternalPower = "ignore";
   };
 
-  networking.hostName = "Moontier";
-
   environment.systemPackages = with pkgs; [
     smartmontools
     calibre
-    zip
   ];
 
   services.earlyoom = {

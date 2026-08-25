@@ -4,8 +4,6 @@
     ../../Features
   ];
 
-  networking.hostName = "Centuria";
-
   environment.systemPackages = with pkgs; [
     ckan
   ];
