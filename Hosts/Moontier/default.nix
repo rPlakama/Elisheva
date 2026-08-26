@@ -4,6 +4,33 @@
     ../../Features
   ];
 
+  networking = {
+    bonds = {
+      bond0 = {
+        interfaces = [
+          "enp2s0"
+          "enp0s20f0u2"
+        ];
+        driverOptions = {
+          mode = "802.3ad";
+          lacp_rate = "fast";
+          miimon = "100";
+        };
+      };
+    };
+
+    # DHCP on bond
+    useDHCP = false;
+    interfaces.bond0.useDHCP = true;
+
+    # Don't grap their own ips
+
+    interfaces = {
+      enp2s0.useDHCP = false;
+      enp0s20f0u2.useDHCP = false;
+    };
+  };
+
   services.logind.settings.Login = {
     HandleLidSwitch = "ignore";
     HandleLidSwitchDocked = "ignore";
