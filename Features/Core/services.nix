@@ -3,12 +3,14 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   headless = config.core.headless;
   usesAuto-cpufreq = config.core.isLaptop.usesAuto-cpufreq;
   usesPPD = config.core.isLaptop.usesPPD;
   isLaptop = config.core.isLaptop.enable;
-in {
+in
+{
   imports = [ inputs.auto-cpufreq.nixosModules.default ];
 
   programs.auto-cpufreq = {
@@ -42,16 +44,6 @@ in {
         support32Bit = !headless;
       };
       pulse.enable = !headless;
-      wireplumber.extraConfig = {
-        "51-follow-newest" = {
-          "wireplumber.settings" = {
-            "device.restore-profile" = true;
-            "default.node.restore" = false;
-            "default.policy.follow" = true;
-            "default.policy.move" = true;
-          };
-        };
-      };
     };
     tailscale = {
       enable = true;
