@@ -19,10 +19,6 @@ let
   theming = featureCall.theming;
   keyboardLayout = config.core.keyboardLayout;
 
-  power-cycle = optionalString (config.core.isLaptop.usesPPD || config.core.isLaptop.usesTunedPPD) ''
-    "Ctrl+Alt+Q" { spawn-sh "noctalia msg power-cycle"; }
-  '';
-
   cursorBlock = ''
     cursor {
         xcursor-theme "${theming.cursorTheme}"
@@ -71,12 +67,11 @@ in
 
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
-          [ "@ImportNoctalia@" "@cursor@" "@keyboardLayout@" "@power-cycle@" "@output@" ]
+          [ "@ImportNoctalia@" "@cursor@" "@keyboardLayout@" "@output@" ]
           [
             featureCall.niri.noctalia.import
             cursorBlock
             keyboardLayout
-            power-cycle
             outputBlock
           ]
           (builtins.readFile ./config.kdl);
