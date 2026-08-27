@@ -6,6 +6,7 @@
 
   environment.systemPackages = with pkgs; [
     ckan
+    osu-lazer-bin
   ];
   core = {
 
