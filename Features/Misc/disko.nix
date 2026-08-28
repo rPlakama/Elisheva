@@ -3,9 +3,9 @@
   lib,
   inputs,
   ...
-}: let
-  inherit
-    (lib)
+}:
+let
+  inherit (lib)
     mkOption
     mkIf
     mkEnableOption
@@ -14,8 +14,7 @@
     optionals
     genAttrs
     ;
-  inherit
-    (lib.types)
+  inherit (lib.types)
     bool
     str
     ;
@@ -23,24 +22,24 @@
   featureCall = config.features;
 
   # Partition 1 of the secondary drive, e.g. /dev/nvme0n1 -> /dev/nvme0n1p1.
-  secondaryPart = let
-    dev = featureCall.disko.secondaryDrive;
-  in
-    if builtins.match ".*[0-9]$" dev != null
-    then "${dev}p1"
-    else "${dev}1";
+  secondaryPart =
+    let
+      dev = featureCall.disko.secondaryDrive;
+    in
+    if builtins.match ".*[0-9]$" dev != null then "${dev}p1" else "${dev}1";
 
   # One btrfs pool spans both drives: data single (files land on one device,
   # so a drive failure only costs its own files) + metadata raid1.
-  poolExtraArgs =
-    ["-f"]
-    ++ optionals featureCall.disko.dualDrive [
-      "-d"
-      "single"
-      "-m"
-      "raid1"
-      secondaryPart
-    ];
+  poolExtraArgs = [
+    "-f"
+  ]
+  ++ optionals featureCall.disko.dualDrive [
+    "-d"
+    "single"
+    "-m"
+    "raid1"
+    secondaryPart
+  ];
 
   btrfsOpts = [
     "noatime"
@@ -65,42 +64,41 @@
       type = "disk";
       content = {
         type = "gpt";
-        partitions =
-          {
-            boot = {
-              name = "boot";
-              size = "1M";
-              type = "EF02";
-            };
-            esp = {
-              name = "ESP";
-              size = "1G";
-              type = "EF00";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-              };
-            };
-            root = {
-              name = "root";
-              size = "100%";
-              content = {
-                type = "btrfs";
-                extraArgs = poolExtraArgs;
-                subvolumes = poolSubvols;
-              };
-            };
-          }
-          // optionalAttrs featureCall.disko.swap.enable {
-            swap = {
-              size = featureCall.disko.swap.size;
-              content = {
-                type = "swap";
-                resumeDevice = true;
-              };
+        partitions = {
+          boot = {
+            name = "boot";
+            size = "1M";
+            type = "EF02";
+          };
+          esp = {
+            name = "ESP";
+            size = "1G";
+            type = "EF00";
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot";
             };
           };
+          root = {
+            name = "root";
+            size = "100%";
+            content = {
+              type = "btrfs";
+              extraArgs = poolExtraArgs;
+              subvolumes = poolSubvols;
+            };
+          };
+        }
+        // optionalAttrs featureCall.disko.swap.enable {
+          swap = {
+            size = featureCall.disko.swap.size;
+            content = {
+              type = "swap";
+              resumeDevice = true;
+            };
+          };
+        };
       };
     };
   };
@@ -121,7 +119,8 @@
       };
     };
   };
-in {
+in
+{
   imports = [ inputs.disko.nixosModules.disko ];
 
   options.features.disko = {
@@ -183,11 +182,13 @@ in {
       ];
     };
     fileSystems =
-      genAttrs [
-        "/nix"
-        "/persistent"
-      ] (m: {
-        neededForBoot = true;
-      });
+      genAttrs
+        [
+          "/nix"
+          "/persistent"
+        ]
+        (m: {
+          neededForBoot = true;
+        });
   };
 }
