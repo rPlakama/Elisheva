@@ -31,11 +31,6 @@ hash = "5c76a1e72c12255967cdc39636698133af73c2ac87378934a8efb42a15aaa195"
 metafile = true
 
 [[files]]
-file = "mods/c2me-ocl.pw.toml"
-hash = "c09e75c7844e63d8f4cb37e86348c87569fce0edb1fa68c5062e88d9969529b2"
-metafile = true
-
-[[files]]
 file = "mods/chunky.pw.toml"
 hash = "8e4512056e448a6f3d1ac179961eb699c15fbe000284e0aee041b5971b417302"
 metafile = true
@@ -58,6 +53,11 @@ metafile = true
 [[files]]
 file = "mods/debugify.pw.toml"
 hash = "88aa13d41089c63696b88a60353b21156b67416affbdb1f162478b4771b76ff2"
+metafile = true
+
+[[files]]
+file = "mods/distanthorizons.pw.toml"
+hash = "ce280969fa45ec982f36067934c36f76098dcf8b0c71bab46691e6b5b8e9664e"
 metafile = true
 
 [[files]]
