@@ -37,7 +37,7 @@ in
           gamemode = 0;
           max-players = 5;
           motd = "Moontier Minecraft Server";
-          white-list = true;
+          white-list = false;
           enable-rcon = true;
           "rcon.password" = "moontier";
         };
