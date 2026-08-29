@@ -16,6 +16,11 @@ hash = "7e40269f47995ac1bfb6dfd2bbc8689ee4ecefc6f5486acf448b38473d534185"
 metafile = true
 
 [[files]]
+file = "mods/asynclogger.pw.toml"
+hash = "0c615d15fa44b5f4511383f35f4f814a24abc3a3a1d9af9c1bb516be7962010d"
+metafile = true
+
+[[files]]
 file = "mods/balm.pw.toml"
 hash = "43da9987e5d5b835f7f7df9f1678ef4e30f13bf4c0d19ff894e81f1a8ae8cd41"
 metafile = true
@@ -26,8 +31,23 @@ hash = "5c76a1e72c12255967cdc39636698133af73c2ac87378934a8efb42a15aaa195"
 metafile = true
 
 [[files]]
+file = "mods/c2me-ocl.pw.toml"
+hash = "c09e75c7844e63d8f4cb37e86348c87569fce0edb1fa68c5062e88d9969529b2"
+metafile = true
+
+[[files]]
+file = "mods/chunky.pw.toml"
+hash = "8e4512056e448a6f3d1ac179961eb699c15fbe000284e0aee041b5971b417302"
+metafile = true
+
+[[files]]
 file = "mods/clumps.pw.toml"
 hash = "3e4d788583a36e9d145407fadce148f037e5229bff430f7dcd281d4d426c9ee6"
+metafile = true
+
+[[files]]
+file = "mods/crashexploitfixer.pw.toml"
+hash = "4470228e8935aeb0af85a461eaa3bebcc7570b3993dde4c3223c3a5059984c00"
 metafile = true
 
 [[files]]
@@ -46,8 +66,18 @@ hash = "069d81cab53c0141459ad4d70bcf3e10f17652f24cc62d3b4a0fc2cd2b700871"
 metafile = true
 
 [[files]]
+file = "mods/jasione.pw.toml"
+hash = "eb8647b69a908f1ffdcd173c1c0470f8ef614b08b214069a927bc0f6b15feea8"
+metafile = true
+
+[[files]]
 file = "mods/krypton.pw.toml"
 hash = "e922d7300eba8cfbd9aa31ba475cf6fcbcf11d74e89a0314ada18d58f08a2634"
+metafile = true
+
+[[files]]
+file = "mods/lazyai.pw.toml"
+hash = "6427e1b8c7440a426783887c0496944772d3cf795c95fde339f246c125c5c790"
 metafile = true
 
 [[files]]
@@ -81,8 +111,23 @@ hash = "1330268d34fa30998d31f2299eb65054cc419bb935710a50a95518dbeccbb268"
 metafile = true
 
 [[files]]
+file = "mods/railoptimization.pw.toml"
+hash = "007d42e89d189519bb2ec03eb34c1a735f04e7cfc8890bab10666e50e0e694ee"
+metafile = true
+
+[[files]]
 file = "mods/resourceful-config.pw.toml"
 hash = "a8d92e3a2cf956cfa5932d3324a219729fe549fbcc3992c75b54d6b345178389"
+metafile = true
+
+[[files]]
+file = "mods/scalablelux.pw.toml"
+hash = "fda2f23dc5a311460c9a277922fbb94ccfd6adbde2b74cc395a467f51523b90f"
+metafile = true
+
+[[files]]
+file = "mods/slumber.pw.toml"
+hash = "496ec14411fec1d4ab7191fddd34ee10f8f578d034e6a68273400e7ed33615fe"
 metafile = true
 
 [[files]]
