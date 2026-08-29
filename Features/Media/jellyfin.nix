@@ -2,15 +2,17 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   featureCall = config.features;
-in {
+in
+{
   options.features.jellyfin.enable = lib.mkEnableOption "Jellyfin media server";
 
   config = lib.mkIf featureCall.jellyfin.enable {
     features = {
       mediaPermissions.enable = true;
-      preservation.system.directories = ["/var/lib/jellyfin"];
+      preservation.system.directories = [ "/var/lib/jellyfin" ];
       unifiedDNS.proxyServices.jellyfin = {
         port = 8096;
         icon = "si-jellyfin";
