@@ -21,13 +21,17 @@ in
 
     networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 43000 ];
 
+    environment.systemPackages = with pkgs; [
+      tmux
+    ];
+
     services.minecraft-servers = {
       enable = true;
       eula = true;
 
       servers.moontier = {
         enable = true;
-        package = pkgs.paper-server; # (tracks nix-minecraft upstream)
+        package = pkgs.paperServers.paper-26_2;
         openFirewall = true;
 
         serverProperties = {
