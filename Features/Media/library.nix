@@ -3,11 +3,13 @@
   config,
   pkgsM,
   ...
-}: let
+}:
+let
   featureCall = config.features;
   kavitaPort = 3034;
   suwayomiPort = 4567;
-in {
+in
+{
   options.features.library = {
     enable = lib.mkEnableOption "Library Master Switch";
     downloadPath = lib.mkOption {
@@ -22,11 +24,11 @@ in {
     lib.mkMerge [
       {
         features = {
-          preservation.system.directories = [featureCall.library.downloadPath];
+          preservation.system.directories = [ featureCall.library.downloadPath ];
         };
         features.library = {
           kavita.enable = lib.mkDefault true;
-          suwayomi.enable = lib.mkDefault true;
+          suwayomi.enable = lib.mkDefault false;
         };
       }
       (lib.mkIf featureCall.library.kavita.enable {
@@ -35,14 +37,14 @@ in {
         };
         features = {
           mediaPermissions.enable = true;
-          preservation.system.directories = ["/var/lib/kavita"];
+          preservation.system.directories = [ "/var/lib/kavita" ];
           unifiedDNS.proxyServices.kavita = {
             port = kavitaPort;
             icon = "sh-kavita";
             description = "Ebook and manga library";
           };
         };
-        systemd.services.kavita.serviceConfig.SupplementaryGroups = ["media"];
+        systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
         services.kavita = {
           enable = true;
           tokenKeyFile = config.sops.secrets."kavita/token".path;
@@ -52,14 +54,14 @@ in {
       (lib.mkIf featureCall.library.suwayomi.enable {
         features = {
           mediaPermissions.enable = true;
-          preservation.system.directories = ["/var/lib/suwayomi-server"];
+          preservation.system.directories = [ "/var/lib/suwayomi-server" ];
           unifiedDNS.proxyServices.suwayomi = {
             port = suwayomiPort;
             icon = "sh-suwayomi";
             description = "Manga reader (Suwayomi-Server)";
           };
         };
-        systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = ["media"];
+        systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = [ "media" ];
         services.suwayomi-server = {
           enable = true;
           package = pkgsM.suwayomi-server;
