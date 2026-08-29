@@ -1,10 +1,6 @@
 hash-format = "sha256"
 
 [[files]]
-file = "default.nix"
-hash = "4948744f12458bce262fab44e5724fed0f3f893429e26bde1e9a65ca66eed05a"
-
-[[files]]
 file = "mods/almanac.pw.toml"
 hash = "4a23e8d96bcd9514ea66860790cc417a5ba99e259b69df38b9d48d07db10f124"
 metafile = true

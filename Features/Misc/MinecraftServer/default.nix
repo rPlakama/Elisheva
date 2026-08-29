@@ -10,9 +10,11 @@ let
   featureCall = config.features;
 
   #nix shell nixpkgs#packwiz
+  moontierPackDir = ./moontier-modpack;
+
   modpack = pkgs.fetchPackwizModpack {
-    url = "file://${./moontier-modpack/pack.toml}";
-    packHash = lib.fakeHash;
+    url = "file://${moontierPackDir}/pack.toml";
+    packHash = "sha256-x/BKjaCGrbgIpAwhIUVKyQddeo1TpczY5bLLNSh1hb8=";
   };
 
 in
