@@ -14,7 +14,7 @@ let
 
   modpack = pkgs.fetchPackwizModpack {
     url = "file://${moontierPackDir}/pack.toml";
-    packHash = "sha256-x/BKjaCGrbgIpAwhIUVKyQddeo1TpczY5bLLNSh1hb8=";
+    packHash = "sha256-U4DsoJZ0aaZlfP6QNostgJHqp6imhx4neIVoSGmT8OI=";
   };
 
 in
@@ -36,6 +36,7 @@ in
     services.minecraft-servers = {
       enable = true;
       eula = true;
+      dataDir = "/srv/minecraft";
 
       servers.moontier = {
         enable = true;
