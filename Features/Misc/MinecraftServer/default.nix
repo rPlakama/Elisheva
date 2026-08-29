@@ -9,9 +9,10 @@ let
 
   featureCall = config.features;
 
+  #nix shell nixpkgs#packwiz
   modpack = pkgs.fetchPackwizModpack {
-    url = "file://${./pack.toml}";
-    packHash = lib.fakeHash; # nix will print the real hash on rebuild
+    url = "file://${./moontier-modpack/pack.toml}";
+    packHash = lib.fakeHash;
   };
 
 in
