@@ -1,0 +1,13 @@
+name = "NetherPortalFix"
+filename = "netherportalfix-fabric-26.2-26.2.0.1.jar"
+side = "server"
+
+[download]
+url = "https://cdn.modrinth.com/data/nPZr02ET/versions/GQpccFqg/netherportalfix-fabric-26.2-26.2.0.1.jar"
+hash-format = "sha512"
+hash = "59d02006e5f51bd9a7e57de05a39f6803e504303bc22fb3451e41756c41ff7333ff6348ee51cf3b585dcf27454c0556407523a1a0bc4a84639e0d0b331ce8b6b"
+
+[update]
+[update.modrinth]
+mod-id = "nPZr02ET"
+version = "GQpccFqg"

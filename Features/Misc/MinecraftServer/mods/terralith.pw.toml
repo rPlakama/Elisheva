@@ -1,0 +1,13 @@
+name = "Terralith"
+filename = "Terralith_26.2_v2.6.4.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/8oi3bsk5/versions/OxfI2n80/Terralith_26.2_v2.6.4.jar"
+hash-format = "sha512"
+hash = "0830f4601674c4ea58d247a71bfdc820e4676900e173c7d6df4e58e348a09da43b279cea060df7b67e6f74c84e2a05b401b2df79836c37cffc8dc994844ab250"
+
+[update]
+[update.modrinth]
+mod-id = "8oi3bsk5"
+version = "OxfI2n80"

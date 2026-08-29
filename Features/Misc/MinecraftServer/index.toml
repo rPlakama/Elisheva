@@ -1,0 +1,115 @@
+hash-format = "sha256"
+
+[[files]]
+file = "default.nix"
+hash = "4948744f12458bce262fab44e5724fed0f3f893429e26bde1e9a65ca66eed05a"
+
+[[files]]
+file = "mods/almanac.pw.toml"
+hash = "4a23e8d96bcd9514ea66860790cc417a5ba99e259b69df38b9d48d07db10f124"
+metafile = true
+
+[[files]]
+file = "mods/alternate-current.pw.toml"
+hash = "db49ed5fd52d71b3eb2f65f7385b63c3f3d572e269d774281786eec2522ffc42"
+metafile = true
+
+[[files]]
+file = "mods/async.pw.toml"
+hash = "7e40269f47995ac1bfb6dfd2bbc8689ee4ecefc6f5486acf448b38473d534185"
+metafile = true
+
+[[files]]
+file = "mods/balm.pw.toml"
+hash = "43da9987e5d5b835f7f7df9f1678ef4e30f13bf4c0d19ff894e81f1a8ae8cd41"
+metafile = true
+
+[[files]]
+file = "mods/c2me-fabric.pw.toml"
+hash = "5c76a1e72c12255967cdc39636698133af73c2ac87378934a8efb42a15aaa195"
+metafile = true
+
+[[files]]
+file = "mods/clumps.pw.toml"
+hash = "3e4d788583a36e9d145407fadce148f037e5229bff430f7dcd281d4d426c9ee6"
+metafile = true
+
+[[files]]
+file = "mods/debugify.pw.toml"
+hash = "88aa13d41089c63696b88a60353b21156b67416affbdb1f162478b4771b76ff2"
+metafile = true
+
+[[files]]
+file = "mods/distanthorizons.pw.toml"
+hash = "ce280969fa45ec982f36067934c36f76098dcf8b0c71bab46691e6b5b8e9664e"
+metafile = true
+
+[[files]]
+file = "mods/fabric-api.pw.toml"
+hash = "7ed424f5ce1febe2c2c0e5fc58d34858f1bbd97eabdceb9b9c6afdde4bf578df"
+metafile = true
+
+[[files]]
+file = "mods/ferrite-core.pw.toml"
+hash = "069d81cab53c0141459ad4d70bcf3e10f17652f24cc62d3b4a0fc2cd2b700871"
+metafile = true
+
+[[files]]
+file = "mods/krypton.pw.toml"
+hash = "e922d7300eba8cfbd9aa31ba475cf6fcbcf11d74e89a0314ada18d58f08a2634"
+metafile = true
+
+[[files]]
+file = "mods/lithium.pw.toml"
+hash = "a5ee497ec151dd6e6b946091e12e2c56362e5c772c4b8ea175b2e81277cc708d"
+metafile = true
+
+[[files]]
+file = "mods/lithostitched.pw.toml"
+hash = "97aa748211421353c6e41005b59ab725448b3122934f69f2116534070315b164"
+metafile = true
+
+[[files]]
+file = "mods/lmd.pw.toml"
+hash = "ab3be4435d81feb60e0faeee73ad9250dbe6a924d92e3d8d47819b56414f1c5c"
+metafile = true
+
+[[files]]
+file = "mods/netherportalfix.pw.toml"
+hash = "8869f77dfbc37e83dc0d0ea34fcaaa1faf235dff008767a444b68ede8ca7390d"
+metafile = true
+
+[[files]]
+file = "mods/no-chat-reports.pw.toml"
+hash = "68f5930c1212376b4b26a295c91dd5eb5c1157af1f95a18a5f8c06c4da7125cb"
+metafile = true
+
+[[files]]
+file = "mods/noisiumforked.pw.toml"
+hash = "1330268d34fa30998d31f2299eb65054cc419bb935710a50a95518dbeccbb268"
+metafile = true
+
+[[files]]
+file = "mods/resourceful-config.pw.toml"
+hash = "a8d92e3a2cf956cfa5932d3324a219729fe549fbcc3992c75b54d6b345178389"
+metafile = true
+
+[[files]]
+file = "mods/structure-layout-optimizer.pw.toml"
+hash = "6801adb48ee85a21c7c4992625c34a751197382cb952dd25082d145a37de84fb"
+metafile = true
+
+[[files]]
+file = "mods/tectonic.pw.toml"
+hash = "8f2b6f7b6626fd440001af7fd8ae39671fea791fa9d570919f9e216b0fb3aa3e"
+metafile = true
+
+[[files]]
+file = "mods/terralith.pw.toml"
+hash = "b1083983d7ac86c52c1bb1da749f132460c4ee9a8875e76c5244037fc1e0de73"
+metafile = true
+
+[[files]]
+file = "mods/zfastnoise.pw.toml"
+hash = "9171a6a788ccba0c128dbc05bd3101fc69b9e1240656dcf549f25814ab800a10"
+metafile = true
