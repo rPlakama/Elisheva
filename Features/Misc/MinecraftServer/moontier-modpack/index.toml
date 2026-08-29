@@ -36,11 +36,6 @@ hash = "88aa13d41089c63696b88a60353b21156b67416affbdb1f162478b4771b76ff2"
 metafile = true
 
 [[files]]
-file = "mods/distanthorizons.pw.toml"
-hash = "ce280969fa45ec982f36067934c36f76098dcf8b0c71bab46691e6b5b8e9664e"
-metafile = true
-
-[[files]]
 file = "mods/fabric-api.pw.toml"
 hash = "7ed424f5ce1febe2c2c0e5fc58d34858f1bbd97eabdceb9b9c6afdde4bf578df"
 metafile = true
@@ -103,6 +98,11 @@ metafile = true
 [[files]]
 file = "mods/terralith.pw.toml"
 hash = "b1083983d7ac86c52c1bb1da749f132460c4ee9a8875e76c5244037fc1e0de73"
+metafile = true
+
+[[files]]
+file = "mods/voxy-server-side.pw.toml"
+hash = "50fcf7a65d1bb4e3d9c73a6534805b500065ae1fdb2dc6089d622f9a91d96da0"
 metafile = true
 
 [[files]]

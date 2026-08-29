@@ -42,7 +42,7 @@ in
         # package = pkgs.paperServers.paper-26_2;
         # fabric requires java 25 for fabric-26_2
         package = pkgs.fabricServers.fabric-26_2.override {
-          jre_headless = pkgs.jdk25_headless;
+          jre_headless = pkgs.openjdk25_headless;
         };
         openFirewall = true;
 
