@@ -1,0 +1,13 @@
+name = "CustomSkinLoader"
+filename = "CustomSkinLoader_Universal-15.0.1.jar"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/idMHQ4n2/versions/OLaesh5y/CustomSkinLoader_Universal-15.0.1.jar"
+hash-format = "sha512"
+hash = "8c65193c46c1435ddea571901f1dd04cc179179f59f1c1a0449349de04722b9c1b6e5efaec166975e05d2fa0b05f6c07c9d5d93a05f1c9a57fece2a0d0fc1ce7"
+
+[update]
+[update.modrinth]
+mod-id = "idMHQ4n2"
+version = "OLaesh5y"

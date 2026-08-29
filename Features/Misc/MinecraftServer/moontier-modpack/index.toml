@@ -51,6 +51,11 @@ hash = "4470228e8935aeb0af85a461eaa3bebcc7570b3993dde4c3223c3a5059984c00"
 metafile = true
 
 [[files]]
+file = "mods/customskinloader.pw.toml"
+hash = "aec1df84ab0edd3ab36d80a08765ab0ae3754c2bdbb4e9f568e979f01f470234"
+metafile = true
+
+[[files]]
 file = "mods/debugify.pw.toml"
 hash = "88aa13d41089c63696b88a60353b21156b67416affbdb1f162478b4771b76ff2"
 metafile = true
