@@ -44,7 +44,7 @@ in
           vpl-gpu-rt # oneVPL runtime
           intel-vaapi-driver # legacy i965 - fallback
           libvdpau-va-gl # VDPAU via VA-API,
-          intel-compute-runtime # Jellyfin tone-mapping
+          intel-compute-runtime # Jellyfin tone-mapping and others
         ];
         extraPackages32 = with pkgs.pkgsi686Linux; [
           intel-media-driver
