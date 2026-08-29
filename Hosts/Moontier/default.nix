@@ -53,6 +53,7 @@
       };
     };
 
+    minecraft-server.enable = true;
     neovim.enable = true;
     library.enable = true;
     rrstack.enable = true;

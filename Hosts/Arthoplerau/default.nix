@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ./hardware.nix
     ../../Features
@@ -55,4 +55,10 @@
 
     preservation.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+
+    prismlauncher
+
+  ];
 }

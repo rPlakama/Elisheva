@@ -35,6 +35,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:Mic92/sops-nix";
     };
+
+    nix-minecraft = {
+      url = "github:Infinidoge/nix-minecraft";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
