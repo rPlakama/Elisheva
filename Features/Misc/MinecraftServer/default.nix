@@ -28,7 +28,6 @@ in
 
     environment.systemPackages = with pkgs; [
       tmux
-      packwiz
     ];
 
     services.minecraft-servers = {
