@@ -14,7 +14,7 @@ let
 
   modpack = pkgs.fetchPackwizModpack {
     url = "file://${moontierPackDir}/pack.toml";
-    packHash = "sha256-4u5KoSi26dRpYKTcNOC+pcENgri0S121cH/wjOLL6dw=";
+    packHash = lib.fakeHash;
   };
 
 in

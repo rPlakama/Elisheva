@@ -46,11 +46,6 @@ hash = "4470228e8935aeb0af85a461eaa3bebcc7570b3993dde4c3223c3a5059984c00"
 metafile = true
 
 [[files]]
-file = "mods/customskinloader.pw.toml"
-hash = "aec1df84ab0edd3ab36d80a08765ab0ae3754c2bdbb4e9f568e979f01f470234"
-metafile = true
-
-[[files]]
 file = "mods/debugify.pw.toml"
 hash = "88aa13d41089c63696b88a60353b21156b67416affbdb1f162478b4771b76ff2"
 metafile = true
@@ -128,6 +123,11 @@ metafile = true
 [[files]]
 file = "mods/scalablelux.pw.toml"
 hash = "fda2f23dc5a311460c9a277922fbb94ccfd6adbde2b74cc395a467f51523b90f"
+metafile = true
+
+[[files]]
+file = "mods/skinsrestorer.pw.toml"
+hash = "ea56079166ad99b1113970c2468efc6a3b19e6af0d2c4465e4a0552a2aab1915"
 metafile = true
 
 [[files]]
