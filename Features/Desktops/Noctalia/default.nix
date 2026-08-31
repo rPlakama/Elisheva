@@ -160,7 +160,7 @@ in
               margin_edge = 7;
               background_opacity = barOpacity;
               font_family = fontFamily;
-              position = "left";
+              position = "top";
               radius = barRadius;
               margin_ends = 30;
               capsule = false;
@@ -207,6 +207,8 @@ in
                     "workspaces"
                     "keyboard_layout"
                     "privacy"
+                    "taskbar"
+
                   ];
                   opacity = widgetsGroupOpacity;
                   padding = widgetsGroupSpacing;
@@ -218,10 +220,9 @@ in
                   members = [
                     "cpu"
                     "ram"
-                    "spacer_3"
+                    "audio_visualizer"
                     "clock"
                     "spacer_4"
-                    "taskbar"
                   ];
                   opacity = widgetsGroupOpacity;
                   padding = widgetsGroupSpacing;
@@ -240,6 +241,11 @@ in
             widget = {
               cpu.show_value = false;
               ram.show_value = false;
+              audio_visualizer = {
+                mirroed = false;
+                width = 60;
+              };
+
               spacer_3.type = "spacer";
               spacer_4.type = "spacer";
               systemd-inhibit = {
