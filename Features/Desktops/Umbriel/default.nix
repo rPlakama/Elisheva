@@ -274,7 +274,6 @@ in
     (mkIf (featureCall.noctalia.enable && featureCall.umbriel.enable) {
 
       hjem.users.${user}.programs.umbriel.settings = {
-        general.autostart = [ "noctalia" ];
         keybinds = {
           "Mod+Space" = "spawn:${nCallPanel} launcher";
           "Mod+V" = "spawn:${nCallPanel} clipboard";

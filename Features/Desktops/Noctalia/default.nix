@@ -78,7 +78,7 @@ in
 
         programs.noctalia = {
           enable = true;
-          systemd.enable = !featureCall.umbriel.enable; # Umbriel do its own call
+          systemd.enable = true;
           settings = {
             shell = {
               launch_apps_as_systemd_services = true;
