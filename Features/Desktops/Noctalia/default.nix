@@ -179,6 +179,7 @@ in
                   members = [
                     "bluetooth"
                     "battery"
+                    "spacer_5"
                     "notifications"
                     "volume"
                     "network"
@@ -248,6 +249,8 @@ in
 
               spacer_3.type = "spacer";
               spacer_4.type = "spacer";
+              spacer_5.type = "spacer";
+
               systemd-inhibit = {
                 glyph = "eye-star";
                 tooltip = "Calls a btop with systemd-inhibit";
@@ -275,6 +278,7 @@ in
               volume.show_label = false;
               battery = {
                 display_mode = "graphic";
+                font_scale = 1.4;
                 capsule_radius = barRadius;
                 scale = 0.70;
                 show_label = false;
