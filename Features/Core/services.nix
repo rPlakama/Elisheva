@@ -32,7 +32,7 @@ in
     power-profiles-daemon.enable = usesPPD;
     bpftune.enable = true;
     devmon.enable = !headless;
-    udisks2.enable = !headless;
+    udisks2.enable = true;
     resolved.enable = true;
     gvfs.enable = !headless;
     fwupd.enable = true;
