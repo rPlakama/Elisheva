@@ -36,11 +36,6 @@ let
       icon = "sh-prowlarr";
       description = "Indexer manager";
     };
-    flaresolverr = {
-      port = 8191;
-      icon = "sh-flaresolverr";
-      description = "Cloudflare-bypass proxy for indexers";
-    };
   };
 in
 {
