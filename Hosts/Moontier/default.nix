@@ -22,8 +22,6 @@
     freeSwapThreshold = 10;
   };
 
-  services.glances.enable = true;
-
   core = {
     user = "rplakama";
     ip = "192.168.0.160";
@@ -46,11 +44,6 @@
       email = "rPlakama@proton.me";
       gateway = "192.168.0.1";
       tailscaleIP = "100.67.254.80";
-      proxyServices.glances = {
-        port = 61208;
-        icon = "sh-glances";
-        description = "System monitoring";
-      };
     };
 
     minecraft-server.enable = true;

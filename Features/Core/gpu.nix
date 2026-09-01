@@ -42,7 +42,7 @@ in
         extraPackages = with pkgs; [
           intel-media-driver # iHD - modern Intel GPUs (Broadwell+)
           vpl-gpu-rt # oneVPL runtime
-          intel-vaapi-driver # legacy i965 - fallback
+          intel-vaapi-driver # Fallback
           libvdpau-va-gl # VDPAU via VA-API,
           intel-compute-runtime # Jellyfin tone-mapping and others
         ];

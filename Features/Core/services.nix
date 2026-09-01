@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   inputs,
   ...
 }:
@@ -32,10 +31,10 @@ in
     scx.enable = true;
     power-profiles-daemon.enable = usesPPD;
     bpftune.enable = true;
-    devmon.enable = true;
-    udisks2.enable = true;
+    devmon.enable = !headless;
+    udisks2.enable = !headless;
     resolved.enable = true;
-    gvfs.enable = true;
+    gvfs.enable = !headless;
     fwupd.enable = true;
     pipewire = {
       enable = !headless;
