@@ -5,6 +5,7 @@
 }:
 let
   featureCall = config.features;
+  serverPort = 8226;
 in
 {
   options.features.tdarr.enable = lib.mkEnableOption "Tdarr Service";
@@ -16,7 +17,7 @@ in
       preservation.system.directories = [ "/var/lib/tdarr" ];
 
       unifiedDNS.proxyServices.tdarr = {
-        port = 8096;
+        port = serverPort;
         icon = "si-tdarr";
         description = "Movies, shows and music";
       };
@@ -24,6 +25,7 @@ in
     services.tdarr = {
       enable = true;
       group = "media";
+      server.serverPort = serverPort;
     };
     users.users.tdarr.extraGroups = [
       "video"

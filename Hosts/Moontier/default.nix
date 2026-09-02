@@ -55,6 +55,7 @@
     homepage.enable = true;
     nextcloud.enable = true;
     jellyfin.enable = true;
+    tdarr.enable = true;
     navidrome.enable = true;
 
     bots = {
