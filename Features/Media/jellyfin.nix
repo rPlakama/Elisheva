@@ -7,7 +7,7 @@ let
   featureCall = config.features;
 in
 {
-  options.features.jellyfin.enable = lib.mkEnableOption "Jellyfin media server";
+  options.features.jellyfin.enable = lib.mkEnableOption "Jellyfin module";
 
   config = lib.mkIf featureCall.jellyfin.enable {
     features = {
