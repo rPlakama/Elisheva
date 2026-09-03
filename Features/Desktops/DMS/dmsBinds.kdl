@@ -1,0 +1,16 @@
+binds {
+
+Ctrl+Alt+A { spawn "dms" "ipc" "call" "control-center" "toggle"; }
+Ctrl+Alt+S { spawn "dms" "ipc" "call" "sessions" "open"; }
+Ctrl+Alt+W { spawn "dms" "ipc" "call" "dash" "toggle" "wallpaper"; }
+Ctrl+Alt+D { spawn "dms" "ipc" "call" "wallpaper" "next"; }
+Ctrl+Alt+Q { spawn "dms" "ipc" "call" "powermenu" "toggle"; }
+
+
+Mod+Space  { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+
+XF86MonBrightnessUp   { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
+XF86MonBrightnessDown   { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
+
+}

@@ -1,5 +1,6 @@
 // Core - Includes
 @ImportNoctalia@
+@ImportDmsShell@
 
 // Cursor
 @cursor@

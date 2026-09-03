@@ -3,26 +3,27 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   featureCall = config.features;
   user = config.core.user;
   headless = config.core.headless;
-in {
+in
+{
   options.features.qbit.enable = lib.mkEnableOption "qBittorrent + Qui";
   config = lib.mkIf featureCall.qbit.enable {
-    features.mediaPermissions.enable = headless;
+    features.mediaPermissions.enable = true;
     sops.secrets."qui/secret" = {
       group = lib.mkIf headless "media";
     };
 
     features = {
-      preservation.system.directories =
-        [
-          "/var/lib/qbittorrent"
-        ]
-        ++ lib.optionals (headless) [
-          "/var/lib/qui"
-        ];
+      preservation.system.directories = [
+        "/var/lib/qbittorrent"
+      ]
+      ++ lib.optionals (headless) [
+        "/var/lib/qui"
+      ];
 
       unifiedDNS.proxyServices = {
         qui = {
@@ -39,7 +40,8 @@ in {
     };
 
     hjem.users.${user}.packages = lib.optionals (!headless) (
-      with pkgs; [
+      with pkgs;
+      [
         qbittorrent
       ]
     );
@@ -55,7 +57,7 @@ in {
       };
       qbittorrent = {
         enable = true;
-        group = lib.mkIf headless "media";
+        group = "media";
         serverConfig = {
           LegalNotice.Accepted = true;
           BitTorrent.Session = {

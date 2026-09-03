@@ -35,6 +35,15 @@ in
 {
   options.features.niri = {
     enable = mkEnableOption "Niri Configuration";
+    dms-shell = {
+      import = mkOption {
+        type = str;
+        default = "";
+        description = "Additional KDL cfg if dms-shell is enabled";
+      };
+      enabled = mkEnableOption "dms-shell integration";
+    };
+
     noctalia = {
       import = mkOption {
         type = str;
@@ -67,8 +76,9 @@ in
 
       files.".config/niri/config.kdl".text =
         builtins.replaceStrings
-          [ "@ImportNoctalia@" "@cursor@" "@keyboardLayout@" "@output@" ]
+          [ "@ImportDmsShell@" "@ImportNoctalia@" "@cursor@" "@keyboardLayout@" "@output@" ]
           [
+            featureCall.niri.dms-shell.import
             featureCall.niri.noctalia.import
             cursorBlock
             keyboardLayout

@@ -14,6 +14,10 @@
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     twatch.url = "github:rPlakama/twatch";
     gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
@@ -26,6 +30,7 @@
     };
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    dms.url = "github:AvengeMedia/DankMaterialShell";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";

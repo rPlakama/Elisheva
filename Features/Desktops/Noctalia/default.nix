@@ -29,7 +29,7 @@ in
   options.features.noctalia = {
     enable = mkOption {
       type = bool;
-      default = featureCall.niri.noctalia.enabled || featureCall.umbriel.enable; # Shoudl subclass this, creates inflexibility --- since might use other Desktop shell later;
+      default = featureCall.niri.noctalia.enabled || featureCall.umbriel.enable; # Should subclass this, creates inflexibility --- since might use other Desktop shell later;
       description = "Enable Noctalia Desktop Shell.";
     };
   };

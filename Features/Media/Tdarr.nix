@@ -27,6 +27,8 @@ in
       group = "media";
       server.serverPort = serverPort;
     };
+    systemd.services.tdarr-server.serviceConfig.StateDirectory = "tdarr/server";
+
     users.users.tdarr.extraGroups = [
       "video"
       "render"
