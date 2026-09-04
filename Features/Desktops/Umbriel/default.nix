@@ -16,7 +16,7 @@ let
   keyboardLayout = config.core.keyboardLayout;
   featureCall = config.features;
   theming = featureCall.theming;
-  delayMs = 500;
+  delayMs = 361;
   user = config.core.user;
   nCallPanel = "noctalia msg panel-toggle";
 
@@ -56,11 +56,46 @@ in
             focus_on_activate = false;
           };
 
+          animation = {
+
+            beziers.softLander = [
+              0.2
+              1.0
+              0.2
+              1.0
+            ];
+
+            enabled = true;
+            duration_ms = delayMs;
+
+            windows_move = {
+              enabled = true;
+              duration_ms = delayMs;
+              curve = "softLander";
+            };
+
+            windows_out = {
+              enabled = true;
+              duration_ms = delayMs;
+              curve = "softLander";
+            };
+
+            overview = {
+              enabled = true;
+              duration_ms = delayMs;
+              curve = "softLander";
+            };
+
+            windows_in = {
+              enabled = true;
+              duration_ms = delayMs;
+              curve = "softLander";
+            };
+          };
           appearance = {
             corner_radius = 0;
             prefer_no_csd = true;
             border_width = 0;
-            animation_ms = 240;
 
             blur = {
               enabled = true;
@@ -152,8 +187,8 @@ in
             "Print" = "spawn:noctalia msg screenshot-fullscreen";
 
             "Mod+H" = "window-focus-left";
-            "Mod+J" = "window-focus-down";
-            "Mod+K" = "window-focus-up";
+            "Mod+J" = "window-focus-or-workspace-down";
+            "Mod+K" = "window-focus-or-workspace-up";
             "Mod+L" = "window-focus-right";
 
             "Mod+BracketLeft" = "window-consume-left";
