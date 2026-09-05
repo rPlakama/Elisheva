@@ -86,11 +86,6 @@ hash = "ab3be4435d81feb60e0faeee73ad9250dbe6a924d92e3d8d47819b56414f1c5c"
 metafile = true
 
 [[files]]
-file = "mods/moonrise-opt.pw.toml"
-hash = "15ecba20b9fe2688f0eafc1832967fd8631a7a59f472f0dc3590b5523d101a2e"
-metafile = true
-
-[[files]]
 file = "mods/netherportalfix.pw.toml"
 hash = "8869f77dfbc37e83dc0d0ea34fcaaa1faf235dff008767a444b68ede8ca7390d"
 metafile = true
