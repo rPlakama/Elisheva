@@ -26,11 +26,6 @@ hash = "43da9987e5d5b835f7f7df9f1678ef4e30f13bf4c0d19ff894e81f1a8ae8cd41"
 metafile = true
 
 [[files]]
-file = "mods/c2me-fabric.pw.toml"
-hash = "5c76a1e72c12255967cdc39636698133af73c2ac87378934a8efb42a15aaa195"
-metafile = true
-
-[[files]]
 file = "mods/chunky.pw.toml"
 hash = "8e4512056e448a6f3d1ac179961eb699c15fbe000284e0aee041b5971b417302"
 metafile = true
@@ -48,11 +43,6 @@ metafile = true
 [[files]]
 file = "mods/debugify.pw.toml"
 hash = "88aa13d41089c63696b88a60353b21156b67416affbdb1f162478b4771b76ff2"
-metafile = true
-
-[[files]]
-file = "mods/distanthorizons.pw.toml"
-hash = "ce280969fa45ec982f36067934c36f76098dcf8b0c71bab46691e6b5b8e9664e"
 metafile = true
 
 [[files]]
@@ -96,6 +86,11 @@ hash = "ab3be4435d81feb60e0faeee73ad9250dbe6a924d92e3d8d47819b56414f1c5c"
 metafile = true
 
 [[files]]
+file = "mods/moonrise-opt.pw.toml"
+hash = "15ecba20b9fe2688f0eafc1832967fd8631a7a59f472f0dc3590b5523d101a2e"
+metafile = true
+
+[[files]]
 file = "mods/netherportalfix.pw.toml"
 hash = "8869f77dfbc37e83dc0d0ea34fcaaa1faf235dff008767a444b68ede8ca7390d"
 metafile = true
@@ -123,6 +118,11 @@ metafile = true
 [[files]]
 file = "mods/scalablelux.pw.toml"
 hash = "fda2f23dc5a311460c9a277922fbb94ccfd6adbde2b74cc395a467f51523b90f"
+metafile = true
+
+[[files]]
+file = "mods/servercore.pw.toml"
+hash = "223a48cab4fc6cfa44ce60e70b59583c1a8192019a2716ae3a744a9187b35560"
 metafile = true
 
 [[files]]

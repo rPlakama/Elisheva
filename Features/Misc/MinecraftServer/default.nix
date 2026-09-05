@@ -14,7 +14,7 @@ let
 
   modpack = pkgs.fetchPackwizModpack {
     url = "file://${moontierPackDir}/pack.toml";
-    packHash = "sha256-fTzmGrukdS3yqm8URkzeDRqxqPUj/Yb0HdB/GDmVAKs=";
+    packHash = "sha256-udWIEiYeXHxbIu+bfXfoxRaiEimurJRLP8lfNpoLdaA=";
   };
 
 in
@@ -62,7 +62,7 @@ in
           enable-rcon = true;
           "rcon.password" = "moontier";
         };
-        jvmOpts = "-Xms5G -Xmx5G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Dcom.mojang.eula.agree=true -XX:ParallelGCThreads=2 -XX:ConcGCThreads=1";
+        jvmOpts = "-Xms2G -Xmx4G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Dcom.mojang.eula.agree=true -XX:ParallelGCThreads=2 -XX:ConcGCThreads=1";
       };
     };
   };
