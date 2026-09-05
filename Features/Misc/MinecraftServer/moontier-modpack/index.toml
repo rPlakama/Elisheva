@@ -11,11 +11,6 @@ hash = "db49ed5fd52d71b3eb2f65f7385b63c3f3d572e269d774281786eec2522ffc42"
 metafile = true
 
 [[files]]
-file = "mods/async.pw.toml"
-hash = "7e40269f47995ac1bfb6dfd2bbc8689ee4ecefc6f5486acf448b38473d534185"
-metafile = true
-
-[[files]]
 file = "mods/asynclogger.pw.toml"
 hash = "0c615d15fa44b5f4511383f35f4f814a24abc3a3a1d9af9c1bb516be7962010d"
 metafile = true
@@ -91,11 +86,6 @@ hash = "8869f77dfbc37e83dc0d0ea34fcaaa1faf235dff008767a444b68ede8ca7390d"
 metafile = true
 
 [[files]]
-file = "mods/no-chat-reports.pw.toml"
-hash = "68f5930c1212376b4b26a295c91dd5eb5c1157af1f95a18a5f8c06c4da7125cb"
-metafile = true
-
-[[files]]
 file = "mods/noisiumforked.pw.toml"
 hash = "1330268d34fa30998d31f2299eb65054cc419bb935710a50a95518dbeccbb268"
 metafile = true
@@ -143,6 +133,11 @@ metafile = true
 [[files]]
 file = "mods/terralith.pw.toml"
 hash = "b1083983d7ac86c52c1bb1da749f132460c4ee9a8875e76c5244037fc1e0de73"
+metafile = true
+
+[[files]]
+file = "mods/vmp-fabric.pw.toml"
+hash = "9d2d6dfc69a39361bb5d9e30c6c35c2ca7b8121ac0b66fad29bcfa81c40b0738"
 metafile = true
 
 [[files]]

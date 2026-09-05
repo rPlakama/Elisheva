@@ -14,7 +14,7 @@ let
 
   modpack = pkgs.fetchPackwizModpack {
     url = "file://${moontierPackDir}/pack.toml";
-    packHash = "sha256-kM6axDIx2i5nH4B/upIxWjKwIQaeph6v9ouTOSKoB6s=";
+    packHash = "sha256-nJebk77gxV/JiXQyZ23ufd6sPXMgNwTwh3yX4YzeHu8=";
   };
 
 in
@@ -57,6 +57,8 @@ in
           online-mode = false;
           gamemode = 0;
           max-players = 5;
+          view-distance = 8;
+          simulation-distance = 6;
           motd = "Moontier Minecraft Server";
           white-list = false;
           enable-rcon = true;
