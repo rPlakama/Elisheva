@@ -46,6 +46,7 @@ in
     hjem.users.${user}.packages = with pkgs; [
       mangohud
       lutris
+      low-latency-layer
     ];
 
     programs = {
