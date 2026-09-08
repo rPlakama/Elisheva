@@ -59,7 +59,10 @@ in
     gpu = {
       amd = mkEnableOption "AMD GPU (RADV/amdgpu)";
       nvidia = mkEnableOption "Nvidia GPU (nvidia/nouveau)";
-      intel = mkEnableOption "Intel GPU (i915/Xe)";
+      intel = {
+        enable = mkEnableOption "Intel GPU (i915/Xe)";
+        isLegacy = mkEnableOption "Intel GPU legacy drivers (i965 VA-API stack instead of iHD/oneVPL)";
+      };
     };
     # Cpu
     cpu = {

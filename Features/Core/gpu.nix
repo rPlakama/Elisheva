@@ -6,8 +6,25 @@
   ...
 }:
 let
-  inherit (lib) mkMerge mkIf;
+  inherit (lib) mkMerge mkIf optionals;
   gpu = config.core.gpu;
+  intel = gpu.intel;
+
+  # iHD (intel-media-driver)/oneVPL/Compute-Runtime target Broadwell+ GPUs;
+  # the i965 stack (intel-vaapi-driver) is the legacy/fallback for older iGPUs.
+  intelDriverPkgs =
+    (optionals (!intel.isLegacy) [
+      pkgs.intel-media-driver # iHD - modern Intel GPUs (Broadwell+)
+      pkgs.vpl-gpu-rt # oneVPL runtime
+      pkgs.intel-compute-runtime # Jellyfin tone-mapping and others
+    ])
+    ++ [
+      pkgs.intel-vaapi-driver # i965 - legacy & fallback driver (pre-Broadwell)
+      pkgs.libvdpau-va-gl # VDPAU via VA-API
+    ];
+  intelDriverPkgs32 =
+    (optionals (!intel.isLegacy) [ pkgs.pkgsi686Linux.intel-media-driver ])
+    ++ [ pkgs.pkgsi686Linux.intel-vaapi-driver ];
 in
 {
   imports = [ inputs.chaotic.nixosModules.default ];
@@ -30,30 +47,27 @@ in
       };
     })
 
-    (mkIf (gpu.intel || gpu.amd) {
+    (mkIf (intel.enable || gpu.amd) {
       chaotic.mesa-git.enable = true;
       hardware.graphics = {
         enable = true;
       };
     })
 
-    (mkIf gpu.intel {
+    (mkIf intel.enable {
+      # chaotic.mesa-git mkForce's `hardware.graphics.*`, so the driver set
+      # must be mirrored into `chaotic.mesa-git.extraPackages` to take effect.
+      chaotic.mesa-git = {
+        extraPackages = intelDriverPkgs;
+        extraPackages32 = intelDriverPkgs32;
+      };
       hardware.graphics = {
-        extraPackages = with pkgs; [
-          intel-media-driver # iHD - modern Intel GPUs (Broadwell+)
-          vpl-gpu-rt # oneVPL runtime
-          intel-vaapi-driver # Fallback
-          libvdpau-va-gl # VDPAU via VA-API,
-          intel-compute-runtime # Jellyfin tone-mapping and others
-        ];
-        extraPackages32 = with pkgs.pkgsi686Linux; [
-          intel-media-driver
-          intel-vaapi-driver
-        ];
+        extraPackages = intelDriverPkgs;
+        extraPackages32 = intelDriverPkgs32;
       };
 
       environment = {
-        sessionVariables.LIBVA_DRIVER_NAME = "iHD";
+        sessionVariables.LIBVA_DRIVER_NAME = if intel.isLegacy then "i965" else "iHD";
         systemPackages = with pkgs; [
           intel-gpu-tools # intel_gpu_top for monitoring transcode
           libva-utils # vainfo - verify VA-API profiles expose

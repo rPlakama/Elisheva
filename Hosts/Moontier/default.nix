@@ -30,7 +30,10 @@
       email = "rPlakama@proton.me";
       user = "rPlakama";
     };
-    gpu.intel = true;
+    gpu.intel = {
+      enable = true;
+      isLegacy = true;
+    };
     cpu.intel = true;
     headless = true;
     zram.size = 4048;
