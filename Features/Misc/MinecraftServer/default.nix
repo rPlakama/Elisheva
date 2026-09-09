@@ -15,17 +15,20 @@ let
 
   baselineMods = pkgs.fetchPackwizModpack {
     url = "file://${baselineModsDir}/pack.toml";
-    packHash = "sha256-nhV+H1L6L4aXEm+WYo1ETLfge+OODogX8PwO1As/UXE=";
+    packHash = lib.fakeHash;
   };
 
   additionals = pkgs.fetchPackwizModpack {
     url = "file://${additionalsDir}/pack.toml";
-    packHash = "sha256-9srKmZx4f4neLRkVuf2L/8eoiYj0bQiwyC8YmUkWPYE=";
+    packHash = lib.fakeHash;
   };
 
   modpack = pkgs.symlinkJoin {
     name = "moontier-modpack";
-    paths = [ baselineMods additionals ];
+    paths = [
+      baselineMods
+      additionals
+    ];
   };
 
 in
