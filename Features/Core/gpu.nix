@@ -22,9 +22,9 @@ let
       pkgs.intel-vaapi-driver # i965 - legacy & fallback driver (pre-Broadwell)
       pkgs.libvdpau-va-gl # VDPAU via VA-API
     ];
-  intelDriverPkgs32 =
-    (optionals (!intel.isLegacy) [ pkgs.pkgsi686Linux.intel-media-driver ])
-    ++ [ pkgs.pkgsi686Linux.intel-vaapi-driver ];
+  intelDriverPkgs32 = (optionals (!intel.isLegacy) [ pkgs.pkgsi686Linux.intel-media-driver ]) ++ [
+    pkgs.pkgsi686Linux.intel-vaapi-driver
+  ];
 in
 {
   imports = [ inputs.chaotic.nixosModules.default ];
@@ -48,19 +48,16 @@ in
     })
 
     (mkIf (intel.enable || gpu.amd) {
-      chaotic.mesa-git.enable = true;
+      hardware.amdgpu.opencl.enable = true;
       hardware.graphics = {
         enable = true;
+        #extraPackages = with pkgs; [
+        #  mesa.opencl
+        #];
       };
     })
 
     (mkIf intel.enable {
-      # chaotic.mesa-git mkForce's `hardware.graphics.*`, so the driver set
-      # must be mirrored into `chaotic.mesa-git.extraPackages` to take effect.
-      chaotic.mesa-git = {
-        extraPackages = intelDriverPkgs;
-        extraPackages32 = intelDriverPkgs32;
-      };
       hardware.graphics = {
         extraPackages = intelDriverPkgs;
         extraPackages32 = intelDriverPkgs32;
