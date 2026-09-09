@@ -1,12 +1,12 @@
-name = "MoontierSRV"
-author = "rPlakama"
+name = "additionals"
+author = "rplk"
 version = "1.0.0"
 pack-format = "packwiz:1.1.0"
 
 [index]
 file = "index.toml"
 hash-format = "sha256"
-hash = "5a5ce574a34402d1c41884f7e6263e78819ec5affa1a00276fe5773196f92f94"
+hash = "ab91cce2283c083cf4988759b424385237f36975d9ea4140eb531e78f2a7e972"
 
 [versions]
 fabric = "0.19.5"

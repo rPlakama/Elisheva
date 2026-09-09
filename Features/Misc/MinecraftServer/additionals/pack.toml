@@ -1,0 +1,13 @@
+name = "additionals"
+author = "rplk"
+version = "1.0.0"
+pack-format = "packwiz:1.1.0"
+
+[index]
+file = "index.toml"
+hash-format = "sha256"
+hash = "462e2959b09f4b361291d3c44fc3199637725d7d1c61eb5fae79f762823bfde1"
+
+[versions]
+fabric = "0.19.5"
+minecraft = "26.2"
