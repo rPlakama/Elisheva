@@ -1,163 +1,6 @@
 hash-format = "sha256"
 
 [[files]]
-file = "baseline-mods/index.toml"
-hash = "ab91cce2283c083cf4988759b424385237f36975d9ea4140eb531e78f2a7e972"
-
-[[files]]
-file = "baseline-mods/mods/almanac.pw.toml"
-hash = "4a23e8d96bcd9514ea66860790cc417a5ba99e259b69df38b9d48d07db10f124"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/alternate-current.pw.toml"
-hash = "db49ed5fd52d71b3eb2f65f7385b63c3f3d572e269d774281786eec2522ffc42"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/asynclogger.pw.toml"
-hash = "0c615d15fa44b5f4511383f35f4f814a24abc3a3a1d9af9c1bb516be7962010d"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/balm.pw.toml"
-hash = "43da9987e5d5b835f7f7df9f1678ef4e30f13bf4c0d19ff894e81f1a8ae8cd41"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/chunky.pw.toml"
-hash = "8e4512056e448a6f3d1ac179961eb699c15fbe000284e0aee041b5971b417302"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/clumps.pw.toml"
-hash = "3e4d788583a36e9d145407fadce148f037e5229bff430f7dcd281d4d426c9ee6"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/crashexploitfixer.pw.toml"
-hash = "4470228e8935aeb0af85a461eaa3bebcc7570b3993dde4c3223c3a5059984c00"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/debugify.pw.toml"
-hash = "88aa13d41089c63696b88a60353b21156b67416affbdb1f162478b4771b76ff2"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/fabric-api.pw.toml"
-hash = "7ed424f5ce1febe2c2c0e5fc58d34858f1bbd97eabdceb9b9c6afdde4bf578df"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/ferrite-core.pw.toml"
-hash = "069d81cab53c0141459ad4d70bcf3e10f17652f24cc62d3b4a0fc2cd2b700871"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/jasione.pw.toml"
-hash = "eb8647b69a908f1ffdcd173c1c0470f8ef614b08b214069a927bc0f6b15feea8"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/krypton.pw.toml"
-hash = "e922d7300eba8cfbd9aa31ba475cf6fcbcf11d74e89a0314ada18d58f08a2634"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/lazyai.pw.toml"
-hash = "6427e1b8c7440a426783887c0496944772d3cf795c95fde339f246c125c5c790"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/lithium.pw.toml"
-hash = "a5ee497ec151dd6e6b946091e12e2c56362e5c772c4b8ea175b2e81277cc708d"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/lithostitched.pw.toml"
-hash = "97aa748211421353c6e41005b59ab725448b3122934f69f2116534070315b164"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/lmd.pw.toml"
-hash = "ab3be4435d81feb60e0faeee73ad9250dbe6a924d92e3d8d47819b56414f1c5c"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/netherportalfix.pw.toml"
-hash = "8869f77dfbc37e83dc0d0ea34fcaaa1faf235dff008767a444b68ede8ca7390d"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/noisiumforked.pw.toml"
-hash = "1330268d34fa30998d31f2299eb65054cc419bb935710a50a95518dbeccbb268"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/railoptimization.pw.toml"
-hash = "007d42e89d189519bb2ec03eb34c1a735f04e7cfc8890bab10666e50e0e694ee"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/resourceful-config.pw.toml"
-hash = "a8d92e3a2cf956cfa5932d3324a219729fe549fbcc3992c75b54d6b345178389"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/scalablelux.pw.toml"
-hash = "fda2f23dc5a311460c9a277922fbb94ccfd6adbde2b74cc395a467f51523b90f"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/servercore.pw.toml"
-hash = "223a48cab4fc6cfa44ce60e70b59583c1a8192019a2716ae3a744a9187b35560"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/skinsrestorer.pw.toml"
-hash = "ea56079166ad99b1113970c2468efc6a3b19e6af0d2c4465e4a0552a2aab1915"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/slumber.pw.toml"
-hash = "496ec14411fec1d4ab7191fddd34ee10f8f578d034e6a68273400e7ed33615fe"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/structure-layout-optimizer.pw.toml"
-hash = "6801adb48ee85a21c7c4992625c34a751197382cb952dd25082d145a37de84fb"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/terralith.pw.toml"
-hash = "b1083983d7ac86c52c1bb1da749f132460c4ee9a8875e76c5244037fc1e0de73"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/vmp-fabric.pw.toml"
-hash = "9d2d6dfc69a39361bb5d9e30c6c35c2ca7b8121ac0b66fad29bcfa81c40b0738"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/voxy-server-side.pw.toml"
-hash = "50fcf7a65d1bb4e3d9c73a6534805b500065ae1fdb2dc6089d622f9a91d96da0"
-metafile = true
-
-[[files]]
-file = "baseline-mods/mods/zfastnoise.pw.toml"
-hash = "9171a6a788ccba0c128dbc05bd3101fc69b9e1240656dcf549f25814ab800a10"
-metafile = true
-
-[[files]]
-file = "baseline-mods/pack.toml"
-hash = "689762e4133155817f561918c5a3f2050593dc1feb9db7f251821b3dc672e655"
-
-[[files]]
-file = "default.nix"
-hash = "b1fbca150cbe4e2e0c2799835b4c601322cc87daa45831b8f8ab5ab15a5be40f"
-
-[[files]]
 file = "mods/better-combat.pw.toml"
 hash = "229a486a5b8a4f151b921ca86c20b1c8821046219c7b9adb4809fb67f5148dee"
 metafile = true
@@ -183,6 +26,26 @@ hash = "37069be1c7d23b2fe463a98297d1f12eb8875f0d3be651a3a6cadc868752ab5a"
 metafile = true
 
 [[files]]
+file = "mods/forge-config-api-port.pw.toml"
+hash = "8c91080e610d7c8c40ae6445d36af1cf591fe1ebf70718b3e6d4714232b23592"
+metafile = true
+
+[[files]]
+file = "mods/leaves-be-gone.pw.toml"
+hash = "cc60dc47e6965f1565ffd068b07d09d1e4598e58e941d134eecd668e08905d42"
+metafile = true
+
+[[files]]
+file = "mods/open-together.pw.toml"
+hash = "c1544eb0f1a4133688b3453ef38dafe3c14887cba55cdb2e19f801e73f964d21"
+metafile = true
+
+[[files]]
 file = "mods/player-animation-library.pw.toml"
 hash = "c0cda45c0b9cbc05935f935ab57268a12819e8cf85f1aef7e717b858e3f55bd2"
+metafile = true
+
+[[files]]
+file = "mods/puzzles-lib.pw.toml"
+hash = "a535571c7e24a2fb76a7ec7f74efe902623ea61a4d42e7f1489e9180aecc36f4"
 metafile = true

@@ -10,11 +10,22 @@ let
   featureCall = config.features;
 
   #nix shell nixpkgs#packwiz
-  moontierPackDir = ./moontier-modpack;
+  baselineModsDir = ./baseline-mods;
+  additionalsDir = ./additionals;
 
-  modpack = pkgs.fetchPackwizModpack {
-    url = "file://${moontierPackDir}/pack.toml";
-    packHash = "sha256-nJebk77gxV/JiXQyZ23ufd6sPXMgNwTwh3yX4YzeHu8=";
+  baselineMods = pkgs.fetchPackwizModpack {
+    url = "file://${baselineModsDir}/pack.toml";
+    packHash = "sha256-nhV+H1L6L4aXEm+WYo1ETLfge+OODogX8PwO1As/UXE=";
+  };
+
+  additionals = pkgs.fetchPackwizModpack {
+    url = "file://${additionalsDir}/pack.toml";
+    packHash = "sha256-9srKmZx4f4neLRkVuf2L/8eoiYj0bQiwyC8YmUkWPYE=";
+  };
+
+  modpack = pkgs.symlinkJoin {
+    name = "moontier-modpack";
+    paths = [ baselineMods additionals ];
   };
 
 in
@@ -64,7 +75,7 @@ in
           enable-rcon = true;
           "rcon.password" = "moontier";
         };
-        jvmOpts = "-Xms1G -Xmx3G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Dcom.mojang.eula.agree=true -XX:ParallelGCThreads=2 -XX:ConcGCThreads=1";
+        jvmOpts = "-Xms1G -Xmx4G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Dcom.mojang.eula.agree=true -XX:ParallelGCThreads=2 -XX:ConcGCThreads=1";
       };
     };
   };
