@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 let
@@ -27,7 +26,6 @@ let
   ];
 in
 {
-  imports = [ inputs.chaotic.nixosModules.default ];
   config = mkMerge [
     (mkIf gpu.nvidia {
       services.xserver.videoDrivers = [ "nvidia" ];
@@ -48,12 +46,11 @@ in
     })
 
     (mkIf (intel.enable || gpu.amd) {
-      hardware.amdgpu.opencl.enable = true;
-      hardware.graphics = {
-        enable = true;
-        #extraPackages = with pkgs; [
-        #  mesa.opencl
-        #];
+      hardware = {
+        amdgpu.opencl.enable = true;
+        graphics = {
+          enable = true;
+        };
       };
     })
 
