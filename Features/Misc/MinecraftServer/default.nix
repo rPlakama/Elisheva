@@ -52,7 +52,7 @@ in
       eula = true;
       # dataDir = "/srv/minecraft";
 
-      servers.ratomorto = {
+      servers.ratmort = {
         enable = true;
         # package = pkgs.paperServers.paper-26_2;
         # fabric requires java 25 for fabric-26_2
