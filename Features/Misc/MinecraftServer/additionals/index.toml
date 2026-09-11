@@ -21,11 +21,6 @@ hash = "7fa9592b9948b8809018a4e7c3ca7da4d19fc5ef8c03021414cb22ae0253f083"
 metafile = true
 
 [[files]]
-file = "mods/continents.pw.toml"
-hash = "a516cae54142a38262b5b0163a30e119df844ee4bd11ad1cbea5accbc0334540"
-metafile = true
-
-[[files]]
 file = "mods/explorify.pw.toml"
 hash = "6adce6422e74091638dbd7872270ee58d9a22dc18340580f809cc50c739e0d4f"
 metafile = true
