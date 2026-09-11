@@ -20,7 +20,7 @@ let
 
   additionals = pkgs.fetchPackwizModpack {
     url = "file://${additionalsDir}/pack.toml";
-    packHash = "sha256-RYJQsgQ81sM5hvmN/euxkplh1/waH2EWOnE4aLx4030=";
+    packHash = "sha256-DHiu3UzzRRWKFAR8/v0uZTojC/4IvbG6DdKIWVwGVSk=";
   };
 
   modpack = pkgs.symlinkJoin {
