@@ -71,8 +71,8 @@ in
           online-mode = false;
           gamemode = 0;
           max-players = 5;
-          view-distance = 8;
-          simulation-distance = 6;
+          view-distance = 12;
+          simulation-distance = 8;
           motd = "MT-Server";
           white-list = false;
           enable-rcon = true;
