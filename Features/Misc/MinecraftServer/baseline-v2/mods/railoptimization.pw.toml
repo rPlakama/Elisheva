@@ -1,0 +1,13 @@
+name = "RailOptimization"
+filename = "railoptimization-2.0-snapshot.4+mc26.1.2-fabric.jar"
+side = "server"
+
+[download]
+url = "https://cdn.modrinth.com/data/QSvN5pBU/versions/jQdEquUi/railoptimization-2.0-snapshot.4%2Bmc26.1.2-fabric.jar"
+hash-format = "sha512"
+hash = "858cef3cca6fc9940663011837729d216fdda68dfac61d5464fbfd93f1f25009e07bc2d02d4c07ec972377b21efede3c19c26555339bab08801739067e0a80f8"
+
+[update]
+[update.modrinth]
+mod-id = "QSvN5pBU"
+version = "jQdEquUi"

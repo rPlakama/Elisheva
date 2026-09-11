@@ -10,17 +10,17 @@ let
   featureCall = config.features;
 
   #nix shell nixpkgs#packwiz
-  baselineModsDir = ./baseline-mods;
-  additionalsDir = ./additionals;
+  baselineModsDir = ./baseline-v2;
+  additionalsDir = ./additionals-v2;
 
   baselineMods = pkgs.fetchPackwizModpack {
     url = "file://${baselineModsDir}/pack.toml";
-    packHash = "sha256-bgriUdW+8qKdHqh820WEdEnMgQzLmvVEh5+0y7CytHA=";
+    packHash = "sha256-twBjyhe98nY/BBXbIxUWXQ5Q5SRB5HiBxU9N8M7fAog=";
   };
 
   additionals = pkgs.fetchPackwizModpack {
     url = "file://${additionalsDir}/pack.toml";
-    packHash = lib.fakeHash;
+    packHash = "sha256-RYJQsgQ81sM5hvmN/euxkplh1/waH2EWOnE4aLx4030=";
   };
 
   modpack = pkgs.symlinkJoin {

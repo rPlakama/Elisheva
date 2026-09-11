@@ -1,0 +1,13 @@
+name = "BCLib: New Dawn"
+filename = "bclib-26.2.2-fabric.jar"
+side = "both"
+
+[download]
+url = "https://cdn.modrinth.com/data/7bdKEtKC/versions/yWDI0LzD/bclib-26.2.2-fabric.jar"
+hash-format = "sha512"
+hash = "b01effb31f751d0672573e3357da4ac2f2f3eea7afbd8de6ad7668d1bcc85b7554cb79bceb09b2200aa724510e8ae02e3cc2660170af152fc47ba0fb174f2c59"
+
+[update]
+[update.modrinth]
+mod-id = "7bdKEtKC"
+version = "yWDI0LzD"

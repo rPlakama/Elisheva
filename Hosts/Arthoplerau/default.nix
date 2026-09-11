@@ -29,6 +29,7 @@
     # tdarr.enable = true;
     # umbriel.enable = true;
 
+    minecraft-server.enable = true;
     niri = {
       enable = true;
       noctalia.enabled = true;

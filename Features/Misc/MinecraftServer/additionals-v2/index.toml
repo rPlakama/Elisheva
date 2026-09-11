@@ -1,0 +1,106 @@
+hash-format = "sha256"
+
+[[files]]
+file = "mods/bclib.pw.toml"
+hash = "6a265244c7553f1ad686914dcaac827aa5baf42e00e8c114b9ffddf239015504"
+metafile = true
+
+[[files]]
+file = "mods/betterend.pw.toml"
+hash = "9264d0727859bf3598fedcdd62c222f196f31b547a9a6ae1aa4477056e4e8b09"
+metafile = true
+
+[[files]]
+file = "mods/betternether.pw.toml"
+hash = "aecea6cba78f7b7aff010ab999a0f234d72f94dc3394e9e37da240797548a674"
+metafile = true
+
+[[files]]
+file = "mods/cloth-config.pw.toml"
+hash = "7fa9592b9948b8809018a4e7c3ca7da4d19fc5ef8c03021414cb22ae0253f083"
+metafile = true
+
+[[files]]
+file = "mods/explorify.pw.toml"
+hash = "6adce6422e74091638dbd7872270ee58d9a22dc18340580f809cc50c739e0d4f"
+metafile = true
+
+[[files]]
+file = "mods/fabric-api.pw.toml"
+hash = "37069be1c7d23b2fe463a98297d1f12eb8875f0d3be651a3a6cadc868752ab5a"
+metafile = true
+
+[[files]]
+file = "mods/fabric-language-kotlin.pw.toml"
+hash = "7a7f5673b6e33eebaed00c0c453fc41d11c7474eb320c3ce8736d415fcfe2682"
+metafile = true
+
+[[files]]
+file = "mods/forge-config-api-port.pw.toml"
+hash = "8c91080e610d7c8c40ae6445d36af1cf591fe1ebf70718b3e6d4714232b23592"
+metafile = true
+
+[[files]]
+file = "mods/ksyxis.pw.toml"
+hash = "24108936876681291323c2ba37f0a8da6ae4a779411e360d480f21ab145c396b"
+metafile = true
+
+[[files]]
+file = "mods/leaves-be-gone.pw.toml"
+hash = "cc60dc47e6965f1565ffd068b07d09d1e4598e58e941d134eecd668e08905d42"
+metafile = true
+
+[[files]]
+file = "mods/open-together.pw.toml"
+hash = "c1544eb0f1a4133688b3453ef38dafe3c14887cba55cdb2e19f801e73f964d21"
+metafile = true
+
+[[files]]
+file = "mods/player-animation-library.pw.toml"
+hash = "c0cda45c0b9cbc05935f935ab57268a12819e8cf85f1aef7e717b858e3f55bd2"
+metafile = true
+
+[[files]]
+file = "mods/pneumono_core.pw.toml"
+hash = "18cc3229caf3ba4c00309bcae7bbc6461d49ed71b814667e274e9f2c4942431a"
+metafile = true
+
+[[files]]
+file = "mods/pneumono_gravestones.pw.toml"
+hash = "6a2fb28c18abbf2add2124dbeb81ff8274b2ea3e2adaeafb8b043666735319e8"
+metafile = true
+
+[[files]]
+file = "mods/puzzles-lib.pw.toml"
+hash = "a535571c7e24a2fb76a7ec7f74efe902623ea61a4d42e7f1489e9180aecc36f4"
+metafile = true
+
+[[files]]
+file = "mods/travelersbackpack.pw.toml"
+hash = "bcf12651e2f9a8efc66a56a8887c83f7e29a812f48416a8796b940519039d0e5"
+metafile = true
+
+[[files]]
+file = "mods/veinminer.pw.toml"
+hash = "b38381a74718c294570c2f59245deb3138ed3b19afb013d7ed915805f329565e"
+metafile = true
+
+[[files]]
+file = "mods/worldweaver.pw.toml"
+hash = "18a53276fe30ba314a61628042f13b4862c872aa8f3ef8760b94f74ef552b43a"
+metafile = true
+
+[[files]]
+file = "mods/wunderlib.pw.toml"
+hash = "3715cc4807df97c1ebf6f231a2502ac34b4c2f0838367ce78eb17490a92a8016"
+metafile = true
+
+[[files]]
+file = "mods/xaeros-world-map.pw.toml"
+hash = "dea5f0bd5d1c94786ff67bb08a36df702cb2cd5fe74d3e31152413297b966981"
+metafile = true
+
+[[files]]
+file = "mods/yacl.pw.toml"
+hash = "b08ea22923b8ccf2fbeb020cb532487be60c2dd75dd8e1c04e14deb66c118bba"
+metafile = true

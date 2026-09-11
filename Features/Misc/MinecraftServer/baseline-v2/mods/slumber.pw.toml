@@ -1,0 +1,13 @@
+name = "Slumber"
+filename = "Slumber-2.0.0.jar"
+side = "server"
+
+[download]
+url = "https://cdn.modrinth.com/data/ksm6XRZ9/versions/8VNqZydR/Slumber-2.0.0.jar"
+hash-format = "sha512"
+hash = "cd18a78c42bc9f3b96a4890c8b56da8479e9d64ebd599a482268836821332e7d0a76378503e0c5dcde4f99b4847f7d84899703263fb9689393b758fbe22a48ff"
+
+[update]
+[update.modrinth]
+mod-id = "ksm6XRZ9"
+version = "8VNqZydR"
