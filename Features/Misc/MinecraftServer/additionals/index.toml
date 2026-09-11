@@ -1,8 +1,18 @@
 hash-format = "sha256"
 
 [[files]]
-file = "mods/better-combat.pw.toml"
-hash = "229a486a5b8a4f151b921ca86c20b1c8821046219c7b9adb4809fb67f5148dee"
+file = "mods/bclib-neoforge.pw.toml"
+hash = "6a265244c7553f1ad686914dcaac827aa5baf42e00e8c114b9ffddf239015504"
+metafile = true
+
+[[files]]
+file = "mods/betterend-neoforge.pw.toml"
+hash = "9264d0727859bf3598fedcdd62c222f196f31b547a9a6ae1aa4477056e4e8b09"
+metafile = true
+
+[[files]]
+file = "mods/betternether-neoforge.pw.toml"
+hash = "aecea6cba78f7b7aff010ab999a0f234d72f94dc3394e9e37da240797548a674"
 metafile = true
 
 [[files]]
@@ -36,6 +46,11 @@ hash = "8c91080e610d7c8c40ae6445d36af1cf591fe1ebf70718b3e6d4714232b23592"
 metafile = true
 
 [[files]]
+file = "mods/ksyxis.pw.toml"
+hash = "24108936876681291323c2ba37f0a8da6ae4a779411e360d480f21ab145c396b"
+metafile = true
+
+[[files]]
 file = "mods/leaves-be-gone.pw.toml"
 hash = "cc60dc47e6965f1565ffd068b07d09d1e4598e58e941d134eecd668e08905d42"
 metafile = true
@@ -66,6 +81,26 @@ hash = "a535571c7e24a2fb76a7ec7f74efe902623ea61a4d42e7f1489e9180aecc36f4"
 metafile = true
 
 [[files]]
+file = "mods/travelersbackpack.pw.toml"
+hash = "bcf12651e2f9a8efc66a56a8887c83f7e29a812f48416a8796b940519039d0e5"
+metafile = true
+
+[[files]]
 file = "mods/veinminer.pw.toml"
 hash = "b38381a74718c294570c2f59245deb3138ed3b19afb013d7ed915805f329565e"
+metafile = true
+
+[[files]]
+file = "mods/worldweaver-neoforge.pw.toml"
+hash = "18a53276fe30ba314a61628042f13b4862c872aa8f3ef8760b94f74ef552b43a"
+metafile = true
+
+[[files]]
+file = "mods/wunderlib-neoforge.pw.toml"
+hash = "3715cc4807df97c1ebf6f231a2502ac34b4c2f0838367ce78eb17490a92a8016"
+metafile = true
+
+[[files]]
+file = "mods/xaeros-world-map.pw.toml"
+hash = "dea5f0bd5d1c94786ff67bb08a36df702cb2cd5fe74d3e31152413297b966981"
 metafile = true

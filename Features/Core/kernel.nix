@@ -5,26 +5,14 @@
   ...
 }: let
   cpu = config.core.cpu;
-  ddcciPatch = ./ddcci-string-h.patch;
 in {
   nixpkgs.overlays = [inputs.nix-cachyos-kernel.overlays.pinned];
 
   boot = {
-    kernelPackages = let
-      cachyos =
-        if cpu.amd
-        then pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-zen4
-        else pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
-    in
-      cachyos.extend (
-        final: prev: {
-          # ddcci-driver uses strncpy without including <linux/string.h>,
-          # which fails to build on kernels >= 7
-          ddcci-driver = prev.ddcci-driver.overrideAttrs (old: {
-            patches = (old.patches or []) ++ [ddcciPatch];
-          });
-        }
-      );
+    kernelPackages =
+      if cpu.amd
+      then pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-zen4
+      else pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
     kernelParams =
       if cpu.amd
       then ["amd_pstate=active"]

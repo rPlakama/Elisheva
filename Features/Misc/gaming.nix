@@ -12,8 +12,6 @@ let
   gsrEnable = featureCall.gaming.gsr.enable;
 in
 {
-  #  imports = [inputs.gsr-ui-nix.nixosModules.default];
-
   options.features.gaming = {
     enable = lib.mkEnableOption "Enable gaming bundle";
 
