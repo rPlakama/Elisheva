@@ -101,11 +101,6 @@ hash = "8869f77dfbc37e83dc0d0ea34fcaaa1faf235dff008767a444b68ede8ca7390d"
 metafile = true
 
 [[files]]
-file = "mods/noisiumforked.pw.toml"
-hash = "1330268d34fa30998d31f2299eb65054cc419bb935710a50a95518dbeccbb268"
-metafile = true
-
-[[files]]
 file = "mods/railoptimization.pw.toml"
 hash = "007d42e89d189519bb2ec03eb34c1a735f04e7cfc8890bab10666e50e0e694ee"
 metafile = true
