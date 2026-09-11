@@ -81,6 +81,11 @@ hash = "bcf12651e2f9a8efc66a56a8887c83f7e29a812f48416a8796b940519039d0e5"
 metafile = true
 
 [[files]]
+file = "mods/trinkets-updated.pw.toml"
+hash = "a5b15314fb9b775d20b6b30eaa52046cea177b34197039627edda9f6de6f9ed4"
+metafile = true
+
+[[files]]
 file = "mods/veinminer.pw.toml"
 hash = "b38381a74718c294570c2f59245deb3138ed3b19afb013d7ed915805f329565e"
 metafile = true
