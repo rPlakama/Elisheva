@@ -11,6 +11,11 @@ hash = "db49ed5fd52d71b3eb2f65f7385b63c3f3d572e269d774281786eec2522ffc42"
 metafile = true
 
 [[files]]
+file = "mods/async.pw.toml"
+hash = "7e40269f47995ac1bfb6dfd2bbc8689ee4ecefc6f5486acf448b38473d534185"
+metafile = true
+
+[[files]]
 file = "mods/asynclogger.pw.toml"
 hash = "0c615d15fa44b5f4511383f35f4f814a24abc3a3a1d9af9c1bb516be7962010d"
 metafile = true
