@@ -53,6 +53,9 @@ in
         amdgpu.opencl.enable = true;
         graphics = {
           enable = true;
+          extraPackages = with pkgs; [
+            mesa.opencl
+          ];
         };
       };
     })
