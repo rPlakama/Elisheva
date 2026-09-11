@@ -51,6 +51,11 @@ hash = "069d81cab53c0141459ad4d70bcf3e10f17652f24cc62d3b4a0fc2cd2b700871"
 metafile = true
 
 [[files]]
+file = "mods/immersive-optimization.pw.toml"
+hash = "c3d87832823c9a37dcca3bd2e82d7268428acdc2c676fbd66169b2b4b6eab271"
+metafile = true
+
+[[files]]
 file = "mods/jasione.pw.toml"
 hash = "eb8647b69a908f1ffdcd173c1c0470f8ef614b08b214069a927bc0f6b15feea8"
 metafile = true
