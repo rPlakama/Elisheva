@@ -15,12 +15,12 @@ let
 
   baselineMods = pkgs.fetchPackwizModpack {
     url = "file://${baselineModsDir}/pack.toml";
-    packHash = lib.fakeHash;
+    packHash = "sha256-bgriUdW+8qKdHqh820WEdEnMgQzLmvVEh5+0y7CytHA=";
   };
 
   additionals = pkgs.fetchPackwizModpack {
     url = "file://${additionalsDir}/pack.toml";
-    packHash = lib.fakeHash;
+    packHash = "sha256-w/kLu/5KqZVjxii0iX6IYM4Qr00NhaSt8K5PNZgRhtE=";
   };
 
   modpack = pkgs.symlinkJoin {
@@ -52,7 +52,7 @@ in
       eula = true;
       # dataDir = "/srv/minecraft";
 
-      servers.moontier = {
+      servers.ratomorto = {
         enable = true;
         # package = pkgs.paperServers.paper-26_2;
         # fabric requires java 25 for fabric-26_2
@@ -73,12 +73,12 @@ in
           max-players = 5;
           view-distance = 8;
           simulation-distance = 6;
-          motd = "Moontier Minecraft Server";
+          motd = "MT-Server";
           white-list = false;
           enable-rcon = true;
           "rcon.password" = "moontier";
         };
-        jvmOpts = "-Xms1G -Xmx4G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Dcom.mojang.eula.agree=true -XX:ParallelGCThreads=2 -XX:ConcGCThreads=1";
+        jvmOpts = "-Xms3G -Xmx3G -XX:+UseZGC -XX:+ParallelRefProcEnabled -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:+PerfDisableSharedMem -Dcom.mojang.eula.agree=true";
       };
     };
   };
