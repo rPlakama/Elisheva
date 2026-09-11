@@ -46,6 +46,11 @@ hash = "8c91080e610d7c8c40ae6445d36af1cf591fe1ebf70718b3e6d4714232b23592"
 metafile = true
 
 [[files]]
+file = "mods/immersive-storms.pw.toml"
+hash = "05de50b0976a06e48a87eb83f623a61b4861da62686d7fc7e8bff41e5ae93641"
+metafile = true
+
+[[files]]
 file = "mods/ksyxis.pw.toml"
 hash = "24108936876681291323c2ba37f0a8da6ae4a779411e360d480f21ab145c396b"
 metafile = true
@@ -103,4 +108,9 @@ metafile = true
 [[files]]
 file = "mods/xaeros-world-map.pw.toml"
 hash = "dea5f0bd5d1c94786ff67bb08a36df702cb2cd5fe74d3e31152413297b966981"
+metafile = true
+
+[[files]]
+file = "mods/yacl.pw.toml"
+hash = "b08ea22923b8ccf2fbeb020cb532487be60c2dd75dd8e1c04e14deb66c118bba"
 metafile = true

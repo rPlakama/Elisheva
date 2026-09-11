@@ -1,0 +1,13 @@
+name = "Immersive Storms"
+filename = "immersive-storms-1.7.3+26.2.jar"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/SdJDElEu/versions/3Box8PS5/immersive-storms-1.7.3%2B26.2.jar"
+hash-format = "sha512"
+hash = "423bb9e0122444345026913b87fb64ea5839d61a73c95f72a303d0a1b08af2db4a39e1613074812644196506ef5b1b8e56ad2082747d7aaa9ebecc88083f7dba"
+
+[update]
+[update.modrinth]
+mod-id = "SdJDElEu"
+version = "3Box8PS5"
