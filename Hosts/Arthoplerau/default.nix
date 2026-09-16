@@ -46,15 +46,12 @@
 
     disko = {
       enable = true;
-      isBTRFS = true;
+      isXFS = true;
       dualDrive = true;
-      primaryDrive = "/dev/nvme1n1";
-      secondaryDrive = "/dev/nvme0n1";
-      btrfs.compression = "zstd:6";
+      primaryDrive = "/dev/nvme0n1";
+      secondaryDrive = "/dev/nvme1n1";
       swap.enable = true;
     };
-
-    preservation.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
