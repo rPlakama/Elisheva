@@ -122,18 +122,26 @@ let
   };
 
   # XFS does not support subvolumes, so it cannot back an ephemeral (tmpfs) root.
+  # noatime avoids atime metadata writes; logbsize batches metadata into larger
+  # log buffers, trimming small random writes (helps DRAM-less NVMe a little).
   xfsRoot = {
     type = "filesystem";
     format = "xfs";
     mountpoint = "/";
-    mountOptions = [ "noatime" ];
+    mountOptions = [
+      "noatime"
+      "logbsize=256k"
+    ];
   };
 
   xfsSecondaryData = {
     type = "filesystem";
     format = "xfs";
     mountpoint = cfg.xfs.secondaryMount;
-    mountOptions = [ "noatime" ];
+    mountOptions = [
+      "noatime"
+      "logbsize=256k"
+    ];
   };
 in
 {
