@@ -52,7 +52,6 @@ in
       };
       usesPPD = mkEnableOption "PPD daemon";
       usesAuto-cpufreq = mkEnableOption "uses auto-cpufreq";
-      usesTunedPPD = mkEnableOption "TuneD PPD daemon (power-profiles-daemon compatible)";
     };
 
     # gpu

@@ -4,7 +4,8 @@
   modulesPath,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -30,7 +31,12 @@
       "snd_pci_acp6x"
     ];
 
-    extraModprobeConfig = "options snd-hda-intel dmic_detect=0 ";
+    kernelParams = [
+      "iommu=pt"
+      "acpi_enforce_resources=lax"
+    ];
+
+    extraModprobeConfig = "options rtw89_core disable_ps_mode=1";
     kernelModules = [
       "kvm-amd"
     ];

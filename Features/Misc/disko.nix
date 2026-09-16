@@ -19,48 +19,30 @@ let
     str
     ;
 
-  featureCall = config.features;
+  cfg = config.features.disko;
 
   # Partition 1 of the secondary drive, e.g. /dev/nvme0n1 -> /dev/nvme0n1p1.
   secondaryPart =
-    let
-      dev = featureCall.disko.secondaryDrive;
-    in
-    if builtins.match ".*[0-9]$" dev != null then "${dev}p1" else "${dev}1";
+    if builtins.match ".*[0-9]$" cfg.secondaryDrive != null then
+      "${cfg.secondaryDrive}p1"
+    else
+      "${cfg.secondaryDrive}1";
 
-  # One btrfs pool spans both drives: data single (files land on one device,
-  # so a drive failure only costs its own files) + metadata raid1.
-  poolExtraArgs = [
-    "-f"
-  ]
-  ++ optionals featureCall.disko.dualDrive [
-    "-d"
-    "single"
-    "-m"
-    "raid1"
-    secondaryPart
-  ];
-
-  btrfsOpts = [
-    "noatime"
-    "compress=${featureCall.disko.compression}"
-    "ssd"
-    "discard=async"
-  ];
-
-  subvol = mount: {
-    mountOptions = btrfsOpts;
-    mountpoint = mount;
+  # Optional swap partition appended to the primary drive's GPT.
+  swapPartition = optionalAttrs cfg.swap.enable {
+    swap = {
+      size = cfg.swap.size;
+      content = {
+        type = "swap";
+        resumeDevice = true;
+      };
+    };
   };
 
-  poolSubvols = {
-    "/nix" = subvol "/nix";
-    "/persistent" = subvol "/persistent";
-  };
-
-  primaryDisk = {
+  # Bootable primary drive; `rootContent` is whatever ends up mounted on `/`.
+  primaryDisk = rootContent: {
     main = {
-      device = featureCall.disko.primaryDrive;
+      device = cfg.primaryDrive;
       type = "disk";
       content = {
         type = "gpt";
@@ -82,42 +64,76 @@ let
           };
           root = {
             name = "root";
+            label = "PrimaryDrive";
             size = "100%";
-            content = {
-              type = "btrfs";
-              extraArgs = poolExtraArgs;
-              subvolumes = poolSubvols;
-            };
+            content = rootContent;
           };
         }
-        // optionalAttrs featureCall.disko.swap.enable {
-          swap = {
-            size = featureCall.disko.swap.size;
-            content = {
-              type = "swap";
-              resumeDevice = true;
-            };
-          };
-        };
+        // swapPartition;
       };
     };
   };
 
-  # The secondary drive contributes an unformatted partition to the pool.
+  # Secondary drive, either an unformatted partition joined into the btrfs pool
+  # (`content = null`) or an independent XFS filesystem.
   # Named "0-secondary" so it sorts before "main": disko processes disks in
-  # alphabetical order, and mkfs.btrfs needs this partition to already exist.
-  secondaryDisk = {
+  # alphabetical order and mkfs.btrfs needs this partition to already exist.
+  secondaryDisk = content: {
     "0-secondary" = {
-      device = featureCall.disko.secondaryDrive;
+      device = cfg.secondaryDrive;
       type = "disk";
       content = {
         type = "gpt";
         partitions.data = {
           name = "data";
+          label = "SecondaryDrive";
           size = "100%";
+          inherit content;
         };
       };
     };
+  };
+
+  btrfsMountOptions = [
+    "noatime"
+    "compress=${cfg.btrfs.compression}"
+    "ssd"
+    "discard=async"
+  ];
+
+  # One btrfs pool spans both drives: data single (files land on one device, so
+  # a drive failure only costs its own files) + metadata raid1.
+  btrfsRoot = {
+    type = "btrfs";
+    extraArgs = [
+      "-f"
+    ]
+    ++ optionals cfg.dualDrive [
+      "-d"
+      "single"
+      "-m"
+      "raid1"
+      secondaryPart
+    ];
+    subvolumes = genAttrs [ "/nix" "/persistent" ] (mountpoint: {
+      inherit mountpoint;
+      mountOptions = btrfsMountOptions;
+    });
+  };
+
+  # XFS does not support subvolumes, so it cannot back an ephemeral (tmpfs) root.
+  xfsRoot = {
+    type = "filesystem";
+    format = "xfs";
+    mountpoint = "/";
+    mountOptions = [ "noatime" ];
+  };
+
+  xfsSecondaryData = {
+    type = "filesystem";
+    format = "xfs";
+    mountpoint = cfg.xfs.secondaryMount;
+    mountOptions = [ "noatime" ];
   };
 in
 {
@@ -125,24 +141,43 @@ in
 
   options.features.disko = {
     enable = mkEnableOption "declarative disk layout (disko)";
+
+    isBTRFS = mkEnableOption "Uses BTRFS";
+    isXFS = mkEnableOption "Uses XFS";
+
     primaryDrive = mkOption {
       type = str;
       default = "";
-      description = "Primary drive hosting the btrfs pool";
+      description = "Primary drive hosting the root filesystem";
       example = "/dev/nvme0n1";
     };
+
     secondaryDrive = mkOption {
       type = str;
       default = "";
-      description = "Second drive joined into the btrfs pool (dual-drive mode)";
+      description = "Secondary drive used as additional storage";
       example = "/dev/nvme1n1";
     };
-    dualDrive = mkEnableOption "join a second drive into the btrfs pool (data single, metadata raid1)";
-    compression = mkOption {
-      type = str;
-      default = "zstd:3";
-      description = "Btrfs compression algorithm and level";
+
+    dualDrive = mkEnableOption "SecondaryDrive declaration";
+
+    btrfs = {
+      compression = mkOption {
+        type = str;
+        default = "zstd:3";
+        description = "Btrfs compression algorithm and level";
+      };
     };
+
+    xfs = {
+      secondaryMount = mkOption {
+        type = str;
+        default = "/mnt/secondary";
+        description = "Mountpoint of the secondary XFS drive";
+        example = "/data";
+      };
+    };
+
     swap = {
       enable = mkOption {
         type = bool;
@@ -157,38 +192,46 @@ in
     };
   };
 
-  config = mkIf featureCall.disko.enable {
-    assertions = [
-      {
-        assertion = featureCall.disko.primaryDrive != "";
-        message = "features.disko.primaryDrive must be set when disko is enabled";
-      }
-      {
-        assertion = !featureCall.disko.dualDrive || featureCall.disko.secondaryDrive != "";
-        message = "features.disko.secondaryDrive must be set when dualDrive is enabled";
-      }
-    ];
-    disko.devices = {
-      nodev."/" = {
-        fsType = "tmpfs";
-        mountOptions = [
-          "size=40%"
-          "mode=755"
+  config = mkIf cfg.enable (mkMerge [
+    {
+      assertions = [
+        {
+          assertion = cfg.primaryDrive != "";
+          message = "features.disko.primaryDrive must be set when disko is enabled";
+        }
+        {
+          assertion = !cfg.dualDrive || cfg.secondaryDrive != "";
+          message = "features.disko.secondaryDrive must be set when dualDrive is enabled";
+        }
+        {
+          assertion = cfg.isBTRFS != cfg.isXFS;
+          message = "features.disko: enable exactly one of isBTRFS or isXFS";
+        }
+      ];
+    }
+    (mkIf cfg.isBTRFS {
+      disko.devices = {
+        nodev."/" = {
+          fsType = "tmpfs";
+          mountOptions = [
+            "size=40%"
+            "mode=755"
+          ];
+        };
+        disk = mkMerge [
+          (primaryDisk btrfsRoot)
+          (mkIf cfg.dualDrive (secondaryDisk null))
         ];
       };
-      disk = mkMerge [
-        primaryDisk
-        (mkIf featureCall.disko.dualDrive secondaryDisk)
+      fileSystems = genAttrs [ "/nix" "/persistent" ] (_: {
+        neededForBoot = true;
+      });
+    })
+    (mkIf cfg.isXFS {
+      disko.devices.disk = mkMerge [
+        (primaryDisk xfsRoot)
+        (mkIf cfg.dualDrive (secondaryDisk xfsSecondaryData))
       ];
-    };
-    fileSystems =
-      genAttrs
-        [
-          "/nix"
-          "/persistent"
-        ]
-        (m: {
-          neededForBoot = true;
-        });
-  };
+    })
+  ]);
 }

@@ -21,7 +21,7 @@ let
   nCallPanel = "noctalia msg panel-toggle";
 
   power-cycle-bind =
-    optionalAttrs (config.core.isLaptop.usesPPD || config.core.isLaptop.usesTunedPPD)
+    optionalAttrs config.core.isLaptop.usesPPD
       {
         "Ctrl+Alt+Q" = "spawn:noctalia msg power-cycle";
       };

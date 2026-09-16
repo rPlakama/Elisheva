@@ -28,7 +28,7 @@ in
   };
   services = {
     upower.enable = isLaptop;
-    scx.enable = true;
+    scx.enable = false;
     power-profiles-daemon.enable = usesPPD;
     bpftune.enable = true;
     devmon.enable = !headless;
