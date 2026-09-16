@@ -36,6 +36,12 @@ in
     resolved.enable = true;
     gvfs.enable = !headless;
     fwupd.enable = true;
+
+    kmscon = {
+      enable = true;
+      hwRender = true;
+    };
+
     pipewire = {
       enable = !headless;
       alsa = {
