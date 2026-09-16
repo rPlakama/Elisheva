@@ -180,7 +180,7 @@ in
     xfs = {
       secondaryMount = mkOption {
         type = str;
-        default = "/mnt/secondary";
+        default = "/secondary";
         description = "Mountpoint of the secondary XFS drive";
         example = "/data";
       };
