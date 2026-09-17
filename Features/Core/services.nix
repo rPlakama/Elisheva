@@ -8,7 +8,7 @@ let
   usesAuto-cpufreq = config.core.isLaptop.usesAuto-cpufreq;
   usesPPD = config.core.isLaptop.usesPPD;
   isLaptop = config.core.isLaptop.enable;
-  keyLayout = config.core.keyLayout;
+  keyLayout = config.core.keyboardLayout;
 in
 {
   imports = [ inputs.auto-cpufreq.nixosModules.default ];
