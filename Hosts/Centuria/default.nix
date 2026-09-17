@@ -10,7 +10,7 @@
   ];
   core = {
 
-    keyboardLayout = "br,us";
+    keyboardLayout = "us,br";
     user = "rplakama";
     gpu.nvidia = true;
     cpu.amd = true;

@@ -8,6 +8,7 @@ let
   usesAuto-cpufreq = config.core.isLaptop.usesAuto-cpufreq;
   usesPPD = config.core.isLaptop.usesPPD;
   isLaptop = config.core.isLaptop.enable;
+  keyLayout = config.core.keyLayout;
 in
 {
   imports = [ inputs.auto-cpufreq.nixosModules.default ];
@@ -37,9 +38,12 @@ in
     gvfs.enable = !headless;
     fwupd.enable = true;
 
+    xserver.xkb.layout = keyLayout;
+
     kmscon = {
       enable = true;
       hwRender = true;
+      useXkbConfig = true;
     };
 
     pipewire = {
