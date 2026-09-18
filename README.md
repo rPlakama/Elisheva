@@ -36,4 +36,4 @@ One-drive hosts are identical; they just have a smaller pool.
 
 ## Modules cross-talk
 
-<img src="images/modules-cross-talk.png" alt="Just a reference, not kept up-to-date" width="1000">
+<img src="images/modules-cross-talk.png" alt="Feature module cross-talk (source: images/modules-cross-talk.gv, regenerate with graphviz)" width="1000">
