@@ -49,6 +49,7 @@ in
           obsidian
           kdePackages.okular
           motrix-next
+          jellyfin-mpv-shim
         ]
         ++ optionals (config.core.isLaptop.enable) [
           moonlight-qt
