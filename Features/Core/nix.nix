@@ -5,6 +5,7 @@
 }:
 let
   user = config.core.user;
+  Secret = config.sops.secrets;
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -31,5 +32,8 @@ in
         "@wheel"
       ];
     };
+    extraOptions = ''
+      !include ${Secret.nixAccessTokens.path}
+    '';
   };
 }
