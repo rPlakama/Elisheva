@@ -10,9 +10,11 @@ let
 in
 {
   options.features.devenv = {
-    type = lib.types.bool;
-    default = true;
-    description = "DevEnv as default impl";
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "DevEnv as default impl";
+    };
   };
 
   config = lib.mkIf featureCall.devenv.enable {
