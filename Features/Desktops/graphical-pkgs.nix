@@ -50,6 +50,7 @@ in
           kdePackages.okular
           motrix-next
           jellyfin-mpv-shim
+          aonsoku
         ]
         ++ optionals (config.core.isLaptop.enable) [
           moonlight-qt
