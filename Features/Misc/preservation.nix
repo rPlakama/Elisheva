@@ -44,6 +44,7 @@ let
   ];
 
   defaultHomeDirs = [
+    "Music"
     "Downloads"
     "Media"
     "Projects"
