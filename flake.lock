@@ -667,11 +667,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1785844570,
-        "narHash": "sha256-9XyXUW4ukIW4g8hUSTEtjyPBxvpp96V/2KFNSAZXwz4=",
+        "lastModified": 1789846983,
+        "narHash": "sha256-+LyVw8oyEkV4uyhrx6xbe9PdDZCXYaKrPzzpdpZ6Ers=",
         "owner": "rPlakama",
         "repo": "twatch",
-        "rev": "b0df5b7f177fa3919a1eed64dfdb86a4b5d60e71",
+        "rev": "fe4f70eea2c38a4a00fc73f7e0e217c16805c173",
         "type": "github"
       },
       "original": {
