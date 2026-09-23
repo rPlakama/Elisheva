@@ -64,7 +64,6 @@
     bots = {
       enable = true;
       whatsapp-bot.enable = true;
-      discord-bot.enable = true;
     };
   };
 }
