@@ -2,12 +2,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
 
   headless = config.core.headless;
-in {
-  systemd.services.NetworkManager-wait-online.enable = false;
+in
+{
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
