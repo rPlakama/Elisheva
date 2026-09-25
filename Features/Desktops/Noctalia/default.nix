@@ -132,6 +132,8 @@ in
             };
             location.auto_locate = true;
             lockscreen = {
+              transition = [ "zoom" ];
+              transition_duration = 500;
               blurred_desktop = false;
               blur_intensity = 0.65;
               tint_intensity = 0.0;
