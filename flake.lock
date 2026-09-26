@@ -580,6 +580,26 @@
         "type": "github"
       }
     },
+    "noctalia-greeter": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790261545,
+        "narHash": "sha256-isUUxY1OmlfWox0lEHz0pbcs4TdEZ4/Pfkj/Fku5Q1s=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-greeter",
+        "rev": "212f559d9c1ca18295b786c2d54ef78ca6895659",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia-greeter",
+        "type": "github"
+      }
+    },
     "preservation": {
       "locked": {
         "lastModified": 1757436102,
@@ -629,6 +649,7 @@
         "nixpkgs": "nixpkgs_6",
         "nixpkgs-master": "nixpkgs-master",
         "noctalia": "noctalia",
+        "noctalia-greeter": "noctalia-greeter",
         "preservation": "preservation",
         "quickshell": "quickshell",
         "sops-nix": "sops-nix",
