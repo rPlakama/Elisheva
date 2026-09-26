@@ -51,6 +51,7 @@ in
           motrix-next
           jellyfin-mpv-shim
           aonsoku
+          localsend
         ]
         ++ optionals (config.core.isLaptop.enable) [
           moonlight-qt
