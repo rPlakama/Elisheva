@@ -8,6 +8,7 @@ let
   featureCall = config.features;
   kavitaPort = 3034;
   suwayomiPort = 4567;
+  stumpPort = 10801;
 in
 {
   options.features.library = {
@@ -18,6 +19,7 @@ in
       description = "Download path for library downloads";
     };
     kavita.enable = lib.mkEnableOption "Kavita self-hosted digital library";
+    stump.enable = lib.mkEnableOption "Stump free and open source comics, manga and digital book server with OPDS support";
     suwayomi.enable = lib.mkEnableOption "Suwayomi-Server (Tachidesk) manga reader";
   };
   config = lib.mkIf featureCall.library.enable (
@@ -31,6 +33,25 @@ in
           suwayomi.enable = lib.mkDefault false;
         };
       }
+      (lib.mkIf featureCall.library.stump.enable {
+        features = {
+          mediaPermissions = {
+            enable = true;
+            writableServices = [ "stump" ];
+          };
+          preservation.system.directories = [ "/var/lib/stump" ];
+          unifiedDNS.proxyServices.stump = {
+            port = stumpPort;
+            icon = "sh-stump";
+            description = "Comics, manga and digital book server";
+          };
+        };
+        services.stump = {
+          enable = true;
+          group = "media";
+          port = stumpPort;
+        };
+      })
       (lib.mkIf featureCall.library.kavita.enable {
         sops.secrets."kavita/token" = {
           owner = "kavita";

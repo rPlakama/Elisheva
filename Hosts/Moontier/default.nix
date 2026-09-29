@@ -51,7 +51,10 @@
 
     # minecraft-server.enable = true;
     neovim.enable = true;
-    library.enable = true;
+    library = {
+      enable = true;
+      stump.enable = true;
+    };
     rrstack.enable = true;
     qbit.enable = true;
     slskd.enable = true;
