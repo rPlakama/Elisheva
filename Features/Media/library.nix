@@ -50,6 +50,7 @@ in
           enable = true;
           group = "media";
           port = stumpPort;
+          environment.STUMP_TRUST_PROXY_HEADERS = "false";
         };
       })
       (lib.mkIf featureCall.library.kavita.enable {
