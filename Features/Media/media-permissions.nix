@@ -35,7 +35,9 @@ in {
     };
   };
   config = lib.mkIf featureCall.mediaPermissions.enable {
-    users.groups.media = {};
+    users.groups.media = {
+      gid = 2000;
+    };
     users.users.${user}.extraGroups = ["media"];
     systemd.tmpfiles.rules =
       builtins.concatMap (folder: [

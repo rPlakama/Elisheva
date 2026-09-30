@@ -44,7 +44,7 @@ digraph cross_talk {
     navidrome [label = "navidrome"];
     rrstack [label = "rrstack"];
     slskd [label = "slskd"];
-    tdarr [label = "tdarr"];
+    unmanic [label = "unmanic"];
   }
 
   subgraph cluster_misc {
@@ -121,9 +121,9 @@ digraph cross_talk {
   slskd -> mediaPermissions [label = "enable", color = "#e8590c"];
   slskd -> preservation [label = "/var/lib/slskd", color = "#1971c2"];
   slskd -> unifiedDNS [label = "slskd:5030", color = "#2f9e44"];
-  tdarr -> mediaPermissions [label = "enable", color = "#e8590c"];
-  tdarr -> preservation [label = "/var/lib/tdarr", color = "#1971c2"];
-  tdarr -> unifiedDNS [label = "tdarr:8226", color = "#2f9e44"];
+  unmanic -> mediaPermissions [label = "enable", color = "#e8590c"];
+  unmanic -> preservation [label = "/var/lib/unmanic", color = "#1971c2"];
+  unmanic -> unifiedDNS [label = "unmanic:8226", color = "#2f9e44"];
 
   /* ---- Misc -> hubs ---- */
   bots -> preservation [label = "home: ascending-bots", color = "#1971c2"];
@@ -153,7 +153,7 @@ digraph cross_talk {
   moontier -> homepage [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> nextcloud [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> jellyfin [label = "", color = "#5c7cfa", style = "dotted"];
-  moontier -> tdarr [label = "", color = "#5c7cfa", style = "dotted"];
+  moontier -> unmanic [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> navidrome [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> bots [label = "", color = "#5c7cfa", style = "dotted"];
 

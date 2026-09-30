@@ -135,7 +135,7 @@ binds {
     Mod+Y      { spawn-sh "foot -e yazi"; }
     Mod+Shift+W      { toggle-column-tabbed-display; }
     Mod+W { close-window; }
-    Mod+P      { spawn-sh "wl-mirror $(niri msg --json focused-output | jq -r .name)"; }
+    Mod+P      { spawn-sh r#"src=$(niri msg --json focused-output | jq -r .name); dst=$(niri msg --json outputs | jq -r --arg s "$src" 'keys[] | select(. != $s) | select(test("^(HDMI|DP)"))' | head -n1); if [ -n "$dst" ]; then exec wl-mirror --fullscreen-output "$dst" "$src"; else notify-send "No external display connected"; fi"#; }
     Print      { screenshot; }
 
 // Binds - System Overlays

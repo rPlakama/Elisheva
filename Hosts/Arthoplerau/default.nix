@@ -26,7 +26,7 @@
 
   features = {
     neovim.enable = true;
-    # tdarr.enable = true;
+    # unmanic.enable = true;
     # umbriel.enable = true;
 
     niri = {
