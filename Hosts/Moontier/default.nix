@@ -20,6 +20,7 @@
     enable = true;
     freeMemThreshold = 2;
     freeSwapThreshold = 10;
+    extraArgs = [ "-M" "131072" ];
   };
 
   core = {
