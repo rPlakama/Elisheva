@@ -20,7 +20,10 @@
     enable = true;
     freeMemThreshold = 2;
     freeSwapThreshold = 10;
-    extraArgs = [ "-M" "131072" ];
+    extraArgs = [
+      "-M"
+      "131072"
+    ];
   };
 
   core = {
@@ -55,6 +58,7 @@
     library = {
       enable = true;
       stump.enable = true;
+      suwayomi.enable = true;
     };
     rrstack.enable = true;
     qbit.enable = true;

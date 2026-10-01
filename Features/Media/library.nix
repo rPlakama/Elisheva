@@ -28,10 +28,6 @@ in
         features = {
           preservation.system.directories = [ featureCall.library.downloadPath ];
         };
-        features.library = {
-          kavita.enable = lib.mkDefault true;
-          suwayomi.enable = lib.mkDefault false;
-        };
       }
       (lib.mkIf featureCall.library.stump.enable {
         features = {
