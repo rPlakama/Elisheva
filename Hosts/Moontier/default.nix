@@ -32,7 +32,7 @@
     };
     gpu.intel = {
       enable = true;
-      isLegacy = true;
+      isLegacy = false;
     };
     cpu.intel = true;
     headless = true;
