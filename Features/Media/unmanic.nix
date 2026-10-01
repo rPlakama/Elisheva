@@ -6,7 +6,7 @@
 let
   featureCall = config.features;
   user = config.core.user;
-
+  localHost = "127.0.0.1";
   serverPort = 8226;
   containerPort = 8888;
   dataDir = "/var/lib/unmanic";
@@ -59,7 +59,7 @@ in
         containers.unmanic = {
           image = "josh5/unmanic:latest";
           user = "${toString unmanicUid}:${toString mediaGid}";
-          ports = [ "127.0.0.1:${toString serverPort}:${toString containerPort}" ];
+          ports = [ "${localHost}:${toString serverPort}:${toString containerPort}" ];
           volumes = [
             "${dataDir}/config:/config"
             "/media:/library"

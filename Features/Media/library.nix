@@ -8,7 +8,12 @@ let
   featureCall = config.features;
   kavitaPort = 3034;
   suwayomiPort = 4567;
+  suwayomiID = 2002;
+  suwayomiContainerPort = 8882;
+  suwayomiDataDir = "/var/lib/suwayomi/suwayomi-server";
+  mediaGid = config.users.groups.media.gid;
   stumpPort = 10801;
+  localHost = "127.0.0.1";
 in
 {
   options.features.library = {
@@ -81,22 +86,27 @@ in
         };
         systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = [ "media" ];
 
-        services.suwayomi-server = {
-          enable = true;
-          package = pkgsM.suwayomi-server;
-          settings = {
-            server = {
-              port = suwayomiPort;
-              downloadAsCbz = true;
-              downloadsPath = featureCall.library.downloadPath;
-              extensionRepos = [
-                "https://raw.githubusercontent.com/keiyoushi/extensions/repo/index.min.json"
-                "https://raw.githubusercontent.com/yuzono/manga-repo/repo/index.min.json"
-                "https://raw.githubusercontent.com/LittleSurvival/copymanga-copy20/repo/index.min.json"
+        virtualisation = {
+          oci-containers = {
+            backend = "docker";
+            containers.suwayomi-server = {
+              image = "suwayomi/suwayomi-server:latest";
+              user = "${toString suwayomiID}:${toString mediaGid}";
+              ports = [ "${localHost}:${toString suwayomiPort}:${toString suwayomiContainerPort}" ];
+              volumes = [
+                "${suwayomiDataDir}/downloads:/home/suwayomi/.local/share/Tachidesk/downloads"
+                "${suwayomiDataDir}/files:/home/suwayomi/.local/share/T"
               ];
+              environment = {
+                PUID = toString suwayomiID;
+                PGID = toString mediaGid;
+                TZ = config.time.timeZone;
+              };
+              devices = [ "/dev/dri:/dev/dri" ];
             };
           };
         };
+
       })
     ]
   );
