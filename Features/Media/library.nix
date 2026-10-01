@@ -80,6 +80,7 @@ in
           };
         };
         systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = [ "media" ];
+
         services.suwayomi-server = {
           enable = true;
           package = pkgsM.suwayomi-server;
