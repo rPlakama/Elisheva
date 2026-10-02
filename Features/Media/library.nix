@@ -8,8 +8,8 @@ let
   kavitaPort = 3034;
   suwayomiPort = 4567;
   suwayomiID = 2002;
-  suwayomiContainerPort = 8882;
-  suwayomiDataDir = "/var/lib/suwayomi/suwayomi-server";
+  suwayomiContainerPort = 4567;
+  suwayomiDataDir = "/var/lib/suwayomi";
   mediaGid = config.users.groups.media.gid;
   stumpPort = 10801;
   localHost = "127.0.0.1";
@@ -75,37 +75,57 @@ in
       })
       (lib.mkIf featureCall.library.suwayomi.enable {
         features = {
-          mediaPermissions.enable = true;
-          preservation.system.directories = [ "/var/lib/suwayomi-server" ];
+          mediaPermissions = {
+            enable = true;
+            writableServices = [ "docker-suwayomi-server" ];
+          };
+          preservation.system.directories = [ suwayomiDataDir ];
           unifiedDNS.proxyServices.suwayomi = {
             port = suwayomiPort;
             icon = "sh-suwayomi";
             description = "Manga reader (Suwayomi-Server)";
           };
         };
-        systemd.services.suwayomi-server.serviceConfig.SupplementaryGroups = [ "media" ];
+
+        users.users.suwayomi = {
+          isSystemUser = true;
+          group = "media";
+          uid = suwayomiID;
+          extraGroups = [
+            "video"
+            "render"
+          ];
+        };
+
+        systemd.tmpfiles.rules = [
+          "d ${suwayomiDataDir} 2770 suwayomi media -"
+        ];
 
         virtualisation = {
+          docker.enable = true;
           oci-containers = {
             backend = "docker";
             containers.suwayomi-server = {
-              image = "suwayomi/suwayomi-server:latest";
+              image = "ghcr.io/suwayomi/suwayomi-server:latest";
               user = "${toString suwayomiID}:${toString mediaGid}";
               ports = [ "${localHost}:${toString suwayomiPort}:${toString suwayomiContainerPort}" ];
               volumes = [
-                "${suwayomiDataDir}/downloads:/home/suwayomi/.local/share/Tachidesk/downloads"
-                "${suwayomiDataDir}/files:/home/suwayomi/.local/share/T"
+                "${featureCall.library.downloadPath}:/home/suwayomi/.local/share/Tachidesk/downloads"
+                "${suwayomiDataDir}:/home/suwayomi/.local/share/Tachidesk"
               ];
               environment = {
-                PUID = toString suwayomiID;
-                PGID = toString mediaGid;
                 TZ = config.time.timeZone;
               };
               devices = [ "/dev/dri:/dev/dri" ];
+              extraOptions = [
+                "--group-add"
+                (toString config.users.groups.video.gid)
+                "--group-add"
+                (toString config.users.groups.render.gid)
+              ];
             };
           };
         };
-
       })
     ]
   );
