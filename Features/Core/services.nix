@@ -42,7 +42,7 @@ in
 
     kmscon = {
       enable = true;
-      hwRender = true;
+      hwaccel = true;
       useXkbConfig = true;
     };
 
