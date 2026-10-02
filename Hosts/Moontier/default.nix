@@ -60,6 +60,10 @@
       stump.enable = true;
       suwayomi.enable = true;
     };
+    galleryDl = {
+      enable = true;
+      urls = [ "https://weebcentral.com/series/01J76XYH789EJ16X8EC7NB0EVK/Centuria" ];
+    };
     rrstack.enable = true;
     qbit.enable = true;
     slskd.enable = true;
