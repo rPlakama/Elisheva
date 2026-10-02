@@ -31,6 +31,12 @@ let
   };
 
   mediaNonPermissions = {
+    flaresolverr = {
+      port = 8191;
+      icon = "si-flareresolver";
+      description = "Resolve flare";
+    };
+
     prowlarr = {
       port = 9696;
       icon = "sh-prowlarr";
@@ -50,6 +56,7 @@ in
         "/var/lib/radarr"
         # "/var/lib/lidarr"
         "/var/lib/prowlarr"
+        "/var/lib/flareresolver"
       ];
       unifiedDNS.proxyServices = mediaServicesWithPermissions // mediaNonPermissions;
     };
@@ -61,6 +68,8 @@ in
       // (lib.mapAttrs (name: svc: {
         enable = true;
       }) mediaNonPermissions);
+
+    networking.firewall.interfaces."docker0".allowedTCPPorts = [ config.services.flaresolverr.port ];
 
     # systemd.services.lidarr.path = [ pkgs.ffmpeg-full ];
   };

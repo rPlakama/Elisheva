@@ -115,9 +115,12 @@ in
               ];
               environment = {
                 TZ = config.time.timeZone;
+                FLARESOLVERR_ENABLED = "true";
+                FLARESOLVERR_URL = "http://host.docker.internal:${toString config.services.flaresolverr.port}";
               };
               devices = [ "/dev/dri:/dev/dri" ];
               extraOptions = [
+                "--add-host=host.docker.internal:host-gateway"
                 "--group-add"
                 (toString config.users.groups.video.gid)
                 "--group-add"
