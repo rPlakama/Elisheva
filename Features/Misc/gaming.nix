@@ -59,6 +59,11 @@ in
 
       steam = lib.mkIf featureCall.gaming.steam {
         enable = true;
+        remotePlay.openFirewall = true;
+        gamescopeSession.enable = true;
+        dedicatedServer.openFirewall = true;
+        localNetworkGameTransfers.openFirewall = true;
+
         extraCompatPackages = with pkgs; [
           proton-cachyos
           proton-ge-custom
