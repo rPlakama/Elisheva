@@ -34,6 +34,7 @@ in
       extraGroups = [
         "wheel"
         "video"
+        "render"
         "audio"
       ];
     };
