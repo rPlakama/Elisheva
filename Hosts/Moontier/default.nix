@@ -57,8 +57,9 @@
     neovim.enable = true;
     library = {
       enable = true;
-      stump.enable = true;
+      # stump.enable = true;
       suwayomi.enable = true;
+      kavita.enable = true;
     };
     galleryDl = {
       enable = true;

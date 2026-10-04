@@ -62,6 +62,7 @@ in
           LegalNotice.Accepted = true;
           BitTorrent.Session = {
             QueueingSystemEnabled = false;
+            DefaultSavePath = if headless then "/media/torrents" else "/home/${user}/Downloads";
             # in case if I enable it later.
             MaxActiveDownloads = 3;
             MaxActiveUploads = 3;
