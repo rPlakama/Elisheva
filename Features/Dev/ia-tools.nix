@@ -23,13 +23,11 @@ in
       ];
     };
 
-    hjem.users.${user}.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
-      opencode
-      hermes-agent
-    ];
-
     hjem.users.${user}.packages =
-      with pkgs;
-      optionals gpu.nvidia [ ollama-cuda ] ++ optionals gpu.amd [ ollama-rocm ];
+      (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
+        opencode
+        hermes-agent
+      ])
+      ++ (with pkgs; optionals gpu.nvidia [ ollama-cuda ] ++ optionals gpu.amd [ ollama-rocm ]);
   };
 }
