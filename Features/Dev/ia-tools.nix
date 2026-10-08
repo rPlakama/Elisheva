@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -14,13 +15,21 @@ in
   options.features.ia-tools.enable = lib.mkEnableOption "General IA Tools";
 
   config = lib.mkIf featureCall.ia-tools.enable {
+    nixpkgs.overlays = [
+    ];
     features = {
       preservation.home.directories = [
         ".ollama"
       ];
     };
+
+    hjem.users.${user}.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
+      opencode
+      hermes-agent
+    ];
+
     hjem.users.${user}.packages =
       with pkgs;
-      [ opencode ] ++ optionals gpu.nvidia [ ollama-cuda ] ++ optionals gpu.amd [ ollama-rocm ];
+      optionals gpu.nvidia [ ollama-cuda ] ++ optionals gpu.amd [ ollama-rocm ];
   };
 }

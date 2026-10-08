@@ -23,6 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    llm-agents.url = "github:numtide/llm-agents.nix";
     twatch.url = "github:rPlakama/twatch";
     gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
     helium-browser.url = "github:schembriaiden/helium-browser-nix-flake";
