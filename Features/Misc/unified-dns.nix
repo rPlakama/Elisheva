@@ -1,5 +1,7 @@
 {
   config,
+  pkgsM,
+  pkgs,
   lib,
   ...
 }:
@@ -111,6 +113,16 @@ in
 
     systemd.tmpfiles.rules = [
       "f /etc/pihole/versions 0644 pihole pihole - -"
+    ];
+
+    nixpkgs.overlays = [
+      (final: prev: {
+        pihole-ftl = prev.pihole-ftl.overrideAttrs (old: {
+          env = (old.env or { }) // {
+            NIX_CFLAGS_COMPILE = "${old.env.NIX_CFLAGS_COMPILE or ""} -Wno-error=unused-but-set-variable";
+          };
+        });
+      })
     ];
 
     services = {
