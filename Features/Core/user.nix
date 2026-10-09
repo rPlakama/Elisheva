@@ -32,6 +32,7 @@ in
       shell = pkgs.fish;
       group = user;
       extraGroups = [
+        "dialout"
         "wheel"
         "video"
         "render"

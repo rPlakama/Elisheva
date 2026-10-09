@@ -67,7 +67,7 @@
     };
     rrstack.enable = true;
     qbit.enable = true;
-    slskd.enable = false;
+    slskd.enable = true;
     homepage.enable = true;
     nextcloud.enable = true;
     jellyfin.enable = true;
