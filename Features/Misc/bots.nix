@@ -22,6 +22,13 @@ in
         description = "Enable WhatsApp Bot";
       };
     };
+    oxydo-bot = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable Oxydo Bot";
+      };
+    };
   };
 
   config = lib.mkIf featureCall.bots.enable {
@@ -50,6 +57,26 @@ in
         };
       })
 
+      (lib.mkIf featureCall.bots.oxydo-bot.enable {
+        oxydo-bot = {
+          description = "Oxydo Bot";
+          wantedBy = [ "multi-user.target" ];
+          after = [ "network.target" ];
+
+          path = with pkgs; [
+            ffmpeg
+            libwebp
+          ];
+
+          serviceConfig = {
+            ExecStart = "/home/${user}/ascending-bots/oxydo-bot/oxydo-bot";
+            WorkingDirectory = "/home/${user}/ascending-bots/oxydo-bot";
+            User = user;
+            Restart = "on-failure";
+            RestartSec = "5s";
+          };
+        };
+      })
     ];
   };
 }
