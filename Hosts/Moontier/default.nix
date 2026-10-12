@@ -78,6 +78,7 @@
     bots = {
       enable = true;
       whatsapp-bot.enable = true;
+      oxydo-bot.enable = true;
     };
   };
 }
