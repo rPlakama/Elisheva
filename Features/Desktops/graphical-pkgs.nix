@@ -40,6 +40,7 @@ in
         with pkgs;
         [
           inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+          inputs.musika.packages.${pkgs.system}.default
           vesktop
           materialgram
           nextcloud-client

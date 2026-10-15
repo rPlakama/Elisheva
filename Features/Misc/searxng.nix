@@ -20,16 +20,76 @@ let
   autocomplete = "duckduckgo";
   safeSearch = 0;
   imageProxy = true;
-  limiter = true;
   publicInstance = false;
   enableMetrics = false;
-  requestTimeout = 6.0;
-  maxRequestTimeout = 12.0;
-  realIp = {
-    x_for = 1;
-    ipv4_prefix = 32;
-    ipv6_prefix = 56;
-  };
+  requestTimeout = 3.0;
+  maxRequestTimeout = 6.0;
+
+  keepEngines = [
+    "duckduckgo"
+    "duckduckgo images"
+    "duckduckgo news"
+    "duckduckgo videos"
+    "brave"
+    "brave.images"
+    "brave.news"
+    "brave.videos"
+    "wikipedia"
+    "wikidata"
+    "wikinews"
+    "wiktionary"
+    "wikicommons.images"
+    "wikicommons.videos"
+    "openverse"
+    "openstreetmap"
+    "photon"
+    "stackoverflow"
+    "superuser"
+    "askubuntu"
+    "github"
+    "gitlab"
+    "codeberg"
+    "mdn"
+    "hackernews"
+    "nixos wiki"
+    "arch linux wiki"
+    "docker hub"
+    "pypi"
+    "npm"
+    "crates.io"
+    "lib.rs"
+    "hoogle"
+    "mankier"
+    "huggingface"
+    "arxiv"
+    "pubmed"
+    "semantic scholar"
+    "crossref"
+    "europepmc"
+    "openalex"
+    "bandcamp"
+    "soundcloud"
+    "genius"
+    "radio browser"
+    "etymonline"
+    "wttr.in"
+    "openmeteo"
+    "lingva"
+    "imdb"
+    "tmdb"
+    "mastodon hashtags"
+    "youtube"
+    "vimeo"
+    "peertube"
+    "1337x"
+    "piratebay"
+    "solidtorrents"
+    "annas archive"
+    "unsplash"
+    "pexels"
+    "currency"
+    "goodreads"
+  ];
 in
 {
   options.features.searxng.enable = lib.mkEnableOption "Searxng module";
@@ -55,7 +115,6 @@ in
     features = {
       preservation.system.directories = [
         "/var/lib/searx"
-        "/var/lib/redis-searx"
       ];
       unifiedDNS.proxyServices.searxng = {
         port = searxPort;
@@ -67,14 +126,10 @@ in
     services.searx = {
       enable = true;
       package = pkgs.searxng;
-      redisCreateLocally = true;
       environmentFile = envFile;
 
       settings = {
-        use_default_settings.engines.remove = [
-          "ahmia"
-          "torch"
-        ];
+        use_default_settings.engines.keep_only = keepEngines;
 
         general = {
           instance_name = instanceName;
@@ -88,7 +143,6 @@ in
           port = searxPort;
           secret_key = "$SEARXNG_SECRET_KEY";
           image_proxy = imageProxy;
-          limiter = limiter;
           public_instance = publicInstance;
         };
 
@@ -103,10 +157,6 @@ in
           request_timeout = requestTimeout;
           max_request_timeout = maxRequestTimeout;
         };
-      };
-
-      limiterSettings = {
-        real_ip = realIp;
       };
     };
   };

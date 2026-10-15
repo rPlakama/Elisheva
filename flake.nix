@@ -10,6 +10,9 @@
       url = "github:noctalia-dev/noctalia-greeter";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    musika.url = "github:rPlakama/musika";
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -103,11 +106,6 @@
                 };
 
                 config = {
-                  nix.settings = {
-                    substituters = [ "https://attic.xuyh0120.win/lantian" ];
-                    trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
-                  };
-
                   networking.hostName = hostname;
                   system.stateVersion = stVersion;
                   sops.defaultSopsFile = ./secrets.yaml;
