@@ -7,6 +7,7 @@
   environment.systemPackages = with pkgs; [
     ckan
     osu-lazer-bin
+    heroic
   ];
   core = {
 
