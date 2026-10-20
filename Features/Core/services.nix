@@ -5,33 +5,17 @@
 }:
 let
   headless = config.core.headless;
-  usesAuto-cpufreq = config.core.isLaptop.usesAuto-cpufreq;
   usesPPD = config.core.isLaptop.usesPPD;
   isLaptop = config.core.isLaptop.enable;
   keyLayout = config.core.keyboardLayout;
 in
 {
-  imports = [ inputs.auto-cpufreq.nixosModules.default ];
 
-  programs.auto-cpufreq = {
-    enable = usesAuto-cpufreq;
-    settings = {
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
-
-      battery = {
-        governor = "powersave";
-        turbo = "auto";
-      };
-    };
-  };
   services = {
     upower.enable = isLaptop;
     scx.enable = false;
     power-profiles-daemon.enable = usesPPD;
-    bpftune.enable = true;
+    # bpftune.enable = true;
     devmon.enable = !headless;
     udisks2.enable = true;
     resolved.enable = true;

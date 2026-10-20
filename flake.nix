@@ -17,10 +17,6 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    auto-cpufreq = {
-      url = "github:AdnanHodzic/auto-cpufreq";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +36,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     dms.url = "github:AvengeMedia/DankMaterialShell";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     preservation.url = "github:nix-community/preservation";
 
@@ -60,7 +57,6 @@
       sops-nix,
       disko,
       preservation,
-      auto-cpufreq,
       chaotic,
       ...
     }:
