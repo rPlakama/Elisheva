@@ -15,11 +15,6 @@ in
   config = lib.mkIf featureCall.nextcloud.enable {
     features.preservation.system.directories = [ "/var/lib/nextcloud" ];
 
-    sops.secrets."nextcloud/admin" = {
-      owner = "nextcloud";
-      group = "nextcloud";
-      mode = "0400";
-    };
     services.nextcloud = {
       package = pkgs.nextcloud35;
       enable = true;
@@ -30,7 +25,6 @@ in
 
       config = {
         dbtype = "pgsql";
-        adminpassFile = config.sops.secrets."nextcloud/admin".path;
       };
 
       settings = {

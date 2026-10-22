@@ -42,16 +42,15 @@ in
           inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
           inputs.musika.packages.${pkgs.system}.default
           vesktop
-          materialgram
+          telegram-desktop
           nextcloud-client
           foot
           mpv
           ripdrag
           obsidian
           kdePackages.okular
-          motrix-next
+          rayburst
           jellyfin-mpv-shim
-          aonsoku
           localsend
         ]
         ++ optionals (config.core.isLaptop.enable) [
