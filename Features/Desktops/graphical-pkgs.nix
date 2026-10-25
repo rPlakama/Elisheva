@@ -43,7 +43,6 @@ in
           inputs.musika.packages.${pkgs.system}.default
           vesktop
           telegram-desktop
-          nextcloud-client
           foot
           mpv
           ripdrag

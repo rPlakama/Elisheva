@@ -27,7 +27,12 @@ let
   ];
 in
 {
-  imports = [ inputs.chaotic.nixosModules.default ];
+  imports = [
+    inputs.chaotic.nixosModules.default
+    # Pre-driver FP/BF16 issue-rate unlock for NVIDIA Ampere (GA102/103/104/106).
+    # Opt-in per host through hardware.gpu-unlock.enable.
+    inputs.gpu-unlock.nixosModules.default
+  ];
 
   config = mkMerge [
     (mkIf gpu.nvidia {

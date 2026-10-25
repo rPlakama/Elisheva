@@ -9,6 +9,13 @@
     osu-lazer-bin
     heroic
   ];
+
+  # RTX 3060 (GA106) is an Ampere card: unlock its FP/BF16 issue rate before
+  # the proprietary nvidia driver binds it.
+  hardware.gpu-unlock = {
+    enable = true;
+    targets = "all";
+  };
   core = {
 
     keyboardLayout = "us,br";
@@ -41,6 +48,7 @@
       gsr.enable = true;
     };
     qbit.enable = true;
+    syncthing.enable = true;
     niri = {
       enable = true;
       noctalia.enabled = true;

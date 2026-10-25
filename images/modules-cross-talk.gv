@@ -59,7 +59,7 @@ digraph cross_talk {
     ia_tools [label = "ia-tools"];
     minecraft [label = "minecraft-server"];
     neovim [label = "neovim\n(hjem)"];
-    nextcloud [label = "nextcloud"];
+    syncthing [label = "syncthing"];
     qbit [label = "qbit\n(qBittorrent)"];
     sunshine [label = "sunshine"];
     theming [label = "theming"];
@@ -131,8 +131,8 @@ digraph cross_talk {
   homepage -> unifiedDNS [label = "dashboard:8082\n+ reads proxyServices", color = "#2f9e44"];
   homepage -> unifiedDNS [label = "assert: needs unifiedDNS", color = "#c92a2a", style = "dashed"];
   ia_tools -> preservation [label = "home: .ollama", color = "#1971c2"];
-  nextcloud -> preservation [label = "/var/lib/nextcloud", color = "#1971c2"];
-  nextcloud -> unifiedDNS [label = "reads tailscaleIP,\naccessControl", color = "#868e96", style = "dashed"];
+  syncthing -> preservation [label = "/var/lib/syncthing", color = "#1971c2"];
+  syncthing -> unifiedDNS [label = "syncthing:8384", color = "#2f9e44"];
   qbit -> mediaPermissions [label = "enable (headless)", color = "#e8590c"];
   qbit -> preservation [label = "/var/lib/qbittorrent\n/var/lib/qui", color = "#1971c2"];
   qbit -> unifiedDNS [label = "qui:3000, qbittorrent:8080", color = "#2f9e44"];
@@ -151,7 +151,7 @@ digraph cross_talk {
   moontier -> qbit [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> slskd [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> homepage [label = "", color = "#5c7cfa", style = "dotted"];
-  moontier -> nextcloud [label = "", color = "#5c7cfa", style = "dotted"];
+  moontier -> syncthing [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> jellyfin [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> unmanic [label = "", color = "#5c7cfa", style = "dotted"];
   moontier -> navidrome [label = "", color = "#5c7cfa", style = "dotted"];

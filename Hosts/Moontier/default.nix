@@ -12,7 +12,6 @@
 
   environment.systemPackages = with pkgs; [
     smartmontools
-    calibre
     exiftool
   ];
 
@@ -70,7 +69,7 @@
     qbit.enable = true;
     slskd.enable = true;
     homepage.enable = true;
-    nextcloud.enable = true;
+    syncthing.enable = true;
     jellyfin.enable = true;
     unmanic.enable = true;
     navidrome.enable = true;

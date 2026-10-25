@@ -45,6 +45,11 @@
       url = "github:Mic92/sops-nix";
     };
 
+    gpu-unlock = {
+      url = "github:rPlakama/gpu-unlock-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
       inputs.nixpkgs.follows = "nixpkgs";
