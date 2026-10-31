@@ -5,9 +5,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    ckan
-    osu-lazer-bin
-    heroic
+    blender
   ];
 
   # RTX 3060 (GA106) is an Ampere card: unlock its FP/BF16 issue rate before
@@ -49,6 +47,7 @@
     };
     qbit.enable = true;
     syncthing.enable = true;
+    ia-tools.enable = true;
     niri = {
       enable = true;
       noctalia.enabled = true;
