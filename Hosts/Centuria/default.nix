@@ -48,6 +48,7 @@
     qbit.enable = true;
     syncthing.enable = true;
     ia-tools.enable = true;
+    artcraft.enable = true;
     niri = {
       enable = true;
       noctalia.enabled = true;

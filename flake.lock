@@ -447,11 +447,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1793378577,
-        "narHash": "sha256-zvg1nvV4jv7nlSwn5OqQiBUyuIMtVKjFyZJV5xGBIFk=",
+        "lastModified": 1793807289,
+        "narHash": "sha256-nFfLZO3/feJTYTfpk6OIA7MQq2qY4tUnuvzZb9d/Z+E=",
         "owner": "rPlakama",
         "repo": "musika",
-        "rev": "db31e83a80216d213da045daa4773e2f5f5606ff",
+        "rev": "434a51968bfb31120a446fe865dcc34365d629a0",
         "type": "github"
       },
       "original": {
@@ -477,6 +477,26 @@
       "original": {
         "owner": "xddxdd",
         "repo": "nix-cachyos-kernel",
+        "type": "github"
+      }
+    },
+    "nix-craftapps": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793251511,
+        "narHash": "sha256-vd8oYQN3cqg9dq0NGsl9Vzxqum2vL1gsao3gZ5sRVLA=",
+        "owner": "olafkfreund",
+        "repo": "nix-craftapps",
+        "rev": "4a9e69c6c1e196d86e39b33516544c11bb6dfb5b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "olafkfreund",
+        "repo": "nix-craftapps",
         "type": "github"
       }
     },
@@ -790,6 +810,7 @@
         "llm-agents": "llm-agents",
         "musika": "musika",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
+        "nix-craftapps": "nix-craftapps",
         "nix-minecraft": "nix-minecraft",
         "nixpkgs": "nixpkgs_8",
         "nixpkgs-master": "nixpkgs-master",

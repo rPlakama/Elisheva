@@ -9,6 +9,7 @@
     powerOnBoot = false;
   };
 
+  services.flatpak.enable = true;
   core = {
     user = "rplakama";
     gpu.amd = true;
@@ -44,6 +45,7 @@
     syncthing.enable = true;
     virtualization.enable = true;
     ia-tools.enable = true;
+    artcraft.enable = true;
 
     disko = {
       enable = true;
@@ -57,7 +59,9 @@
 
   environment.systemPackages = with pkgs; [
 
-    prismlauncher
+    deepseek-harness
+    nodejs
+    pnpm
 
   ];
 }
