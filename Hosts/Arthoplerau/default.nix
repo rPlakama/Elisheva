@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [
     ./hardware.nix
     ../../Features
@@ -59,9 +59,6 @@
 
   environment.systemPackages = with pkgs; [
 
-    deepseek-harness
-    nodejs
-    pnpm
-
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.dsh
   ];
 }
