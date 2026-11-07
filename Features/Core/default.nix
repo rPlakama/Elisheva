@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 let
   inherit (lib)
     mkOption
@@ -30,6 +30,8 @@ let
 in
 {
   imports = map (n: ./${n}) importFiles;
+
+  config.boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   options.core = {
     # Generic
