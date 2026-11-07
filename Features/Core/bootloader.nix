@@ -24,6 +24,5 @@ in
       "splash"
       "udev.log_level=3"
     ];
-    initrd.systemd.enable = true;
   };
 }

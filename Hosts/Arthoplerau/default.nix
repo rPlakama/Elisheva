@@ -45,7 +45,8 @@
     syncthing.enable = true;
     virtualization.enable = true;
     ia-tools.enable = true;
-    artcraft.enable = true;
+    art-toolchain.enable = true;
+    benchtools.enable = true;
 
     disko = {
       enable = true;
@@ -59,6 +60,10 @@
 
   environment.systemPackages = with pkgs; [
 
+    # DSH_AGINT
     inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.dsh
+    nodejs
+    python3
+
   ];
 }

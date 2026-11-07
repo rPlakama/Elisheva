@@ -4,11 +4,13 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   inherit (lib) optionals;
   gpu = config.core.gpu;
   user = config.core.user;
-in {
+in
+{
   environment.systemPackages = with pkgs; [
     cifs-utils
     man-pages-posix
@@ -16,7 +18,8 @@ in {
   ];
 
   hjem.users.${user} = {
-    packages = with pkgs;
+    packages =
+      with pkgs;
       [
         ripgrep
         zip
@@ -33,9 +36,8 @@ in {
         dust
         jq
         fd
-        inputs.twatch.packages.${pkgs.stdenv.hostPlatform.system}.default
       ]
-      ++ optionals (!gpu.nvidia) [btop-rocm]
-      ++ optionals gpu.nvidia [btop-cuda];
+      ++ optionals (!gpu.nvidia) [ btop-rocm ]
+      ++ optionals gpu.nvidia [ btop-cuda ];
   };
 }

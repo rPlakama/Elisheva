@@ -1,11 +1,7 @@
-{ pkgs, ... }: {
+{ ... }: {
   imports = [
     ./hardware.nix
     ../../Features
-  ];
-
-  environment.systemPackages = with pkgs; [
-    blender
   ];
 
   # RTX 3060 (GA106) is an Ampere card: unlock its FP/BF16 issue rate before
