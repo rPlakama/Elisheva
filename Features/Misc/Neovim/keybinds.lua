@@ -1,14 +1,13 @@
 local map = vim.keymap.set
-local fff = require('fff')
 local fzf_lua = require('fzf-lua')
 
 -- Terminal
 map('n', '<leader>t', '<cmd>sp term://fish<CR>', { desc = "Terminal" })
 
--- FFF
-map('n', '<leader>f', function() fff.find_files() end, { desc = 'Search files' })
-map('n', '<leader>g', function() fff.live_grep() end, { desc = 'Grep search' })
-map('n', '<leader>w', function() fff.live_grep_under_cursor() end, { desc = 'Grep word under cursor' })
+-- Search
+map('n', '<leader>f', function() fzf_lua.files() end, { desc = 'Search files' })
+map('n', '<leader>g', function() fzf_lua.live_grep() end, { desc = 'Grep search' })
+map('n', '<leader>w', function() fzf_lua.grep_cword() end, { desc = 'Grep word under cursor' })
 
 -- FZF-Lua
 map('n', '<leader>a', function() fzf_lua.buffers() end, { desc = 'Buffer search' })

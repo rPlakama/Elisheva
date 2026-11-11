@@ -4,12 +4,6 @@
     ../../Features
   ];
 
-  # RTX 3060 (GA106) is an Ampere card: unlock its FP/BF16 issue rate before
-  # the proprietary nvidia driver binds it.
-  hardware.gpu-unlock = {
-    enable = true;
-    targets = "all";
-  };
   core = {
 
     keyboardLayout = "us,br";
@@ -44,7 +38,7 @@
     qbit.enable = true;
     syncthing.enable = true;
     ia-tools.enable = true;
-    artcraft.enable = true;
+    art-toolchain.enable = true;
     niri = {
       enable = true;
       noctalia.enabled = true;

@@ -69,8 +69,11 @@ in
         systemd.services.kavita.serviceConfig.SupplementaryGroups = [ "media" ];
         services.kavita = {
           enable = true;
-          tokenKeyFile = config.sops.secrets."kavita/token".path;
-          settings.Port = kavitaPort;
+          settings = {
+            Port = kavitaPort;
+            TokenKey = "@token_key@";
+          };
+          credentials.token_key = config.sops.secrets."kavita/token".path;
         };
       })
       (lib.mkIf featureCall.library.suwayomi.enable {

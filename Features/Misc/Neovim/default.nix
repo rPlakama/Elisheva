@@ -19,7 +19,6 @@
       packages.myPlugins.start = with pkgs.vimPlugins; [
         nvim-lspconfig
         nvim-treesitter.withAllGrammars
-        fff-nvim
         fzf-lua
         blink-cmp
         oil-nvim

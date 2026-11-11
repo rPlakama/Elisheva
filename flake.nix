@@ -32,6 +32,7 @@
     gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
     helium-browser.url = "github:schembriaiden/helium-browser-nix-flake";
     umbriel.url = "git+https://github.com/noctalia-dev/umbriel";
+    zapfast.url = "github:crmne/zapfast";
 
     hjem = {
       url = "github:feel-co/hjem";
@@ -39,19 +40,16 @@
     };
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/26.05"; # Latest stable
+
     dms.url = "github:AvengeMedia/DankMaterialShell";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     preservation.url = "github:nix-community/preservation";
 
     sops-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:Mic92/sops-nix";
-    };
-
-    gpu-unlock = {
-      url = "github:rPlakama/gpu-unlock-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-minecraft = {
@@ -75,6 +73,12 @@
         nixpkgs.lib.filterAttrs (name: type: type == "directory") (builtins.readDir ./Hosts)
       );
       system = "x86_64-linux";
+
+      pkgsS = import inputs.nixpkgs-stable {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
       pkgsM = import inputs.nixpkgs-master {
         inherit system;
         config.allowUnfree = true;
@@ -84,7 +88,7 @@
       nixosConfigurations = nixpkgs.lib.genAttrs hostNames (
         hostname:
         nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs pkgsM; };
+          specialArgs = { inherit inputs pkgsM pkgsS; };
           modules = [
             inputs.hjem.nixosModules.default
             sops-nix.nixosModules.sops

@@ -10,12 +10,109 @@ let
 
   portOf = svc: if builtins.isInt svc then svc else svc.port;
 
-  mkDnsRecords =
-    ip: lib.mapAttrsToList (name: svc: "${ip} ${name}.${domain}") featureCall.unifiedDNS.proxyServices;
+  rewrite = domain: answer: {
+    inherit domain answer;
+    enabled = true;
+  };
+
+  mkDnsRewrites =
+    answer:
+    lib.mapAttrsToList (name: _: rewrite "${name}.${domain}" answer) featureCall.unifiedDNS.proxyServices;
+
+  blocklists = [
+    {
+      url = "https://big.oisd.nl/";
+      description = "OISD Full - ads, trackers, malware";
+    }
+    {
+      url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
+      description = "StevenBlack Unified hosts - ads, malware";
+    }
+    {
+      url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling/hosts";
+      description = "StevenBlack Gambling - betting & gambling sites";
+    }
+    {
+      url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts";
+      description = "StevenBlack Fakenews + Gambling - fake news & betting";
+    }
+    {
+      url = "https://adaway.org/hosts.txt";
+      description = "AdAway - mobile ads";
+    }
+    {
+      url = "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext";
+      description = "Peter Lowe's Adservers";
+    }
+    {
+      url = "https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt";
+      description = "AnudeepND Adservers";
+    }
+    {
+      url = "https://v.firebog.net/hosts/AdguardDNS.txt";
+      description = "AdGuard DNS filter";
+    }
+    {
+      url = "https://v.firebog.net/hosts/Easylist.txt";
+      description = "EasyList - ads";
+    }
+    {
+      url = "https://v.firebog.net/hosts/Easyprivacy.txt";
+      description = "EasyPrivacy - trackers";
+    }
+    {
+      url = "https://v.firebog.net/hosts/Prigent-Ads.txt";
+      description = "Prigent Ads";
+    }
+    {
+      url = "https://v.firebog.net/hosts/Prigent-Malware.txt";
+      description = "Prigent Malware";
+    }
+    {
+      url = "https://v.firebog.net/hosts/Prigent-Crypto.txt";
+      description = "Prigent Cryptojacking";
+    }
+    {
+      url = "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt";
+      description = "DandelionSprout Anti-Malware";
+    }
+    {
+      url = "https://urlhaus.abuse.ch/downloads/hostfile/";
+      description = "URLhaus Malware domains";
+    }
+    {
+      url = "https://phishing.army/download/phishing_army_blocklist_extended.txt";
+      description = "Phishing Army Extended";
+    }
+    {
+      url = "https://raw.githubusercontent.com/Spam404/lists/master/main-blacklist.txt";
+      description = "Spam404 blacklist";
+    }
+    {
+      url = "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt";
+      description = "KADhosts - ad/telemetry/spam";
+    }
+    {
+      url = "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts";
+      description = "FadeMind Spam";
+    }
+    {
+      url = "https://raw.githubusercontent.com/matomo-org/referrer-spam-blacklist/master/spammers.txt";
+      description = "Matomo Referrer Spam";
+    }
+    {
+      url = "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt";
+      description = "WindowsSpyBlocker telemetry";
+    }
+    {
+      url = "https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt";
+      description = "Frogeye First-party trackers";
+    }
+  ];
 in
 {
   options.features.unifiedDNS = {
-    enable = lib.mkEnableOption "Unified DNS and Reverse Proxy (Pi-hole + Nginx)";
+    enable = lib.mkEnableOption "Unified DNS and Reverse Proxy (AdGuard Home + Nginx)";
 
     email = lib.mkOption {
       type = lib.types.str;
@@ -48,13 +145,13 @@ in
         ]
       );
       default = { };
-      description = "Services to be proxied by Nginx and registered in Pi-hole (a port or an attrset with port/icon/description)";
+      description = "Services to be proxied by Nginx and registered in AdGuard Home (a port or an attrset with port/icon/description)";
     };
 
     gateway = lib.mkOption {
       type = lib.types.str;
       default = "";
-      description = "LAN gateway/router IP for Pi-hole DHCP";
+      description = "LAN gateway/router IP for the gateway DNS rewrite";
     };
 
     tailscaleIP = lib.mkOption {
@@ -103,25 +200,12 @@ in
     networking.firewall = {
       trustedInterfaces = [ "tailscale0" ];
       allowedTCPPorts = [
+        53
         80
         443
-        8081
       ];
+      allowedUDPPorts = [ 53 ];
     };
-
-    systemd.tmpfiles.rules = [
-      "f /etc/pihole/versions 0644 pihole pihole - -"
-    ];
-
-    nixpkgs.overlays = [
-      (final: prev: {
-        pihole-ftl = prev.pihole-ftl.overrideAttrs (old: {
-          env = (old.env or { }) // {
-            NIX_CFLAGS_COMPILE = "${old.env.NIX_CFLAGS_COMPILE or ""} -Wno-error=unused-but-set-variable";
-          };
-        });
-      })
-    ];
 
     services = {
       resolved.settings.Resolve = {
@@ -129,139 +213,48 @@ in
         MulticastDNS = "yes";
       };
 
-      pihole-ftl = {
+      adguardhome = {
         enable = true;
-        openFirewallDNS = true;
-        openFirewallDHCP = true;
-        openFirewallWebserver = true;
-        queryLogDeleter.enable = true;
-        useDnsmasqConfig = true;
-        lists = [
-          {
-            url = "https://big.oisd.nl/";
-            description = "OISD Full - ads, trackers, malware";
-          }
-          {
-            url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
-            description = "StevenBlack Unified hosts - ads, malware";
-          }
-          {
-            url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling/hosts";
-            description = "StevenBlack Gambling - betting & gambling sites";
-          }
-          {
-            url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts";
-            description = "StevenBlack Fakenews + Gambling - fake news & betting";
-          }
-          {
-            url = "https://adaway.org/hosts.txt";
-            description = "AdAway - mobile ads";
-          }
-          {
-            url = "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext";
-            description = "Peter Lowe's Adservers";
-          }
-          {
-            url = "https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt";
-            description = "AnudeepND Adservers";
-          }
-          {
-            url = "https://v.firebog.net/hosts/AdguardDNS.txt";
-            description = "AdGuard DNS filter";
-          }
-          {
-            url = "https://v.firebog.net/hosts/Easylist.txt";
-            description = "EasyList - ads";
-          }
-          {
-            url = "https://v.firebog.net/hosts/Easyprivacy.txt";
-            description = "EasyPrivacy - trackers";
-          }
-          {
-            url = "https://v.firebog.net/hosts/Prigent-Ads.txt";
-            description = "Prigent Ads";
-          }
-          {
-            url = "https://v.firebog.net/hosts/Prigent-Malware.txt";
-            description = "Prigent Malware";
-          }
-          {
-            url = "https://v.firebog.net/hosts/Prigent-Crypto.txt";
-            description = "Prigent Cryptojacking";
-          }
-          {
-            url = "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt";
-            description = "DandelionSprout Anti-Malware";
-          }
-          {
-            url = "https://urlhaus.abuse.ch/downloads/hostfile/";
-            description = "URLhaus Malware domains";
-          }
-          {
-            url = "https://phishing.army/download/phishing_army_blocklist_extended.txt";
-            description = "Phishing Army Extended";
-          }
-          {
-            url = "https://raw.githubusercontent.com/Spam404/lists/master/main-blacklist.txt";
-            description = "Spam404 blacklist";
-          }
-          {
-            url = "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt";
-            description = "KADhosts - ad/telemetry/spam";
-          }
-          {
-            url = "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts";
-            description = "FadeMind Spam";
-          }
-          {
-            url = "https://raw.githubusercontent.com/matomo-org/referrer-spam-blacklist/master/spammers.txt";
-            description = "Matomo Referrer Spam";
-          }
-          {
-            url = "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt";
-            description = "WindowsSpyBlocker telemetry";
-          }
-          {
-            url = "https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt";
-            description = "Frogeye First-party trackers";
-          }
-        ];
+        mutableSettings = false;
+        openFirewall = true;
         settings = {
-          dhcp.active = false;
+          http = {
+            address = "0.0.0.0:8081";
+            session_ttl = "12h";
+          };
           dns = {
-            cnameRecords = [ ];
-            domain = domain;
-            domainNeeded = true;
-            listeningMode = "ALL";
-            expandHosts = true;
-            interface = "all";
-            hosts = [
-              "${featureCall.unifiedDNS.gateway} gateway"
-              "${currentIP} pi-hole"
-              "${currentIP} ${domain}"
-              "${featureCall.unifiedDNS.tailscaleIP} ${domain}"
-            ]
-            ++ (mkDnsRecords currentIP)
-            ++ (mkDnsRecords featureCall.unifiedDNS.tailscaleIP);
-            upstreams = [
+            bind_hosts = [ "0.0.0.0" ];
+            port = 53;
+            upstream_dns = [
+              "94.140.14.14"
+              "1.1.1.1"
+            ];
+            bootstrap_dns = [
               "94.140.14.14"
               "1.1.1.1"
             ];
           };
-          ntp = {
-            ipv4.active = false;
-            ipv6.active = false;
-            sync.active = false;
+          filtering = {
+            filtering_enabled = true;
+            rewrites_enabled = true;
+            rewrites =
+              [
+                (rewrite "gateway" featureCall.unifiedDNS.gateway)
+                (rewrite "adguard" currentIP)
+                (rewrite domain currentIP)
+                (rewrite domain featureCall.unifiedDNS.tailscaleIP)
+              ]
+              ++ (mkDnsRewrites currentIP)
+              ++ (mkDnsRewrites featureCall.unifiedDNS.tailscaleIP);
           };
-          webserver.api.cli_pw = true;
-          webserver.api.pwhash = "";
-          session.timeout = 43200;
+          filters = lib.imap1 (id: list: {
+            inherit id;
+            inherit (list) url;
+            name = list.description;
+            enabled = true;
+          }) blocklists;
+          dhcp.enabled = false;
         };
-      };
-
-      pihole-web = {
-        enable = true;
-        ports = [ 8081 ];
       };
 
       nginx = {
@@ -300,12 +293,12 @@ in
       };
     };
 
-    features.preservation.system.directories = [ "/etc/pihole" ];
+    features.preservation.system.directories = [ "/var/lib/AdGuardHome" ];
 
-    features.unifiedDNS.proxyServices.pi-hole = {
+    features.unifiedDNS.proxyServices.adguard = {
       port = 8081;
-      icon = "si-pihole";
-      description = "DNS ad-blocker and DHCP server";
+      icon = "si-adguard";
+      description = "Network-wide DNS ad-blocker";
     };
   };
 }

@@ -41,6 +41,7 @@ in
         [
           inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
           inputs.musika.packages.${pkgs.system}.default
+          inputs.zapfast.packages.${pkgs.system}.default
           vesktop
           telegram-desktop
           foot
@@ -48,7 +49,6 @@ in
           ripdrag
           obsidian
           kdePackages.okular
-          rayburst
           jellyfin-mpv-shim
           localsend
         ]
