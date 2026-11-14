@@ -35,7 +35,7 @@
       enable = true;
       gsr.enable = true;
     };
-    qbit.enable = true;
+    # qbit.enable = true;
     syncthing.enable = true;
     ia-tools.enable = true;
     art-toolchain.enable = true;

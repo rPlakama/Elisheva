@@ -42,6 +42,7 @@ in
           inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
           inputs.musika.packages.${pkgs.system}.default
           inputs.zapfast.packages.${pkgs.system}.default
+          qbittorrent
           vesktop
           telegram-desktop
           foot

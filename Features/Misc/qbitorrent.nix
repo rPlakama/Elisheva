@@ -12,7 +12,7 @@ in
 {
   options.features.qbit.enable = lib.mkEnableOption "qBittorrent + Qui";
   config = lib.mkIf featureCall.qbit.enable {
-    features.mediaPermissions.enable = true;
+    features.mediaPermissions.enable = lib.mkIf headless true;
     sops.secrets."qui/secret" = {
       group = lib.mkIf headless "media";
     };

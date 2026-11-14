@@ -71,8 +71,9 @@
     homepage.enable = true;
     syncthing.enable = true;
     jellyfin.enable = true;
-    unmanic.enable = true;
+    # unmanic.enable = true;
     navidrome.enable = true;
+    sure.enable = true;
 
     bots = {
       enable = true;

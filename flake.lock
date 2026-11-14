@@ -376,11 +376,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1794355273,
-        "narHash": "sha256-FvKt+0cZbhX1PHsRmCeXbk0TJpqJh7GtzPEXtvXGwzM=",
+        "lastModified": 1794588200,
+        "narHash": "sha256-DCWn0FEik6kzO3znreaBZ1t0infC0DzjaMOL69p6yew=",
         "owner": "rPlakama",
         "repo": "musika",
-        "rev": "a2255faaf74040ada686e313b68de9f5841f61f5",
+        "rev": "3769258398afe32ad40d30c78240d2c354bbbdeb",
         "type": "github"
       },
       "original": {

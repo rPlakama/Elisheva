@@ -24,6 +24,7 @@ in
       enable = true;
       apps = {
         photocraft.enable = true;
+        vectorcraft.enable = true;
       };
     };
   };
