@@ -4,6 +4,15 @@
     ../../Features
   ];
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+    settings.General = {
+      Experimental = true;
+      FastConnectable = true;
+    };
+  };
+
   core = {
 
     keyboardLayout = "us,br";
@@ -36,6 +45,7 @@
       gsr.enable = true;
     };
     # qbit.enable = true;
+    bluetooth-injct.enable = true;
     syncthing.enable = true;
     ia-tools.enable = true;
     art-toolchain.enable = true;

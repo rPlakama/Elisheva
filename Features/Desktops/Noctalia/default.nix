@@ -176,7 +176,7 @@ in
               ];
               capsule_group = [
                 {
-                  fill = "surface_variant";
+                  fill = "surface_container";
                   id = "g1";
                   members = [
                     "bluetooth"
@@ -191,7 +191,7 @@ in
                   radius = widgetsGroupRadius;
                 }
                 {
-                  fill = "surface_variant";
+                  fill = "surface_container";
                   id = "g4";
                   members = [
                     "tray"
@@ -218,7 +218,7 @@ in
                   radius = widgetsGroupRadius;
                 }
                 {
-                  fill = "surface_variant";
+                  fill = "surface_container";
                   id = "g6";
                   members = [
                     "cpu"

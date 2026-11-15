@@ -52,6 +52,7 @@ in
           kdePackages.okular
           jellyfin-mpv-shim
           localsend
+          pavucontrol
         ]
         ++ optionals (config.core.isLaptop.enable) [
           moonlight-qt
