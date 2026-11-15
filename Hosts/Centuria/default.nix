@@ -45,7 +45,12 @@
       gsr.enable = true;
     };
     # qbit.enable = true;
-    bluetooth-injct.enable = true;
+    bluetooth-injct = {
+      enable = true;
+      # deviceMac = "";
+      boostXhciIrq = true;
+      disableWifi = true;
+    };
     syncthing.enable = true;
     ia-tools.enable = true;
     art-toolchain.enable = true;
