@@ -47,9 +47,8 @@
     # qbit.enable = true;
     bluetooth-injct = {
       enable = true;
-      # deviceMac = "";
-      boostXhciIrq = true;
-      disableWifi = true;
+      deviceMac = "40:EB:98:20:53:65";
+      MSIB550Board = true;
     };
     syncthing.enable = true;
     ia-tools.enable = true;
