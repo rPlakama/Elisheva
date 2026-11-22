@@ -561,7 +561,7 @@
 <title>virtualization&#45;&gt;preservation</title>
 <path fill="none" stroke="#1971c2" d="M646.73,-405.62C658.94,-408.48 672.27,-411.44 684.62,-413.83 869.04,-449.45 1011.9,-356 1092.12,-525.83 1136.99,-620.81 1148.86,-954.16 1151.4,-1051.16"/>
 <polygon fill="#1971c2" stroke="#1971c2" points="1148.95,-1051.09 1151.57,-1058.03 1153.84,-1050.97 1148.95,-1051.09"/>
-<text xml:space="preserve" text-anchor="middle" x="934.12" y="-463.73" font-family="sans-serif" font-size="9.00" fill="#adb5bd">/var/lib/docker</text>
+<text xml:space="preserve" text-anchor="middle" x="934.12" y="-463.73" font-family="sans-serif" font-size="9.00" fill="#adb5bd">/var/lib/containers</text>
 <text xml:space="preserve" text-anchor="middle" x="934.12" y="-452.48" font-family="sans-serif" font-size="9.00" fill="#adb5bd">/var/lib/libvirt</text>
 </g>
 <!-- preservation&#45;&gt;disko -->

@@ -19,6 +19,7 @@ in
       [
         opencode
         dsh
+        antigravity-cli
       ]
     );
   };

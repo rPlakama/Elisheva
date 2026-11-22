@@ -28,6 +28,11 @@
 in {
   options.features.mediaPermissions = {
     enable = lib.mkEnableOption "Shared media folders and group permissions";
+    gid = lib.mkOption {
+      type = lib.types.int;
+      default = 2000;
+      description = "GID of the shared media group";
+    };
     writableServices = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];
@@ -36,7 +41,7 @@ in {
   };
   config = lib.mkIf featureCall.mediaPermissions.enable {
     users.groups.media = {
-      gid = 2000;
+      gid = featureCall.mediaPermissions.gid;
     };
     users.users.${user}.extraGroups = ["media"];
     systemd.tmpfiles.rules =

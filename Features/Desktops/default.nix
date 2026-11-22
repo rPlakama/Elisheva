@@ -13,20 +13,39 @@
 
   headless = config.core.headless;
   theming = config.features.theming;
-  noctaliaGreeter = config.features.noctalia.enable && !headless;
+  kde = config.features.kdeDesktop.enable;
+  gnome = config.features.gnomeDesktop.enable;
+  niri = config.features.niri.enable;
+  desktopManager = kde || gnome;
+  noctaliaGreeter = config.features.noctalia.enable && !headless && !desktopManager;
 in {
   imports = modulePaths ++ [ inputs.noctalia-greeter.nixosModules.default ];
+
+  assertions = [
+    {
+      assertion = !(kde && gnome);
+      message = "features.kdeDesktop and features.gnomeDesktop cannot be enabled at the same time";
+    }
+  ];
 
   boot.consoleLogLevel = 0;
 
   services.displayManager.ly = {
-    enable = !headless && !noctaliaGreeter;
+    enable = !headless && !desktopManager && !noctaliaGreeter;
     settings = {
       default_input = "password";
       bigclock = true;
       hide_borders = true;
     };
   };
+
+  services.displayManager.sddm = lib.mkIf (!headless && kde) {
+    enable = true;
+  };
+
+  services.displayManager.gdm.enable = !headless && gnome;
+
+  services.displayManager.defaultSession = lib.mkIf (kde && niri) (lib.mkForce "niri");
 
   services.greetd.settings = lib.mkIf noctaliaGreeter {
     terminal.vt = 1;

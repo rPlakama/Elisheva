@@ -10,7 +10,7 @@ let
   suwayomiID = 2002;
   suwayomiContainerPort = 4567;
   suwayomiDataDir = "/var/lib/suwayomi";
-  mediaGid = config.users.groups.media.gid;
+  mediaGid = featureCall.mediaPermissions.gid;
   stumpPort = 10801;
   localHost = "127.0.0.1";
 in
@@ -80,13 +80,34 @@ in
         features = {
           mediaPermissions = {
             enable = true;
-            writableServices = [ "docker-suwayomi-server" ];
+            writableServices = [ "podman-suwayomi-server" ];
           };
           preservation.system.directories = [ suwayomiDataDir ];
           unifiedDNS.proxyServices.suwayomi = {
             port = suwayomiPort;
             icon = "sh-suwayomi";
             description = "Manga reader (Suwayomi-Server)";
+          };
+          virtualization.containers.suwayomi-server = {
+            image = "ghcr.io/suwayomi/suwayomi-server:latest";
+            user = "${toString suwayomiID}:${toString mediaGid}";
+            ports = [ "${localHost}:${toString suwayomiPort}:${toString suwayomiContainerPort}" ];
+            volumes = [
+              "${featureCall.library.downloadPath}:/home/suwayomi/.local/share/Tachidesk/downloads"
+              "${suwayomiDataDir}:/home/suwayomi/.local/share/Tachidesk"
+            ];
+            environment = {
+              TZ = config.time.timeZone;
+              FLARESOLVERR_ENABLED = "true";
+              FLARESOLVERR_URL = "http://host.containers.internal:${toString config.services.flaresolverr.port}";
+            };
+            devices = [ "/dev/dri:/dev/dri" ];
+            extraOptions = [
+              "--group-add"
+              (toString config.ids.gids.video)
+              "--group-add"
+              (toString config.ids.gids.render)
+            ];
           };
         };
 
@@ -103,35 +124,6 @@ in
         systemd.tmpfiles.rules = [
           "d ${suwayomiDataDir} 2770 suwayomi media -"
         ];
-
-        virtualisation = {
-          docker.enable = true;
-          oci-containers = {
-            backend = "docker";
-            containers.suwayomi-server = {
-              image = "ghcr.io/suwayomi/suwayomi-server:latest";
-              user = "${toString suwayomiID}:${toString mediaGid}";
-              ports = [ "${localHost}:${toString suwayomiPort}:${toString suwayomiContainerPort}" ];
-              volumes = [
-                "${featureCall.library.downloadPath}:/home/suwayomi/.local/share/Tachidesk/downloads"
-                "${suwayomiDataDir}:/home/suwayomi/.local/share/Tachidesk"
-              ];
-              environment = {
-                TZ = config.time.timeZone;
-                FLARESOLVERR_ENABLED = "true";
-                FLARESOLVERR_URL = "http://host.docker.internal:${toString config.services.flaresolverr.port}";
-              };
-              devices = [ "/dev/dri:/dev/dri" ];
-              extraOptions = [
-                "--add-host=host.docker.internal:host-gateway"
-                "--group-add"
-                (toString config.users.groups.video.gid)
-                "--group-add"
-                (toString config.users.groups.render.gid)
-              ];
-            };
-          };
-        };
       })
     ]
   );

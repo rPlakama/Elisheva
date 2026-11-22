@@ -69,7 +69,7 @@ in
         enable = true;
       }) mediaNonPermissions);
 
-    networking.firewall.interfaces."docker0".allowedTCPPorts = [ config.services.flaresolverr.port ];
+    networking.firewall.interfaces."podman0".allowedTCPPorts = [ config.services.flaresolverr.port ];
 
     # systemd.services.lidarr.path = [ pkgs.ffmpeg-full ];
   };

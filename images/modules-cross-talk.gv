@@ -137,7 +137,7 @@ digraph cross_talk {
   qbit -> preservation [label = "/var/lib/qbittorrent\n/var/lib/qui", color = "#1971c2"];
   qbit -> unifiedDNS [label = "qui:3000, qbittorrent:8080", color = "#2f9e44"];
   sunshine -> preservation [label = "/var/lib/sunshine", color = "#1971c2"];
-  virtualization -> preservation [label = "/var/lib/docker\n/var/lib/libvirt", color = "#1971c2"];
+  virtualization -> preservation [label = "/var/lib/containers\n/var/lib/libvirt", color = "#1971c2"];
   unifiedDNS -> preservation [label = "/etc/pihole", color = "#1971c2"];
   unifiedDNS -> unifiedDNS [label = "pi-hole:8081 (self-proxy)", color = "#2f9e44", style = "dashed"];
   preservation -> disko [label = "assert: requires disko", color = "#c92a2a", style = "dashed"];

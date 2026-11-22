@@ -6,7 +6,6 @@
 
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = false;
   };
 
   services.flatpak.enable = true;
@@ -47,6 +46,11 @@
     ia-tools.enable = true;
     art-toolchain.enable = true;
     benchtools.enable = true;
+
+    bluetooth-injct = {
+      enable = true;
+      deviceMac = "40:EB:98:20:53:65";
+    };
 
     disko = {
       enable = true;
