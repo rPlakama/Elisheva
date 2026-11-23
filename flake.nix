@@ -46,6 +46,7 @@
     dms.url = "github:AvengeMedia/DankMaterialShell";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     preservation.url = "github:nix-community/preservation";
+    ao3instance.url = "github:rPlakama/Ao3Instance";
 
     sops-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -85,6 +86,8 @@
       };
     in
     {
+      packages.${system}.lichii = (import nixpkgs { inherit system; }).callPackage ./pkgs/lichii.nix { };
+
       nixosConfigurations = nixpkgs.lib.genAttrs hostNames (
         hostname:
         nixpkgs.lib.nixosSystem {

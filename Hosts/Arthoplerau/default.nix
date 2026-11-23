@@ -8,6 +8,10 @@
     enable = true;
   };
 
+  services.flaresolverr = {
+    openFirewall = true;
+    enable = true;
+  };
   services.flatpak.enable = true;
   core = {
     user = "rplakama";
@@ -38,6 +42,7 @@
     gaming = {
       enable = true;
       gsr.enable = true;
+      lichii.enable = true;
     };
 
     # qbit.enable = true;

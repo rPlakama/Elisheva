@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  inputs,
   ...
 }:
 let
@@ -10,11 +11,15 @@ let
   suwayomiID = 2002;
   suwayomiContainerPort = 4567;
   suwayomiDataDir = "/var/lib/suwayomi";
+  ao3instanceport = 8099;
+
   mediaGid = featureCall.mediaPermissions.gid;
   stumpPort = 10801;
   localHost = "127.0.0.1";
 in
 {
+  imports = [ inputs.ao3instance.nixosModules.default ];
+
   options.features.library = {
     enable = lib.mkEnableOption "Library Master Switch";
     downloadPath = lib.mkOption {
@@ -25,6 +30,7 @@ in
     kavita.enable = lib.mkEnableOption "Kavita self-hosted digital library";
     stump.enable = lib.mkEnableOption "Stump free and open source comics, manga and digital book server with OPDS support";
     suwayomi.enable = lib.mkEnableOption "Suwayomi-Server (Tachidesk) manga reader";
+    ao3instance.enable = lib.mkEnableOption "AO3 instance";
   };
   config = lib.mkIf featureCall.library.enable (
     lib.mkMerge [
@@ -77,6 +83,20 @@ in
         };
       })
       (lib.mkIf featureCall.library.suwayomi.enable {
+        users.users.suwayomi = {
+          isSystemUser = true;
+          group = "media";
+          uid = suwayomiID;
+          extraGroups = [
+            "video"
+            "render"
+          ];
+        };
+
+        systemd.tmpfiles.rules = [
+          "d ${suwayomiDataDir} 2770 suwayomi media -"
+        ];
+
         features = {
           mediaPermissions = {
             enable = true;
@@ -110,20 +130,20 @@ in
             ];
           };
         };
+      })
 
-        users.users.suwayomi = {
-          isSystemUser = true;
-          group = "media";
-          uid = suwayomiID;
-          extraGroups = [
-            "video"
-            "render"
-          ];
+      (lib.mkIf featureCall.library.ao3instance.enable {
+
+        features.unifiedDNS.proxyServices.ao3instance = {
+          port = ao3instanceport;
+          icon = "s-ao3";
+          description = "ao3 instance";
         };
-
-        systemd.tmpfiles.rules = [
-          "d ${suwayomiDataDir} 2770 suwayomi media -"
-        ];
+        services.ao3instance = {
+          enable = true;
+          dataDir = "/var/lib/ao3instance";
+          port = ao3instanceport;
+        };
       })
     ]
   );

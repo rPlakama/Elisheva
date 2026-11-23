@@ -42,6 +42,7 @@
     gaming = {
       enable = true;
       gsr.enable = true;
+      lichii.enable = true;
     };
     # qbit.enable = true;
     bluetooth-injct = {

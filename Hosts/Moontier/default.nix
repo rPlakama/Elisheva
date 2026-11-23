@@ -59,6 +59,7 @@
       # stump.enable = true;
       suwayomi.enable = true;
       kavita.enable = true;
+      ao3instance.enable = true;
     };
     galleryDl = {
       enable = true;
