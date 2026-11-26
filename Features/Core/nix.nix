@@ -5,6 +5,7 @@
 }:
 let
   user = config.core.user;
+  headless = config.core.headless;
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -16,8 +17,12 @@ in
       dates = "weekly";
       options = "--delete-older-than +5d";
     };
+    optimise = {
+      automatic = headless;
+      dates = [ "weekly" ];
+    };
     settings = {
-      auto-optimise-store = true;
+      auto-optimise-store = !headless;
       show-trace = true;
       experimental-features = [
         "nix-command"

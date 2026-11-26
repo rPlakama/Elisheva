@@ -9,13 +9,20 @@ let
   inherit (lib) optionals;
   gpu = config.core.gpu;
   user = config.core.user;
+  headless = config.core.headless;
 in
 {
-  environment.systemPackages = with pkgs; [
-    cifs-utils
-    man-pages-posix
-    man-pages
-  ];
+  environment.systemPackages =
+    (with pkgs; [
+      cifs-utils
+    ])
+    ++ optionals (!headless) (
+      with pkgs;
+      [
+        man-pages-posix
+        man-pages
+      ]
+    );
 
   hjem.users.${user} = {
     packages =

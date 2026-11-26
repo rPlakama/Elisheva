@@ -81,7 +81,7 @@ in
     (mkIf (intel.enable || gpu.amd) {
       hardware.graphics = {
         enable = true;
-        enable32Bit = true;
+        enable32Bit = !config.core.headless;
       };
     })
 
@@ -94,7 +94,7 @@ in
     (mkIf intel.enable {
       hardware.graphics = {
         extraPackages = intelDriverPkgs;
-        extraPackages32 = intelDriverPkgs32;
+        extraPackages32 = mkIf (!config.core.headless) intelDriverPkgs32;
       };
 
       environment = {

@@ -212,7 +212,7 @@ in
     services = {
       resolved.settings.Resolve = {
         DNSStubListener = "no";
-        MulticastDNS = "yes";
+        MulticastDNS = lib.mkDefault (if config.core.headless then "no" else "yes");
       };
 
       adguardhome = {

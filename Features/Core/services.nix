@@ -17,15 +17,15 @@ in
     power-profiles-daemon.enable = usesPPD;
     # bpftune.enable = true;
     devmon.enable = !headless;
-    udisks2.enable = true;
+    udisks2.enable = !headless;
     resolved.enable = true;
     gvfs.enable = !headless;
-    fwupd.enable = true;
+    fwupd.enable = !headless;
 
-    xserver.xkb.layout = keyLayout;
+    xserver.xkb.layout = lib.mkIf (!headless) keyLayout;
 
     kmscon = {
-      enable = true;
+      enable = !headless;
       hwRender = true;
       useXkbConfig = true;
     };
@@ -51,7 +51,7 @@ in
     };
   };
 
-  features.preservation.system.directories = [
+  features.preservation.system.directories = lib.mkIf (!headless) [
     "/var/lib/fwupd"
   ];
 }

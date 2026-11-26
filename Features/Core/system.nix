@@ -1,11 +1,12 @@
 { config, ... }:
 let
   user = config.core.user;
+  headless = config.core.headless;
 in
 {
   security = {
     sudo-rs.enable = true;
-    rtkit.enable = true;
+    rtkit.enable = !headless;
   };
 
   networking.networkmanager.enable = true;
@@ -26,7 +27,7 @@ in
     };
   };
   documentation = {
-    dev.enable = true;
+    dev.enable = !headless;
     man.enable = true;
   };
   hardware = {
