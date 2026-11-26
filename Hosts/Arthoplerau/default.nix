@@ -42,7 +42,7 @@
     gaming = {
       enable = true;
       gsr.enable = true;
-      fritchii.enable = true;
+      lichii.enable = true;
     };
 
     # qbit.enable = true;

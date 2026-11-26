@@ -86,7 +86,7 @@
       };
     in
     {
-      packages.${system}.fritchii = (import nixpkgs { inherit system; }).callPackage ./pkgs/fritchii.nix { };
+      packages.${system}.lichii = (import nixpkgs { inherit system; }).callPackage ./pkgs/lichii.nix { };
 
       nixosConfigurations = nixpkgs.lib.genAttrs hostNames (
         hostname:
