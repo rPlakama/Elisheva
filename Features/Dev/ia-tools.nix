@@ -14,6 +14,8 @@ in
 
   config = lib.mkIf featureCall.ia-tools.enable {
 
+    environment.systemPackages = with pkgs; [ ollama-rocm ];
+
     hjem.users.${user}.packages = (
       with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
       [

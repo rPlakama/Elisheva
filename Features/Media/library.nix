@@ -142,6 +142,7 @@ in
         services.ao3instance = {
           enable = true;
           dataDir = "/var/lib/ao3instance";
+          writesEnabled = true;
           port = ao3instanceport;
         };
       })

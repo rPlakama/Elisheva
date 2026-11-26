@@ -11,8 +11,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    musika.url = "github:rPlakama/musika";
-
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,8 +26,6 @@
     };
 
     llm-agents.url = "github:numtide/llm-agents.nix";
-    twatch.url = "github:rPlakama/twatch";
-    gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
     helium-browser.url = "github:schembriaiden/helium-browser-nix-flake";
     umbriel.url = "git+https://github.com/noctalia-dev/umbriel";
     zapfast.url = "github:crmne/zapfast";
@@ -46,7 +42,12 @@
     dms.url = "github:AvengeMedia/DankMaterialShell";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     preservation.url = "github:nix-community/preservation";
+
     ao3instance.url = "github:rPlakama/Ao3Instance";
+    twatch.url = "github:rPlakama/twatch";
+    musika.url = "github:rPlakama/musika";
+    gsr-ui-nix.url = "github:rPlakama/gsr-ui-nix";
+    localrevisor.url = "github:rPlakama/localRevisor";
 
     sops-nix = {
       inputs.nixpkgs.follows = "nixpkgs";

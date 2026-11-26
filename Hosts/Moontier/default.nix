@@ -75,6 +75,7 @@
     # unmanic.enable = true;
     navidrome.enable = true;
     sure.enable = true;
+    localrevisor.enable = true;
 
     bots = {
       enable = true;

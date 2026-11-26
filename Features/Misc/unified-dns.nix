@@ -17,7 +17,9 @@ let
 
   mkDnsRewrites =
     answer:
-    lib.mapAttrsToList (name: _: rewrite "${name}.${domain}" answer) featureCall.unifiedDNS.proxyServices;
+    lib.mapAttrsToList (
+      name: _: rewrite "${name}.${domain}" answer
+    ) featureCall.unifiedDNS.proxyServices;
 
   blocklists = [
     {
@@ -237,15 +239,14 @@ in
           filtering = {
             filtering_enabled = true;
             rewrites_enabled = true;
-            rewrites =
-              [
-                (rewrite "gateway" featureCall.unifiedDNS.gateway)
-                (rewrite "adguard" currentIP)
-                (rewrite domain currentIP)
-                (rewrite domain featureCall.unifiedDNS.tailscaleIP)
-              ]
-              ++ (mkDnsRewrites currentIP)
-              ++ (mkDnsRewrites featureCall.unifiedDNS.tailscaleIP);
+            rewrites = [
+              (rewrite "gateway" featureCall.unifiedDNS.gateway)
+              (rewrite "adguard" currentIP)
+              (rewrite domain currentIP)
+              (rewrite domain featureCall.unifiedDNS.tailscaleIP)
+            ]
+            ++ (mkDnsRewrites currentIP)
+            ++ (mkDnsRewrites featureCall.unifiedDNS.tailscaleIP);
           };
           filters = lib.imap1 (id: list: {
             inherit id;
@@ -287,7 +288,6 @@ in
         dnsProvider = "hetzner";
         environmentFile = config.sops.secrets."hetzner/api".path;
         dnsResolver = "1.1.1.1:53";
-        dnsPropagationCheck = true;
         group = "nginx";
         webroot = null;
       };
