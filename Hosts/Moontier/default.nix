@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./hardware.nix
+    ./performance.nix
     ../../Features
   ];
 
@@ -39,7 +40,24 @@
     };
     cpu.intel = true;
     headless = true;
-    zram.size = 4048;
+    zram = {
+      size = 4048;
+      algorithm = "lz4";
+    };
+  };
+
+  services.journald.settings.Journal = {
+    SystemMaxUse = "200M";
+    RuntimeMaxUse = "64M";
+    Compress = true;
+  };
+
+  services.postgresql.settings = {
+    shared_buffers = "128MB";
+    work_mem = "4MB";
+    maintenance_work_mem = "32MB";
+    effective_cache_size = "1GB";
+    max_connections = 30;
   };
 
   services.tailscale.useRoutingFeatures = "both";
@@ -74,7 +92,10 @@
     jellyfin.enable = true;
     # unmanic.enable = true;
     navidrome.enable = true;
-    sure.enable = true;
+    sure = {
+      enable = true;
+      port = 3001; # Avoid colliding with qui on port 3000
+    };
     localrevisor.enable = true;
 
     bots = {
