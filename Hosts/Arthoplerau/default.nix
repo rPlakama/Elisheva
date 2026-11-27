@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ./hardware.nix
     ./performance.nix
@@ -9,11 +9,6 @@
     enable = true;
   };
 
-  services.flaresolverr = {
-    openFirewall = true;
-    enable = true;
-  };
-  services.flatpak.enable = true;
   core = {
     user = "rplakama";
     gpu.amd = true;
@@ -34,8 +29,6 @@
 
   features = {
     neovim.enable = true;
-    # unmanic.enable = true;
-    # umbriel.enable = true;
 
     niri = {
       enable = true;
@@ -63,11 +56,12 @@
 
     disko = {
       enable = true;
-      isXFS = true;
       dualDrive = true;
       primaryDrive = "/dev/nvme0n1";
       secondaryDrive = "/dev/nvme1n1";
       swap.enable = true;
+      format.BTRFS = { };
+      mode.normal = { };
     };
   };
 

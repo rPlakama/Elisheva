@@ -35,10 +35,12 @@
 
     disko = {
       enable = true;
-      isBTRFS = true;
       primaryDrive = "/dev/nvme1n1";
-      btrfs.compression = "zstd:3";
       swap.enable = true;
+      format.BTRFS = {
+        compression = "zstd:3";
+      };
+      mode.impermanence = { };
     };
 
     preservation.enable = true;
@@ -55,7 +57,7 @@
       MSIB550Board = true;
     };
     syncthing.enable = true;
-    ia-tools.enable = true;
+    # ia-tools.enable = true;
     art-toolchain.enable = true;
     niri = {
       enable = true;
