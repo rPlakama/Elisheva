@@ -58,6 +58,8 @@
     maintenance_work_mem = "32MB";
     effective_cache_size = "1GB";
     max_connections = 30;
+    checkpoint_completion_target = 0.9;
+    wal_compression = "lz4";
   };
 
   services.tailscale.useRoutingFeatures = "both";

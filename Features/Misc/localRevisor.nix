@@ -25,7 +25,9 @@ in
     };
     services.localrevisor = {
       enable = true;
+      inherit port;
       package = inputs.localrevisor.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      trustedHosts = [ "localrevisor.${domain}" ];
     };
   };
 }
