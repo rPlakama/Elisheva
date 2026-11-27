@@ -39,7 +39,6 @@
     gaming = {
       enable = true;
       gsr.enable = true;
-      triforce.enable = true;
     };
 
     # qbit.enable = true;
