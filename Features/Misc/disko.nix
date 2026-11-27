@@ -30,6 +30,7 @@ let
   isXFS = cfg.format.XFS != null;
   isImpermanence = cfg.mode.impermanence != null;
   isNormal = cfg.mode.normal != null;
+  hasSeparateNix = isImpermanence && cfg.mode.impermanence.nixSize != null;
 
   hasSingleFormat =
     count id [
@@ -151,23 +152,16 @@ let
       "raid1"
       "/dev/disk/by-partlabel/SecondaryDrive"
     ];
-    subvolumes = genAttrs [ "/nix" "/persistent" ] (mountpoint: {
+    subvolumes = genAttrs (optionals (!hasSeparateNix) [ "/nix" ] ++ [ "/persistent" ]) (mountpoint: {
       inherit mountpoint;
       mountOptions = btrfsMountOptions;
     });
   };
 
-  btrfsNormalRoot = {
-    type = "btrfs";
-    extraArgs = [ "-f" ];
-    mountpoint = "/";
-    mountOptions = btrfsMountOptions;
-  };
-
-  btrfsNixPartition = {
+  btrfsNixPartition = optionalAttrs hasSeparateNix {
     nix = {
       name = "nix";
-      size = cfg.mode.normal.nixSize;
+      size = cfg.mode.impermanence.nixSize;
       content = {
         type = "btrfs";
         extraArgs = [ "-f" ];
@@ -175,6 +169,13 @@ let
         mountOptions = btrfsMountOptions;
       };
     };
+  };
+
+  btrfsNormalRoot = {
+    type = "btrfs";
+    extraArgs = [ "-f" ];
+    mountpoint = "/";
+    mountOptions = btrfsMountOptions;
   };
 
   btrfsSecondaryData = {
@@ -250,20 +251,21 @@ in
               default = "40%";
               description = "Size of the ephemeral tmpfs root";
             };
+            nixSize = mkOption {
+              type = nullOr str;
+              default = null;
+              description = "Optional size of a dedicated BTRFS /nix partition (when null, /nix is a BTRFS subvolume alongside /persistent)";
+              example = "64G";
+            };
           };
         });
         default = null;
-        description = "Ephemeral tmpfs root with persistent /nix and /persistent subvolumes (declare as `{ ... }` or `{ }`)";
+        description = "Ephemeral tmpfs root with persistent /nix and /persistent storage (declare as `{ ... }` or `{ }`)";
       };
 
       normal = mkOption {
         type = nullOr (submodule {
           options = {
-            nixSize = mkOption {
-              type = str;
-              default = "64G";
-              description = "Size of the dedicated BTRFS /nix partition";
-            };
             secondaryMount = mkOption {
               type = str;
               default = "/secondary";
@@ -342,7 +344,10 @@ in
           ];
         };
         disk = mkMerge [
-          (primaryDisk { rootContent = btrfsImpermanentRoot; })
+          (primaryDisk {
+            rootContent = btrfsImpermanentRoot;
+            extraPartitions = btrfsNixPartition;
+          })
           (mkIf cfg.dualDrive (secondaryDisk null))
         ];
       };
@@ -352,13 +357,9 @@ in
     })
     (mkIf (validLayout && isBTRFS && isNormal) {
       disko.devices.disk = mkMerge [
-        (primaryDisk {
-          rootContent = btrfsNormalRoot;
-          extraPartitions = btrfsNixPartition;
-        })
+        (primaryDisk { rootContent = btrfsNormalRoot; })
         (mkIf cfg.dualDrive (secondaryDisk btrfsSecondaryData))
       ];
-      fileSystems."/nix".neededForBoot = true;
     })
     (mkIf (validLayout && isXFS && isNormal) {
       disko.devices.disk = mkMerge [
