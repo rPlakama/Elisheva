@@ -1,6 +1,7 @@
 { pkgs, inputs, ... }: {
   imports = [
     ./hardware.nix
+    ./performance.nix
     ../../Features
   ];
 
@@ -17,7 +18,10 @@
     user = "rplakama";
     gpu.amd = true;
     cpu.amd = true;
-    zram.size = 8192;
+    zram = {
+      size = 8192;
+      algorithm = "lz4";
+    };
     isLaptop = {
       enable = true;
       usesPPD = true;
@@ -42,7 +46,7 @@
     gaming = {
       enable = true;
       gsr.enable = true;
-      lichii.enable = true;
+      triforce.enable = true;
     };
 
     # qbit.enable = true;
@@ -68,11 +72,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-
-    # DSH_AGINT
-    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.dsh
     nodejs
     python3
-
   ];
 }

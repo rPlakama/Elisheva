@@ -11,7 +11,7 @@ let
   gsrPkg = inputs.gsr-ui-nix.packages.${pkgs.stdenv.hostPlatform.system}.gpu-screen-recorder;
   gsrEnable = featureCall.gaming.gsr.enable;
 
-  lichii = pkgs.callPackage ../../pkgs/lichii.nix { };
+  triforce = pkgs.callPackage ../../pkgs/triforce.nix { };
 in
 {
   options.features.gaming = {
@@ -33,7 +33,7 @@ in
       description = "Enable Gamemode (part of the bundle, can be opted out)";
     };
     gsr.enable = lib.mkEnableOption "Enable GPU Screen Recorder";
-    lichii.enable = lib.mkEnableOption "Lichii (Nintendo Switch/Switch 2 emulator)";
+    triforce.enable = lib.mkEnableOption "Triforce (native Ocarina of Time recomp)";
   };
 
   config = lib.mkIf featureCall.gaming.enable {
@@ -51,9 +51,7 @@ in
         lutris
         low-latency-layer
       ]
-      ++ lib.optionals featureCall.gaming.lichii.enable [ lichii ];
-
-    services.udev.packages = lib.optionals featureCall.gaming.lichii.enable [ lichii ];
+      ++ lib.optionals featureCall.gaming.triforce.enable [ triforce ];
 
     programs = {
       gamemode.enable = featureCall.gaming.gamemode;

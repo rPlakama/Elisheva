@@ -26,7 +26,7 @@ in
 
     kmscon = {
       enable = !headless;
-      hwRender = true;
+      config.hwaccel = true;
       useXkbConfig = true;
     };
 

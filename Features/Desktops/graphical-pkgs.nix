@@ -18,6 +18,16 @@ let
   user = config.core.user;
   headless = config.core.headless;
   featureCall = config.features;
+
+  kritaWayland = pkgs.symlinkJoin {
+    name = "krita-wayland";
+    paths = [ pkgs.krita ];
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/krita \
+        --set-default QT_QPA_PLATFORM wayland
+    '';
+  };
 in
 {
   options.features.graphicalPkgs = {
@@ -42,6 +52,7 @@ in
           inputs.helium-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
           inputs.musika.packages.${pkgs.system}.default
           inputs.zapfast.packages.${pkgs.system}.default
+          kritaWayland
           qbittorrent
           vesktop
           telegram-desktop

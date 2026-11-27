@@ -87,7 +87,7 @@
       };
     in
     {
-      packages.${system}.lichii = (import nixpkgs { inherit system; }).callPackage ./pkgs/lichii.nix { };
+      packages.${system}.triforce = (import nixpkgs { inherit system; }).callPackage ./pkgs/triforce.nix { };
 
       nixosConfigurations = nixpkgs.lib.genAttrs hostNames (
         hostname:

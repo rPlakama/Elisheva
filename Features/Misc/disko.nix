@@ -130,6 +130,7 @@ let
     mountpoint = "/";
     mountOptions = [
       "noatime"
+      "logbufs=8"
       "logbsize=256k"
     ];
   };
@@ -140,6 +141,7 @@ let
     mountpoint = cfg.xfs.secondaryMount;
     mountOptions = [
       "noatime"
+      "logbufs=8"
       "logbsize=256k"
     ];
   };

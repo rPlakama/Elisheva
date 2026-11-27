@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./hardware.nix
+    ./performance.nix
     ../../Features
   ];
 
@@ -18,7 +19,10 @@
     user = "rplakama";
     gpu.nvidia = true;
     cpu.amd = true;
-    zram.size = 8192;
+    zram = {
+      size = 8192;
+      algorithm = "lz4";
+    };
     git = {
       email = "rPlakama@proton.me";
       user = "rPlakama";
@@ -33,7 +37,7 @@
       enable = true;
       isBTRFS = true;
       primaryDrive = "/dev/nvme1n1";
-      btrfs.compression = "zstd:6";
+      btrfs.compression = "zstd:3";
       swap.enable = true;
     };
 
@@ -42,7 +46,7 @@
     gaming = {
       enable = true;
       gsr.enable = true;
-      lichii.enable = true;
+      triforce.enable = true;
     };
     # qbit.enable = true;
     bluetooth-injct = {
