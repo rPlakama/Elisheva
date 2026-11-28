@@ -41,7 +41,6 @@
       gsr.enable = true;
     };
 
-    # qbit.enable = true;
     syncthing.enable = true;
     virtualization.enable = true;
     ia-tools.enable = true;
