@@ -5,10 +5,6 @@
     ../../Features
   ];
 
-  hardware.bluetooth = {
-    enable = true;
-  };
-
   core = {
     user = "rplakama";
     gpu.amd = true;

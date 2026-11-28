@@ -93,7 +93,6 @@ in
     # 4. BlueZ controller & link-layer policy hardening
     hardware.bluetooth = {
       enable = true;
-      powerOnBoot = true;
       settings = {
         General = {
           ControllerMode = "bredr"; # Change to "dual" if you use BLE peripherals (mice/keyboards)
